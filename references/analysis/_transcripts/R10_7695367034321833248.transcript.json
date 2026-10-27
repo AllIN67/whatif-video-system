@@ -1,0 +1,116 @@
+{
+ "file": "R10_7695367034321833248.mp4",
+ "language": "en",
+ "language_probability": 0.101,
+ "model": "/tmp/claude-0/-home-user-oxygen-video/c0ef34c7-8c9c-5dff-82a6-832eadd17941/scratchpad/whisper-small-ct2",
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 1.84,
+   "text": "Yeah, I had to pick out the app.",
+   "no_speech_prob": 0.45
+  },
+  {
+   "start": 1.84,
+   "end": 2.3,
+   "text": "No, no, no.",
+   "no_speech_prob": 0.45
+  },
+  {
+   "start": 2.3,
+   "end": 3.8,
+   "text": "It's all right.",
+   "no_speech_prob": 0.45
+  },
+  {
+   "start": 3.8,
+   "end": 4.8,
+   "text": "I'm gonna go ahead.",
+   "no_speech_prob": 0.45
+  },
+  {
+   "start": 4.8,
+   "end": 7.9,
+   "text": "All right.",
+   "no_speech_prob": 0.45
+  },
+  {
+   "start": 7.9,
+   "end": 9.2,
+   "text": "Ha ha ha.",
+   "no_speech_prob": 0.45
+  },
+  {
+   "start": 9.2,
+   "end": 11.7,
+   "text": "Big ding.",
+   "no_speech_prob": 0.45
+  },
+  {
+   "start": 11.7,
+   "end": 12.8,
+   "text": "Yeah, I had to pick out the app.",
+   "no_speech_prob": 0.45
+  },
+  {
+   "start": 12.8,
+   "end": 13.7,
+   "text": "Yeah.",
+   "no_speech_prob": 0.45
+  },
+  {
+   "start": 13.7,
+   "end": 15.1,
+   "text": "Ha ha ha.",
+   "no_speech_prob": 0.45
+  },
+  {
+   "start": 15.1,
+   "end": 16.7,
+   "text": "Ha ha ha.",
+   "no_speech_prob": 0.45
+  },
+  {
+   "start": 16.7,
+   "end": 18.2,
+   "text": "Ha ha ha.",
+   "no_speech_prob": 0.45
+  },
+  {
+   "start": 18.2,
+   "end": 19.1,
+   "text": "Ha ha ha ha.",
+   "no_speech_prob": 0.45
+  },
+  {
+   "start": 19.1,
+   "end": 21.3,
+   "text": "Ha ha ha ha.",
+   "no_speech_prob": 0.45
+  },
+  {
+   "start": 21.3,
+   "end": 22.5,
+   "text": "Ha ha ha.",
+   "no_speech_prob": 0.45
+  },
+  {
+   "start": 22.5,
+   "end": 23.9,
+   "text": "Ha ha ha ha.",
+   "no_speech_prob": 0.45
+  },
+  {
+   "start": 23.9,
+   "end": 25.9,
+   "text": "Ha ha ha.",
+   "no_speech_prob": 0.45
+  },
+  {
+   "start": 25.9,
+   "end": 27.9,
+   "text": "No.",
+   "no_speech_prob": 0.58
+  }
+ ]
+}

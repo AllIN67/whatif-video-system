@@ -1,0 +1,134 @@
+{
+ "file": "R08_7699812603970817311.mp4",
+ "language": "en",
+ "language_probability": 0.564,
+ "model": "/tmp/claude-0/-home-user-oxygen-video/c0ef34c7-8c9c-5dff-82a6-832eadd17941/scratchpad/whisper-small-ct2",
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 3.8,
+   "text": "Excuse me sir, I'm just missing someone just who feels me for a fuck.",
+   "no_speech_prob": 0.7
+  },
+  {
+   "start": 3.8,
+   "end": 8.0,
+   "text": "So someone who will be awesome, more than uniform, I really don't belong here.",
+   "no_speech_prob": 0.7
+  },
+  {
+   "start": 8.0,
+   "end": 9.8,
+   "text": "I know you've worked for two before.",
+   "no_speech_prob": 0.7
+  },
+  {
+   "start": 9.8,
+   "end": 11.4,
+   "text": "So bring back the demons, now.",
+   "no_speech_prob": 0.7
+  },
+  {
+   "start": 11.4,
+   "end": 13.2,
+   "text": "I'm just missing someone.",
+   "no_speech_prob": 0.7
+  },
+  {
+   "start": 13.2,
+   "end": 16.6,
+   "text": "Run from your demons, if you are exhausted.",
+   "no_speech_prob": 0.7
+  },
+  {
+   "start": 16.6,
+   "end": 19.4,
+   "text": "One day you will have to stop and find out what they want.",
+   "no_speech_prob": 0.7
+  },
+  {
+   "start": 21.4,
+   "end": 24.0,
+   "text": "Until you are exhausted.",
+   "no_speech_prob": 0.7
+  },
+  {
+   "start": 26.0,
+   "end": 28.0,
+   "text": "You do run for all they know.",
+   "no_speech_prob": 0.7
+  },
+  {
+   "start": 28.0,
+   "end": 30.66,
+   "text": "So you don't have to worry about the rest of the world",
+   "no_speech_prob": 0.79
+  },
+  {
+   "start": 30.66,
+   "end": 32.46,
+   "text": "After you start impressing the world",
+   "no_speech_prob": 0.79
+  },
+  {
+   "start": 32.46,
+   "end": 34.76,
+   "text": "I'm feeling really good under your skin",
+   "no_speech_prob": 0.79
+  },
+  {
+   "start": 34.76,
+   "end": 37.26,
+   "text": "So you always don't stay",
+   "no_speech_prob": 0.79
+  },
+  {
+   "start": 39.26,
+   "end": 42.92,
+   "text": "Excuse me sir, there must be someone you've confused me for",
+   "no_speech_prob": 0.79
+  },
+  {
+   "start": 42.92,
+   "end": 46.12,
+   "text": "If I can see someone who knew me or someone in uniform",
+   "no_speech_prob": 0.79
+  },
+  {
+   "start": 46.12,
+   "end": 49.56,
+   "text": "I really don't belong in a place where you've worked until no more",
+   "no_speech_prob": 0.79
+  },
+  {
+   "start": 49.56,
+   "end": 52.46,
+   "text": "Hey, you don't have to worry about the rest of the world",
+   "no_speech_prob": 0.79
+  },
+  {
+   "start": 52.46,
+   "end": 54.96,
+   "text": "I'm just feeling sorry for the rest of the world",
+   "no_speech_prob": 0.79
+  },
+  {
+   "start": 54.96,
+   "end": 57.96,
+   "text": "If you use my phone, I can see someone who will be awesome",
+   "no_speech_prob": 0.72
+  },
+  {
+   "start": 57.96,
+   "end": 58.96,
+   "text": "and beautiful.",
+   "no_speech_prob": 0.72
+  },
+  {
+   "start": 58.96,
+   "end": 60.96,
+   "text": "I really don't belong here with my...",
+   "no_speech_prob": 0.72
+  }
+ ]
+}

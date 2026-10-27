@@ -1,0 +1,657 @@
+{
+ "file": "R07_7700624061914828062.mp4",
+ "mode": "reference",
+ "probe": {
+  "duration": 61.021995,
+  "size_bytes": 13066999,
+  "bitrate_kbps": 1713,
+  "video": {
+   "codec": "hevc",
+   "width": 1080,
+   "height": 1920,
+   "pix_fmt": "yuv420p",
+   "r_frame_rate": 30.0,
+   "avg_frame_rate": 30.0,
+   "nb_frames": 1830,
+   "duration": 61.0,
+   "start_time": 0.0,
+   "aspect": 0.5625
+  },
+  "audio": {
+   "codec": "aac",
+   "sample_rate": 44100,
+   "channels": 2,
+   "duration": 61.021995,
+   "start_time": 0.0
+  }
+ },
+ "video": {
+  "frame_count": 1830,
+  "timestamp_irregularities": [],
+  "timestamp_irregularity_count": 0,
+  "cuts": [
+   60.9
+  ],
+  "cut_count": 1,
+  "motion_transitions": [
+   {
+    "start": 0.1,
+    "end": 0.233,
+    "frames": 5,
+    "peak_ydif": 21.3,
+    "baseline_ydif": 2.2,
+    "mid_n": 5
+   },
+   {
+    "start": 3.967,
+    "end": 4.067,
+    "frames": 4,
+    "peak_ydif": 24.7,
+    "baseline_ydif": 2.3,
+    "mid_n": 120
+   },
+   {
+    "start": 6.067,
+    "end": 6.433,
+    "frames": 12,
+    "peak_ydif": 18.5,
+    "baseline_ydif": 2.6,
+    "mid_n": 187
+   },
+   {
+    "start": 7.967,
+    "end": 8.1,
+    "frames": 5,
+    "peak_ydif": 27.8,
+    "baseline_ydif": 2.9,
+    "mid_n": 241
+   },
+   {
+    "start": 11.967,
+    "end": 12.067,
+    "frames": 4,
+    "peak_ydif": 27.6,
+    "baseline_ydif": 1.3,
+    "mid_n": 360
+   },
+   {
+    "start": 15.967,
+    "end": 16.1,
+    "frames": 5,
+    "peak_ydif": 28.5,
+    "baseline_ydif": 1.7,
+    "mid_n": 481
+   },
+   {
+    "start": 19.933,
+    "end": 20.1,
+    "frames": 6,
+    "peak_ydif": 29.8,
+    "baseline_ydif": 2.9,
+    "mid_n": 600
+   },
+   {
+    "start": 23.933,
+    "end": 24.1,
+    "frames": 6,
+    "peak_ydif": 30.7,
+    "baseline_ydif": 1.6,
+    "mid_n": 720
+   },
+   {
+    "start": 27.933,
+    "end": 28.067,
+    "frames": 5,
+    "peak_ydif": 30.5,
+    "baseline_ydif": 1.7,
+    "mid_n": 840
+   },
+   {
+    "start": 30.767,
+    "end": 30.933,
+    "frames": 6,
+    "peak_ydif": 34.8,
+    "baseline_ydif": 1.5,
+    "mid_n": 925
+   },
+   {
+    "start": 39.967,
+    "end": 40.067,
+    "frames": 4,
+    "peak_ydif": 24.9,
+    "baseline_ydif": 6.2,
+    "mid_n": 1200
+   },
+   {
+    "start": 55.933,
+    "end": 56.0,
+    "frames": 3,
+    "peak_ydif": 41.7,
+    "baseline_ydif": 6.8,
+    "mid_n": 1679
+   }
+  ],
+  "motion_transition_count": 12,
+  "shots": [
+   {
+    "start": 0.0,
+    "frames": 5,
+    "dur": 0.167,
+    "mid_n": 2
+   },
+   {
+    "start": 0.167,
+    "frames": 115,
+    "dur": 3.833,
+    "mid_n": 62
+   },
+   {
+    "start": 4.0,
+    "frames": 67,
+    "dur": 2.233,
+    "mid_n": 153
+   },
+   {
+    "start": 6.233,
+    "frames": 54,
+    "dur": 1.8,
+    "mid_n": 213
+   },
+   {
+    "start": 8.033,
+    "frames": 119,
+    "dur": 3.967,
+    "mid_n": 300
+   },
+   {
+    "start": 12.0,
+    "frames": 121,
+    "dur": 4.033,
+    "mid_n": 420
+   },
+   {
+    "start": 16.033,
+    "frames": 119,
+    "dur": 3.967,
+    "mid_n": 540
+   },
+   {
+    "start": 20.0,
+    "frames": 120,
+    "dur": 4.0,
+    "mid_n": 659
+   },
+   {
+    "start": 24.0,
+    "frames": 120,
+    "dur": 4.0,
+    "mid_n": 779
+   },
+   {
+    "start": 28.0,
+    "frames": 85,
+    "dur": 2.833,
+    "mid_n": 882
+   },
+   {
+    "start": 30.833,
+    "frames": 275,
+    "dur": 9.167,
+    "mid_n": 1062
+   },
+   {
+    "start": 40.0,
+    "frames": 479,
+    "dur": 15.967,
+    "mid_n": 1439
+   },
+   {
+    "start": 55.967,
+    "frames": 148,
+    "dur": 4.933,
+    "mid_n": 1752
+   },
+   {
+    "start": 60.9,
+    "frames": 3,
+    "dur": 0.1,
+    "mid_n": 1828
+   }
+  ],
+  "shot_stats": {
+   "count": 14,
+   "median_s": 3.97,
+   "mean_s": 4.36,
+   "min_s": 0.1,
+   "max_s": 15.97,
+   "cuts_per_10s": 0.16,
+   "shot_changes_per_10s": 2.13
+  },
+  "flash_shots": [],
+  "isolated_duplicate_frames": [],
+  "duplicate_ratio_in_motion": 0.001,
+  "jump_candidates": [
+   {
+    "t": 31.967,
+    "ydif": 32.14,
+    "local_median": 2.53
+   },
+   {
+    "t": 32.0,
+    "ydif": 52.22,
+    "local_median": 2.23
+   },
+   {
+    "t": 32.067,
+    "ydif": 18.25,
+    "local_median": 1.86
+   },
+   {
+    "t": 33.933,
+    "ydif": 6.4,
+    "local_median": 0.88
+   },
+   {
+    "t": 33.967,
+    "ydif": 10.26,
+    "local_median": 0.9
+   },
+   {
+    "t": 34.067,
+    "ydif": 10.19,
+    "local_median": 0.9
+   },
+   {
+    "t": 34.1,
+    "ydif": 6.44,
+    "local_median": 0.9
+   },
+   {
+    "t": 43.933,
+    "ydif": 13.48,
+    "local_median": 2.12
+   },
+   {
+    "t": 43.967,
+    "ydif": 25.55,
+    "local_median": 2.09
+   },
+   {
+    "t": 44.0,
+    "ydif": 34.75,
+    "local_median": 2.07
+   },
+   {
+    "t": 44.067,
+    "ydif": 14.41,
+    "local_median": 2.03
+   },
+   {
+    "t": 45.967,
+    "ydif": 12.34,
+    "local_median": 1.36
+   },
+   {
+    "t": 46.067,
+    "ydif": 12.25,
+    "local_median": 1.31
+   }
+  ],
+  "flicker_candidates": [
+   1.967,
+   3.933,
+   3.967,
+   4.0,
+   5.967,
+   7.933,
+   7.967,
+   9.967,
+   11.933,
+   11.967,
+   12.0,
+   13.967,
+   15.933,
+   15.967,
+   16.0,
+   19.933,
+   19.967,
+   20.0,
+   23.933,
+   23.967,
+   24.0,
+   27.933,
+   27.967,
+   28.0,
+   29.967,
+   31.833,
+   31.867,
+   31.9,
+   31.933,
+   31.967,
+   32.0,
+   33.967,
+   35.933,
+   35.967,
+   36.0,
+   37.967,
+   39.933,
+   39.967,
+   40.0,
+   41.967,
+   43.933,
+   43.967,
+   44.0,
+   45.933,
+   45.967,
+   46.0,
+   47.967,
+   49.967,
+   51.933,
+   51.967,
+   52.0,
+   53.967,
+   55.933,
+   55.967,
+   56.0,
+   57.933,
+   57.967,
+   58.0,
+   59.967
+  ],
+  "first_cut_s": 60.9,
+  "first_shot_change_s": 0.167,
+  "mean_luma": 155.7,
+  "mean_motion_ydif": 5.12,
+  "letterbox_crop": null
+ },
+ "audio": {
+  "integrated_lufs": -25.2,
+  "lra_lu": 2.2,
+  "true_peak_dbtp": -13.4,
+  "short_term_lufs_per_s": [
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    3,
+    -24.7
+   ],
+   [
+    4,
+    -24.4
+   ],
+   [
+    5,
+    -24.4
+   ],
+   [
+    6,
+    -24.5
+   ],
+   [
+    7,
+    -24.5
+   ],
+   [
+    8,
+    -24.4
+   ],
+   [
+    9,
+    -24.2
+   ],
+   [
+    10,
+    -24.2
+   ],
+   [
+    11,
+    -24.2
+   ],
+   [
+    12,
+    -24.4
+   ],
+   [
+    13,
+    -24.6
+   ],
+   [
+    14,
+    -24.9
+   ],
+   [
+    15,
+    -24.8
+   ],
+   [
+    16,
+    -25.2
+   ],
+   [
+    17,
+    -25.2
+   ],
+   [
+    18,
+    -26.0
+   ],
+   [
+    19,
+    -26.0
+   ],
+   [
+    20,
+    -26.0
+   ],
+   [
+    21,
+    -25.9
+   ],
+   [
+    22,
+    -25.8
+   ],
+   [
+    23,
+    -25.9
+   ],
+   [
+    24,
+    -26.2
+   ],
+   [
+    25,
+    -26.1
+   ],
+   [
+    26,
+    -26.5
+   ],
+   [
+    27,
+    -26.5
+   ],
+   [
+    28,
+    -26.5
+   ],
+   [
+    29,
+    -25.8
+   ],
+   [
+    30,
+    -25.0
+   ],
+   [
+    31,
+    -24.8
+   ],
+   [
+    32,
+    -24.6
+   ],
+   [
+    33,
+    -24.5
+   ],
+   [
+    34,
+    -24.7
+   ],
+   [
+    35,
+    -24.7
+   ],
+   [
+    36,
+    -25.0
+   ],
+   [
+    37,
+    -25.0
+   ],
+   [
+    38,
+    -25.1
+   ],
+   [
+    39,
+    -25.1
+   ],
+   [
+    40,
+    -25.3
+   ],
+   [
+    41,
+    -25.5
+   ],
+   [
+    42,
+    -24.7
+   ],
+   [
+    43,
+    -24.3
+   ],
+   [
+    44,
+    -24.2
+   ],
+   [
+    45,
+    -24.5
+   ],
+   [
+    46,
+    -24.4
+   ],
+   [
+    47,
+    -24.2
+   ],
+   [
+    48,
+    -23.8
+   ],
+   [
+    49,
+    -23.8
+   ],
+   [
+    50,
+    -24.1
+   ],
+   [
+    51,
+    -24.5
+   ],
+   [
+    52,
+    -25.0
+   ],
+   [
+    53,
+    -25.2
+   ],
+   [
+    54,
+    -25.6
+   ],
+   [
+    55,
+    -24.8
+   ],
+   [
+    56,
+    -24.9
+   ],
+   [
+    57,
+    -25.3
+   ],
+   [
+    58,
+    -26.7
+   ],
+   [
+    59,
+    -27.9
+   ],
+   [
+    60,
+    -28.9
+   ],
+   [
+    61,
+    -30.3
+   ]
+  ],
+  "loudness_jumps": [],
+  "silences": [],
+  "peak_dbfs": -13.408206,
+  "rms_dbfs": -27.010319,
+  "flat_factor": 0.0,
+  "peak_count": 2.0,
+  "dc_offset": 1.8e-05,
+  "nans": 0.0,
+  "click_candidates": [
+   {
+    "t": 26.69,
+    "hf_peak_db": -22.6,
+    "context_median_db": -46.9
+   },
+   {
+    "t": 39.85,
+    "hf_peak_db": -22.4,
+    "context_median_db": -44.0
+   },
+   {
+    "t": 53.0,
+    "hf_peak_db": -22.3,
+    "context_median_db": -44.3
+   }
+  ],
+  "first_50ms_rms_db": -73.290078,
+  "last_50ms_rms_db": -40.242962,
+  "last_1s_rms_db": -34.060784
+ },
+ "black": [
+  [
+   0.0,
+   0.1
+  ],
+  [
+   60.9,
+   60.9667
+  ]
+ ],
+ "freezes": []
+}

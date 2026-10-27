@@ -1,0 +1,588 @@
+{
+ "file": "R01_7699403259378715936.mp4",
+ "mode": "reference",
+ "probe": {
+  "duration": 75.008005,
+  "size_bytes": 7051872,
+  "bitrate_kbps": 752,
+  "video": {
+   "codec": "h264",
+   "width": 576,
+   "height": 1024,
+   "pix_fmt": "yuv420p",
+   "r_frame_rate": 30.0,
+   "avg_frame_rate": 30.0,
+   "nb_frames": 2250,
+   "duration": 75.0,
+   "start_time": 0.0,
+   "aspect": 0.5625
+  },
+  "audio": {
+   "codec": "aac",
+   "sample_rate": 44100,
+   "channels": 2,
+   "duration": 75.008005,
+   "start_time": 0.0
+  }
+ },
+ "video": {
+  "frame_count": 2250,
+  "timestamp_irregularities": [],
+  "timestamp_irregularity_count": 0,
+  "cuts": [
+   71.0
+  ],
+  "cut_count": 1,
+  "motion_transitions": [
+   {
+    "start": 9.733,
+    "end": 10.433,
+    "frames": 22,
+    "peak_ydif": 23.0,
+    "baseline_ydif": 0.7,
+    "mid_n": 302
+   },
+   {
+    "start": 22.2,
+    "end": 22.6,
+    "frames": 13,
+    "peak_ydif": 16.8,
+    "baseline_ydif": 5.0,
+    "mid_n": 672
+   },
+   {
+    "start": 34.7,
+    "end": 35.1,
+    "frames": 13,
+    "peak_ydif": 28.4,
+    "baseline_ydif": 1.8,
+    "mid_n": 1047
+   },
+   {
+    "start": 35.833,
+    "end": 36.033,
+    "frames": 7,
+    "peak_ydif": 19.3,
+    "baseline_ydif": 1.7,
+    "mid_n": 1078
+   },
+   {
+    "start": 40.967,
+    "end": 41.133,
+    "frames": 6,
+    "peak_ydif": 15.2,
+    "baseline_ydif": 1.2,
+    "mid_n": 1231
+   },
+   {
+    "start": 46.967,
+    "end": 47.3,
+    "frames": 11,
+    "peak_ydif": 24.6,
+    "baseline_ydif": 0.7,
+    "mid_n": 1414
+   },
+   {
+    "start": 53.033,
+    "end": 53.267,
+    "frames": 8,
+    "peak_ydif": 16.5,
+    "baseline_ydif": 2.0,
+    "mid_n": 1594
+   },
+   {
+    "start": 57.467,
+    "end": 58.167,
+    "frames": 22,
+    "peak_ydif": 20.4,
+    "baseline_ydif": 4.0,
+    "mid_n": 1735
+   },
+   {
+    "start": 64.867,
+    "end": 65.3,
+    "frames": 14,
+    "peak_ydif": 18.0,
+    "baseline_ydif": 5.0,
+    "mid_n": 1952
+   }
+  ],
+  "motion_transition_count": 9,
+  "shots": [
+   {
+    "start": 0.0,
+    "frames": 302,
+    "dur": 10.067,
+    "mid_n": 150
+   },
+   {
+    "start": 10.067,
+    "frames": 370,
+    "dur": 12.333,
+    "mid_n": 486
+   },
+   {
+    "start": 22.4,
+    "frames": 375,
+    "dur": 12.5,
+    "mid_n": 859
+   },
+   {
+    "start": 34.9,
+    "frames": 31,
+    "dur": 1.033,
+    "mid_n": 1062
+   },
+   {
+    "start": 35.933,
+    "frames": 153,
+    "dur": 5.1,
+    "mid_n": 1154
+   },
+   {
+    "start": 41.033,
+    "frames": 183,
+    "dur": 6.1,
+    "mid_n": 1322
+   },
+   {
+    "start": 47.133,
+    "frames": 180,
+    "dur": 6.0,
+    "mid_n": 1503
+   },
+   {
+    "start": 53.133,
+    "frames": 141,
+    "dur": 4.7,
+    "mid_n": 1664
+   },
+   {
+    "start": 57.833,
+    "frames": 217,
+    "dur": 7.233,
+    "mid_n": 1843
+   },
+   {
+    "start": 65.067,
+    "frames": 178,
+    "dur": 5.933,
+    "mid_n": 2040
+   },
+   {
+    "start": 71.0,
+    "frames": 120,
+    "dur": 4.0,
+    "mid_n": 2189
+   }
+  ],
+  "shot_stats": {
+   "count": 11,
+   "median_s": 6.0,
+   "mean_s": 6.82,
+   "min_s": 1.03,
+   "max_s": 12.5,
+   "cuts_per_10s": 0.13,
+   "shot_changes_per_10s": 1.33
+  },
+  "flash_shots": [],
+  "isolated_duplicate_frames": [],
+  "duplicate_ratio_in_motion": 0.002,
+  "jump_candidates": [],
+  "flicker_candidates": [],
+  "first_cut_s": 71.0,
+  "first_shot_change_s": 10.067,
+  "mean_luma": 99.1,
+  "mean_motion_ydif": 3.88,
+  "letterbox_crop": null
+ },
+ "audio": {
+  "integrated_lufs": -13.8,
+  "lra_lu": 15.9,
+  "true_peak_dbtp": -3.7,
+  "short_term_lufs_per_s": [
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    3,
+    -27.1
+   ],
+   [
+    4,
+    -27.0
+   ],
+   [
+    5,
+    -27.5
+   ],
+   [
+    6,
+    -27.7
+   ],
+   [
+    7,
+    -28.9
+   ],
+   [
+    8,
+    -28.3
+   ],
+   [
+    9,
+    -27.6
+   ],
+   [
+    10,
+    -26.1
+   ],
+   [
+    11,
+    -26.9
+   ],
+   [
+    12,
+    -24.7
+   ],
+   [
+    13,
+    -25.9
+   ],
+   [
+    14,
+    -26.5
+   ],
+   [
+    15,
+    -39.6
+   ],
+   [
+    16,
+    -53.0
+   ],
+   [
+    17,
+    -53.8
+   ],
+   [
+    18,
+    -55.2
+   ],
+   [
+    19,
+    -54.7
+   ],
+   [
+    20,
+    -56.5
+   ],
+   [
+    21,
+    -58.0
+   ],
+   [
+    22,
+    -60.7
+   ],
+   [
+    23,
+    -42.8
+   ],
+   [
+    24,
+    -42.8
+   ],
+   [
+    25,
+    -42.7
+   ],
+   [
+    26,
+    -53.3
+   ],
+   [
+    27,
+    -52.8
+   ],
+   [
+    28,
+    -52.9
+   ],
+   [
+    29,
+    -25.2
+   ],
+   [
+    30,
+    -18.7
+   ],
+   [
+    31,
+    -16.0
+   ],
+   [
+    32,
+    -14.5
+   ],
+   [
+    33,
+    -14.4
+   ],
+   [
+    34,
+    -13.6
+   ],
+   [
+    35,
+    -13.1
+   ],
+   [
+    36,
+    -12.7
+   ],
+   [
+    37,
+    -13.1
+   ],
+   [
+    38,
+    -13.6
+   ],
+   [
+    39,
+    -14.0
+   ],
+   [
+    40,
+    -14.1
+   ],
+   [
+    41,
+    -13.4
+   ],
+   [
+    42,
+    -12.9
+   ],
+   [
+    43,
+    -12.6
+   ],
+   [
+    44,
+    -14.0
+   ],
+   [
+    45,
+    -16.5
+   ],
+   [
+    46,
+    -23.0
+   ],
+   [
+    47,
+    -19.8
+   ],
+   [
+    48,
+    -16.3
+   ],
+   [
+    49,
+    -14.2
+   ],
+   [
+    50,
+    -13.6
+   ],
+   [
+    51,
+    -13.8
+   ],
+   [
+    52,
+    -13.9
+   ],
+   [
+    53,
+    -14.2
+   ],
+   [
+    54,
+    -13.6
+   ],
+   [
+    55,
+    -13.4
+   ],
+   [
+    56,
+    -13.0
+   ],
+   [
+    57,
+    -13.4
+   ],
+   [
+    58,
+    -14.0
+   ],
+   [
+    59,
+    -16.4
+   ],
+   [
+    60,
+    -19.8
+   ],
+   [
+    61,
+    -17.5
+   ],
+   [
+    62,
+    -14.1
+   ],
+   [
+    63,
+    -11.9
+   ],
+   [
+    64,
+    -10.8
+   ],
+   [
+    65,
+    -10.5
+   ],
+   [
+    66,
+    -10.8
+   ],
+   [
+    67,
+    -12.1
+   ],
+   [
+    68,
+    -13.4
+   ],
+   [
+    69,
+    -13.5
+   ],
+   [
+    70,
+    -13.7
+   ],
+   [
+    71,
+    -15.0
+   ],
+   [
+    72,
+    -18.3
+   ],
+   [
+    73,
+    -19.4
+   ],
+   [
+    74,
+    -19.5
+   ],
+   [
+    75,
+    -20.1
+   ]
+  ],
+  "loudness_jumps": [
+   {
+    "t": 11.3,
+    "from_lufs": -39.3,
+    "to_lufs": -23.3
+   },
+   {
+    "t": 46.2,
+    "from_lufs": -44.6,
+    "to_lufs": -23.3
+   },
+   {
+    "t": 60.4,
+    "from_lufs": -34.7,
+    "to_lufs": -17.0
+   },
+   {
+    "t": 72.0,
+    "from_lufs": -39.2,
+    "to_lufs": -19.6
+   }
+  ],
+  "silences": [
+   {
+    "start": 10.4,
+    "end": 10.86
+   },
+   {
+    "start": 19.59,
+    "end": 20.17
+   },
+   {
+    "start": 21.97,
+    "end": 22.54
+   },
+   {
+    "start": 22.89,
+    "end": 23.35
+   }
+  ],
+  "peak_dbfs": -3.66747,
+  "rms_dbfs": -18.576673,
+  "flat_factor": 0.0,
+  "peak_count": 2.0,
+  "dc_offset": -4e-05,
+  "nans": 0.0,
+  "click_candidates": [
+   {
+    "t": 22.62,
+    "hf_peak_db": -38.6,
+    "context_median_db": -78.8
+   },
+   {
+    "t": 46.16,
+    "hf_peak_db": -35.0,
+    "context_median_db": -56.3
+   },
+   {
+    "t": 71.89,
+    "hf_peak_db": -33.3,
+    "context_median_db": -57.4
+   }
+  ],
+  "first_50ms_rms_db": -49.427844,
+  "last_50ms_rms_db": -91.099577,
+  "last_1s_rms_db": -41.652952
+ },
+ "black": [
+  [
+   71.0,
+   74.9667
+  ]
+ ],
+ "freezes": [
+  [
+   71.6333,
+   72.8333
+  ],
+  [
+   72.8333,
+   74.9667
+  ]
+ ]
+}

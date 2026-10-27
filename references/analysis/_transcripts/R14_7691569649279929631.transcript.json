@@ -1,0 +1,14 @@
+{
+ "file": "R14_7691569649279929631.mp4",
+ "language": "nn",
+ "language_probability": 0.504,
+ "model": "/tmp/claude-0/-home-user-oxygen-video/c0ef34c7-8c9c-5dff-82a6-832eadd17941/scratchpad/whisper-small-ct2",
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 2.0,
+   "text": "ʕ ʕ ʕ ʕ ʕ ʕ",
+   "no_speech_prob": 0.81
+  }
+ ]
+}
