@@ -23,13 +23,22 @@
 - [ ] Ende ≤ 5 s nach der Pointe
 - [ ] Blitzregel eingehalten
 
+## Dateien der Produktion
+
+- `timeline.json` – Zeiten, Einstellungen, Kamera, HUD-Werte, Ereignisse, Ton (Vorlage: `templates/timeline.json`)
+- `text.en.json` – alle Bildschirmtexte (Struktur unten), keine Texte im Szenencode
+- `scene.js` – 3D-Szene, Zustand nur aus `t` (Vorlage: `templates/scene.js`)
+
 ## text.en.json (Struktur)
 
 ```json
 {
-  "title": {"text": "What if …?", "highlight": "…"},
-  "hud": [{"from": 0.0, "label": "…", "unit": "…", "sub": "…"}],
-  "lines": [{"id": "l01", "in": 3.8, "out": 6.6, "text": "…"}],
-  "end": {"text": "…"}
+  "lang": "en",
+  "number_locale": "en-US",
+  "title": { "text": "What if …?", "highlight": "Schlüsselwort" },
+  "hud": { "h1": { "label": "LABEL", "sub": "UNTERZEILE", "unit": " m", "scale": 1, "final": "HERE" } },
+  "lines": { "l01": "Eine Zeile, drei bis zehn Wörter." }
 }
 ```
+
+Für eine metrische/deutsche Fassung `text.de.json` mit `"number_locale": "de-DE"`, `"unit"` und `"scale"` (Umrechnungsfaktor) anlegen – Zeiten und Szene bleiben unverändert.

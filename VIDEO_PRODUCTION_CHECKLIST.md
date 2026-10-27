@@ -56,10 +56,18 @@ Ablage pro Video: `productions/<slug>/` mit `LOG.md`, `scene_plan.md`, `text.en.
 
 ## 6. Rendern
 
+```bash
+node tools/validate_production.mjs productions/<slug>      # Regeln vor dem Rendern (muss „OK“ melden)
+node pipeline/run.mjs --production productions/<slug>      # Frames → Ton → Encode → QA → Bildstreifen
+```
+
+`run.mjs` führt die Schritte 6–8 (automatischer Teil) nacheinander aus, bricht beim ersten Fehler ab und schreibt `render/run_log.json`. Nach einem Abbruch denselben Befehl erneut starten: fertige Teilstücke werden wiederverwendet.
+
+- [ ] `validate_production.mjs` meldet OK (Warnungen begründet im LOG)
 - [ ] Deterministisch: Frame n wird für t = n/30 berechnet, keine Echtzeit-Aufnahme (10.2)
 - [ ] Alle Assets vor Frame 0 geladen; globale Zeitachse (10.2, 12)
 - [ ] Encode: 1080×1920, 30 fps CFR, H.264 High, yuv420p, BT.709, CRF ≤ 18, AAC 48 kHz ≥ 192 kbit/s, `+faststart` (10.1)
-- [ ] Render-Befehl und Versionsstand (Git-Commit) im Protokoll
+- [ ] Render-Befehl und Versionsstand (Git-Commit) im Protokoll – vor dem Rendern committen, damit `run_log.json` keinen „dirty“-Stand meldet
 
 ## 7. Technische Eigenschaften prüfen
 

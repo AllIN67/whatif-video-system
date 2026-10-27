@@ -1,7 +1,7 @@
 # WHATIF STYLE GUIDE
 
 **Maßgebliche kreative und technische Grundlage für alle Videos dieses Projekts.**
-Version 1.0 · 2026-10-27 · Belegbasis: `REFERENCE_ANALYSIS.md` (15 Referenzen, R01–R15) und `references/analysis/MEASUREMENTS.md`.
+Version 1.1 · 2026-10-27 · Belegbasis: `REFERENCE_ANALYSIS.md` (15 Referenzen, R01–R15) und `references/analysis/MEASUREMENTS.md`.
 
 Kennzeichnung der Regeln:
 
@@ -298,7 +298,7 @@ Diese Merkmale sind gestalterische Entscheidungen, keine belegten Erfolgsfaktore
 
 ### 10.3 Pipeline-Stand
 
-In diesem Repository existiert **noch keine Render-Pipeline**. Verfügbare Werkzeuge in der aktuellen Umgebung: Node.js 22, Python 3, FFmpeg 6.1, Chromium + Playwright (headless). **Empfehlung für die erste Produktion [S]:** 3D-Szene mit einer WebGL-Bibliothek (z. B. Three.js) im headless Chromium, Zeit pro Frame von außen gesetzt (deterministisch), Text/HUD als HTML/CSS-Ebene in derselben Seite, Frames per Playwright-Screenshot, Encode mit FFmpeg. Begründung: alles läuft mit vorhandenen Werkzeugen, Text bleibt sprachunabhängig und scharf. Die Entscheidung wird bei der ersten Produktion getroffen und im Änderungsprotokoll dieses Dokuments sowie im Produktionsprotokoll festgehalten; zusätzliche Abhängigkeiten (Three.js, Schriften, Musik) sind dann zu installieren bzw. zu lizenzieren.
+**Entschieden (2026-10-27) und umgesetzt [V]:** 3D-Szene mit Three.js (0.186.1) im headless Chromium (Playwright 1.63, SwiftShader-WebGL, keine GPU nötig), Text/HUD als HTML/CSS-Ebene darüber, ein PNG-Screenshot pro Frame, verlustfreie FFV1-Teilstücke, ein einziger H.264-Encode; Ton separat (FFmpeg-Generatoren, Mischung mit frame-genauen Einsätzen, lineare Normierung + True-Peak-Limiter). Bedienung, Dateien und Tests: `README.md`, Abschnitt „Render-Pipeline“; Einstieg `node pipeline/run.mjs --production productions/<slug>`. Gemessene Renderzeit in der Cloud-Umgebung (4 CPU-Kerne, keine GPU): ≈ 0,4 s pro Frame, also ≈ 13–17 min für 61–80 s Video; Parallelisierung bringt dort keinen Gewinn. Die Szene jeder Produktion (`scene.js`) darf Zustand nur aus `t` ableiten; Uhr, Animationsschleife und ungeseedeter Zufall sind technisch gesperrt.
 
 ---
 
@@ -398,3 +398,4 @@ Claude Code kann Audio messen, aber **nicht hören**. Deshalb gilt **[V]**: Vor 
 | Datum | Version | Änderung | Begründung |
 |---|---|---|---|
 | 2026-10-27 | 1.0 | Erstfassung | Analyse R01–R15 |
+| 2026-10-27 | 1.1 | 10.3: Render-Pipeline entschieden und umgesetzt (Three.js + headless Chromium + FFmpeg, deterministisch) | Implementierungsplan freigegeben; Machbarkeit, Determinismus und Renderzeit gemessen; Tests in `tests/` |

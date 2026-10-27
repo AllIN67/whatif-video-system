@@ -16,3 +16,7 @@ productions/**/*.jpg
 __pycache__/
 *.pyc
 node_modules/
+
+# Test-Fixtures erzeugen beim Testlauf temporär render/ und qa/
+tests/fixtures/*/render/
+tests/fixtures/*/qa/

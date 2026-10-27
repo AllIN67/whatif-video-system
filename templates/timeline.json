@@ -1,0 +1,34 @@
+{
+ "_comment": "Vorlage: alle Zeiten in Sekunden, auf Frame-Grenzen (n/30). Kopieren nach productions/<slug>/timeline.json, dann node tools/validate_production.mjs productions/<slug>.",
+ "fps": 30,
+ "duration": 62,
+ "seed": 1,
+ "pointe": 57.0,
+ "title": { "in": 0, "out": 3.5 },
+ "shots": [
+  { "id": "s01", "from": 0, "to": 6,
+    "camera": { "keys": [
+      { "t": 0, "pos": [0, 1.6, 30], "look": [0, 4, 0], "fov": 50 },
+      { "t": 6, "pos": [0, 1.6, 27], "look": [0, 4, 0], "fov": 50 } ] } },
+  { "id": "s02", "from": 6, "to": 62, "transition_in": { "type": "whip", "frames": 10, "direction": "right" },
+    "shake": [ { "t": 8.0, "dur": 1.2, "amp": 0.3 } ],
+    "camera": { "mode": "inOut", "keys": [
+      { "t": 6, "pos": [20, 3, 10], "look": [0, 2, 0], "fov": 45 },
+      { "t": 62, "pos": [18, 3, 8], "look": [0, 2, 0], "fov": 45 } ] } }
+ ],
+ "hud": [
+  { "id": "h1", "from": 0, "value": { "keys": [[0, 1000], [8, 0]], "ease": "in" }, "decimals": 0 },
+  { "id": "h2", "from": 8, "value": { "keys": [[8, 0], [57, 100]], "ease": "out" }, "decimals": 0, "final": { "at": 57 } }
+ ],
+ "lines": [
+  { "id": "l01", "in": 4.0, "out": 7.0 }
+ ],
+ "events": [
+  { "t": 8.0, "id": "trigger", "trigger": true }
+ ],
+ "audio": {
+  "fade_out": 1.5,
+  "beds": [ { "src": "gen:drone", "start": 0, "end": 62, "gain_db": -6, "automation": [[0, 0], [6.8, 0], [7.4, -16], [7.9, -16], [8.0, 0]] } ],
+  "sfx": [ { "src": "gen:whoosh", "t": 5.833333, "gain_db": -4 }, { "src": "gen:boom", "t": 8.0, "gain_db": 0 } ]
+ }
+}

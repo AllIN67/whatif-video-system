@@ -24,10 +24,14 @@ Eigenständiges Projekt – unabhängig von `AllIN67/oxygen-video`; von dort wur
 ├── REFERENCE_ANALYSIS.md
 ├── CLAUDE.md
 ├── .claude/skills/whatif-video-style/SKILL.md
+├── package.json               # three, Schriften (gepinnt); Playwright wird global erwartet
+├── pipeline/                  # Render-Pipeline (siehe Abschnitt „Render-Pipeline“)
+├── tests/                     # automatische Tests + Fixtures
 ├── templates/
 │   ├── scene_plan.md          # Vorlage Szenenplan + text.en.json-Struktur
 │   └── production_log.md      # Vorlage Produktionsprotokoll
 ├── tools/
+│   ├── validate_production.mjs, audio_mix.py, sfx_synth.py, av_sync.py   # Render-Pipeline (siehe unten)
 │   ├── video_qa.py            # Messung + Abnahme (Bild, Ton, Format) → report.md/json, Kontaktbögen
 │   ├── inspect_frames.py      # Bildstreifen mit voller Bildrate an Schnitten/Auffälligkeiten
 │   ├── transcribe.py          # optionale Spracherkennung (faster-whisper)
@@ -39,8 +43,67 @@ Eigenständiges Projekt – unabhängig von `AllIN67/oxygen-video`; von dort wur
 │       ├── MEASUREMENTS.md
 │       ├── Rxx/               # report.md, report.json, frames.tsv (Kontaktbögen nur lokal)
 │       └── _transcripts/      # Spracherkennung (überwiegend Halluzinationen auf Musik, siehe Analyse)
-└── productions/               # ein Ordner pro Video (noch leer)
+└── productions/               # ein Ordner pro Video; _pipeline_test = technische Testproduktion
 ```
+
+## Render-Pipeline
+
+Deterministisch: Jedes Bild ist eine reine Funktion seines Frame-Index (`t = n / 30`). Uhr, Animationsschleife und ungeseedeter Zufall sind in der Bühne technisch gesperrt (`pipeline/runtime/guard.js`).
+
+```
+timeline.json + text.en.json + scene.js
+   │  node tools/validate_production.mjs productions/<slug>        Regeln des Style-Guides vor dem Rendern
+   ▼
+pipeline/render_frames.mjs   headless Chromium + Three.js (SwiftShader), 1 PNG-Screenshot pro Frame
+   │                         → verlustfreie FFV1-Teilstücke à 300 Frames (wiederaufnehmbar), frames.tsv (Prüfsummen)
+tools/audio_mix.py           lizenzfreie Klänge (tools/sfx_synth.py), frame-genaue Einsätze, Clip-Fades,
+   │                         lineare Normierung −14 LUFS, True-Peak-Limiter −1,5 dBTP, exakte Länge
+pipeline/encode.mjs          ein H.264-Encode (CRF 16, BT.709, 30 fps CFR) + AAC 48 kHz, Selbstkontrolle per ffprobe
+   ▼
+tools/video_qa.py --mode render  +  tools/inspect_frames.py --report …   (+ tools/av_sync.py bei Synchron-Markern)
+```
+
+Alles in einem Befehl (bricht beim ersten Fehler ab, schreibt `render/run_log.json`):
+
+```bash
+npm install                                   # einmalig: three, Schriften (Fraunces, JetBrains Mono)
+node pipeline/run.mjs --production productions/<slug>
+```
+
+| Datei | Aufgabe |
+|---|---|
+| `pipeline/server.mjs` | lokaler HTTP-Server (nur 127.0.0.1); ES-Module laden nicht über `file://` |
+| `pipeline/browser.mjs` | Chromium-Start (SwiftShader), Versionsprüfung des global installierten Playwright |
+| `pipeline/runtime/stage.html/.js/.css` | Bühne: Szene, Kamera, Übergänge (Whip-Unschärfe als WebGL-Pass, Dip/Flash-Overlay) |
+| `pipeline/runtime/timeline.js` | Zeitachse: Interpolation, Einstellungsgrenzen, Übergänge, Kamera, Wackeln, HUD – reine Funktionen |
+| `pipeline/runtime/overlay.js` + `brand.json` | Titel, HUD mit Fortschrittsskala, Untertitel, Scrims, Sicherheitszone, Synchron-Marker |
+| `pipeline/runtime/guard.js`, `rng.js` | Echtzeit-Sperre, geseedeter Zufall |
+| `pipeline/render_frames.mjs`, `encode.mjs`, `run.mjs` | Frames, Endkodierung, Gesamtablauf |
+| `tools/validate_production.mjs` | Regelprüfung vor dem Rendern |
+| `tools/sfx_synth.py`, `tools/audio_mix.py` | Klänge erzeugen, Ton mischen |
+| `tools/av_sync.py` | Bild-Ton-Versatz über Synchron-Marker messen |
+| `templates/timeline.json`, `templates/scene.js` | Vorlagen für neue Produktionen |
+| `productions/_pipeline_test/` | abstrakte technische Testproduktion (kein Inhaltsvideo) |
+
+**Signalfarbe:** `pipeline/runtime/brand.json` enthält einen **Platzhalter** (`signal_is_placeholder: true`); die endgültige Farbe wird beim ersten echten Video festgelegt.
+
+**Renderzeit** (Cloud-Container, 4 Kerne, keine GPU): ≈ 0,4 s pro Frame → ≈ 13–17 min für 61–80 s. Parallele Browser bringen hier keinen Gewinn (gemessen).
+
+### Tests
+
+```bash
+npm test     # node --test tests/*.mjs  +  python3 -m unittest (tests/test_*.py)
+```
+
+| Test | prüft |
+|---|---|
+| `test_runtime_guard.mjs` | Echtzeit-APIs werfen, Szene mit Uhrzugriff bricht ab, Zufall reproduzierbar, statische Code-Prüfung |
+| `test_timeline.mjs` | Interpolation, Frame-Grenzen, Fehlerfälle, Übergänge ohne Schwarz-/Weißbild, Kamera ohne Sprünge |
+| `test_render_frames.mjs` | bit-identische Frames (Reihenfolge, neue Browser-Instanz), exakte Frame-Zahl, 30/1, Wiederaufnahme |
+| `test_overlay.mjs` | Schriften geladen, Inhalte/Zeiten, Sicherheitszone, HUD ab Frame 0, fehlende Text-ID bricht ab |
+| `test_validate_production.mjs` | gültige Produktion + 18 gezielte Regelverstöße |
+| `test_audio_mix.py` | Länge, −14 ± 1 LUFS, True Peak ≤ −1, Ein-/Ausblendung, keine Knackser, sample-genaue Platzierung |
+| `test_pipeline_run.mjs` | Gesamtablauf auf 3-s-Fixture: Spezifikation, QA ohne FAIL, A/V-Versatz ≤ 1 Frame |
 
 ## Skill verwenden
 
@@ -82,8 +145,9 @@ Geprüft in der Analyse-Umgebung (Cloud-Container, 2026-10-27):
 |---|---|---|
 | FFmpeg/ffprobe 6.1.1 | vorhanden | Analyse, Encode |
 | Python 3.13 (nur Standardbibliothek) | vorhanden | alle Skripte außer `transcribe.py` |
-| Node.js 22 | vorhanden | künftige Render-Pipeline |
-| Chromium + Playwright | vorhanden | künftiges deterministisches Rendern (Empfehlung im Guide 10.3) |
+| Node.js 22 | vorhanden | Render-Pipeline |
+| Chromium + Playwright 1.63 (global, `/opt/node-tools`) | vorhanden | deterministisches Rendern; bewusst nicht als Projektabhängigkeit installiert |
+| three 0.186.1, @fontsource/fraunces, @fontsource/jetbrains-mono | per `npm install` | 3D, Schriften (SIL OFL) |
 | DejaVu-Schriften | vorhanden | Zeitstempel in Kontaktbögen |
 | faster-whisper | **nicht** installiert | optional, in eigener venv: `python3 -m venv .venv-asr && .venv-asr/bin/pip install faster-whisper` |
 
@@ -100,7 +164,8 @@ Zusätzlich an den Referenzen kalibriert (Letterbox-Zuschnitt, Bewegungsübergä
 
 ## Bekannte Einschränkungen
 
-- **Noch keine Render-Pipeline** im Repository; Empfehlung und Anforderungen stehen im Style-Guide (10.2, 10.3).
+- Render-Pipeline erzeugt bisher nur die abstrakte Testproduktion; ein echtes Inhaltsvideo wurde noch nicht produziert.
+- Signalfarbe ist ein Platzhalter; Musik nur selbst erzeugt (keine lizenzierte Musik eingebunden).
 - **Claude kann Audio nicht hören.** Ton wird gemessen; die Hörprüfung vor der Freigabe muss ein Mensch durchführen.
 - Automatische Bildprüfung findet Kandidaten, keine Gewissheit: Abblend-Übergänge, Zeitraffer und Partikel erzeugen Fehlalarme; sehr kurze Fehler zwischen den 1-s-Kontaktbögen findet nur die Frame-Messung bzw. die Bildstreifen.
 - Referenzvideos und Kontaktbögen sind nicht versioniert (Urheberrecht). In einer neuen Umgebung müssen sie erneut bereitgestellt werden.
