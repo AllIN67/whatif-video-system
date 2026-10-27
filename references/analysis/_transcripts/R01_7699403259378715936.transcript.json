@@ -1,0 +1,26 @@
+{
+ "file": "R01_7699403259378715936.mp4",
+ "language": "en",
+ "language_probability": 0.493,
+ "model": "/tmp/claude-0/-home-user-oxygen-video/c0ef34c7-8c9c-5dff-82a6-832eadd17941/scratchpad/whisper-small-ct2",
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 10.5,
+   "text": "...",
+   "no_speech_prob": 0.49
+  },
+  {
+   "start": 10.5,
+   "end": 22.5,
+   "text": "...",
+   "no_speech_prob": 0.49
+  },
+  {
+   "start": 22.5,
+   "end": 24.5,
+   "text": "I",
+   "no_speech_prob": 0.56
+  }
+ ]
+}

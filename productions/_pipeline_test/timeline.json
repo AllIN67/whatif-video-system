@@ -1,0 +1,782 @@
+{
+ "_comment": "Abstrakte technische Testproduktion der Render-Pipeline (kein Inhaltsvideo). Deckt alle Übergänge, HUD-Wechsel, Wackeln, Partikel, Licht-/Farbverlauf, Synchron-Marker und eine Lautstärke-Absenkung ab.",
+ "fps": 30,
+ "duration": 62,
+ "seed": 20261027,
+ "pointe": 57.0,
+ "title": {
+  "in": 0,
+  "out": 3.5
+ },
+ "shots": [
+  {
+   "id": "s01_observer",
+   "from": 0,
+   "to": 8,
+   "camera": {
+    "keys": [
+     {
+      "t": 0,
+      "pos": [
+       6,
+       1.6,
+       40
+      ],
+      "look": [
+       0,
+       16,
+       -20
+      ],
+      "fov": 50
+     },
+     {
+      "t": 8,
+      "pos": [
+       5,
+       1.6,
+       37
+      ],
+      "look": [
+       0,
+       6,
+       -20
+      ],
+      "fov": 50
+     }
+    ]
+   }
+  },
+  {
+   "id": "s02_impact",
+   "from": 8,
+   "to": 14,
+   "transition_in": {
+    "type": "whip",
+    "frames": 10,
+    "direction": "right"
+   },
+   "camera": {
+    "keys": [
+     {
+      "t": 8,
+      "pos": [
+       22,
+       4,
+       4
+      ],
+      "look": [
+       0,
+       1.5,
+       -20
+      ],
+      "fov": 45
+     },
+     {
+      "t": 14,
+      "pos": [
+       18,
+       3.5,
+       0
+      ],
+      "look": [
+       0,
+       1.5,
+       -20
+      ],
+      "fov": 45
+     }
+    ]
+   },
+   "shake": [
+    {
+     "t": 8.0,
+     "dur": 1.4,
+     "amp": 0.35
+    }
+   ]
+  },
+  {
+   "id": "s03_street",
+   "from": 14,
+   "to": 20,
+   "transition_in": {
+    "type": "dip",
+    "frames": 6
+   },
+   "camera": {
+    "keys": [
+     {
+      "t": 14,
+      "pos": [
+       -30,
+       1.6,
+       10
+      ],
+      "look": [
+       0,
+       4,
+       -20
+      ],
+      "fov": 50
+     },
+     {
+      "t": 20,
+      "pos": [
+       -26,
+       1.6,
+       4
+      ],
+      "look": [
+       0,
+       4,
+       -20
+      ],
+      "fov": 50
+     }
+    ]
+   }
+  },
+  {
+   "id": "s04_high",
+   "from": 20,
+   "to": 26,
+   "transition_in": {
+    "type": "cut"
+   },
+   "camera": {
+    "keys": [
+     {
+      "t": 20,
+      "pos": [
+       0,
+       60,
+       40
+      ],
+      "look": [
+       0,
+       0,
+       -20
+      ],
+      "fov": 55
+     },
+     {
+      "t": 26,
+      "pos": [
+       10,
+       52,
+       30
+      ],
+      "look": [
+       0,
+       0,
+       -20
+      ],
+      "fov": 55
+     }
+    ]
+   }
+  },
+  {
+   "id": "s05_orange",
+   "from": 26,
+   "to": 32,
+   "transition_in": {
+    "type": "flash",
+    "frames": 8
+   },
+   "camera": {
+    "keys": [
+     {
+      "t": 26,
+      "pos": [
+       4,
+       1.6,
+       30
+      ],
+      "look": [
+       0,
+       10,
+       -20
+      ],
+      "fov": 50
+     },
+     {
+      "t": 32,
+      "pos": [
+       2,
+       1.6,
+       26
+      ],
+      "look": [
+       0,
+       12,
+       -20
+      ],
+      "fov": 50
+     }
+    ]
+   }
+  },
+  {
+   "id": "s06_side",
+   "from": 32,
+   "to": 38,
+   "transition_in": {
+    "type": "whip",
+    "frames": 10,
+    "direction": "left"
+   },
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 32,
+      "pos": [
+       40,
+       8,
+       -10
+      ],
+      "look": [
+       0,
+       1.5,
+       -20
+      ],
+      "fov": 50
+     },
+     {
+      "t": 35,
+      "pos": [
+       38,
+       9,
+       -24
+      ],
+      "look": [
+       0,
+       1.5,
+       -20
+      ],
+      "fov": 50
+     },
+     {
+      "t": 38,
+      "pos": [
+       34,
+       10,
+       -34
+      ],
+      "look": [
+       0,
+       1.5,
+       -20
+      ],
+      "fov": 50
+     }
+    ]
+   }
+  },
+  {
+   "id": "s07_close",
+   "from": 38,
+   "to": 44,
+   "transition_in": {
+    "type": "dip",
+    "frames": 4
+   },
+   "camera": {
+    "keys": [
+     {
+      "t": 38,
+      "pos": [
+       8,
+       2,
+       -6
+      ],
+      "look": [
+       0,
+       1.5,
+       -20
+      ],
+      "fov": 40
+     },
+     {
+      "t": 44,
+      "pos": [
+       6,
+       2.5,
+       -9
+      ],
+      "look": [
+       0,
+       1.5,
+       -20
+      ],
+      "fov": 40
+     }
+    ]
+   }
+  },
+  {
+   "id": "s08_rise",
+   "from": 44,
+   "to": 50,
+   "transition_in": {
+    "type": "cut"
+   },
+   "camera": {
+    "keys": [
+     {
+      "t": 44,
+      "pos": [
+       -12,
+       1.6,
+       24
+      ],
+      "look": [
+       0,
+       6,
+       -20
+      ],
+      "fov": 50
+     },
+     {
+      "t": 50,
+      "pos": [
+       -10,
+       1.6,
+       20
+      ],
+      "look": [
+       0,
+       14,
+       -20
+      ],
+      "fov": 50
+     }
+    ]
+   },
+   "shake": [
+    {
+     "t": 46.0,
+     "dur": 2.0,
+     "amp": 0.12,
+     "freq": 6
+    }
+   ]
+  },
+  {
+   "id": "s09_wave",
+   "from": 50,
+   "to": 56,
+   "transition_in": {
+    "type": "flash",
+    "frames": 8
+   },
+   "camera": {
+    "keys": [
+     {
+      "t": 50,
+      "pos": [
+       0,
+       25,
+       30
+      ],
+      "look": [
+       0,
+       3,
+       -20
+      ],
+      "fov": 60
+     },
+     {
+      "t": 56,
+      "pos": [
+       0,
+       30,
+       36
+      ],
+      "look": [
+       0,
+       3,
+       -20
+      ],
+      "fov": 60
+     }
+    ]
+   }
+  },
+  {
+   "id": "s10_end",
+   "from": 56,
+   "to": 62,
+   "transition_in": {
+    "type": "dip",
+    "frames": 6
+   },
+   "camera": {
+    "keys": [
+     {
+      "t": 56,
+      "pos": [
+       6,
+       1.6,
+       40
+      ],
+      "look": [
+       0,
+       8,
+       -20
+      ],
+      "fov": 50
+     },
+     {
+      "t": 62,
+      "pos": [
+       6,
+       1.6,
+       42
+      ],
+      "look": [
+       0,
+       14,
+       -20
+      ],
+      "fov": 50
+     }
+    ]
+   }
+  }
+ ],
+ "hud": [
+  {
+   "id": "alt",
+   "from": 0,
+   "value": {
+    "keys": [
+     [
+      0,
+      1200
+     ],
+     [
+      8,
+      0
+     ]
+    ],
+    "ease": "in"
+   },
+   "decimals": 0
+  },
+  {
+   "id": "wave",
+   "from": 8,
+   "value": {
+    "keys": [
+     [
+      8,
+      0
+     ],
+     [
+      26,
+      3000
+     ]
+    ],
+    "ease": "out"
+   },
+   "decimals": 0
+  },
+  {
+   "id": "light",
+   "from": 26,
+   "value": {
+    "keys": [
+     [
+      26,
+      1
+     ],
+     [
+      50,
+      40
+     ]
+    ],
+    "ease": "inOut"
+   },
+   "decimals": 1
+  },
+  {
+   "id": "checks",
+   "from": 50,
+   "value": {
+    "keys": [
+     [
+      50,
+      0
+     ],
+     [
+      57,
+      16
+     ]
+    ],
+    "ease": "linear"
+   },
+   "decimals": 0,
+   "final": {
+    "at": 57
+   }
+  }
+ ],
+ "lines": [
+  {
+   "id": "l01",
+   "in": 4.0,
+   "out": 7.0
+  },
+  {
+   "id": "l02",
+   "in": 8.2,
+   "out": 10.8
+  },
+  {
+   "id": "l03",
+   "in": 11.0,
+   "out": 13.95
+  },
+  {
+   "id": "l04",
+   "in": 14.3,
+   "out": 17.25
+  },
+  {
+   "id": "l05",
+   "in": 17.45,
+   "out": 19.95
+  },
+  {
+   "id": "l06",
+   "in": 20.2,
+   "out": 23.2
+  },
+  {
+   "id": "l07",
+   "in": 23.4,
+   "out": 25.9
+  },
+  {
+   "id": "l08",
+   "in": 26.3,
+   "out": 29.3
+  },
+  {
+   "id": "l09",
+   "in": 29.5,
+   "out": 31.7
+  },
+  {
+   "id": "l10",
+   "in": 32.3,
+   "out": 35.0
+  },
+  {
+   "id": "l11",
+   "in": 35.2,
+   "out": 37.8
+  },
+  {
+   "id": "l12",
+   "in": 38.3,
+   "out": 41.0
+  },
+  {
+   "id": "l13",
+   "in": 44.3,
+   "out": 47.3
+  },
+  {
+   "id": "l14",
+   "in": 50.3,
+   "out": 53.0
+  },
+  {
+   "id": "l15",
+   "in": 53.2,
+   "out": 55.85
+  },
+  {
+   "id": "l16",
+   "in": 56.3,
+   "out": 59.7
+  }
+ ],
+ "events": [
+  {
+   "t": 4.0,
+   "id": "probe_ignites"
+  },
+  {
+   "t": 8.0,
+   "id": "impact",
+   "trigger": true
+  },
+  {
+   "t": 20.0,
+   "id": "light_up"
+  },
+  {
+   "t": 26.0,
+   "id": "sky_orange"
+  },
+  {
+   "t": 44.0,
+   "id": "city_rises"
+  },
+  {
+   "t": 50.0,
+   "id": "second_wave"
+  },
+  {
+   "t": 53.0,
+   "id": "liftoff"
+  },
+  {
+   "t": 57.0,
+   "id": "pointe"
+  }
+ ],
+ "sync_markers": [
+  60,
+  600,
+  1260,
+  1740
+ ],
+ "audio": {
+  "fade_out": 1.5,
+  "beds": [
+   {
+    "src": "gen:drone",
+    "start": 0,
+    "end": 62,
+    "gain_db": -6,
+    "automation": [
+     [
+      0,
+      0
+     ],
+     [
+      6.0,
+      0
+     ],
+     [
+      6.8,
+      -16
+     ],
+     [
+      7.9,
+      -16
+     ],
+     [
+      8.0,
+      2
+     ],
+     [
+      12,
+      0
+     ],
+     [
+      15,
+      -9
+     ],
+     [
+      24,
+      -9
+     ],
+     [
+      26,
+      -2
+     ],
+     [
+      30,
+      -5
+     ],
+     [
+      40,
+      -5
+     ],
+     [
+      44,
+      -2
+     ],
+     [
+      48,
+      3
+     ],
+     [
+      50,
+      6
+     ],
+     [
+      54,
+      6
+     ],
+     [
+      56,
+      -6
+     ],
+     [
+      62,
+      -8
+     ]
+    ]
+   }
+  ],
+  "sfx": [
+   {
+    "src": "gen:whoosh",
+    "t": 7.833333,
+    "gain_db": -4
+   },
+   {
+    "src": "gen:boom",
+    "t": 8.0,
+    "gain_db": 0
+   },
+   {
+    "src": "gen:hit",
+    "t": 20.0,
+    "gain_db": -8
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 31.833333,
+    "gain_db": -4
+   },
+   {
+    "src": "gen:riser",
+    "t": 46.0,
+    "gain_db": -6
+   },
+   {
+    "src": "gen:boom",
+    "t": 50.0,
+    "gain_db": -3
+   },
+   {
+    "src": "gen:tick",
+    "t": 2.0,
+    "gain_db": -6
+   },
+   {
+    "src": "gen:tick",
+    "t": 20.0,
+    "gain_db": -6
+   },
+   {
+    "src": "gen:tick",
+    "t": 42.0,
+    "gain_db": -6
+   },
+   {
+    "src": "gen:tick",
+    "t": 58.0,
+    "gain_db": -6
+   }
+  ]
+ }
+}

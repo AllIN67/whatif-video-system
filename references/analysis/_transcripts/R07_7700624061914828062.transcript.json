@@ -1,0 +1,140 @@
+{
+ "file": "R07_7700624061914828062.mp4",
+ "language": "en",
+ "language_probability": 0.753,
+ "model": "/tmp/claude-0/-home-user-oxygen-video/c0ef34c7-8c9c-5dff-82a6-832eadd17941/scratchpad/whisper-small-ct2",
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 2.62,
+   "text": "🎵 Push them through the door, it's you, sir 🎵",
+   "no_speech_prob": 0.77
+  },
+  {
+   "start": 2.62,
+   "end": 4.96,
+   "text": "🎵 And I must get someone you can feel free for 🎵",
+   "no_speech_prob": 0.77
+  },
+  {
+   "start": 4.96,
+   "end": 8.1,
+   "text": "🎵 If I can see someone who knew me or someone in uniform 🎵",
+   "no_speech_prob": 0.77
+  },
+  {
+   "start": 8.1,
+   "end": 11.4,
+   "text": "🎵 I really don't belong here, I know you've left me too before 🎵",
+   "no_speech_prob": 0.77
+  },
+  {
+   "start": 11.4,
+   "end": 14.3,
+   "text": "🎵 So rematch the demons while they push them through the door 🎵",
+   "no_speech_prob": 0.77
+  },
+  {
+   "start": 14.3,
+   "end": 18.1,
+   "text": "🎵 You can run from your demons, until you are exhausted 🎵",
+   "no_speech_prob": 0.77
+  },
+  {
+   "start": 18.1,
+   "end": 21.0,
+   "text": "🎵 One day you will have to stop and find out what they want 🎵",
+   "no_speech_prob": 0.77
+  },
+  {
+   "start": 21.0,
+   "end": 26.0,
+   "text": "🎵 You can run from those demons, until you are exhausted 🎵",
+   "no_speech_prob": 0.77
+  },
+  {
+   "start": 26.0,
+   "end": 30.0,
+   "text": "You can run to those who know who's to you",
+   "no_speech_prob": 0.88
+  },
+  {
+   "start": 30.0,
+   "end": 32.0,
+   "text": "Alright, I'll stay in one day",
+   "no_speech_prob": 0.88
+  },
+  {
+   "start": 32.0,
+   "end": 34.0,
+   "text": "You'll have to stop and question what they want",
+   "no_speech_prob": 0.88
+  },
+  {
+   "start": 34.0,
+   "end": 37.0,
+   "text": "You can run into those who know who's to you",
+   "no_speech_prob": 0.88
+  },
+  {
+   "start": 37.0,
+   "end": 39.0,
+   "text": "Alright, I'll stay",
+   "no_speech_prob": 0.88
+  },
+  {
+   "start": 41.0,
+   "end": 42.0,
+   "text": "Excuse me, sir",
+   "no_speech_prob": 0.88
+  },
+  {
+   "start": 42.0,
+   "end": 44.0,
+   "text": "There must be someone you've confused me for",
+   "no_speech_prob": 0.88
+  },
+  {
+   "start": 44.0,
+   "end": 46.0,
+   "text": "If I could see someone who knew me",
+   "no_speech_prob": 0.88
+  },
+  {
+   "start": 46.0,
+   "end": 47.0,
+   "text": "Or someone in uniform",
+   "no_speech_prob": 0.88
+  },
+  {
+   "start": 47.0,
+   "end": 49.0,
+   "text": "I may not belong here",
+   "no_speech_prob": 0.88
+  },
+  {
+   "start": 49.0,
+   "end": 51.0,
+   "text": "I know you've got the uniform",
+   "no_speech_prob": 0.88
+  },
+  {
+   "start": 54.0,
+   "end": 55.0,
+   "text": "Excuse me, sir",
+   "no_speech_prob": 0.88
+  },
+  {
+   "start": 55.0,
+   "end": 58.0,
+   "text": "Let's get some of the new feels make for a box",
+   "no_speech_prob": 0.77
+  },
+  {
+   "start": 58.0,
+   "end": 61.0,
+   "text": "Get some of the new me or some of the new look for my",
+   "no_speech_prob": 0.77
+  }
+ ]
+}

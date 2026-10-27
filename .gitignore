@@ -1,0 +1,22 @@
+# Fremdes, urheberrechtlich geschütztes Referenzmaterial – nur lokal, nie versionieren
+references/videos/
+references/analysis/**/*.jpg
+references/analysis/**/*.png
+
+# Produktions-Zwischenstände und große Binärdateien
+productions/*/render/
+productions/*/frames/
+productions/**/*.jpg
+*.mp4
+*.mov
+*.wav
+
+# Lokale Werkzeuge
+.venv*/
+__pycache__/
+*.pyc
+node_modules/
+
+# Test-Fixtures erzeugen beim Testlauf temporär render/ und qa/
+tests/fixtures/*/render/
+tests/fixtures/*/qa/

@@ -1,0 +1,20 @@
+{
+ "file": "R03_7698695375753858337.mp4",
+ "language": "zh",
+ "language_probability": 0.474,
+ "model": "/tmp/claude-0/-home-user-oxygen-video/c0ef34c7-8c9c-5dff-82a6-832eadd17941/scratchpad/whisper-small-ct2",
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 5.0,
+   "text": "优优独播剧场——YoYo Television Series Exclusive",
+   "no_speech_prob": 0.24
+  },
+  {
+   "start": 60.0,
+   "end": 64.46,
+   "text": "封鎖",
+   "no_speech_prob": 0.54
+  }
+ ]
+}

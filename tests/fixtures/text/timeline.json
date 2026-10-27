@@ -1,0 +1,212 @@
+{
+ "fps": 30,
+ "duration": 3,
+ "seed": 11,
+ "shots": [
+  {
+   "id": "a",
+   "from": 0,
+   "to": 1,
+   "camera": {
+    "keys": [
+     {
+      "t": 0,
+      "pos": [
+       0,
+       1.6,
+       12
+      ],
+      "look": [
+       0,
+       2,
+       0
+      ],
+      "fov": 50
+     },
+     {
+      "t": 1,
+      "pos": [
+       1,
+       1.6,
+       10
+      ],
+      "look": [
+       0,
+       2,
+       0
+      ],
+      "fov": 50
+     }
+    ]
+   }
+  },
+  {
+   "id": "b",
+   "from": 1,
+   "to": 2,
+   "transition_in": {
+    "type": "whip",
+    "frames": 10
+   },
+   "camera": {
+    "keys": [
+     {
+      "t": 1,
+      "pos": [
+       8,
+       3,
+       8
+      ],
+      "look": [
+       0,
+       1,
+       0
+      ],
+      "fov": 45
+     },
+     {
+      "t": 2,
+      "pos": [
+       6,
+       3,
+       9
+      ],
+      "look": [
+       0,
+       1,
+       0
+      ],
+      "fov": 45
+     }
+    ]
+   }
+  },
+  {
+   "id": "c",
+   "from": 2,
+   "to": 3,
+   "transition_in": {
+    "type": "dip",
+    "frames": 6
+   },
+   "camera": {
+    "keys": [
+     {
+      "t": 2,
+      "pos": [
+       -6,
+       2,
+       6
+      ],
+      "look": [
+       0,
+       1,
+       0
+      ],
+      "fov": 55
+     },
+     {
+      "t": 3,
+      "pos": [
+       -5,
+       2,
+       7
+      ],
+      "look": [
+       0,
+       1,
+       0
+      ],
+      "fov": 55
+     }
+    ]
+   }
+  }
+ ],
+ "title": {
+  "in": 0,
+  "out": 2.0
+ },
+ "hud": [
+  {
+   "id": "dist",
+   "from": 0,
+   "value": {
+    "keys": [
+     [
+      0,
+      21575
+     ],
+     [
+      2,
+      61
+     ]
+    ],
+    "ease": "out"
+   },
+   "decimals": 0
+  },
+  {
+   "id": "shock",
+   "from": 2,
+   "value": {
+    "keys": [
+     [
+      2,
+      183
+     ],
+     [
+      3,
+      0
+     ]
+    ]
+   },
+   "decimals": 0,
+   "final": {
+    "at": 2.9
+   }
+  }
+ ],
+ "lines": [
+  {
+   "id": "l01",
+   "in": 0.3,
+   "out": 1.4
+  },
+  {
+   "id": "l02",
+   "in": 1.6,
+   "out": 2.9
+  }
+ ],
+ "sync_markers": [
+  15,
+  75
+ ],
+ "audio": {
+  "fade_out": 0.6,
+  "beds": [
+   {
+    "src": "gen:drone",
+    "start": 0,
+    "end": 3,
+    "gain_db": -12
+   }
+  ],
+  "sfx": [
+   {
+    "src": "gen:tick",
+    "t": 0.5
+   },
+   {
+    "src": "gen:tick",
+    "t": 2.5
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 0.833333,
+    "gain_db": -6
+   }
+  ]
+ }
+}

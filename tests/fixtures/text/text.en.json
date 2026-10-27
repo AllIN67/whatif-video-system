@@ -1,0 +1,25 @@
+{
+ "lang": "en",
+ "number_locale": "en-US",
+ "title": {
+  "text": "What if a star fell on your town tonight?",
+  "highlight": "star"
+ },
+ "hud": {
+  "dist": {
+   "label": "ALTITUDE",
+   "sub": "33,000 MPH",
+   "unit": " mi"
+  },
+  "shock": {
+   "label": "SHOCKWAVE",
+   "sub": "25 MILES AWAY",
+   "unit": " s",
+   "final": "HERE"
+  }
+ },
+ "lines": {
+  "l01": "A new light appears in the morning sky.",
+  "l02": "Every window in town is shaking now, and nobody knows why."
+ }
+}

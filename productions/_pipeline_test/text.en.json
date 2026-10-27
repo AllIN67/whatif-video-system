@@ -1,0 +1,49 @@
+{
+ "lang": "en",
+ "number_locale": "en-US",
+ "title": {
+  "text": "What if this test passed every check?",
+  "highlight": "check"
+ },
+ "hud": {
+  "alt": {
+   "label": "PROBE ALTITUDE",
+   "sub": "TEST OBJECT · FALLING",
+   "unit": " m"
+  },
+  "wave": {
+   "label": "WAVE RADIUS",
+   "sub": "SPREADING OUTWARD",
+   "unit": " m"
+  },
+  "light": {
+   "label": "LIGHT LEVEL",
+   "sub": "BRIGHTER THAN NORMAL",
+   "unit": "×"
+  },
+  "checks": {
+   "label": "CHECKS PASSED",
+   "sub": "PIPELINE SELF-TEST",
+   "unit": " / 16",
+   "final": "ALL"
+  }
+ },
+ "lines": {
+  "l01": "Every frame starts from its own timestamp.",
+  "l02": "Now the probe reaches the ground.",
+  "l03": "A whip turn blurs only the scene.",
+  "l04": "The text above it stays perfectly sharp.",
+  "l05": "Dips never go fully black.",
+  "l06": "Seen from above, the wave keeps growing.",
+  "l07": "No clock decides any frame.",
+  "l08": "A white flash marks the next chapter.",
+  "l09": "The sky changes slowly.",
+  "l10": "Debris follows a fixed random seed.",
+  "l11": "Each block remembers the wave.",
+  "l12": "Close up, every edge stays clean.",
+  "l13": "Then the whole city starts to rise.",
+  "l14": "A second wave rolls over everything.",
+  "l15": "And the probe lifts off again.",
+  "l16": "Every check passed. This was only a test."
+ }
+}
