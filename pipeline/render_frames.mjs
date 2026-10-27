@@ -52,6 +52,30 @@ function encodeChunk(file) {
   };
 }
 
+// Fingerabdruck aller Eingaben, die ein Bild beeinflussen. Ändert sich einer davon, sind fertige
+// Teilstücke veraltet und werden verworfen (sonst enthielte das Video alte Frames).
+export function inputFingerprint(prodDir, lang) {
+  const h = createHash('sha256');
+  const add = (file) => {
+    h.update(path.relative(ROOT, file));
+    h.update(fs.readFileSync(file));
+  };
+  const walk = (dir, skip) => {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
+      const p = path.join(dir, e.name);
+      if (skip.includes(e.name)) continue;
+      if (e.isDirectory()) walk(p, skip);
+      else if (!/\.md$/.test(e.name) && !(/^text\./.test(e.name) && e.name !== `text.${lang}.json`)) add(p);
+    }
+  };
+  walk(prodDir, ['render', 'qa', 'LOG.md']);
+  walk(path.join(ROOT, 'pipeline', 'runtime'), []);
+  for (const pkg of ['three', '@fontsource/fraunces', '@fontsource/jetbrains-mono']) {
+    h.update(pkg + JSON.parse(fs.readFileSync(path.join(ROOT, 'node_modules', pkg, 'package.json'), 'utf8')).version);
+  }
+  return h.digest('hex').slice(0, 24);
+}
+
 export async function renderFrames(opts) {
   const prodDir = path.resolve(ROOT, opts.production);
   const rel = path.relative(ROOT, prodDir);
@@ -59,6 +83,16 @@ export async function renderFrames(opts) {
   const outDir = path.resolve(opts.out || path.join(prodDir, 'render'));
   const chunkDir = path.join(outDir, 'chunks');
   fs.mkdirSync(chunkDir, { recursive: true });
+  const fpFile = path.join(outDir, 'fingerprint.json');
+  const fp = inputFingerprint(prodDir, opts.lang);
+  const oldFp = fs.existsSync(fpFile) ? JSON.parse(fs.readFileSync(fpFile, 'utf8')).hash : null;
+  if (oldFp !== fp) {
+    const stale = fs.readdirSync(chunkDir).filter((f) => f.endsWith('.mkv'));
+    if (stale.length) console.log(`Eingaben geändert (Fingerabdruck ${oldFp} → ${fp}): ${stale.length} Teilstücke verworfen`);
+    for (const f of stale) fs.rmSync(path.join(chunkDir, f));
+    fs.rmSync(path.join(outDir, 'frames.tsv'), { force: true });
+  }
+  fs.writeFileSync(fpFile, JSON.stringify({ hash: fp, lang: opts.lang }, null, 1));
 
   const srv = await startServer();
   const { browser, page, errors } = await launchStage(srv.url, { production: rel, lang: opts.lang, seed: String(tl.seed ?? 1) });

@@ -11,7 +11,8 @@ export async function build({ THREE, scene, rng, timeline, assetUrl }) {
   sun.shadow.mapSize.set(2048, 2048);
   scene.add(sun);
 
-  const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshStandardMaterial({ color: 0x7d9a62, flatShading: true }));
+  // Schattenempfänger fein unterteilen (Dreiecke ≤ 25 m), sonst falsche Schatten bei einzelnen Kameraposen
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400, 40, 40), new THREE.MeshStandardMaterial({ color: 0x7d9a62, flatShading: true }));
   ground.rotation.x = -Math.PI / 2;
   ground.receiveShadow = true;
   scene.add(ground);

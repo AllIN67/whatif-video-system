@@ -7,7 +7,7 @@ export async function build({ THREE, scene, rng }) {
   sun.castShadow = true;
   sun.shadow.mapSize.set(1024, 1024);
   scene.add(sun);
-  const ground = new THREE.Mesh(new THREE.PlaneGeometry(80, 80), new THREE.MeshStandardMaterial({ color: 0x7a9a5a, flatShading: true }));
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(80, 80, 8, 8), new THREE.MeshStandardMaterial({ color: 0x7a9a5a, flatShading: true }));
   ground.rotation.x = -Math.PI / 2;
   ground.receiveShadow = true;
   scene.add(ground);

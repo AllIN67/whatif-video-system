@@ -23,19 +23,26 @@ MX, MY, MS = int(0.9 * W), int(0.9 * H), 64
 FPS = 30
 
 
-def marker_frames(path):
-    vf = f"crop={MS - 16}:{MS - 16}:{MX + 8}:{MY + 8},signalstats,metadata=print:file=-"
+def _yavg_series(path, w, h, x, y):
+    vf = f"crop={w}:{h}:{x}:{y},signalstats,metadata=print:file=-"
     out = subprocess.run(["ffmpeg", "-v", "error", "-i", path, "-an", "-vf", vf, "-f", "null", "-"],
                          capture_output=True, text=True, check=True).stdout
-    frames, n = [], -1
+    vals, n = {}, -1
     for line in out.splitlines():
         if line.startswith("frame:"):
             n = int(re.search(r"frame:(\d+)", line).group(1))
-        elif "lavfi.signalstats.YAVG=" in line and float(line.split("=")[1]) > 200:
-            frames.append(n)
-    # zusammenhängende Läufe → erster Frame
-    starts = [f for i, f in enumerate(frames) if i == 0 or frames[i - 1] != f - 1]
-    return starts
+        elif "lavfi.signalstats.YAVG=" in line:
+            vals[n] = float(line.split("=")[1])
+    return vals
+
+
+def marker_frames(path):
+    """Frames, in denen das Marker-Quadrat weiß ist UND sich deutlich von der Umgebung abhebt.
+    Ohne den Umgebungsvergleich würden Weißblenden (ganzes Bild hell) als Marker gezählt."""
+    inner = _yavg_series(path, MS - 16, MS - 16, MX + 8, MY + 8)
+    ref = _yavg_series(path, MS - 16, MS - 16, MX - MS - 8, MY + 8)  # gleich großes Feld links daneben
+    frames = sorted(n for n, v in inner.items() if v > 200 and v - ref.get(n, 255) > 50)
+    return [f for i, f in enumerate(frames) if i == 0 or frames[i - 1] != f - 1]
 
 
 def tick_onsets(path):

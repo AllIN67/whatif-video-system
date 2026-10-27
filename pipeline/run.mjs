@@ -75,6 +75,7 @@ export async function run({ production, lang = 'en', skipValidate = false, qaIgn
     const enc = await step(log, 'Kodieren', () => encode({ production: rel }));
     const qa = await step(log, 'QA (video_qa.py --mode render)', () => {
       const args = ['tools/video_qa.py', path.relative(ROOT, enc.final), '--out', path.relative(ROOT, qaDir), '--mode', 'render'];
+      args.push('--plan', path.relative(ROOT, path.join(prodDir, 'timeline.json')));
       if (qaIgnoreLength) args.push('--ignore-length');
       const code = py(args);
       const status = { 0: 'PASS', 2: 'REVIEW', 1: 'FAIL' }[code] || `Fehler (Exit ${code})`;

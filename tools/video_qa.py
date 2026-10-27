@@ -61,6 +61,8 @@ RENDER_SPEC = {
     "lufs_max": -13.0,
     "true_peak_max": -1.0,
     "av_duration_diff_max": 0.10,
+    "lra_min": 6.0,
+    "lra_max": 16.0,
     "min_seconds": 61.0,
     "max_seconds": 80.0,
 }
@@ -399,6 +401,41 @@ def contact_sheets(path, outdir, duration, shots, fps):
              "-vsync", "vfr", "-frames:v", "1", "-q:v", "4", os.path.join(outdir, "shots.jpg")])
 
 
+def apply_plan(plan_path, frames, v, a, fps):
+    """Abgleich mit timeline.json der Produktion: Kandidaten an GEPLANTEN Übergängen bzw. Ton-Ereignissen
+    werden getrennt ausgewiesen; nur unerwartete Kandidaten bleiben REVIEW. Zusätzlich wird geprüft, ob jeder
+    geplante Übergang im Bild tatsächlich sichtbar ist."""
+    tl = json.load(open(plan_path))
+    ydif = [f["ydif"] or 0.0 for f in frames]
+    windows = []
+    for s in tl.get("shots", [])[1:]:
+        tr = s.get("transition_in") or {"type": "cut"}
+        k = 0 if tr["type"] == "cut" else int(tr.get("frames", 0))
+        b = int(round(s["from"] * fps))
+        before = (k + 1) // 2
+        lo, hi = b - before - 2, b + (k - before) + 2
+        seg = ydif[max(1, lo):min(len(ydif), hi + 1)]
+        ctx = ydif[max(1, lo - 30):max(1, lo)] or [0.0]
+        peak = max(seg) if seg else 0.0
+        med = statistics.median(ctx)
+        windows.append({"t": round(b / fps, 3), "type": tr["type"], "frames": k, "lo": lo, "hi": hi,
+                        "peak_ydif": round(peak, 2), "visible": peak > max(3.0, 3 * med)})
+    inside = lambda t: any(w["lo"] <= round(t * fps) <= w["hi"] for w in windows)
+    v["planned_transitions"] = [{k: w[k] for k in ("t", "type", "frames", "peak_ydif", "visible")} for w in windows]
+    v["planned_jump_candidates"] = [j for j in v["jump_candidates"] if inside(j["t"])]
+    v["jump_candidates"] = [j for j in v["jump_candidates"] if not inside(j["t"])]
+    v["planned_flicker_candidates"] = [t for t in v["flicker_candidates"] if inside(t)]
+    v["flicker_candidates"] = [t for t in v["flicker_candidates"] if not inside(t)]
+    if a:
+        cues = [c["t"] for c in tl.get("audio", {}).get("sfx", [])]
+        auto = [p[0] for b in tl.get("audio", {}).get("beds", []) for p in b.get("automation", [])]
+        near = lambda t, pts, tol: any(abs(t - p) <= tol for p in pts)
+        a["planned_click_candidates"] = [c for c in a["click_candidates"] if near(c["t"], cues, 0.06)]
+        a["click_candidates"] = [c for c in a["click_candidates"] if not near(c["t"], cues, 0.06)]
+        a["planned_loudness_jumps"] = [j for j in a["loudness_jumps"] if near(j["t"], cues + auto, 0.4)]
+        a["loudness_jumps"] = [j for j in a["loudness_jumps"] if not near(j["t"], cues + auto, 0.4)]
+
+
 def evaluate(info, v, a, black, freezes, ignore_length=False):
     """Nur im render-Modus: Bewertung gegen RENDER_SPEC. Liefert (status, findings)."""
     S = RENDER_SPEC
@@ -452,6 +489,9 @@ def evaluate(info, v, a, black, freezes, ignore_length=False):
         reviews.append(f"Sprungkandidaten ohne Schnitt: {[j['t'] for j in v['jump_candidates']]}")
     if v["flicker_candidates"]:
         reviews.append(f"Flacker-Kandidaten: {v['flicker_candidates'][:20]}")
+    invisible = [w["t"] for w in v.get("planned_transitions", []) if not w["visible"]]
+    if invisible:
+        reviews.append(f"Geplante Übergänge im Bild nicht erkennbar (prüfen): {invisible}")
     if freezes:
         reviews.append(f"Standbild-Phasen ≥ {FREEZE_MIN_S} s (nur ok, wenn beabsichtigt): "
                        f"{[(round(s, 2), round(e, 2)) for s, e in freezes]}")
@@ -464,6 +504,8 @@ def evaluate(info, v, a, black, freezes, ignore_length=False):
             fails.append(f"Clipping-Verdacht (Flat factor {a['flat_factor']})")
         if a.get("nans", 0) > 0:
             fails.append("NaN-Samples in Audio")
+        if "lra_lu" in a and not (S["lra_min"] <= a["lra_lu"] <= S["lra_max"]):
+            reviews.append(f"Lautheitsumfang (LRA) {a['lra_lu']} LU außerhalb {S['lra_min']:.0f}–{S['lra_max']:.0f} LU (Style-Guide 9.4)")
         if a["click_candidates"]:
             reviews.append(f"Klick-Kandidaten (anhören!): {[c['t'] for c in a['click_candidates']][:30]}")
         if a["loudness_jumps"]:
@@ -509,6 +551,10 @@ def write_md(path, out, rep):
          f"- Sehr kurze Einstellungen (< {FLASH_SHOT_FRAMES} Frames): {[s['start'] for s in v['flash_shots']] or 'keine'}",
          f"- Sprungkandidaten ohne Schnitt: {[j['t'] for j in v['jump_candidates']] or 'keine'}",
          f"- Flacker-Kandidaten: {v['flicker_candidates'][:20] or 'keine'}",
+         *([f"- Abgleich mit Zeitplan: {len(v['planned_transitions'])} geplante Übergänge, davon im Bild erkennbar: "
+            f"{sum(w['visible'] for w in v['planned_transitions'])}; Kandidaten an geplanten Übergängen (erwartet): "
+            f"Sprung {[j['t'] for j in v['planned_jump_candidates']]}, Flackern {v['planned_flicker_candidates']}"]
+           if 'planned_transitions' in v else []),
          f"- Mittlere Helligkeit (Y 0–255): {v['mean_luma']}, mittlere Bilddifferenz: {v['mean_motion_ydif']}", "",
          "## Ton", "",
          f"- Integrierte Lautheit: {a.get('integrated_lufs')} LUFS, LRA {a.get('lra_lu')} LU, "
@@ -517,6 +563,8 @@ def write_md(path, out, rep):
          f"- Stille (< −45 dB, ≥ 0,4 s): {a['silences'] or 'keine'}",
          f"- Lautheitssprünge: {[j['t'] for j in a['loudness_jumps']] or 'keine'}",
          f"- Klick-Kandidaten (HF-Transienten, oft auch gewollte SFX): {[c['t'] for c in a['click_candidates']][:30] or 'keine'}",
+         *([f"- An geplanten Ton-Ereignissen (beim Anhören bestätigen): Transienten {[c['t'] for c in a['planned_click_candidates']]}, "
+            f"Lautheitssprünge {[j['t'] for j in a['planned_loudness_jumps']]}"] if 'planned_click_candidates' in a else []),
          f"- Erste 50 ms: {a['first_50ms_rms_db']} dB RMS; letzte 50 ms: {a['last_50ms_rms_db']} dB RMS; "
          f"letzte Sekunde: {a['last_1s_rms_db']} dB RMS",
          "- Lautheitsverlauf (Short-Term-LUFS, alle 2 s): " + " ".join(
@@ -539,6 +587,7 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--mode", choices=["reference", "render"], default="render")
     ap.add_argument("--no-sheets", action="store_true", help="keine Kontaktbögen erzeugen")
+    ap.add_argument("--plan", help="timeline.json der Produktion: Kandidaten an geplanten Übergängen/Ton-Ereignissen trennen")
     ap.add_argument("--ignore-length", action="store_true",
                     help="Längenprüfung 61–80 s auslassen (nur für technische Test-Clips)")
     args = ap.parse_args()
@@ -550,6 +599,8 @@ def main():
     frames, black, freezes = video_pass(args.video, args.out, crop)
     v = analyse_frames(frames, fps)
     a = audio_pass(args.video, args.out, info["duration"]) if "audio" in info else {}
+    if args.plan:
+        apply_plan(args.plan, frames, v, a, fps)
     if not args.no_sheets:
         contact_sheets(args.video, args.out, info["duration"], v["shots"], fps)
     v["letterbox_crop"] = crop

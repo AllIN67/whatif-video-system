@@ -41,7 +41,7 @@ async function selftest(THREE, seed) {
   sun.castShadow = true;
   sun.shadow.mapSize.set(2048, 2048);
   scene.add(sun);
-  const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshStandardMaterial({ color: 0x6b8e4e, flatShading: true }));
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400, 40, 40), new THREE.MeshStandardMaterial({ color: 0x6b8e4e, flatShading: true }));
   ground.rotation.x = -Math.PI / 2;
   ground.receiveShadow = true;
   scene.add(ground);
@@ -66,6 +66,36 @@ async function selftest(THREE, seed) {
       renderer.render(scene, camera);
     },
   };
+}
+
+// Schattenempfänger mit riesigen Dreiecken erzeugen im Software-Renderer bei einzelnen Kameraposen falsche
+// Schatten (gefunden in der Testproduktion, Frame 566). Deshalb beim Aufbau abbrechen statt still fehlerhaft rendern.
+const MAX_RECEIVER_EDGE_M = 25;
+function checkShadowReceivers(THREE, scene) {
+  scene.updateMatrixWorld(true);
+  const a = new THREE.Vector3();
+  const b = new THREE.Vector3();
+  const c = new THREE.Vector3();
+  scene.traverse((o) => {
+    if (!o.isMesh || !o.receiveShadow || !o.geometry?.attributes?.position) return;
+    const pos = o.geometry.attributes.position;
+    const idx = o.geometry.index;
+    const tri = idx ? idx.count / 3 : pos.count / 3;
+    const step = Math.max(1, Math.floor(tri / 2000)); // Stichprobe für große Netze
+    let max = 0;
+    for (let i = 0; i < tri; i += step) {
+      const ia = idx ? idx.getX(3 * i) : 3 * i;
+      const ib = idx ? idx.getX(3 * i + 1) : 3 * i + 1;
+      const ic = idx ? idx.getX(3 * i + 2) : 3 * i + 2;
+      a.fromBufferAttribute(pos, ia).applyMatrix4(o.matrixWorld);
+      b.fromBufferAttribute(pos, ib).applyMatrix4(o.matrixWorld);
+      c.fromBufferAttribute(pos, ic).applyMatrix4(o.matrixWorld);
+      max = Math.max(max, a.distanceTo(b), b.distanceTo(c), c.distanceTo(a));
+    }
+    if (max > MAX_RECEIVER_EDGE_M) {
+      throw new Error(`Schattenempfänger "${o.name || o.type}" hat Dreiecke mit ${max.toFixed(0)} m Kantenlänge (max. ${MAX_RECEIVER_EDGE_M} m) – Geometrie unterteilen`);
+    }
+  });
 }
 
 // Horizontale Gauß-Unschärfe: Szene → MSAA-Rendertarget → Blur-Shader → Bildschirm.
@@ -122,6 +152,7 @@ async function production(THREE, prodPath, seed) {
   const sceneMod = await import(`${base}/scene.js`);
   const world = await sceneMod.build({ THREE, scene, camera, renderer, rng: createRng(seed), timeline: ptl, assetUrl: (p) => `${base}/${p}` });
   if (!world || typeof world.update !== 'function') throw new Error('scene.js: build() muss { update(state) } liefern');
+  checkShadowReceivers(THREE, scene);
 
   const trEl = document.getElementById('transition');
   const blur = createBlurPass(THREE, renderer);

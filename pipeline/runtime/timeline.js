@@ -81,7 +81,9 @@ export function prepare(tl) {
     if (frames < lim[0] || frames > lim[1]) throw new Error(`shot ${s.id}: ${tr.type} mit ${frames} Frames außerhalb ${lim[0]}–${lim[1]}`);
     const keys = (s.camera?.keys || []).map((k) => ({ ...k, t: k.t }));
     if (keys.length === 0) throw new Error(`shot ${s.id}: camera.keys fehlt`);
-    return { ...s, index: i, from, to, transition: { ...tr, frames }, camKeys: keys, camMode: s.camera.mode || 'inOut' };
+    // Standard linear: Bewegung läuft über die ganze Einstellung, ohne Abbremsen bis zum Stillstand an Anfang/Ende
+    // (inOut ließ Frame 0 praktisch unbewegt wirken – Style-Guide 2 verlangt Bewegung ab Frame 0).
+    return { ...s, index: i, from, to, transition: { ...tr, frames }, camKeys: keys, camMode: s.camera.mode || 'linear' };
   });
   if (shots[0].from !== 0) throw new Error('Erste Einstellung muss bei 0 beginnen');
   for (let i = 1; i < shots.length; i++) {

@@ -58,3 +58,16 @@ test('Kein Echtzeit-Zugriff im Laufzeit- und Szenen-Code (statische Prüfung)', 
   }
   assert.deepEqual(offenders, []);
 });
+
+test('Schattenempfänger mit riesigen Dreiecken werden beim Aufbau abgelehnt', { timeout: 120000 }, async () => {
+  const dir = path.join(ROOT, 'tests/fixtures/_bigground');
+  fs.mkdirSync(dir, { recursive: true });
+  try {
+    fs.copyFileSync(path.join(ROOT, 'tests/fixtures/mini/timeline.json'), path.join(dir, 'timeline.json'));
+    const scene = fs.readFileSync(path.join(ROOT, 'tests/fixtures/mini/scene.js'), 'utf8').replace('new THREE.PlaneGeometry(80, 80, 8, 8)', 'new THREE.PlaneGeometry(80, 80)');
+    fs.writeFileSync(path.join(dir, 'scene.js'), scene);
+    await assert.rejects(withStage({ production: 'tests/fixtures/_bigground', seed: '11' }, async () => {}), /Kantenlänge/);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});

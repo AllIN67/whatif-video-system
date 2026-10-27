@@ -52,7 +52,8 @@ export async function build({ THREE, scene, rng, timeline }) {
   sun.shadow.bias = -0.0006;
   scene.add(sun, sun.target);
 
-  const ground = new THREE.Mesh(new THREE.PlaneGeometry(800, 800), new THREE.MeshStandardMaterial({ color: 0x7d9a62, flatShading: true }));
+  // Boden unterteilt (10-m-Felder): riesige Dreiecke führten bei einzelnen Kameraposen zu falschen Schatten (Frame 566)
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(800, 800, 80, 80), new THREE.MeshStandardMaterial({ color: 0x7d9a62, flatShading: true }));
   ground.rotation.x = -Math.PI / 2;
   ground.receiveShadow = true;
   scene.add(ground);

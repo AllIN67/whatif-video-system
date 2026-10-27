@@ -50,6 +50,10 @@ test('Render erzeugt exakt N Frames mit 30/1 CFR; Wiederaufnahme überspringt fe
     const r2 = await renderFrames({ production: FIX, lang: 'en', chunk: 40, out });
     assert.equal(r2.rendered, 40);
     assert.equal(fs.readFileSync(path.join(out, 'frames.tsv'), 'utf8'), hashes1);
+    // Geänderte Eingabe (Fingerabdruck) → alle Teilstücke werden neu gerendert, nicht wiederverwendet
+    fs.writeFileSync(path.join(out, 'fingerprint.json'), JSON.stringify({ hash: 'veraltet', lang: 'en' }));
+    const r3 = await renderFrames({ production: FIX, lang: 'en', chunk: 40, out });
+    assert.equal(r3.rendered, 90);
   } finally {
     fs.rmSync(out, { recursive: true, force: true });
   }
