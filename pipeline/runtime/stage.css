@@ -1,0 +1,5 @@
+html, body { margin: 0; padding: 0; background: #000; overflow: hidden; }
+#frame { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+#gl { position: absolute; inset: 0; width: 1080px; height: 1920px; display: block; }
+#transition { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+#overlay { position: absolute; inset: 0; pointer-events: none; }

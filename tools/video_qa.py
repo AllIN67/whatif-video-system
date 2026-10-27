@@ -61,6 +61,8 @@ RENDER_SPEC = {
     "lufs_max": -13.0,
     "true_peak_max": -1.0,
     "av_duration_diff_max": 0.10,
+    "min_seconds": 61.0,
+    "max_seconds": 80.0,
 }
 
 
@@ -397,11 +399,13 @@ def contact_sheets(path, outdir, duration, shots, fps):
              "-vsync", "vfr", "-frames:v", "1", "-q:v", "4", os.path.join(outdir, "shots.jpg")])
 
 
-def evaluate(info, v, a, black, freezes):
+def evaluate(info, v, a, black, freezes, ignore_length=False):
     """Nur im render-Modus: Bewertung gegen RENDER_SPEC. Liefert (status, findings)."""
     S = RENDER_SPEC
     fails, reviews = [], []
     vi, ai = info.get("video"), info.get("audio")
+    if not ignore_length and not (S["min_seconds"] <= info["duration"] <= S["max_seconds"] + 0.05):
+        fails.append(f"Länge {info['duration']:.2f} s außerhalb {S['min_seconds']:.0f}–{S['max_seconds']:.0f} s")
     if not vi:
         fails.append("Keine Videospur")
     else:
@@ -535,6 +539,8 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--mode", choices=["reference", "render"], default="render")
     ap.add_argument("--no-sheets", action="store_true", help="keine Kontaktbögen erzeugen")
+    ap.add_argument("--ignore-length", action="store_true",
+                    help="Längenprüfung 61–80 s auslassen (nur für technische Test-Clips)")
     args = ap.parse_args()
     os.makedirs(args.out, exist_ok=True)
 
@@ -550,7 +556,7 @@ def main():
     rep = {"file": os.path.basename(args.video), "mode": args.mode, "probe": info, "video": v,
            "audio": a, "black": black, "freezes": freezes}
     if args.mode == "render":
-        rep["status"], rep["fails"], rep["reviews"] = evaluate(info, v, a, black, freezes)
+        rep["status"], rep["fails"], rep["reviews"] = evaluate(info, v, a, black, freezes, args.ignore_length)
     with open(os.path.join(args.out, "report.json"), "w") as fh:
         json.dump(rep, fh, indent=1, ensure_ascii=False)
     write_md(args.video, args.out, rep)

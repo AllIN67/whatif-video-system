@@ -1,0 +1,20 @@
+{
+  "name": "whatif-video-system",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Deterministische Render-Pipeline für What-if-Kurzvideos (Three.js + Headless Chromium + FFmpeg)",
+  "scripts": {
+    "test": "node --test tests/*.mjs && python3 -m unittest discover -s tests -p 'test_*.py'",
+    "render": "node pipeline/run.mjs"
+  },
+  "dependencies": {
+    "@fontsource/fraunces": "5.3.0",
+    "@fontsource/jetbrains-mono": "5.3.0",
+    "three": "0.186.1"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "playwrightGlobal": "1.63"
+}
