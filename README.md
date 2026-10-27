@@ -60,7 +60,7 @@ tools/audio_mix.py           lizenzfreie Klänge (tools/sfx_synth.py), frame-gen
    │                         lineare Normierung −14 LUFS, True-Peak-Limiter −1,5 dBTP, exakte Länge
 pipeline/encode.mjs          ein H.264-Encode (CRF 16, BT.709, 30 fps CFR) + AAC 48 kHz, Selbstkontrolle per ffprobe
    ▼
-tools/video_qa.py --mode render  +  tools/inspect_frames.py --report …   (+ tools/av_sync.py bei Synchron-Markern)
+tools/video_qa.py --mode render --plan timeline.json  +  tools/inspect_frames.py --report …   (+ tools/av_sync.py bei Synchron-Markern)
 ```
 
 Alles in einem Befehl (bricht beim ersten Fehler ab, schreibt `render/run_log.json`):
@@ -85,6 +85,8 @@ node pipeline/run.mjs --production productions/<slug>
 | `templates/timeline.json`, `templates/scene.js` | Vorlagen für neue Produktionen |
 | `productions/_pipeline_test/` | abstrakte technische Testproduktion (kein Inhaltsvideo) |
 
+**Ergebnis des End-to-End-Tests** (`productions/_pipeline_test/LOG.md`): 62-s-Testvideo, `video_qa.py` PASS, A/V-Versatz +4 ms, alle Kontaktbögen und 9 Übergangs-Streifen gesichtet; Hörprüfung durch einen Menschen steht aus.
+
 **Signalfarbe:** `pipeline/runtime/brand.json` enthält einen **Platzhalter** (`signal_is_placeholder: true`); die endgültige Farbe wird beim ersten echten Video festgelegt.
 
 **Renderzeit** (Cloud-Container, 4 Kerne, keine GPU): ≈ 0,4 s pro Frame → ≈ 13–17 min für 61–80 s. Parallele Browser bringen hier keinen Gewinn (gemessen).
@@ -97,9 +99,9 @@ npm test     # node --test tests/*.mjs  +  python3 -m unittest (tests/test_*.py)
 
 | Test | prüft |
 |---|---|
-| `test_runtime_guard.mjs` | Echtzeit-APIs werfen, Szene mit Uhrzugriff bricht ab, Zufall reproduzierbar, statische Code-Prüfung |
+| `test_runtime_guard.mjs` | Echtzeit-APIs werfen, Szene mit Uhrzugriff bricht ab, Zufall reproduzierbar, statische Code-Prüfung, Schattenempfänger mit Riesendreiecken abgelehnt |
 | `test_timeline.mjs` | Interpolation, Frame-Grenzen, Fehlerfälle, Übergänge ohne Schwarz-/Weißbild, Kamera ohne Sprünge |
-| `test_render_frames.mjs` | bit-identische Frames (Reihenfolge, neue Browser-Instanz), exakte Frame-Zahl, 30/1, Wiederaufnahme |
+| `test_render_frames.mjs` | bit-identische Frames (Reihenfolge, neue Browser-Instanz), exakte Frame-Zahl, 30/1, Wiederaufnahme, Verwerfen veralteter Teilstücke (Fingerabdruck) |
 | `test_overlay.mjs` | Schriften geladen, Inhalte/Zeiten, Sicherheitszone, HUD ab Frame 0, fehlende Text-ID bricht ab |
 | `test_validate_production.mjs` | gültige Produktion + 18 gezielte Regelverstöße |
 | `test_audio_mix.py` | Länge, −14 ± 1 LUFS, True Peak ≤ −1, Ein-/Ausblendung, keine Knackser, sample-genaue Platzierung |

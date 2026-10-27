@@ -28,6 +28,10 @@ def times_from_report(path):
     ts.update(j["t"] for j in v.get("jump_candidates", []))
     ts.update(v.get("flicker_candidates", []))
     ts.update(v.get("isolated_duplicate_frames", []))
+    # mit --plan gemessen: auch alle geplanten Übergänge und die dort erwarteten Kandidaten zeigen
+    ts.update(w["t"] for w in v.get("planned_transitions", []))
+    ts.update(j["t"] for j in v.get("planned_jump_candidates", []))
+    ts.update(v.get("planned_flicker_candidates", []))
     ts.update(s["start"] for s in v.get("flash_shots", []))
     ts.update(c["t"] for c in a.get("click_candidates", []))
     ts.update(j["t"] for j in a.get("loudness_jumps", []))
