@@ -76,10 +76,10 @@ node pipeline/run.mjs --production productions/<slug>
 | `pipeline/browser.mjs` | Chromium-Start (SwiftShader), Versionsprüfung des global installierten Playwright |
 | `pipeline/runtime/stage.html/.js/.css` | Bühne: Szene, Kamera, Übergänge (Whip-Unschärfe als WebGL-Pass, Dip/Flash-Overlay) |
 | `pipeline/runtime/timeline.js` | Zeitachse: Interpolation, Einstellungsgrenzen, Übergänge, Kamera, Wackeln, HUD – reine Funktionen |
-| `pipeline/runtime/overlay.js` + `brand.json` | Titel, HUD mit Fortschrittsskala, Untertitel, Scrims, Sicherheitszone, Synchron-Marker |
+| `pipeline/runtime/overlay.js` + `brand.json` | Titel, HUD mit Fortschrittsskala und Akzenten (`hud[].flashes`: `loss`/`warn`), Untertitel, Endkarte (`timeline.endcard` + `text.endcard`), Scrims, Sicherheitszone, Synchron-Marker |
 | `pipeline/runtime/guard.js`, `rng.js` | Echtzeit-Sperre, geseedeter Zufall |
 | `pipeline/render_frames.mjs`, `encode.mjs`, `run.mjs` | Frames, Endkodierung, Gesamtablauf |
-| `tools/validate_production.mjs` | Regelprüfung vor dem Rendern |
+| `tools/validate_production.mjs` | Regelprüfung vor dem Rendern; Längenabweichung nur mit Begründung (`timeline.length_deviation`) |
 | `tools/sfx_synth.py`, `tools/audio_mix.py` | Klänge erzeugen, Ton mischen |
 | `tools/av_sync.py` | Bild-Ton-Versatz über Synchron-Marker messen |
 | `templates/timeline.json`, `templates/scene.js` | Vorlagen für neue Produktionen |
@@ -87,7 +87,7 @@ node pipeline/run.mjs --production productions/<slug>
 
 **Ergebnis des End-to-End-Tests** (`productions/_pipeline_test/LOG.md`): 62-s-Testvideo, `video_qa.py` PASS, A/V-Versatz +4 ms, alle Kontaktbögen und 9 Übergangs-Streifen gesichtet; Hörprüfung durch einen Menschen steht aus.
 
-**Signalfarbe:** `pipeline/runtime/brand.json` enthält einen **Platzhalter** (`signal_is_placeholder: true`); die endgültige Farbe wird beim ersten echten Video festgelegt.
+**Signalfarbe:** `#38E1C6`, festgelegt mit dem ersten Video (`productions/every-lie-costs-a-minute`), dazu `alarm #FF4545` für Verlust-Akzente – `pipeline/runtime/brand.json`.
 
 **Renderzeit** (Cloud-Container, 4 Kerne, keine GPU): ≈ 0,4 s pro Frame → ≈ 13–17 min für 61–80 s. Parallele Browser bringen hier keinen Gewinn (gemessen).
 
@@ -102,8 +102,8 @@ npm test     # node --test tests/*.mjs  +  python3 -m unittest (tests/test_*.py)
 | `test_runtime_guard.mjs` | Echtzeit-APIs werfen, Szene mit Uhrzugriff bricht ab, Zufall reproduzierbar, statische Code-Prüfung, Schattenempfänger mit Riesendreiecken abgelehnt |
 | `test_timeline.mjs` | Interpolation, Frame-Grenzen, Fehlerfälle, Übergänge ohne Schwarz-/Weißbild, Kamera ohne Sprünge |
 | `test_render_frames.mjs` | bit-identische Frames (Reihenfolge, neue Browser-Instanz), exakte Frame-Zahl, 30/1, Wiederaufnahme, Verwerfen veralteter Teilstücke (Fingerabdruck) |
-| `test_overlay.mjs` | Schriften geladen, Inhalte/Zeiten, Sicherheitszone, HUD ab Frame 0, fehlende Text-ID bricht ab |
-| `test_validate_production.mjs` | gültige Produktion + 18 gezielte Regelverstöße |
+| `test_overlay.mjs` | Schriften geladen, Inhalte/Zeiten, Sicherheitszone, HUD ab Frame 0, fehlende Text-ID bricht ab, HUD-Akzente, Endkarte |
+| `test_validate_production.mjs` | gültige Produktion + 18 gezielte Regelverstöße, Längenabweichung, Endkarte, HUD-Akzente |
 | `test_audio_mix.py` | Länge, −14 ± 1 LUFS, True Peak ≤ −1, Ein-/Ausblendung, keine Knackser, sample-genaue Platzierung |
 | `test_pipeline_run.mjs` | Gesamtablauf auf 3-s-Fixture: Spezifikation, QA ohne FAIL, A/V-Versatz ≤ 1 Frame |
 
@@ -166,8 +166,8 @@ Zusätzlich an den Referenzen kalibriert (Letterbox-Zuschnitt, Bewegungsübergä
 
 ## Bekannte Einschränkungen
 
-- Render-Pipeline erzeugt bisher nur die abstrakte Testproduktion; ein echtes Inhaltsvideo wurde noch nicht produziert.
-- Signalfarbe ist ein Platzhalter; Musik nur selbst erzeugt (keine lizenzierte Musik eingebunden).
+- Erstes Inhaltsvideo: `productions/every-lie-costs-a-minute` (55 s, technisch geprüft, Hörprüfung ausstehend – siehe dessen `LOG.md`).
+- Musik nur selbst erzeugt (keine lizenzierte Musik eingebunden).
 - **Claude kann Audio nicht hören.** Ton wird gemessen; die Hörprüfung vor der Freigabe muss ein Mensch durchführen.
 - Automatische Bildprüfung findet Kandidaten, keine Gewissheit: Abblend-Übergänge, Zeitraffer und Partikel erzeugen Fehlalarme; sehr kurze Fehler zwischen den 1-s-Kontaktbögen findet nur die Frame-Messung bzw. die Bildstreifen.
 - Referenzvideos und Kontaktbögen sind nicht versioniert (Urheberrecht). In einer neuen Umgebung müssen sie erneut bereitgestellt werden.

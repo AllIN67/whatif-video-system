@@ -101,7 +101,7 @@ test('HUD-Akzente (Verlust/Warnung) und Endkarte', { timeout: 300000 }, async ()
       const before = await at(14);
       const loss = await at(15); // Akzent beginnt genau auf dem Frame (0,5 s)
       const warn = await at(46); // Mitte des Warnpulses
-      const after = await at(55);
+      const after = await at(59); // nach Ende des Warnpulses (1,2 s + 0,7 s)
       const end = await at(89);
       assert.equal(before.color, 'rgb(255, 255, 255)');
       assert.equal(loss.color, 'rgb(255, 69, 69)');

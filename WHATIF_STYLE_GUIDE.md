@@ -399,3 +399,4 @@ Claude Code kann Audio messen, aber **nicht hören**. Deshalb gilt **[V]**: Vor 
 |---|---|---|---|
 | 2026-10-27 | 1.0 | Erstfassung | Analyse R01–R15 |
 | 2026-10-27 | 1.1 | 10.3: Render-Pipeline entschieden und umgesetzt (Three.js + headless Chromium + FFmpeg, deterministisch) | Implementierungsplan freigegeben; Machbarkeit, Determinismus und Renderzeit gemessen; Tests in `tests/` |
+| 2026-10-28 | 1.1 | Keine Regeländerung. 6.4: Signalfarbe mit Video 1 festgelegt (`#38E1C6`, `brand.json`). | Guide 6.4 verlangt die Festlegung beim ersten Video (`productions/every-lie-costs-a-minute/LOG.md`) |
