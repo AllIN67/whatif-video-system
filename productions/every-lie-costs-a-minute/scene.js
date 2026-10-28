@@ -332,8 +332,9 @@ function makePersonFactory(THREE) {
         // Gesicht: brows > 0 traurig/besorgt (innen hoch), < 0 misstrauisch/verärgert; surprise hebt beide
         const br = q.brows || 0;
         const su = q.surprise || 0;
-        brows[0].rotation.z = 0.32 * br;
-        brows[1].rotation.z = -0.32 * br;
+        // innere Brauenenden (zur Gesichtsmitte) heben sich bei br > 0
+        brows[0].rotation.z = -0.32 * br;
+        brows[1].rotation.z = 0.32 * br;
         for (const b of brows) b.position.y = 0.16 + 0.013 * su + 0.003 * Math.abs(br);
         const blink = q.blink || 0;
         const eo = Math.max(0.12, (1 - blink) * (1 + 0.25 * su) * (1 - 0.35 * (q.squint || 0)));
@@ -982,7 +983,7 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
     ph.quaternion.copy(h.getWorldQuaternion(new THREE.Quaternion()));
   };
   const earTarget = (p, side) => p.headG.localToWorld(V(side === 'r' ? -0.135 : 0.135, 0.1, 0.03));
-  const phonePole = (p, side) => p.spine.localToWorld(V(side === 'l' ? 0.45 : -0.45, 0.05, 0.45));
+  const phonePole = (p, side) => p.spine.localToWorld(V(side === 'l' ? 0.4 : -0.4, -0.25, 0.5));
   const elbowPole = (p, side, out = 1, up = 0, fwd = 0) => p.local((side === 'l' ? 1 : -1) * out, 1.0 + up * 0.4, fwd);
 
   function update({ t, frame, shot }) {
@@ -1256,7 +1257,7 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
       hero.root.position.set(0.75, 0, -221.5);
       hero.root.rotation.set(0, -0.1, 0);
       hero.pose({ headPitch: -0.05, headYaw: 0.05 * Math.sin(t * 0.4), brows: 0.35, blink: blinkAt(t, 0.7, 4.6), lean: 0.01 * Math.sin(t * 1.4) });
-      showCd(hero, countdownState(t, hudValue('h_end', t), []), 1, 0.16, 1.15);
+      showCd(hero, countdownState(t, 27409836, []), 1, 0.16, 1.15);
     }
     void NAMED;
   }

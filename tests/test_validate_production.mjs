@@ -84,3 +84,50 @@ test('Regelverstöße werden einzeln erkannt', () => {
     assert.ok(hasErr(r, re), `erwartet Fehler ${re}, erhalten: ${JSON.stringify(r.errors)}`);
   }
 });
+
+test('Längenabweichung nur mit Begründung; Endkarte und HUD-Akzente werden geprüft', () => {
+  const shorten = (v) => {
+    v.timeline.duration = 56;
+    v.timeline.shots.pop();
+    v.timeline.shots.at(-1).to = 56;
+    v.timeline.pointe = 52;
+    v.timeline.lines = v.timeline.lines.filter((l) => l.out <= 50);
+    v.timeline.hud[2].value.keys = [[40, 0], [56, 1]];
+    v.timeline.hud[2].final.at = 52;
+  };
+  // ohne Begründung: Fehler
+  let r = run((v) => shorten(v));
+  assert.ok(hasErr(r, /Länge 56/), r.errors.join('\n'));
+  // mit Begründung im Rahmen: nur Warnung
+  r = run((v) => {
+    shorten(v);
+    v.timeline.length_deviation = { min: 45, max: 56, reason: 'Vorgabe des Auftraggebers' };
+  });
+  assert.ok(!hasErr(r, /Länge/), r.errors.join('\n'));
+  assert.ok(r.warnings.some((w) => /dokumentierte Abweichung/.test(w)));
+  // Begründung, aber Länge außerhalb des genannten Rahmens: Fehler
+  r = run((v) => {
+    shorten(v);
+    v.timeline.length_deviation = { min: 45, max: 55, reason: 'Vorgabe des Auftraggebers' };
+  });
+  assert.ok(hasErr(r, /Länge 56/));
+  // Endkarte ohne Text, Endkarte überlappt Untertitel, unbekannter Akzent
+  const cases = [
+    [(v) => { v.timeline.endcard = { in: 58 }; }, /endcard\.title fehlt/],
+    [(v) => { v.timeline.endcard = { in: 50 }; v.text.endcard = { title: 'Would you?' }; }, /überlappt die Endkarte/],
+    [(v) => { v.timeline.endcard = { in: 59, center: 0.9 }; v.text.endcard = { title: 'Would you?' }; }, /Sicherheitszone/],
+    [(v) => { v.timeline.hud[0].flashes = [{ t: 1, kind: 'boom' }]; }, /unbekannt/],
+    [(v) => { v.timeline.hud[0].flashes = [{ t: 30, kind: 'loss' }]; }, /außerhalb des Segments/],
+  ];
+  for (const [mut, re] of cases) {
+    const res = run(mut);
+    assert.ok(hasErr(res, re), `erwartet ${re}, erhalten: ${res.errors.join(' | ')}`);
+  }
+  // gültige Endkarte + Akzente: keine Fehler
+  r = run((v) => {
+    v.timeline.endcard = { in: 59.5, center: 0.3 };
+    v.text.endcard = { title: 'Would you always tell the truth?', sub: 'Even if it hurt?' };
+    v.timeline.hud[0].flashes = [{ t: 1, kind: 'loss' }, { t: 5, kind: 'warn' }];
+  });
+  assert.deepEqual(r.errors, []);
+});

@@ -62,9 +62,10 @@
    "unit": ""
   },
   "h_end": {
-   "label": "HIS LIFE LEFT",
+   "label": "YOUR LIFE LEFT",
    "sub": "MINUTES",
-   "unit": ""
+   "unit": "",
+   "final": "??,???,???"
   }
  },
  "lines": {

@@ -113,3 +113,13 @@ test('HUD: Segmentwechsel, Wert, Fortschritt', () => {
   assert.equal(hudAt(p, 2.5).id, 'h2');
   assert.equal(hudAt(p, 3).value, 25);
 });
+
+test('HUD: Sprung mit "hold" genau am Keyframe, feste Skala über "bar"', () => {
+  const tl = base();
+  tl.hud = [{ id: 'life', from: 0, value: { keys: [[0, 1000], [1.5, 999]], ease: 'hold' }, decimals: 0, bar: [0, 2000] }];
+  const p = prepare(tl);
+  assert.equal(hudAt(p, 1.5 - 1 / 30).value, 1000);
+  assert.equal(hudAt(p, 1.5).value, 999);
+  assert.equal(hudAt(p, 0).progress, 0.5); // bezogen auf bar, nicht auf die Keyframes
+  assert.equal(hudAt(p, 2).progress, 999 / 2000);
+});

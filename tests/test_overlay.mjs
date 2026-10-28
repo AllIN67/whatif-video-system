@@ -73,3 +73,49 @@ test('Fehlende Text-ID bricht den Aufbau ab', { timeout: 120000 }, async () => {
     fs.rmSync(dir, { recursive: true, force: true });
   }
 });
+
+test('HUD-Akzente (Verlust/Warnung) und Endkarte', { timeout: 300000 }, async () => {
+  const dir = path.join(ROOT, 'tests/fixtures/text_endcard');
+  fs.mkdirSync(dir, { recursive: true });
+  try {
+    fs.copyFileSync(path.join(ROOT, FIX, 'scene.js'), path.join(dir, 'scene.js'));
+    const tl = JSON.parse(fs.readFileSync(path.join(ROOT, FIX, 'timeline.json'), 'utf8'));
+    tl.hud[0].flashes = [{ t: 0.5, kind: 'loss' }, { t: 1.2, kind: 'warn' }];
+    tl.lines = tl.lines.filter((l) => l.out <= 2.0);
+    tl.endcard = { in: 2.0, center: 0.3 };
+    fs.writeFileSync(path.join(dir, 'timeline.json'), JSON.stringify(tl));
+    const text = JSON.parse(fs.readFileSync(path.join(ROOT, FIX, 'text.en.json'), 'utf8'));
+    text.endcard = { title: 'Would you always tell the truth?', sub: 'Even if it hurt someone you love?' };
+    fs.writeFileSync(path.join(dir, 'text.en.json'), JSON.stringify(text));
+    const S = brand.layout.safe;
+    await withStage({ production: 'tests/fixtures/text_endcard', seed: '11' }, async (page) => {
+      const at = async (n) => {
+        await page.evaluate((k) => window.__stage.setFrame(k), n);
+        return page.evaluate(() => ({
+          color: document.querySelector('#wif-hud-value').style.color,
+          end: Number(document.querySelector('#wif-end').style.opacity),
+          endText: document.querySelector('#wif-end-title').textContent,
+          rects: window.__stage.layoutRects(),
+        }));
+      };
+      const before = await at(14);
+      const loss = await at(15); // Akzent beginnt genau auf dem Frame (0,5 s)
+      const warn = await at(46); // Mitte des Warnpulses
+      const after = await at(55);
+      const end = await at(89);
+      assert.equal(before.color, 'rgb(255, 255, 255)');
+      assert.equal(loss.color, 'rgb(255, 69, 69)');
+      assert.notEqual(warn.color, 'rgb(255, 255, 255)');
+      assert.notEqual(warn.color, 'rgb(255, 69, 69)');
+      assert.equal(after.color, 'rgb(255, 255, 255)');
+      assert.equal(before.end, 0);
+      assert.equal(end.end, 1);
+      assert.equal(end.endText, 'Would you always tell the truth?');
+      const r = end.rects.find((x) => x.name === 'endcard');
+      assert.ok(r, 'Endkarte fehlt in layoutRects');
+      assert.ok(r.x0 >= S.x0 - 1e-3 && r.x1 <= S.x1 + 1e-3 && r.y0 >= S.y0 - 1e-3 && r.y1 <= S.y1 + 1e-3, `Endkarte außerhalb der Sicherheitszone ${JSON.stringify(r)}`);
+    });
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});

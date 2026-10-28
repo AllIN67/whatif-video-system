@@ -107,7 +107,7 @@ shot("s02", 4.0, 6.6, [
     key(5.4, H, f + 0.48, 2.6, 1.32, 0.67, 0.5, 42),
     key(5.85, H, f + 0.42, 2.0, 1.34, 0.67, 0.52, 40, "inOut"),
     key(6.6, H, f + 0.38, 1.95, 1.34, 0.67, 0.52, 40),
-], tr={"type": "whip", "frames": 8, "direction": "right"})
+])
 H = head("late", -0.1)
 f = S["late"][3]
 shot("s03", 6.6, 9.2, [
@@ -173,9 +173,9 @@ shot("s11", 35.5, 39.0, [
 # Szene 5 – Krankenhaus
 H = head("father", 0.28)
 shot("s12", 39.0, 42.8, [
-    key(39.0, H, PI / 2 - 0.62, 3.6, 1.8, 0.57, 0.37, 44),
-    key(42.8, H, PI / 2 - 0.55, 3.2, 1.75, 0.57, 0.37, 44),
-], tr={"type": "dip", "frames": 6})
+    key(39.0, H, PI / 2 - 0.75, 3.2, 1.8, 0.57, 0.37, 44),
+    key(42.8, H, PI / 2 - 0.68, 2.85, 1.75, 0.57, 0.37, 44),
+])
 H = head("father", 0.28)
 Hc = (H[0], H[1] + 0.45, H[2])  # Blick auf den Countdown über dem Kopf
 fp = PI / 2 - 0.42
@@ -192,7 +192,7 @@ shot("s13", 42.8, 46.8, [
 Hm = head("father", 0.3)
 shot("s14", 46.8, 50.0, [
     key(46.8, Hm, PI / 2 - 0.55, 2.8, 1.7, 0.57, 0.38, 44),
-    key(50.0, Hm, PI / 2 - 0.7, 3.6, 2.4, 0.57, 0.42, 46),
+    key(50.0, Hm, PI / 2 - 0.7, 3.0, 2.3, 0.57, 0.42, 46),
 ])
 # Szene 6 – Schlussfrage in der dunklen Straße
 shot("s15", 50.0, 55.0, [
@@ -226,8 +226,8 @@ hud = [
     life("h_paint", 29301778, None, warns=[24.4], from_=24.2),
     life("h_honest", 20488351, None, warns=[29.9, 30.8], from_=26.7),
     life("h_father", 19730662, 45.3, warns=[43.3], from_=39.0),
-    # Schlussbild: der Mann aus Szene 1 (Kreisschluss) – sein Countdown bleibt stehen
-    life("h_end", 24198416, None, from_=50.0),
+    # Schlussbild: der Countdown gehört jetzt dem Zuschauer – Wert bewusst unbekannt („??,???,???“)
+    {"id": "h_end", "from": 50.0, "value": {"keys": [[50.0, 0]], "ease": "hold"}, "decimals": 0, "final": {"at": 50.0}},
 ]
 lines = [("l01", 0.3, 4.0), ("l02", 4.2, 6.6), ("l03", 6.8, 9.2), ("l04", 9.4, 11.8), ("l05", 12.0, 14.4), ("l06", 14.6, 18.0),
          ("l07", 18.2, 21.4), ("l08", 21.6, 24.2), ("l09", 24.4, 26.7), ("l10", 27.0, 29.8), ("l11", 31.9, 35.5), ("l12", 35.7, 39.0),
@@ -247,8 +247,7 @@ def lie(t, g):
     return {"src": "gen:lie_hit", "t": t, "gain_db": g}
 
 
-sfx = [{"src": "gen:appear", "t": 0.2, "gain_db": -3}, lie(1.8, 0), {"src": "gen:whoosh", "t": 3.666667, "gain_db": -9},
-       lie(5.4, -2), lie(8.0, -2), {"src": "gen:whoosh", "t": 8.866667, "gain_db": -9}, lie(10.7, -2)]
+sfx = [{"src": "gen:appear", "t": 0.2, "gain_db": -3}, lie(1.8, 0), lie(5.4, -2), lie(8.0, -2), {"src": "gen:whoosh", "t": 8.866667, "gain_db": -9}, lie(10.7, -2)]
 sfx += [lie(d, -12) for d in street_drops] + [lie(d["t"], -11) for d in crowd_drops[5:]]
 sfx += [lie(20.0, -1), {"src": "gen:pulse", "t": 24.4, "gain_db": -10},
         {"src": "gen:pulse", "t": 29.9, "gain_db": -6}, {"src": "gen:pulse", "t": 30.8, "gain_db": -6},
