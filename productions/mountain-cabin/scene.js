@@ -240,7 +240,8 @@ export async function build({ THREE, scene, camera, renderer, timeline }) {
       }
       sun.color.setRGB(...env.sunCol);
       // Blitz (ein einzelner, weicher Lichtstoß – Blitzregel)
-      const lightning = Math.exp(-Math.pow((t - E.lightning) / 0.05, 2)) + 0.5 * Math.exp(-Math.pow((t - E.lightning - 0.17) / 0.04, 2));
+      // ein einzelner Lichtstoß (Blitzregel 6.2: im 1. Render waren es zwei Spitzen in 0,2 s)
+      const lightning = Math.exp(-Math.pow((t - E.lightning) / 0.07, 2));
       const inside = cfg.interior ? (cfg.insideUntil != null ? 1 - ramp(t, cfg.insideUntil[0], cfg.insideUntil[1]) : 1) : 0;
       sun.intensity = env.sunI;
       hemi.intensity = env.hemiI * (1 - 0.82 * inside) + lightning * 2.5;
@@ -310,7 +311,8 @@ export async function build({ THREE, scene, camera, renderer, timeline }) {
       cabin.glowMat.opacity = 0.85 * glow;
       for (const g of cabin.glows) g.visible = glow > 0 && !cfg.interior;
       // Feuer
-      const fireK = t < E.fire_catch ? 0 : t < E.clear ? ramp(t, E.fire_catch, E.fire_catch + 1.6) : t >= E.evening ? 0.85 : 0;
+      // Glut glimmt schon vor dem Anzünden (sonst Schwarzbild zu Beginn der Kamin-Einstellung, 1. Render 39,0 s)
+      const fireK = t < E.lamp_lit ? 0 : t < E.clear ? Math.max(0.14, ramp(t, E.fire_catch, E.fire_catch + 1.6)) : t >= E.evening ? 0.85 : 0;
       fire.update(t, fireK);
       embers.update(t, fireK, 0.8);
       cabin.charMat.emissive.setRGB(0.22 * fireK, 0.05 * fireK, 0.01 * fireK);

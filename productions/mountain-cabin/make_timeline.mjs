@@ -27,7 +27,12 @@ const EV = {
 
 const pool = [POOL.x, H(POOL.x, POOL.z) + 1, POOL.z];
 const fallTop = [POOL.x + CLIFF_DIR[0] * 9.6, H(POOL.x + CLIFF_DIR[0] * 11.5, POOL.z + CLIFF_DIR[1] * 11.5), POOL.z + CLIFF_DIR[1] * 9.6];
-const orbit = (a, r, h) => [POOL.x + Math.cos(a) * r, pool[1] + h, POOL.z + Math.sin(a) * r];
+// Orbit: nie tiefer als 2 m über dem Gelände (im 1. Render fuhr die Kamera am Ende in den Hang, 27,03 s)
+const orbit = (a, r, h) => {
+  const x = POOL.x + Math.cos(a) * r;
+  const z = POOL.z + Math.sin(a) * r;
+  return [x, Math.max(pool[1] + h, H(x, z) + 2.0), z];
+};
 const hk = (s, h = 1.0, side = 0, back = 0) => {
   const p = hikeAt(s);
   const x = p.x + Math.cos(p.dir) * side - Math.sin(p.dir) * back;
@@ -68,8 +73,8 @@ const shots = [
     key(14.0, [10.0, 0.75, 2.15], [8.25, 0.5, -0.95], 42),
   ] } },
   { id: 's07_eggs', from: 14.0, to: 15.8, camera: { keys: [
-    key(14.0, [7.6, 0.32, 2.85], [9.2, 0.45, 5.6], 50),
-    key(15.8, [8.1, 0.34, 2.8], [9.2, 0.45, 5.6], 50),
+    key(14.0, [7.55, 0.36, 3.75], [9.4, 0.45, 6.3], 50),
+    key(15.8, [8.0, 0.38, 3.8], [9.4, 0.45, 6.3], 50),
   ] } },
   { id: 's08_tracks', from: 15.8, to: 19.0, camera: { mode: 'catmull', keys: [
     key(15.8, eye(-4.4, -1.6), [-5.2, 1.0, 4.5], 55),
@@ -92,9 +97,9 @@ const shots = [
     key(25.0, eye(-61.6, 33.5), [fallTop[0], fallTop[1] - 7, fallTop[2]], 52),
   ] } },
   { id: 's11_orbit', from: 25.0, to: 27.5, camera: { mode: 'catmull', keys: [
-    key(25.0, orbit(-0.55, 19, 2.2), [POOL.x - 2, pool[1] + 6, POOL.z + 3], 48),
-    key(26.25, orbit(-0.95, 18.5, 3.0), [POOL.x - 2, pool[1] + 6, POOL.z + 3], 48),
-    key(27.5, orbit(-1.35, 18, 3.8), [POOL.x - 2, pool[1] + 6.5, POOL.z + 3], 48),
+    key(25.0, orbit(-0.5, 19, 2.6), [POOL.x - 2, pool[1] + 6, POOL.z + 3], 48),
+    key(26.25, orbit(-0.72, 18.5, 3.2), [POOL.x - 2, pool[1] + 6, POOL.z + 3], 48),
+    key(27.5, orbit(-0.95, 18, 3.8), [POOL.x - 2, pool[1] + 6.5, POOL.z + 3], 48),
   ] } },
   // Sturm
   { id: 's12_storm', from: 27.5, to: 29.6, transition_in: { type: 'dip', frames: 6 }, camera: { keys: [
@@ -154,11 +159,11 @@ const shots = [
   ] } },
   { id: 's24_summit', from: 50.5, to: 54.5, camera: { mode: 'catmull', keys: [
     key(50.5, [SUMMIT.x - 0.6, sumY + 1.95, SUMMIT.z - 4.4], [SUMMIT.x - 30, sumY - 30, SUMMIT.z - 200], 50),
-    key(52.0, [SUMMIT.x + 2.5, sumY + 3.2, SUMMIT.z - 5.5], [SUMMIT.x - 60, sumY - 60, SUMMIT.z - 500], 54),
+    key(52.0, [SUMMIT.x + 0.9, sumY + 2.5, SUMMIT.z - 4.6], [SUMMIT.x - 60, sumY - 60, SUMMIT.z - 500], 54),
     key(54.5, [SUMMIT.x + 7.5, sumY + 6.5, SUMMIT.z - 4.0], [SUMMIT.x - 160, sumY - 140, SUMMIT.z - 1200], 60),
   ] } },
   // E – letztes Bild
-  { id: 's25_fireside', from: 54.5, to: 57.5, transition_in: { type: 'dip', frames: 6 }, camera: { keys: [
+  { id: 's25_fireside', from: 54.5, to: 57.5, camera: { keys: [
     key(54.5, [-0.1, F + 1.45, 2.45], [3.0, F + 0.7, 0.4], 52),
     key(57.5, [0.15, F + 1.4, 2.3], [3.0, F + 0.7, 0.4], 52),
   ] } },

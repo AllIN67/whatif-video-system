@@ -285,9 +285,9 @@ def music():
              (41.5, ["E2", "B2", "G3", "D4"], ["G4", "F#4", "E4"]), (43.5, ["A2", "E3", "A3", "D4"], ["E4", "C#4"])]
     for i, (t0, chord, mel) in enumerate(inner):
         for j, n_ in enumerate(chord):
-            add(piano(midi(nm(n_)), 4, 0.32), t0 + j * 0.09, 0.45, -0.3 + 0.2 * j)
+            add(piano(midi(nm(n_)), 4, 0.32), t0 + j * 0.09, 0.3, -0.3 + 0.2 * j)
         for j, n_ in enumerate(mel):
-            add(piano(midi(nm(n_)), 3, 0.3), t0 + 0.9 + j * 0.6, 0.42, 0.25)
+            add(piano(midi(nm(n_)), 3, 0.3), t0 + 0.9 + j * 0.6, 0.28, 0.25)
         add(pad(chord_notes(chord[1:3]), 2.4, attack=0.9, release=1.0, bright=0.25), t0, 0.18)
 
     # G – Aufstieg und Gipfel: Steigerung bis zum Höhepunkt
@@ -390,7 +390,7 @@ def ambience():
     A += (np.stack([sw, sw2], 1) + whistle[:, None]) * (sgust * slvl * 0.5)[:, None]
     muff = shape(noise(N, 1.8, np.random.default_rng(16)), lp(350, 2))
     mlvl = curve([(0, 0), (slam, 0), (slam + 0.01, 0.7), (EV["clear"] - 0.01, 0.6), (EV["clear"], 0), (63, 0)])
-    A += stereo(muff, width=0.5) * (sgust * mlvl * 0.3)[:, None]
+    A += stereo(muff, width=0.5) * (sgust * mlvl * 0.2)[:, None]
 
     # 6) Regen außen (dicht, hell) und auf dem Dach innen (dumpf + Prasseln)
     rn = shape(noise(N, 0.3, np.random.default_rng(17)), mul(hp(900, 1), lp(9000, 1)))
@@ -407,7 +407,7 @@ def ambience():
     roofb = shape(noise(N, 1.4, np.random.default_rng(20)), lp(900, 2))
     ilvl = curve([(0, 0), (slam, 0), (slam + 0.01, 1.0), (EV["clear"] - 0.01, 1.0), (EV["clear"], 0), (63, 0)])
     elvl = curve([(0, 0), (29.9, 0), (34.5, 1.0), (slam - 0.01, 1.0), (slam, 0), (63, 0)])
-    A += stereo(roof * 0.6 + roofb * 0.7, width=0.7) * (ilvl * 0.09)[:, None]
+    A += stereo(roof * 0.6 + roofb * 0.7, width=0.7) * (ilvl * 0.06)[:, None]
     A += stereo(norm(shape(drops, hp(2500, 1))), width=0.9) * (elvl * 0.07)[:, None]
 
     # 7) Kaminfeuer: Grundrauschen + Knistern
@@ -421,7 +421,7 @@ def ambience():
     cr = norm(cr)
     clvl = curve([(0, 0), (EV["fire_catch"] - 0.1, 0), (EV["fire_catch"] + 1.5, 1.0), (EV["clear"] - 0.01, 1.0), (EV["clear"], 0),
                   (EV["evening"], 0), (EV["evening"] + 0.01, 0.9), (57.5, 0.9), (57.5, 0.0), (63, 0)])
-    A += stereo(fr * 0.5 + cr * 0.6, width=0.4) * (clvl * 0.17)[:, None]
+    A += stereo(fr * 0.5 + cr * 0.6, width=0.4) * (clvl * 0.12)[:, None]
 
     # 8) Abend außen: leiser, hohler Wind
     ew = shape(noise(N, 1.8, np.random.default_rng(23)), mul(bp(420, 1.2), lp(1200, 2)))
