@@ -1,0 +1,742 @@
+{
+ "file": "final.mp4",
+ "mode": "render",
+ "probe": {
+  "duration": 61.0,
+  "size_bytes": 32801298,
+  "bitrate_kbps": 4302,
+  "video": {
+   "codec": "h264",
+   "width": 1080,
+   "height": 1920,
+   "pix_fmt": "yuv420p",
+   "r_frame_rate": 30.0,
+   "avg_frame_rate": 30.0,
+   "nb_frames": 1830,
+   "duration": 61.0,
+   "start_time": 0.0,
+   "aspect": 0.5625
+  },
+  "audio": {
+   "codec": "aac",
+   "sample_rate": 48000,
+   "channels": 2,
+   "duration": 61.0,
+   "start_time": 0.0
+  }
+ },
+ "video": {
+  "frame_count": 1830,
+  "timestamp_irregularities": [],
+  "timestamp_irregularity_count": 0,
+  "cuts": [
+   3.8,
+   9.5,
+   13.0,
+   24.5,
+   27.5
+  ],
+  "cut_count": 5,
+  "motion_transitions": [
+   {
+    "start": 5.867,
+    "end": 6.033,
+    "frames": 6,
+    "peak_ydif": 31.2,
+    "baseline_ydif": 1.4,
+    "mid_n": 178
+   },
+   {
+    "start": 18.467,
+    "end": 18.633,
+    "frames": 6,
+    "peak_ydif": 38.2,
+    "baseline_ydif": 1.5,
+    "mid_n": 556
+   },
+   {
+    "start": 22.667,
+    "end": 23.267,
+    "frames": 19,
+    "peak_ydif": 34.8,
+    "baseline_ydif": 2.8,
+    "mid_n": 689
+   },
+   {
+    "start": 27.533,
+    "end": 27.633,
+    "frames": 4,
+    "peak_ydif": 29.0,
+    "baseline_ydif": 1.3,
+    "mid_n": 827
+   },
+   {
+    "start": 33.433,
+    "end": 33.5,
+    "frames": 3,
+    "peak_ydif": 25.1,
+    "baseline_ydif": 0.4,
+    "mid_n": 1004
+   },
+   {
+    "start": 48.9,
+    "end": 49.0,
+    "frames": 4,
+    "peak_ydif": 22.0,
+    "baseline_ydif": 1.0,
+    "mid_n": 1468
+   }
+  ],
+  "motion_transition_count": 6,
+  "shots": [
+   {
+    "start": 0.0,
+    "frames": 114,
+    "dur": 3.8,
+    "mid_n": 56
+   },
+   {
+    "start": 3.8,
+    "frames": 64,
+    "dur": 2.133,
+    "mid_n": 145
+   },
+   {
+    "start": 5.933,
+    "frames": 107,
+    "dur": 3.567,
+    "mid_n": 231
+   },
+   {
+    "start": 9.5,
+    "frames": 105,
+    "dur": 3.5,
+    "mid_n": 337
+   },
+   {
+    "start": 13.0,
+    "frames": 166,
+    "dur": 5.533,
+    "mid_n": 472
+   },
+   {
+    "start": 18.533,
+    "frames": 133,
+    "dur": 4.433,
+    "mid_n": 622
+   },
+   {
+    "start": 22.967,
+    "frames": 46,
+    "dur": 1.533,
+    "mid_n": 711
+   },
+   {
+    "start": 24.5,
+    "frames": 90,
+    "dur": 3.0,
+    "mid_n": 779
+   },
+   {
+    "start": 27.5,
+    "frames": 2,
+    "dur": 0.067,
+    "mid_n": 825
+   },
+   {
+    "start": 27.567,
+    "frames": 177,
+    "dur": 5.9,
+    "mid_n": 915
+   },
+   {
+    "start": 33.467,
+    "frames": 464,
+    "dur": 15.467,
+    "mid_n": 1235
+   },
+   {
+    "start": 48.933,
+    "frames": 362,
+    "dur": 12.067,
+    "mid_n": 1648
+   }
+  ],
+  "shot_stats": {
+   "count": 12,
+   "median_s": 3.68,
+   "mean_s": 5.08,
+   "min_s": 0.07,
+   "max_s": 15.47,
+   "cuts_per_10s": 0.82,
+   "shot_changes_per_10s": 1.8
+  },
+  "flash_shots": [
+   {
+    "start": 27.5,
+    "frames": 2,
+    "dur": 0.067,
+    "mid_n": 825
+   }
+  ],
+  "isolated_duplicate_frames": [],
+  "duplicate_ratio_in_motion": 0.0,
+  "jump_candidates": [],
+  "flicker_candidates": [],
+  "first_cut_s": 3.8,
+  "first_shot_change_s": 3.8,
+  "mean_luma": 61.0,
+  "mean_motion_ydif": 2.13,
+  "planned_transitions": [
+   {
+    "t": 3.8,
+    "type": "cut",
+    "frames": 0,
+    "peak_ydif": 37.03,
+    "visible": true
+   },
+   {
+    "t": 6.0,
+    "type": "whip",
+    "frames": 10,
+    "peak_ydif": 31.21,
+    "visible": true
+   },
+   {
+    "t": 9.5,
+    "type": "whip",
+    "frames": 10,
+    "peak_ydif": 83.95,
+    "visible": true
+   },
+   {
+    "t": 13.0,
+    "type": "whip",
+    "frames": 10,
+    "peak_ydif": 93.16,
+    "visible": true
+   },
+   {
+    "t": 18.5,
+    "type": "whip",
+    "frames": 10,
+    "peak_ydif": 38.18,
+    "visible": true
+   },
+   {
+    "t": 24.5,
+    "type": "cut",
+    "frames": 0,
+    "peak_ydif": 49.46,
+    "visible": true
+   },
+   {
+    "t": 27.5,
+    "type": "whip",
+    "frames": 10,
+    "peak_ydif": 32.97,
+    "visible": true
+   },
+   {
+    "t": 33.5,
+    "type": "whip",
+    "frames": 10,
+    "peak_ydif": 25.09,
+    "visible": true
+   },
+   {
+    "t": 39.0,
+    "type": "dip",
+    "frames": 6,
+    "peak_ydif": 28.39,
+    "visible": true
+   },
+   {
+    "t": 44.5,
+    "type": "cut",
+    "frames": 0,
+    "peak_ydif": 23.33,
+    "visible": true
+   },
+   {
+    "t": 49.0,
+    "type": "whip",
+    "frames": 10,
+    "peak_ydif": 22.0,
+    "visible": true
+   },
+   {
+    "t": 53.5,
+    "type": "whip",
+    "frames": 10,
+    "peak_ydif": 11.56,
+    "visible": true
+   },
+   {
+    "t": 56.2,
+    "type": "cut",
+    "frames": 0,
+    "peak_ydif": 21.16,
+    "visible": true
+   }
+  ],
+  "planned_jump_candidates": [
+   {
+    "t": 9.4,
+    "ydif": 9.97,
+    "local_median": 1.48
+   },
+   {
+    "t": 9.433,
+    "ydif": 13.56,
+    "local_median": 1.51
+   },
+   {
+    "t": 9.567,
+    "ydif": 11.25,
+    "local_median": 1.55
+   },
+   {
+    "t": 12.9,
+    "ydif": 13.92,
+    "local_median": 2.28
+   },
+   {
+    "t": 12.933,
+    "ydif": 14.85,
+    "local_median": 2.28
+   },
+   {
+    "t": 27.367,
+    "ydif": 9.35,
+    "local_median": 1.43
+   },
+   {
+    "t": 27.4,
+    "ydif": 11.56,
+    "local_median": 1.43
+   },
+   {
+    "t": 27.433,
+    "ydif": 9.76,
+    "local_median": 1.43
+   },
+   {
+    "t": 39.0,
+    "ydif": 28.39,
+    "local_median": 0.25
+   },
+   {
+    "t": 39.033,
+    "ydif": 9.03,
+    "local_median": 0.25
+   },
+   {
+    "t": 39.067,
+    "ydif": 9.21,
+    "local_median": 0.25
+   },
+   {
+    "t": 39.1,
+    "ydif": 9.0,
+    "local_median": 0.25
+   },
+   {
+    "t": 44.5,
+    "ydif": 23.33,
+    "local_median": 0.28
+   },
+   {
+    "t": 56.2,
+    "ydif": 21.16,
+    "local_median": 1.54
+   }
+  ],
+  "planned_flicker_candidates": [
+   5.9,
+   5.933,
+   5.967,
+   6.0,
+   9.433,
+   9.467
+  ],
+  "letterbox_crop": null
+ },
+ "audio": {
+  "integrated_lufs": -14.0,
+  "lra_lu": 7.1,
+  "true_peak_dbtp": -1.3,
+  "short_term_lufs_per_s": [
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    3,
+    -18.1
+   ],
+   [
+    4,
+    -15.8
+   ],
+   [
+    5,
+    -15.6
+   ],
+   [
+    6,
+    -15.5
+   ],
+   [
+    7,
+    -14.8
+   ],
+   [
+    8,
+    -15.1
+   ],
+   [
+    9,
+    -15.4
+   ],
+   [
+    10,
+    -17.2
+   ],
+   [
+    11,
+    -16.0
+   ],
+   [
+    12,
+    -16.1
+   ],
+   [
+    13,
+    -16.2
+   ],
+   [
+    14,
+    -18.2
+   ],
+   [
+    15,
+    -17.6
+   ],
+   [
+    16,
+    -17.2
+   ],
+   [
+    17,
+    -17.0
+   ],
+   [
+    18,
+    -16.6
+   ],
+   [
+    19,
+    -15.8
+   ],
+   [
+    20,
+    -14.7
+   ],
+   [
+    21,
+    -13.0
+   ],
+   [
+    22,
+    -11.3
+   ],
+   [
+    23,
+    -9.8
+   ],
+   [
+    24,
+    -10.4
+   ],
+   [
+    25,
+    -11.3
+   ],
+   [
+    26,
+    -13.5
+   ],
+   [
+    27,
+    -13.4
+   ],
+   [
+    28,
+    -14.1
+   ],
+   [
+    29,
+    -14.6
+   ],
+   [
+    30,
+    -14.7
+   ],
+   [
+    31,
+    -15.0
+   ],
+   [
+    32,
+    -14.7
+   ],
+   [
+    33,
+    -14.5
+   ],
+   [
+    34,
+    -14.0
+   ],
+   [
+    35,
+    -13.9
+   ],
+   [
+    36,
+    -12.7
+   ],
+   [
+    37,
+    -12.9
+   ],
+   [
+    38,
+    -13.1
+   ],
+   [
+    39,
+    -14.9
+   ],
+   [
+    40,
+    -14.2
+   ],
+   [
+    41,
+    -15.5
+   ],
+   [
+    42,
+    -14.3
+   ],
+   [
+    43,
+    -13.9
+   ],
+   [
+    44,
+    -12.1
+   ],
+   [
+    45,
+    -10.8
+   ],
+   [
+    46,
+    -11.1
+   ],
+   [
+    47,
+    -12.5
+   ],
+   [
+    48,
+    -17.4
+   ],
+   [
+    49,
+    -22.9
+   ],
+   [
+    50,
+    -16.2
+   ],
+   [
+    51,
+    -15.4
+   ],
+   [
+    52,
+    -15.2
+   ],
+   [
+    53,
+    -18.1
+   ],
+   [
+    54,
+    -18.0
+   ],
+   [
+    55,
+    -17.6
+   ],
+   [
+    56,
+    -17.1
+   ],
+   [
+    57,
+    -12.7
+   ],
+   [
+    58,
+    -11.2
+   ],
+   [
+    59,
+    -10.7
+   ],
+   [
+    60,
+    -12.6
+   ],
+   [
+    61,
+    -15.4
+   ]
+  ],
+  "loudness_jumps": [],
+  "silences": [],
+  "peak_dbfs": -1.29272,
+  "rms_dbfs": -15.587023,
+  "flat_factor": 0.0,
+  "peak_count": 2.0,
+  "dc_offset": 0.000121,
+  "nans": 0.0,
+  "click_candidates": [
+   {
+    "t": 5.85,
+    "hf_peak_db": -26.2,
+    "context_median_db": -48.5
+   },
+   {
+    "t": 9.4,
+    "hf_peak_db": -25.0,
+    "context_median_db": -45.3
+   },
+   {
+    "t": 12.9,
+    "hf_peak_db": -24.6,
+    "context_median_db": -45.5
+   },
+   {
+    "t": 33.41,
+    "hf_peak_db": -24.0,
+    "context_median_db": -44.1
+   },
+   {
+    "t": 48.97,
+    "hf_peak_db": -20.2,
+    "context_median_db": -40.4
+   },
+   {
+    "t": 53.4,
+    "hf_peak_db": -24.8,
+    "context_median_db": -45.3
+   }
+  ],
+  "first_50ms_rms_db": -58.102367,
+  "last_50ms_rms_db": -50.024592,
+  "last_1s_rms_db": -25.097404,
+  "planned_click_candidates": [
+   {
+    "t": 3.98,
+    "hf_peak_db": -28.7,
+    "context_median_db": -53.2
+   },
+   {
+    "t": 24.52,
+    "hf_peak_db": -18.1,
+    "context_median_db": -50.5
+   },
+   {
+    "t": 45.01,
+    "hf_peak_db": -35.4,
+    "context_median_db": -55.7
+   },
+   {
+    "t": 54.32,
+    "hf_peak_db": -35.1,
+    "context_median_db": -59.9
+   },
+   {
+    "t": 54.85,
+    "hf_peak_db": -35.0,
+    "context_median_db": -59.0
+   },
+   {
+    "t": 55.38,
+    "hf_peak_db": -35.3,
+    "context_median_db": -57.9
+   },
+   {
+    "t": 55.92,
+    "hf_peak_db": -34.5,
+    "context_median_db": -56.7
+   },
+   {
+    "t": 59.12,
+    "hf_peak_db": -34.4,
+    "context_median_db": -55.2
+   },
+   {
+    "t": 59.65,
+    "hf_peak_db": -36.3,
+    "context_median_db": -56.8
+   },
+   {
+    "t": 60.18,
+    "hf_peak_db": -39.7,
+    "context_median_db": -62.1
+   }
+  ],
+  "planned_loudness_jumps": [
+   {
+    "t": 39.9,
+    "from_lufs": -23.6,
+    "to_lufs": -10.2
+   },
+   {
+    "t": 41.5,
+    "from_lufs": -23.6,
+    "to_lufs": -10.1
+   },
+   {
+    "t": 42.9,
+    "from_lufs": -22.7,
+    "to_lufs": -9.4
+   },
+   {
+    "t": 44.0,
+    "from_lufs": -21.4,
+    "to_lufs": -8.2
+   }
+  ]
+ },
+ "black": [],
+ "freezes": [],
+ "status": "FAIL",
+ "fails": [
+  "Einstellungen < 4 Frames (Blitzbild/Sprung): [27.5]"
+ ],
+ "reviews": [
+  "Klick-Kandidaten (anhören!): [5.85, 9.4, 12.9, 33.41, 48.97, 53.4]"
+ ]
+}

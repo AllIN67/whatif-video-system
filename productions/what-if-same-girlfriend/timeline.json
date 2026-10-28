@@ -339,9 +339,7 @@
     ]
    },
    "transition_in": {
-    "type": "whip",
-    "frames": 10,
-    "direction": "right"
+    "type": "cut"
    }
   },
   {
@@ -1082,11 +1080,6 @@
    {
     "src": "render/sfx/swish.wav",
     "t": 18.166667,
-    "gain_db": -7
-   },
-   {
-    "src": "render/sfx/swish.wav",
-    "t": 27.166667,
     "gain_db": -7
    },
    {

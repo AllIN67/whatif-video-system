@@ -86,7 +86,7 @@ SOUNDS = {
         "[a][b]amix=inputs=2:normalize=0"),
     # Whip: Luftzug, Maximum exakt bei 0,3333 s (= Einstellungsgrenze, Start 10 Frames vorher)
     "swish": stereo(
-        f"anoisesrc=d=0.6667:c=pink:r={SR}:a=0.9:s=281,highpass=f=250,lowpass=f=3800,{env('pow(sin(PI*t/0.6667),3)')}"),
+        f"anoisesrc=d=0.6667:c=pink:r={SR}:a=0.9:s=281,highpass=f=250,lowpass=f=2200,lowpass=f=2200,{env('pow(sin(PI*t/0.6667),3)')}"),
     # Tür: dumpfer Anschlag + Holz
     "door": stereo(
         f"aevalsrc='0.7*sin(2*PI*(70*t+20*(1-exp(-12*t))))*exp(-9*t)*min(1,t/0.004)':d=1:s={SR}[a];"
