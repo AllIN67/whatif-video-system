@@ -1,0 +1,28 @@
+{
+ "lang": "en",
+ "number_locale": "en-US",
+ "title": { "text": "What if you lived alone in the mountains?", "highlight": "alone" },
+ "hud": {
+  "neighbor": { "label": "NEAREST NEIGHBOR", "sub": "NO ROAD · NO SIGNAL", "unit": " km" },
+  "trail": { "label": "FOLLOWING TRACKS", "sub": "INTO THE FOREST", "unit": " km" },
+  "wind": { "label": "WIND SPEED", "sub": "STORM INCOMING", "unit": " km/h" },
+  "temp": { "label": "INSIDE TEMPERATURE", "sub": "WOOD FIRE ONLY", "unit": " °C" },
+  "alt": { "label": "ALTITUDE", "sub": "ABOVE THE VALLEY", "unit": " m" },
+  "stress": { "label": "STRESS LEVEL", "sub": "AFTER ONE DAY HERE", "unit": " %", "final": "ZERO" }
+ },
+ "lines": {
+  "l01": "Nobody needs anything from you.",
+  "l02": "Breakfast takes as long as you want.",
+  "l03": "You grow most of what you eat.",
+  "l04": "Something walked past while you slept.",
+  "l05": "Nobody else knows this place exists.",
+  "l06": "Then the weather turns. Fast.",
+  "l07": "The firewood is still outside.",
+  "l08": "No power. No signal. No problem.",
+  "l09": "You stay warm with what you gathered.",
+  "l10": "Storms pass. Views like this stay.",
+  "l11": "This is your backyard now.",
+  "l12": "No boss. No traffic. No stress.",
+  "l13": "Could you live like this?"
+ }
+}
