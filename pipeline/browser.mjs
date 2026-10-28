@@ -49,6 +49,13 @@ export async function launchStage(serverUrl, query) {
     await browser.close();
     throw new Error(`Fehler beim Aufbau der Bühne: ${err}`);
   }
+  // WebGL arbeitet asynchron: Shader-Kompilierung und Aufwärm-Frames stehen nach "ready" noch in der
+  // GPU-Warteschlange und würden sonst dem ersten Screenshot angelastet (30-s-Zeitlimit; bei großen Szenen
+  // überschritten). readPixels erzwingt das Abarbeiten hier, ohne Zeitlimit und ohne Einfluss auf die Bilder.
+  await page.evaluate(() => {
+    const gl = document.getElementById('gl').getContext('webgl2');
+    if (gl) gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(4));
+  });
   return { browser, page, errors };
 }
 
