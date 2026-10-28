@@ -123,7 +123,8 @@ export async function renderFrames(opts) {
         const r = await page.evaluate((k) => window.__stage.setFrame(k), n);
         if (r.n !== n) throw new Error(`Bühne meldet Frame ${r.n} statt ${n}`);
         if (errors.length) throw new Error(`Fehler in der Bühne bei Frame ${n}: ${errors.join(' | ')}`);
-        const png = await page.screenshot({ type: 'png', clip: { x: 0, y: 0, width: 1080, height: 1920 } });
+        // großzügiges Zeitlimit: der erste Frame schwerer Szenen enthält Shader-Kompilierung + Aufwärmen (gemessen ≈ 2 min)
+        const png = await page.screenshot({ type: 'png', timeout: 600000, clip: { x: 0, y: 0, width: 1080, height: 1920 } });
         hashes.set(n, createHash('sha256').update(png).digest('hex').slice(0, 16));
         await enc.write(png);
         rendered++;
