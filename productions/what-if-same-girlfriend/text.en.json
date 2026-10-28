@@ -1,0 +1,32 @@
+{
+ "lang": "en",
+ "number_locale": "en-US",
+ "title": { "text": "What if every man had the same girlfriend?", "highlight": "same" },
+ "hud": {
+  "boyfriends": { "label": "HER BOYFRIENDS", "sub": "EVERY ADULT MAN ON EARTH", "unit": "" },
+  "nextnight": { "label": "HER NEXT FREE NIGHT IN", "sub": "ONE DATE PER NIGHT", "unit": " YEARS" },
+  "messages": { "label": "MESSAGES TO HER", "sub": "ONE TEXT PER MAN PER DAY", "unit": " / SEC" },
+  "goodnight": { "label": "TIME TO SAY GOODNIGHT", "sub": "ONE SECOND PER MAN", "unit": " YEARS" },
+  "boyfriends_end": { "label": "HER BOYFRIENDS", "sub": "HER OWN CHOICE", "unit": "" }
+ },
+ "lines": {
+  "l01": "Her name is Nora.",
+  "l02": "Every man alive is suddenly her boyfriend.",
+  "l03": "Same girlfriend, in every time zone.",
+  "l04": "Every table is booked for her.",
+  "l05": "Tonight, and every night after.",
+  "l06": "Her phone never stops buzzing.",
+  "l07": "Phone networks were never built for this.",
+  "l08": "Her street becomes a waiting room.",
+  "l09": "She never said yes to any of them.",
+  "l10": "She can't be everywhere.",
+  "l11": "Best friends start keeping score.",
+  "l12": "Nobody knows whose turn it is.",
+  "l13": "Everyone has plans for her life.",
+  "l14": "Nobody asked what she wants.",
+  "l15": "Then Nora makes her own choice.",
+  "l16": "If nobody chose it, is it still love?",
+  "l17": "She chooses herself.",
+  "l18": "WOULD YOU ACCEPT THIS WORLD — OR WALK AWAY?"
+ }
+}

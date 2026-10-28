@@ -1,7 +1,7 @@
 {
-  "_comment": "Zentrale Markenwerte (Style-Guide 6.3/6.4). signal ist ein PLATZHALTER – endgültige Signalfarbe wird beim ersten echten Video festgelegt.",
-  "signal": "#38E1C6",
-  "signal_is_placeholder": true,
+  "_comment": "Zentrale Markenwerte (Style-Guide 6.3/6.4). signal festgelegt mit dem ersten Inhaltsvideo (what-if-same-girlfriend, Koralle); austauschbar nur hier an einer Stelle.",
+  "signal": "#FF5A72",
+  "signal_is_placeholder": false,
   "text": "#FFFFFF",
   "scrim": "rgba(0,0,0,0.55)",
   "title_scrim": "rgba(0,0,0,0.68)",
