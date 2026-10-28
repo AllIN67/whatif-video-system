@@ -45,6 +45,41 @@ SOUNDS = {
         f"aevalsrc='0.35*sin(2*PI*(180*t+60*t*t))*pow(t/4,2)':d=4:s={SR}[a];"
         f"anoisesrc=d=4:c=pink:r={SR}:a=0.5:s=41,highpass=f=800,{_env('pow(t/4,3)')}[b];"
         "[a][b]amix=inputs=2:normalize=0,pan=stereo|c0=c0|c1=c0[out]")),
+    # Verlust-Impuls („eine Minute weg“): präziser digitaler Doppel-Ton mit fallender Tonhöhe + tiefer Sub-Stoß.
+    # Einsatz ohne Vorlauf, damit der Klang auf dem Frame des Wertsprungs beginnt.
+    "lie_hit": (1.2, (
+        f"aevalsrc='0.42*sin(2*PI*(1320*t-1700*t*t))*exp(-26*t)*lt(t,0.2)"
+        f" + 0.30*sin(2*PI*(990*(t-0.07)))*exp(-30*(t-0.07))*gte(t,0.07)*lt(t,0.25)':d=1.2:s={SR}[a];"
+        f"aevalsrc='0.9*sin(2*PI*(46*t+5*(1-exp(-9*t))))*exp(-4.2*t)':d=1.2:s={SR}[b];"
+        f"anoisesrc=d=1.2:c=white:r={SR}:a=0.5:s=61,bandpass=f=2400:width_type=o:w=1.2,{_env('exp(-60*t)')}[c];"
+        "[a][b][c]amix=inputs=3:normalize=0,pan=stereo|c0=c0|c1=c0[out]")),
+    # tiefer, dezenter Ton beim Erscheinen eines Countdowns (weicher Einsatz, langes Ausklingen)
+    "appear": (2.6, (
+        f"aevalsrc='(0.5*sin(2*PI*49*t)+0.25*sin(2*PI*98*t+0.6)+0.06*sin(2*PI*392*t+1.2)*sin(PI*t/2.6))"
+        f"*min(1,t/0.12)*exp(-1.3*t)':d=2.6:s={SR},pan=stereo|c0=c0|c1=c0[out]")),
+    # Herzschlag-artiger, gedämpfter Doppelpuls (Zögern, Anspannung)
+    "pulse": (0.9, (
+        f"aevalsrc='0.8*sin(2*PI*52*t)*exp(-14*t)*min(1,t/0.004)"
+        f" + 0.55*sin(2*PI*48*(t-0.24))*exp(-16*(t-0.24))*gte(t,0.24)':d=0.9:s={SR},lowpass=f=300,"
+        "pan=stereo|c0=c0|c1=c0[out]")),
+    # Stadt bei Nacht: fernes Rauschen (Verkehr), leichte Luft, sehr langsame Bewegung; 90 s
+    "city": (90.0, (
+        f"anoisesrc=d=90:c=brown:r={SR}:a=0.5:s=71,lowpass=f=420,{_env('0.8+0.2*sin(2*PI*0.05*t)')}[a];"
+        f"anoisesrc=d=90:c=pink:r={SR}:a=0.08:s=72,highpass=f=1800,lowpass=f=6000,{_env('0.7+0.3*sin(2*PI*0.031*t+1)')}[b];"
+        f"anoisesrc=d=90:c=pink:r={SR}:a=0.5:s=73,lowpass=f=420[c];"
+        "[a][c]join=inputs=2:channel_layout=stereo[ac];"
+        "[b]pan=stereo|c0=c0|c1=c0[bb];[ac][bb]amix=inputs=2:normalize=0[out]")),
+    # Zurückhaltende Spannungsfläche für den persönlichen Konflikt (D-Moll, langsame Schwebung); 30 s
+    "tension": (30.0, (
+        f"aevalsrc='0.20*sin(2*PI*73.42*t)*(0.85+0.15*sin(2*PI*0.11*t))"
+        f" + 0.14*sin(2*PI*110.0*t+0.9)*(0.8+0.2*sin(2*PI*0.07*t))"
+        f" + 0.10*sin(2*PI*174.61*t+1.7)*(0.7+0.3*sin(2*PI*0.13*t))"
+        f" + 0.05*sin(2*PI*220.6*t+2.2)':d=30:s={SR},pan=stereo|c0=c0|c1=c0[out]")),
+    # Krankenhaus: leises Netzbrummen der Leuchtstoffröhren + Raumrauschen; 30 s
+    "hum": (30.0, (
+        f"aevalsrc='0.10*sin(2*PI*100*t)+0.05*sin(2*PI*200*t+0.4)+0.025*sin(2*PI*300*t+1.1)':d=30:s={SR}[a];"
+        f"anoisesrc=d=30:c=pink:r={SR}:a=0.06:s=81,lowpass=f=2500[b];"
+        "[a][b]amix=inputs=2:normalize=0,pan=stereo|c0=c0|c1=c0[out]")),
     # Synchron-Marker: 3-kHz-Ton, 80 ms, weiche Flanken (5 ms)
     "tick": (0.08, (
         f"aevalsrc='0.6*sin(2*PI*3000*t)*min(1,min(t/0.005,(0.08-t)/0.005))':d=0.08:s={SR},"

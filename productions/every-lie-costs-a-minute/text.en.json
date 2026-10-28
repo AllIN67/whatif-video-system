@@ -1,0 +1,91 @@
+{
+ "lang": "en",
+ "number_locale": "en-US",
+ "title": {
+  "text": "What if every lie cost one minute of your life?",
+  "highlight": "lie"
+ },
+ "hud": {
+  "h_hero": {
+   "label": "HIS LIFE LEFT",
+   "sub": "MINUTES",
+   "unit": ""
+  },
+  "h_fine": {
+   "label": "HER LIFE LEFT",
+   "sub": "MINUTES",
+   "unit": ""
+  },
+  "h_late": {
+   "label": "HIS LIFE LEFT",
+   "sub": "MINUTES",
+   "unit": ""
+  },
+  "h_job": {
+   "label": "HIS LIFE LEFT",
+   "sub": "MINUTES",
+   "unit": ""
+  },
+  "h_street": {
+   "label": "MINUTES LOST TODAY",
+   "sub": "ON THIS STREET",
+   "unit": ""
+  },
+  "h_city": {
+   "label": "MINUTES LOST TODAY",
+   "sub": "IN THIS CITY",
+   "unit": ""
+  },
+  "h_deal": {
+   "label": "HIS LIFE LEFT",
+   "sub": "MINUTES",
+   "unit": ""
+  },
+  "h_artist": {
+   "label": "HER LIFE LEFT",
+   "sub": "MINUTES",
+   "unit": ""
+  },
+  "h_paint": {
+   "label": "HER LIFE LEFT",
+   "sub": "MINUTES",
+   "unit": ""
+  },
+  "h_honest": {
+   "label": "HIS LIFE LEFT",
+   "sub": "MINUTES",
+   "unit": ""
+  },
+  "h_father": {
+   "label": "HIS LIFE LEFT",
+   "sub": "MINUTES",
+   "unit": ""
+  },
+  "h_end": {
+   "label": "HIS LIFE LEFT",
+   "sub": "MINUTES",
+   "unit": ""
+  }
+ },
+ "lines": {
+  "l01": "“I've never told a lie.”",
+  "l02": "“I'm fine. Really.”",
+  "l03": "“I'm already on my way!”",
+  "l04": "“Yes, I speak fluent French.”",
+  "l05": "Every lie takes 60 seconds.",
+  "l06": "Suddenly, nobody trusts anyone.",
+  "l07": "“Trust me. The deal is safe.”",
+  "l08": "“So… do you like my painting?”",
+  "l09": "“It's beauti— Honestly? Not really.”",
+  "l10": "“Have you been honest with me?”",
+  "l11": "“No. I lost my job. Months ago.”",
+  "l12": "The truth can hurt. A lie always costs.",
+  "l13": "“Is Mom going to be okay?”",
+  "l14": "“Yes. She'll be fine.”",
+  "l15": "He paid one minute for her hope."
+ },
+ "endcard": {
+  "title": "Would you always tell the truth?",
+  "sub": "Even if it hurt someone you love?"
+ }
+}

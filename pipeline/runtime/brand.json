@@ -1,7 +1,7 @@
 {
-  "_comment": "Zentrale Markenwerte (Style-Guide 6.3/6.4). signal ist ein PLATZHALTER – endgültige Signalfarbe wird beim ersten echten Video festgelegt.",
+  "_comment": "Zentrale Markenwerte (Style-Guide 6.3/6.4). Signalfarbe festgelegt mit Video 1 (every-lie-costs-a-minute, 2026-10-28) – danach unverändert lassen. alarm = Farbe für Verlust-Akzente (HUD-Wertsprung).",
   "signal": "#38E1C6",
-  "signal_is_placeholder": true,
+  "signal_is_placeholder": false,
   "text": "#FFFFFF",
   "scrim": "rgba(0,0,0,0.55)",
   "title_scrim": "rgba(0,0,0,0.68)",
@@ -12,11 +12,16 @@
   "layout": {
     "width": 1080,
     "height": 1920,
-    "safe": { "x0": 0.06, "x1": 0.82, "y0": 0.10, "y1": 0.76 },
+    "safe": {
+      "x0": 0.06,
+      "x1": 0.82,
+      "y0": 0.1,
+      "y1": 0.76
+    },
     "title_top": 0.22,
     "title_size": 78,
     "hud_left": 64,
-    "hud_value_baseline": 0.50,
+    "hud_value_baseline": 0.5,
     "hud_label_size": 30,
     "hud_value_size": 80,
     "hud_sub_size": 28,
@@ -24,7 +29,16 @@
     "hud_bar_height": 6,
     "line_center": 0.67,
     "line_size": 54,
-    "end_center": 0.45
+    "end_center": 0.45,
+    "end_title_size": 68,
+    "end_sub_size": 46
   },
-  "fades": { "title_out": 0.4, "line_in": 0.25, "line_out": 0.25, "hud_label_cross": 0.3 }
+  "fades": {
+    "title_out": 0.4,
+    "line_in": 0.25,
+    "line_out": 0.25,
+    "hud_label_cross": 0.3,
+    "end_in": 0.4
+  },
+  "alarm": "#FF4545"
 }

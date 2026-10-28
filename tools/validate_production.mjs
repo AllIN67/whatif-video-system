@@ -27,8 +27,14 @@ export function validate(timeline, text, { lang = 'en' } = {}) {
   }
   const dur = timeline.duration;
 
-  // Länge (10.1)
-  if (dur < 61 || dur > 80) E('10.1', `Länge ${dur} s außerhalb 61–80 s`);
+  // Länge (10.1). Abweichung nur mit Begründung in timeline.length_deviation = { min, max, reason }
+  // (z. B. ausdrückliche Längenvorgabe des Auftraggebers) – dann Warnung statt Fehler.
+  if (dur < 61 || dur > 80) {
+    const dev = timeline.length_deviation;
+    if (dev && typeof dev.reason === 'string' && dev.reason.trim().length >= 10 && dur >= dev.min && dur <= dev.max) {
+      W('10.1', `Länge ${dur} s außerhalb 61–80 s – dokumentierte Abweichung (${dev.min}–${dev.max} s): ${dev.reason}`);
+    } else E('10.1', `Länge ${dur} s außerhalb 61–80 s`);
+  }
 
   // Titel (2)
   const tt = timeline.title;
@@ -55,8 +61,13 @@ export function validate(timeline, text, { lang = 'en' } = {}) {
     const d = hud[0].decimals ?? 0;
     if (v0.toFixed(d) === v2.toFixed(d)) E('2', 'HUD-Wert ändert sich in den ersten 2 s nicht sichtbar');
     if (hud.length < 3) W('3.2', `nur ${hud.length - 1} HUD-Label-Wechsel (Empfehlung ≥ 2)`);
-    for (const s of hud) {
+    for (const [i, s] of hud.entries()) {
       if (!text.hud?.[s.id]) E('1.3', `HUD-ID „${s.id}“ fehlt in text.${lang}.json`);
+      const segEnd = i + 1 < hud.length ? hud[i + 1].from : dur;
+      for (const f of s.flashes || []) {
+        if (!['loss', 'warn'].includes(f.kind)) E('6.3', `HUD „${s.id}“: Akzent „${f.kind}“ unbekannt (loss, warn)`);
+        if (f.t < s.from || f.t >= segEnd) E('6.5', `HUD „${s.id}“: Akzent bei ${f.t} s liegt außerhalb des Segments ${s.from}–${segEnd} s`);
+      }
       if (s.final && !text.hud?.[s.id]?.final) E('1.3', `HUD „${s.id}“: Endtext (final) fehlt in der Textdatei`);
     }
   }
@@ -86,6 +97,19 @@ export function validate(timeline, text, { lang = 'en' } = {}) {
   if (lines.length && (lines[0].in < 3.5 || lines[0].in > 5.0)) W('2', `erste Zeile bei ${lines[0].in} s (Empfehlung 3,5–5,0 s)`);
   const used = new Set(lines.map((l) => l.id));
   for (const id of Object.keys(text.lines || {})) if (!used.has(id)) W('1.3', `Text-ID „${id}“ wird nicht verwendet`);
+
+  // Endkarte (6.3, 7.4): Frage aus der Textdatei, ≤ 10 Wörter, steht bis zum Videoende
+  const ec = timeline.endcard;
+  if (ec) {
+    const et = text.endcard?.title;
+    if (!et) E('1.3', `Endkarte: endcard.title fehlt in text.${lang}.json`);
+    else if (words(et) > 10) E('4', `Endkarte: ${words(et)} Wörter (max. 10)`);
+    if (text.endcard?.sub && words(text.endcard.sub) > 10) E('4', `Endkarten-Unterzeile: ${words(text.endcard.sub)} Wörter (max. 10)`);
+    if (ec.in >= dur) E('7.4', 'Endkarte beginnt nach Videoende');
+    if (ec.out != null && ec.out < dur) W('7.4', `Endkarte endet bei ${ec.out} s vor dem Videoende`);
+    if (ec.center != null && (ec.center < 0.10 || ec.center > 0.76)) E('6.3', `Endkarte: Mitte ${ec.center} außerhalb der Sicherheitszone`);
+    for (const l of lines) if (l.out > ec.in + 1e-9) E('4', `${l.id} überlappt die Endkarte`);
+  }
 
   // Auslösendes Ereignis ≤ 10 s (2)
   const events = timeline.events || [];
