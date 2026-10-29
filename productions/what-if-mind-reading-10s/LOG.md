@@ -74,4 +74,23 @@
 
 ## 5. Render und QA
 
-(wird nach dem Render ergänzt)
+### Durchlauf 1 – 2026-10-29 (Commit d84d895)
+
+- Befehl: `node pipeline/run.mjs --production productions/what-if-mind-reading-10s` · ≈ 1,2 s/Frame, ≈ 38 min für 1890 Frames
+- Mix: 63,000 s · −14,0 LUFS · TP −1,5 dBTP (audio_mix); Datei: −14,0 LUFS, LRA 11,7 LU, TP −1,1 dBTP
+- `video_qa.py`: **FAIL**
+  - ❌ Einstellungen < 4 Frames bei 13,933 und 42,733 s
+  - ⚠️ Sprungkandidaten ohne Schnitt 23,3 und 27,3 s
+  - ⚠️ Klick-Kandidaten 0,26 … 13,79 s (Abstand ≈ 0,4 s)
+  - ⚠️ Stille 56,08–58,0 s
+- Angesehen: sheet_01–03 (alle, inkl. Ende), Bildstreifen 13,79 und 42,72 s.
+
+| Zeitpunkt | Befund | Einstufung | Ursache | Korrektur |
+|---|---|---|---|---|
+| 13,933 / 42,733 | 2-Frame-„Einstellung“ | Messartefakt, aber FAIL | Abblende mit 4 Frames: der Detektor zählt Beginn der Abdunklung und Ortswechsel als zwei Schnitte; kein fremdes Bild (Streifen geprüft) | beide Übergänge als Whip (8 Frames, laut B1 zulässig) |
+| 23,3 / 27,3 | Sprung | **Fehler** | Figuren wechseln in einem Frame von „sitzen“ zu „stehen“ | Kit: `pose(…, { seated: 0…1 })` – Aufstehen über 0,4 s (Besprechung, Date, Schwarm, Freunde in der Küche) |
+| 58,0 | Pointe schwach lesbar | Fehler (Sicht) | Klasse dreht sich nur wenig | Drehung stärker (Körper 75 %, Kopf bis 1,1 rad) |
+| 3,6–7,2 | Standbild-Wirkung | Verbesserung | Kopf unbewegt | du schaust dich ungläubig um |
+| 5–11 s | Short-Term −24 … −28 LUFS | Verbesserung | Musik „pulse“ leise am Anfang | Musikbett 0–12 s +3 … +2 dB |
+| Klick-Kandidaten | regelmäßig alle ≈ 0,4 s bis 13,8 s | vermutlich beabsichtigt | Ticken des Musikstils „pulse“ | Hörprüfung durch den Menschen |
+| 56,08–58,0 | Stille | beabsichtigt | Musikpause vor der Pointe (Guide 9.2/9.3, bewusste Stille) | – |
