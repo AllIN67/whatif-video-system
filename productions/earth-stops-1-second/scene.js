@@ -59,8 +59,8 @@ export async function build({ THREE, scene, renderer, rng, timeline, fetchJson }
     const map = kit.space.cloudTexture(opts);
     return new THREE.MeshStandardMaterial({ map, emissiveMap: map, emissive: 0x6a5240, transparent: true, depthWrite: false, roughness: 1 });
   };
-  const storm1 = new THREE.Mesh(new THREE.SphereGeometry(10.06, 160, 80), stormMat({ stretchX: 7, cover: 0.4, color: [196, 138, 84], alpha: 1.0 }));
-  const storm2 = new THREE.Mesh(new THREE.SphereGeometry(10.12, 160, 80), stormMat({ stretchX: 10, cover: 0.44, color: [250, 240, 225], alpha: 1.0 }));
+  const storm1 = new THREE.Mesh(new THREE.SphereGeometry(10.06, 160, 80), stormMat({ stretchX: 7, cover: 0.5, color: [196, 138, 84], alpha: 0.95 }));
+  const storm2 = new THREE.Mesh(new THREE.SphereGeometry(10.12, 160, 80), stormMat({ stretchX: 6, cover: 0.56, color: [250, 240, 225], alpha: 0.9 }));
   SPACE.g.add(storm1, storm2);
 
   // ---------------------------------------------------------------- New York (Straße entlang x)
@@ -514,7 +514,8 @@ export async function build({ THREE, scene, renderer, rng, timeline, fetchJson }
           const ts = t - SH.atmo1.from;
           storm1.rotation.y = 1.2 * ts + 0.3;
           storm2.rotation.y = 1.55 * ts;
-          storm1.material.opacity = 0.9;
+          storm1.material.opacity = 0.85;
+          storm2.material.opacity = 0.9;
           const p = kit.space.latLon(18, -55 + 3 * ts, 19.5);
           const look = kit.space.latLon(28, -55 + 3 * ts + 6, 6);
           const s = shake(t, SH.atmo1.from, 2.6, 0.06);
@@ -527,7 +528,8 @@ export async function build({ THREE, scene, renderer, rng, timeline, fetchJson }
           const slow = 1 - 0.6 * ease(k);
           storm1.rotation.y = 0.3 + 1.2 * (SH.atmo2.from - SH.atmo1.from) + 1.2 * slow * (t - SH.atmo2.from);
           storm2.rotation.y = 1.55 * (SH.atmo2.from - SH.atmo1.from) + 1.55 * slow * (t - SH.atmo2.from);
-          storm1.material.opacity = 0.9 * (1 - 0.35 * ease(k));
+          storm1.material.opacity = 0.45 * (1 - 0.5 * ease(k));
+          storm2.material.opacity = 0.8 * (1 - 0.4 * ease(k));
           const c = orbitCam(lerp(22, 12, ease(k)), lerp(-30, -18, k), lerp(19, 34, easeOut(k)), { fov: 46 });
           cam = c;
           void ts;
@@ -690,12 +692,15 @@ export async function build({ THREE, scene, renderer, rng, timeline, fetchJson }
           windCar.rotation.set(0, Math.PI / 2, -Math.max(0, ts - 0.8) * 2.2);
           for (const l of leaves) {
             const x = XWND - 40 + (((l.ph * 90 + l.v * ts) % 90) + 90) % 90;
-            l.m.position.set(x, l.y + 0.5 * Math.sin(ts * 5 + l.ph * 9), l.z);
+            // nicht durch die bodennahe Kamera der zweiten Wind-Einstellung fliegen (sonst Blitzbild)
+            const nearCam = id === 'wind2' && l.z > -1.2 && l.y < 3;
+            l.m.position.set(x, l.y + 0.5 * Math.sin(ts * 5 + l.ph * 9), nearCam ? l.z - 3 : l.z);
             l.m.rotation.set(l.spin[0] * ts, l.spin[1] * ts, l.spin[2] * ts);
           }
           for (const s of streaks) {
             s.m.visible = true;
-            s.m.position.set(XWND - 50 + (((s.ph * 100 + s.v * ts) % 100) + 100) % 100, s.y * 0.7, s.z);
+            const nearCam = id === 'wind2' && Math.abs(s.z - 1.2) < 2 && s.y * 0.7 < 3;
+            s.m.position.set(XWND - 50 + (((s.ph * 100 + s.v * ts) % 100) + 100) % 100, s.y * 0.7, nearCam ? s.z - 4 : s.z);
             s.m.scale.set(s.len, 1, 1);
           }
           if (id === 'wind1') {
@@ -742,7 +747,7 @@ export async function build({ THREE, scene, renderer, rng, timeline, fetchJson }
           }
           const k = ease(seg(t, SH.pole.from, SH.pole.to));
           const a = lerp(0.35, -0.15, k);
-          cam = { pos: [PX + 7.5 * Math.sin(a), lerp(1.7, 2.1, k), 7.5 * Math.cos(a)], look: [PX - 0.2, 0.75, -1], fov: 46 };
+          cam = { pos: [PX + 10 * Math.sin(a), lerp(2.4, 2.7, k), 10 * Math.cos(a)], look: [PX - 0.4, 0.95, -1], fov: 40 };
           break;
         }
         default:

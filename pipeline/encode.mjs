@@ -31,13 +31,16 @@ export function encode({ production, out }) {
   const list = path.join(renderDir, 'chunks.ffconcat');
   fs.writeFileSync(list, 'ffconcat version 1.0\n' + chunks.map((c) => `file 'chunks/${c}'`).join('\n') + '\n');
   const final = path.join(renderDir, 'final.mp4');
+  // Qualität: CRF 16 Standard; timeline.encode.crf (≤ 18, Style-Guide 10.1) z. B. für 60 fps + Filmkorn (Dateigröße)
+  const crf = tl.encode?.crf ?? 16;
+  if (crf > 18) throw new Error(`encode.crf ${crf} > 18 (Style-Guide 10.1)`);
   // Filmkorn (timeline.post.grain, 0–0,1): zeitlich wechselndes Luma-Rauschen, deterministisch (fester Seed)
   const grain = tl.post?.grain && tl.post.grain_in_shader !== true ? Math.round(tl.post.grain * 220) : 0;
   const noise = grain > 0 ? `noise=c0s=${grain}:c0f=t+u:all_seed=1234,` : '';
   execFileSync('ffmpeg', ['-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', list, '-i', audio,
     '-map', '0:v:0', '-map', '1:a:0',
     '-vf', `scale=in_range=full:out_range=tv:out_color_matrix=bt709:flags=accurate_rnd+full_chroma_int,format=yuv420p,${noise}format=yuv420p`,
-    '-c:v', 'libx264', '-profile:v', 'high', '-preset', 'slow', '-crf', '16', '-g', String(2 * fps),
+    '-c:v', 'libx264', '-profile:v', 'high', '-preset', 'slow', '-crf', String(crf), '-g', String(2 * fps),
     '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-color_range', 'tv',
     '-r', String(fps), '-fps_mode', 'cfr',
     '-c:a', 'aac', '-b:a', '256k', '-ar', '48000', '-ac', '2',

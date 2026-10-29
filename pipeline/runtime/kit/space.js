@@ -42,8 +42,9 @@ export function createSpace(THREE, core, rng) {
   const fbm = (w, h, { cells = 8, octaves = 5, stretchX = 1 } = {}) => {
     const layers = [];
     for (let o = 0; o < octaves; o++) {
-      const cx = Math.round(cells * 2 ** o);
-      const cy = Math.max(2, Math.round((cells * 2 ** o) / 2 / stretchX));
+      // stretchX > 1: weniger Zellen in x → Strukturen in Ost-West-Richtung gestreckt (Schlieren)
+      const cx = Math.max(2, Math.round((cells * 2 ** o) / stretchX));
+      const cy = Math.max(2, Math.round((cells * 2 ** o) / 2));
       layers.push({ n: makeNoise(cx, cy), cx, cy, a: 0.5 ** o });
     }
     const out = new Float32Array(w * h);
