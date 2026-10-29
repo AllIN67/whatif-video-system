@@ -345,11 +345,237 @@ export function createProps(THREE, core, rng) {
     return m;
   };
 
+  // ---------- Gedankenblase ----------
+  // Wolke aus weißen Low-Poly-Kugeln mit Piktogramm (keine Schrift – Texte gehören in text.<lang>.json, Guide 1.3)
+  // und Pünktchenspur zum Kopf. Mittelpunkt der Wolke = Ursprung der Gruppe; tail = Versatz zum Kopf (lokal).
+  //   const b = props.thoughtBubble({ icon: 'pizza', tail: [-0.3, -0.7, 0] });
+  //   b.position.set(...); b.lookAt(kameraPosition);   // Piktogramm zeigt zur Kamera
+  //   in update(): b.userData.pop(t - tAuf, t - tZu)   // Aufploppen mit Überschwingen, Zuploppen; < 0 = noch nicht
+  // Piktogramme: question, pizza, heart, tie, mail, door, stars1, stars2, cake, zzz, ear, empty
+  const ICONS = {
+    question(g, W, H) {
+      g.fillStyle = '#3a3a48';
+      g.textAlign = 'center';
+      g.textBaseline = 'middle';
+      [[0.3, 0.55, 150, -0.25], [0.52, 0.45, 200, 0.05], [0.74, 0.58, 140, 0.3]].forEach(([x, y, s, r]) => {
+        g.save();
+        g.translate(x * W, y * H);
+        g.rotate(r);
+        g.font = `900 ${s}px sans-serif`;
+        g.fillText('?', 0, 0);
+        g.restore();
+      });
+    },
+    pizza(g, W, H) {
+      g.translate(W / 2, H / 2 + 6);
+      g.fillStyle = '#c98a3a';
+      g.beginPath();
+      g.moveTo(-110, -70);
+      g.quadraticCurveTo(0, -105, 110, -70);
+      g.lineTo(0, 100);
+      g.closePath();
+      g.fill();
+      g.fillStyle = '#f2c94c';
+      g.beginPath();
+      g.moveTo(-92, -58);
+      g.quadraticCurveTo(0, -86, 92, -58);
+      g.lineTo(0, 86);
+      g.closePath();
+      g.fill();
+      g.fillStyle = '#c8302a';
+      for (const [x, y] of [[-35, -35], [30, -30], [0, 15], [-10, 55]]) {
+        g.beginPath();
+        g.arc(x, y, 16, 0, Math.PI * 2);
+        g.fill();
+      }
+    },
+    heart(g, W, H) {
+      g.translate(W / 2, H / 2 + 10);
+      g.fillStyle = '#e8365a';
+      g.beginPath();
+      g.moveTo(0, 85);
+      g.bezierCurveTo(-150, -10, -80, -120, 0, -50);
+      g.bezierCurveTo(80, -120, 150, -10, 0, 85);
+      g.fill();
+    },
+    tie(g, W, H) {
+      g.translate(W / 2, H / 2);
+      g.fillStyle = '#e83fb4';
+      g.fillRect(-26, -95, 52, 34);
+      g.beginPath();
+      g.moveTo(-22, -61);
+      g.lineTo(22, -61);
+      g.lineTo(42, 70);
+      g.lineTo(0, 100);
+      g.lineTo(-42, 70);
+      g.closePath();
+      g.fill();
+      g.strokeStyle = '#d0202a';
+      g.lineWidth = 22;
+      g.lineCap = 'round';
+      g.beginPath();
+      g.moveTo(-95, -90);
+      g.lineTo(95, 90);
+      g.moveTo(95, -90);
+      g.lineTo(-95, 90);
+      g.stroke();
+    },
+    mail(g, W, H) {
+      g.translate(W / 2, H / 2);
+      g.fillStyle = '#f4f1ea';
+      g.strokeStyle = '#3a3a48';
+      g.lineWidth = 12;
+      g.lineJoin = 'round';
+      g.fillRect(-120, -78, 240, 156);
+      g.strokeRect(-120, -78, 240, 156);
+      g.beginPath();
+      g.moveTo(-120, -78);
+      g.lineTo(0, 20);
+      g.lineTo(120, -78);
+      g.stroke();
+    },
+    door(g, W, H) {
+      g.translate(W / 2, H / 2);
+      g.fillStyle = '#8a5a36';
+      g.fillRect(-95, -105, 120, 210);
+      g.fillStyle = '#f2c94c';
+      g.beginPath();
+      g.arc(5, 5, 10, 0, Math.PI * 2);
+      g.fill();
+      g.strokeStyle = '#2f9a5a';
+      g.fillStyle = '#2f9a5a';
+      g.lineWidth = 20;
+      g.beginPath();
+      g.moveTo(45, 0);
+      g.lineTo(100, 0);
+      g.stroke();
+      g.beginPath();
+      g.moveTo(130, 0);
+      g.lineTo(92, -32);
+      g.lineTo(92, 32);
+      g.closePath();
+      g.fill();
+    },
+    cake(g, W, H) {
+      g.translate(W / 2, H / 2 + 20);
+      g.fillStyle = '#f2a0b8';
+      g.fillRect(-105, -10, 210, 80);
+      g.fillStyle = '#fff4f0';
+      g.fillRect(-105, -30, 210, 30);
+      g.fillStyle = '#7a4a2e';
+      g.fillRect(-105, 30, 210, 14);
+      g.fillStyle = '#5aa0e8';
+      g.fillRect(-8, -95, 16, 65);
+      g.fillStyle = '#ffb020';
+      g.beginPath();
+      g.ellipse(0, -112, 13, 22, 0, 0, Math.PI * 2);
+      g.fill();
+    },
+    zzz(g, W, H) {
+      g.fillStyle = '#3a4a8a';
+      g.textAlign = 'center';
+      g.textBaseline = 'middle';
+      [[0.3, 0.68, 110], [0.52, 0.48, 140], [0.75, 0.3, 170]].forEach(([x, y, s]) => {
+        g.font = `900 ${s}px sans-serif`;
+        g.fillText('Z', x * W, y * H);
+      });
+    },
+    ear(g, W, H) {
+      g.translate(W / 2 - 20, H / 2);
+      g.fillStyle = '#e8b48a';
+      g.strokeStyle = '#a8704a';
+      g.lineWidth = 12;
+      g.beginPath();
+      g.moveTo(-40, 90);
+      g.bezierCurveTo(-90, 40, -100, -100, 10, -105);
+      g.bezierCurveTo(90, -105, 95, -20, 40, 20);
+      g.bezierCurveTo(10, 45, 20, 95, -40, 90);
+      g.fill();
+      g.stroke();
+      g.beginPath();
+      g.moveTo(-25, 40);
+      g.bezierCurveTo(-50, -30, -10, -60, 25, -45);
+      g.stroke();
+      g.strokeStyle = '#3a3a48';
+      g.lineWidth = 10;
+      g.lineCap = 'round';
+      for (const r of [40, 75]) {
+        g.beginPath();
+        g.arc(80, -10, r, -0.7, 0.7);
+        g.stroke();
+      }
+    },
+    empty() {},
+  };
+  const starIcon = (n) => (g, W, H) => {
+    const star = (cx, cy, r, fill) => {
+      g.beginPath();
+      for (let i = 0; i < 10; i++) {
+        const a = -Math.PI / 2 + (i * Math.PI) / 5;
+        const rr = i % 2 ? r * 0.45 : r;
+        g.lineTo(cx + rr * Math.cos(a), cy + rr * Math.sin(a));
+      }
+      g.closePath();
+      g.fillStyle = fill ? '#f2b822' : '#d4d4dc';
+      g.fill();
+    };
+    for (let i = 0; i < 5; i++) star(W / 2 + (i - 2) * 72, H / 2, 40, i < n);
+  };
+  ICONS.stars1 = starIcon(1);
+  ICONS.stars2 = starIcon(2);
+  const iconTextures = new Map();
+  const iconTex = (name) => {
+    if (!ICONS[name]) throw new Error(`thoughtBubble: unbekanntes Piktogramm "${name}"`);
+    if (!iconTextures.has(name)) iconTextures.set(name, canvasTex(384, 288, (g, W, H) => ICONS[name](g, W, H)));
+    return iconTextures.get(name);
+  };
+  const puffGeo = new THREE.IcosahedronGeometry(1, 1);
+  const thoughtBubble = ({ icon = 'question', tail = [-0.35, -0.75, 0], size = 1, color = 0xffffff } = {}) => {
+    const g = new THREE.Group();
+    const cloud = new THREE.Group();
+    g.add(cloud);
+    const white = mat(color, { emissive: color, emissiveIntensity: 0.35 });
+    const puff = (x, y, z, r, sx = 1) => {
+      const m = new THREE.Mesh(puffGeo, white);
+      m.position.set(x, y, z);
+      m.scale.set(r * sx, r, r * 0.55);
+      cloud.add(m);
+    };
+    // Wolkenkörper: Mitte + Ring kleinerer Kugeln (flach, damit das Piktogramm davor liegen kann)
+    puff(0, 0, 0, 0.3, 1.45);
+    [[-0.36, 0.06, 0.2], [-0.2, 0.2, 0.22], [0.05, 0.24, 0.22], [0.3, 0.18, 0.21], [0.42, -0.02, 0.19], [0.24, -0.2, 0.19], [-0.05, -0.22, 0.2], [-0.32, -0.15, 0.18]].forEach(([x, y, r]) => puff(x, y, -0.02, r));
+    const face = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.465), new THREE.MeshBasicMaterial({ map: iconTex(icon), transparent: true, toneMapped: false }));
+    face.position.z = 0.19;
+    cloud.add(face);
+    // Pünktchenspur zum Kopf (2 Kugeln, kleiner werdend)
+    const dots = [0.42, 0.72].map((k, i) => {
+      const m = new THREE.Mesh(puffGeo, white);
+      m.position.set(tail[0] * k, -0.18 + (tail[1] + 0.18) * k, tail[2] * k);
+      m.scale.setScalar(i ? 0.045 : 0.075);
+      g.add(m);
+      return m;
+    });
+    for (const m of [...cloud.children, ...dots]) m.castShadow = false;
+    g.scale.setScalar(size);
+    g.userData.pop = (since, sinceClose = -1) => {
+      // 0 → 1 mit Überschwingen in 0,25 s; Zuploppen 0,15 s; Pünktchen erscheinen zuerst
+      let k = since < 0 ? 0 : since >= 0.25 ? 1 : 1 + 0.25 * Math.sin(Math.PI * (since / 0.25)) - (1 - since / 0.25) ** 2;
+      if (sinceClose >= 0) k *= Math.max(0, 1 - sinceClose / 0.15);
+      g.visible = k > 0.001;
+      cloud.scale.setScalar(Math.max(0.001, k));
+      dots.forEach((d, i) => (d.visible = since >= 0.04 * (1 - i) && k > 0.05));
+      return k;
+    };
+    g.userData.pop(-1);
+    return g;
+  };
+
   // Boden-/Wandplatte (unterteilt für saubere Schatten)
   const slab = (w, d, color, pos = [0, 0, 0], h = 0.1) => box(w, h, d, color, [pos[0], pos[1] - h, pos[2]]);
 
   return {
     canvasTex, phoneTexture, phone, bigPhone, sign, bed, nightstand, tableLamp, alarmClock, table, chair, counter, upperCabinets, toaster, mug, toast, plant, cardboardBox,
     desk, officeChair, umbrella, puddle, tree, bush, streetLamp, bench, hydrant, trashCan, car, bus, building, tower, slab,
+    thoughtBubble,
   };
 }

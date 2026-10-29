@@ -1,0 +1,37 @@
+{
+ "lang": "en",
+ "number_locale": "en-US",
+ "title": { "text": "What if everyone could read your mind for 10 seconds?", "highlight": "mind" },
+ "hud": {
+  "p1_10": { "label": "SECRETS EXPOSED", "sub": "TIME LEFT 0:10", "unit": "" },
+  "p1_09": { "label": "SECRETS EXPOSED", "sub": "TIME LEFT 0:09", "unit": "" },
+  "p1_08": { "label": "SECRETS EXPOSED", "sub": "TIME LEFT 0:08", "unit": "" },
+  "p1_07": { "label": "SECRETS EXPOSED", "sub": "TIME LEFT 0:07", "unit": "" },
+  "p1_06": { "label": "SECRETS EXPOSED", "sub": "TIME LEFT 0:06", "unit": "" },
+  "p2_05": { "label": "PEOPLE EXPOSED", "sub": "TIME LEFT 0:05", "unit": "" },
+  "p2_04": { "label": "PEOPLE EXPOSED", "sub": "TIME LEFT 0:04", "unit": "" },
+  "p2_03": { "label": "PEOPLE EXPOSED", "sub": "TIME LEFT 0:03", "unit": "" },
+  "p2_02": { "label": "PEOPLE EXPOSED", "sub": "TIME LEFT 0:02", "unit": "" },
+  "p2_01": { "label": "PEOPLE EXPOSED", "sub": "TIME LEFT 0:01", "unit": "" },
+  "p3_00": { "label": "MIND READING", "sub": "TIME LEFT 0:00", "unit": "", "final": "OFF" }
+ },
+ "lines": {
+  "l01": "Everyone can hear your thoughts.",
+  "l02": "Your teacher: “What am I teaching?”",
+  "l03": "The quiet kid? Only thinking about pizza.",
+  "l04": "You're staring at your crush. She heard.",
+  "l05": "Coworker: “That tie is a crime.”",
+  "l06": "“This meeting could have been an email.”",
+  "l07": "First date. Both think: “When can I leave?”",
+  "l08": "A stranger rates your outfit. Badly.",
+  "l09": "Then it spreads to the whole world.",
+  "l10": "Every surprise party on Earth: ruined.",
+  "l11": "Everyone who texted “on my way”… still in bed.",
+  "l12": "Turns out nobody knows what they're doing.",
+  "l13": "Eight billion minds. Wide open.",
+  "l14": "Ten seconds later, it stops.",
+  "l15": "Everyone pretends nothing happened.",
+  "l16": "“Wait… did you all hear what I thought about you?”",
+  "l17": "What would they hear from you?"
+ }
+}

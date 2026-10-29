@@ -155,28 +155,111 @@ export function createPlaces(THREE, core, props, rng) {
     return { root: place(g, o), origin: o, spots: { bench: at(o, -2.4, 0.45, -1), path: at(o, 0, 0, 0), center: at(o, 0, 0, 0) } };
   };
 
-  const office = (o = [0, 0, 0], { carpet = 0x5a6f8f, wall = 0xd9dde2 } = {}) => {
-    const g = room({ w: 9, d: 7, floor: carpet, wall, stripes: false });
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 2; j++) {
-        const d = P.desk();
-        d.position.set(-2.8 + i * 2.8, 0, -2 + j * 2.4);
-        g.add(d);
+  // Großraumbüro: cols × rows Schreibtische (Standard 3 × 2). spots.desks[i] = Sitzplatz am Stuhl (Blick −z).
+  const office = (o = [0, 0, 0], { carpet = 0x5a6f8f, wall = 0xd9dde2, cols = 3, rows = 2 } = {}) => {
+    const w = Math.max(9, cols * 2.8 + 0.6);
+    const d = Math.max(7, rows * 2.4 + 2.2);
+    const g = room({ w, d, floor: carpet, wall, stripes: false });
+    const desks = [];
+    for (let i = 0; i < cols; i++) {
+      for (let j = 0; j < rows; j++) {
+        const x = (i - (cols - 1) / 2) * 2.8;
+        const z = -d / 2 + 1.5 + j * 2.4;
+        const dk = P.desk();
+        dk.position.set(x, 0, z);
+        g.add(dk);
         const ch = P.officeChair();
-        ch.position.set(-2.8 + i * 2.8, 0, -1.4 + j * 2.4);
+        ch.position.set(x, 0, z + 0.6);
         g.add(ch);
+        desks.push(at(o, x, 0, z + 0.55));
       }
     }
-    for (let i = 0; i < 3; i++) {
-      const w = windowPane(1.8, 1.3);
-      w.position.set(-3 + i * 3, 1.0, -3.42);
-      g.add(w);
+    const nw = Math.max(3, Math.round(w / 3));
+    for (let i = 0; i < nw; i++) {
+      const wp = windowPane(1.8, 1.3);
+      wp.position.set((i - (nw - 1) / 2) * 3, 1.0, -d / 2 + 0.08);
+      g.add(wp);
     }
     const pl = P.plant();
-    pl.position.set(3.9, 0, -3);
+    pl.position.set(w / 2 - 0.6, 0, -d / 2 + 0.5);
     g.add(pl);
-    return { root: place(g, o), origin: o, spots: { front: at(o, 0, 0, 1.8), center: at(o, 0, 0, 0) } };
+    return { root: place(g, o), origin: o, spots: { front: at(o, 0, 0, 1.8), center: at(o, 0, 0, 0), desks } };
   };
 
-  return { room, windowPane, bedroom, kitchen, street, park, office };
+  // Klassenzimmer: Tafel an der Rückwand (−z), Lehrerpult davor, cols × rows Schülertische mit Blick zur Tafel.
+  // spots.seats[r][c] = Sitzplatz (Figur mit Blick −z, Pose 'sit'), spots.teacher = Platz vor der Tafel.
+  const classroom = (o = [0, 0, 0], { wall = 0xe8dcc0, floor = 0xb98a5c, cols = 3, rows = 3 } = {}) => {
+    const W = 9;
+    const D = 9;
+    const g = room({ w: W, d: D, floor, wall, stripes: false });
+    g.add(box(4.2, 1.5, 0.06, 0x2f4a3a, [0, 0.9, -D / 2 + 0.1]), box(4.4, 0.08, 0.14, 0xb08a5a, [0, 0.86, -D / 2 + 0.14]));
+    // Kreidestriche auf der Tafel (keine Schrift)
+    const chalk = core.mat(0xe8e8e0);
+    [[-1.3, 2.05, 1.2], [-1.0, 1.8, 0.8], [0.8, 1.95, 1.4], [0.9, 1.55, 0.9], [-1.2, 1.4, 1.0]].forEach(([x, y, l]) => g.add(box(l, 0.035, 0.01, chalk, [x, y, -D / 2 + 0.135], { cast: false })));
+    for (const sx of [-1, 1]) {
+      const wp = windowPane(1.3, 1.4);
+      wp.rotation.y = -sx * Math.PI / 2;
+      wp.position.set(sx * (W / 2 - 0.08), 0.95, 0.4);
+      g.add(wp);
+    }
+    const pult = P.table({ w: 1.4, d: 0.7, color: 0x7a4f2e });
+    pult.position.set(1.6, 0, -D / 2 + 1.7);
+    g.add(pult);
+    const pl = P.plant();
+    pl.position.set(-W / 2 + 0.5, 0, -D / 2 + 0.5);
+    g.add(pl);
+    const seats = [];
+    for (let r = 0; r < rows; r++) {
+      const row = [];
+      for (let c = 0; c < cols; c++) {
+        const x = (c - (cols - 1) / 2) * 1.9;
+        const z = -D / 2 + 3.4 + r * 1.6;
+        const t = P.table({ w: 0.9, d: 0.55, h: 0.72, color: 0xc9b08a });
+        t.position.set(x, 0, z);
+        g.add(t);
+        const ch = P.chair(0x3a6ea5);
+        ch.position.set(x, 0, z + 0.55);
+        ch.rotation.y = Math.PI;
+        g.add(ch);
+        row.push(at(o, x, 0, z + 0.5));
+      }
+      seats.push(row);
+    }
+    return { root: place(g, o), origin: o, spots: { seats, teacher: at(o, 0, 0, -D / 2 + 1.1), board: at(o, 0, 1.6, -D / 2 + 0.1), center: at(o, 0, 0, 0) } };
+  };
+
+  // Café: Zweiertisch am Fenster, Theke im Hintergrund, Hängelampen. spots.seatL/seatR = Plätze am Tisch (Blick zum Tisch).
+  const cafe = (o = [0, 0, 0], { wall = 0x9a5a48, floor = 0x6b4a36 } = {}) => {
+    const g = room({ w: 7, d: 6, floor, wall, stripes: true });
+    for (const x of [-1.8, 1.8]) {
+      const wp = windowPane(1.6, 1.3, 0xffe6c4);
+      wp.position.set(x, 1.0, -2.92);
+      g.add(wp);
+    }
+    const bar = P.counter({ w: 2.6, color: 0x3a2a22, top: 0xd9c8a8 });
+    bar.position.set(2.0, 0, 0.2);
+    bar.rotation.y = -Math.PI / 2;
+    g.add(bar);
+    const t = P.table({ w: 0.8, d: 0.8, color: 0xe8e0d0 });
+    t.position.set(-0.6, 0, -0.8);
+    g.add(t);
+    g.add(box(0.06, 0.12, 0.06, 0xf4f0e0, [-0.6, 0.75, -0.8], { mat: { emissive: 0xffd080, emissiveIntensity: 0.5 } }));
+    for (const sx of [-1, 1]) {
+      const ch = P.chair(0x2a2a2e);
+      ch.position.set(-0.6 + sx * 0.7, 0, -0.8);
+      ch.rotation.y = -sx * Math.PI / 2;
+      g.add(ch);
+      const cup = P.mug(0xf4f4f4);
+      cup.position.set(-0.6 + sx * 0.22, 0.75, -0.8);
+      g.add(cup);
+    }
+    for (const x of [-1.8, 1.9]) g.add(box(0.02, 0.9, 0.02, 0x222222, [x, 2.1, -2.0]), box(0.36, 0.22, 0.36, 0xe0a030, [x, 1.9, -2.0], { mat: { emissive: 0xffc070, emissiveIntensity: 0.6 } }));
+    const pl = P.plant();
+    pl.position.set(-3.0, 0, -2.4);
+    pl.scale.setScalar(1.8);
+    g.add(pl);
+    return { root: place(g, o), origin: o, spots: { seatL: at(o, -1.25, 0, -0.8), seatR: at(o, 0.05, 0, -0.8), table: at(o, -0.6, 0.75, -0.8), center: at(o, 0, 0, 0) } };
+  };
+
+  return { room, windowPane, bedroom, kitchen, street, park, office, classroom, cafe };
 }

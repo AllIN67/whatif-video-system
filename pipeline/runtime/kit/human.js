@@ -7,8 +7,9 @@
 //   h.pose('walk', t * 1.6);   // Phase in Schritten (zyklisch)
 //   h.mood('sad');
 //
-// Posen: stand, walk, run, wave, sit, armsUp, facepalm, phone, shrug, slump, lie, point, carry
-// Gefühle: neutral, happy, sad, angry, shock, tired, worried
+// Posen: stand, walk, run, wave, sit, armsUp, facepalm, phone, shrug, slump, lie, liePhone, point, carry
+//   Oberkörper-Posen sitzend: h.pose('facepalm', p, { seated: true }) (Beine/Hüfte wie 'sit')
+// Gefühle: neutral, happy, laugh, sad, angry, shock, tired, worried
 import { clamp01 } from './core.js';
 
 export const SKIN = [0xe8c4a0, 0xd9a77e, 0xb07a52, 0x8a5a3b, 0x5e3b27, 0xf1d3b8];
@@ -248,12 +249,27 @@ export function createHumanFactory(THREE, core) {
         armL.shoulder.rotation.z = 0.12;
         armR.shoulder.rotation.z = -0.12;
       },
+      // Liegend, Handy über dem Gesicht (rechte Hand; Handy mit hold() anhängen)
+      liePhone() {
+        POSES.lie();
+        armR.shoulder.rotation.x = -1.25;
+        armR.shoulder.rotation.z = 0.35;
+        armR.elbow.rotation.x = -1.0;
+        head.rotation.x = 0.25;
+      },
+    };
+    // Sitzende Beine/Hüfte für beliebige Oberkörper-Posen
+    const seatLegs = () => {
+      body.position.y = -0.47;
+      legL.hip.rotation.x = legR.hip.rotation.x = -Math.PI / 2;
+      legL.knee.rotation.x = legR.knee.rotation.x = Math.PI / 2;
     };
 
     // Gefühle über Brauen, Augen, Mund
     const MOODS = {
       neutral: { brow: 0, browY: 0, eye: 1, mouth: 0, open: 1 },
       happy: { brow: 0.1, browY: 0.01, eye: 0.8, mouth: 0.35, open: 1 },
+      laugh: { brow: -0.15, browY: 0.018, eye: 0.3, mouth: 0.4, open: 2.6 },
       sad: { brow: -0.45, browY: 0, eye: 0.9, mouth: -0.35, open: 1 },
       worried: { brow: -0.35, browY: 0.012, eye: 1.1, mouth: -0.15, open: 1.4 },
       angry: { brow: 0.5, browY: -0.012, eye: 0.8, mouth: -0.25, open: 1.3 },
@@ -278,12 +294,13 @@ export function createHumanFactory(THREE, core) {
       root,
       head,
       hands: { left: armL.hand, right: armR.hand },
-      pose(name, phase = 0) {
+      pose(name, phase = 0, { seated = false } = {}) {
         const f = POSES[name];
         if (!f) throw new Error(`Unbekannte Pose "${name}"`);
         reset();
         neck.position.y = 0.62;
         f(phase);
+        if (seated) seatLegs();
         return api;
       },
       mood(name, blink) {
