@@ -179,8 +179,9 @@
    "from": 14,
    "to": 17.8,
    "transition_in": {
-    "type": "dip",
-    "frames": 4
+    "type": "whip",
+    "frames": 8,
+    "direction": "right"
    },
    "camera": {
     "mode": "linear",
@@ -519,8 +520,9 @@
    "from": 42.8,
    "to": 46.2,
    "transition_in": {
-    "type": "dip",
-    "frames": 4
+    "type": "whip",
+    "frames": 8,
+    "direction": "right"
    },
    "camera": {
     "mode": "linear",
@@ -1820,11 +1822,11 @@
     "automation": [
      [
       0,
-      -3
+      3
      ],
      [
-      10,
-      -1
+      12,
+      2
      ],
      [
       31.6,
@@ -1891,6 +1893,11 @@
     "src": "gen:tick",
     "t": 12,
     "gain_db": -5
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 13.866667,
+    "gain_db": -9
    },
    {
     "src": "gen:tick",
@@ -2081,6 +2088,11 @@
     "src": "gen:tick",
     "t": 40.9,
     "gain_db": -10
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 42.666667,
+    "gain_db": -9
    },
    {
     "src": "gen:tick",

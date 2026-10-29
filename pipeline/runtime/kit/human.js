@@ -8,7 +8,8 @@
 //   h.mood('sad');
 //
 // Posen: stand, walk, run, wave, sit, armsUp, facepalm, phone, shrug, slump, lie, liePhone, point, carry
-//   Oberkörper-Posen sitzend: h.pose('facepalm', p, { seated: true }) (Beine/Hüfte wie 'sit')
+//   Oberkörper-Posen sitzend: h.pose('facepalm', p, { seated: true }) (Beine/Hüfte wie 'sit');
+//   Aufstehen weich: h.pose('stand', p, { seated: 1 - k }) mit k 0 → 1
 // Gefühle: neutral, happy, laugh, sad, angry, shock, tired, worried
 import { clamp01 } from './core.js';
 
@@ -258,11 +259,11 @@ export function createHumanFactory(THREE, core) {
         head.rotation.x = 0.25;
       },
     };
-    // Sitzende Beine/Hüfte für beliebige Oberkörper-Posen
-    const seatLegs = () => {
-      body.position.y = -0.47;
-      legL.hip.rotation.x = legR.hip.rotation.x = -Math.PI / 2;
-      legL.knee.rotation.x = legR.knee.rotation.x = Math.PI / 2;
+    // Sitzende Beine/Hüfte für beliebige Oberkörper-Posen; k = 1 sitzt, 0 steht (Zwischenwerte = Aufstehen/Hinsetzen)
+    const seatLegs = (k = 1) => {
+      body.position.y = -0.47 * k;
+      legL.hip.rotation.x = legR.hip.rotation.x = (-Math.PI / 2) * k;
+      legL.knee.rotation.x = legR.knee.rotation.x = (Math.PI / 2) * k;
     };
 
     // Gefühle über Brauen, Augen, Mund
@@ -300,7 +301,7 @@ export function createHumanFactory(THREE, core) {
         reset();
         neck.position.y = 0.62;
         f(phase);
-        if (seated) seatLegs();
+        if (seated) seatLegs(seated === true ? 1 : clamp01(seated));
         return api;
       },
       mood(name, blink) {

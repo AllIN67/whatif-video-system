@@ -167,8 +167,8 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
         let d = target - h.base.rot;
         while (d > Math.PI) d -= 2 * Math.PI;
         while (d < -Math.PI) d += 2 * Math.PI;
-        h.setPosition(h.base.x, h.base.y, h.base.z, h.base.rot + d * 0.55 * k);
-        h.pose('sit').mood('shock').look(d * 0.45 * k, 0);
+        h.setPosition(h.base.x, h.base.y, h.base.z, h.base.rot + d * 0.75 * k);
+        h.pose('sit').mood('shock').look(Math.max(-1.1, Math.min(1.1, d * 0.4 * k)), 0);
       }
     }
 
@@ -194,8 +194,7 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
       // steht auf, dreht sich zur Klasse und fragt
       const k = ramp(t, ev.crush_stands, ev.crush_stands + 0.5);
       crush.setPosition(crush.base.x + 0.2 * k, crush.base.y, crush.base.z + 0.35 * k, crush.base.rot - Math.PI * 0.85 * k);
-      if (k < 0.5) crush.pose('sit').mood('worried');
-      else crush.pose(t < ev.pointe ? 'shrug' : 'stand', (t - ev.crush_stands) * 0.8).mood(t < ev.pointe ? 'worried' : 'happy');
+      crush.pose(t < ev.pointe ? 'shrug' : 'stand', (t - ev.crush_stands) * 0.8, { seated: 1 - k }).mood(t < ev.pointe ? 'worried' : 'happy');
       if (t >= ev.pointe) crush.look(0.6 * ramp(t, ev.pointe, ev.pointe + 0.5), 0);
     }
 
@@ -204,6 +203,7 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
     if (t < S.crush.from) {
       you.pose('sit').mood(t < ev.teacher_pop + 0.35 ? 'neutral' : t < ev.class_laugh ? 'shock' : 'laugh');
       if (t < S.teacher.from) you.look(-0.15 + 0.1 * ramp(t, 1.2, 2.2), 0);
+      else if (t < S.laugh.from) you.look(0.35 * Math.sin((t - S.teacher.from) * 2.2), -0.06 * ramp(t, 5.0, 5.6)); // schaut sich ungläubig um
     } else if (t < S.tie.from) {
       const lookCrush = yaw(you, crush.base.x, crush.base.z) - you.base.rot;
       if (t < ev.crush_turns) you.pose('sit').mood('happy').look(lookCrush * 0.6, 0.12);
@@ -264,10 +264,12 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
         h.setPosition(h.base.x, 0, h.base.z, 0);
         h.pose('sit').mood(t < ev.mail_pops ? 'tired' : t < ev.mail_pops + 0.6 ? 'shock' : 'happy').look(t > ev.mail_pops + 0.6 ? 0.4 * Math.sin(i + t * 2) : 0, 0);
       } else {
-        // aufstehen und Richtung Kamera/rechts hinausgehen
-        const d = Math.max(0, tl - 0.25) * 1.3;
-        h.setPosition(h.base.x + d * 0.75, 0, h.base.z + 0.45 + d * 0.66, 0.85);
-        h.pose(tl < 0.25 ? 'stand' : 'walk', tl * 1.8).mood('happy');
+        // aufstehen (weich, 0,4 s) und Richtung Kamera/rechts hinausgehen
+        const up = Math.min(1, tl / 0.4);
+        const d = Math.max(0, tl - 0.4) * 1.3;
+        h.setPosition(h.base.x + d * 0.75, 0, h.base.z + 0.45 * up + d * 0.66, 0.85 * up);
+        if (up < 1) h.pose('stand', 0, { seated: 1 - up }).mood('happy');
+        else h.pose('walk', (tl - 0.4) * 1.8).mood('happy');
       }
     }
   };
@@ -290,9 +292,11 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
         if (t > ev.date_relief) h.root.position.y = 0.025 * Math.abs(Math.sin(t * 9));
       } else {
         // beide stehen auf und gehen gemeinsam (lachend) nach vorn
-        const d = Math.max(0, tl - 0.3) * 1.4;
-        h.setPosition(h.base.x + dir * 0.15 + d * 0.1, 0, h.base.z + 0.4 + d, 0.1);
-        h.pose(tl < 0.3 ? 'stand' : 'walk', tl * 1.8).mood('laugh');
+        const up = Math.min(1, tl / 0.4);
+        const d = Math.max(0, tl - 0.4) * 1.4;
+        h.setPosition(h.base.x + dir * 0.15 * up + d * 0.1, 0, h.base.z + 0.4 * up + d, lerp(h.base.rot, 0.1, up));
+        if (up < 1) h.pose('stand', 0, { seated: 1 - up }).mood('laugh');
+        else h.pose('walk', (tl - 0.4) * 1.8).mood('laugh');
       }
     }
   };
@@ -402,7 +406,7 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
       } else {
         const k = ramp(t, ev.friends_deflate + i * 0.08, ev.friends_deflate + 0.4 + i * 0.08);
         h.setPosition(h.base.x, h.base.y * (1 - k), h.base.z, 0);
-        h.pose(k < 0.5 ? 'sit' : 'slump', t).mood('sad');
+        h.pose('slump', t, { seated: 1 - k }).mood('sad');
       }
     }
     const tw = Math.max(0, t - ev.bday_enter);
