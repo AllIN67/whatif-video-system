@@ -8,7 +8,8 @@
 | Style-Guide-Version | 1.2 |
 | Git-Commit des Renders | siehe `render/run_log.json` (`git_commit`) |
 | Länge | 41,0 s · 1080×1920 · **60 fps** |
-| Rezept | **B** („X für kurze Zeit weg“: Erddrehung stoppt 1 s), stark abgewandelt nach Auftrag (siehe Abweichungen) |
+| Produktionsstil | **A (Earth)** – diese Produktion ist die Referenz für Stil A (`STYLE_A_EARTH.md`). Ursprünglich als „Rezept B, stark abgewandelt“ geführt (Guide 1.2). |
+| Länge vs. Mindestlänge | **41 s < 60 s** – seit Guide 1.3 nicht mehr veröffentlichungsfähig; der Validator lehnt die Produktion ab. Verlängerung siehe `STYLE_A_EARTH.md` Abschnitt 6. |
 
 ## 1. Entscheidungen
 

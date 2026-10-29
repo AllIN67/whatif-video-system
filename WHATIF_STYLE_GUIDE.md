@@ -1,7 +1,14 @@
 # WHATIF STYLE GUIDE
 
 **Maßgebliche kreative und technische Grundlage für alle Videos dieses Projekts.**
-Version 1.2 · 2026-10-29 · Belegbasis: `REFERENCE_ANALYSIS.md` (R01–R15), Abschnitt 16 (R16–R18) und `references/analysis/MEASUREMENTS.md`.
+Version 1.3 · 2026-10-29 · Belegbasis: `REFERENCE_ANALYSIS.md` (R01–R15), Abschnitt 16 (R16–R18) und `references/analysis/MEASUREMENTS.md`.
+
+**Zwei Produktionsstile – jeder Auftrag nennt genau einen (Abschnitt 17):**
+
+- `PRODUKTIONSSTIL: A (Earth)` – Sprecher-Erklärvideo, Regeln in `STYLE_A_EARTH.md`.
+- `PRODUKTIONSSTIL: B (TikTok-Referenz)` – stummes What-if-Video nach diesem Guide, Rezept **B1** (Standard) oder **B2** (Abschnitt 16).
+
+**Mindestlänge für jedes Video: 60 s** (alle Stile, Abschnitt 10.1).
 
 Kennzeichnung der Regeln:
 
@@ -17,7 +24,7 @@ Referenzbelege stehen in eckigen Klammern, z. B. *(R12, R14)*. Zahlen aus den Re
 
 ### 1.1 Was wir machen
 
-Vertikale Kurzvideos (61–80 s), die eine einzige **„What if …?“-Frage** konsequent zu Ende denken: aus der Perspektive des Zuschauers, in einer stilisierten 3D-Welt, erzählt durch **kurze Texteinblendungen, einen Live-Messwert und Bild/Ton – ohne Sprecher**.
+Vertikale Kurzvideos (mindestens 60 s, Standard 61–80 s), die eine einzige **„What if …?“-Frage** konsequent zu Ende denken: aus der Perspektive des Zuschauers, in einer stilisierten 3D-Welt, erzählt durch **kurze Texteinblendungen, einen Live-Messwert und Bild/Ton – ohne Sprecher**.
 
 Das Format-Versprechen an den Zuschauer: *„In einer Minute erlebst du, was wirklich passieren würde – Schritt für Schritt, mit echten Zahlen, bis zur Pointe.“*
 
@@ -82,7 +89,7 @@ Belege: Titel ab Frame 0 über bewegtem Bild in 14/14 What-if-Referenzen; HUD ab
 
 ## 3. Dramaturgie und Spannungsaufbau
 
-### 3.1 Grundstruktur (für 61–80 s)
+### 3.1 Grundstruktur (für 60–80 s)
 
 | Akt | Zeit | Inhalt | HUD |
 |---|---|---|---|
@@ -248,7 +255,7 @@ Diese Merkmale sind gestalterische Entscheidungen, keine belegten Erfolgsfaktore
 
 ### 9.1 Sprecher
 
-- **[V für Phase 1]** **Kein Sprecher.** Begründung: 0 von 15 Referenzen nutzen einen Erzähler; das Format funktioniert stumm; ohne Sprecher entfallen TTS-Qualitätsrisiken und die Lokalisierung bleibt billig. Ein Sprecher-Test ist möglich, aber erst nach dem Sprachtest (1.3) und nur als Einzelvariable.
+- **[V für Stil B]** **Kein Sprecher.** (Stil A arbeitet mit Sprecher, siehe `STYLE_A_EARTH.md`.) Begründung: 0 von 15 Referenzen nutzen einen Erzähler; das Format funktioniert stumm; ohne Sprecher entfallen TTS-Qualitätsrisiken und die Lokalisierung bleibt billig. Ein Sprecher-Test ist möglich, aber erst nach dem Sprachtest (1.3) und nur als Einzelvariable.
 
 ### 9.2 Musik
 
@@ -285,7 +292,7 @@ Diese Merkmale sind gestalterische Entscheidungen, keine belegten Erfolgsfaktore
 | Video | H.264 High, yuv420p, BT.709, CRF ≤ 18 oder ≥ 12 Mbit/s |
 | Audio | AAC-LC, 48 kHz, Stereo, ≥ 192 kbit/s |
 | Container | MP4, `+faststart` |
-| Länge | **61–80 s** *(alle 15 Referenzen 61–81 s; [H] Plattformregeln zur Mindestlänge für Monetarisierung prüfen)* |
+| Länge | **mindestens 60 s – gilt für jedes Video, alle Stile, nicht überschreibbar**; Standard 61–80 s *(alle 15 Referenzen 61–81 s; [H] „über 1 Minute“ für Monetarisierung, daher 61 s empfohlen)*. Verlängert wird durch Dramaturgie und visuelle Entwicklung, nie durch Leerlauf. Geprüft von `validate_production.mjs` und `video_qa.py`. |
 | Audio-/Videolänge | Differenz ≤ 0,10 s; beide Streams starten bei 0 |
 
 ### 10.2 Rendering-Prinzipien (gegen Ruckler und Sprünge)
@@ -397,9 +404,9 @@ Grundlage: R04, R07, R16–R18 (vom Auftraggeber als erfolgreich benannt: ein Ka
 
 **[B] Alle diese Videos sind mit derselben Technik wie unsere Pipeline gebaut:** Würfel-Figuren, Würfel-Autos, Würfel-Städte, Low-Poly-Bäume, Echtzeit-3D (Kanten, Schatten-Look, Partikel). Keine KI-Bild-/Videogenerierung, keine Fotorealistik. Wir brauchen dafür **keine** zusätzlichen Dienste – nur den Baukasten (`pipeline/runtime/kit/`, Abschnitt 16.3).
 
-Jedes Video folgt **genau einem** der zwei Rezepte. Themen außerhalb beider Rezepte nur nach Rücksprache.
+Abschnitt 16 beschreibt **Stil B**. Jedes Stil-B-Video folgt **genau einem** der zwei Rezepte: **B1** ist der Standard (Vorbild: 77k-Kanal), **B2** die Alternative (Vorbild: 17-Mio.-Video R16). Themen außerhalb beider Rezepte nur nach Rücksprache. Stil A: `STYLE_A_EARTH.md`.
 
-### 16.1 Rezept A – „Eskalations-Zähler“ (Vorbild R17, R18, R04, R07)
+### 16.1 Rezept B1 – „Eskalations-Zähler“ (Standard; Vorbild 77k-Kanal: R17, R18, R04, R07)
 
 | Baustein | Vorgabe |
 |---|---|
@@ -412,7 +419,7 @@ Jedes Video folgt **genau einem** der zwei Rezepte. Themen außerhalb beider Rez
 | Ende | „Part 2?“ **oder** direkte Frage an den Zuschauer („Who would you want it to be?“) → Kommentare |
 | Länge | **61 s** (knapp über 1 Minute) |
 
-### 16.2 Rezept B – „X verschwindet für 5 Sekunden“ (Vorbild R16, R06, R15)
+### 16.2 Rezept B2 – „X verschwindet für 5 Sekunden“ (Alternative; Vorbild 17-Mio.-Video R16, dazu R06, R15)
 
 | Baustein | Vorgabe |
 |---|---|
@@ -431,6 +438,18 @@ Jedes Video folgt **genau einem** der zwei Rezepte. Themen außerhalb beider Rez
 - **Vorschau statt Komplett-Render:** `node tools/still.mjs --production productions/<slug> --at 2,6,10` rendert einzelne Bilder in Sekunden. Jede Einstellung erst per Vorschau prüfen, dann das ganze Video rendern.
 - Fehlt ein Teil, wird es **im Kit** ergänzt (nicht nur in einer Produktion), damit jedes weitere Video schneller geht.
 
+## 17. Produktionsstile und Auswahl
+
+| Auftrag | Stil | Regeln | Profil (`timeline.json`) | Referenz |
+|---|---|---|---|---|
+| `PRODUKTIONSSTIL: A (Earth)` | A | `STYLE_A_EARTH.md` | `"profile": "voiceover"` | `productions/earth-stops-1-second/` (eigene Produktion) |
+| `PRODUKTIONSSTIL: B (TikTok-Referenz)` | B, Rezept B1 oder B2 | dieser Guide, Abschnitt 16 | Standardprofil (ohne `profile`) | B1: R04, R07, R17, R18 · B2: R16 (Messberichte in `references/analysis/`) |
+
+- **[V]** Jeder Produktionsauftrag nennt den Stil. **Fehlt die Angabe, wird nachgefragt** – nie selbst gewählt. Bei Stil B wird zusätzlich B1 oder B2 festgelegt (ohne Angabe: B1 vorschlagen und bestätigen lassen).
+- **[V]** Stile werden nicht gemischt: Stil A übernimmt keine Titelfrage/HUD/Zeilen-Untertitel, Stil B keinen Sprecher und keine Wort-für-Wort-Untertitel. Gemeinsam genutzt werden Pipeline, Baukasten, Ton- und QA-Werkzeuge.
+- **[V]** Thema, Länge (≥ 60 s), Format, Sprache, QA und Ausgabe bleiben Teil jedes Auftrags.
+- Stil, Rezept und Referenz stehen im Produktionsprotokoll.
+
 Änderungen an diesem Style-Guide nur auf Basis dokumentierter Ergebnisse (Produktionsprotokolle, Analytics). Jede Änderung mit Datum und Begründung unten eintragen.
 
 ### Änderungsprotokoll
@@ -440,3 +459,4 @@ Jedes Video folgt **genau einem** der zwei Rezepte. Themen außerhalb beider Rez
 | 2026-10-27 | 1.0 | Erstfassung | Analyse R01–R15 |
 | 2026-10-27 | 1.1 | 10.3: Render-Pipeline entschieden und umgesetzt (Three.js + headless Chromium + FFmpeg, deterministisch) | Implementierungsplan freigegeben; Machbarkeit, Determinismus und Renderzeit gemessen; Tests in `tests/` |
 | 2026-10-29 | 1.2 | Abschnitt 16: zwei Erfolgsrezepte (Eskalations-Zähler, X verschwindet 5 s), Baukasten `pipeline/runtime/kit/`, Vorschau `tools/still.mjs` | Analyse R16–R18 + R04/R07 (vom Auftraggeber benannte erfolgreiche Kanäle); erstes Testvideo wich vom Stil ab (Fotorealistik) |
+| 2026-10-29 | 1.3 | Zwei Produktionsstile (A Earth, B mit Rezepten B1/B2, Abschnitt 17, `STYLE_A_EARTH.md`); Rezepte A/B → B1/B2 umbenannt; Mindestlänge 60 s für jedes Video, technisch erzwungen | Auftrag des Nutzers (Stilauswahl je Auftrag; jedes Video ≥ 60 s) |

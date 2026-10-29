@@ -22,10 +22,11 @@ test('paginate: höchstens 3 Wörter, Umbruch am Satzende, Schlüsselbegriff all
   for (let i = 1; i < pages.length; i++) assert.ok(pages[i].in >= pages[i - 1].out - 1e-9);
 });
 
+// Mindestens 60 s (Style-Guide 10.1, alle Stile); Ereignisse alle 5 s gegen Leerlauf (7.1).
 const vo = () => ({
-  profile: 'voiceover', fps: 60, duration: 10, seed: 1, pointe: 8, qa: { min_seconds: 5, max_seconds: 12 },
-  shots: [{ id: 'a', from: 0, to: 5, camera: { keys: [{ t: 0, pos: [0, 0, 5], look: [0, 0, 0] }] } }, { id: 'b', from: 5, to: 10, camera: { keys: [{ t: 5, pos: [0, 0, 5], look: [0, 0, 0] }] } }],
-  events: [{ id: 'x', t: 3, trigger: true }],
+  profile: 'voiceover', fps: 60, duration: 62, seed: 1, pointe: 58, qa: { min_seconds: 60, max_seconds: 65 },
+  shots: [{ id: 'a', from: 0, to: 31, camera: { keys: [{ t: 0, pos: [0, 0, 5], look: [0, 0, 0] }] } }, { id: 'b', from: 31, to: 62, camera: { keys: [{ t: 31, pos: [0, 0, 5], look: [0, 0, 0] }] } }],
+  events: [{ id: 'x', t: 3, trigger: true }, ...[8, 13, 18, 23, 28, 36, 41, 46, 51, 56].map((t) => ({ id: `e${t}`, t }))],
   captions: { words: 'voice/words.json', center_y: 0.25, max_words: 3, max_width: 0.7 },
   callouts: [{ id: 'hook', kind: 'title', in: 0, out: 2, y: 0.26 }],
   audio: { voice: { src: 'v.wav', words: 'voice/words.json' } },
@@ -44,11 +45,14 @@ test('validate voiceover: Regelverstöße', () => {
     f(t);
     return validate(t, text, { wordTimes: words }).errors.join('\n');
   };
-  assert.match(bad((t) => (t.duration = 13) && (t.shots[1].to = 13)), /Länge/);
+  assert.match(bad((t) => (t.duration = 70) && (t.shots[1].to = 70)), /Länge/);
+  // Mindestlänge 60 s: weder kürzere Videos noch ein abgesenkter qa-Bereich sind zulässig
+  assert.match(bad((t) => { t.duration = 41; t.shots[1].to = 41; t.pointe = 36; t.events = t.events.filter((e) => e.t < 41); t.qa = { min_seconds: 35, max_seconds: 45 }; }), /Mindestlänge 60 s/);
+  assert.match(bad((t) => (t.qa.min_seconds = 45)), /qa\.min_seconds = 45/);
   assert.match(bad((t) => (t.captions.center_y = 0.6)), /oberes Drittel/);
   assert.match(bad((t) => (t.callouts[0].y = 0.85)), /Sicherheitszone/);
   assert.match(bad((t) => (t.callouts[0].id = 'fehlt')), /fehlt in der Textdatei/);
   assert.match(bad((t) => (t.events[0].t = 12)), /spätestens 10 s/);
   assert.match(validate(vo(), text, { wordTimes: null }).errors.join('\n'), /Wortzeiten fehlen/);
-  assert.match(validate(vo(), text, { wordTimes: { ...words, speech_end: 9.9 } }).errors.join('\n'), /Luft/);
+  assert.match(validate(vo(), text, { wordTimes: { ...words, speech_end: 61.9 } }).errors.join('\n'), /Luft/);
 });

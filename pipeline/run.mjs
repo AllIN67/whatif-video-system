@@ -38,9 +38,20 @@ function py(args) {
   return p.status;
 }
 
+// Technische Test-Clips (tests/…, productions/_<name>/) dürfen Validierung/Längenprüfung auslassen.
+// Für echte Videos sind beide Schalter gesperrt: Mindestlänge 60 s und alle Regeln gelten immer.
+export function isTechnical(rel) {
+  const parts = rel.split(path.sep);
+  if (parts[0] === 'tests') return true;
+  return parts[0] === 'productions' && (parts[1] || '').startsWith('_');
+}
+
 export async function run({ production, lang = 'en', skipValidate = false, qaIgnoreLength = false }) {
   const prodDir = path.resolve(ROOT, production);
   const rel = path.relative(ROOT, prodDir);
+  if ((skipValidate || qaIgnoreLength) && !isTechnical(rel)) {
+    throw new Error(`--skip-validate/--qa-ignore-length sind nur für technische Test-Clips erlaubt, nicht für ${rel}`);
+  }
   const renderDir = path.join(prodDir, 'render');
   const qaDir = path.join(prodDir, 'qa');
   fs.mkdirSync(renderDir, { recursive: true });

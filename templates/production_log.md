@@ -3,11 +3,12 @@
 | Feld | Wert |
 |---|---|
 | Slug | `<slug>` |
+| Produktionsstil | A (Earth) / B – Rezept B1 / B2 |
 | Sprache | en |
 | Status | ENTWURF / TECHNISCH GEPRÜFT / FREIGEGEBEN |
 | Style-Guide-Version | 1.0 |
 | Git-Commit des Renders | |
-| Länge | s |
+| Länge | s (≥ 60 s) |
 
 ## 1. Entscheidungen
 

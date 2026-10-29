@@ -1,6 +1,6 @@
 # whatif-video-system
 
-Produktionssystem für eigenständige, technisch geprüfte **„What if …?“-Kurzvideos** (9:16, 61–80 s, Englisch, ohne Sprecher). Das Repository enthält die kreative und technische Regelbasis, die Belege aus 15 Referenzvideos, einen Claude-Code-Skill für den Arbeitsablauf und Werkzeuge für Analyse und Qualitätsabnahme.
+Produktionssystem für eigenständige, technisch geprüfte **„What if …?“-Kurzvideos** (9:16, mindestens 60 s, Englisch; zwei Produktionsstile: A „Earth“ mit Sprecher, B stumm nach TikTok-Referenz). Das Repository enthält die kreative und technische Regelbasis, die Belege aus 15 Referenzvideos, einen Claude-Code-Skill für den Arbeitsablauf und Werkzeuge für Analyse und Qualitätsabnahme.
 
 Eigenständiges Projekt – unabhängig von `AllIN67/oxygen-video`; von dort wurden weder Dateien noch Regeln übernommen.
 
@@ -9,6 +9,7 @@ Eigenständiges Projekt – unabhängig von `AllIN67/oxygen-video`; von dort wur
 | Datei | Zweck |
 |---|---|
 | `WHATIF_STYLE_GUIDE.md` | **Quelle der Wahrheit**: Format, Sprache, Hook, Dramaturgie, Kamera, Bild, Schnitt, Effekte, Ton, Technik, QA, Hypothesen |
+| `STYLE_A_EARTH.md` | Regeln für Produktionsstil A (Earth, mit Sprecher); Stil B steht im Style-Guide |
 | `VIDEO_PRODUCTION_CHECKLIST.md` | Abhakliste für jedes Video (Thema → Freigabe → Dokumentation) |
 | `REFERENCE_ANALYSIS.md` | Belegbasis: Einzelanalyse R01–R15, Vergleich, Schwächen, Grenzen der Analyse |
 | `references/analysis/MEASUREMENTS.md` | Messwert-Tabelle und Lautheitsverläufe aller Referenzen |
@@ -91,11 +92,16 @@ node pipeline/run.mjs --production productions/<slug>
 
 **Renderzeit** (Cloud-Container, 4 Kerne, keine GPU): ≈ 0,4 s pro Frame → ≈ 13–17 min für 61–80 s. Parallele Browser bringen hier keinen Gewinn (gemessen).
 
-### Videos mit Sprecher (Profil `voiceover`, nur auf ausdrücklichen Auftrag)
+### Produktionsstile
 
-Der Style-Guide sieht standardmäßig keinen Sprecher, 30 fps und 61–80 s vor. Für Aufträge, die davon abweichen
-(z. B. TikTok-Erklärvideo mit Stimme, 60 fps, 35–45 s), gibt es ein eigenes Profil – Abweichungen im LOG begründen.
-Beispiel: `productions/earth-stops-1-second/`.
+| Auftrag | Regeln | Profil | Referenz |
+|---|---|---|---|
+| `PRODUKTIONSSTIL: A (Earth)` | `STYLE_A_EARTH.md` | `"profile": "voiceover"` | `productions/earth-stops-1-second/` |
+| `PRODUKTIONSSTIL: B (TikTok-Referenz)` | `WHATIF_STYLE_GUIDE.md` 16–17, Rezept B1/B2 | Standard | Messberichte R04, R07, R16–R18 |
+
+**Mindestlänge 60 s für jedes Video.** `validate_production.mjs` und `video_qa.py` lehnen kürzere Videos ab; `timeline.qa` kann die Grenze nur anheben. `--skip-validate`/`--qa-ignore-length` (`run.mjs`) und `--ignore-length` (`video_qa.py`) sind nur für technische Test-Clips (`tests/…`, `productions/_…`) erlaubt.
+
+### Stil A – Bausteine (Sprecher, Profil `voiceover`)
 
 | Baustein | Datei | Zweck |
 |---|---|---|
@@ -105,7 +111,7 @@ Beispiel: `productions/earth-stops-1-second/`.
 | Nachbearbeitung | `stage.js` | `timeline.post` (Vignette, Filmkorn), `timeline.motion_blur` (echte Bewegungsunschärfe durch Teilbilder); Szene kann pro Frame `{ camera, fx: { flash, chroma, radial, blurX } }` liefern |
 | Musik | `tools/music_synth.py` | per Code nach Ablaufplan (`audio.music`, Stile pulse/drive/drive_hi/calm/silence); im Mix als `music:<name>` |
 | Ton | `tools/audio_mix.py`, `tools/sfx_synth.py` | `audio.voice` + `duck_db` auf Beds (automatische Absenkung unter der Stimme); neue Klänge `impact`, `rumble`, `swoosh` |
-| Prüfung | `validate_production.mjs` | `"profile": "voiceover"`, Längenbereich aus `timeline.qa` (gilt auch für `video_qa.py --plan`) |
+| Prüfung | `validate_production.mjs` | `"profile": "voiceover"`, Längenbereich aus `timeline.qa` (≥ 60 s, gilt auch für `video_qa.py --plan`) |
 | Baukasten | `kit/space.js`, `props.tower` | Erdkugel (Natural-Earth-Küsten, gemeinfrei), Atmosphäre, Wolken, Sterne mit Parallaxe, Markierungen; Gebäude als eine Masche für große Städte |
 
 Voraussetzung zusätzlich: `pip install kokoro-onnx onnx` (Python), `@fontsource/montserrat` (per `npm install`).
@@ -188,7 +194,7 @@ Zusätzlich an den Referenzen kalibriert (Letterbox-Zuschnitt, Bewegungsübergä
 
 ## Bekannte Einschränkungen
 
-- Erstes Inhaltsvideo: `productions/earth-stops-1-second/` (Profil voiceover, technisch geprüft, Hörprüfung ausstehend).
+- Erstes Inhaltsvideo: `productions/earth-stops-1-second/` (Stil A, technisch geprüft, Hörprüfung ausstehend). Mit 41 s erfüllt es die Mindestlänge 60 s nicht mehr – Stilreferenz, nicht veröffentlichungsfähig (`STYLE_A_EARTH.md`, Abschnitt 6).
 - Signalfarbe ist ein Platzhalter; Musik nur selbst erzeugt (keine lizenzierte Musik eingebunden).
 - **Claude kann Audio nicht hören.** Ton wird gemessen; die Hörprüfung vor der Freigabe muss ein Mensch durchführen.
 - Automatische Bildprüfung findet Kandidaten, keine Gewissheit: Abblend-Übergänge, Zeitraffer und Partikel erzeugen Fehlalarme; sehr kurze Fehler zwischen den 1-s-Kontaktbögen findet nur die Frame-Messung bzw. die Bildstreifen.

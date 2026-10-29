@@ -1,11 +1,12 @@
 # Szenenplan – <Titel>
 
 - Slug: `<slug>`
+- Produktionsstil: B – Rezept B1 / B2 (Stil A: Vorlage aus `productions/earth-stops-1-second/scene_plan.md`)
 - Frage: „What if …?“
 - HUD-Messgröße: <Label> · Start <Wert> → Ende <Wert/„HERE“/„0 %“> · Einheit (EN) <…> / (DE) <…>
 - Kamera-Paradigma: P1 / P2 / P3 / P4 – Begründung: <…>
 - Pointe/Wendung: <…>
-- Geplante Länge: <61–80> s
+- Geplante Länge: <≥ 60, Standard 61–80> s
 
 | Zeit (s) | Akt | Bild – was sieht man? | Kamera | HUD-Label / Wert | Text-ID (text.en.json) | Ton (Musik/SFX/Stille, Ziel-LUFS) | Übergang | Erzählfunktion von Effekten |
 |---|---|---|---|---|---|---|---|---|

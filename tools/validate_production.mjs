@@ -13,6 +13,29 @@ import { paginate } from '../pipeline/runtime/captions.js';
 const words = (s) => s.trim().split(/\s+/).filter(Boolean).length;
 const r2 = (x) => Math.round(x * 100) / 100;
 
+// Länge (Style-Guide 10.1): harte Untergrenze für JEDES Video, alle Stile (A, B1, B2).
+// Nicht überschreibbar – auch nicht über timeline.qa. Verlängert wird durch Dramaturgie, nicht durch Leerlauf
+// (die Regel „Zustandsänderung spätestens alle 6 s“ unten verhindert Leerlauf technisch).
+export const MIN_SECONDS = 60;
+export const MAX_SECONDS_DEFAULT = 80;
+export const RECOMMENDED_MIN_SECONDS = 61; // „über 1 Minute“ (Hypothese H6, Monetarisierung)
+
+export function checkLength(timeline, E, W) {
+  const dur = timeline.duration;
+  const qa = timeline.qa || {};
+  if (qa.min_seconds != null && qa.min_seconds < MIN_SECONDS) {
+    E('10.1', `qa.min_seconds = ${qa.min_seconds} liegt unter der Mindestlänge ${MIN_SECONDS} s – nicht zulässig`);
+  }
+  const lo = Math.max(MIN_SECONDS, qa.min_seconds ?? MIN_SECONDS);
+  const hi = qa.max_seconds ?? MAX_SECONDS_DEFAULT;
+  if (hi < lo) E('10.1', `qa.max_seconds = ${hi} liegt unter der Mindestlänge ${lo} s`);
+  if (dur < MIN_SECONDS) E('10.1', `Länge ${dur} s unter der Mindestlänge ${MIN_SECONDS} s (gilt für alle Stile)`);
+  else if (dur < lo || dur > hi) E('10.1', `Länge ${dur} s außerhalb ${lo}–${hi} s`);
+  if (dur >= MIN_SECONDS && dur < RECOMMENDED_MIN_SECONDS) {
+    W('10.1', `Länge ${dur} s: ≥ ${RECOMMENDED_MIN_SECONDS} s empfohlen („über 1 Minute“, Hypothese H6)`);
+  }
+}
+
 export function validate(timeline, text, { lang = 'en', wordTimes = null } = {}) {
   const errors = [];
   const warnings = [];
@@ -30,7 +53,7 @@ export function validate(timeline, text, { lang = 'en', wordTimes = null } = {})
   const dur = timeline.duration;
 
   // Länge (10.1)
-  if (dur < 61 || dur > 80) E('10.1', `Länge ${dur} s außerhalb 61–80 s`);
+  checkLength(timeline, E, W);
 
   // Titel (2)
   const tt = timeline.title;
@@ -117,8 +140,8 @@ export function validate(timeline, text, { lang = 'en', wordTimes = null } = {})
   return { errors, warnings };
 }
 
-// Profil „voiceover“: Video mit Sprecher, Wort-für-Wort-Untertiteln und Einblendungen statt Titel/HUD/Zeilen.
-// Nur auf ausdrücklichen Auftrag (Abweichung von Style-Guide 9.1, 1.1, 10.1 – im LOG begründen).
+// Profil „voiceover“ = Stil A (Earth): Sprecher, Wort-für-Wort-Untertitel und Einblendungen statt Titel/HUD/Zeilen.
+// Regeln: STYLE_A_EARTH.md. Mindestlänge 60 s wie alle Stile.
 // Prüft die messbaren Regeln, die unabhängig vom Profil gelten, plus die Untertitel-/Einblendungs-Regeln.
 function validateVoiceover(timeline, text, { words, errors, warnings, E, W }) {
   let ptl;
@@ -129,11 +152,8 @@ function validateVoiceover(timeline, text, { words, errors, warnings, E, W }) {
     return { errors, warnings };
   }
   const dur = timeline.duration;
-  const qa = timeline.qa || {};
-  const lo = qa.min_seconds ?? 61;
-  const hi = qa.max_seconds ?? 80;
-  if (dur < lo || dur > hi) E('10.1', `Länge ${dur} s außerhalb ${lo}–${hi} s`);
-  if (!timeline.qa) W('10.1', 'kein qa-Längenbereich angegeben – Style-Guide 61–80 s angenommen');
+  checkLength(timeline, E, W);
+  if (!timeline.qa) W('10.1', `kein qa-Längenbereich angegeben – ${MIN_SECONDS}–${MAX_SECONDS_DEFAULT} s angenommen`);
 
   // Sicherheitszone (6.3; TikTok: unten 20 %, rechts 15 % frei): Mittelpunkte der Einblendungen und Untertitel
   const safe = { y0: 0.1, y1: 0.8 };
