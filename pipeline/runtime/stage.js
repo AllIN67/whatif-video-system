@@ -229,7 +229,10 @@ async function production(THREE, prodPath, seed) {
 
   const trEl = document.getElementById('transition');
   const post = createPost(THREE, renderer);
-  const postDefaults = raw.post || {}; // { vignette, grain } für alle Frames
+  // { vignette, grain } für alle Frames. Filmkorn standardmäßig erst beim Endencode (pipeline/encode.mjs, FFmpeg-noise
+  // mit festem Seed): Korn im Shader macht jedes PNG/FFV1-Bild groß und das Rendern deutlich langsamer.
+  const postDefaults = { ...(raw.post || {}) };
+  if (postDefaults.grain_in_shader !== true) delete postDefaults.grain;
   const mbSegs = raw.motion_blur || []; // [{ from, to, samples, shutter }] – Bewegungsunschärfe durch Teilbilder
 
   // Kamera + Szene für eine (ggf. gebrochene) Frame-Position f setzen. Liefert die Effekte der Szene.
