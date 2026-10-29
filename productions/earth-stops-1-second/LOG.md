@@ -82,7 +82,30 @@ Hinweis: edge-tts (Auftrag nannte es als Option) ist in dieser Umgebung durch di
 
 ## 5. QA-Durchläufe
 
-(wird nach dem Render ergänzt)
+Vorab (vor dem ersten Render): Vorschaubilder mit `tools/still.mjs` in mehreren Runden; dabei behoben: Hook-Titel in
+Frame 0 unsichtbar (Einblendung), Titelzeilen abgeschnitten (Einpassen je Zeile), Schlüsselwörter überlappten
+Nachbarwörter (Schriftgröße statt Skalierung), Figur nach dem Aufwärm-Render noch gedreht (Zustand je Frame komplett
+setzen), Kameras in Gebäuden/Bäumen, Figur außerhalb des schmalen Hochformat-Bildwinkels, Nachtseite der Erde
+(Sonne folgt der Kamera), Einwort-Untertitelseiten (an Nachbarseite gehängt). Renderzeit: Filmkorn im Shader machte
+PNG/FFV1 groß (≈ 2 s/Frame) → Korn in den Endencode verlegt (≈ 1,0–1,9 s/Frame).
+
+### Durchlauf 1 – 2026-10-29 (Commit 31a5bd7)
+
+- `video_qa.py`: **REVIEW**, keine FAIL-Punkte. 41,000 s, 60/60 fps, 2460 Frames, −14,2 LUFS, TP −1,3 dBTP,
+  15/15 geplante Übergänge erkannt, keine Schwarz-/Stand-/Doppelbilder, Datei 247,8 MB (48 Mbit/s).
+- REVIEW-Meldungen: Flacker-Kandidat 27,6 s · LRA 3,3 LU · 30 Klick-Kandidaten · Lautheitssprünge 2,3/6,5/18,1/39,2 s.
+- Kontaktbögen `sheet_01`, `sheet_02` vollständig angesehen; Bildstreifen 27,6 s angesehen; Einzelbilder 0/1/10/25 s +
+  letztes Bild angesehen (Auftrag). Schleife: PSNR Frame 0 ↔ letztes Bild (Erdausschnitt) 31,8 dB (Korn + 1 Frame Bewegung).
+
+| Zeitpunkt | Meldung / Befund | Einstufung | Ursache | Korrektur |
+|---|---|---|---|---|
+| 27,6 s | Flacker-Kandidat | **Fehler** | Blatt fliegt 1–2 Frames direkt durch die bodennahe Kamera | Blätter/Schlieren meiden den Kamerapfad (scene.js) |
+| 31–33,6 s | Erde zur Hälfte flach beige mit senkrechter Kante | **Fehler** | `kit/space.js fbm`: stretchX streckte das Rauschen vertikal statt Ost-West | im Baukasten korrigiert; Staubschicht weniger deckend |
+| 37–39 s | Untertitel über Nordpol-Schild/Kopf, Zähler über der Figur | **Fehler** | Bildaufbau | Kamera weiter weg, Figur Bildmitte, Zähler y 0,72 |
+| 26–28,6 s | „RECORD GUST“ klebt am Zähler | Fehler (Lesbarkeit) | Position | y 0,735 |
+| – | 248 MB | Hinweis | CRF 16 + 60 fps + Korn | CRF 18 (Style-Guide erlaubt ≤ 18) |
+| LRA 3,3 LU | – | beabsichtigt | Sprecher fast durchgehend, Musik geduckt → geringer Umfang; Style-Guide-Wert gilt für stumme Videos | – |
+| Klick-Kandidaten | – | vermutlich beabsichtigt (Konsonanten der Stimme, SFX-Einsätze) | – | **Hörprüfung durch Menschen nötig** |
 
 ## 6. Hörprüfung (Mensch)
 
