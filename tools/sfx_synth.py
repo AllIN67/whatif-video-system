@@ -45,6 +45,23 @@ SOUNDS = {
         f"aevalsrc='0.35*sin(2*PI*(180*t+60*t*t))*pow(t/4,2)':d=4:s={SR}[a];"
         f"anoisesrc=d=4:c=pink:r={SR}:a=0.5:s=41,highpass=f=800,{_env('pow(t/4,3)')}[b];"
         "[a][b]amix=inputs=2:normalize=0,pan=stereo|c0=c0|c1=c0[out]")),
+    # kurzer, schneller Luftzug für harte Schnitte (Tonhöhe steigt, 0,45 s)
+    "swoosh": (0.45, (
+        f"anoisesrc=d=0.45:c=pink:r={SR}:a=0.9:s=13,highpass=f=300,lowpass=f=5200,"
+        f"{_env('pow(sin(PI*pow(t/0.45,0.7)),3)')},"
+        "pan=stereo|c0=0.9*c0|c1=0.6*c0[out]")),
+    # tiefer Bass-Schlag: Sub-Drop 70→28 Hz + Rauschknall, lange Ausklingzeit (Schlüsselereignis)
+    "impact": (3.2, (
+        f"aevalsrc='0.95*sin(2*PI*(28*t+42*0.08*(1-exp(-t/0.08))))*exp(-1.1*t)*min(1,t/0.004)':d=3.2:s={SR}[a];"
+        f"anoisesrc=d=3.2:c=brown:r={SR}:a=0.8:s=23,lowpass=f=220,{_env('exp(-2.4*t)*min(1,t/0.003)')}[b];"
+        f"anoisesrc=d=3.2:c=white:r={SR}:a=0.5:s=29,bandpass=f=2200:width_type=o:w=2,{_env('exp(-18*t)')}[c];"
+        "[a][b][c]amix=inputs=3:normalize=0,pan=stereo|c0=c0|c1=c0[out]")),
+    # Grollen unter den Folgen (5 s, schwankend, weich ein- und ausgeblendet)
+    "rumble": (5.0, (
+        f"anoisesrc=d=5:c=brown:r={SR}:a=0.9:s=37,lowpass=f=140,"
+        f"{_env('min(1,t/0.4)*min(1,(5-t)/0.8)*(0.75+0.25*sin(2*PI*1.7*t)*sin(2*PI*0.6*t))')}[a];"
+        f"aevalsrc='0.35*sin(2*PI*33*t)*min(1,t/0.4)*min(1,(5-t)/0.8)':d=5:s={SR}[b];"
+        "[a][b]amix=inputs=2:normalize=0,pan=stereo|c0=c0|c1=c0[out]")),
     # Synchron-Marker: 3-kHz-Ton, 80 ms, weiche Flanken (5 ms)
     "tick": (0.08, (
         f"aevalsrc='0.6*sin(2*PI*3000*t)*min(1,min(t/0.005,(0.08-t)/0.005))':d=0.08:s={SR},"

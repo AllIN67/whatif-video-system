@@ -91,6 +91,27 @@ node pipeline/run.mjs --production productions/<slug>
 
 **Renderzeit** (Cloud-Container, 4 Kerne, keine GPU): ≈ 0,4 s pro Frame → ≈ 13–17 min für 61–80 s. Parallele Browser bringen hier keinen Gewinn (gemessen).
 
+### Videos mit Sprecher (Profil `voiceover`, nur auf ausdrücklichen Auftrag)
+
+Der Style-Guide sieht standardmäßig keinen Sprecher, 30 fps und 61–80 s vor. Für Aufträge, die davon abweichen
+(z. B. TikTok-Erklärvideo mit Stimme, 60 fps, 35–45 s), gibt es ein eigenes Profil – Abweichungen im LOG begründen.
+Beispiel: `productions/earth-stops-1-second/`.
+
+| Baustein | Datei | Zweck |
+|---|---|---|
+| Sprecher | `tools/tts_kokoro.py` + `voiceover.json` | Kokoro-82M (Apache-2.0) offline auf der CPU; Modell wird beim ersten Lauf von GitHub geladen (SHA-256 geprüft). Exakte Wortzeiten aus den vom Modell vorhergesagten Phonem-Dauern → `voice/words.json`. Markup: `{gesprochen\|ANZEIGE}`, `*Schlüsselwort*`; Zahlen ausschreiben |
+| Untertitel + Einblendungen | `pipeline/runtime/captions.js` | Wort-für-Wort-Untertitel (max. 3 Wörter, aktives Wort gelb, Schlüsselwörter groß mit Pop), Zähler/Titel/Textkarten; `timeline.captions`, `timeline.callouts`, Texte in `text.<lang>.json → callouts` |
+| Bildrate | `timeline.fps` | 30 (Standard) oder 60; Übergangsgrenzen gelten in Sekunden |
+| Nachbearbeitung | `stage.js` | `timeline.post` (Vignette, Filmkorn), `timeline.motion_blur` (echte Bewegungsunschärfe durch Teilbilder); Szene kann pro Frame `{ camera, fx: { flash, chroma, radial, blurX } }` liefern |
+| Musik | `tools/music_synth.py` | per Code nach Ablaufplan (`audio.music`, Stile pulse/drive/drive_hi/calm/silence); im Mix als `music:<name>` |
+| Ton | `tools/audio_mix.py`, `tools/sfx_synth.py` | `audio.voice` + `duck_db` auf Beds (automatische Absenkung unter der Stimme); neue Klänge `impact`, `rumble`, `swoosh` |
+| Prüfung | `validate_production.mjs` | `"profile": "voiceover"`, Längenbereich aus `timeline.qa` (gilt auch für `video_qa.py --plan`) |
+| Baukasten | `kit/space.js`, `props.tower` | Erdkugel (Natural-Earth-Küsten, gemeinfrei), Atmosphäre, Wolken, Sterne mit Parallaxe, Markierungen; Gebäude als eine Masche für große Städte |
+
+Voraussetzung zusätzlich: `pip install kokoro-onnx onnx` (Python), `@fontsource/montserrat` (per `npm install`).
+`run.mjs` führt den Sprecher-Schritt automatisch aus, wenn `voiceover.json` existiert. Hinweis: edge-tts ist in der
+Cloud-Umgebung durch die Netzwerkrichtlinie gesperrt; Kokoro läuft vollständig lokal.
+
 ### Tests
 
 ```bash
@@ -106,6 +127,7 @@ npm test     # node --test tests/*.mjs  +  python3 -m unittest (tests/test_*.py)
 | `test_validate_production.mjs` | gültige Produktion + 18 gezielte Regelverstöße |
 | `test_audio_mix.py` | Länge, −14 ± 1 LUFS, True Peak ≤ −1, Ein-/Ausblendung, keine Knackser, sample-genaue Platzierung |
 | `test_pipeline_run.mjs` | Gesamtablauf auf 3-s-Fixture: Spezifikation, QA ohne FAIL, A/V-Versatz ≤ 1 Frame |
+| `test_captions.mjs` | Untertitel-Seiten (max. Wörter, keine Ein-Wort-Blitzseiten), Profil voiceover: gültig + Regelverstöße |
 
 ## Skill verwenden
 
@@ -166,7 +188,7 @@ Zusätzlich an den Referenzen kalibriert (Letterbox-Zuschnitt, Bewegungsübergä
 
 ## Bekannte Einschränkungen
 
-- Render-Pipeline erzeugt bisher nur die abstrakte Testproduktion; ein echtes Inhaltsvideo wurde noch nicht produziert.
+- Erstes Inhaltsvideo: `productions/earth-stops-1-second/` (Profil voiceover, technisch geprüft, Hörprüfung ausstehend).
 - Signalfarbe ist ein Platzhalter; Musik nur selbst erzeugt (keine lizenzierte Musik eingebunden).
 - **Claude kann Audio nicht hören.** Ton wird gemessen; die Hörprüfung vor der Freigabe muss ein Mensch durchführen.
 - Automatische Bildprüfung findet Kandidaten, keine Gewissheit: Abblend-Übergänge, Zeitraffer und Partikel erzeugen Fehlalarme; sehr kurze Fehler zwischen den 1-s-Kontaktbögen findet nur die Frame-Messung bzw. die Bildstreifen.
