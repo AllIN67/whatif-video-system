@@ -3,8 +3,8 @@
  "mode": "render",
  "probe": {
   "duration": 63.0,
-  "size_bytes": 67041242,
-  "bitrate_kbps": 8513,
+  "size_bytes": 66673654,
+  "bitrate_kbps": 8466,
   "video": {
    "codec": "h264",
    "width": 1080,
@@ -36,13 +36,14 @@
    10.0,
    11.5,
    14.0,
+   15.8,
    33.6,
    34.8,
    39.0,
    50.5,
    54.5
   ],
-  "cut_count": 11,
+  "cut_count": 12,
   "motion_transitions": [
    {
     "start": 10.667,
@@ -56,8 +57,8 @@
     "start": 27.5,
     "end": 27.6,
     "frames": 4,
-    "peak_ydif": 24.9,
-    "baseline_ydif": 2.4,
+    "peak_ydif": 28.9,
+    "baseline_ydif": 2.1,
     "mid_n": 826
    },
    {
@@ -67,17 +68,9 @@
     "peak_ydif": 21.2,
     "baseline_ydif": 3.8,
     "mid_n": 913
-   },
-   {
-    "start": 54.4,
-    "end": 54.467,
-    "frames": 3,
-    "peak_ydif": 16.5,
-    "baseline_ydif": 0.9,
-    "mid_n": 1633
    }
   ],
-  "motion_transition_count": 4,
+  "motion_transition_count": 3,
   "shots": [
    {
     "start": 0.0,
@@ -123,9 +116,15 @@
    },
    {
     "start": 14.0,
-    "frames": 406,
-    "dur": 13.533,
-    "mid_n": 622
+    "frames": 54,
+    "dur": 1.8,
+    "mid_n": 446
+   },
+   {
+    "start": 15.8,
+    "frames": 352,
+    "dur": 11.733,
+    "mid_n": 649
    },
    {
     "start": 27.533,
@@ -159,15 +158,9 @@
    },
    {
     "start": 50.5,
-    "frames": 118,
-    "dur": 3.933,
-    "mid_n": 1573
-   },
-   {
-    "start": 54.433,
-    "frames": 2,
-    "dur": 0.067,
-    "mid_n": 1633
+    "frames": 120,
+    "dur": 4.0,
+    "mid_n": 1574
    },
    {
     "start": 54.5,
@@ -180,62 +173,43 @@
    "count": 16,
    "median_s": 2.7,
    "mean_s": 3.94,
-   "min_s": 0.07,
-   "max_s": 13.53,
-   "cuts_per_10s": 1.75,
+   "min_s": 0.73,
+   "max_s": 11.73,
+   "cuts_per_10s": 1.9,
    "shot_changes_per_10s": 2.38
   },
-  "flash_shots": [
-   {
-    "start": 54.433,
-    "frames": 2,
-    "dur": 0.067,
-    "mid_n": 1633
-   }
-  ],
+  "flash_shots": [],
   "isolated_duplicate_frames": [],
   "duplicate_ratio_in_motion": 0.0,
   "jump_candidates": [
    {
-    "t": 27.067,
-    "ydif": 17.04,
-    "local_median": 1.51
+    "t": 34.033,
+    "ydif": 13.95,
+    "local_median": 1.99
    },
    {
     "t": 34.067,
-    "ydif": 20.25,
-    "local_median": 2.05
+    "ydif": 14.24,
+    "local_median": 1.99
    },
    {
     "t": 34.167,
-    "ydif": 19.93,
+    "ydif": 14.0,
+    "local_median": 1.99
+   },
+   {
+    "t": 34.2,
+    "ydif": 13.94,
     "local_median": 2.0
-   },
-   {
-    "t": 34.267,
-    "ydif": 13.65,
-    "local_median": 2.05
-   },
-   {
-    "t": 34.333,
-    "ydif": 13.93,
-    "local_median": 2.09
    }
   ],
   "flicker_candidates": [
-   34.033,
-   34.067,
-   34.1,
-   34.133,
-   34.167,
-   34.2,
-   34.233,
-   34.267
+   34.067
   ],
   "first_cut_s": 4.5,
   "first_shot_change_s": 4.5,
-  "mean_luma": 73.1,
-  "mean_motion_ydif": 3.88,
+  "mean_luma": 72.9,
+  "mean_motion_ydif": 3.77,
   "planned_transitions": [
    {
     "t": 4.5,
@@ -276,14 +250,14 @@
     "t": 14.0,
     "type": "cut",
     "frames": 0,
-    "peak_ydif": 47.14,
+    "peak_ydif": 55.2,
     "visible": true
    },
    {
     "t": 15.8,
     "type": "cut",
     "frames": 0,
-    "peak_ydif": 31.35,
+    "peak_ydif": 37.01,
     "visible": true
    },
    {
@@ -304,14 +278,14 @@
     "t": 25.0,
     "type": "cut",
     "frames": 0,
-    "peak_ydif": 26.29,
+    "peak_ydif": 25.0,
     "visible": true
    },
    {
     "t": 27.5,
     "type": "dip",
     "frames": 6,
-    "peak_ydif": 24.88,
+    "peak_ydif": 28.9,
     "visible": true
    },
    {
@@ -360,7 +334,7 @@
     "t": 39.0,
     "type": "cut",
     "frames": 0,
-    "peak_ydif": 40.0,
+    "peak_ydif": 37.97,
     "visible": true
    },
    {
@@ -400,9 +374,9 @@
    },
    {
     "t": 54.5,
-    "type": "dip",
-    "frames": 6,
-    "peak_ydif": 54.55,
+    "type": "cut",
+    "frames": 0,
+    "peak_ydif": 98.56,
     "visible": true
    },
    {
@@ -421,8 +395,13 @@
    },
    {
     "t": 25.0,
-    "ydif": 26.29,
-    "local_median": 1.58
+    "ydif": 25.0,
+    "local_median": 1.11
+   },
+   {
+    "t": 27.4,
+    "ydif": 12.13,
+    "local_median": 1.91
    },
    {
     "t": 36.5,
@@ -474,7 +453,7 @@
  },
  "audio": {
   "integrated_lufs": -14.1,
-  "lra_lu": 5.9,
+  "lra_lu": 6.7,
   "true_peak_dbtp": -1.1,
   "short_term_lufs_per_s": [
    [
@@ -487,139 +466,139 @@
    ],
    [
     3,
-    -19.3
+    -19.1
    ],
    [
     4,
-    -16.4
-   ],
-   [
-    5,
-    -15.6
-   ],
-   [
-    6,
-    -15.8
-   ],
-   [
-    7,
-    -17.1
-   ],
-   [
-    8,
-    -13.8
-   ],
-   [
-    9,
-    -12.6
-   ],
-   [
-    10,
-    -12.5
-   ],
-   [
-    11,
-    -14.3
-   ],
-   [
-    12,
     -16.2
    ],
    [
-    13,
-    -16.1
+    5,
+    -15.4
    ],
    [
-    14,
-    -15.8
+    6,
+    -15.6
    ],
    [
-    15,
-    -14.6
+    7,
+    -16.9
    ],
    [
-    16,
-    -14.5
+    8,
+    -13.6
    ],
    [
-    17,
-    -14.3
+    9,
+    -12.4
    ],
    [
-    18,
-    -15.9
-   ],
-   [
-    19,
-    -16.7
-   ],
-   [
-    20,
-    -17.5
-   ],
-   [
-    21,
-    -17.3
-   ],
-   [
-    22,
-    -16.8
-   ],
-   [
-    23,
-    -16.4
-   ],
-   [
-    24,
-    -14.2
-   ],
-   [
-    25,
-    -13.5
-   ],
-   [
-    26,
-    -13.1
-   ],
-   [
-    27,
-    -14.2
-   ],
-   [
-    28,
-    -15.3
-   ],
-   [
-    29,
-    -14.5
-   ],
-   [
-    30,
-    -13.0
-   ],
-   [
-    31,
-    -12.5
-   ],
-   [
-    32,
-    -12.1
-   ],
-   [
-    33,
+    10,
     -12.3
    ],
    [
+    11,
+    -14.1
+   ],
+   [
+    12,
+    -16.0
+   ],
+   [
+    13,
+    -15.9
+   ],
+   [
+    14,
+    -15.6
+   ],
+   [
+    15,
+    -14.4
+   ],
+   [
+    16,
+    -14.3
+   ],
+   [
+    17,
+    -14.1
+   ],
+   [
+    18,
+    -15.7
+   ],
+   [
+    19,
+    -16.5
+   ],
+   [
+    20,
+    -17.3
+   ],
+   [
+    21,
+    -17.1
+   ],
+   [
+    22,
+    -16.6
+   ],
+   [
+    23,
+    -16.2
+   ],
+   [
+    24,
+    -14.0
+   ],
+   [
+    25,
+    -13.3
+   ],
+   [
+    26,
+    -13.0
+   ],
+   [
+    27,
+    -14.0
+   ],
+   [
+    28,
+    -15.1
+   ],
+   [
+    29,
+    -14.4
+   ],
+   [
+    30,
+    -12.9
+   ],
+   [
+    31,
+    -12.3
+   ],
+   [
+    32,
+    -12.0
+   ],
+   [
+    33,
+    -12.1
+   ],
+   [
     34,
-    -11.3
+    -11.1
    ],
    [
     35,
-    -10.3
+    -10.2
    ],
    [
     36,
-    -9.7
+    -9.6
    ],
    [
     37,
@@ -627,238 +606,226 @@
    ],
    [
     38,
-    -11.9
+    -11.8
    ],
    [
     39,
-    -14.9
+    -15.2
    ],
    [
     40,
-    -14.8
+    -15.6
    ],
    [
     41,
-    -14.9
+    -16.2
    ],
    [
     42,
-    -14.6
+    -15.9
    ],
    [
     43,
-    -15.7
+    -18.5
    ],
    [
     44,
-    -15.4
+    -18.4
    ],
    [
     45,
-    -15.0
+    -18.1
    ],
    [
     46,
-    -15.1
+    -17.8
    ],
    [
     47,
-    -15.5
+    -17.6
    ],
    [
     48,
-    -15.5
+    -16.4
    ],
    [
     49,
-    -15.1
+    -15.3
    ],
    [
     50,
-    -14.2
+    -14.1
    ],
    [
     51,
-    -13.3
+    -13.1
    ],
    [
     52,
-    -12.3
+    -12.1
    ],
    [
     53,
-    -12.0
+    -11.8
    ],
    [
     54,
-    -12.2
+    -12.0
    ],
    [
     55,
-    -12.8
+    -12.6
    ],
    [
     56,
-    -13.4
+    -13.2
    ],
    [
     57,
-    -14.4
+    -14.2
    ],
    [
     58,
-    -15.8
+    -15.6
    ],
    [
     59,
-    -15.9
+    -15.7
    ],
    [
     60,
-    -15.9
+    -15.7
    ],
    [
     61,
-    -16.0
+    -15.8
    ],
    [
     62,
-    -17.2
+    -17.0
    ],
    [
     63,
-    -19.3
+    -19.1
    ]
   ],
   "loudness_jumps": [],
   "silences": [],
-  "peak_dbfs": -1.201611,
-  "rms_dbfs": -15.257192,
+  "peak_dbfs": -1.123868,
+  "rms_dbfs": -15.587864,
   "flat_factor": 0.0,
   "peak_count": 2.0,
-  "dc_offset": 0.003461,
+  "dc_offset": -0.004377,
   "nans": 0.0,
   "click_candidates": [
    {
-    "t": 1.07,
-    "hf_peak_db": -17.1,
-    "context_median_db": -37.8
+    "t": 0.28,
+    "hf_peak_db": -10.9,
+    "context_median_db": -31.0
    },
    {
     "t": 1.7,
-    "hf_peak_db": -19.3,
-    "context_median_db": -40.8
+    "hf_peak_db": -19.1,
+    "context_median_db": -40.7
+   },
+   {
+    "t": 45.16,
+    "hf_peak_db": -15.9,
+    "context_median_db": -36.2
    },
    {
     "t": 46.86,
-    "hf_peak_db": -16.4,
-    "context_median_db": -38.0
-   },
-   {
-    "t": 47.46,
-    "hf_peak_db": -16.4,
-    "context_median_db": -37.4
-   },
-   {
-    "t": 48.06,
-    "hf_peak_db": -15.9,
-    "context_median_db": -37.2
-   },
-   {
-    "t": 48.46,
-    "hf_peak_db": -15.3,
-    "context_median_db": -37.6
-   },
-   {
-    "t": 57.78,
-    "hf_peak_db": -17.0,
-    "context_median_db": -38.0
-   },
-   {
-    "t": 58.11,
-    "hf_peak_db": -16.3,
-    "context_median_db": -37.3
-   },
-   {
-    "t": 58.94,
-    "hf_peak_db": -19.8,
-    "context_median_db": -40.0
-   },
-   {
-    "t": 60.08,
-    "hf_peak_db": -21.1,
-    "context_median_db": -43.6
-   },
-   {
-    "t": 60.43,
-    "hf_peak_db": -25.6,
-    "context_median_db": -47.3
-   },
-   {
-    "t": 60.76,
-    "hf_peak_db": -25.3,
-    "context_median_db": -45.5
-   }
-  ],
-  "first_50ms_rms_db": -74.910153,
-  "last_50ms_rms_db": -55.838931,
-  "last_1s_rms_db": -29.600586,
-  "planned_click_candidates": [
-   {
-    "t": 10.2,
-    "hf_peak_db": -14.2,
-    "context_median_db": -39.2
-   },
-   {
-    "t": 36.99,
-    "hf_peak_db": -9.3,
-    "context_median_db": -30.5
-   },
-   {
-    "t": 45.66,
-    "hf_peak_db": -16.2,
-    "context_median_db": -40.9
-   },
-   {
-    "t": 46.26,
-    "hf_peak_db": -16.9,
-    "context_median_db": -40.3
-   },
-   {
-    "t": 48.94,
-    "hf_peak_db": -17.0,
+    "hf_peak_db": -16.1,
     "context_median_db": -37.9
    },
    {
-    "t": 49.5,
-    "hf_peak_db": -16.8,
+    "t": 47.46,
+    "hf_peak_db": -16.1,
+    "context_median_db": -37.1
+   },
+   {
+    "t": 48.06,
+    "hf_peak_db": -15.7,
+    "context_median_db": -36.9
+   },
+   {
+    "t": 48.46,
+    "hf_peak_db": -15.1,
+    "context_median_db": -37.5
+   },
+   {
+    "t": 57.89,
+    "hf_peak_db": -18.0,
     "context_median_db": -38.6
    },
    {
+    "t": 60.08,
+    "hf_peak_db": -23.9,
+    "context_median_db": -44.0
+   },
+   {
+    "t": 60.53,
+    "hf_peak_db": -24.3,
+    "context_median_db": -47.5
+   }
+  ],
+  "first_50ms_rms_db": -74.710077,
+  "last_50ms_rms_db": -55.617065,
+  "last_1s_rms_db": -29.396308,
+  "planned_click_candidates": [
+   {
+    "t": 10.2,
+    "hf_peak_db": -13.9,
+    "context_median_db": -39.0
+   },
+   {
+    "t": 36.98,
+    "hf_peak_db": -13.5,
+    "context_median_db": -33.5
+   },
+   {
+    "t": 45.66,
+    "hf_peak_db": -16.0,
+    "context_median_db": -40.6
+   },
+   {
+    "t": 46.2,
+    "hf_peak_db": -18.2,
+    "context_median_db": -38.8
+   },
+   {
+    "t": 48.94,
+    "hf_peak_db": -16.7,
+    "context_median_db": -37.7
+   },
+   {
+    "t": 49.5,
+    "hf_peak_db": -16.6,
+    "context_median_db": -38.5
+   },
+   {
     "t": 50.09,
-    "hf_peak_db": -15.1,
-    "context_median_db": -37.1
+    "hf_peak_db": -15.0,
+    "context_median_db": -36.8
    }
   ],
   "planned_loudness_jumps": []
  },
  "black": [
   [
-   39.0,
-   39.7667
+   39.3333,
+   39.4667
   ]
  ],
  "freezes": [],
  "status": "FAIL",
  "fails": [
-  "Schwarzbilder: [(39.0, 39.7667)]",
-  "Einstellungen < 4 Frames (Blitzbild/Sprung): [54.433]"
+  "Schwarzbilder: [(39.3333, 39.4667)]"
  ],
  "reviews": [
-  "Sprungkandidaten ohne Schnitt: [27.067, 34.067, 34.167, 34.267, 34.333]",
-  "Flacker-Kandidaten: [34.033, 34.067, 34.1, 34.133, 34.167, 34.2, 34.233, 34.267]",
+  "Sprungkandidaten ohne Schnitt: [34.033, 34.067, 34.167, 34.2]",
+  "Flacker-Kandidaten: [34.067]",
   "Geplante Übergänge im Bild nicht erkennbar (prüfen): [19.0, 29.6]",
-  "Lautheitsumfang (LRA) 5.9 LU außerhalb 6–16 LU (Style-Guide 9.4)",
-  "Klick-Kandidaten (anhören!): [1.07, 1.7, 46.86, 47.46, 48.06, 48.46, 57.78, 58.11, 58.94, 60.08, 60.43, 60.76]"
+  "Klick-Kandidaten (anhören!): [0.28, 1.7, 45.16, 46.86, 47.46, 48.06, 48.46, 57.89, 60.08, 60.53]"
  ]
 }

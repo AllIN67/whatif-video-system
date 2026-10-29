@@ -312,7 +312,7 @@ export async function build({ THREE, scene, camera, renderer, timeline }) {
       for (const g of cabin.glows) g.visible = glow > 0 && !cfg.interior;
       // Feuer
       // Glut glimmt schon vor dem Anzünden (sonst Schwarzbild zu Beginn der Kamin-Einstellung, 1. Render 39,0 s)
-      const fireK = t < E.lamp_lit ? 0 : t < E.clear ? Math.max(0.14, ramp(t, E.fire_catch, E.fire_catch + 1.6)) : t >= E.evening ? 0.85 : 0;
+      const fireK = t < E.lamp_lit ? 0 : t < E.clear ? Math.max(0.35, ramp(t, E.fire_catch, E.fire_catch + 1.6)) : t >= E.evening ? 0.85 : 0;
       fire.update(t, fireK);
       embers.update(t, fireK, 0.8);
       cabin.charMat.emissive.setRGB(0.22 * fireK, 0.05 * fireK, 0.01 * fireK);

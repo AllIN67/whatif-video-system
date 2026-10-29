@@ -22,7 +22,7 @@ const EV = {
   door_open: 0.0, pour_start: 7.25, pour_end: 8.35, cut1: 8.85, cut2: 9.2, cut3: 9.5, slice_fall: 9.6, window_open: 10.3,
   carrot_pull: 12.6, lid_open: 14.25, egg_take: 14.95, tracks_seen: 16.5, look_forest: 17.7, reveal: 23.0,
   storm_turn: 27.5, thunder1: 28.6, rain_start: 29.9, logs_grab: 31.1, lightning: 34.1, door_close: 36.0, door_slam: 36.3,
-  match_strike: 37.0, lamp_lit: 37.55, fire_catch: 39.4, pot_on: 41.5, clear: 45.5, summit: 50.5, evening: 54.5,
+  match_strike: 37.0, lamp_lit: 37.55, fire_catch: 39.1, pot_on: 41.5, clear: 45.5, summit: 50.5, evening: 54.5,
 };
 
 const pool = [POOL.x, H(POOL.x, POOL.z) + 1, POOL.z];
