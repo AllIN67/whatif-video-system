@@ -2,13 +2,16 @@
 
 Für **jedes** Video abarbeiten. Regeln und Begründungen stehen in `WHATIF_STYLE_GUIDE.md` (Abschnittsnummern in Klammern). Ein Punkt gilt erst als erledigt, wenn er im Produktionsprotokoll (`productions/<slug>/LOG.md`, Vorlage `templates/production_log.md`) mit Ergebnis vermerkt ist.
 
+**Produktionsstil zuerst:** `PRODUKTIONSSTIL: A (Earth)` → zusätzlich `STYLE_A_EARTH.md`; `PRODUKTIONSSTIL: B (TikTok-Referenz)` → Rezept B1 oder B2 (16). Fehlt die Angabe: nachfragen (17). Punkte, die nur für einen Stil gelten, sind mit [A] bzw. [B] markiert.
+
 Ablage pro Video: `productions/<slug>/` mit `LOG.md`, `scene_plan.md`, `text.en.json`, Quellcode/Assets, `render/` (nicht versioniert), `qa/`.
 
 ---
 
 ## 1. Thema und zentrale What-if-Frage
 
-- [ ] Frage formuliert: „What if …?“, ≤ 10 Wörter, max. 2 Zeilen (2)
+- [ ] Produktionsstil (A / B) und bei B das Rezept (B1 / B2) im Protokoll (17)
+- [ ] [B] Frage formuliert: „What if …?“, ≤ 10 Wörter, max. 2 Zeilen (2)
 - [ ] Messgröße für den HUD festgelegt (Start → Endzustand, Einheit) (1.4)
 - [ ] ≥ 5 eskalierende Konsequenzen gesammelt (1.4)
 - [ ] Pointe/Wendung festgelegt (3.2)
@@ -17,12 +20,12 @@ Ablage pro Video: `productions/<slug>/` mit `LOG.md`, `scene_plan.md`, `text.en.
 
 ## 2. Hook und Dramaturgie
 
-- [ ] Frame 0: bewegte Szene + Titel + HUD (2)
+- [ ] Frame 0: bewegte Szene + Text ([B] Titel + HUD, [A] Hook-Einblendung) (2)
 - [ ] HUD-Wert ändert sich in den ersten 2 s (2)
 - [ ] Auslösendes Ereignis spätestens bei 10 s (2)
 - [ ] Akte A–E mit Zeiten geplant; Eskalation monoton; ≥ 2 HUD-Label-Wechsel geprüft (3)
 - [ ] Global/persönlich-Wechsel geprüft (3.2)
-- [ ] Geplante Länge 61–80 s (10.1)
+- [ ] Geplante Länge **≥ 60 s** (Standard 61–80 s), verlängert durch zusätzliche Konsequenzen/visuelle Entwicklung, nicht durch Leerlauf (10.1)
 
 ## 3. Szenenplan
 
@@ -47,7 +50,7 @@ Ablage pro Video: `productions/<slug>/` mit `LOG.md`, `scene_plan.md`, `text.en.
 
 ## 5. Audio und Sounddesign
 
-- [ ] Kein Sprecher (9.1)
+- [ ] [B] Kein Sprecher (9.1) · [A] Sprecher nach `STYLE_A_EARTH.md`, Hörprüfung der Stimme
 - [ ] Musik mit dokumentierter Lizenz; instrumental bevorzugt (9.2)
 - [ ] Lautheitsdramaturgie geplant: Aufbau, Rückgang vor Schlüsselmoment, Maximum am Höhepunkt (9.2)
 - [ ] Jedes Schlüsselereignis: Ton-Akzent oder bewusste Stille, framegenau (9.3)

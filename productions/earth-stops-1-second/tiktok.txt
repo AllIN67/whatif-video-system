@@ -1,0 +1,21 @@
+VIDEO: What if the Earth stopped spinning for 1 second?
+File: productions/earth-stops-1-second/render/final.mp4 (1080x1920, 60 fps, 41.0 s)
+
+=== CAPTION ===
+The Earth stops spinning for ONE second. You keep going at 790 mph. 🌍💨 Only one place on the planet is safe… Where would you survive? 👇
+
+=== HASHTAGS ===
+#whatif #earth #science #physics #space
+
+=== ALTERNATIVE HOOKS (A/B tests, on-screen text for 0–1.5 s) ===
+1. "You're moving at 790 mph. Right now."
+2. "1 second without Earth's spin = game over."
+3. "The Earth hits the brakes. You don't."
+
+=== FACT SHEET (for comment replies) ===
+- Equator rotation speed: ~1,040 mph (24,901 mi / 23.93 h sidereal day)
+- New York (40.7° N): 1,040 × cos(40.7°) ≈ 790 mph
+- In 1 second at 790 mph you would travel ~1,155 ft (352 m)
+- Speed of sound at sea level (15 °C): ~761 mph → 790 mph winds are supersonic
+- Fastest recorded tropical-cyclone gust: 253 mph (Cyclone Olivia, Barrow Island, 1996, WMO)
+- At the North Pole your rotation speed is ~0 mph

@@ -1,0 +1,1560 @@
+{
+ "engine": "kokoro-onnx",
+ "model": "Kokoro-82M v1.0 (Apache-2.0)",
+ "voice": "am_michael",
+ "speed": 1.26,
+ "input_hash": "97517db307144994506178c2",
+ "speech_end": 40.455,
+ "words": [
+  {
+   "seg": "s01",
+   "text": "The",
+   "start": 0.13,
+   "end": 0.23
+  },
+  {
+   "seg": "s01",
+   "text": "Earth",
+   "start": 0.28,
+   "end": 0.48
+  },
+  {
+   "seg": "s01",
+   "text": "stops.",
+   "start": 0.53,
+   "end": 0.955
+  },
+  {
+   "seg": "s01",
+   "text": "For",
+   "start": 1.135,
+   "end": 1.235
+  },
+  {
+   "seg": "s01",
+   "text": "one",
+   "start": 1.285,
+   "end": 1.46
+  },
+  {
+   "seg": "s01",
+   "text": "second.",
+   "start": 1.51,
+   "end": 2.057
+  },
+  {
+   "seg": "s02",
+   "text": "Right",
+   "start": 2.18,
+   "end": 2.405
+  },
+  {
+   "seg": "s02",
+   "text": "now",
+   "start": 2.455,
+   "end": 2.73
+  },
+  {
+   "seg": "s02",
+   "text": "in",
+   "start": 2.78,
+   "end": 2.83
+  },
+  {
+   "seg": "s02",
+   "text": "New",
+   "start": 2.88,
+   "end": 2.98
+  },
+  {
+   "seg": "s02",
+   "text": "York,",
+   "start": 3.03,
+   "end": 3.555
+  },
+  {
+   "seg": "s02",
+   "text": "you're",
+   "start": 3.68,
+   "end": 3.755
+  },
+  {
+   "seg": "s02",
+   "text": "spinning",
+   "start": 3.805,
+   "end": 4.055
+  },
+  {
+   "seg": "s02",
+   "text": "at",
+   "start": 4.105,
+   "end": 4.155
+  },
+  {
+   "seg": "s02",
+   "text": "seven",
+   "start": 4.23,
+   "end": 4.43
+  },
+  {
+   "seg": "s02",
+   "text": "hundred",
+   "start": 4.48,
+   "end": 4.705
+  },
+  {
+   "seg": "s02",
+   "text": "ninety",
+   "start": 4.755,
+   "end": 5.03
+  },
+  {
+   "seg": "s02",
+   "text": "miles",
+   "start": 5.08,
+   "end": 5.405
+  },
+  {
+   "seg": "s02",
+   "text": "per",
+   "start": 5.455,
+   "end": 5.58
+  },
+  {
+   "seg": "s02",
+   "text": "hour",
+   "start": 5.63,
+   "end": 6.05
+  },
+  {
+   "seg": "s03",
+   "text": "and",
+   "start": 6.23,
+   "end": 6.305
+  },
+  {
+   "seg": "s03",
+   "text": "you",
+   "start": 6.33,
+   "end": 6.405
+  },
+  {
+   "seg": "s03",
+   "text": "don't",
+   "start": 6.43,
+   "end": 6.58
+  },
+  {
+   "seg": "s03",
+   "text": "even",
+   "start": 6.605,
+   "end": 6.805
+  },
+  {
+   "seg": "s03",
+   "text": "feel",
+   "start": 6.905,
+   "end": 7.155
+  },
+  {
+   "seg": "s03",
+   "text": "it.",
+   "start": 7.205,
+   "end": 7.48
+  },
+  {
+   "seg": "s04",
+   "text": "Then...",
+   "start": 7.73,
+   "end": 7.93
+  },
+  {
+   "seg": "s04",
+   "text": "it",
+   "start": 8.13,
+   "end": 8.205
+  },
+  {
+   "seg": "s04",
+   "text": "stops.",
+   "start": 8.255,
+   "end": 8.884
+  },
+  {
+   "seg": "s05",
+   "text": "But",
+   "start": 9.63,
+   "end": 9.73
+  },
+  {
+   "seg": "s05",
+   "text": "you",
+   "start": 9.78,
+   "end": 9.88
+  },
+  {
+   "seg": "s05",
+   "text": "don't.",
+   "start": 9.93,
+   "end": 10.414
+  },
+  {
+   "seg": "s06",
+   "text": "People,",
+   "start": 10.63,
+   "end": 10.955
+  },
+  {
+   "seg": "s06",
+   "text": "cars,",
+   "start": 11.04,
+   "end": 11.715
+  },
+  {
+   "seg": "s06",
+   "text": "everything",
+   "start": 11.865,
+   "end": 12.265
+  },
+  {
+   "seg": "s06",
+   "text": "flies",
+   "start": 12.315,
+   "end": 12.64
+  },
+  {
+   "seg": "s06",
+   "text": "east",
+   "start": 12.715,
+   "end": 12.965
+  },
+  {
+   "seg": "s06",
+   "text": "at",
+   "start": 13.015,
+   "end": 13.065
+  },
+  {
+   "seg": "s06",
+   "text": "seven",
+   "start": 13.14,
+   "end": 13.315
+  },
+  {
+   "seg": "s06",
+   "text": "hundred",
+   "start": 13.365,
+   "end": 13.59
+  },
+  {
+   "seg": "s06",
+   "text": "ninety",
+   "start": 13.64,
+   "end": 13.915
+  },
+  {
+   "seg": "s06",
+   "text": "miles",
+   "start": 13.965,
+   "end": 14.29
+  },
+  {
+   "seg": "s06",
+   "text": "per",
+   "start": 14.34,
+   "end": 14.49
+  },
+  {
+   "seg": "s06",
+   "text": "hour",
+   "start": 14.54,
+   "end": 14.859
+  },
+  {
+   "seg": "s07",
+   "text": "Buildings",
+   "start": 15.13,
+   "end": 15.53
+  },
+  {
+   "seg": "s07",
+   "text": "rip",
+   "start": 15.58,
+   "end": 15.73
+  },
+  {
+   "seg": "s07",
+   "text": "apart.",
+   "start": 15.755,
+   "end": 16.334
+  },
+  {
+   "seg": "s08",
+   "text": "In",
+   "start": 16.63,
+   "end": 16.705
+  },
+  {
+   "seg": "s08",
+   "text": "that",
+   "start": 16.755,
+   "end": 16.905
+  },
+  {
+   "seg": "s08",
+   "text": "one",
+   "start": 16.955,
+   "end": 17.13
+  },
+  {
+   "seg": "s08",
+   "text": "second,",
+   "start": 17.18,
+   "end": 17.68
+  },
+  {
+   "seg": "s08",
+   "text": "you'd",
+   "start": 17.805,
+   "end": 17.93
+  },
+  {
+   "seg": "s08",
+   "text": "fly",
+   "start": 17.98,
+   "end": 18.23
+  },
+  {
+   "seg": "s08",
+   "text": "over",
+   "start": 18.255,
+   "end": 18.455
+  },
+  {
+   "seg": "s08",
+   "text": "a",
+   "start": 18.505,
+   "end": 18.655
+  },
+  {
+   "seg": "s08",
+   "text": "thousand",
+   "start": 18.73,
+   "end": 19.08
+  },
+  {
+   "seg": "s08",
+   "text": "feet",
+   "start": 19.155,
+   "end": 19.587
+  },
+  {
+   "seg": "s09",
+   "text": "The",
+   "start": 20.13,
+   "end": 20.23
+  },
+  {
+   "seg": "s09",
+   "text": "oceans",
+   "start": 20.28,
+   "end": 20.655
+  },
+  {
+   "seg": "s09",
+   "text": "keep",
+   "start": 20.705,
+   "end": 20.88
+  },
+  {
+   "seg": "s09",
+   "text": "moving",
+   "start": 20.93,
+   "end": 21.205
+  },
+  {
+   "seg": "s09",
+   "text": "too.",
+   "start": 21.28,
+   "end": 21.73
+  },
+  {
+   "seg": "s09",
+   "text": "Walls",
+   "start": 21.905,
+   "end": 22.205
+  },
+  {
+   "seg": "s09",
+   "text": "of",
+   "start": 22.23,
+   "end": 22.305
+  },
+  {
+   "seg": "s09",
+   "text": "water",
+   "start": 22.355,
+   "end": 22.58
+  },
+  {
+   "seg": "s09",
+   "text": "surge",
+   "start": 22.655,
+   "end": 22.93
+  },
+  {
+   "seg": "s09",
+   "text": "over",
+   "start": 22.955,
+   "end": 23.08
+  },
+  {
+   "seg": "s09",
+   "text": "the",
+   "start": 23.105,
+   "end": 23.155
+  },
+  {
+   "seg": "s09",
+   "text": "coasts.",
+   "start": 23.205,
+   "end": 23.645
+  },
+  {
+   "seg": "s10",
+   "text": "Then",
+   "start": 24.13,
+   "end": 24.23
+  },
+  {
+   "seg": "s10",
+   "text": "the",
+   "start": 24.255,
+   "end": 24.33
+  },
+  {
+   "seg": "s10",
+   "text": "wind.",
+   "start": 24.38,
+   "end": 24.955
+  },
+  {
+   "seg": "s10",
+   "text": "Faster",
+   "start": 25.13,
+   "end": 25.455
+  },
+  {
+   "seg": "s10",
+   "text": "than",
+   "start": 25.48,
+   "end": 25.605
+  },
+  {
+   "seg": "s10",
+   "text": "sound,",
+   "start": 25.68,
+   "end": 26.03
+  },
+  {
+   "seg": "s10",
+   "text": "three",
+   "start": 26.105,
+   "end": 26.28
+  },
+  {
+   "seg": "s10",
+   "text": "times",
+   "start": 26.33,
+   "end": 26.63
+  },
+  {
+   "seg": "s10",
+   "text": "any",
+   "start": 26.655,
+   "end": 26.805
+  },
+  {
+   "seg": "s10",
+   "text": "hurricane",
+   "start": 26.855,
+   "end": 27.33
+  },
+  {
+   "seg": "s10",
+   "text": "on",
+   "start": 27.355,
+   "end": 27.505
+  },
+  {
+   "seg": "s10",
+   "text": "record.",
+   "start": 27.555,
+   "end": 27.94
+  },
+  {
+   "seg": "s11",
+   "text": "For",
+   "start": 28.63,
+   "end": 28.73
+  },
+  {
+   "seg": "s11",
+   "text": "one",
+   "start": 28.78,
+   "end": 28.955
+  },
+  {
+   "seg": "s11",
+   "text": "second,",
+   "start": 29.005,
+   "end": 29.43
+  },
+  {
+   "seg": "s11",
+   "text": "the",
+   "start": 29.48,
+   "end": 29.53
+  },
+  {
+   "seg": "s11",
+   "text": "entire",
+   "start": 29.58,
+   "end": 30.03
+  },
+  {
+   "seg": "s11",
+   "text": "atmosphere",
+   "start": 30.08,
+   "end": 30.605
+  },
+  {
+   "seg": "s11",
+   "text": "scours",
+   "start": 30.68,
+   "end": 31.055
+  },
+  {
+   "seg": "s11",
+   "text": "the",
+   "start": 31.08,
+   "end": 31.13
+  },
+  {
+   "seg": "s11",
+   "text": "surface.",
+   "start": 31.18,
+   "end": 31.651
+  },
+  {
+   "seg": "s12",
+   "text": "But",
+   "start": 33.626,
+   "end": 33.726
+  },
+  {
+   "seg": "s12",
+   "text": "there's",
+   "start": 33.751,
+   "end": 33.926
+  },
+  {
+   "seg": "s12",
+   "text": "one",
+   "start": 34.001,
+   "end": 34.201
+  },
+  {
+   "seg": "s12",
+   "text": "place",
+   "start": 34.251,
+   "end": 34.501
+  },
+  {
+   "seg": "s12",
+   "text": "you'd",
+   "start": 34.551,
+   "end": 34.676
+  },
+  {
+   "seg": "s12",
+   "text": "survive...",
+   "start": 34.726,
+   "end": 35.307
+  },
+  {
+   "seg": "s13",
+   "text": "The",
+   "start": 35.73,
+   "end": 35.78
+  },
+  {
+   "seg": "s13",
+   "text": "North",
+   "start": 35.83,
+   "end": 36.055
+  },
+  {
+   "seg": "s13",
+   "text": "Pole",
+   "start": 36.105,
+   "end": 36.639
+  },
+  {
+   "seg": "s14",
+   "text": "Up",
+   "start": 37.03,
+   "end": 37.18
+  },
+  {
+   "seg": "s14",
+   "text": "there,",
+   "start": 37.23,
+   "end": 37.43
+  },
+  {
+   "seg": "s14",
+   "text": "you're",
+   "start": 37.48,
+   "end": 37.58
+  },
+  {
+   "seg": "s14",
+   "text": "barely",
+   "start": 37.63,
+   "end": 37.93
+  },
+  {
+   "seg": "s14",
+   "text": "moving",
+   "start": 37.98,
+   "end": 38.255
+  },
+  {
+   "seg": "s14",
+   "text": "at",
+   "start": 38.28,
+   "end": 38.33
+  },
+  {
+   "seg": "s14",
+   "text": "all.",
+   "start": 38.38,
+   "end": 38.685
+  },
+  {
+   "seg": "s15",
+   "text": "So",
+   "start": 39.13,
+   "end": 39.255
+  },
+  {
+   "seg": "s15",
+   "text": "when",
+   "start": 39.28,
+   "end": 39.38
+  },
+  {
+   "seg": "s15",
+   "text": "the",
+   "start": 39.405,
+   "end": 39.505
+  },
+  {
+   "seg": "s15",
+   "text": "Earth",
+   "start": 39.555,
+   "end": 39.755
+  },
+  {
+   "seg": "s15",
+   "text": "stops...",
+   "start": 39.805,
+   "end": 40.455
+  }
+ ],
+ "units": [
+  {
+   "seg": "s01",
+   "display": "The",
+   "key": false,
+   "brk": null,
+   "captions": false,
+   "start": 0.13,
+   "end": 0.23
+  },
+  {
+   "seg": "s01",
+   "display": "Earth",
+   "key": false,
+   "brk": null,
+   "captions": false,
+   "start": 0.28,
+   "end": 0.48
+  },
+  {
+   "seg": "s01",
+   "display": "stops.",
+   "key": false,
+   "brk": "sentence",
+   "captions": false,
+   "start": 0.53,
+   "end": 0.955
+  },
+  {
+   "seg": "s01",
+   "display": "For",
+   "key": false,
+   "brk": null,
+   "captions": false,
+   "start": 1.135,
+   "end": 1.235
+  },
+  {
+   "seg": "s01",
+   "display": "one",
+   "key": false,
+   "brk": null,
+   "captions": false,
+   "start": 1.285,
+   "end": 1.46
+  },
+  {
+   "seg": "s01",
+   "display": "second.",
+   "key": false,
+   "brk": "sentence",
+   "captions": false,
+   "start": 1.51,
+   "end": 2.057
+  },
+  {
+   "seg": "s02",
+   "display": "Right",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 2.18,
+   "end": 2.405
+  },
+  {
+   "seg": "s02",
+   "display": "now",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 2.455,
+   "end": 2.73
+  },
+  {
+   "seg": "s02",
+   "display": "in",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 2.78,
+   "end": 2.83
+  },
+  {
+   "seg": "s02",
+   "display": "New",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 2.88,
+   "end": 2.98
+  },
+  {
+   "seg": "s02",
+   "display": "York,",
+   "key": false,
+   "brk": "clause",
+   "captions": true,
+   "start": 3.03,
+   "end": 3.555
+  },
+  {
+   "seg": "s02",
+   "display": "you're",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 3.68,
+   "end": 3.755
+  },
+  {
+   "seg": "s02",
+   "display": "spinning",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 3.805,
+   "end": 4.055
+  },
+  {
+   "seg": "s02",
+   "display": "at",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 4.105,
+   "end": 4.155
+  },
+  {
+   "seg": "s02",
+   "display": "790 MPH",
+   "key": true,
+   "brk": "sentence",
+   "captions": true,
+   "start": 4.23,
+   "end": 6.05
+  },
+  {
+   "seg": "s03",
+   "display": "and",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 6.23,
+   "end": 6.305
+  },
+  {
+   "seg": "s03",
+   "display": "you",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 6.33,
+   "end": 6.405
+  },
+  {
+   "seg": "s03",
+   "display": "don't",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 6.43,
+   "end": 6.58
+  },
+  {
+   "seg": "s03",
+   "display": "even",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 6.605,
+   "end": 6.805
+  },
+  {
+   "seg": "s03",
+   "display": "feel",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 6.905,
+   "end": 7.155
+  },
+  {
+   "seg": "s03",
+   "display": "it.",
+   "key": false,
+   "brk": "sentence",
+   "captions": true,
+   "start": 7.205,
+   "end": 7.48
+  },
+  {
+   "seg": "s04",
+   "display": "Then...",
+   "key": false,
+   "brk": "sentence",
+   "captions": true,
+   "start": 7.73,
+   "end": 7.93
+  },
+  {
+   "seg": "s04",
+   "display": "it",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 8.13,
+   "end": 8.205
+  },
+  {
+   "seg": "s04",
+   "display": "stops.",
+   "key": true,
+   "brk": "sentence",
+   "captions": true,
+   "start": 8.255,
+   "end": 8.884
+  },
+  {
+   "seg": "s05",
+   "display": "But",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 9.63,
+   "end": 9.73
+  },
+  {
+   "seg": "s05",
+   "display": "you",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 9.78,
+   "end": 9.88
+  },
+  {
+   "seg": "s05",
+   "display": "don't.",
+   "key": false,
+   "brk": "sentence",
+   "captions": true,
+   "start": 9.93,
+   "end": 10.414
+  },
+  {
+   "seg": "s06",
+   "display": "People,",
+   "key": false,
+   "brk": "clause",
+   "captions": true,
+   "start": 10.63,
+   "end": 10.955
+  },
+  {
+   "seg": "s06",
+   "display": "cars,",
+   "key": false,
+   "brk": "clause",
+   "captions": true,
+   "start": 11.04,
+   "end": 11.715
+  },
+  {
+   "seg": "s06",
+   "display": "everything",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 11.865,
+   "end": 12.265
+  },
+  {
+   "seg": "s06",
+   "display": "flies",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 12.315,
+   "end": 12.64
+  },
+  {
+   "seg": "s06",
+   "display": "east",
+   "key": true,
+   "brk": null,
+   "captions": true,
+   "start": 12.715,
+   "end": 12.965
+  },
+  {
+   "seg": "s06",
+   "display": "at",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 13.015,
+   "end": 13.065
+  },
+  {
+   "seg": "s06",
+   "display": "790 MPH",
+   "key": true,
+   "brk": "sentence",
+   "captions": true,
+   "start": 13.14,
+   "end": 14.859
+  },
+  {
+   "seg": "s07",
+   "display": "Buildings",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 15.13,
+   "end": 15.53
+  },
+  {
+   "seg": "s07",
+   "display": "rip",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 15.58,
+   "end": 15.73
+  },
+  {
+   "seg": "s07",
+   "display": "apart.",
+   "key": false,
+   "brk": "sentence",
+   "captions": true,
+   "start": 15.755,
+   "end": 16.334
+  },
+  {
+   "seg": "s08",
+   "display": "In",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 16.63,
+   "end": 16.705
+  },
+  {
+   "seg": "s08",
+   "display": "that",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 16.755,
+   "end": 16.905
+  },
+  {
+   "seg": "s08",
+   "display": "one",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 16.955,
+   "end": 17.13
+  },
+  {
+   "seg": "s08",
+   "display": "second,",
+   "key": false,
+   "brk": "clause",
+   "captions": true,
+   "start": 17.18,
+   "end": 17.68
+  },
+  {
+   "seg": "s08",
+   "display": "you'd",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 17.805,
+   "end": 17.93
+  },
+  {
+   "seg": "s08",
+   "display": "fly",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 17.98,
+   "end": 18.23
+  },
+  {
+   "seg": "s08",
+   "display": "over",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 18.255,
+   "end": 18.455
+  },
+  {
+   "seg": "s08",
+   "display": "1,000 FEET",
+   "key": true,
+   "brk": "sentence",
+   "captions": true,
+   "start": 18.505,
+   "end": 19.587
+  },
+  {
+   "seg": "s09",
+   "display": "The",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 20.13,
+   "end": 20.23
+  },
+  {
+   "seg": "s09",
+   "display": "oceans",
+   "key": true,
+   "brk": null,
+   "captions": true,
+   "start": 20.28,
+   "end": 20.655
+  },
+  {
+   "seg": "s09",
+   "display": "keep",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 20.705,
+   "end": 20.88
+  },
+  {
+   "seg": "s09",
+   "display": "moving",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 20.93,
+   "end": 21.205
+  },
+  {
+   "seg": "s09",
+   "display": "too.",
+   "key": false,
+   "brk": "sentence",
+   "captions": true,
+   "start": 21.28,
+   "end": 21.73
+  },
+  {
+   "seg": "s09",
+   "display": "Walls",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 21.905,
+   "end": 22.205
+  },
+  {
+   "seg": "s09",
+   "display": "of",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 22.23,
+   "end": 22.305
+  },
+  {
+   "seg": "s09",
+   "display": "water",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 22.355,
+   "end": 22.58
+  },
+  {
+   "seg": "s09",
+   "display": "surge",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 22.655,
+   "end": 22.93
+  },
+  {
+   "seg": "s09",
+   "display": "over",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 22.955,
+   "end": 23.08
+  },
+  {
+   "seg": "s09",
+   "display": "the",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 23.105,
+   "end": 23.155
+  },
+  {
+   "seg": "s09",
+   "display": "coasts.",
+   "key": false,
+   "brk": "sentence",
+   "captions": true,
+   "start": 23.205,
+   "end": 23.645
+  },
+  {
+   "seg": "s10",
+   "display": "Then",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 24.13,
+   "end": 24.23
+  },
+  {
+   "seg": "s10",
+   "display": "the",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 24.255,
+   "end": 24.33
+  },
+  {
+   "seg": "s10",
+   "display": "wind.",
+   "key": true,
+   "brk": "sentence",
+   "captions": true,
+   "start": 24.38,
+   "end": 24.955
+  },
+  {
+   "seg": "s10",
+   "display": "Faster",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 25.13,
+   "end": 25.455
+  },
+  {
+   "seg": "s10",
+   "display": "than",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 25.48,
+   "end": 25.605
+  },
+  {
+   "seg": "s10",
+   "display": "sound,",
+   "key": true,
+   "brk": "clause",
+   "captions": true,
+   "start": 25.68,
+   "end": 26.03
+  },
+  {
+   "seg": "s10",
+   "display": "three",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 26.105,
+   "end": 26.28
+  },
+  {
+   "seg": "s10",
+   "display": "times",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 26.33,
+   "end": 26.63
+  },
+  {
+   "seg": "s10",
+   "display": "any",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 26.655,
+   "end": 26.805
+  },
+  {
+   "seg": "s10",
+   "display": "hurricane",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 26.855,
+   "end": 27.33
+  },
+  {
+   "seg": "s10",
+   "display": "on",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 27.355,
+   "end": 27.505
+  },
+  {
+   "seg": "s10",
+   "display": "record.",
+   "key": false,
+   "brk": "sentence",
+   "captions": true,
+   "start": 27.555,
+   "end": 27.94
+  },
+  {
+   "seg": "s11",
+   "display": "For",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 28.63,
+   "end": 28.73
+  },
+  {
+   "seg": "s11",
+   "display": "one",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 28.78,
+   "end": 28.955
+  },
+  {
+   "seg": "s11",
+   "display": "second,",
+   "key": false,
+   "brk": "clause",
+   "captions": true,
+   "start": 29.005,
+   "end": 29.43
+  },
+  {
+   "seg": "s11",
+   "display": "the",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 29.48,
+   "end": 29.53
+  },
+  {
+   "seg": "s11",
+   "display": "entire",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 29.58,
+   "end": 30.03
+  },
+  {
+   "seg": "s11",
+   "display": "atmosphere",
+   "key": true,
+   "brk": null,
+   "captions": true,
+   "start": 30.08,
+   "end": 30.605
+  },
+  {
+   "seg": "s11",
+   "display": "scours",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 30.68,
+   "end": 31.055
+  },
+  {
+   "seg": "s11",
+   "display": "the",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 31.08,
+   "end": 31.13
+  },
+  {
+   "seg": "s11",
+   "display": "surface.",
+   "key": false,
+   "brk": "sentence",
+   "captions": true,
+   "start": 31.18,
+   "end": 31.651
+  },
+  {
+   "seg": "s12",
+   "display": "But",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 33.626,
+   "end": 33.726
+  },
+  {
+   "seg": "s12",
+   "display": "there's",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 33.751,
+   "end": 33.926
+  },
+  {
+   "seg": "s12",
+   "display": "one",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 34.001,
+   "end": 34.201
+  },
+  {
+   "seg": "s12",
+   "display": "place",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 34.251,
+   "end": 34.501
+  },
+  {
+   "seg": "s12",
+   "display": "you'd",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 34.551,
+   "end": 34.676
+  },
+  {
+   "seg": "s12",
+   "display": "survive...",
+   "key": true,
+   "brk": "sentence",
+   "captions": true,
+   "start": 34.726,
+   "end": 35.307
+  },
+  {
+   "seg": "s13",
+   "display": "The",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 35.73,
+   "end": 35.78
+  },
+  {
+   "seg": "s13",
+   "display": "NORTH POLE",
+   "key": true,
+   "brk": "sentence",
+   "captions": true,
+   "start": 35.83,
+   "end": 36.639
+  },
+  {
+   "seg": "s14",
+   "display": "Up",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 37.03,
+   "end": 37.18
+  },
+  {
+   "seg": "s14",
+   "display": "there,",
+   "key": false,
+   "brk": "clause",
+   "captions": true,
+   "start": 37.23,
+   "end": 37.43
+  },
+  {
+   "seg": "s14",
+   "display": "you're",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 37.48,
+   "end": 37.58
+  },
+  {
+   "seg": "s14",
+   "display": "barely",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 37.63,
+   "end": 37.93
+  },
+  {
+   "seg": "s14",
+   "display": "moving",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 37.98,
+   "end": 38.255
+  },
+  {
+   "seg": "s14",
+   "display": "at",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 38.28,
+   "end": 38.33
+  },
+  {
+   "seg": "s14",
+   "display": "all.",
+   "key": false,
+   "brk": "sentence",
+   "captions": true,
+   "start": 38.38,
+   "end": 38.685
+  },
+  {
+   "seg": "s15",
+   "display": "So",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 39.13,
+   "end": 39.255
+  },
+  {
+   "seg": "s15",
+   "display": "when",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 39.28,
+   "end": 39.38
+  },
+  {
+   "seg": "s15",
+   "display": "the",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 39.405,
+   "end": 39.505
+  },
+  {
+   "seg": "s15",
+   "display": "Earth",
+   "key": false,
+   "brk": null,
+   "captions": true,
+   "start": 39.555,
+   "end": 39.755
+  },
+  {
+   "seg": "s15",
+   "display": "stops...",
+   "key": false,
+   "brk": "sentence",
+   "captions": true,
+   "start": 39.805,
+   "end": 40.455
+  }
+ ]
+}

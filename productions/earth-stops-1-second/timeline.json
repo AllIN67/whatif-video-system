@@ -1,0 +1,829 @@
+{
+ "_comment": "What if the Earth stopped spinning for 1 second? \u2013 Auftrag: 1080x1920, 60 fps, 35\u201345 s, Sprecher (Abweichungen vom Style-Guide siehe LOG.md). Kamera wird in scene.js gef\u00fchrt (driver: scene).",
+ "profile": "voiceover",
+ "fps": 60,
+ "duration": 41.0,
+ "seed": 11,
+ "pointe": 35.7,
+ "qa": {
+  "min_seconds": 35,
+  "max_seconds": 45
+ },
+ "post": {
+  "vignette": 0.32,
+  "grain": 0.035
+ },
+ "shots": [
+  {
+   "id": "hook",
+   "from": 0,
+   "to": 2.15,
+   "camera": {
+    "driver": "scene",
+    "keys": [
+     {
+      "t": 0,
+      "pos": [
+       0,
+       0,
+       10
+      ],
+      "look": [
+       0,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "ny",
+   "from": 2.15,
+   "to": 4.6,
+   "camera": {
+    "driver": "scene",
+    "keys": [
+     {
+      "t": 2.15,
+      "pos": [
+       0,
+       0,
+       10
+      ],
+      "look": [
+       0,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "street",
+   "from": 4.6,
+   "to": 7.7,
+   "camera": {
+    "driver": "scene",
+    "keys": [
+     {
+      "t": 4.6,
+      "pos": [
+       0,
+       0,
+       10
+      ],
+      "look": [
+       0,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "stop",
+   "from": 7.7,
+   "to": 9.6,
+   "camera": {
+    "driver": "scene",
+    "keys": [
+     {
+      "t": 7.7,
+      "pos": [
+       0,
+       0,
+       10
+      ],
+      "look": [
+       0,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "fly",
+   "from": 9.6,
+   "to": 12.6,
+   "camera": {
+    "driver": "scene",
+    "keys": [
+     {
+      "t": 9.6,
+      "pos": [
+       0,
+       0,
+       10
+      ],
+      "look": [
+       0,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "flywide",
+   "from": 12.6,
+   "to": 15.1,
+   "camera": {
+    "driver": "scene",
+    "keys": [
+     {
+      "t": 12.6,
+      "pos": [
+       0,
+       0,
+       10
+      ],
+      "look": [
+       0,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "buildings",
+   "from": 15.1,
+   "to": 16.6,
+   "camera": {
+    "driver": "scene",
+    "keys": [
+     {
+      "t": 15.1,
+      "pos": [
+       0,
+       0,
+       10
+      ],
+      "look": [
+       0,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "distance",
+   "from": 16.6,
+   "to": 20.1,
+   "camera": {
+    "driver": "scene",
+    "keys": [
+     {
+      "t": 16.6,
+      "pos": [
+       0,
+       0,
+       10
+      ],
+      "look": [
+       0,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "ocean",
+   "from": 20.1,
+   "to": 24.1,
+   "camera": {
+    "driver": "scene",
+    "keys": [
+     {
+      "t": 20.1,
+      "pos": [
+       0,
+       0,
+       10
+      ],
+      "look": [
+       0,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "wind1",
+   "from": 24.1,
+   "to": 26.4,
+   "camera": {
+    "driver": "scene",
+    "keys": [
+     {
+      "t": 24.1,
+      "pos": [
+       0,
+       0,
+       10
+      ],
+      "look": [
+       0,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "wind2",
+   "from": 26.4,
+   "to": 28.6,
+   "camera": {
+    "driver": "scene",
+    "keys": [
+     {
+      "t": 26.4,
+      "pos": [
+       0,
+       0,
+       10
+      ],
+      "look": [
+       0,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "atmo1",
+   "from": 28.6,
+   "to": 31.2,
+   "camera": {
+    "driver": "scene",
+    "keys": [
+     {
+      "t": 28.6,
+      "pos": [
+       0,
+       0,
+       10
+      ],
+      "look": [
+       0,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "atmo2",
+   "from": 31.2,
+   "to": 33.6,
+   "camera": {
+    "driver": "scene",
+    "keys": [
+     {
+      "t": 31.2,
+      "pos": [
+       0,
+       0,
+       10
+      ],
+      "look": [
+       0,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "twist",
+   "from": 33.6,
+   "to": 37.0,
+   "camera": {
+    "driver": "scene",
+    "keys": [
+     {
+      "t": 33.6,
+      "pos": [
+       0,
+       0,
+       10
+      ],
+      "look": [
+       0,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "pole",
+   "from": 37.0,
+   "to": 39.1,
+   "camera": {
+    "driver": "scene",
+    "keys": [
+     {
+      "t": 37.0,
+      "pos": [
+       0,
+       0,
+       10
+      ],
+      "look": [
+       0,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "loop",
+   "from": 39.1,
+   "to": 41.0,
+   "camera": {
+    "driver": "scene",
+    "keys": [
+     {
+      "t": 39.1,
+      "pos": [
+       0,
+       0,
+       10
+      ],
+      "look": [
+       0,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "events": [
+  {
+   "id": "stop",
+   "t": 8.25,
+   "trigger": true
+  },
+  {
+   "id": "ny_pin",
+   "t": 2.6
+  },
+  {
+   "id": "counter_spike",
+   "t": 9.65
+  },
+  {
+   "id": "buildings",
+   "t": 15.2
+  },
+  {
+   "id": "wave",
+   "t": 20.3
+  },
+  {
+   "id": "wind",
+   "t": 24.2
+  },
+  {
+   "id": "atmosphere",
+   "t": 28.7
+  },
+  {
+   "id": "music_drop",
+   "t": 33.5
+  },
+  {
+   "id": "pole",
+   "t": 35.7
+  },
+  {
+   "id": "loop",
+   "t": 39.1
+  }
+ ],
+ "motion_blur": [
+  {
+   "from": 2.15,
+   "to": 4.6,
+   "samples": 3,
+   "shutter": 0.5
+  },
+  {
+   "from": 8.25,
+   "to": 9.6,
+   "samples": 3,
+   "shutter": 0.6
+  },
+  {
+   "from": 9.6,
+   "to": 16.6,
+   "samples": 4,
+   "shutter": 0.6
+  },
+  {
+   "from": 16.6,
+   "to": 20.1,
+   "samples": 2,
+   "shutter": 0.5
+  },
+  {
+   "from": 20.1,
+   "to": 28.6,
+   "samples": 3,
+   "shutter": 0.5
+  },
+  {
+   "from": 28.6,
+   "to": 33.6,
+   "samples": 3,
+   "shutter": 0.6
+  }
+ ],
+ "captions": {
+  "words": "voice/words.json",
+  "center_y": 0.255,
+  "size": 90,
+  "key_scale": 1.32,
+  "max_words": 3,
+  "highlight": "#FFE135",
+  "max_width": 0.7
+ },
+ "callouts": [
+  {
+   "id": "hook",
+   "kind": "title",
+   "in": 0,
+   "out": 2.12,
+   "y": 0.26,
+   "size": 150,
+   "line_at": [
+    0,
+    0,
+    1.12
+   ],
+   "pop": false
+  },
+  {
+   "id": "speed_ny",
+   "kind": "counter",
+   "in": 3.7,
+   "out": 7.65,
+   "y": 0.64,
+   "size": 210,
+   "from": 0,
+   "to": 790,
+   "count": [
+    3.75,
+    5.95
+   ],
+   "ease": "out"
+  },
+  {
+   "id": "rel_speed",
+   "kind": "counter",
+   "in": 9.62,
+   "out": 15.05,
+   "y": 0.64,
+   "size": 210,
+   "from": 0,
+   "to": 790,
+   "count": [
+    9.62,
+    10.05
+   ],
+   "ease": "out",
+   "tint": [
+    [
+     0,
+     "#ff5040"
+    ]
+   ],
+   "shake": [
+    {
+     "t": 9.62,
+     "dur": 1.4,
+     "amp": 26
+    },
+    {
+     "t": 13.14,
+     "dur": 0.6,
+     "amp": 12
+    }
+   ]
+  },
+  {
+   "id": "distance",
+   "kind": "counter",
+   "in": 16.75,
+   "out": 20.05,
+   "y": 0.64,
+   "size": 200,
+   "from": 0,
+   "to": 1155,
+   "count": [
+    16.8,
+    19.45
+   ],
+   "ease": "inOut"
+  },
+  {
+   "id": "ocean_speed",
+   "kind": "counter",
+   "in": 20.4,
+   "out": 24.05,
+   "y": 0.64,
+   "size": 190,
+   "from": 0,
+   "to": 1040,
+   "count": [
+    20.45,
+    21.4
+   ],
+   "ease": "out"
+  },
+  {
+   "id": "wind_speed",
+   "kind": "counter",
+   "in": 24.2,
+   "out": 28.55,
+   "y": 0.64,
+   "size": 200,
+   "from": 0,
+   "to": 790,
+   "count": [
+    24.25,
+    24.95
+   ],
+   "ease": "out",
+   "shake": [
+    {
+     "t": 24.38,
+     "dur": 1.0,
+     "amp": 14
+    }
+   ]
+  },
+  {
+   "id": "sound",
+   "kind": "text",
+   "in": 25.68,
+   "out": 26.35,
+   "y": 0.735,
+   "size": 54
+  },
+  {
+   "id": "hurricane",
+   "kind": "text",
+   "in": 26.4,
+   "out": 28.55,
+   "y": 0.735,
+   "size": 54
+  },
+  {
+   "id": "pole_speed",
+   "kind": "counter",
+   "in": 35.75,
+   "out": 39.05,
+   "y": 0.72,
+   "size": 210,
+   "from": 790,
+   "to": 0,
+   "count": [
+    35.8,
+    37.4
+   ],
+   "ease": "inOut",
+   "tint": [
+    [
+     0,
+     "#ffffff"
+    ],
+    [
+     37.4,
+     "#5dff9d"
+    ]
+   ]
+  }
+ ],
+ "audio": {
+  "fade_out": 0.6,
+  "music": {
+   "main": {
+    "bpm": 104,
+    "root": "D",
+    "duration": 41.0,
+    "seed": 5,
+    "sections": [
+     {
+      "from": 0,
+      "to": 7.65,
+      "style": "pulse"
+     },
+     {
+      "from": 7.65,
+      "to": 9.55,
+      "style": "silence"
+     },
+     {
+      "from": 9.55,
+      "to": 20.1,
+      "style": "drive"
+     },
+     {
+      "from": 20.1,
+      "to": 33.45,
+      "style": "drive_hi"
+     },
+     {
+      "from": 33.45,
+      "to": 41.0,
+      "style": "calm"
+     }
+    ]
+   }
+  },
+  "beds": [
+   {
+    "src": "music:main",
+    "start": 0,
+    "end": 41.0,
+    "gain_db": -4,
+    "duck_db": -9,
+    "automation": [
+     [
+      0,
+      -3
+     ],
+     [
+      7.4,
+      0
+     ],
+     [
+      9.55,
+      -2
+     ],
+     [
+      20.1,
+      0
+     ],
+     [
+      28.6,
+      2
+     ],
+     [
+      33.4,
+      2
+     ],
+     [
+      33.6,
+      -4
+     ],
+     [
+      41,
+      -4
+     ]
+    ]
+   }
+  ],
+  "voice": {
+   "src": "render/voice/voice.wav",
+   "words": "voice/words.json",
+   "gain_db": 0
+  },
+  "sfx": [
+   {
+    "src": "gen:whoosh",
+    "t": 1.85,
+    "gain_db": -8
+   },
+   {
+    "src": "gen:riser",
+    "t": 4.25,
+    "gain_db": -12
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 4.4,
+    "gain_db": -10
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 7.5,
+    "gain_db": -10
+   },
+   {
+    "src": "gen:impact",
+    "t": 8.25,
+    "gain_db": -1
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 9.3,
+    "gain_db": -6
+   },
+   {
+    "src": "gen:rumble",
+    "t": 9.6,
+    "gain_db": -8
+   },
+   {
+    "src": "gen:hit",
+    "t": 9.65,
+    "gain_db": -12
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 12.4,
+    "gain_db": -9
+   },
+   {
+    "src": "gen:boom",
+    "t": 15.1,
+    "gain_db": -7
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 16.4,
+    "gain_db": -10
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 19.8,
+    "gain_db": -8
+   },
+   {
+    "src": "gen:rumble",
+    "t": 20.1,
+    "gain_db": -7
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 23.8,
+    "gain_db": -8
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 26.2,
+    "gain_db": -9
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 28.3,
+    "gain_db": -8
+   },
+   {
+    "src": "gen:rumble",
+    "t": 28.6,
+    "gain_db": -6
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 31.0,
+    "gain_db": -11
+   },
+   {
+    "src": "gen:hit",
+    "t": 35.75,
+    "gain_db": -14
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 36.8,
+    "gain_db": -12
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 38.8,
+    "gain_db": -10
+   }
+  ]
+ },
+ "encode": {
+  "crf": 18
+ }
+}

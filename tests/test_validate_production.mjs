@@ -54,6 +54,8 @@ test('gültige Produktion: keine Fehler', () => {
 test('Regelverstöße werden einzeln erkannt', () => {
   const cases = [
     [(v) => { v.timeline.duration = 90; v.timeline.shots.at(-1).to = 90; }, /Länge 90/],
+    [(v) => { v.timeline.qa = { min_seconds: 40 }; }, /Mindestlänge 60 s/],
+    [(v) => { v.timeline.duration = 45; v.timeline.shots = v.timeline.shots.filter((x) => x.from < 45); v.timeline.shots.at(-1).to = 45; v.timeline.pointe = 42; v.timeline.lines = v.timeline.lines.filter((l) => l.out <= 45); v.timeline.hud[2].value.keys = [[40, 0], [45, 1]]; v.timeline.hud[2].final.at = 42; }, /unter der Mindestlänge 60 s/],
     [(v) => { v.text.title.text = 'What if the sky above every single city on our planet turned off?'; }, /Wörter \(max\. 10\)/],
     [(v) => { v.text.title.text = 'The sky turned off.'; v.text.title.highlight = 'sky'; }, /What if|„\?“/],
     [(v) => { v.timeline.title.in = 1; }, /ab Frame 0/],

@@ -102,5 +102,22 @@ class AudioMixTest(unittest.TestCase):
             audio_mix.mix(self.d)
 
 
+class DuckingCurves(unittest.TestCase):
+    """Absenkung der Musik unter dem Sprecher: Sprechphasen, Rampen, Addition zur Automation."""
+
+    def test_speech_intervals_merge_short_gaps(self):
+        words = [{"start": 1.0, "end": 1.4}, {"start": 1.5, "end": 2.0}, {"start": 3.0, "end": 3.5}]
+        self.assertEqual(audio_mix.speech_intervals(words, 0.45), [[1.0, 2.0], [3.0, 3.5]])
+
+    def test_duck_plus_automation(self):
+        duck = audio_mix.duck_points([[2.0, 4.0]], -10, 0.1, 0.3)
+        auto = [(0, -3), (10, 3)]
+        c = audio_mix.add_curves(auto, duck)
+        self.assertAlmostEqual(audio_mix.curve_at(c, 0.0), -3.0, places=3)
+        self.assertAlmostEqual(audio_mix.curve_at(c, 3.0), -3 + 0.6 * 3 - 10, places=3)
+        self.assertAlmostEqual(audio_mix.curve_at(c, 5.0), 0.0, places=3)
+        self.assertAlmostEqual(audio_mix.curve_at(c, 1.95), -3 + 0.6 * 1.95 - 5, places=3)  # Rampe halb
+
+
 if __name__ == "__main__":
     unittest.main()

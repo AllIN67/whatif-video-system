@@ -1,0 +1,87 @@
+{
+ "_comment": "Sprechertext (auf ausdrücklichen Auftrag des Nutzers, Abweichung von Style-Guide 9.1 – siehe LOG.md). Markup: {gesprochen|ANZEIGE}, *Schlüsselwort*. Zahlen ausschreiben.",
+ "voice": "am_michael",
+ "speed": 1.26,
+ "lang": "en-us",
+ "sentence_pause": 0.14,
+ "clause_pause": 0.06,
+ "gap": 0.2,
+ "segments": [
+  {
+   "id": "s01",
+   "at": 0.1,
+   "captions": false,
+   "text": "The Earth stops. For one second."
+  },
+  {
+   "id": "s02",
+   "at": 2.15,
+   "text": "Right now in New York, you're spinning at {seven hundred ninety miles per hour|*790 MPH*}..."
+  },
+  {
+   "id": "s03",
+   "at": 6.2,
+   "text": "and you don't even feel it."
+  },
+  {
+   "id": "s04",
+   "at": 7.7,
+   "text": "Then... it *stops.*"
+  },
+  {
+   "id": "s05",
+   "at": 9.6,
+   "text": "But you don't."
+  },
+  {
+   "id": "s06",
+   "at": 10.6,
+   "text": "People, cars, everything flies *east* at {seven hundred ninety miles per hour|*790 MPH*}."
+  },
+  {
+   "id": "s07",
+   "at": 15.1,
+   "text": "Buildings rip apart."
+  },
+  {
+   "id": "s08",
+   "at": 16.6,
+   "text": "In that one second, you'd fly over {a thousand feet|*1,000 FEET*}."
+  },
+  {
+   "id": "s09",
+   "at": 20.1,
+   "text": "The *oceans* keep moving too. Walls of water surge over the coasts."
+  },
+  {
+   "id": "s10",
+   "at": 24.1,
+   "text": "Then the *wind.* Faster than *sound,* three times any hurricane on record."
+  },
+  {
+   "id": "s11",
+   "at": 28.6,
+   "text": "For one second, the entire *atmosphere* scours the surface."
+  },
+  {
+   "id": "s12",
+   "at": 33.6,
+   "text": "But there's one place you'd *survive...*"
+  },
+  {
+   "id": "s13",
+   "at": 35.7,
+   "text": "The {North Pole|*NORTH POLE*}."
+  },
+  {
+   "id": "s14",
+   "at": 37.0,
+   "text": "Up there, you're barely moving at all."
+  },
+  {
+   "id": "s15",
+   "at": 39.1,
+   "text": "So when the Earth stops..."
+  }
+ ]
+}

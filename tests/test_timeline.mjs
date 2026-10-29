@@ -54,7 +54,7 @@ test('prepare: Fehlerfälle', () => {
   const lang = base(); lang.shots[1].transition_in = { type: 'whip', frames: 20 };
   assert.throws(() => prepare(lang), /außerhalb/);
   const fps = base(); fps.fps = 24;
-  assert.throws(() => prepare(fps), /30 fps/);
+  assert.throws(() => prepare(fps), /fps 24 nicht erlaubt/);
   const kurz = { fps: 30, duration: 0.1, shots: [{ id: 'x', from: 0, to: 0.1, camera: { keys: [cam(0, 0)] } }] };
   assert.throws(() => prepare(kurz), /4 Frames/);
 });
@@ -112,4 +112,24 @@ test('HUD: Segmentwechsel, Wert, Fortschritt', () => {
   assert.equal(hudAt(p, 1).progress, 0.5);
   assert.equal(hudAt(p, 2.5).id, 'h2');
   assert.equal(hudAt(p, 3).value, 25);
+});
+
+test('prepare: 60 fps – Übergangsgrenzen in Sekunden gleich, Frames doppelt', () => {
+  const t60 = base();
+  t60.fps = 60;
+  t60.shots[1].transition_in = { type: 'whip', frames: 20 }; // 20 Frames bei 60 fps = 10 Frames bei 30 fps
+  t60.shots[2].transition_in = { type: 'dip', frames: 12 };
+  t60.shots[3].transition_in = { type: 'flash', frames: 16 };
+  const p = prepare(t60);
+  assert.equal(p.total, 240);
+  assert.equal(p.shots[1].from, 60);
+  const zuLang = base();
+  zuLang.fps = 60;
+  zuLang.shots[1].transition_in = { type: 'whip', frames: 30 };
+  assert.throws(() => prepare(zuLang), /außerhalb 12–24/);
+  // gebrochene Frames (Teilbilder für Bewegungsunschärfe) liefern stetige Kamera
+  const a = cameraAt(p, 10).pos[0];
+  const b = cameraAt(p, 10.5).pos[0];
+  const c = cameraAt(p, 11).pos[0];
+  assert.ok(a < b && b < c);
 });

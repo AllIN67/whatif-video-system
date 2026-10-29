@@ -63,9 +63,12 @@ RENDER_SPEC = {
     "av_duration_diff_max": 0.10,
     "lra_min": 6.0,
     "lra_max": 16.0,
-    "min_seconds": 61.0,
+    "min_seconds": 60.0,
     "max_seconds": 80.0,
 }
+
+# Harte Mindestlänge für jedes fertige Video, alle Stile (Style-Guide 10.1). Nicht über --plan absenkbar.
+MIN_SECONDS = 60.0
 
 
 def run(cmd, capture="stderr"):
@@ -436,6 +439,17 @@ def apply_plan(plan_path, frames, v, a, fps):
         a["loudness_jumps"] = [j for j in a["loudness_jumps"] if not near(j["t"], cues + auto, 0.4)]
 
 
+def is_technical_clip(path):
+    """Technische Test-Clips: unter tests/ oder in productions/_<name>/ (Unterstrich = keine Veröffentlichung)."""
+    parts = os.path.normpath(os.path.abspath(path)).split(os.sep)
+    if "tests" in parts:
+        return True
+    if "productions" in parts:
+        i = parts.index("productions")
+        return i + 1 < len(parts) and parts[i + 1].startswith("_")
+    return True  # Dateien außerhalb von productions/ (z. B. synthetische Prüfvideos)
+
+
 def evaluate(info, v, a, black, freezes, ignore_length=False):
     """Nur im render-Modus: Bewertung gegen RENDER_SPEC. Liefert (status, findings)."""
     S = RENDER_SPEC
@@ -589,9 +603,22 @@ def main():
     ap.add_argument("--no-sheets", action="store_true", help="keine Kontaktbögen erzeugen")
     ap.add_argument("--plan", help="timeline.json der Produktion: Kandidaten an geplanten Übergängen/Ton-Ereignissen trennen")
     ap.add_argument("--ignore-length", action="store_true",
-                    help="Längenprüfung 61–80 s auslassen (nur für technische Test-Clips)")
+                    help="Längenprüfung auslassen – nur für technische Test-Clips (tests/…, productions/_…), nie für Videos")
     args = ap.parse_args()
+    if args.ignore_length and args.mode == "render" and not is_technical_clip(args.video):
+        sys.exit(f"--ignore-length ist nur für technische Test-Clips erlaubt, nicht für {args.video} "
+                 f"(Mindestlänge {MIN_SECONDS:.0f} s gilt für jedes Video)")
     os.makedirs(args.out, exist_ok=True)
+    if args.plan:
+        # Produktionsspezifische Vorgaben aus timeline.json: Bildrate und – bei vom Style-Guide
+        # abweichendem Auftrag – Längenbereich ("qa": {"min_seconds": …, "max_seconds": …}).
+        tl = json.load(open(args.plan))
+        RENDER_SPEC["fps"] = float(tl.get("fps", 30))
+        for k in ("min_seconds", "max_seconds"):
+            if k in tl.get("qa", {}):
+                RENDER_SPEC[k] = float(tl["qa"][k])
+        # Die Mindestlänge kann der Plan nur anheben, nie unter 60 s senken.
+        RENDER_SPEC["min_seconds"] = max(MIN_SECONDS, RENDER_SPEC["min_seconds"])
 
     info = probe(args.video)
     fps = info["video"]["avg_frame_rate"] or info["video"]["r_frame_rate"]

@@ -19,7 +19,10 @@ Nicht verwenden für andere Projekte. Insbesondere gilt in diesem Repository **n
 
 ## Schritt 0 – Laden
 
-1. `WHATIF_STYLE_GUIDE.md` vollständig lesen, **zuerst Abschnitt 16 (Erfolgsrezepte)**. Jedes Video folgt Rezept A oder B; im LOG festhalten, welches.
+1. **Produktionsstil bestimmen:** Der Auftrag nennt `PRODUKTIONSSTIL: A (Earth)` oder `PRODUKTIONSSTIL: B (TikTok-Referenz)`. Fehlt die Angabe oder ist sie unklar: **nachfragen und nichts planen**, nie selbst wählen. Bei Stil B Rezept B1 (Standard) oder B2 festlegen. Stil und Rezept ins LOG.
+   - Stil A: `STYLE_A_EARTH.md` lesen, Referenz `productions/earth-stops-1-second/` (`scene_plan.md`, `timeline.json`, `voiceover.json`); dazu aus dem Guide die gemeinsamen Abschnitte (dort aufgezählt).
+   - Stil B: `WHATIF_STYLE_GUIDE.md` lesen, **zuerst Abschnitt 16 (Rezepte B1/B2)** und 17.
+   - Stile nicht mischen (Guide 17). **Jedes Video ≥ 60 s** – Länge über zusätzliche Konsequenzen und visuelle Entwicklung, nie über Leerlauf.
 2. `VIDEO_PRODUCTION_CHECKLIST.md` lesen – sie ist die Abhakliste für diesen Ablauf.
 3. Bei Stil- oder Begründungsfragen: `REFERENCE_ANALYSIS.md` und `references/analysis/MEASUREMENTS.md`.
 4. Bei Überarbeitung: vorhandenes `productions/<slug>/LOG.md` lesen.
