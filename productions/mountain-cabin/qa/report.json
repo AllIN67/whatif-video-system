@@ -3,8 +3,8 @@
  "mode": "render",
  "probe": {
   "duration": 63.0,
-  "size_bytes": 66673654,
-  "bitrate_kbps": 8466,
+  "size_bytes": 66750260,
+  "bitrate_kbps": 8476,
   "video": {
    "codec": "h264",
    "width": 1080,
@@ -208,7 +208,7 @@
   ],
   "first_cut_s": 4.5,
   "first_shot_change_s": 4.5,
-  "mean_luma": 72.9,
+  "mean_luma": 73.1,
   "mean_motion_ydif": 3.77,
   "planned_transitions": [
    {
@@ -334,7 +334,7 @@
     "t": 39.0,
     "type": "cut",
     "frames": 0,
-    "peak_ydif": 37.97,
+    "peak_ydif": 35.69,
     "visible": true
    },
    {
@@ -453,7 +453,7 @@
  },
  "audio": {
   "integrated_lufs": -14.1,
-  "lra_lu": 6.7,
+  "lra_lu": 6.8,
   "true_peak_dbtp": -1.1,
   "short_term_lufs_per_s": [
    [
@@ -614,11 +614,11 @@
    ],
    [
     40,
-    -15.6
+    -15.4
    ],
    [
     41,
-    -16.2
+    -16.0
    ],
    [
     42,
@@ -626,11 +626,11 @@
    ],
    [
     43,
-    -18.5
+    -18.8
    ],
    [
     44,
-    -18.4
+    -18.5
    ],
    [
     45,
@@ -642,7 +642,7 @@
    ],
    [
     47,
-    -17.6
+    -17.5
    ],
    [
     48,
@@ -712,10 +712,10 @@
   "loudness_jumps": [],
   "silences": [],
   "peak_dbfs": -1.123868,
-  "rms_dbfs": -15.587864,
+  "rms_dbfs": -15.586439,
   "flat_factor": 0.0,
   "peak_count": 2.0,
-  "dc_offset": -0.004377,
+  "dc_offset": -0.004378,
   "nans": 0.0,
   "click_candidates": [
    {
@@ -729,9 +729,9 @@
     "context_median_db": -40.7
    },
    {
-    "t": 45.16,
-    "hf_peak_db": -15.9,
-    "context_median_db": -36.2
+    "t": 44.98,
+    "hf_peak_db": -15.3,
+    "context_median_db": -36.4
    },
    {
     "t": 46.86,
@@ -751,27 +751,32 @@
    {
     "t": 48.46,
     "hf_peak_db": -15.1,
-    "context_median_db": -37.5
+    "context_median_db": -37.4
    },
    {
-    "t": 57.89,
-    "hf_peak_db": -18.0,
-    "context_median_db": -38.6
+    "t": 57.71,
+    "hf_peak_db": -17.7,
+    "context_median_db": -38.3
    },
    {
-    "t": 60.08,
-    "hf_peak_db": -23.9,
-    "context_median_db": -44.0
+    "t": 58.89,
+    "hf_peak_db": -18.9,
+    "context_median_db": -40.3
    },
    {
-    "t": 60.53,
-    "hf_peak_db": -24.3,
-    "context_median_db": -47.5
+    "t": 60.05,
+    "hf_peak_db": -24.5,
+    "context_median_db": -44.7
+   },
+   {
+    "t": 60.49,
+    "hf_peak_db": -22.6,
+    "context_median_db": -47.6
    }
   ],
   "first_50ms_rms_db": -74.710077,
-  "last_50ms_rms_db": -55.617065,
-  "last_1s_rms_db": -29.396308,
+  "last_50ms_rms_db": -55.61813,
+  "last_1s_rms_db": -29.398618,
   "planned_click_candidates": [
    {
     "t": 10.2,
@@ -784,19 +789,19 @@
     "context_median_db": -33.5
    },
    {
-    "t": 45.66,
-    "hf_peak_db": -16.0,
-    "context_median_db": -40.6
+    "t": 45.6,
+    "hf_peak_db": -17.6,
+    "context_median_db": -39.6
    },
    {
     "t": 46.2,
-    "hf_peak_db": -18.2,
+    "hf_peak_db": -17.9,
     "context_median_db": -38.8
    },
    {
     "t": 48.94,
     "hf_peak_db": -16.7,
-    "context_median_db": -37.7
+    "context_median_db": -37.6
    },
    {
     "t": 49.5,
@@ -804,28 +809,21 @@
     "context_median_db": -38.5
    },
    {
-    "t": 50.09,
-    "hf_peak_db": -15.0,
-    "context_median_db": -36.8
+    "t": 50.04,
+    "hf_peak_db": -16.6,
+    "context_median_db": -36.7
    }
   ],
   "planned_loudness_jumps": []
  },
- "black": [
-  [
-   39.3333,
-   39.4667
-  ]
- ],
+ "black": [],
  "freezes": [],
- "status": "FAIL",
- "fails": [
-  "Schwarzbilder: [(39.3333, 39.4667)]"
- ],
+ "status": "REVIEW",
+ "fails": [],
  "reviews": [
   "Sprungkandidaten ohne Schnitt: [34.033, 34.067, 34.167, 34.2]",
   "Flacker-Kandidaten: [34.067]",
   "Geplante Übergänge im Bild nicht erkennbar (prüfen): [19.0, 29.6]",
-  "Klick-Kandidaten (anhören!): [0.28, 1.7, 45.16, 46.86, 47.46, 48.06, 48.46, 57.89, 60.08, 60.53]"
+  "Klick-Kandidaten (anhören!): [0.28, 1.7, 44.98, 46.86, 47.46, 48.06, 48.46, 57.71, 58.89, 60.05, 60.49]"
  ]
 }
