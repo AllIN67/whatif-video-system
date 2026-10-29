@@ -288,7 +288,7 @@ Diese Merkmale sind gestalterische Entscheidungen, keine belegten Erfolgsfaktore
 | Eigenschaft | Wert |
 |---|---|
 | Auflösung | 1080 × 1920, quadratische Pixel, vollflächig |
-| Bildrate | **30 fps konstant** (CFR); r_frame_rate = avg_frame_rate = 30/1 |
+| Bildrate | konstant (CFR): **Stil B 30 fps**, **Stil A 60 fps** (`STYLE_A_EARTH.md`); r_frame_rate = avg_frame_rate |
 | Video | H.264 High, yuv420p, BT.709, CRF ≤ 18 oder ≥ 12 Mbit/s |
 | Audio | AAC-LC, 48 kHz, Stereo, ≥ 192 kbit/s |
 | Container | MP4, `+faststart` |
@@ -369,7 +369,7 @@ Claude Code kann Audio messen, aber **nicht hören**. Deshalb gilt **[V]**: Vor 
 
 ## 13. Verbindlich vs. situativ – Übersicht
 
-**Verbindlich [V]:** What-if-Format; Englisch in Phase 1 mit externen Textdateien; Frame 0 mit Szene + Titel + HUD; Titel ≤ 10 Wörter; HUD ändert sich in 2 s; Ereignis bis 10 s; monotone Eskalation mit festgelegter Pointe; Textregeln (Zeilenlänge, Anzeigedauer, Bild vor Text); ein Kamera-Paradigma pro Video; Augenhöhe; nur echte 3D-Kamera; stilisierte 3D-Welt vollflächig; Blitzregel; Typografie-Mindestgrößen, Sicherheitszone, Scrim; Erkennungsmerkmale 6.4; Kontinuität; Zustandsänderung spätestens alle 6 s; Text blendet vor Schnitt aus; Ende ≤ 5 s nach Pointe; kein Sprecher; lizenzierte Musik; Tonakzente framegenau; Clip-Fades; Mischwerte; technische Ausgabe 10.1; deterministisches Rendern; QA 11.1–11.4; keine realen Personen/Logos.
+**Verbindlich [V]** (für Stil B; Stil A weicht bei Sprecher, Textebene, Bildrate und Kamera ab – `STYLE_A_EARTH.md`; Mindestlänge 60 s gilt für beide): What-if-Format; Englisch in Phase 1 mit externen Textdateien; Frame 0 mit Szene + Titel + HUD; Titel ≤ 10 Wörter; HUD ändert sich in 2 s; Ereignis bis 10 s; monotone Eskalation mit festgelegter Pointe; Textregeln (Zeilenlänge, Anzeigedauer, Bild vor Text); ein Kamera-Paradigma pro Video; Augenhöhe; nur echte 3D-Kamera; stilisierte 3D-Welt vollflächig; Blitzregel; Typografie-Mindestgrößen, Sicherheitszone, Scrim; Erkennungsmerkmale 6.4; Kontinuität; Zustandsänderung spätestens alle 6 s; Text blendet vor Schnitt aus; Ende ≤ 5 s nach Pointe; kein Sprecher; lizenzierte Musik; Tonakzente framegenau; Clip-Fades; Mischwerte; technische Ausgabe 10.1; deterministisches Rendern; QA 11.1–11.4; keine realen Personen/Logos.
 
 **Situativ [S]:** Schlüsselwort-Farbe, Formulierung der ersten Zeile, globale/persönliche Wechsel, Anzahl HUD-Label-Wechsel, „HERE“-Countdown, benannte Figur, Schnitttakt je Paradigma, Ruhephasen, Abschlussvariante, Kamera-Wackeln, Effektfunktionen, instrumentale Musik, Themenpool und Themenausschlüsse.
 

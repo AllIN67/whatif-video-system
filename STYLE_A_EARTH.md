@@ -29,7 +29,7 @@ Die Referenz ist der **Quellcode** dieser Produktion; das Video ist daraus bit-g
 | Effekte | Bewegungsunschärfe aus Teilbildern (`timeline.motion_blur`), Vignette, Filmkorn beim Endencode, Blitz/Aberration/Shake nur am Schlüsselereignis |
 | Ton | Stimme vorn, Musik per Code (`tools/music_synth.py`) unter der Stimme geduckt, SFX auf Schnitten und Ereignissen, bewusste Stille vor dem Ereignis |
 | Ende | Pointe/Wendung, dann **Loop**: letzte Einstellung endet im Zustand von Frame 0, letzter Satz läuft in den Hook |
-| Bildrate | 60 fps in der Referenz (auf Auftrag); 30 fps erlaubt – Wirkung von 60 fps ist nicht belegt [H] |
+| Bildrate | **60 fps** (Festlegung des Auftraggebers, 2026-10-29); Wirkung gegenüber 30 fps nicht belegt [H] |
 
 ## 2. Dramaturgie (für ≥ 60 s)
 
@@ -38,7 +38,7 @@ Die Referenz ist der **Quellcode** dieser Produktion; das Video ist daraus bit-g
 | Hook | 0–1,5 s | starkes Bild + Bildschirmtext ab Frame 0 |
 | Spannung | bis ≈ 8–10 s | Ausgangslage mit Zahl („790 mph – and you don't even feel it“) |
 | Moment | spätestens 10 s | das Ereignis selbst, mit Ton-Akzent oder Stille davor |
-| Eskalation | bis ≈ 80 % | **mindestens 5 Folgen**, jede eine neue Konsequenz (Mensch → Straße → Stadt → Planet …), Wechsel global ↔ persönlich |
+| Eskalation | bis ≈ 80 % | Folgen in sinnvoller Anzahl – **keine feste Mindestzahl**; jede Folge ist eine neue Konsequenz (Mensch → Straße → Stadt → Planet …), Wechsel global ↔ persönlich. Maßstab ist eine tragfähige Dramaturgie über mindestens 60 s |
 | Wendung | ≈ 80–92 % | „But there's one place …“ – Gegenpol/Auflösung |
 | Loop | letzte 2–5 s | Rückführung ins erste Bild |
 
@@ -66,4 +66,4 @@ Renderzeit der Referenz: ≈ 1,0–1,9 s pro Frame bei 60 fps und Bewegungsunsch
 - Eine veröffentlichungsfähige Fassung bräuchte ≈ 20 s zusätzliche Dramaturgie: zusätzliche Folgen (mit Quellen),
   einen weiteren Wechsel global ↔ persönlich, eine längere Auflösung am Nordpol; dazu neue Sprechersegmente,
   Einstellungen, Einblendungen und Musikplan, danach ein kompletter Neu-Render und vollständige QA.
-- Die Struktur des ursprünglichen Auftrags („3 Folgen à ≤ 4 s“) wird für Stil A zu „mindestens 5 Folgen“ (Abschnitt 2).
+- Eine feste Zahl von Folgen gibt es nicht (Entscheidung des Auftraggebers, 2026-10-29); die Länge von ≥ 60 s muss aus der Dramaturgie entstehen (Abschnitt 2–3).
