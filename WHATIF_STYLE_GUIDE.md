@@ -1,7 +1,7 @@
 # WHATIF STYLE GUIDE
 
 **Maßgebliche kreative und technische Grundlage für alle Videos dieses Projekts.**
-Version 1.1 · 2026-10-27 · Belegbasis: `REFERENCE_ANALYSIS.md` (15 Referenzen, R01–R15) und `references/analysis/MEASUREMENTS.md`.
+Version 1.2 · 2026-10-29 · Belegbasis: `REFERENCE_ANALYSIS.md` (R01–R15), Abschnitt 16 (R16–R18) und `references/analysis/MEASUREMENTS.md`.
 
 Kennzeichnung der Regeln:
 
@@ -391,6 +391,46 @@ Claude Code kann Audio messen, aber **nicht hören**. Deshalb gilt **[V]**: Vor 
 - **Originalqualität der Referenzen** (nur Re-Encodes analysiert).
 - **Plattformspezifische Unterschiede** (TikTok vs. Shorts vs. Reels): Alle Referenzen stammen von TikTok.
 
+## 16. Erfolgsrezepte (Stand 2026-10-29) – **zuerst lesen**
+
+Grundlage: R04, R07, R16–R18 (vom Auftraggeber als erfolgreich benannt: ein Kanal mit ≈ 77.000 Followern nach 2 Wochen bei 3 Videos/Tag – R04, R07, R17, R18 –, ein Kanal mit ≈ 275.000 Followern und zwei Videos > 15 Mio. Aufrufe – R16). Aufruf- und Followerzahlen sind Angaben des Auftraggebers, nicht geprüft **[H]**.
+
+**[B] Alle diese Videos sind mit derselben Technik wie unsere Pipeline gebaut:** Würfel-Figuren, Würfel-Autos, Würfel-Städte, Low-Poly-Bäume, Echtzeit-3D (Kanten, Schatten-Look, Partikel). Keine KI-Bild-/Videogenerierung, keine Fotorealistik. Wir brauchen dafür **keine** zusätzlichen Dienste – nur den Baukasten (`pipeline/runtime/kit/`, Abschnitt 16.3).
+
+Jedes Video folgt **genau einem** der zwei Rezepte. Themen außerhalb beider Rezepte nur nach Rücksprache.
+
+### 16.1 Rezept A – „Eskalations-Zähler“ (Vorbild R17, R18, R04, R07)
+
+| Baustein | Vorgabe |
+|---|---|
+| Frage | Alltag, zweite Person: „What if you …?“ / „What if everyone … except you?“ |
+| HUD | Zähler, der Schritt für Schritt steigt/fällt („BAD THINGS TODAY 1 → 15“, „PEOPLE ON EARTH 8,199,999,707 → 2“, „HEIGHT 1.49 m …“) |
+| Takt | **Alle 3–4 s ein neues Ereignis**, jedes an einem eigenen kleinen Ort; Wechsel per kurzer Abblende (`dip`, 4 Frames) oder Whip |
+| Figuren | Würfel-Menschen **mit Gesicht**; Gefühl ist in jeder Einstellung lesbar (Brauen, Mund); Hauptfigur sieht überall gleich aus |
+| Bild | nah, Augenhöhe, langsame Kamerafahrt; viele Requisiten (Bett, Toaster, Bus, Handy-Chat, Schilder) |
+| Bogen | Eskalation → Wendung (≈ 50–57 s) → Schlussbild |
+| Ende | „Part 2?“ **oder** direkte Frage an den Zuschauer („Who would you want it to be?“) → Kommentare |
+| Länge | **61 s** (knapp über 1 Minute) |
+
+### 16.2 Rezept B – „X verschwindet für 5 Sekunden“ (Vorbild R16, R06, R15)
+
+| Baustein | Vorgabe |
+|---|---|
+| Frage | „What if [Grundbaustein der Welt] disappeared for 5 seconds?“ (Sauerstoff, Elektronen, Wasser, Schwerkraft, Reibung, Licht …) |
+| HUD | Countdown **mit Millisekunden** bis zum Ereignis, dann „[X] RETURNS IN 0:04.958“ + Unterzeile „TIME SLOWED DOWN 11×“ |
+| Ort | **Ein** Ort (z. B. Park in einer Großstadt), Ich-Perspektive mit eigenen Händen |
+| Eskalation | vom Kleinen zum Riesigen: Hände → Menschen → Stadt → Erde (Totale aus dem All) |
+| Bild | wenige, lange Einstellungen (Median ≈ 12 s); der Look **kippt** beim Ereignis komplett (Drahtgitter, Leuchten, Negativ) |
+| Ende | Rückkehr von X → letzte Konsequenz („they explode too“) → kurze dunkle Endkarte mit Titel + einer Faktenzeile |
+| Länge | 75–80 s |
+
+### 16.3 Baukasten und Vorschau
+
+- `pipeline/runtime/kit/` – `createKit({ THREE, scene, renderer, rng })` liefert: `human()` (Posen: stand, walk, run, wave, sit, armsUp, facepalm, phone, shrug, slump, lie, point, carry · Gefühle: neutral, happy, sad, worried, angry, shock, tired), `props.*` (Bett, Wecker, Küche, Toaster, Handy mit Chat/Sperrbildschirm, Schild, Auto, Bus, Gebäude, Bank, Baum, Laterne, Regenschirm, Karton …), `places.*` (bedroom, kitchen, street, park, office), `crowd()`, `sunAt()`, `activeSet()`.
+- Beispiel aller Teile: `productions/_kit_demo/scene.js`.
+- **Vorschau statt Komplett-Render:** `node tools/still.mjs --production productions/<slug> --at 2,6,10` rendert einzelne Bilder in Sekunden. Jede Einstellung erst per Vorschau prüfen, dann das ganze Video rendern.
+- Fehlt ein Teil, wird es **im Kit** ergänzt (nicht nur in einer Produktion), damit jedes weitere Video schneller geht.
+
 Änderungen an diesem Style-Guide nur auf Basis dokumentierter Ergebnisse (Produktionsprotokolle, Analytics). Jede Änderung mit Datum und Begründung unten eintragen.
 
 ### Änderungsprotokoll
@@ -399,3 +439,4 @@ Claude Code kann Audio messen, aber **nicht hören**. Deshalb gilt **[V]**: Vor 
 |---|---|---|---|
 | 2026-10-27 | 1.0 | Erstfassung | Analyse R01–R15 |
 | 2026-10-27 | 1.1 | 10.3: Render-Pipeline entschieden und umgesetzt (Three.js + headless Chromium + FFmpeg, deterministisch) | Implementierungsplan freigegeben; Machbarkeit, Determinismus und Renderzeit gemessen; Tests in `tests/` |
+| 2026-10-29 | 1.2 | Abschnitt 16: zwei Erfolgsrezepte (Eskalations-Zähler, X verschwindet 5 s), Baukasten `pipeline/runtime/kit/`, Vorschau `tools/still.mjs` | Analyse R16–R18 + R04/R07 (vom Auftraggeber benannte erfolgreiche Kanäle); erstes Testvideo wich vom Stil ab (Fotorealistik) |

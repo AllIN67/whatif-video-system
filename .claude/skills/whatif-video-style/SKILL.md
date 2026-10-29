@@ -19,7 +19,7 @@ Nicht verwenden für andere Projekte. Insbesondere gilt in diesem Repository **n
 
 ## Schritt 0 – Laden
 
-1. `WHATIF_STYLE_GUIDE.md` vollständig lesen (aktuelle Version + Änderungsprotokoll am Ende).
+1. `WHATIF_STYLE_GUIDE.md` vollständig lesen, **zuerst Abschnitt 16 (Erfolgsrezepte)**. Jedes Video folgt Rezept A oder B; im LOG festhalten, welches.
 2. `VIDEO_PRODUCTION_CHECKLIST.md` lesen – sie ist die Abhakliste für diesen Ablauf.
 3. Bei Stil- oder Begründungsfragen: `REFERENCE_ANALYSIS.md` und `references/analysis/MEASUREMENTS.md`.
 4. Bei Überarbeitung: vorhandenes `productions/<slug>/LOG.md` lesen.
@@ -49,6 +49,10 @@ Nicht verwenden für andere Projekte. Insbesondere gilt in diesem Repository **n
 - Tonplan: Lautheitsverlauf, Akzente, bewusste Stille, Musikquelle **mit Lizenz** (Guide 9). Ohne lizenzierte Musik: nachfragen bzw. als Einschränkung dokumentieren, keine fremde Musik verwenden.
 
 ## Schritt 4 – An die Pipeline anpassen
+
+- **Szene immer mit dem Baukasten bauen** (`pipeline/runtime/kit/`, Beispiel `productions/_kit_demo/scene.js`): Würfel-Menschen mit Gesicht, Requisiten, Orte. Keine Fotorealistik, kein Realismus-3D, keine KI-Bild-/Videogenerierung (Guide 6.1, 16).
+- Fehlende Teile im Kit ergänzen, nicht nur in der Produktion.
+- Jede Einstellung zuerst mit `node tools/still.mjs --production productions/<slug> --at …` als Vorschaubild prüfen und dem Nutzer den Kontaktbogen zeigen, bevor das ganze Video gerendert wird.
 
 - Zuerst prüfen, was im Repository existiert (`ls`, `README.md`, LOG früherer Produktionen). Vorhandene, funktionierende Pipeline-Komponenten wiederverwenden, nicht ohne Grund ersetzen.
 - Gibt es noch keine Pipeline: Empfehlung aus Guide 10.3 umsetzen und die Entscheidung im Guide-Änderungsprotokoll + LOG festhalten. Neue Abhängigkeiten nur, wenn nötig, und im LOG begründen.
