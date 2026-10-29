@@ -5,7 +5,7 @@
 | Slug | `what-if-mind-reading-10s` |
 | Produktionsstil | **B (TikTok-Referenz) – Rezept B1 „Eskalations-Zähler“** (Auftrag des Nutzers 2026-10-29: „Select Style B1 … record that choice“). Referenzen B1: R04, R07, R17, R18 |
 | Sprache | en (Titel, HUD, Textzeilen, Caption) |
-| Status | siehe Abschnitt 5 |
+| Status | **TECHNISCH GEPRÜFT – Hörprüfung ausstehend** (nicht FREIGEGEBEN) |
 | Style-Guide-Version | 1.3 (1.3.1 = nur Baukasten-Bestandsliste ergänzt) |
 | Git-Commit des Renders | siehe `render/run_log.json` (`git_commit`) |
 | Länge | 63,0 s · 1080×1920 · 30 fps |
@@ -94,3 +94,38 @@
 | 5–11 s | Short-Term −24 … −28 LUFS | Verbesserung | Musik „pulse“ leise am Anfang | Musikbett 0–12 s +3 … +2 dB |
 | Klick-Kandidaten | regelmäßig alle ≈ 0,4 s bis 13,8 s | vermutlich beabsichtigt | Ticken des Musikstils „pulse“ | Hörprüfung durch den Menschen |
 | 56,08–58,0 | Stille | beabsichtigt | Musikpause vor der Pointe (Guide 9.2/9.3, bewusste Stille) | – |
+
+### Durchlauf 2 – 2026-10-29 (Commit b3f8cb8)
+
+- Befehl wie Durchlauf 1 · ≈ 1,2 s/Frame
+- Datei `render/final.mp4`: 63,000 s · 1080×1920 · 30 fps CFR (1890 Frames) · H.264 High yuv420p · AAC 48 kHz Stereo · 35,8 MB
+- Ton: −14,0 LUFS, LRA 9,7 LU, True Peak −1,3 dBTP; erste 50 ms −55 dB, letzte 50 ms −70 dB (Ein-/Ausblendung vorhanden)
+- Short-Term-Lautheit 5–11 s jetzt −21 … −22 LUFS (vorher −24 … −28)
+- `video_qa.py`: **REVIEW** (kein FAIL). Keine Einstellungen < 4 Frames, keine Sprung-/Flacker-Kandidaten, keine Schwarzbilder, keine Standbilder, 0 Doppelbilder, 17/17 geplante Übergänge erkannt.
+- **Angesehen:** sheet_01, sheet_02, sheet_03 (bis 62 s, Ende), shots.jpg, **alle 88 Bildstreifen** aus `qa/strips/` (in 15 Sammelbildern zu je 6 Streifen).
+
+| REVIEW-Meldung | Einstufung | Begründung |
+|---|---|---|
+| Klick-Kandidaten 0,13 … 12,07 s (alle ≈ 0,3–0,4 s) | beabsichtigt (vorläufig) | Dieselben Zeitpunkte findet der Detektor im reinen Musik-Stem `render/audio/gen/music_main.wav` (Hi-Hat-Ticken des Stils „pulse“) → nicht durch Mischung/Schnitt entstanden. **Hörprüfung durch einen Menschen nötig.** |
+| Stille 56,08–58,0 s | beabsichtigt | geplante Musikpause vor der Pointe (Leseraum für die Twist-Zeile), Pointe mit hit bei 58,0 s |
+
+- Sichtbefunde Durchlauf 2: Aufstehen weich (Besprechung 23,0+, Date 27,3+, Schwarm 56,0+, Küche 37,9+); alle Textzeilen blenden vor dem Schnitt aus; HUD stetig (Balken beginnt bei Label-Wechseln neu, Werte steigen monoton); Titel, Zeilen und HUD innerhalb der Sicherheitszone, auf dem Kontaktbogen lesbar.
+- Hinweis: Kontaktbogen-Kachel „28,000“ zeigt bereits die Bushaltestelle; der Bildstreifen belegt den Schnitt bei 28,4 s wie geplant (Kachel-Zeitpunkt des Kontaktbogens weicht ab).
+- Kleinere, bewusst belassene Punkte: HUD schaltet bei 49,8 s auf OFF, die Ohr-Blasen platzen 0,2 s später (50,0 s) – Ton-Akzent liegt auf dem Platzen; Bus-Szene zeigt den Fremden nur im Profil.
+- Keine offenen Bildfehler.
+
+## 6. Hörprüfung (Mensch)
+
+- **Ausstehend.** Bitte prüfen: Ticken der Musik 0–31 s (Klick-Kandidaten), Pausen 49,8–50,8 s und 55,6–58,0 s, Impact 49,0 s, Hit 58,0 s, Ausblendung am Ende. Kopfhörer + Handylautsprecher.
+
+## 7. Bekannte Einschränkungen
+
+- Kein Lachen/Stimmengewirr im Ton (nicht im Repository vorhanden, keine fremden Samples verwendet) – Reaktionen nur im Bild.
+- Signalfarbe weiterhin Platzhalter aus `brand.json`.
+- Kreisschluss inhaltlich (neue Blase über dir), nicht kameragenau zum ersten Bild.
+- Renderzeit ≈ 1,2 s/Frame (viele Figuren), ≈ 38 min.
+
+## 9. Erkenntnisse für den Style-Guide (Vorschläge)
+
+- 4-Frame-Abblenden zwischen ähnlich hellen Einstellungen werden von `video_qa.py` gelegentlich als zwei harte Schnitte (2-Frame-Einstellung, FAIL) gezählt; Whip vermeidet das. Ggf. Detektor für Abblenden verbessern.
+- Gedankenblase mit Piktogramm hat sich als sprachneutrales Erzählmittel für B1 bewährt (Hypothese, ungetestet).
