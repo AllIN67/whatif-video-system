@@ -4,7 +4,7 @@
 |---|---|
 | Slug | `earth-stops-1-second` |
 | Sprache | en (Sprecher, Untertitel, Einblendungen, Caption) |
-| Status | siehe Abschnitt 5 (höchstens TECHNISCH GEPRÜFT – Hörprüfung durch einen Menschen steht aus) |
+| Status | **TECHNISCH GEPRÜFT – Hörprüfung ausstehend** (nicht FREIGEGEBEN) |
 | Style-Guide-Version | 1.2 |
 | Git-Commit des Renders | siehe `render/run_log.json` (`git_commit`) |
 | Länge | 41,0 s · 1080×1920 · **60 fps** |
@@ -106,6 +106,19 @@ PNG/FFV1 groß (≈ 2 s/Frame) → Korn in den Endencode verlegt (≈ 1,0–1,9 
 | – | 248 MB | Hinweis | CRF 16 + 60 fps + Korn | CRF 18 (Style-Guide erlaubt ≤ 18) |
 | LRA 3,3 LU | – | beabsichtigt | Sprecher fast durchgehend, Musik geduckt → geringer Umfang; Style-Guide-Wert gilt für stumme Videos | – |
 | Klick-Kandidaten | – | vermutlich beabsichtigt (Konsonanten der Stimme, SFX-Einsätze) | – | **Hörprüfung durch Menschen nötig** |
+
+### Durchlauf 2 – 2026-10-29 (Commit 3d6c834, kompletter Neu-Render)
+
+- `video_qa.py`: **REVIEW**, keine FAIL-Punkte. 41,000 s, 60/60 fps, 2460 Frames, 67,4 MB (13,2 Mbit/s, CRF 18),
+  −14,2 LUFS, TP −1,3 dBTP, 15/15 Übergänge erkannt, **keine Flacker-Kandidaten**, keine Schwarz-/Stand-/Doppelbilder.
+- Verbleibende REVIEW-Meldungen: LRA 3,3 LU (beabsichtigt, s. o.) · 30 Klick-Kandidaten (Hörprüfung) · Sprung-Kandidat
+  31,2 s liegt auf dem geplanten Schnitt atmo1→atmo2 (erwartet).
+- Angesehen: `sheet_01`, `sheet_02` (alle 41 s), **alle 42 Bildstreifen** in `qa/strips/`, Einzelbilder 0/1/10/25 s + letztes Bild.
+- Alle Fehler aus Durchlauf 1 behoben (bestätigt auf Bögen/Streifen). Schleife: PSNR Frame 0 ↔ letztes Bild 32,2 dB.
+- Texte: Rechtschreibung geprüft; alle Texte im oberen Drittel bzw. y ≤ 0,76, innerhalb x 15–85 %; lesbar auf 240-px-Bogen.
+- Restbefund (klein, nicht behoben): 9,60–9,63 s – Straßenbaum zieht 3 Frames (50 ms) direkt vor der Verfolgungskamera
+  durch (grüner Wisch mit Bewegungsunschärfe am Schnitt). Wirkt wie ein Vordergrund-Wisch; Korrektur (Kamera-z oder
+  Baum ausblenden) würde einen weiteren kompletten Render (≈ 75 min) erfordern → dem Auftraggeber zur Entscheidung gemeldet.
 
 ## 6. Hörprüfung (Mensch)
 

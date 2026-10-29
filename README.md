@@ -188,7 +188,7 @@ Zusätzlich an den Referenzen kalibriert (Letterbox-Zuschnitt, Bewegungsübergä
 
 ## Bekannte Einschränkungen
 
-- Render-Pipeline erzeugt bisher nur die abstrakte Testproduktion; ein echtes Inhaltsvideo wurde noch nicht produziert.
+- Erstes Inhaltsvideo: `productions/earth-stops-1-second/` (Profil voiceover, technisch geprüft, Hörprüfung ausstehend).
 - Signalfarbe ist ein Platzhalter; Musik nur selbst erzeugt (keine lizenzierte Musik eingebunden).
 - **Claude kann Audio nicht hören.** Ton wird gemessen; die Hörprüfung vor der Freigabe muss ein Mensch durchführen.
 - Automatische Bildprüfung findet Kandidaten, keine Gewissheit: Abblend-Übergänge, Zeitraffer und Partikel erzeugen Fehlalarme; sehr kurze Fehler zwischen den 1-s-Kontaktbögen findet nur die Frame-Messung bzw. die Bildstreifen.
