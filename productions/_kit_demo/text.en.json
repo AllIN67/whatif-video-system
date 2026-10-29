@@ -1,0 +1,14 @@
+{
+ "lang": "en",
+ "number_locale": "en-US",
+ "title": { "text": "What if you had the worst day ever?", "highlight": "worst day" },
+ "hud": { "bad": { "label": "BAD THINGS TODAY", "sub": "MOOD 3% · MONDAY", "unit": "" } },
+ "lines": {
+  "l01": "Your alarm never goes off.",
+  "l02": "Breakfast? Burnt.",
+  "l03": "You miss the bus by one second.",
+  "l04": "Then your boss fires you.",
+  "l05": "Wet paint.",
+  "l06": "Then she texts..."
+ }
+}

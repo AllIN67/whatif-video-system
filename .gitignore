@@ -20,3 +20,6 @@ node_modules/
 # Test-Fixtures erzeugen beim Testlauf temporär render/ und qa/
 tests/fixtures/*/render/
 tests/fixtures/*/qa/
+
+# Vorschaubilder aus tools/still.mjs
+productions/*/stills/
