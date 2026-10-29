@@ -433,7 +433,7 @@ Abschnitt 16 beschreibt **Stil B**. Jedes Stil-B-Video folgt **genau einem** der
 
 ### 16.3 Baukasten und Vorschau
 
-- `pipeline/runtime/kit/` – `createKit({ THREE, scene, renderer, rng })` liefert: `human()` (Posen: stand, walk, run, wave, sit, armsUp, facepalm, phone, shrug, slump, lie, point, carry · Gefühle: neutral, happy, sad, worried, angry, shock, tired), `props.*` (Bett, Wecker, Küche, Toaster, Handy mit Chat/Sperrbildschirm, Schild, Auto, Bus, Gebäude, Bank, Baum, Laterne, Regenschirm, Karton …), `places.*` (bedroom, kitchen, street, park, office), `crowd()`, `sunAt()`, `activeSet()`.
+- `pipeline/runtime/kit/` – `createKit({ THREE, scene, renderer, rng })` liefert: `human()` (Posen: stand, walk, run, wave, sit, armsUp, facepalm, phone, shrug, slump, lie, liePhone, point, carry; Oberkörper-Posen sitzend über `{ seated: true }` · Gefühle: neutral, happy, laugh, sad, worried, angry, shock, tired), `props.*` (Bett, Wecker, Küche, Toaster, Handy mit Chat/Sperrbildschirm, Schild, Auto, Bus, Gebäude, Bank, Baum, Laterne, Regenschirm, Karton, Gedankenblase mit Piktogramm `thoughtBubble` …), `places.*` (bedroom, kitchen, street, park, office mit `cols`/`rows`, classroom, cafe), `crowd()`, `sunAt()`, `activeSet()`.
 - Beispiel aller Teile: `productions/_kit_demo/scene.js`.
 - **Vorschau statt Komplett-Render:** `node tools/still.mjs --production productions/<slug> --at 2,6,10` rendert einzelne Bilder in Sekunden. Jede Einstellung erst per Vorschau prüfen, dann das ganze Video rendern.
 - Fehlt ein Teil, wird es **im Kit** ergänzt (nicht nur in einer Produktion), damit jedes weitere Video schneller geht.
@@ -460,3 +460,4 @@ Abschnitt 16 beschreibt **Stil B**. Jedes Stil-B-Video folgt **genau einem** der
 | 2026-10-27 | 1.1 | 10.3: Render-Pipeline entschieden und umgesetzt (Three.js + headless Chromium + FFmpeg, deterministisch) | Implementierungsplan freigegeben; Machbarkeit, Determinismus und Renderzeit gemessen; Tests in `tests/` |
 | 2026-10-29 | 1.2 | Abschnitt 16: zwei Erfolgsrezepte (Eskalations-Zähler, X verschwindet 5 s), Baukasten `pipeline/runtime/kit/`, Vorschau `tools/still.mjs` | Analyse R16–R18 + R04/R07 (vom Auftraggeber benannte erfolgreiche Kanäle); erstes Testvideo wich vom Stil ab (Fotorealistik) |
 | 2026-10-29 | 1.3 | Zwei Produktionsstile (A Earth, B mit Rezepten B1/B2, Abschnitt 17, `STYLE_A_EARTH.md`); Rezepte A/B → B1/B2 umbenannt; Mindestlänge 60 s für jedes Video, technisch erzwungen | Auftrag des Nutzers (Stilauswahl je Auftrag; jedes Video ≥ 60 s) |
+| 2026-10-29 | 1.3.1 | 16.3: Baukasten-Liste um die bei `what-if-mind-reading-10s` ergänzten Teile erweitert (Gedankenblase, Klassenzimmer, Café, sitzende Posen, `laugh`, `liePhone`) | Bestandsliste, keine Regeländerung |
