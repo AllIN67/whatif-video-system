@@ -592,6 +592,14 @@ def main():
                     help="Längenprüfung 61–80 s auslassen (nur für technische Test-Clips)")
     args = ap.parse_args()
     os.makedirs(args.out, exist_ok=True)
+    if args.plan:
+        # Produktionsspezifische Vorgaben aus timeline.json: Bildrate und – bei vom Style-Guide
+        # abweichendem Auftrag – Längenbereich ("qa": {"min_seconds": …, "max_seconds": …}).
+        tl = json.load(open(args.plan))
+        RENDER_SPEC["fps"] = float(tl.get("fps", 30))
+        for k in ("min_seconds", "max_seconds"):
+            if k in tl.get("qa", {}):
+                RENDER_SPEC[k] = float(tl["qa"][k])
 
     info = probe(args.video)
     fps = info["video"]["avg_frame_rate"] or info["video"]["r_frame_rate"]

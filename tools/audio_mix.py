@@ -2,7 +2,7 @@
 """Mischt die Tonspur einer Produktion aus timeline.json → audio/mix.wav (48 kHz, Stereo, float).
 
 Regeln (Style-Guide 9.3/9.4, 10.1/10.2):
-- Effekte starten sample-genau auf dem Frame:  start_sample = frame * 1600  (48000 / 30)
+- Effekte starten sample-genau auf dem Frame:  start_sample = frame * 48000 / fps  (fps aus timeline.json)
 - jeder Clip bekommt 10 ms Ein-/Ausblendung (gegen Knackser an Schnittkanten)
 - Mischen in Float ohne automatische Normalisierung; 0,3 s Einblendung (quadratisch) am Anfang und
   ≥ 0,5 s Ausblendung am Ende (kein abrupter Abriss) noch VOR der Lautheitsmessung
@@ -20,6 +20,13 @@ timeline.json, Abschnitt "audio":
 "gen:<name>" verweist auf einen mit tools/sfx_synth.py erzeugten Klang, sonst Pfad relativ zur Produktion.
 Zeiten (start, t) müssen auf Frame-Grenzen liegen. automation: [Sekunde relativ zum Videostart, dB].
 
+Optional Sprecher (nur auf ausdrücklichen Auftrag, Style-Guide 9.1) – erzeugt mit tools/tts_kokoro.py:
+  "voice": {"src": "render/voice/voice.wav", "words": "voice/words.json", "gain_db": 0}
+Beds mit "duck_db" (z. B. -10) werden unter dem Sprecher automatisch abgesenkt: Sprechphasen aus
+words.json (Lücken < duck_merge s zusammengefasst), Rampen duck_attack/duck_release s. Die Absenkung wird
+zur automation addiert (beide stückweise linear in dB).
+"src": "music:<name>" verweist auf einen mit tools/music_synth.py erzeugten Musiktitel (audio.music).
+
   python3 tools/audio_mix.py productions/<slug> [--out productions/<slug>/render/audio]
 """
 
@@ -34,8 +41,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import sfx_synth  # noqa: E402
 
 SR = 48000
-FPS = 30
-SPF = SR // FPS  # 1600 Samples pro Frame
+FPS = 30  # wird in mix() aus timeline.json gesetzt
+SPF = SR // FPS  # Samples pro Frame (1600 bei 30 fps, 800 bei 60 fps)
 TARGET_I = -14.0
 TARGET_TP = -1.5
 CLIP_FADE = 0.010
@@ -76,7 +83,15 @@ def db_curve_expr(points, offset):
     return f"pow(10,({expr})/20)"
 
 
-def resolve(src, prod_dir, gen_dir, need_drone_s):
+def resolve(src, prod_dir, gen_dir, need_drone_s, music=None):
+    if src.startswith("music:"):
+        import music_synth
+        name = src[6:]
+        if not music or name not in music:
+            raise ValueError(f"Musik „{name}“ fehlt in audio.music")
+        path = os.path.join(gen_dir, f"music_{name}.wav")
+        music_synth.render_to(music[name], path, SR)
+        return path
     if src.startswith("gen:"):
         name = src[4:]
         path = os.path.join(gen_dir, f"{name}.wav")
@@ -100,16 +115,63 @@ def measure(path):
     return I, (-120.0 if "inf" in tp else float(tp))
 
 
+def speech_intervals(words, merge):
+    """Sprechphasen [(start, end)] aus words.json; Lücken < merge s werden zusammengefasst."""
+    iv = []
+    for w in sorted(words, key=lambda w: w["start"]):
+        if iv and w["start"] - iv[-1][1] < merge:
+            iv[-1][1] = max(iv[-1][1], w["end"])
+        else:
+            iv.append([w["start"], w["end"]])
+    return iv
+
+
+def duck_points(intervals, db, attack, release):
+    """Stückweise lineare dB-Kurve: 0 dB außerhalb, db während Sprechphasen (Rampe vorher/nachher)."""
+    pts = [(0.0, 0.0)]
+    for a, b in intervals:
+        pts += [(max(0.0, a - attack), 0.0), (max(0.0, a), db), (b, db), (b + release, 0.0)]
+    pts.sort()
+    return pts
+
+
+def curve_at(points, t):
+    if not points:
+        return 0.0
+    if t <= points[0][0]:
+        return points[0][1]
+    for (t0, d0), (t1, d1) in zip(points, points[1:]):
+        if t <= t1:
+            return d1 if t1 == t0 else d0 + (d1 - d0) * (t - t0) / (t1 - t0)
+    return points[-1][1]
+
+
+def add_curves(a, b):
+    """Summe zweier stückweise linearer Kurven (exakt auf der Vereinigung der Stützstellen)."""
+    if not a:
+        return b
+    if not b:
+        return a
+    ts = sorted({t for t, _ in a} | {t for t, _ in b})
+    return [(t, round(curve_at(a, t) + curve_at(b, t), 4)) for t in ts]
+
+
 def build_graph(audio, total_frames, prod_dir, gen_dir):
     inputs, chains, labels = [], [], []
     total_s = total_frames / FPS
     beds = audio.get("beds", [])
     need_drone = max([b["end"] - b["start"] for b in beds if b["src"] == "gen:drone"] + [1.0])
     clips = [("bed", b) for b in beds] + [("sfx", s) for s in audio.get("sfx", [])]
+    duck = []
+    voice = audio.get("voice")
+    if voice:
+        clips.append(("voice", {"src": voice["src"], "t": voice.get("t", 0), "gain_db": voice.get("gain_db", 0)}))
+        words = json.load(open(os.path.join(prod_dir, voice["words"])))["words"]
+        duck = speech_intervals(words, voice.get("duck_merge", 0.45))
     if not clips:
         raise ValueError("audio: keine Clips (beds/sfx)")
     for i, (kind, c) in enumerate(clips):
-        path = resolve(c["src"], prod_dir, gen_dir, need_drone)
+        path = resolve(c["src"], prod_dir, gen_dir, need_drone, audio.get("music"))
         inputs += ["-i", path]
         start = c["start"] if kind == "bed" else c["t"]
         f0 = frame_of(start, f"{kind} {c['src']} start")
@@ -127,11 +189,15 @@ def build_graph(audio, total_frames, prod_dir, gen_dir):
              f"atrim=end_sample={int(round(length * SR))}", "asetpts=PTS-STARTPTS",
              f"afade=t=in:d={CLIP_FADE}", f"afade=t=out:st={max(0.0, length - CLIP_FADE):.6f}:d={CLIP_FADE}",
              f"volume={c.get('gain_db', 0)}dB"]
-        if kind == "bed" and c.get("automation"):
+        curve = c.get("automation") or []
+        if kind == "bed" and c.get("duck_db") and duck:
+            curve = add_curves([tuple(p) for p in curve],
+                               duck_points(duck, c["duck_db"], c.get("duck_attack", 0.12), c.get("duck_release", 0.35)))
+        if kind == "bed" and curve:
             # Lautstärkeverlauf wird pro Audioblock angewendet: Blöcke auf 48 Samples (1 ms) verkleinern,
             # sonst entstehen hörbare Stufen („Zipper-Noise“) bei schnellen Absenkungen.
             f.append("asetnsamples=n=48:p=0")
-            f.append(f"volume='{db_curve_expr(c['automation'], start)}':eval=frame")
+            f.append(f"volume='{db_curve_expr(curve, start)}':eval=frame")
         f.append(f"adelay=delays={f0 * SPF}S:all=1")
         lab = f"c{i}"
         chains.append(",".join(f) + f"[{lab}]")
@@ -143,8 +209,13 @@ def build_graph(audio, total_frames, prod_dir, gen_dir):
 
 
 def mix(prod_dir, out_dir=None):
+    global FPS, SPF
     prod_dir = os.path.abspath(prod_dir)
     tl = json.load(open(os.path.join(prod_dir, "timeline.json")))
+    FPS = int(tl.get("fps", 30))
+    if SR % FPS:
+        raise ValueError(f"fps {FPS}: 48000 nicht ganzzahlig teilbar")
+    SPF = SR // FPS
     audio = tl.get("audio")
     if not audio:
         raise ValueError("timeline.json enthält keinen Abschnitt 'audio'")

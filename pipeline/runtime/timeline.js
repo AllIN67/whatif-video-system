@@ -13,7 +13,8 @@ export const EASE = {
   hold: () => 0,
 };
 
-// Übergänge laut Style-Guide 7.2. Grenzwerte: [min, max] Frames gesamt.
+// Übergänge laut Style-Guide 7.2. Grenzwerte: [min, max] Frames gesamt bei 30 fps
+// (bei 60 fps gelten doppelte Frame-Zahlen – gleiche Dauer in Sekunden).
 export const TRANSITIONS = {
   cut: [0, 0],
   whip: [6, 12],
@@ -22,6 +23,8 @@ export const TRANSITIONS = {
 };
 
 const clamp01 = (x) => Math.min(1, Math.max(0, x));
+
+export const FPS_ALLOWED = [30, 60];
 
 export function toFrame(seconds, fps, what) {
   const f = seconds * fps;
@@ -66,7 +69,9 @@ export function interpolate(keys, t, mode = 'inOut') {
 // Bereitet timeline.json vor: Frames berechnen, Lücken/Überlappungen/Grenzwerte prüfen.
 export function prepare(tl) {
   const fps = tl.fps || 30;
-  if (fps !== 30) throw new Error('Nur 30 fps erlaubt (Style-Guide 10.1)');
+  // Style-Guide 10.1: 30 fps. 60 fps nur auf ausdrücklichen Auftrag (Abweichung im LOG begründen).
+  if (!FPS_ALLOWED.includes(fps)) throw new Error(`fps ${fps} nicht erlaubt (erlaubt: ${FPS_ALLOWED.join(', ')})`);
+  const k = fps / 30;
   const total = toFrame(tl.duration, fps, 'duration');
   if (!Array.isArray(tl.shots) || tl.shots.length === 0) throw new Error('timeline.shots fehlt');
   const shots = tl.shots.map((s, i) => {
@@ -75,7 +80,7 @@ export function prepare(tl) {
     if (to <= from) throw new Error(`shot ${s.id}: to ≤ from`);
     const tr = s.transition_in || { type: 'cut' };
     if (i === 0 && tr.type !== 'cut') throw new Error('Erste Einstellung muss hart beginnen (Frame 0 zeigt sofort die Szene)');
-    const lim = TRANSITIONS[tr.type];
+    const lim = TRANSITIONS[tr.type]?.map((x) => x * k);
     if (!lim) throw new Error(`shot ${s.id}: unbekannter Übergang "${tr.type}" (erlaubt: ${Object.keys(TRANSITIONS).join(', ')})`);
     const frames = tr.type === 'cut' ? 0 : tr.frames ?? lim[1];
     if (frames < lim[0] || frames > lim[1]) throw new Error(`shot ${s.id}: ${tr.type} mit ${frames} Frames außerhalb ${lim[0]}–${lim[1]}`);
@@ -89,12 +94,12 @@ export function prepare(tl) {
   for (let i = 1; i < shots.length; i++) {
     if (shots[i].from !== shots[i - 1].to) throw new Error(`Lücke/Überlappung zwischen ${shots[i - 1].id} und ${shots[i].id}`);
     const half = Math.ceil(shots[i].transition.frames / 2);
-    if (shots[i - 1].to - shots[i - 1].from < half + 4 || shots[i].to - shots[i].from < half + 4) {
+    if (shots[i - 1].to - shots[i - 1].from < half + 4 * k || shots[i].to - shots[i].from < half + 4 * k) {
       throw new Error(`Übergang zu ${shots[i].id} ist länger als eine der Einstellungen erlaubt`);
     }
   }
   if (shots[shots.length - 1].to !== total) throw new Error(`Letzte Einstellung endet bei Frame ${shots[shots.length - 1].to}, Video hat ${total}`);
-  for (const s of shots) if (s.to - s.from < 4) throw new Error(`shot ${s.id}: kürzer als 4 Frames (Blitzbild)`);
+  for (const s of shots) if (s.to - s.from < 4 * k) throw new Error(`shot ${s.id}: kürzer als ${4 * k} Frames (Blitzbild)`);
   return { ...tl, fps, total, shots };
 }
 
@@ -143,6 +148,7 @@ export function transitionAt(ptl, frame) {
 }
 
 // Kamera am Frame: Position, Blickziel, Brennweite (FOV) + Gierwinkel aus Übergang + Wackeln.
+// frame darf gebrochen sein (Teilbilder für Bewegungsunschärfe).
 export function cameraAt(ptl, frame) {
   const t = frame / ptl.fps;
   const s = ptl.shots[shotIndexAt(ptl, frame)];
@@ -160,7 +166,7 @@ export function cameraAt(ptl, frame) {
     shake[2] += amp * 0.4 * Math.sin(w * 0.73 * t + 2.3);
   }
   const tr = transitionAt(ptl, frame);
-  return { t, shot: s.id, pos: pos.map((v, i) => v + shake[i]), look, fov, yaw: tr.yaw, blur: tr.blur, overlay: tr.overlay, overlayColor: tr.overlayColor };
+  return { t, shot: s.id, pos: pos.map((v, i) => v + shake[i]), shakeOffset: shake, look, fov, yaw: tr.yaw, blur: tr.blur, overlay: tr.overlay, overlayColor: tr.overlayColor };
 }
 
 // Deckkraft eines zeitlich begrenzten Elements mit weicher Ein-/Ausblendung (Sekunden).

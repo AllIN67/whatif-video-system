@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Rendert alle Frames einer Produktion deterministisch (Frame n ↔ t = n/30) in verlustfreie Teilstücke.
+// Rendert alle Frames einer Produktion deterministisch (Frame n ↔ t = n/fps, fps aus timeline.json) in verlustfreie Teilstücke.
 //
 //   node pipeline/render_frames.mjs --production productions/<slug> [--lang en] [--chunk 300]
 //                                   [--from F --to F] [--force] [--hashes]
@@ -36,10 +36,10 @@ export function countFrames(file) {
   return Number(out);
 }
 
-function encodeChunk(file) {
+function encodeChunk(file, fps) {
   // PNG-Bilder über eine Pipe → FFV1 (verlustfrei, RGB). Kein verlustbehafteter Schritt vor dem Endencode.
-  const ff = spawn('ffmpeg', ['-v', 'error', '-y', '-f', 'image2pipe', '-framerate', '30', '-c:v', 'png', '-i', '-',
-    '-c:v', 'ffv1', '-level', '3', '-g', '1', '-slicecrc', '1', '-pix_fmt', 'bgr0', '-r', '30', file], { stdio: ['pipe', 'inherit', 'pipe'] });
+  const ff = spawn('ffmpeg', ['-v', 'error', '-y', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'png', '-i', '-',
+    '-c:v', 'ffv1', '-level', '3', '-g', '1', '-slicecrc', '1', '-pix_fmt', 'bgr0', '-r', String(fps), file], { stdio: ['pipe', 'inherit', 'pipe'] });
   let err = '';
   ff.stderr.on('data', (d) => (err += d));
   const done = new Promise((res, rej) => ff.on('close', (c) => (c === 0 ? res() : rej(new Error(`ffmpeg (Teilstück): ${err}`)))));
@@ -70,7 +70,7 @@ export function inputFingerprint(prodDir, lang) {
   };
   walk(prodDir, ['render', 'qa', 'LOG.md']);
   walk(path.join(ROOT, 'pipeline', 'runtime'), []);
-  for (const pkg of ['three', '@fontsource/fraunces', '@fontsource/jetbrains-mono']) {
+  for (const pkg of ['three', '@fontsource/fraunces', '@fontsource/jetbrains-mono', '@fontsource/montserrat']) {
     h.update(pkg + JSON.parse(fs.readFileSync(path.join(ROOT, 'node_modules', pkg, 'package.json'), 'utf8')).version);
   }
   return h.digest('hex').slice(0, 24);
@@ -118,7 +118,7 @@ export async function renderFrames(opts) {
         continue;
       }
       const tmp = file + '.partial.mkv';
-      const enc = encodeChunk(tmp);
+      const enc = encodeChunk(tmp, tl.fps || 30);
       for (let n = c0; n < c1; n++) {
         const r = await page.evaluate((k) => window.__stage.setFrame(k), n);
         if (r.n !== n) throw new Error(`Bühne meldet Frame ${r.n} statt ${n}`);

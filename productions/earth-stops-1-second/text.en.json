@@ -1,0 +1,43 @@
+{
+ "lang": "en",
+ "number_locale": "en-US",
+ "callouts": {
+  "hook": {
+   "lines": [
+    "The Earth",
+    "stops.",
+    "For *1 second.*"
+   ]
+  },
+  "speed_ny": {
+   "label": "YOUR SPEED IN *NEW YORK*",
+   "unit": " MPH"
+  },
+  "rel_speed": {
+   "label": "YOU VS. THE GROUND",
+   "unit": " MPH"
+  },
+  "distance": {
+   "label": "IN *ONE* SECOND",
+   "unit": " FT"
+  },
+  "ocean_speed": {
+   "label": "OCEANS MOVING AT UP TO",
+   "unit": " MPH"
+  },
+  "wind_speed": {
+   "label": "WIND SPEED",
+   "unit": " MPH"
+  },
+  "sound": {
+   "text": "SPEED OF SOUND: *761 MPH*"
+  },
+  "hurricane": {
+   "text": "RECORD GUST: *253 MPH*"
+  },
+  "pole_speed": {
+   "label": "YOUR SPEED AT THE *NORTH POLE*",
+   "unit": " MPH"
+  }
+ }
+}

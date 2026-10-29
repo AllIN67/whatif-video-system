@@ -3,7 +3,7 @@
 //
 //   node pipeline/encode.mjs --production productions/<slug> [--out <render-dir>]
 //
-// Ausgabe nach Style-Guide 10.1: 1080×1920, 30 fps CFR, H.264 High, yuv420p, BT.709, CRF 16,
+// Ausgabe nach Style-Guide 10.1: 1080×1920, fps aus timeline.json (Standard 30) CFR, H.264 High, yuv420p, BT.709, CRF 16,
 // AAC-LC 48 kHz Stereo 256 kbit/s, +faststart. Danach Selbstkontrolle mit ffprobe.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -18,7 +18,8 @@ function probe(file) {
 export function encode({ production, out }) {
   const prodDir = path.resolve(ROOT, production);
   const tl = JSON.parse(fs.readFileSync(path.join(prodDir, 'timeline.json'), 'utf8'));
-  const total = Math.round(tl.duration * 30);
+  const fps = tl.fps || 30;
+  const total = Math.round(tl.duration * fps);
   const renderDir = path.resolve(out || path.join(prodDir, 'render'));
   const chunkDir = path.join(renderDir, 'chunks');
   const audio = path.join(renderDir, 'audio', 'mix.wav');
@@ -33,9 +34,9 @@ export function encode({ production, out }) {
   execFileSync('ffmpeg', ['-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', list, '-i', audio,
     '-map', '0:v:0', '-map', '1:a:0',
     '-vf', 'scale=in_range=full:out_range=tv:out_color_matrix=bt709:flags=accurate_rnd+full_chroma_int,format=yuv420p',
-    '-c:v', 'libx264', '-profile:v', 'high', '-preset', 'slow', '-crf', '16', '-g', '60',
+    '-c:v', 'libx264', '-profile:v', 'high', '-preset', 'slow', '-crf', '16', '-g', String(2 * fps),
     '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-color_range', 'tv',
-    '-r', '30', '-fps_mode', 'cfr',
+    '-r', String(fps), '-fps_mode', 'cfr',
     '-c:a', 'aac', '-b:a', '256k', '-ar', '48000', '-ac', '2',
     '-movflags', '+faststart', final], { stdio: ['ignore', 'inherit', 'inherit'] });
 
@@ -45,7 +46,7 @@ export function encode({ production, out }) {
   const a = p.streams.find((s) => s.codec_type === 'audio');
   const problems = [];
   if (Number(v.nb_read_packets) !== total) problems.push(`Video hat ${v.nb_read_packets} Frames statt ${total}`);
-  if (v.r_frame_rate !== '30/1' || v.avg_frame_rate !== '30/1') problems.push(`Bildrate ${v.r_frame_rate}/${v.avg_frame_rate}`);
+  if (v.r_frame_rate !== `${fps}/1` || v.avg_frame_rate !== `${fps}/1`) problems.push(`Bildrate ${v.r_frame_rate}/${v.avg_frame_rate}`);
   if (v.width !== 1080 || v.height !== 1920) problems.push(`Auflösung ${v.width}x${v.height}`);
   if (v.pix_fmt !== 'yuv420p' || v.profile !== 'High') problems.push(`Format ${v.profile} ${v.pix_fmt}`);
   if (Math.abs(Number(a.duration) - Number(v.duration)) > 0.1) problems.push(`A/V-Länge ${a.duration} vs ${v.duration}`);

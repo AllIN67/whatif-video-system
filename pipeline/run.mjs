@@ -12,7 +12,7 @@ import { spawnSync, execFileSync } from 'node:child_process';
 import { ROOT } from './server.mjs';
 import { renderFrames } from './render_frames.mjs';
 import { encode } from './encode.mjs';
-import { validate } from '../tools/validate_production.mjs';
+import { validate, loadWords } from '../tools/validate_production.mjs';
 
 function git(args) {
   try {
@@ -54,11 +54,19 @@ export async function run({ production, lang = 'en', skipValidate = false, qaIgn
   };
   const save = () => fs.writeFileSync(path.join(renderDir, 'run_log.json'), JSON.stringify(log, null, 1));
   try {
+    // Sprecher (nur wenn die Produktion voiceover.json hat): Stimme + Wortzeiten vor allem anderen,
+    // weil Untertitel (Bild) und Mischung (Ton) davon abhängen. Unveränderte Eingaben werden übersprungen.
+    if (fs.existsSync(path.join(prodDir, 'voiceover.json'))) {
+      await step(log, 'Sprecher (tts_kokoro.py)', () => {
+        if (py(['tools/tts_kokoro.py', rel]) !== 0) throw new Error('tts_kokoro.py fehlgeschlagen');
+        return { words: path.relative(ROOT, path.join(prodDir, 'voice', 'words.json')) };
+      });
+    }
     if (!skipValidate) {
       await step(log, 'Validierung', () => {
         const tl = JSON.parse(fs.readFileSync(path.join(prodDir, 'timeline.json'), 'utf8'));
         const tx = JSON.parse(fs.readFileSync(path.join(prodDir, `text.${lang}.json`), 'utf8'));
-        const r = validate(tl, tx, { lang });
+        const r = validate(tl, tx, { lang, wordTimes: loadWords(prodDir, tl) });
         for (const w of r.warnings) console.log(`⚠️  ${w}`);
         if (r.errors.length) {
           for (const e of r.errors) console.log(`❌ ${e}`);
@@ -82,7 +90,8 @@ export async function run({ production, lang = 'en', skipValidate = false, qaIgn
       return { exit: code, status };
     });
     await step(log, 'Bildstreifen (inspect_frames.py)', () => {
-      const code = py(['tools/inspect_frames.py', path.relative(ROOT, enc.final), '--report', path.relative(ROOT, path.join(qaDir, 'report.json')), '--out', path.relative(ROOT, path.join(qaDir, 'strips'))]);
+      const fps = JSON.parse(fs.readFileSync(path.join(prodDir, 'timeline.json'), 'utf8')).fps || 30;
+      const code = py(['tools/inspect_frames.py', path.relative(ROOT, enc.final), '--fps', String(fps), '--report', path.relative(ROOT, path.join(qaDir, 'report.json')), '--out', path.relative(ROOT, path.join(qaDir, 'strips'))]);
       if (code !== 0) throw new Error('inspect_frames.py fehlgeschlagen');
       return { strips: fs.readdirSync(path.join(qaDir, 'strips')).length };
     });

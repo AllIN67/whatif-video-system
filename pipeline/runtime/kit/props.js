@@ -302,11 +302,54 @@ export function createProps(THREE, core, rng) {
     return g;
   };
 
+  // Leichtes Gebäude aus EINEM Netz (Fenster als Textur) – für große Städte, Luftbilder und schnelle Fahrten,
+  // wo hunderte Gebäude nötig sind (building() erzeugt je Fenster eigene Netze und ist dafür zu teuer).
+  const towerTiles = new Map();
+  const towerTile = (color, win, lit) => {
+    const key = `${color}|${win}|${lit}`;
+    if (!towerTiles.has(key)) {
+      // 4 Spalten × 4 Stockwerke pro Kachel; Fenster zufällig beleuchtet (geseedet)
+      const tex = canvasTex(256, 256, (g, W, H) => {
+        g.fillStyle = `#${new THREE.Color(color).getHexString()}`;
+        g.fillRect(0, 0, W, H);
+        for (let f = 0; f < 4; f++) {
+          for (let c = 0; c < 4; c++) {
+            const on = rng.next() < lit;
+            g.fillStyle = on ? '#ffe2a0' : `#${new THREE.Color(win).getHexString()}`;
+            g.fillRect(c * 64 + 14, f * 64 + 12, 36, 34);
+            g.fillStyle = 'rgba(255,255,255,0.35)';
+            g.fillRect(c * 64 + 10, f * 64 + 48, 44, 5);
+          }
+        }
+      });
+      tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+      towerTiles.set(key, tex);
+    }
+    return towerTiles.get(key);
+  };
+  const tower = ({ w = 10, h = 24, d = 10, color = 0xb5654a, win = 0x8fa6bc, lit = 0, roof = 0x8a8178 } = {}) => {
+    const side = (len) => {
+      const t = towerTile(color, win, lit).clone();
+      t.needsUpdate = true;
+      t.repeat.set(len / 6.4, h / 12.8); // Kachel = 4 Spalten à 1,6 m × 4 Stockwerke à 3,2 m
+      return new THREE.MeshStandardMaterial({ map: t, roughness: 0.85, flatShading: true });
+    };
+    const top = mat(roof);
+    const sx = side(d);
+    const sz = side(w);
+    const geo = new THREE.BoxGeometry(w, h, d, Math.max(1, Math.ceil(w / 8)), Math.max(1, Math.ceil(h / 8)), Math.max(1, Math.ceil(d / 8)));
+    geo.translate(0, h / 2, 0);
+    const m = new THREE.Mesh(geo, [sx, sx, top, top, sz, sz]);
+    m.castShadow = true;
+    m.receiveShadow = true;
+    return m;
+  };
+
   // Boden-/Wandplatte (unterteilt für saubere Schatten)
   const slab = (w, d, color, pos = [0, 0, 0], h = 0.1) => box(w, h, d, color, [pos[0], pos[1] - h, pos[2]]);
 
   return {
     canvasTex, phoneTexture, phone, bigPhone, sign, bed, nightstand, tableLamp, alarmClock, table, chair, counter, upperCabinets, toaster, mug, toast, plant, cardboardBox,
-    desk, officeChair, umbrella, puddle, tree, bush, streetLamp, bench, hydrant, trashCan, car, bus, building, slab,
+    desk, officeChair, umbrella, puddle, tree, bush, streetLamp, bench, hydrant, trashCan, car, bus, building, tower, slab,
   };
 }

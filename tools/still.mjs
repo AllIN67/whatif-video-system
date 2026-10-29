@@ -30,7 +30,7 @@ fs.mkdirSync(out, { recursive: true });
 const files = await withStage({ production: path.relative(ROOT, prodDir), lang: opt('--lang', 'en'), seed: String(tl.seed ?? 1) }, async (page, st) => {
   const done = [];
   for (const s of times) {
-    const n = Math.round(s * 30);
+    const n = Math.round(s * (tl.fps || 30));
     await page.evaluate((k) => window.__stage.setFrame(k), n);
     if (st.errors.length) throw new Error(`Fehler bei ${s} s: ${st.errors.join(' | ')}`);
     const f = path.join(out, `t${s.toFixed(2).padStart(6, '0')}.png`);
