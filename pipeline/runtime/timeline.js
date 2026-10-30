@@ -183,10 +183,11 @@ export function hudAt(ptl, t) {
   let seg = null;
   for (const s of segs) if (t >= s.from) seg = s;
   if (!seg) return null;
-  const keys = seg.value.keys.map(([kt, v]) => ({ t: kt, v }));
+  // Keys [t, v] oder [t, v, ease]; ease 'hold' = Stufe (Wert springt genau bei t, wie die Zähler in R19)
+  const keys = seg.value.keys.map(([kt, v, ease]) => ({ t: kt, v, ease }));
   const value = interpolate(keys, t, seg.value.ease || 'linear');
-  const v0 = keys[0].v;
-  const v1 = keys[keys.length - 1].v;
+  // Fortschrittsskala: Weg vom ersten zum letzten Wert des Segments; mit seg.bar = [a, b] fester Bezug
+  const [v0, v1] = seg.bar || [keys[0].v, keys[keys.length - 1].v];
   const progress = v1 === v0 ? 1 : clamp01((value - v0) / (v1 - v0));
   return { id: seg.id, value, progress, decimals: seg.decimals ?? 0, final: seg.final || null, segFrom: seg.from };
 }

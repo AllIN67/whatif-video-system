@@ -11,12 +11,16 @@
 //     return { update({ t }) { kit.sunAt(sun, room.origin); me.pose('stand', t).mood('tired'); } };
 //   }
 //
-// Inhalt: core (mat, box, cbox, group, setupLook), human(), props.*, places.*, space.* (Erdkugel, Sterne), Hilfen (ramp, smooth, lerp).
+// Inhalt: core (mat, box, cbox, group, setupLook, applyLook), human() mit act(), props.*, places.*, space.* (Erdkugel, Sterne),
+// fx.* (Regen, Funken), shotKeys (Kamera-Vorlagen), beatClock (Beats/Ereignisse aus timeline.json), Hilfen (ramp, smooth, lerp).
 import { createCore, clamp01, smooth, lerp, ramp } from './core.js';
 import { createHumanFactory, SKIN, HAIR } from './human.js';
 import { createProps } from './props.js';
 import { createPlaces } from './places.js';
 import { createSpace } from './space.js';
+import { shotKeys } from './camera.js';
+import { beatClock } from './beats.js';
+import { createFx } from './fx.js';
 
 export function createKit({ THREE, scene, renderer, rng }) {
   if (!rng) throw new Error('createKit: rng fehlt (geseedeter Zufall aus build())');
@@ -25,6 +29,7 @@ export function createKit({ THREE, scene, renderer, rng }) {
   const props = createProps(THREE, core, rng);
   const places = createPlaces(THREE, core, props, rng);
   const space = createSpace(THREE, core, rng);
+  const fx = createFx(THREE, rng);
 
   // Sonne mit dem aktiven Ort mitführen: ein Schattenlicht für alle Orte, scharfe Schatten dort, wo die Kamera ist.
   const sunAt = (sun, origin, offset = [18, 30, 14]) => {
@@ -60,5 +65,5 @@ export function createKit({ THREE, scene, renderer, rng }) {
     return out;
   };
 
-  return { THREE, core, ...core, human, props, places, space, sunAt, activeSet, crowd, SKIN, HAIR, clamp01, smooth, lerp, ramp };
+  return { THREE, core, ...core, human, props, places, space, fx, sunAt, activeSet, crowd, SKIN, HAIR, clamp01, smooth, lerp, ramp, shotKeys, beatClock };
 }

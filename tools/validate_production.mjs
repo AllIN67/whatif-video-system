@@ -137,7 +137,102 @@ export function validate(timeline, text, { lang = 'en', wordTimes = null } = {})
   // Seed für deterministische Effekte (8)
   if (!Number.isInteger(timeline.seed)) E('8', 'timeline.seed (ganzzahlig) fehlt – Effekte müssen geseedet sein');
 
+  // HUD-Akzente gehören in ihr Segment (6.5)
+  for (const [i, s] of hud.entries()) {
+    const segEnd = i + 1 < hud.length ? hud[i + 1].from : dur;
+    for (const f of s.flashes || []) {
+      if (!['loss', 'gain', 'warn'].includes(f.kind)) E('6.3', `HUD „${s.id}“: Akzent „${f.kind}“ unbekannt (loss, gain, warn)`);
+      if (f.t < s.from || f.t >= segEnd) E('6.5', `HUD „${s.id}“: Akzent bei ${f.t} s außerhalb des Segments ${s.from}–${segEnd} s`);
+    }
+  }
+  // Endkarte (7.4): Text aus der Textdatei, ≤ 10 Wörter
+  if (timeline.endcard) {
+    const et = text.endcard?.title;
+    if (!et) E('1.3', `Endkarte: endcard.title fehlt in text.${lang}.json`);
+    else if (words(et) > 10) E('4', `Endkarte: ${words(et)} Wörter (max. 10)`);
+    if (timeline.endcard.in >= dur) E('7.4', 'Endkarte beginnt nach Videoende');
+  }
+
+  // Produktionsstandard Stil B (Abschnitt 18) – nur für Zeitachsen aus beats.json (tools/build_timeline.mjs)
+  if (timeline.beats) checkStandardB(timeline, ptl, E, W);
+
   return { errors, warnings };
+}
+
+// Messbare Regeln aus der Referenzanalyse R07/R19/R20 (Guide 18). Ziel: Monotonie, Kamera-Wiederholung,
+// stillstehende HUDs und unsynchronen Ton schon VOR dem Rendern verhindern.
+export const STANDARD_B = {
+  beatMin: 1.8, // kürzester Beat (s); kürzere nur als Einschub (Reaktion), siehe beatMinInsert
+  beatMinInsert: 1.0,
+  beatMax: 6.0, // R07/R19: 4,0 s, R20: 1,5–5 s
+  medianRange: [2.5, 4.6],
+  minFramings: 4,
+  maxFramingShare: 0.45,
+  minPlacesB1: 5,
+  minMoods: 4,
+  minHudChangeShare: 0.7,
+};
+
+export function checkStandardB(timeline, ptl, E, W) {
+  const S = STANDARD_B;
+  const beats = timeline.beats;
+  const r2 = (x) => Math.round(x * 100) / 100;
+  const lens = beats.map((b) => b.to - b.from);
+  const sorted = [...lens].sort((a, b) => a - b);
+  const median = sorted[Math.floor(sorted.length / 2)];
+  beats.forEach((b, i) => {
+    const L = lens[i];
+    if (L > S.beatMax + 1e-9) E('18.2', `Beat ${b.id}: ${r2(L)} s (max. ${S.beatMax} s – Referenzen wechseln alle 2–4 s)`);
+    if (L < S.beatMinInsert - 1e-9) E('18.2', `Beat ${b.id}: ${r2(L)} s (min. ${S.beatMinInsert} s)`);
+    else if (L < S.beatMin - 1e-9) W('18.2', `Beat ${b.id}: ${r2(L)} s – nur als Reaktions-Einschub sinnvoll`);
+  });
+  if (median < S.medianRange[0] || median > S.medianRange[1]) W('18.2', `Median-Beatlänge ${r2(median)} s außerhalb ${S.medianRange.join('–')} s`);
+
+  // Kamera-Abwechslung (18.3)
+  for (let i = 1; i < beats.length; i++) {
+    const a = beats[i - 1];
+    const b = beats[i];
+    if (a.framing === b.framing && a.preset === b.preset) E('18.3', `Beats ${a.id} → ${b.id}: gleiche Kamera (${b.preset}/${b.framing}) zweimal hintereinander`);
+  }
+  const counts = {};
+  for (const b of beats) counts[b.framing] = (counts[b.framing] || 0) + 1;
+  const nF = Object.keys(counts).length;
+  if (nF < S.minFramings) E('18.3', `nur ${nF} Bildgrößen (${Object.keys(counts).join(', ')}) – mindestens ${S.minFramings} (close, medium, wide, low, high, pov)`);
+  for (const [k, n] of Object.entries(counts)) if (n / beats.length > S.maxFramingShare) W('18.3', `Bildgröße „${k}“ in ${n}/${beats.length} Beats (max. ${S.maxFramingShare * 100} %)`);
+
+  // Orte, Gefühle (18.4)
+  const places = new Set(beats.map((b) => b.place).filter(Boolean));
+  if (timeline.recipe === 'B1' && places.size < S.minPlacesB1) E('18.4', `nur ${places.size} Orte (Rezept B1: ≥ ${S.minPlacesB1})`);
+  const moods = new Set(beats.map((b) => b.mood).filter(Boolean));
+  if (moods.size < S.minMoods) E('18.4', `nur ${moods.size} Gefühle der Hauptfigur (${[...moods].join(', ')}) – mindestens ${S.minMoods}, sichtbare Entwicklung`);
+  for (const b of beats) if (!b.mood) W('18.4', `Beat ${b.id}: kein Gefühl (mood) der Hauptfigur angegeben`);
+
+  // Jeder Beat hat ein sichtbares Ereignis (18.2) – R07/R19: jede 4-s-Szene enthält eine Aktion
+  const evByBeat = {};
+  for (const e of timeline.events || []) (evByBeat[e.beat] ||= []).push(e);
+  for (const b of beats) if (!evByBeat[b.id]?.length) E('18.2', `Beat ${b.id}: kein Ereignis – jede Einstellung braucht eine sichtbare Aktion`);
+
+  // HUD verändert sich in den meisten Beats (18.5)
+  const hudShare = beats.filter((b) => b.hud_change).length / beats.length;
+  if (hudShare < S.minHudChangeShare) E('18.5', `HUD ändert sich nur in ${Math.round(hudShare * 100)} % der Beats (min. ${S.minHudChangeShare * 100} %)`);
+
+  // Ton (18.6): jedes Ereignis mit sfx hat einen Klang genau auf seinem Frame; Akzente/Auslöser brauchen Klang
+  const sfx = timeline.audio?.sfx || [];
+  const fps = ptl.fps;
+  for (const e of timeline.events || []) {
+    for (const name of e.sfx || []) {
+      if (!sfx.some((s) => s.src === `gen:${name}` && Math.abs(s.t - e.t) < 0.5 / fps)) E('18.6', `Ereignis ${e.id}: Klang ${name} liegt nicht auf ${e.t} s`);
+    }
+    if ((e.flash || e.trigger) && !(e.sfx || []).length) W('18.6', `Ereignis ${e.id} (${e.flash ? 'HUD-Akzent' : 'Auslöser'}) ohne Klang`);
+  }
+  const keyEvents = (timeline.events || []).filter((e) => (e.sfx || []).length);
+  if (keyEvents.length < beats.length * 0.6) W('18.6', `nur ${keyEvents.length} Ereignisse mit Klang bei ${beats.length} Beats`);
+  // Wiederholung desselben Klangs direkt hintereinander (≥ 4×) wirkt mechanisch
+  const evSfx = sfx.filter((s) => s.event && s.event !== 'hud_step' && !String(s.event).startsWith('cut:')).map((s) => s.src);
+  for (let i = 3; i < evSfx.length; i++) if (evSfx[i] === evSfx[i - 1] && evSfx[i] === evSfx[i - 2] && evSfx[i] === evSfx[i - 3]) W('18.6', `Klang ${evSfx[i]} viermal hintereinander`);
+
+  // Ende (18.7): Endkarte oder Frage an den Zuschauer
+  if (!timeline.endcard) W('18.7', 'keine Endkarte (Frage an den Zuschauer / „Part 2?“)');
 }
 
 // Profil „voiceover“ = Stil A (Earth): Sprecher, Wort-für-Wort-Untertitel und Einblendungen statt Titel/HUD/Zeilen.

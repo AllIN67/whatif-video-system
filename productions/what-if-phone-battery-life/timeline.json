@@ -1,0 +1,2326 @@
+{
+ "_comment": "ERZEUGT von tools/build_timeline.mjs aus beats.json – nicht von Hand ändern.",
+ "fps": 30,
+ "duration": 61.4,
+ "seed": 61,
+ "recipe": "B1",
+ "pointe": 57.8,
+ "title": {
+  "in": 0,
+  "out": 3.4
+ },
+ "shots": [
+  {
+   "id": "wake",
+   "from": 0,
+   "to": 4.2,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 0,
+      "pos": [
+       1.839,
+       1.6,
+       0.27
+      ],
+      "look": [
+       0.3,
+       0.75,
+       -1.7
+      ],
+      "fov": 48
+     },
+     {
+      "t": 1.05,
+      "pos": [
+       1.957,
+       1.6,
+       0.172
+      ],
+      "look": [
+       0.3,
+       0.75,
+       -1.7
+      ],
+      "fov": 48
+     },
+     {
+      "t": 2.1,
+      "pos": [
+       2.068,
+       1.6,
+       0.068
+      ],
+      "look": [
+       0.3,
+       0.75,
+       -1.7
+      ],
+      "fov": 48
+     },
+     {
+      "t": 3.15,
+      "pos": [
+       2.172,
+       1.6,
+       -0.043
+      ],
+      "look": [
+       0.3,
+       0.75,
+       -1.7
+      ],
+      "fov": 48
+     },
+     {
+      "t": 4.2,
+      "pos": [
+       2.27,
+       1.6,
+       -0.161
+      ],
+      "look": [
+       0.3,
+       0.75,
+       -1.7
+      ],
+      "fov": 48
+     }
+    ]
+   }
+  },
+  {
+   "id": "kitchen",
+   "from": 4.2,
+   "to": 8.2,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 4.2,
+      "pos": [
+       38.681,
+       1.75,
+       1.49
+      ],
+      "look": [
+       40.2,
+       1.6,
+       -1.1
+      ],
+      "fov": 45
+     },
+     {
+      "t": 8.2,
+      "pos": [
+       39.324,
+       1.75,
+       0.813
+      ],
+      "look": [
+       40.2,
+       1.6,
+       -1.1
+      ],
+      "fov": 45
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "bus",
+   "from": 8.2,
+   "to": 12.2,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 8.2,
+      "pos": [
+       99.523,
+       1.35,
+       -5.927
+      ],
+      "look": [
+       95.2,
+       1.25,
+       -7.5
+      ],
+      "fov": 48
+     },
+     {
+      "t": 12.2,
+      "pos": [
+       99.523,
+       1.35,
+       0.573
+      ],
+      "look": [
+       95.2,
+       1.25,
+       -1
+      ],
+      "fov": 48
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "whip",
+    "direction": "right"
+   }
+  },
+  {
+   "id": "pant",
+   "from": 12.2,
+   "to": 14.4,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 12.2,
+      "pos": [
+       96.66,
+       1.5,
+       1.51
+      ],
+      "look": [
+       95.2,
+       1.25,
+       -0.5
+      ],
+      "fov": 40
+     },
+     {
+      "t": 14.4,
+      "pos": [
+       96.718,
+       1.5,
+       1.072
+      ],
+      "look": [
+       95.2,
+       1.25,
+       -0.5
+      ],
+      "fov": 40
+     }
+    ]
+   }
+  },
+  {
+   "id": "cafe",
+   "from": 14.4,
+   "to": 18.4,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 14.4,
+      "pos": [
+       -38.6,
+       1.613,
+       2.4
+      ],
+      "look": [
+       -41.9,
+       0.554,
+       -2.7
+      ],
+      "fov": 52
+     },
+     {
+      "t": 15.4,
+      "pos": [
+       -38.726,
+       1.583,
+       2.1
+      ],
+      "look": [
+       -41.893,
+       0.549,
+       -2.7
+      ],
+      "fov": 52
+     },
+     {
+      "t": 16.4,
+      "pos": [
+       -38.911,
+       1.569,
+       1.8
+      ],
+      "look": [
+       -41.903,
+       0.548,
+       -2.7
+      ],
+      "fov": 52
+     },
+     {
+      "t": 17.4,
+      "pos": [
+       -39.069,
+       1.576,
+       1.5
+      ],
+      "look": [
+       -41.906,
+       0.554,
+       -2.7
+      ],
+      "fov": 52
+     },
+     {
+      "t": 18.4,
+      "pos": [
+       -39.18,
+       1.535,
+       1.2
+      ],
+      "look": [
+       -41.894,
+       0.546,
+       -2.7
+      ],
+      "fov": 52
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "cafe_react",
+   "from": 18.4,
+   "to": 20.6,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 18.4,
+      "pos": [
+       -39.988,
+       1.84,
+       -0.602
+      ],
+      "look": [
+       -39.3,
+       1.82,
+       1.1
+      ],
+      "fov": 40
+     },
+     {
+      "t": 20.6,
+      "pos": [
+       -40.107,
+       1.84,
+       -0.299
+      ],
+      "look": [
+       -39.3,
+       1.82,
+       1.1
+      ],
+      "fov": 40
+     }
+    ]
+   }
+  },
+  {
+   "id": "office",
+   "from": 20.6,
+   "to": 24.6,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 20.6,
+      "pos": [
+       -90.756,
+       2.2,
+       7.554
+      ],
+      "look": [
+       -90,
+       1.3,
+       1.4
+      ],
+      "fov": 46
+     },
+     {
+      "t": 21.6,
+      "pos": [
+       -89.838,
+       2.2,
+       7.598
+      ],
+      "look": [
+       -90,
+       1.3,
+       1.4
+      ],
+      "fov": 46
+     },
+     {
+      "t": 22.6,
+      "pos": [
+       -88.923,
+       2.2,
+       7.506
+      ],
+      "look": [
+       -90,
+       1.3,
+       1.4
+      ],
+      "fov": 46
+     },
+     {
+      "t": 23.6,
+      "pos": [
+       -88.033,
+       2.2,
+       7.28
+      ],
+      "look": [
+       -90,
+       1.3,
+       1.4
+      ],
+      "fov": 46
+     },
+     {
+      "t": 24.6,
+      "pos": [
+       -87.185,
+       2.2,
+       6.924
+      ],
+      "look": [
+       -90,
+       1.3,
+       1.4
+      ],
+      "fov": 46
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "whip",
+    "direction": "left"
+   }
+  },
+  {
+   "id": "phone_low",
+   "from": 24.6,
+   "to": 27.2,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 24.6,
+      "pos": [
+       -90.62,
+       2.07,
+       1.161
+      ],
+      "look": [
+       -90.25,
+       1.62,
+       2.25
+      ],
+      "fov": 42
+     },
+     {
+      "t": 27.2,
+      "pos": [
+       -90.564,
+       2.07,
+       1.46
+      ],
+      "look": [
+       -90.25,
+       1.62,
+       2.25
+      ],
+      "fov": 42
+     }
+    ]
+   }
+  },
+  {
+   "id": "park",
+   "from": 27.2,
+   "to": 31.4,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 27.2,
+      "pos": [
+       1.375,
+       0.3,
+       121.041
+      ],
+      "look": [
+       -2.4,
+       0.9,
+       119.2
+      ],
+      "fov": 50
+     },
+     {
+      "t": 31.4,
+      "pos": [
+       0.86,
+       0.3,
+       120.013
+      ],
+      "look": [
+       -2.4,
+       0.9,
+       119.2
+      ],
+      "fov": 50
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "stranger",
+   "from": 31.4,
+   "to": 35.4,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 31.4,
+      "pos": [
+       1.738,
+       1.3,
+       120.404
+      ],
+      "look": [
+       -1.9,
+       1.15,
+       119.3
+      ],
+      "fov": 45
+     },
+     {
+      "t": 35.4,
+      "pos": [
+       0.934,
+       1.3,
+       119.93
+      ],
+      "look": [
+       -1.9,
+       1.15,
+       119.3
+      ],
+      "fov": 45
+     }
+    ]
+   }
+  },
+  {
+   "id": "bank_dies",
+   "from": 35.4,
+   "to": 38.2,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 35.4,
+      "pos": [
+       -0.001,
+       1.4,
+       119.462
+      ],
+      "look": [
+       -2,
+       1.25,
+       119
+      ],
+      "fov": 40
+     },
+     {
+      "t": 38.2,
+      "pos": [
+       -0.208,
+       1.4,
+       119.22
+      ],
+      "look": [
+       -2,
+       1.25,
+       119
+      ],
+      "fov": 40
+     }
+    ]
+   }
+  },
+  {
+   "id": "storm",
+   "from": 38.2,
+   "to": 42.2,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 38.2,
+      "pos": [
+       95.768,
+       0.35,
+       9.381
+      ],
+      "look": [
+       94.8,
+       1.3,
+       5.5
+      ],
+      "fov": 52
+     },
+     {
+      "t": 42.2,
+      "pos": [
+       96.203,
+       0.35,
+       8.376
+      ],
+      "look": [
+       94.8,
+       1.3,
+       5.5
+      ],
+      "fov": 52
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "whip",
+    "direction": "right"
+   },
+   "shake": [
+    {
+     "t": 39,
+     "dur": 0.7,
+     "amp": 0.06,
+     "freq": 9
+    }
+   ]
+  },
+  {
+   "id": "blackout",
+   "from": 42.2,
+   "to": 46.2,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 42.2,
+      "pos": [
+       18.127,
+       86.75,
+       -126.745
+      ],
+      "look": [
+       0,
+       8,
+       -220
+      ],
+      "fov": 50
+     },
+     {
+      "t": 46.2,
+      "pos": [
+       27.836,
+       79.25,
+       -139.158
+      ],
+      "look": [
+       0,
+       8,
+       -220
+      ],
+      "fov": 50
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "kiosk",
+   "from": 46.2,
+   "to": 49.8,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 46.2,
+      "pos": [
+       97.514,
+       1.3,
+       14.407
+      ],
+      "look": [
+       94.2,
+       0.9,
+       13
+      ],
+      "fov": 46
+     },
+     {
+      "t": 47.1,
+      "pos": [
+       97.652,
+       1.3,
+       14.022
+      ],
+      "look": [
+       94.2,
+       0.9,
+       13
+      ],
+      "fov": 46
+     },
+     {
+      "t": 48,
+      "pos": [
+       97.745,
+       1.3,
+       13.625
+      ],
+      "look": [
+       94.2,
+       0.9,
+       13
+      ],
+      "fov": 46
+     },
+     {
+      "t": 48.9,
+      "pos": [
+       97.793,
+       1.3,
+       13.22
+      ],
+      "look": [
+       94.2,
+       0.9,
+       13
+      ],
+      "fov": 46
+     },
+     {
+      "t": 49.8,
+      "pos": [
+       97.795,
+       1.3,
+       12.812
+      ],
+      "look": [
+       94.2,
+       0.9,
+       13
+      ],
+      "fov": 46
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "home",
+   "from": 49.8,
+   "to": 53,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 49.8,
+      "pos": [
+       100.229,
+       2.4,
+       14.75
+      ],
+      "look": [
+       94.6,
+       1.2,
+       18
+      ],
+      "fov": 48
+     },
+     {
+      "t": 53,
+      "pos": [
+       100.229,
+       2.4,
+       20.75
+      ],
+      "look": [
+       94.6,
+       1.2,
+       24
+      ],
+      "fov": 48
+     }
+    ]
+   }
+  },
+  {
+   "id": "plug",
+   "from": 53,
+   "to": 57,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 53,
+      "pos": [
+       0.8,
+       1.3,
+       1.801
+      ],
+      "look": [
+       0.3,
+       1.1,
+       -0.55
+      ],
+      "fov": 45
+     },
+     {
+      "t": 57,
+      "pos": [
+       0.835,
+       1.3,
+       0.963
+      ],
+      "look": [
+       0.3,
+       1.1,
+       -0.55
+      ],
+      "fov": 45
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "twist",
+   "from": 57,
+   "to": 61.4,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 57,
+      "pos": [
+       0.432,
+       1.64,
+       0.956
+      ],
+      "look": [
+       0.3,
+       1.62,
+       -0.55
+      ],
+      "fov": 40
+     },
+     {
+      "t": 61.4,
+      "pos": [
+       0.554,
+       1.64,
+       0.756
+      ],
+      "look": [
+       0.3,
+       1.62,
+       -0.55
+      ],
+      "fov": 40
+     }
+    ]
+   }
+  }
+ ],
+ "hud": [
+  {
+   "id": "battery",
+   "from": 0,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      0,
+      100
+     ],
+     [
+      1.5,
+      99,
+      "hold"
+     ],
+     [
+      2.4,
+      98,
+      "hold"
+     ],
+     [
+      3.6,
+      97,
+      "hold"
+     ],
+     [
+      4.9,
+      95,
+      "hold"
+     ],
+     [
+      5.6,
+      93,
+      "hold"
+     ],
+     [
+      6.4,
+      92,
+      "hold"
+     ],
+     [
+      7.1,
+      91,
+      "hold"
+     ],
+     [
+      7.8,
+      90,
+      "hold"
+     ],
+     [
+      10,
+      86,
+      "hold"
+     ],
+     [
+      11,
+      84,
+      "hold"
+     ],
+     [
+      11.8,
+      82,
+      "hold"
+     ],
+     [
+      12.8,
+      81,
+      "hold"
+     ],
+     [
+      14,
+      80,
+      "hold"
+     ],
+     [
+      15.6,
+      79,
+      "hold"
+     ],
+     [
+      18,
+      78,
+      "hold"
+     ],
+     [
+      18.9,
+      77,
+      "hold"
+     ],
+     [
+      21.6,
+      77,
+      "linear"
+     ],
+     [
+      24.4,
+      32,
+      "linear"
+     ],
+     [
+      24.9,
+      27,
+      "hold"
+     ],
+     [
+      25.5,
+      25,
+      "hold"
+     ],
+     [
+      26.166667,
+      22,
+      "hold"
+     ],
+     [
+      26.8,
+      20,
+      "hold"
+     ]
+    ]
+   },
+   "bar": [
+    0,
+    100
+   ],
+   "flashes": [
+    {
+     "t": 10,
+     "kind": "loss"
+    },
+    {
+     "t": 18.9,
+     "kind": "warn"
+    },
+    {
+     "t": 21.6,
+     "kind": "loss"
+    },
+    {
+     "t": 24.9,
+     "kind": "warn"
+    }
+   ]
+  },
+  {
+   "id": "lowpower",
+   "from": 27.2,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      27.2,
+      20
+     ],
+     [
+      27.8,
+      19,
+      "hold"
+     ],
+     [
+      29.4,
+      18,
+      "hold"
+     ],
+     [
+      31,
+      17,
+      "hold"
+     ],
+     [
+      32.3,
+      20,
+      "hold"
+     ],
+     [
+      32.6,
+      20,
+      "linear"
+     ],
+     [
+      35.2,
+      34,
+      "linear"
+     ],
+     [
+      36.3,
+      30,
+      "hold"
+     ],
+     [
+      37,
+      28,
+      "hold"
+     ],
+     [
+      37.8,
+      26,
+      "hold"
+     ],
+     [
+      39.6,
+      22,
+      "hold"
+     ],
+     [
+      40.7,
+      19,
+      "hold"
+     ],
+     [
+      41.8,
+      15,
+      "hold"
+     ]
+    ]
+   },
+   "bar": [
+    0,
+    100
+   ],
+   "flashes": [
+    {
+     "t": 32.3,
+     "kind": "gain"
+    },
+    {
+     "t": 36.3,
+     "kind": "loss"
+    }
+   ]
+  },
+  {
+   "id": "critical",
+   "from": 42.2,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      42.2,
+      15
+     ],
+     [
+      43.2,
+      13,
+      "hold"
+     ],
+     [
+      44.4,
+      12,
+      "hold"
+     ],
+     [
+      45.6,
+      10,
+      "hold"
+     ],
+     [
+      47.3,
+      8,
+      "hold"
+     ],
+     [
+      47.8,
+      7,
+      "hold"
+     ],
+     [
+      49.2,
+      6,
+      "hold"
+     ],
+     [
+      50.8,
+      5,
+      "hold"
+     ],
+     [
+      51.7,
+      4,
+      "hold"
+     ],
+     [
+      52.6,
+      3,
+      "hold"
+     ]
+    ]
+   },
+   "bar": [
+    0,
+    100
+   ],
+   "flashes": [
+    {
+     "t": 43,
+     "kind": "loss"
+    },
+    {
+     "t": 47.3,
+     "kind": "loss"
+    }
+   ]
+  },
+  {
+   "id": "charging",
+   "from": 53,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      53,
+      3
+     ],
+     [
+      54.4,
+      4,
+      "hold"
+     ],
+     [
+      55,
+      5,
+      "hold"
+     ],
+     [
+      56.4,
+      5,
+      "hold"
+     ]
+    ]
+   },
+   "bar": [
+    0,
+    100
+   ],
+   "flashes": [
+    {
+     "t": 54.4,
+     "kind": "gain"
+    }
+   ]
+  },
+  {
+   "id": "critical",
+   "from": 57,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      57,
+      5
+     ],
+     [
+      57.8,
+      4,
+      "hold"
+     ]
+    ]
+   },
+   "bar": [
+    0,
+    100
+   ],
+   "flashes": [
+    {
+     "t": 57.8,
+     "kind": "loss"
+    },
+    {
+     "t": 59.4,
+     "kind": "warn"
+    }
+   ]
+  }
+ ],
+ "lines": [
+  {
+   "id": "l_swipe",
+   "in": 4.5,
+   "out": 8
+  },
+  {
+   "id": "l_maps",
+   "in": 8.6,
+   "out": 12
+  },
+  {
+   "id": "l_outlet",
+   "in": 14.7,
+   "out": 18.2
+  },
+  {
+   "id": "l_call",
+   "in": 20.9,
+   "out": 24.4
+  },
+  {
+   "id": "l_lowpower",
+   "in": 27.5,
+   "out": 31.2
+  },
+  {
+   "id": "l_powerbank",
+   "in": 31.7,
+   "out": 35.2
+  },
+  {
+   "id": "l_empty",
+   "in": 35.6,
+   "out": 38.066667
+  },
+  {
+   "id": "l_storm",
+   "in": 38.5,
+   "out": 42
+  },
+  {
+   "id": "l_blackout",
+   "in": 42.5,
+   "out": 46
+  },
+  {
+   "id": "l_kiosk",
+   "in": 46.5,
+   "out": 49.6
+  },
+  {
+   "id": "l_home",
+   "in": 50.1,
+   "out": 52.8
+  },
+  {
+   "id": "l_plug",
+   "in": 53.3,
+   "out": 56.8
+  }
+ ],
+ "events": [
+  {
+   "t": 0.3,
+   "id": "alarm",
+   "beat": "wake",
+   "what": "Handy-Wecker vibriert",
+   "sfx": [
+    "buzz"
+   ]
+  },
+  {
+   "t": 1.5,
+   "id": "first_tap",
+   "beat": "wake",
+   "trigger": true,
+   "what": "erster Tipp auf das Handy kostet 1 %",
+   "sfx": [
+    "pop"
+   ]
+  },
+  {
+   "t": 4.9,
+   "id": "swipe1",
+   "beat": "kitchen",
+   "what": "Wischen: −2 %",
+   "sfx": [
+    "pop"
+   ]
+  },
+  {
+   "t": 5.6,
+   "id": "swipe2",
+   "beat": "kitchen",
+   "what": "Wischen: −2 %",
+   "sfx": [
+    "pop"
+   ]
+  },
+  {
+   "t": 6.1,
+   "id": "toast_smoke",
+   "beat": "kitchen",
+   "what": "Toast verbrennt hinter ihm, Rauch steigt",
+   "sfx": [
+    "thud"
+   ]
+  },
+  {
+   "t": 8.4,
+   "id": "bus_leaves",
+   "beat": "bus",
+   "what": "Bus fährt ohne ihn ab",
+   "sfx": [
+    "rumble"
+   ]
+  },
+  {
+   "t": 10,
+   "id": "maps_open",
+   "beat": "bus",
+   "what": "er öffnet die Karte – großer Verlust",
+   "sfx": [
+    "loss"
+   ],
+   "flash": "loss"
+  },
+  {
+   "t": 12.366667,
+   "id": "gasp",
+   "beat": "pant",
+   "what": "er keucht, Hände auf den Knien",
+   "sfx": [
+    "heartbeat"
+   ]
+  },
+  {
+   "t": 14.766667,
+   "id": "outlet_seen",
+   "beat": "cafe",
+   "what": "freie Steckdose entdeckt",
+   "sfx": [
+    "ding"
+   ]
+  },
+  {
+   "t": 16.8,
+   "id": "outlet_taken",
+   "beat": "cafe",
+   "what": "ein Fremder steckt sein Kabel zuerst ein",
+   "sfx": [
+    "thud"
+   ]
+  },
+  {
+   "t": 18.9,
+   "id": "glare",
+   "beat": "cafe_react",
+   "what": "wütender Blick, der Fremde grinst",
+   "sfx": [
+    "heartbeat"
+   ],
+   "flash": "warn"
+  },
+  {
+   "t": 20.866667,
+   "id": "call_rings",
+   "beat": "office",
+   "what": "Videoanruf vom Chef klingelt",
+   "sfx": [
+    "buzz"
+   ]
+  },
+  {
+   "t": 21.6,
+   "id": "call_answer",
+   "beat": "office",
+   "what": "er nimmt ab – Akku fällt rasant",
+   "sfx": [
+    "loss"
+   ],
+   "flash": "loss"
+  },
+  {
+   "t": 24.9,
+   "id": "low_warning",
+   "beat": "phone_low",
+   "what": "Akku-Symbol wird rot, Handy vibriert",
+   "sfx": [
+    "buzz"
+   ],
+   "flash": "warn"
+  },
+  {
+   "t": 29,
+   "id": "pigeon_lands",
+   "beat": "park",
+   "what": "Taube landet auf seinem Kopf – er bewegt sich nicht",
+   "sfx": [
+    "pop"
+   ]
+  },
+  {
+   "t": 32.3,
+   "id": "bank_given",
+   "beat": "stranger",
+   "what": "Fremde reicht ihm eine Powerbank",
+   "sfx": [
+    "charge"
+   ],
+   "flash": "gain"
+  },
+  {
+   "t": 33.6,
+   "id": "cheer",
+   "beat": "stranger",
+   "what": "er springt vor Freude",
+   "sfx": [
+    "shimmer"
+   ]
+  },
+  {
+   "t": 36.3,
+   "id": "bank_empty",
+   "beat": "bank_dies",
+   "what": "Powerbank-LEDs erlöschen",
+   "sfx": [
+    "power_down"
+   ],
+   "flash": "loss"
+  },
+  {
+   "t": 39,
+   "id": "lightning",
+   "beat": "storm",
+   "what": "Blitz schlägt ein, Regen setzt ein",
+   "sfx": [
+    "zap",
+    "boom"
+   ]
+  },
+  {
+   "t": 43,
+   "id": "city_dark",
+   "beat": "blackout",
+   "what": "die Stadt wird Block für Block dunkel",
+   "sfx": [
+    "power_down"
+   ],
+   "flash": "loss"
+  },
+  {
+   "t": 47.3,
+   "id": "kneel",
+   "beat": "kiosk",
+   "what": "Ladesäule tot – er sinkt auf die Knie",
+   "sfx": [
+    "thud"
+   ],
+   "flash": "loss"
+  },
+  {
+   "t": 50.2,
+   "id": "window_seen",
+   "beat": "home",
+   "what": "sein Fenster leuchtet noch",
+   "sfx": [
+    "ding"
+   ]
+  },
+  {
+   "t": 54.4,
+   "id": "plug_in",
+   "beat": "plug",
+   "what": "er steckt das Ladekabel ein",
+   "sfx": [
+    "charge"
+   ],
+   "flash": "gain"
+  },
+  {
+   "t": 57.8,
+   "id": "lights_out",
+   "beat": "twist",
+   "what": "Pointe: auch zu Hause fällt der Strom aus",
+   "sfx": [
+    "power_down"
+   ],
+   "flash": "loss"
+  },
+  {
+   "t": 59.4,
+   "id": "dread",
+   "beat": "twist",
+   "what": "Akku-Wert pulsiert rot",
+   "sfx": [
+    "heartbeat"
+   ],
+   "flash": "warn"
+  }
+ ],
+ "beats": [
+  {
+   "id": "wake",
+   "from": 0,
+   "to": 4.2,
+   "place": "bedroom",
+   "mood": "tired",
+   "framing": "medium",
+   "preset": "orbit",
+   "hud_change": true,
+   "data": {
+    "you": [
+     0.3,
+     0.55,
+     -1.4,
+     0
+    ]
+   }
+  },
+  {
+   "id": "kitchen",
+   "from": 4.2,
+   "to": 8.2,
+   "place": "kitchen",
+   "mood": "worried",
+   "framing": "medium",
+   "preset": "push",
+   "hud_change": true,
+   "data": {
+    "you": [
+     40.2,
+     0,
+     -1.1,
+     0
+    ]
+   }
+  },
+  {
+   "id": "bus",
+   "from": 8.2,
+   "to": 12.2,
+   "place": "street",
+   "mood": "panic",
+   "framing": "medium",
+   "preset": "track",
+   "hud_change": true,
+   "data": {
+    "you": [
+     95.2,
+     0.12,
+     -7.5,
+     0
+    ],
+    "youTo": [
+     95.2,
+     0.12,
+     -1,
+     0
+    ]
+   }
+  },
+  {
+   "id": "pant",
+   "from": 12.2,
+   "to": 14.4,
+   "place": "street",
+   "mood": "tired",
+   "framing": "close",
+   "preset": "close",
+   "hud_change": true,
+   "data": {
+    "you": [
+     95.2,
+     0.12,
+     -1,
+     0
+    ]
+   }
+  },
+  {
+   "id": "cafe",
+   "from": 14.4,
+   "to": 18.4,
+   "place": "cafe",
+   "mood": "happy",
+   "framing": "pov",
+   "preset": "pov",
+   "hud_change": true,
+   "data": {
+    "stranger": [
+     -43.6,
+     0,
+     -1.6,
+     1.2
+    ],
+    "strangerTo": [
+     -42.2,
+     0,
+     -2.45,
+     3.14
+    ]
+   }
+  },
+  {
+   "id": "cafe_react",
+   "from": 18.4,
+   "to": 20.6,
+   "place": "cafe",
+   "mood": "angry",
+   "framing": "close",
+   "preset": "close",
+   "hud_change": true,
+   "data": {
+    "you": [
+     -39.3,
+     0,
+     1.1,
+     3.6
+    ]
+   }
+  },
+  {
+   "id": "office",
+   "from": 20.6,
+   "to": 24.6,
+   "place": "office",
+   "mood": "panic",
+   "framing": "wide",
+   "preset": "orbit",
+   "hud_change": true,
+   "data": {
+    "you": [
+     -90,
+     0,
+     1.8,
+     0
+    ]
+   }
+  },
+  {
+   "id": "phone_low",
+   "from": 24.6,
+   "to": 27.2,
+   "place": "office",
+   "mood": "panic",
+   "framing": "close",
+   "preset": "push",
+   "hud_change": true,
+   "data": {
+    "you": [
+     -90,
+     0,
+     1.8,
+     0
+    ]
+   }
+  },
+  {
+   "id": "park",
+   "from": 27.2,
+   "to": 31.4,
+   "place": "park",
+   "mood": "tired",
+   "framing": "low",
+   "preset": "low",
+   "hud_change": true,
+   "data": {
+    "you": [
+     -2.4,
+     0,
+     119,
+     1.5708
+    ]
+   }
+  },
+  {
+   "id": "stranger",
+   "from": 31.4,
+   "to": 35.4,
+   "place": "park",
+   "mood": "happy",
+   "framing": "medium",
+   "preset": "push",
+   "hud_change": true,
+   "data": {
+    "you": [
+     -2.4,
+     0,
+     119,
+     1.5708
+    ],
+    "helper": [
+     -1.2,
+     0,
+     118,
+     -0.876
+    ]
+   }
+  },
+  {
+   "id": "bank_dies",
+   "from": 35.4,
+   "to": 38.2,
+   "place": "park",
+   "mood": "sad",
+   "framing": "close",
+   "preset": "close",
+   "hud_change": true,
+   "data": {
+    "you": [
+     -2.4,
+     0,
+     119,
+     1.5708
+    ]
+   }
+  },
+  {
+   "id": "storm",
+   "from": 38.2,
+   "to": 42.2,
+   "place": "street",
+   "mood": "worried",
+   "framing": "low",
+   "preset": "low",
+   "hud_change": true,
+   "data": {
+    "you": [
+     94.8,
+     0.12,
+     3,
+     0
+    ],
+    "youTo": [
+     94.8,
+     0.12,
+     8,
+     0
+    ]
+   }
+  },
+  {
+   "id": "blackout",
+   "from": 42.2,
+   "to": 46.2,
+   "place": "city",
+   "mood": "shock",
+   "framing": "high",
+   "preset": "high",
+   "hud_change": true
+  },
+  {
+   "id": "kiosk",
+   "from": 46.2,
+   "to": 49.8,
+   "place": "street",
+   "mood": "sad",
+   "framing": "medium",
+   "preset": "orbit",
+   "hud_change": true,
+   "data": {
+    "you": [
+     94.2,
+     0.12,
+     13,
+     1.5708
+    ]
+   }
+  },
+  {
+   "id": "home",
+   "from": 49.8,
+   "to": 53,
+   "place": "street",
+   "mood": "worried",
+   "framing": "wide",
+   "preset": "track",
+   "hud_change": true,
+   "data": {
+    "you": [
+     94.6,
+     0.12,
+     18,
+     0
+    ],
+    "youTo": [
+     94.6,
+     0.12,
+     24,
+     0
+    ]
+   }
+  },
+  {
+   "id": "plug",
+   "from": 53,
+   "to": 57,
+   "place": "bedroom",
+   "mood": "relief",
+   "framing": "close",
+   "preset": "push",
+   "hud_change": true,
+   "data": {
+    "you": [
+     0.3,
+     0,
+     -0.55,
+     0
+    ]
+   }
+  },
+  {
+   "id": "twist",
+   "from": 57,
+   "to": 61.4,
+   "place": "bedroom",
+   "mood": "shock",
+   "framing": "close",
+   "preset": "close",
+   "hud_change": true,
+   "data": {
+    "you": [
+     0.3,
+     0,
+     -0.55,
+     0
+    ]
+   }
+  }
+ ],
+ "audio": {
+  "fade_out": 1.2,
+  "beds": [
+   {
+    "src": "music:main",
+    "start": 0,
+    "end": 61.4,
+    "gain_db": -10
+   },
+   {
+    "src": "gen:room",
+    "start": 0,
+    "end": 8.2,
+    "gain_db": -15,
+    "automation": [
+     [
+      0,
+      -40
+     ],
+     [
+      0.25,
+      0
+     ],
+     [
+      7.95,
+      0
+     ],
+     [
+      8.2,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:city",
+    "start": 8.2,
+    "end": 14.4,
+    "gain_db": -15,
+    "automation": [
+     [
+      8.2,
+      -40
+     ],
+     [
+      8.45,
+      0
+     ],
+     [
+      14.15,
+      0
+     ],
+     [
+      14.4,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:room",
+    "start": 14.4,
+    "end": 27.2,
+    "gain_db": -15,
+    "automation": [
+     [
+      14.4,
+      -40
+     ],
+     [
+      14.65,
+      0
+     ],
+     [
+      26.95,
+      0
+     ],
+     [
+      27.2,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:city",
+    "start": 27.2,
+    "end": 38.2,
+    "gain_db": -15,
+    "automation": [
+     [
+      27.2,
+      -40
+     ],
+     [
+      27.45,
+      0
+     ],
+     [
+      37.95,
+      0
+     ],
+     [
+      38.2,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:rain",
+    "start": 38.2,
+    "end": 61.4,
+    "gain_db": -15,
+    "automation": [
+     [
+      38.2,
+      -40
+     ],
+     [
+      38.45,
+      0
+     ],
+     [
+      61.15,
+      0
+     ],
+     [
+      61.4,
+      -40
+     ]
+    ]
+   }
+  ],
+  "sfx": [
+   {
+    "src": "gen:buzz",
+    "t": 0.3,
+    "gain_db": -9,
+    "event": "alarm"
+   },
+   {
+    "src": "gen:pop",
+    "t": 1.5,
+    "gain_db": -12,
+    "event": "first_tap"
+   },
+   {
+    "src": "gen:pop",
+    "t": 2.4,
+    "gain_db": -17,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 3.6,
+    "gain_db": -17,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 4.9,
+    "gain_db": -12,
+    "event": "swipe1"
+   },
+   {
+    "src": "gen:pop",
+    "t": 5.6,
+    "gain_db": -12,
+    "event": "swipe2"
+   },
+   {
+    "src": "gen:thud",
+    "t": 6.1,
+    "gain_db": -16,
+    "event": "toast_smoke"
+   },
+   {
+    "src": "gen:pop",
+    "t": 6.4,
+    "gain_db": -17,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 7.1,
+    "gain_db": -17,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 7.8,
+    "gain_db": -17,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 7.866667,
+    "gain_db": -12,
+    "event": "cut:bus"
+   },
+   {
+    "src": "gen:rumble",
+    "t": 8.4,
+    "gain_db": -12,
+    "event": "bus_leaves"
+   },
+   {
+    "src": "gen:loss",
+    "t": 10,
+    "gain_db": -7,
+    "event": "maps_open"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 12.366667,
+    "gain_db": -6,
+    "event": "gasp"
+   },
+   {
+    "src": "gen:ding",
+    "t": 14.766667,
+    "gain_db": -10,
+    "event": "outlet_seen"
+   },
+   {
+    "src": "gen:thud",
+    "t": 16.8,
+    "gain_db": -8,
+    "event": "outlet_taken"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 18.9,
+    "gain_db": -9,
+    "event": "glare"
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 20.266667,
+    "gain_db": -12,
+    "event": "cut:office"
+   },
+   {
+    "src": "gen:buzz",
+    "t": 20.866667,
+    "gain_db": -7,
+    "event": "call_rings"
+   },
+   {
+    "src": "gen:loss",
+    "t": 21.6,
+    "gain_db": -6,
+    "event": "call_answer"
+   },
+   {
+    "src": "gen:buzz",
+    "t": 24.9,
+    "gain_db": -8,
+    "event": "low_warning"
+   },
+   {
+    "src": "gen:pop",
+    "t": 25.5,
+    "gain_db": -17,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 26.166667,
+    "gain_db": -17,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 26.8,
+    "gain_db": -17,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 29,
+    "gain_db": -10,
+    "event": "pigeon_lands"
+   },
+   {
+    "src": "gen:charge",
+    "t": 32.3,
+    "gain_db": -7,
+    "event": "bank_given"
+   },
+   {
+    "src": "gen:shimmer",
+    "t": 33.6,
+    "gain_db": -10,
+    "event": "cheer"
+   },
+   {
+    "src": "gen:power_down",
+    "t": 36.3,
+    "gain_db": -8,
+    "event": "bank_empty"
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 37.866667,
+    "gain_db": -12,
+    "event": "cut:storm"
+   },
+   {
+    "src": "gen:zap",
+    "t": 39,
+    "gain_db": -6,
+    "event": "lightning"
+   },
+   {
+    "src": "gen:boom",
+    "t": 39,
+    "gain_db": -6,
+    "event": "lightning"
+   },
+   {
+    "src": "gen:power_down",
+    "t": 43,
+    "gain_db": -4,
+    "event": "city_dark"
+   },
+   {
+    "src": "gen:pop",
+    "t": 43.2,
+    "gain_db": -17,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 44.4,
+    "gain_db": -17,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 45.6,
+    "gain_db": -17,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:thud",
+    "t": 47.3,
+    "gain_db": -6,
+    "event": "kneel"
+   },
+   {
+    "src": "gen:ding",
+    "t": 50.2,
+    "gain_db": -12,
+    "event": "window_seen"
+   },
+   {
+    "src": "gen:charge",
+    "t": 54.4,
+    "gain_db": -6,
+    "event": "plug_in"
+   },
+   {
+    "src": "gen:pop",
+    "t": 55,
+    "gain_db": -17,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 56.4,
+    "gain_db": -17,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:power_down",
+    "t": 57.8,
+    "gain_db": -3,
+    "event": "lights_out"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 59.4,
+    "gain_db": -8,
+    "event": "dread"
+   }
+  ],
+  "music": {
+   "main": {
+    "bpm": 112,
+    "root": "D",
+    "seed": 5,
+    "sections": [
+     {
+      "from": 0,
+      "to": 8.2,
+      "style": "pulse"
+     },
+     {
+      "from": 8.2,
+      "to": 27.2,
+      "style": "drive"
+     },
+     {
+      "from": 27.2,
+      "to": 31.4,
+      "style": "calm"
+     },
+     {
+      "from": 31.4,
+      "to": 35.4,
+      "style": "drive"
+     },
+     {
+      "from": 35.4,
+      "to": 38.2,
+      "style": "pulse"
+     },
+     {
+      "from": 38.2,
+      "to": 53,
+      "style": "drive_hi"
+     },
+     {
+      "from": 53,
+      "to": 57.8,
+      "style": "calm"
+     },
+     {
+      "from": 57.8,
+      "to": 59,
+      "style": "silence"
+     },
+     {
+      "from": 59,
+      "to": 61.4,
+      "style": "pulse"
+     }
+    ],
+    "duration": 61.4
+   }
+  }
+ },
+ "post": {
+  "vignette": 0.18
+ },
+ "endcard": {
+  "in": 58.6,
+  "center": 0.3
+ }
+}
