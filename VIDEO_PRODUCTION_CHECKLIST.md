@@ -25,6 +25,7 @@ Ablage pro Video: `productions/<slug>/` mit `LOG.md`, `beats.json`, `timeline.js
 - [ ] Klang auf jedem Schlüsselereignis (Auslöser, Akzente, Pointe), sonst sparsam; Musikplan mit Ruhe vor der Pointe (18.6)
 - [ ] Texte nur in `text.en.json`: Titel, HUD-Labels, 12–24 Zeilen à 3–10 Wörter, Endkarte (4)
 - [ ] `node tools/build_timeline.mjs productions/<slug>` + `node tools/validate_production.mjs productions/<slug>` → **OK**
+- [ ] Keine Warnung `[18.11]` (Referenzniveau des Testvideos) – oder Begründung im LOG (18.11)
 
 ## 3. Szene und Vorschau
 

@@ -1,7 +1,7 @@
 # WHATIF STYLE GUIDE
 
 **Maßgebliche kreative und technische Grundlage für alle Videos dieses Projekts.**
-Version 2.0 · 2026-10-30 · Belegbasis: `REFERENCE_ANALYSIS.md` (R01–R15, Abschnitt 9: R07/R19/R20), Abschnitt 16 (R16–R18) und `references/analysis/MEASUREMENTS.md`.
+Version 2.1 · 2026-10-30 · Belegbasis: `REFERENCE_ANALYSIS.md` (R01–R15, Abschnitt 9: R07/R19/R20), Abschnitt 16 (R16–R18) und `references/analysis/MEASUREMENTS.md`.
 
 **Aktives Produktionsziel ist ausschließlich Stil B** – stummes What-if-Video, Rezept **B1** (Standard) oder **B2**.
 **Abschnitt 18 ist der verbindliche, eingefrorene Produktionsstandard** und hat bei Widersprüchen Vorrang vor den Abschnitten 1–17.
@@ -544,6 +544,26 @@ Ein technisches PASS ist **keine** Freigabe. Status: `TECHNISCH GEPRÜFT` → `Q
 | Sounddesign | Klangzeiten von Hand, unabhängig von der Szene; keine Kontrolle im fertigen Ton | Ereignis-gekoppelte Klänge, Synchronitätsmessung |
 | Qualitätskontrolle | `video_qa.py` prüfte nur Technik; „technisch geprüft“ wurde als Qualität gelesen | dreistufige Freigabe, Monotonie-Kandidaten, Standard-B-Regeln vor dem Rendern |
 
+### 18.11 Referenzproduktion = verbindliches Mindestniveau (abgenommen 2026-10-30)
+
+Das Testvideo `productions/what-if-phone-battery-life/` wurde vom Auftraggeber vollständig abgenommen und ist der **verbindliche
+Qualitätsmaßstab**. Neue Videos sind eigenständig (eigenes Thema, eigene Orte, eigene Pointe), fallen aber nicht ohne konkreten,
+im LOG begründeten Grund hinter diese Werte zurück. `validate_production.mjs` meldet jede Unterschreitung als Warnung `[18.11]`.
+
+| Merkmal | Referenzwert (Testvideo) | Prüfung |
+|---|---|---|
+| Ereignisdichte | 26 Ereignisse / 17 Beats = 1,5 pro Beat | Warnung < 1,5 |
+| Kamerawechsel | 7 Vorlagen, 6 Bildgrößen, nie zweimal gleich hintereinander | Fehler bei Wiederholung / < 4 Bildgrößen; Warnung < 6 |
+| Figurenreaktionen | 8 Gefühle mit Entwicklung, Reaktionsposen (recoil, jump, kneel, reach …), Blinzeln, Schweiß/Wangen | Fehler < 4, Warnung < 6 |
+| Orte/Licht | 7 Orte, je eigene Lichtstimmung, Lichtwechsel als Ereignis | Fehler < 5 (B1), Warnung < 6 |
+| HUD-Dynamik | Wert ändert sich in 100 % der Beats, 11 Akzente, 4 Labels | Fehler < 70 %, Warnungen < 100 % / < 0,5 Akzente pro Beat / < 4 Labels |
+| Sound-Synchronisation | alle Ereignisse mit Klang; gemessen −15 … +10 ms | Fehler bei Versatz im Plan; Warnung < 90 % mit Klang; Messung in `video_qa.py` |
+| Dramaturgie | Hoffnung/Rückschlag, früh vorbereitete Pointe, Endkarte mit Frage + „Part 2?“, 3,6 s nach der Pointe | Pointe/Ende Fehler, Endkarte Warnung; Rest in `quality_review.md` C |
+| Bildqualität | Würfel-Figuren mit Gesicht, Requisiten mit Erzählfunktion, keine Schwarzbilder/Kurz-Einstellungen, keine Monotonie-Kandidaten | `video_qa.py` + `quality_review.md` B |
+
+Bekannte Schwächen der Referenz, die **nicht** wiederholt werden sollen: zu dunkle Nachtszenen (Gesicht unlesbar),
+Anschlussfehler über einen Schnitt (Pose wechselt), Text während eines Blitzes, wichtige Requisiten zu klein in der Ich-Perspektive.
+
 ### 18.10 Architektur-Freeze
 
 Ab 2026-10-30 werden Pipeline, Kit-Schnittstellen, Beat-Sheet-Format, HUD-Gestaltung, Signalfarbe und Prüfregeln **nicht mehr
@@ -562,3 +582,4 @@ Beleg im LOG), (c) **neue Kit-Teile** (Orte, Requisiten, Posen, Klänge), die ei
 | 2026-10-29 | 1.2 | Abschnitt 16: zwei Erfolgsrezepte (Eskalations-Zähler, X verschwindet 5 s), Baukasten `pipeline/runtime/kit/`, Vorschau `tools/still.mjs` | Analyse R16–R18 + R04/R07 (vom Auftraggeber benannte erfolgreiche Kanäle); erstes Testvideo wich vom Stil ab (Fotorealistik) |
 | 2026-10-29 | 1.3 | Zwei Produktionsstile (A Earth, B mit Rezepten B1/B2, Abschnitt 17, `STYLE_A_EARTH.md`); Rezepte A/B → B1/B2 umbenannt; Mindestlänge 60 s für jedes Video, technisch erzwungen | Auftrag des Nutzers (Stilauswahl je Auftrag; jedes Video ≥ 60 s) |
 | 2026-10-30 | 2.0 | Abschnitt 18 „Produktionsstandard Stil B“ (verbindlich, Vorrang), Architektur-Freeze 18.10; Stil B als einziges aktives Ziel, Stil A archiviert (17); HUD-Gestaltung und Signalfarbe nach R07/R19/R20 (18.5, ersetzt 6.3 HUD-Schrift „Monospace“ und 6.4 Punkt 2/3 „nicht Gold“); 16.3 Kit-Bestand | Auftrag des Nutzers (finale Systemüberarbeitung); Sichtung R07/R19/R20 (`REFERENCE_ANALYSIS.md` 9); Fehleranalyse 18.9; Testvideo `productions/what-if-phone-battery-life` |
+| 2026-10-30 | 2.1 | 18.11: abgenommenes Testvideo als verbindliches Mindestniveau; Validator erzwingt `beats.json` für Stil B und warnt bei Unterschreitung; `run.mjs` legt `quality_review.md` an | Abnahme durch den Auftraggeber; Prüfung, ob der Standard im Ablauf greift |

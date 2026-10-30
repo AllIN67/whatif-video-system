@@ -87,7 +87,7 @@ export async function run({ production, lang = 'en', skipValidate = false, qaIgn
       await step(log, 'Validierung', () => {
         const tl = JSON.parse(fs.readFileSync(path.join(prodDir, 'timeline.json'), 'utf8'));
         const tx = JSON.parse(fs.readFileSync(path.join(prodDir, `text.${lang}.json`), 'utf8'));
-        const r = validate(tl, tx, { lang, wordTimes: loadWords(prodDir, tl) });
+        const r = validate(tl, tx, { lang, wordTimes: loadWords(prodDir, tl), requireBeats: tl.profile !== 'voiceover' && !isTechnical(rel) });
         for (const w of r.warnings) console.log(`⚠️  ${w}`);
         if (r.errors.length) {
           for (const e of r.errors) console.log(`❌ ${e}`);
@@ -116,12 +116,19 @@ export async function run({ production, lang = 'en', skipValidate = false, qaIgn
       if (code !== 0) throw new Error('inspect_frames.py fehlgeschlagen');
       return { strips: fs.readdirSync(path.join(qaDir, 'strips')).length };
     });
+    // Freigabebogen (Guide 18.8) anlegen, falls noch nicht vorhanden – die visuelle/dramaturgische Prüfung ist Pflicht
+    const qr = path.join(prodDir, 'quality_review.md');
+    if (!isTechnical(rel) && !fs.existsSync(qr)) {
+      fs.writeFileSync(qr, fs.readFileSync(path.join(ROOT, 'templates', 'quality_review.md'), 'utf8').replace(/<slug>/g, path.basename(prodDir)));
+      log.quality_review_created = path.relative(ROOT, qr);
+    }
     log.final = enc.final;
     log.qa_status = qa.status;
     log.finished = new Date().toISOString();
     save();
     console.log(`\nFertig: ${path.relative(ROOT, enc.final)} · QA ${qa.status} · Bericht ${path.relative(ROOT, path.join(qaDir, 'report.md'))}`);
-    console.log('Hinweis: Status ist höchstens „technisch geprüft“ nach vollständiger Sichtprüfung; die Hörprüfung durch einen Menschen steht aus.');
+    console.log('Nächste Pflichtschritte (Guide 18.8): alle qa/sheet_*.jpg, qa/shots.jpg und qa/strips/* ansehen, quality_review.md ausfüllen,');
+    console.log(`MP4 als Anhang ausliefern (${path.relative(ROOT, enc.final)}), Hörprüfung beim Nutzer anfragen. Technischer Status ≠ Freigabe.`);
     return log;
   } catch (e) {
     log.error = String(e.message || e);

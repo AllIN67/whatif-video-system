@@ -36,7 +36,7 @@ export function checkLength(timeline, E, W) {
   }
 }
 
-export function validate(timeline, text, { lang = 'en', wordTimes = null } = {}) {
+export function validate(timeline, text, { lang = 'en', wordTimes = null, requireBeats = false } = {}) {
   const errors = [];
   const warnings = [];
   const E = (rule, msg) => errors.push(`[${rule}] ${msg}`);
@@ -155,6 +155,7 @@ export function validate(timeline, text, { lang = 'en', wordTimes = null } = {})
 
   // Produktionsstandard Stil B (Abschnitt 18) – nur für Zeitachsen aus beats.json (tools/build_timeline.mjs)
   if (timeline.beats) checkStandardB(timeline, ptl, E, W);
+  else if (requireBeats) E('18.1', 'timeline.json ist nicht aus beats.json erzeugt – Stil-B-Produktionen brauchen productions/<slug>/beats.json (node tools/build_timeline.mjs)');
 
   return { errors, warnings };
 }
@@ -171,6 +172,20 @@ export const STANDARD_B = {
   minPlacesB1: 5,
   minMoods: 4,
   minHudChangeShare: 0.7,
+};
+
+// Referenzniveau = vom Nutzer abgenommenes Testvideo productions/what-if-phone-battery-life (2026-10-30, Guide 18.11).
+// Unterschreitung ist kein Fehler, aber eine Warnung, die im LOG begründet werden muss (nicht ohne Grund zurückfallen).
+export const REFERENCE_B = {
+  eventsPerBeat: 1.5, // Referenz 1,53
+  framings: 6, // close, medium, wide, low, high, pov
+  presets: 6, // Referenz 7
+  moods: 6, // Referenz 8
+  places: 6, // Referenz 7
+  hudChangeShare: 1.0, // Referenz: HUD ändert sich in jedem Beat
+  sfxEventShare: 0.9, // Referenz: alle Ereignisse mit Klang
+  flashesPerBeat: 0.5, // Referenz 11 Akzente / 17 Beats
+  hudLabels: 4, // Referenz 5 Segmente / 4 Labels
 };
 
 export function checkStandardB(timeline, ptl, E, W) {
@@ -238,6 +253,25 @@ export function checkStandardB(timeline, ptl, E, W) {
 
   // Ende (18.7): Endkarte oder Frage an den Zuschauer
   if (!timeline.endcard) W('18.7', 'keine Endkarte (Frage an den Zuschauer / „Part 2?“)');
+
+  // Referenzniveau (18.11): Werte des abgenommenen Testvideos; Unterschreitung im LOG begründen
+  const R = REFERENCE_B;
+  const ev = timeline.events || [];
+  const under = (what, have, want) => W('18.11', `unter Referenzniveau: ${what} ${have} (Referenz ≥ ${want}) – im LOG begründen`);
+  const epb = Math.round((ev.length / beats.length) * 100) / 100;
+  if (epb < R.eventsPerBeat) under('Ereignisse pro Beat', epb, R.eventsPerBeat);
+  if (nF < R.framings) under('Bildgrößen', nF, R.framings);
+  const nP = new Set(beats.map((b) => b.preset)).size;
+  if (nP < R.presets) under('Kamera-Vorlagen', nP, R.presets);
+  if (moods.size < R.moods) under('Gefühle', moods.size, R.moods);
+  if (places.size < R.places) under('Orte', places.size, R.places);
+  if (hudShare < R.hudChangeShare) under('Anteil Beats mit HUD-Änderung', Math.round(hudShare * 100) / 100, R.hudChangeShare);
+  const sfxShare = ev.length ? ev.filter((e) => (e.sfx || []).length).length / ev.length : 0;
+  if (sfxShare < R.sfxEventShare) under('Anteil Ereignisse mit Klang', Math.round(sfxShare * 100) / 100, R.sfxEventShare);
+  const fl = (timeline.hud || []).reduce((n, h) => n + (h.flashes || []).length, 0);
+  if (fl / beats.length < R.flashesPerBeat) under('HUD-Akzente pro Beat', Math.round((fl / beats.length) * 100) / 100, R.flashesPerBeat);
+  const labels = new Set((timeline.hud || []).map((h) => h.id)).size;
+  if (labels < R.hudLabels) under('HUD-Labels', labels, R.hudLabels);
 }
 
 // Profil „voiceover“ = Stil A (Earth): Sprecher, Wort-für-Wort-Untertitel und Einblendungen statt Titel/HUD/Zeilen.
@@ -318,7 +352,11 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   }
   const tl = JSON.parse(fs.readFileSync(path.join(dir, 'timeline.json'), 'utf8'));
   const tx = JSON.parse(fs.readFileSync(path.join(dir, `text.${lang}.json`), 'utf8'));
-  const res = validate(tl, tx, { lang, wordTimes: loadWords(dir, tl) });
+  // Stil B (alles außer Profil voiceover und technischen Test-Clips productions/_… / tests/…) braucht beats.json
+  const rel = path.relative(process.cwd(), path.resolve(dir)).split(path.sep);
+  const technical = rel[0] === 'tests' || (rel[0] === 'productions' && (rel[1] || '').startsWith('_'));
+  const requireBeats = tl.profile !== 'voiceover' && !technical;
+  const res = validate(tl, tx, { lang, wordTimes: loadWords(dir, tl), requireBeats });
   if (args.includes('--json')) console.log(JSON.stringify(res, null, 1));
   else {
     for (const e of res.errors) console.log(`❌ ${e}`);

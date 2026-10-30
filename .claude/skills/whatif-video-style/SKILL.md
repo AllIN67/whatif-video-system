@@ -20,7 +20,7 @@ erneute Repository-Analyse pro Video. Neue Kit-Teile sind erlaubt, wenn ein Them
 
 1. Guide Abschnitt 18 lesen (dazu bei Bedarf 16.1/16.2 Rezept, 2 Hook, 4 Text, 9 Ton).
 2. `VIDEO_PRODUCTION_CHECKLIST.md` öffnen. Vorlagen: `templates/beats.json`, `templates/production_log.md`, `templates/quality_review.md`.
-3. Beispielproduktion zum Nachschlagen: `productions/what-if-phone-battery-life/` (beats.json + scene.js).
+3. **Referenzproduktion = Mindestniveau** (Guide 18.11): `productions/what-if-phone-battery-life/` (beats.json, scene.js, LOG.md, quality_review.md). Als Muster nachschlagen, nicht kopieren.
 4. Werkzeuge: `node --version`, `ffmpeg -version`, `ls node_modules/three` (sonst `npm install`).
 
 ## Schritt 1 – Thema → Story
@@ -37,6 +37,8 @@ erneute Repository-Analyse pro Video. Neue Kit-Teile sind erlaubt, wenn ein Them
 - Texte nur in `text.en.json` (Titel, HUD-Labels, Zeilen, Endkarte).
 - `node tools/build_timeline.mjs productions/<slug>` → `node tools/validate_production.mjs productions/<slug>` muss **OK** melden
   (Standard-B-Regeln: Kamera-Abwechslung, Ereignis pro Beat, HUD-Dynamik, Gefühle, Orte, Ton-Synchronität).
+- Warnungen `[18.11]` (unter Referenzniveau) beheben – Beat-Sheet anreichern – oder im LOG begründen. Ohne `beats.json` lehnt
+  der Validator eine Stil-B-Produktion ab.
 
 ## Schritt 3 – Szene
 
@@ -62,7 +64,8 @@ erneute Repository-Analyse pro Video. Neue Kit-Teile sind erlaubt, wenn ein Them
 2. **Visuell:** **jeden** `qa/sheet_*.jpg` (inkl. Ende), `qa/shots.jpg`, **jeden** Streifen in `qa/strips/` ansehen; jede REVIEW-Meldung
    als „beabsichtigt“ (Grund) oder „Fehler“ einstufen.
 3. **Dramaturgisch:** Ablauf gegen Beat-Sheet prüfen (Einstieg, Entwicklung, Eskalation, Pointe, Ende).
-- `templates/quality_review.md` → `productions/<slug>/quality_review.md` ausfüllen; nur Gesehenes als OK eintragen.
+- `productions/<slug>/quality_review.md` (legt `run.mjs` aus der Vorlage an) ausfüllen; nur Gesehenes als OK eintragen.
+- Bekannte Schwächen der Referenz vermeiden (Guide 18.11): zu dunkle Nachtszenen, Anschlussfehler über Schnitte, Text im Blitz.
 - Hörprüfung kann Claude nicht leisten → ausdrücklich beim Nutzer anfragen.
 
 ## Schritt 7 – Fehler beheben

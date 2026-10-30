@@ -21,8 +21,8 @@
   Powerbank (Gewinn) → Powerbank leer → Gewitter → **Stromausfall der Stadt** (Aufbau) → Ladesäule tot → Zuhause leuchtet noch →
   Einstecken (Erleichterung) → **Pointe: auch zu Hause fällt der Strom aus** (Auszahlung des Stromausfalls) → Endkarte
   „How long would you last? / Part 2?“.
-- **Beats:** 17 (2,2–4,4 s, Median 4,0 s), 8 Orte (Schlafzimmer, Küche, Straße, Café, Büro, Park, Stadt-Totale, Gewitterstraße),
-  9 Gefühle (tired, worried, panic, happy, angry, sad, shock, relief …), Kamera-Vorlagen orbit, push, track, close, pov, low, high –
+- **Beats:** 17 (2,2–4,4 s, Median 4,0 s), 7 Orte laut Beat-Sheet (Schlafzimmer, Küche, Straße – auch als Gewitterstraße –, Café, Büro, Park, Stadt-Totale),
+  8 Gefühle (tired, worried, panic, happy, angry, sad, shock, relief), Kamera-Vorlagen orbit, push, track, close, pov, low, high –
   6 Bildgrößen, keine Wiederholung hintereinander (Validator).
 - **Licht:** je Ort eigene Stimmung (interior, day, sunset im Café, storm, dusk → blackout als Ereignis, nightRoom → blackout als Pointe).
 - **Ton:** Musik `music_synth.py` (pulse → drive → calm im Energiesparmodus → drive (Powerbank) → pulse (leer) → drive_hi (Gewitter,
@@ -118,4 +118,5 @@ für künftige Kit-Ergänzungen (Guide 18.10 erlaubt neue Kit-Teile).
 
 ## 7. Status
 
-**QUALITÄT GEPRÜFT (mit Einschränkungen) – Hörprüfung durch den Nutzer ausstehend, daher nicht FREIGEGEBEN.**
+**Vom Auftraggeber am 2026-10-30 vollständig abgenommen** („gefällt mir vollständig“) und zum verbindlichen Produktionsstandard erklärt (Guide 18.11).
+Eine ausdrückliche Bestätigung der Hörprüfung (Kopfhörer + Handylautsprecher) liegt nicht gesondert vor.

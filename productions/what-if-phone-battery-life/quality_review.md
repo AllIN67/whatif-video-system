@@ -45,7 +45,7 @@ in `qa/strips/` (nach Korrektur von `inspect_frames.py`, das alte Streifen nicht
 |---|---|---|
 | Einstieg | OK | Frame 0: Figur im Bett, Titel, HUD 100 %; erster Verlust bei 1,5 s, Wecker vibriert bei 0,3 s |
 | Entwicklung ohne Sprecher verständlich | weitgehend OK | Ursache → Wirkung je Beat; schwächste Stellen: Café-Ich-Perspektive (Steckdose klein im Bild), Ladesäule im Dunkeln |
-| Abwechslung | OK | 8 Orte, 6 Bildgrößen, 4 HUD-Labels |
+| Abwechslung | OK | 7 Orte, 6 Bildgrößen, 4 HUD-Labels |
 | Eskalation | OK | 100 % → 4 %, Hoffnung/Rückschlag (Powerbank, Zuhause), Licht kippt von Tag zu Gewitter zu Stromausfall |
 | Ende | OK | Pointe 57,8 s als eigenes Ereignis (Licht aus + Klang + HUD rot), vorbereitet durch den Stromausfall 43 s; Endkarte „How long would you last? / Part 2?“, 3,6 s bis Ende |
 | Vergleich mit R07/R19/R20 | siehe Abschlussbericht im LOG | Takt und Ereignisdichte wie R07/R19; Bildqualität (Licht, Materialien, Detaildichte der Orte) unter R07/R20 |

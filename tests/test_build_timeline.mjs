@@ -121,3 +121,15 @@ test('Standard B erkennt Kamera-Wiederholung, Beat ohne Ereignis, zu lange Beats
   checkStandardB(tl, prepare(tl), (r, m) => errs.push(m), () => {});
   assert.match(errs.join('\n'), /liegt nicht auf/);
 });
+
+test('Stil B ohne beats.json wird abgelehnt; Referenzniveau als Warnung', () => {
+  const tl = buildTimeline(sheet());
+  const noBeats = { ...tl };
+  delete noBeats.beats;
+  assert.match(validate(noBeats, text(), { requireBeats: true }).errors.join('\n'), /beats\.json/);
+  assert.equal(validate(noBeats, text()).errors.some((e) => /beats\.json/.test(e)), false);
+  // Testfixture liegt unter dem Referenzniveau (5 Bildgrößen, 6 Orte, 1 Ereignis/Beat) → Warnungen, keine Fehler
+  const r = validate(tl, text(), { requireBeats: true });
+  assert.deepEqual(r.errors, []);
+  assert.match(r.warnings.join('\n'), /unter Referenzniveau: Ereignisse pro Beat/);
+});
