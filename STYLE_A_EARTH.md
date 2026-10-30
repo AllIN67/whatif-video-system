@@ -1,6 +1,6 @@
 # Stil A – „Earth“ (Sprecher-Erklärvideo)
 
-**Gilt nur bei `PRODUKTIONSSTIL: A (Earth)`.** Stil B (B1/B2) steht in `WHATIF_STYLE_GUIDE.md` Abschnitt 16.
+**ARCHIVIERT (2026-10-30).** Gilt nur, wenn ein Auftrag wörtlich `PRODUKTIONSSTIL: A (Earth)` nennt. Aktives Produktionsziel ist Stil B (`WHATIF_STYLE_GUIDE.md` Abschnitt 18); nichts aus diesem Dokument in Stil-B-Videos übernehmen.
 Gemeinsam für beide Stile gelten aus dem Style-Guide: Themenwahl und Fakten (1.4, 3.2 Quellenpflicht), Hook-Grundsatz
 „Frame 0 zeigt sofort Szene + Text“ (2), stilisierte 3D-Welt mit dem Baukasten (6.1, 16.3), Blitzregel (6.2),
 Kontinuität (6.5), Zustandsänderung spätestens alle 6 s (7.1), Effekte mit Erzählfunktion (8), Mischung −14 LUFS /

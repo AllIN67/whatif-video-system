@@ -286,3 +286,84 @@ Entscheidung und Testplan: siehe `WHATIF_STYLE_GUIDE.md`, Abschnitt 1.3.
 4. Gibt es deutschsprachige What-if-Kanäle in vergleichbarer Qualität? (Nicht Teil der Sammlung; Marktrecherche offen.)
 5. Werden die Plattformregeln zur Mindestlänge (Monetarisierung > 60 s) aktuell so angewendet?
 6. Originalauflösung der Uploads (Downloads sind teils nur 576×1024).
+
+## 9. Nachtrag 2026-10-30: Kernreferenzen für Stil B (R07, R19, R20) – Grundlage für Guide 18
+
+Vom Auftraggeber am 2026-10-30 als **verbindliche visuelle Referenzen** bereitgestellt (drei MP4-Dateien, lokal unter
+`references/videos/`, Prüfsummen in `references/manifest.tsv`):
+
+| ID | Datei/TikTok-ID | Inhalt | Kanal |
+|---|---|---|---|
+| R07 | 7700624061914828062 (bitidentisch mit dem bereits vorhandenen R07) | „What if you got 2× smaller every 2 seconds?“ | Simulationskanal |
+| R19 | 7702164942513868063 (neu, 1080×1920 HEVC, 61,0 s) | „What if you were immortal?“ | Simulationskanal |
+| R20 | 7695367034321833248 (dasselbe TikTok wie R10, aber 1080×1920 statt 576×1024) | „What if Jesus came back?“ – nur Hook/Dramaturgie/Spannung, Thema bleibt ausgeschlossen (Guide 1.4) | zweiter Kanal |
+
+**Was tatsächlich untersucht wurde:** alle drei Videos vollständig decodiert; **Kontaktbögen mit 2 Bildern/s über die gesamte
+Laufzeit** (R07 122, R19 122, R20 155 Bilder) mit dem Read-Werkzeug angesehen; Einzelbilder in voller Auflösung (R07 bei 1,0 /
+17,5 / 45,5 s); Bild-Messung (`video_qa.py --mode reference`: Schnitte, Bewegung, Helligkeit; R19 und R20 neu gemessen, R07 aus
+der früheren Messung); Ton-Einsätze (Energie-Anstiege in 10-ms-Fenstern) für alle drei. **Nicht möglich:** Ton anhören
+(Musik/Effekte nur gemessen), Bildfolgen mit voller Bildrate an jeder Stelle (nur an Messkandidaten).
+
+### 9.1 Beobachtungen je Video [B]
+
+**R07 (Schrumpfen):** 15 Szenen à **genau 4,0 s** (Raum → Bett → Hund → Münze → Ameise → Teppich-Dschungel → Hausstaubmilbe →
+Haar → Wassertropfen → Bakterien → Zelle → Virus → Moleküle → DNA → Atome), Übergang jeweils kurze Abblende. In **jeder** Szene
+ein neues Riesen-Objekt neben der Figur **und** eine Handlung der Figur (geht, zeigt, weicht zurück, schwimmt, hält die Hände
+schützend hoch). Kamera bewegt sich in jeder Szene (Heranfahren, Begleiten, Untersicht – die Untersicht macht Objekte riesig).
+Jede Szene hat eine **eigene Farbwelt** (Holz-Beige, Sand, Türkis, Grün, Nachtblau, Ocker, Violett). HUD „HEIGHT“ zählt **jeden
+Frame** (1,49 m → 1,3 nm), Label klein in Versalien, Wert als **Serifenziffern**, Unterzeile winzig. Eine Textzeile pro Szene.
+Weiches Licht, weiche Schatten, leichte Tiefenunschärfe bei Partikeln. Ton: Song mit Gesang, Einsätze alle ≈ 0,41 s = Takt der
+Musik, keine erkennbaren Einzel-Effekte.
+
+**R19 (Unsterblich):** 14 Szenen à **4,0 s** (Auto prallt ab → Blitz → Friedhof 2100 → Zukunftsstadt 2300 → Haus mit Ranken
+3000 → Eiszeit → fremde Tiere → Erde aus dem All → aufgeblähte Sonne → Roter Riese → Erde weg → letzte Sterne → Googol →
+„Forever“), Übergänge als 5–6-Frame-Abblenden (Messkandidaten exakt bei 3,93–4,10 s, 7,93–8,10 s …). HUD „YEAR 2026“ →
+„YEARS FROM NOW 1 MILLION … FOREVER … ???“, Unterzeile „STILL ALIVE“: der Wert **springt pro Szene** (Stufe), nicht stetig.
+Die erste Hälfte hat starke physische Ereignisse (Autoaufprall mit Dampf, Blitz mit Funken, Regen); **die zweite Hälfte (≈ 36–56 s)
+zeigt nur die Figur im Weltall – gemessene Bewegung 0,06–0,2 (fast Standbild)**. Ende: Lichtblitz → Schwarz → „What was it?
+Part 2?“ (offene Frage). Ton: −18,3 LUFS, ruhiges Bett, Einsätze nur beim Autoaufprall (1,35 s) und bei 11,9 s; Absenkung
+49–57 s (−24 … −28 LUFS) vor dem lauten Lichtblitz.
+
+**R20 (zweiter Kanal):** Ich-Perspektive am Restauranttisch, Gegenüber mit großem, freundlichem Gesicht; HUD mit verrauschten
+Ziffern „??:??:??“ (Geheimnis ab Frame 0). 0–12 s normale Welt mit Kleinstereignissen (Kellner läuft durchs Bild), **bei 12,3 s
+der Schlag** (Blitz), danach **Reaktions-Nahaufnahme** (Gesicht wechselt von Lächeln zu Sorge), Whip, Enthüllung am Himmel.
+Einstellungslänge **Median 1,53 s, 4,8 Wechsel/10 s, 23 Whips** – deutlich schneller als R07/R19. HUD-Label wechselt mit **jedem
+Akt** (HE RETURNS IN → FRIDAY 7:41 PM → RIGHT NOW 8.3 billion → AT YOUR TABLE 1 of 2 → RISING 0–19 m → Magnitude 6.1–9.6 →
+100–0 % → 4.3 billion). Requisiten erzählen (Handy mit Nachricht „Are you seeing this??“, leerer Stuhl). Totale von oben
+(Friedhof, Straße), Kamerawackeln beim Erdbeben. Gemalte Papiertextur + Tiefenunschärfe über allem. Ton: −14,1 LUFS, **LRA 19,3 LU**
+(größte Dynamik), erste ≈ 10 s sehr leise, Einsätze an jedem Schlüsselereignis (12,3 Blitz, 21,5 Posaune, 33,6 Handy, 51,7 Erdbeben,
+53–57 fallende Sterne, 64 Autos). Ende: Rückkehr zum Lichtmotiv → dunkle Karte mit Titel + „Are you ready?“.
+
+### 9.2 Gemeinsame Qualitätsmerkmale (gelten für unser System) [B → Guide 18]
+
+1. **Jede Einstellung = ein sichtbares Ereignis** mit Ursache und Wirkung im Bild; nie nur Text auf ruhigem Bild.
+2. **Feste, kurze Takte:** 4,0 s (R07, R19) bzw. 1,5–4 s mit Reaktions-Einschüben (R20). Keine Einstellung über 7 s.
+3. **Die Figur reagiert sichtbar** (Gesicht + Körper) – das Gefühl ist auf dem Kontaktbogen lesbar.
+4. **Kamera bewegt sich immer** und **wechselt die Bildgröße** von Szene zu Szene (Untersicht, Nah, Totale von oben, Ich-Perspektive).
+5. **Jeder Ort hat eine eigene Licht-/Farbwelt**; Wechsel innerhalb einer Szene nur als Ereignis (Blitz, Stromausfall, Verdunkelung).
+6. **HUD = Erzähler:** Label in kleinen Versalien, großer Serifen-Wert, kleine Unterzeile; der Wert ändert sich in jeder Szene
+   (stetig oder in Stufen), das Label wechselt mit den Akten.
+7. **Eine Textzeile pro Szene**, die Ursache/Bedeutung ergänzt.
+8. **Ende mit offener Frage oder Rückkehr** („Part 2?“, „What was it?“, „Are you ready?“).
+9. **Ton:** durchgehendes Musikbett mit Lautheitsdramaturgie; **Einzel-Effekte sparsam, nur auf Schlüsselereignissen** (R19: 2,
+   R20: ≈ 10). Ruhe vor dem Höhepunkt (R19, R20).
+
+### 9.3 Kanalspezifisch (nicht übernehmen bzw. nur als Variante) [I]
+
+| Merkmal | Video | Entscheidung |
+|---|---|---|
+| Song mit Gesang, Effekte im Takt der Musik | R07 | nicht übernehmen (Lizenz, Lesbarkeit) |
+| Maßstabsreise mit fester Verdopplung | R07 | eigenes Rezept wäre eine Kopie der Idee – nicht als Standard |
+| Zeitsprünge über Milliarden Jahre, Weltall-Standbilder | R19 | Schwäche: Monotonie im zweiten Teil → Gegenbeispiel für die Monotonie-Prüfung |
+| Gemalte Papiertextur, Tiefenunschärfe | R20 | Kanal-Handschrift; nicht übernehmen (Erkennbarkeit) |
+| Ich-Perspektive als Grundhaltung, sehr schneller Schnitt (4,8/10 s) | R20 | als Variante erlaubt (Kamera-Vorlage `pov`), nicht als Standard |
+| Verrauschte HUD-Ziffern „??:??“ | R20 | als Geheimnis-Mittel möglich; Thema Religion bleibt ausgeschlossen |
+
+### 9.4 Abgleich mit den bisherigen Annahmen
+
+- Die Analyse „invisible vs. Worst day ever“ aus dem Auftrag liegt **nicht** im Repository (weder Video noch Bericht); sie wurde
+  als Ausgangsthese behandelt und durch R07/R19/R20 **bestätigt**: lange statische Szenen, wiederholte Perspektiven, seltene
+  HUD-Änderungen und ungenaue Effekte sind genau die Punkte, in denen sich unsere Produktionen von den Referenzen unterscheiden.
+- Nicht bestätigt: „SFX auf jedes Ereignis“. Die Referenzen setzen Einzel-Effekte sparsam; Pflicht ist der Klang auf
+  **Schlüsselereignissen**, nicht auf jedem Schnitt.
+- Guide 16.1 („alle 3–4 s ein Ereignis“) ist bestätigt und präzisiert: 4,0 s in R07/R19.

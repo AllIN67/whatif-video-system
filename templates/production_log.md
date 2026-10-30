@@ -3,17 +3,19 @@
 | Feld | Wert |
 |---|---|
 | Slug | `<slug>` |
-| Produktionsstil | A (Earth) / B – Rezept B1 / B2 |
+| Produktionsstil | B – Rezept B1 / B2 (Stil A nur auf ausdrücklichen Auftrag) |
 | Sprache | en |
-| Status | ENTWURF / TECHNISCH GEPRÜFT / FREIGEGEBEN |
-| Style-Guide-Version | 1.0 |
+| Status | ENTWURF / TECHNISCH GEPRÜFT / QUALITÄT GEPRÜFT / FREIGEGEBEN (Guide 18.8) |
+| Style-Guide-Version | 2.0 |
+| Beat-Sheet / Freigabebogen | `beats.json` / `quality_review.md` |
 | Git-Commit des Renders | |
 | Länge | s (≥ 60 s) |
 
 ## 1. Entscheidungen
 
 - Thema, Frage, HUD-Größe, Pointe:
-- Kamera-Paradigma + Begründung:
+- Beats (Anzahl, Orte, Gefühlsverlauf, Kamera-Vorlagen) + Begründung:
+- Neue Kit-Teile:
 - **Abweichungen vom Style-Guide** (Regel · Abweichung · Begründung):
 
 ## 2. Fakten und Quellen
