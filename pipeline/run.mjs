@@ -13,6 +13,7 @@ import { ROOT } from './server.mjs';
 import { renderFrames } from './render_frames.mjs';
 import { encode } from './encode.mjs';
 import { validate, loadWords } from '../tools/validate_production.mjs';
+import { buildTimeline } from '../tools/build_timeline.mjs';
 
 function git(args) {
   try {
@@ -71,6 +72,15 @@ export async function run({ production, lang = 'en', skipValidate = false, qaIgn
       await step(log, 'Sprecher (tts_kokoro.py)', () => {
         if (py(['tools/tts_kokoro.py', rel]) !== 0) throw new Error('tts_kokoro.py fehlgeschlagen');
         return { words: path.relative(ROOT, path.join(prodDir, 'voice', 'words.json')) };
+      });
+    }
+    // Stil B: timeline.json muss exakt aus beats.json erzeugt sein (eine Zeitquelle für Bild, HUD und Ton)
+    if (fs.existsSync(path.join(prodDir, 'beats.json'))) {
+      await step(log, 'Beat-Sheet aktuell (build_timeline.mjs)', () => {
+        const want = JSON.stringify(buildTimeline(JSON.parse(fs.readFileSync(path.join(prodDir, 'beats.json'), 'utf8'))));
+        const have = JSON.stringify(JSON.parse(fs.readFileSync(path.join(prodDir, 'timeline.json'), 'utf8')));
+        if (want !== have) throw new Error(`timeline.json ist nicht aus beats.json erzeugt – zuerst: node tools/build_timeline.mjs ${rel}`);
+        return { ok: true };
       });
     }
     if (!skipValidate) {
