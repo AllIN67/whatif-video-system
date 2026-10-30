@@ -61,4 +61,23 @@ Gebäude mit schaltbarem Fensterlicht (`userData.setLit`), `street().buildings`,
 
 ## 5. Render und QA
 
-(wird nach dem Render ergänzt)
+### Durchlauf 1 – 2026-10-30 (Commit eeaeab1, Doku-Commits danach ohne Einfluss auf das Bild)
+
+- Befehl: `node pipeline/run.mjs --production productions/what-if-phone-battery-life` · 1842 Frames · ≈ 1,3–1,6 s/Frame · ≈ 46 min
+- Mix: 61,400 s · −14,2 LUFS · TP −1,5 dBTP (Datei −1,1 dBTP) · LRA 10,9 LU
+- `video_qa.py`: **FAIL**
+- Angesehen: sheet_01–03 (alle, inkl. Ende), Bildstreifen 8,067 / 20,467 / 33,400 / 46,200 / 57,800.
+
+| Zeitpunkt | Befund | Einstufung | Ursache | Korrektur |
+|---|---|---|---|---|
+| 8,1 / 20,5–20,6 s | „Einstellung < 4 Frames“ (FAIL) | Fehler | Whip dreht die Kamera aus dem Innenraum in eine Wand (graue/rote Flächen) | Abblende statt Whip; Regel im Guide 18.3 |
+| 44,9–46,2 s | Schwarzbilder (FAIL) | Fehler | Stadt nach dem Stromausfall fast schwarz | hellere Nachtstimmung (Mondlicht) |
+| 33,4 s | Sprung | Fehler | Figur springt beim Aufstehen 0,45 m nach vorn | Verschiebung überblendet |
+| 32–34 s | Geschichte unklar | Fehler (Sicht) | Fremde mit Powerbank außerhalb des Bildes (9:16-Bildwinkel) | Stellung + Kamera senkrecht zur Verbindungslinie |
+| 46,5–49,5 s | Monotonie-Kandidat | Fehler (Sicht) | Figur steht nur vor der Säule | Ankunft im Laufen, Schlag auf die Säule, Knien |
+| 50–53 s | „home still has light“ ohne Bild | Fehler (Sicht) | Fenster außerhalb des Bildes | Begleitkamera von hinten auf das Fenster |
+| 53–57 s | Einstecken nicht erkennbar, dunkel | Fehler (Sicht) | Steckdose hinter dem Bett, schwaches Licht | Steckdosenleiste im Bild, Funken, Lampe vor der Figur |
+| 0–4 s | Monotonie-Kandidat | Verbesserung | liegende Figur, kleiner Schwenk | Wackeln beim Wecker, Schwenk 30° |
+| 58–61 s | Monotonie-Kandidat | beabsichtigt (Endkarte), verbessert | Großaufnahme im Dunkeln | Heranfahrt statt fester Nahaufnahme |
+| Klick-Kandidaten 0,7–18 s im 0,4-s-Raster | Transienten | beabsichtigt (vorläufig) | Hi-Hat des Musikstils „pulse/drive“ (wie in what-if-mind-reading-10s) | Hörprüfung |
+| Synchronität | 1. Messung zeigte −30…−50 ms | Messfehler | Suchfenster ab −50 ms erfasste Musik-Anschläge vor dem Klang | Fenster −15…+60 ms; Nachmessung: 34/37 erkannt, Versatz −15…+10 ms (1 Frame = 33 ms), 3 verdeckt, 1 Grenzfall (+60 ms, leiser HUD-pop) |

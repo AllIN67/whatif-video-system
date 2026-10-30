@@ -194,6 +194,11 @@ export function checkStandardB(timeline, ptl, E, W) {
     const b = beats[i];
     if (a.framing === b.framing && a.preset === b.preset) E('18.3', `Beats ${a.id} → ${b.id}: gleiche Kamera (${b.preset}/${b.framing}) zweimal hintereinander`);
   }
+  // Whip aus Innenräumen dreht die Kamera in eine Wand (Testvideo 2026-10-30: 2-Frame-Flächen, QA-FAIL)
+  const INTERIOR = new Set(['bedroom', 'kitchen', 'cafe', 'office', 'classroom']);
+  ptl.shots.forEach((s, i) => {
+    if (i > 0 && s.transition.type === 'whip' && INTERIOR.has(beats[i - 1]?.place)) W('18.3', `Whip von ${beats[i - 1].id} (Innenraum ${beats[i - 1].place}) – Abblende verwenden`);
+  });
   const counts = {};
   for (const b of beats) counts[b.framing] = (counts[b.framing] || 0) + 1;
   const nF = Object.keys(counts).length;

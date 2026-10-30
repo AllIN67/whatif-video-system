@@ -485,7 +485,7 @@ dramaturgisch, `templates/quality_review.md`) → MP4-AUSLIEFERUNG (Datei als An
 - **Nie zweimal dieselbe Vorlage + Bildgröße hintereinander** (Fehler). Mindestens **4 Bildgrößen** pro Video (Fehler), keine über 45 % (Warnung).
 - Die Kamera bewegt sich in jedem Beat (alle Vorlagen haben eingebaute Bewegung).
 - **9:16 hat nur ≈ 28° horizontalen Bildwinkel** (bei fov 48°): Bei `track` muss sich die Figur gleichmäßig mit der Kamera bewegen,
-  sonst verlässt sie das Bild (im Testvideo gefunden). Innenräume: Kamera bleibt auf der offenen Seite (+z) bzw. innerhalb der Wände.
+  sonst verlässt sie das Bild (im Testvideo gefunden). Zwei Figuren gemeinsam im Bild: Kamera senkrecht zu ihrer Verbindungslinie, Abstand der Figuren ≤ 1 m. Innenräume: Kamera bleibt auf der offenen Seite (+z) bzw. innerhalb der Wände; **aus Innenräumen kein Whip** (der Schwenk dreht die Kamera in eine Wand → 2-Frame-Flächen, QA-FAIL), stattdessen `dip`.
 - Reaktions-Nahaufnahme (`close`) nach jedem großen Ereignis an der Hauptfigur; mindestens eine Totale/Aufsicht (`high`) zur Orientierung.
 
 ### 18.4 Figuren und Orte
