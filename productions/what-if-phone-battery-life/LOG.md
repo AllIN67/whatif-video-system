@@ -26,8 +26,8 @@
   6 Bildgrößen, keine Wiederholung hintereinander (Validator).
 - **Licht:** je Ort eigene Stimmung (interior, day, sunset im Café, storm, dusk → blackout als Ereignis, nightRoom → blackout als Pointe).
 - **Ton:** Musik `music_synth.py` (pulse → drive → calm im Energiesparmodus → drive (Powerbank) → pulse (leer) → drive_hi (Gewitter,
-  Stromausfall) → calm (Einstecken) → **Stille 57,8–59,0 s (Pointe)** → pulse). Atmosphären room/city/rain. 25 Ereignisse, davon
-  21 mit Klang (buzz, pop, loss, thud, heartbeat, ding, charge, shimmer, power_down, zap+boom, rumble); HUD-Stufen mit leisem pop;
+  Stromausfall) → calm (Einstecken) → **Stille 57,8–59,0 s (Pointe)** → pulse). Atmosphären room/city/rain. 26 Ereignisse,
+  alle mit Klang (buzz, pop, loss, thud, heartbeat, ding, charge, shimmer, power_down, zap+boom, rumble); HUD-Stufen mit leisem pop;
   Whips mit Luftzug, Spitze auf dem Schnitt.
 - **Erkenntnis beim Bauen (→ Guide 18.3):** Im Hochformat beträgt der horizontale Bildwinkel bei fov 48° nur ≈ 28°. Die erste
   Fassung der Bus-Szene ließ die Figur schneller laufen als die Begleitkamera – sie war nicht im Bild. Korrektur: gleichmäßige
@@ -81,3 +81,41 @@ Gebäude mit schaltbarem Fensterlicht (`userData.setLit`), `street().buildings`,
 | 58–61 s | Monotonie-Kandidat | beabsichtigt (Endkarte), verbessert | Großaufnahme im Dunkeln | Heranfahrt statt fester Nahaufnahme |
 | Klick-Kandidaten 0,7–18 s im 0,4-s-Raster | Transienten | beabsichtigt (vorläufig) | Hi-Hat des Musikstils „pulse/drive“ (wie in what-if-mind-reading-10s) | Hörprüfung |
 | Synchronität | 1. Messung zeigte −30…−50 ms | Messfehler | Suchfenster ab −50 ms erfasste Musik-Anschläge vor dem Klang | Fenster −15…+60 ms; Nachmessung: 34/37 erkannt, Versatz −15…+10 ms (1 Frame = 33 ms), 3 verdeckt, 1 Grenzfall (+60 ms, leiser HUD-pop) |
+
+### Durchlauf 2 – 2026-10-30 (Commit dfaa333, nicht „dirty“)
+
+- Befehl wie Durchlauf 1 · ≈ 1,3 s/Frame · ≈ 45 min
+- Datei `render/final.mp4`: 61,400 s · 1080×1920 · 30 fps CFR (1842 Frames) · H.264 + AAC 48 kHz · 34,5 MB
+- Ton: −14,2 LUFS, TP −1,1 dBTP, LRA 10,9 LU; Ereignis-Klänge 35/38 erkannt, Versatz −15 … +10 ms
+- `video_qa.py`: **REVIEW, kein FAIL** (keine Schwarzbilder, keine Kurz-Einstellungen, keine Monotonie-Kandidaten)
+- **Werkzeugfehler gefunden:** `inspect_frames.py` ließ Streifen früherer Renders im Ordner liegen (81 statt 71 Dateien, darunter der
+  alte Whip bei 8,067 s). Korrigiert (alte `strip_*.jpg` werden vor dem Schreiben gelöscht), Streifen neu erzeugt.
+- Angesehen: sheet_01–03 (inkl. Ende), shots.jpg, **alle 71 Bildstreifen** (12 Sammelbilder à 6). Einstufung aller Meldungen und
+  Sichtbefunde: `quality_review.md`.
+- Bekannte Einschränkungen (bewusst nicht in einem dritten Render behoben, um den Auftrag abzuschließen – Korrektur jeweils in der
+  Szene möglich): Kontinuitätsbruch 35,4 s (stehend → sitzend), Ladesäulen-Szene 46–50 s zu dunkel (Knien kaum lesbar), Zeile
+  während des Blitzes 39,0–39,3 s kontrastarm, Café-Ich-Perspektive zeigt die Steckdose klein.
+- Auslieferung: `render/final.mp4` per `SendUserFile` als Anhang übergeben (Rückmeldung des Werkzeugs: „1 file delivered“, file_uuid
+  9c9c5751-a17e-43f7-95ef-a0e49ef1647a).
+
+## 6. Vergleich mit den Referenzen (R07, R19, R20)
+
+| Merkmal | Referenzen | Testvideo | Bewertung |
+|---|---|---|---|
+| Takt | 4,0 s (R07/R19), Median 1,5 s (R20) | 17 Beats, 2,2–4,4 s, Median 4,0 s | gleichwertig zu R07/R19 |
+| Ereignis pro Szene | ja | ja (26 Ereignisse) | gleichwertig |
+| Figurenreaktion | Gesten, Gesicht | 11 Gefühle, Reaktionsposen, Blinzeln, Schweiß/Wangen | gleichwertig bis besser lesbar als R07/R19 (größere Mimik) |
+| Kamera-Abwechslung | Untersicht, Nah, Aufsicht, Ich-Perspektive | 7 Vorlagen, 6 Bildgrößen | gleichwertig |
+| HUD | Wert in jeder Szene, Labelwechsel | Wert in jedem Beat, 4 Labels, Akzente rot/gold | gleichwertig, zusätzlich Akzente |
+| Ton | Musikbett + wenige Akzente | Musikbett + Atmo, alle 26 Ereignisse mit Klang (27 Klänge) + HUD-pops + 1 Luftzug, synchron gemessen | stärker akzentuiert; **Klangqualität ungehört** |
+| Licht/Materialien | weiche Ausleuchtung, AO-artige Schatten, Detailreichtum (R07), Malstil + Tiefenunschärfe (R20) | flache Schattierung, Nacht-/Gewitterszenen teils sehr dunkel | **schwächer als R07/R20** |
+| Detaildichte der Orte | viele Kleinteile je Szene | Kit-Orte mit wenigen Requisiten | **schwächer** |
+| Ende | offene Frage / Part 2 | Pointe + Frage + Part 2 | gleichwertig |
+
+**Ergebnis:** Dramaturgie, Takt, Figurenreaktionen, HUD und Synchronität entsprechen dem Referenzniveau von R07/R19. Die
+**Bildqualität (Licht, Materialien, Detaildichte) erreicht die Referenzen noch nicht** – das ist die wichtigste offene Baustelle
+für künftige Kit-Ergänzungen (Guide 18.10 erlaubt neue Kit-Teile).
+
+## 7. Status
+
+**QUALITÄT GEPRÜFT (mit Einschränkungen) – Hörprüfung durch den Nutzer ausstehend, daher nicht FREIGEGEBEN.**
