@@ -447,8 +447,10 @@ MONOTONY_YDIF = 0.5  # mittlere Bilddifferenz darunter = kaum Bewegung (R07-Mini
 
 
 def sfx_sync(path, tl):
-    """Prüft im fertigen Ton, ob jeder Ereignis-Klang (audio.sfx mit event) tatsächlich auf seinem Frame einsetzt:
-    Anstieg der Kurzzeit-Energie (5-ms-Fenster) im Bereich t−50 … t+80 ms. Ergebnis je Einsatz: erkannt, Versatz."""
+    """Prüft im fertigen Ton, ob jeder Ereignis-Klang (audio.sfx mit event) auf seinem Frame einsetzt.
+    Kurzzeit-Energie in 5-ms-Fenstern; gesucht wird der steilste Anstieg im Bereich t−15 … t+60 ms gegenüber dem
+    Pegel davor (t−80 … t−15 ms). Ergebnis je Einsatz: erkannt (Anstieg ≥ 3 dB, Versatz in ms) oder „verdeckt“
+    (lauterer Klang/Musik zur selben Zeit – dann nur per Hörprüfung zu beurteilen)."""
     sr = 16000
     raw = subprocess.run(["ffmpeg", "-v", "error", "-i", path, "-ac", "1", "-ar", str(sr), "-f", "s16le", "-"],
                          capture_output=True).stdout
@@ -467,14 +469,14 @@ def sfx_sync(path, tl):
         if not c.get("event") or name in SOFT_SFX:
             continue
         k = int(round(c["t"] * 200))
-        pre = env[max(0, k - 16):max(0, k - 2)] or [-120.0]
+        pre = env[max(0, k - 16):max(0, k - 3)] or [-120.0]
         base = sorted(pre)[len(pre) // 2]
-        win = range(max(1, k - 10), min(len(env), k + 16))
-        if not len(win):
+        win = [i for i in range(max(1, k - 3), min(len(env), k + 13))]
+        if not win:
             continue
         rise_i = max(win, key=lambda i: env[i] - env[i - 1])
         peak = max(env[i] for i in win)
-        detected = peak - base >= 2.0
+        detected = peak - base >= 3.0
         out.append({"t": c["t"], "sfx": name, "event": c["event"], "detected": detected,
                     "offset_ms": round((rise_i - k) * 5) if detected else None, "rise_db": round(peak - base, 1)})
     return out
@@ -588,10 +590,14 @@ def evaluate(info, v, a, black, freezes, ignore_length=False):
         long_sil = [s for s in a["silences"] if s["end"] - s["start"] > 1.5]
         if long_sil:
             reviews.append(f"Stille > 1,5 s (nur ok, wenn beabsichtigt): {long_sil}")
-        bad = [c for c in a.get("sfx_sync", []) if not c["detected"] or abs(c["offset_ms"]) > SYNC_TOL_S * 1000]
-        if bad:
-            reviews.append(f"Ereignis-Klänge nicht erkennbar oder > ±{SYNC_TOL_S * 1000:.0f} ms versetzt (anhören!): "
-                           f"{[(c['t'], c['sfx'], c['offset_ms']) for c in bad]}")
+        late = [c for c in a.get("sfx_sync", []) if c["detected"] and abs(c["offset_ms"]) > SYNC_TOL_S * 1000]
+        masked = [c for c in a.get("sfx_sync", []) if not c["detected"]]
+        if late:
+            reviews.append(f"Ereignis-Klänge > ±{SYNC_TOL_S * 1000:.0f} ms versetzt (anhören!): "
+                           f"{[(c['t'], c['sfx'], c['offset_ms']) for c in late]}")
+        if masked:
+            reviews.append(f"Ereignis-Klänge verdeckt – Anstieg < 3 dB, nur per Hörprüfung beurteilbar: "
+                           f"{[(c['t'], c['sfx']) for c in masked]}")
     if v.get("monotony"):
         reviews.append(f"Monotonie-Kandidaten (3 s kaum Bewegung, Sichtprüfung): {v['monotony']}")
     status = "FAIL" if fails else ("REVIEW" if reviews else "PASS")
@@ -643,8 +649,8 @@ def write_md(path, out, rep):
          f"- Klick-Kandidaten (HF-Transienten, oft auch gewollte SFX): {[c['t'] for c in a['click_candidates']][:30] or 'keine'}",
          *([f"- An geplanten Ton-Ereignissen (beim Anhören bestätigen): Transienten {[c['t'] for c in a['planned_click_candidates']]}, "
             f"Lautheitssprünge {[j['t'] for j in a['planned_loudness_jumps']]}"] if 'planned_click_candidates' in a else []),
-         *([f"- Synchronität Ereignis-Klänge (Anstieg im Bereich −50…+80 ms): "
-            f"{sum(c['detected'] for c in a['sfx_sync'])}/{len(a['sfx_sync'])} erkannt, Versatz (ms) "
+         *([f"- Synchronität Ereignis-Klänge (steilster Anstieg im Bereich −15…+60 ms): "
+            f"{sum(c['detected'] for c in a['sfx_sync'])}/{len(a['sfx_sync'])} erkannt (übrige verdeckt), Versatz (ms) "
             f"{[c['offset_ms'] for c in a['sfx_sync']]}"] if a.get('sfx_sync') else []),
          f"- Erste 50 ms: {a['first_50ms_rms_db']} dB RMS; letzte 50 ms: {a['last_50ms_rms_db']} dB RMS; "
          f"letzte Sekunde: {a['last_1s_rms_db']} dB RMS",

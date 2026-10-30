@@ -100,7 +100,7 @@
     "yaw": 45,
     "dist": 2.5,
     "height": 0.85,
-    "swing": 14,
+    "swing": 30,
     "fov": 48
    },
    "hud": {
@@ -120,7 +120,11 @@
      "at": 0.3,
      "what": "Handy-Wecker vibriert",
      "sfx": "buzz",
-     "gain_db": -9
+     "gain_db": -9,
+     "shake": {
+      "amp": 0.03,
+      "dur": 0.6
+     }
     },
     {
      "id": "first_tap",
@@ -215,8 +219,7 @@
    "place": "street",
    "mood": "panic",
    "ambience": "city",
-   "transition": "whip",
-   "whip_dir": "right",
+   "transition": "dip",
    "camera": {
     "preset": "track",
     "a": [
@@ -444,8 +447,7 @@
    "place": "office",
    "mood": "panic",
    "ambience": "room",
-   "transition": "whip",
-   "whip_dir": "left",
+   "transition": "dip",
    "camera": {
     "preset": "orbit",
     "target": [
@@ -611,13 +613,13 @@
    "camera": {
     "preset": "push",
     "target": [
-     -1.9,
+     -2.05,
      1.15,
-     119.3
+     118.75
     ],
-    "yaw": 75,
-    "dist": 3.8,
-    "distTo": 2.9,
+    "yaw": 36,
+    "dist": 3.9,
+    "distTo": 3.0,
     "fov": 45
    },
    "line": "l_powerbank",
@@ -659,10 +661,10 @@
      1.5708
     ],
     "helper": [
-     -1.2,
+     -1.7,
      0,
-     118.0,
-     -0.876
+     118.5,
+     -0.95
     ]
    }
   },
@@ -847,9 +849,9 @@
      13.0
     ],
     "yaw": 80,
-    "dist": 3.6,
+    "dist": 3.4,
     "height": 0.4,
-    "swing": 26,
+    "swing": 44,
     "fov": 46
    },
    "line": "l_kiosk",
@@ -868,10 +870,17 @@
    },
    "events": [
     {
+     "id": "kiosk_tap",
+     "at": 0.5,
+     "what": "er schlägt auf die tote Ladesäule",
+     "sfx": "thud",
+     "gain_db": -10
+    },
+    {
      "id": "kneel",
      "at": 1.1,
      "what": "Ladesäule tot – er sinkt auf die Knie",
-     "sfx": "thud",
+     "sfx": "heartbeat",
      "gain_db": -6,
      "hud_to": 8,
      "flash": "loss"
@@ -883,6 +892,12 @@
      0.12,
      13.0,
      1.5708
+    ],
+    "youFrom": [
+     94.4,
+     0.12,
+     16.5,
+     3.1416
     ]
    }
   },
@@ -896,19 +911,19 @@
    "camera": {
     "preset": "track",
     "a": [
-     94.6,
-     1.2,
-     18.0
+     93.8,
+     2.0,
+     21.5
     ],
     "b": [
-     94.6,
-     1.2,
-     24.0
+     93.8,
+     2.2,
+     27.5
     ],
-    "yaw": 120,
-    "dist": 6.5,
-    "height": 1.2,
-    "fov": 48
+    "yaw": 160,
+    "dist": 6.0,
+    "height": 0.3,
+    "fov": 50
    },
    "line": "l_home",
    "line_at": [
@@ -956,17 +971,17 @@
    "ambience": "rain",
    "transition": "dip",
    "camera": {
-    "preset": "push",
+    "preset": "orbit",
     "target": [
-     0.3,
-     1.1,
-     -0.55
+     0.15,
+     0.95,
+     -0.45
     ],
-    "yaw": 15,
-    "dist": 2.4,
-    "distTo": 1.6,
-    "height": 0.2,
-    "fov": 45
+    "yaw": -4,
+    "dist": 2.6,
+    "height": 0.35,
+    "swing": 24,
+    "fov": 46
    },
    "line": "l_plug",
    "line_at": [
@@ -1012,17 +1027,18 @@
    "ambience": "rain",
    "transition": "cut",
    "camera": {
-    "preset": "close",
+    "preset": "push",
     "target": [
      0.3,
      1.62,
      -0.55
     ],
     "yaw": 8,
-    "dist": 1.4,
+    "dist": 1.7,
+    "distTo": 1.25,
     "height": 0.02,
     "fov": 40,
-    "swing": 6
+    "drift": 0.08
    },
    "hud": {
     "label": "critical"

@@ -71,16 +71,19 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
   // Schlafzimmer: Vorhang (nachts), Steckdose, Ladekabel (Kette, folgt der Hand), Lampenlicht
   const curtain = kit.box(1.7, 1.5, 0.05, 0x3b4a6b, [-1.6, 0.9, -2.36], { cast: false });
   scene.add(curtain);
-  const bedOutlet = P.wallOutlet();
-  bedOutlet.position.set(1.0, 0.45, -2.42);
-  scene.add(bedOutlet);
+  // Steckdosenleiste vor dem Bett (im Bild), damit das Einstecken sichtbar ist
+  const strip = kit.group(kit.box(0.42, 0.06, 0.12, 0xf2f2f2), ...[0, 1, 2].map((i) => kit.box(0.05, 0.012, 0.05, 0x333333, [-0.12 + i * 0.12, 0.06, 0], { cast: false })));
+  strip.position.set(0.95, 0, 0.25);
+  scene.add(strip);
+  const spark = kit.fx.burst({ color: 0x7dff9a, count: 24, speed: 1.1, life: 0.8, size: 0.02 });
+  scene.add(spark.root);
   const cableLinks = Array.from({ length: 22 }, () => {
     const m = kit.cbox(0.022, 0.022, 0.022, 0xf2f2f2, [0, 0, 0], { cast: false });
     scene.add(m);
     return m;
   });
   const lampLight = new THREE.PointLight(0xffc98a, 0, 7, 1.6);
-  lampLight.position.set(1.6, 1.0, -1.6);
+  lampLight.position.set(1.0, 1.7, 0.9);
   scene.add(lampLight);
   const phoneGlow = new THREE.PointLight(0x9fc4ff, 0, 2.2, 2);
   scene.add(phoneGlow);
@@ -137,7 +140,7 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
   const tmp = new THREE.Vector3();
   // Stadt-Totale: Nebel weiter weg als in den Straßenszenen, sonst verschwindet die Stadt
   const CITY_DUSK = { ...kit.LOOKS.dusk, fog: [0x4d5a78, 120, 380] };
-  const CITY_DARK = { ...kit.LOOKS.blackout, sky: 0x0d1424, fog: [0x0d1424, 120, 380], hemi: [0x6a7cb0, 0x10121a, 1.0], exposure: 1.25 };
+  const CITY_DARK = { ...kit.LOOKS.blackout, sky: 0x1c2640, fog: [0x1c2640, 120, 380], hemi: [0x8a9cd0, 0x1a1c26, 1.7], sun: [0x9fb0e0, 0.5], exposure: 1.35 };
 
   return {
     update({ t }) {
@@ -298,10 +301,10 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
             { t: ev('cheer'), pose: 'jump', local: true, mood: 'laugh', blend: 0.1 },
             { t: ev('cheer') + 0.6, pose: 'cheer', speed: 1.2, blend: 0.2 },
           ], t);
-          if (t >= ev('cheer') - 0.2) you.root.position.x = pos('park')[0] + 0.45;
+          you.root.position.x = pos('park')[0] + 0.45 * ramp(t, ev('cheer') - 0.25, ev('cheer') + 0.1); // vor die Bank treten (kein Sprung)
           const hp = pos('stranger', 'helper');
           const k = ramp(t, at('stranger'), tg - 0.4);
-          helper.setPosition(lerp(hp[0] + 1.0, hp[0], k), 0, lerp(hp[2] - 2.0, hp[2], k), k < 0.95 ? -0.46 : hp[3]);
+          helper.setPosition(lerp(hp[0] + 1.2, hp[0], k), 0, lerp(hp[2] - 1.0, hp[2], k), lerp(-0.9, hp[3], k));
           helper.act([
             { t: at('stranger'), pose: 'walk', speed: 1.4, mood: 'happy' },
             { t: tg - 0.4, pose: 'reach', mood: 'happy', blend: 0.3 },
@@ -351,11 +354,16 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
         rain.root.position.set(you.root.position.x - 100 + 3, 0, you.root.position.z - 6);
       }
       if (id === 'kiosk') {
-        place(you, pos('kiosk'));
+        const a = pos('kiosk', 'youFrom');
+        const z = pos('kiosk');
+        const k = ramp(t, at('kiosk'), ev('kiosk_tap') - 0.05);
+        you.setPosition(lerp(a[0], z[0], k), z[1], lerp(a[2], z[2], k), k < 0.9 ? a[3] : lerp(a[3], 1.5 * Math.PI, ramp(t, ev('kiosk_tap') - 0.15, ev('kiosk_tap'))));
+        if (t > ev('kiosk_tap') + 0.4) you.root.rotation.y = lerp(1.5 * Math.PI, z[3] + 2 * Math.PI, ramp(t, ev('kiosk_tap') + 0.4, ev('kneel')));
         you.act([
-          { t: at('kiosk'), pose: 'stand', mood: 'worried', look: [0, 0.1] },
-          { t: ev('kneel') - 0.3, pose: 'stand', mood: 'sad', blend: 0.3 },
-          { t: ev('kneel'), pose: 'kneel', blend: 0.25 },
+          { t: at('kiosk'), pose: 'run', speed: 1.7, mood: 'worried' },
+          { t: ev('kiosk_tap') - 0.1, pose: 'reach', mood: 'panic', blend: 0.12 },
+          { t: ev('kiosk_tap') + 0.4, pose: 'stand', mood: 'sad', blend: 0.3 },
+          { t: ev('kneel'), pose: 'kneel', blend: 0.3, look: [0, 0.2] },
         ], t);
         kiosk.userData.setScreen(false);
         rain.update(t, 1);
@@ -372,7 +380,7 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
 
       if (id === 'plug' || id === 'twist') {
         place(you, pos(id));
-        lampLight.intensity = id === 'plug' || t < ev('lights_out') ? 2.2 : 0;
+        lampLight.intensity = id === 'plug' || t < ev('lights_out') ? 5 : 0;
         if (id === 'plug') {
           you.act([
             { t: at('plug'), pose: 'phone', seated: 1, mood: 'worried' },
@@ -396,16 +404,21 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
         // Ladekabel von der Steckdose zur Hand, sobald eingesteckt
         if (id === 'twist' || t >= ev('plug_in')) {
           handPhone.getWorldPosition(tmp);
-          const a = [1.0, 0.42, -2.38];
+          const a = [0.95, 0.07, 0.25];
           const z = [tmp.x, tmp.y - 0.08, tmp.z];
           cableLinks.forEach((m, i) => {
             const k = (i + 0.5) / cableLinks.length;
             m.visible = true;
-            m.position.set(lerp(a[0], z[0], k), lerp(a[1], z[1], k) - 0.35 * Math.sin(Math.PI * k), lerp(a[2], z[2], k));
+            m.position.set(lerp(a[0], z[0], k), Math.max(0.02, lerp(a[1], z[1], k) - 0.3 * Math.sin(Math.PI * k)), lerp(a[2], z[2], k));
           });
         }
       }
 
+      // Funkenstoß beim Einstecken (Ereignis sichtbar machen)
+      if (id === 'plug') {
+        handPhone.getWorldPosition(tmp);
+        spark.update(t - ev('plug_in'), [tmp.x, tmp.y, tmp.z]);
+      } else spark.update(-1, [0, 0, 0]);
       return { fx: { flash } };
     },
   };
