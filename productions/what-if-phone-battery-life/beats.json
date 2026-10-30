@@ -1,0 +1,1075 @@
+{
+ "_comment": "Beat-Sheet (Quelle der Wahrheit). timeline.json wird daraus erzeugt: node tools/build_timeline.mjs productions/what-if-phone-battery-life",
+ "recipe": "B1",
+ "fps": 30,
+ "seed": 61,
+ "title": {
+  "in": 0,
+  "out": 3.4
+ },
+ "hud": {
+  "start": 100,
+  "decimals": 0,
+  "bar": [
+   0,
+   100
+  ]
+ },
+ "pointe": "lights_out",
+ "endcard": {
+  "beat": "twist",
+  "at": 1.6,
+  "center": 0.3
+ },
+ "post": {
+  "vignette": 0.18
+ },
+ "audio": {
+  "fade_out": 1.2,
+  "tick_gain_db": -17,
+  "whoosh_gain_db": -12,
+  "ambience_gain_db": -15,
+  "music": {
+   "bpm": 112,
+   "root": "D",
+   "seed": 5,
+   "gain_db": -10,
+   "sections": [
+    {
+     "from": 0,
+     "to": 8.2,
+     "style": "pulse"
+    },
+    {
+     "from": 8.2,
+     "to": 27.2,
+     "style": "drive"
+    },
+    {
+     "from": 27.2,
+     "to": 31.4,
+     "style": "calm"
+    },
+    {
+     "from": 31.4,
+     "to": 35.4,
+     "style": "drive"
+    },
+    {
+     "from": 35.4,
+     "to": 38.2,
+     "style": "pulse"
+    },
+    {
+     "from": 38.2,
+     "to": 53.0,
+     "style": "drive_hi"
+    },
+    {
+     "from": 53.0,
+     "to": 57.8,
+     "style": "calm"
+    },
+    {
+     "from": 57.8,
+     "to": 59.0,
+     "style": "silence"
+    },
+    {
+     "from": 59.0,
+     "to": 61.4,
+     "style": "pulse"
+    }
+   ]
+  }
+ },
+ "beats": [
+  {
+   "id": "wake",
+   "dur": 4.2,
+   "place": "bedroom",
+   "mood": "tired",
+   "ambience": "room",
+   "camera": {
+    "preset": "orbit",
+    "target": [
+     0.3,
+     0.75,
+     -1.7
+    ],
+    "yaw": 45,
+    "dist": 2.5,
+    "height": 0.85,
+    "swing": 30,
+    "fov": 48
+   },
+   "hud": {
+    "label": "battery",
+    "to": 97,
+    "mode": "steps",
+    "steps": 2,
+    "window": [
+     2.4,
+     3.6
+    ],
+    "tick": "pop"
+   },
+   "events": [
+    {
+     "id": "alarm",
+     "at": 0.3,
+     "what": "Handy-Wecker vibriert",
+     "sfx": "buzz",
+     "gain_db": -9,
+     "shake": {
+      "amp": 0.03,
+      "dur": 0.6
+     }
+    },
+    {
+     "id": "first_tap",
+     "at": 1.5,
+     "what": "erster Tipp auf das Handy kostet 1 %",
+     "sfx": "pop",
+     "gain_db": -12,
+     "hud_to": 99,
+     "trigger": true
+    }
+   ],
+   "data": {
+    "you": [
+     0.3,
+     0.55,
+     -1.4,
+     0
+    ]
+   }
+  },
+  {
+   "id": "kitchen",
+   "dur": 4.0,
+   "place": "kitchen",
+   "mood": "worried",
+   "ambience": "room",
+   "transition": "dip",
+   "camera": {
+    "preset": "push",
+    "target": [
+     40.2,
+     1.6,
+     -1.1
+    ],
+    "yaw": -28,
+    "dist": 3.0,
+    "distTo": 2.1,
+    "fov": 45
+   },
+   "line": "l_swipe",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "hud": {
+    "to": 90,
+    "mode": "steps",
+    "steps": 3,
+    "window": [
+     2.2,
+     3.6
+    ],
+    "tick": "pop"
+   },
+   "events": [
+    {
+     "id": "swipe1",
+     "at": 0.7,
+     "what": "Wischen: −2 %",
+     "sfx": "pop",
+     "gain_db": -12,
+     "hud_to": 95
+    },
+    {
+     "id": "swipe2",
+     "at": 1.4,
+     "what": "Wischen: −2 %",
+     "sfx": "pop",
+     "gain_db": -12,
+     "hud_to": 93
+    },
+    {
+     "id": "toast_smoke",
+     "at": 1.9,
+     "what": "Toast verbrennt hinter ihm, Rauch steigt",
+     "sfx": "thud",
+     "gain_db": -16
+    }
+   ],
+   "data": {
+    "you": [
+     40.2,
+     0,
+     -1.1,
+     0
+    ]
+   }
+  },
+  {
+   "id": "bus",
+   "dur": 4.0,
+   "place": "street",
+   "mood": "panic",
+   "ambience": "city",
+   "transition": "dip",
+   "camera": {
+    "preset": "track",
+    "a": [
+     95.2,
+     1.25,
+     -7.5
+    ],
+    "b": [
+     95.2,
+     1.25,
+     -1.0
+    ],
+    "yaw": 70,
+    "dist": 4.6,
+    "height": 0.1,
+    "fov": 48
+   },
+   "line": "l_maps",
+   "line_at": [
+    0.4,
+    -0.2
+   ],
+   "hud": {
+    "to": 82,
+    "mode": "steps",
+    "steps": 2,
+    "window": [
+     2.8,
+     3.6
+    ]
+   },
+   "events": [
+    {
+     "id": "bus_leaves",
+     "at": 0.2,
+     "what": "Bus fährt ohne ihn ab",
+     "sfx": "rumble",
+     "gain_db": -12
+    },
+    {
+     "id": "maps_open",
+     "at": 1.8,
+     "what": "er öffnet die Karte – großer Verlust",
+     "sfx": "loss",
+     "gain_db": -7,
+     "hud_to": 86,
+     "flash": "loss"
+    }
+   ],
+   "data": {
+    "you": [
+     95.2,
+     0.12,
+     -7.5,
+     0
+    ],
+    "youTo": [
+     95.2,
+     0.12,
+     -1.0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "pant",
+   "dur": 2.2,
+   "place": "street",
+   "mood": "tired",
+   "ambience": "city",
+   "transition": "cut",
+   "camera": {
+    "preset": "close",
+    "target": [
+     95.2,
+     1.25,
+     -0.5
+    ],
+    "yaw": 40,
+    "dist": 2.3,
+    "height": 0.25,
+    "fov": 40
+   },
+   "hud": {
+    "to": 80,
+    "mode": "steps",
+    "steps": 2,
+    "window": [
+     0.6,
+     1.8
+    ]
+   },
+   "events": [
+    {
+     "id": "gasp",
+     "at": 0.15,
+     "what": "er keucht, Hände auf den Knien",
+     "sfx": "heartbeat",
+     "gain_db": -6
+    }
+   ],
+   "data": {
+    "you": [
+     95.2,
+     0.12,
+     -1.0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "cafe",
+   "dur": 4.0,
+   "place": "cafe",
+   "mood": "happy",
+   "ambience": "room",
+   "transition": "dip",
+   "camera": {
+    "preset": "pov",
+    "eye": [
+     -38.6,
+     1.6,
+     2.4
+    ],
+    "eyeTo": [
+     -39.2,
+     1.55,
+     1.2
+    ],
+    "target": [
+     -41.9,
+     0.55,
+     -2.7
+    ],
+    "fov": 52,
+    "sway": 0.025
+   },
+   "line": "l_outlet",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "hud": {
+    "to": 78,
+    "mode": "steps",
+    "steps": 2,
+    "window": [
+     1.2,
+     3.6
+    ]
+   },
+   "events": [
+    {
+     "id": "outlet_seen",
+     "at": 0.35,
+     "what": "freie Steckdose entdeckt",
+     "sfx": "ding",
+     "gain_db": -10
+    },
+    {
+     "id": "outlet_taken",
+     "at": 2.4,
+     "what": "ein Fremder steckt sein Kabel zuerst ein",
+     "sfx": "thud",
+     "gain_db": -8
+    }
+   ],
+   "data": {
+    "stranger": [
+     -43.6,
+     0,
+     -1.6,
+     1.2
+    ],
+    "strangerTo": [
+     -42.2,
+     0,
+     -2.45,
+     3.14
+    ]
+   }
+  },
+  {
+   "id": "cafe_react",
+   "dur": 2.2,
+   "place": "cafe",
+   "mood": "angry",
+   "ambience": "room",
+   "transition": "cut",
+   "camera": {
+    "preset": "close",
+    "target": [
+     -39.3,
+     1.82,
+     1.1
+    ],
+    "yaw": 206,
+    "dist": 1.7,
+    "fov": 40
+   },
+   "hud": {},
+   "events": [
+    {
+     "id": "glare",
+     "at": 0.5,
+     "what": "wütender Blick, der Fremde grinst",
+     "sfx": "heartbeat",
+     "gain_db": -9,
+     "hud_to": 77,
+     "flash": "warn"
+    }
+   ],
+   "data": {
+    "you": [
+     -39.3,
+     0,
+     1.1,
+     3.6
+    ]
+   }
+  },
+  {
+   "id": "office",
+   "dur": 4.0,
+   "place": "office",
+   "mood": "panic",
+   "ambience": "room",
+   "transition": "dip",
+   "camera": {
+    "preset": "orbit",
+    "target": [
+     -90,
+     1.3,
+     1.4
+    ],
+    "yaw": 10,
+    "dist": 6.2,
+    "height": 0.9,
+    "swing": 34,
+    "fov": 46
+   },
+   "line": "l_call",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "hud": {
+    "to": 32,
+    "mode": "linear",
+    "window": [
+     1.0,
+     3.8
+    ]
+   },
+   "events": [
+    {
+     "id": "call_rings",
+     "at": 0.25,
+     "what": "Videoanruf vom Chef klingelt",
+     "sfx": "buzz",
+     "gain_db": -7
+    },
+    {
+     "id": "call_answer",
+     "at": 1.0,
+     "what": "er nimmt ab – Akku fällt rasant",
+     "sfx": "loss",
+     "gain_db": -6,
+     "flash": "loss"
+    }
+   ],
+   "data": {
+    "you": [
+     -90,
+     0,
+     1.8,
+     0
+    ]
+   }
+  },
+  {
+   "id": "phone_low",
+   "dur": 2.6,
+   "place": "office",
+   "mood": "panic",
+   "ambience": "room",
+   "transition": "cut",
+   "camera": {
+    "preset": "push",
+    "target": [
+     -90.25,
+     1.62,
+     2.25
+    ],
+    "yaw": 200,
+    "dist": 1.15,
+    "distTo": 0.85,
+    "height": 0.45,
+    "fov": 42,
+    "drift": 0.05
+   },
+   "hud": {
+    "to": 20,
+    "mode": "steps",
+    "steps": 3,
+    "window": [
+     0.9,
+     2.2
+    ],
+    "tick": "pop"
+   },
+   "events": [
+    {
+     "id": "low_warning",
+     "at": 0.3,
+     "what": "Akku-Symbol wird rot, Handy vibriert",
+     "sfx": "buzz",
+     "gain_db": -8,
+     "hud_to": 27,
+     "flash": "warn"
+    }
+   ],
+   "data": {
+    "you": [
+     -90,
+     0,
+     1.8,
+     0
+    ]
+   }
+  },
+  {
+   "id": "park",
+   "dur": 4.2,
+   "place": "park",
+   "mood": "tired",
+   "ambience": "city",
+   "transition": "dip",
+   "camera": {
+    "preset": "low",
+    "target": [
+     -2.4,
+     0.9,
+     119.2
+    ],
+    "yaw": 70,
+    "dist": 4.2,
+    "camHeight": 0.3,
+    "fov": 50
+   },
+   "line": "l_lowpower",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "hud": {
+    "label": "lowpower",
+    "to": 17,
+    "mode": "steps",
+    "steps": 3,
+    "window": [
+     0.6,
+     3.8
+    ]
+   },
+   "events": [
+    {
+     "id": "pigeon_lands",
+     "at": 1.8,
+     "what": "Taube landet auf seinem Kopf – er bewegt sich nicht",
+     "sfx": "pop",
+     "gain_db": -10
+    }
+   ],
+   "data": {
+    "you": [
+     -2.4,
+     0,
+     119.0,
+     1.5708
+    ]
+   }
+  },
+  {
+   "id": "stranger",
+   "dur": 4.0,
+   "place": "park",
+   "mood": "happy",
+   "ambience": "city",
+   "transition": "cut",
+   "camera": {
+    "preset": "push",
+    "target": [
+     -2.05,
+     1.15,
+     118.75
+    ],
+    "yaw": 36,
+    "dist": 3.9,
+    "distTo": 3.0,
+    "fov": 45
+   },
+   "line": "l_powerbank",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "hud": {
+    "to": 34,
+    "mode": "linear",
+    "window": [
+     1.2,
+     3.8
+    ]
+   },
+   "events": [
+    {
+     "id": "bank_given",
+     "at": 0.9,
+     "what": "Fremde reicht ihm eine Powerbank",
+     "sfx": "charge",
+     "gain_db": -7,
+     "hud_to": 20,
+     "flash": "gain"
+    },
+    {
+     "id": "cheer",
+     "at": 2.2,
+     "what": "er springt vor Freude",
+     "sfx": "shimmer",
+     "gain_db": -10
+    }
+   ],
+   "data": {
+    "you": [
+     -2.4,
+     0,
+     119.0,
+     1.5708
+    ],
+    "helper": [
+     -1.7,
+     0,
+     118.5,
+     -0.95
+    ]
+   }
+  },
+  {
+   "id": "bank_dies",
+   "dur": 2.8,
+   "place": "park",
+   "mood": "sad",
+   "ambience": "city",
+   "transition": "cut",
+   "camera": {
+    "preset": "close",
+    "target": [
+     -2.0,
+     1.25,
+     119.0
+    ],
+    "yaw": 80,
+    "dist": 1.9,
+    "height": 0.15,
+    "fov": 40,
+    "swing": 6
+   },
+   "line": "l_empty",
+   "line_at": [
+    0.2,
+    -0.15
+   ],
+   "hud": {
+    "to": 26,
+    "mode": "steps",
+    "steps": 2,
+    "window": [
+     1.6,
+     2.4
+    ]
+   },
+   "events": [
+    {
+     "id": "bank_empty",
+     "at": 0.9,
+     "what": "Powerbank-LEDs erlöschen",
+     "sfx": "power_down",
+     "gain_db": -8,
+     "hud_to": 30,
+     "flash": "loss"
+    }
+   ],
+   "data": {
+    "you": [
+     -2.4,
+     0,
+     119.0,
+     1.5708
+    ]
+   }
+  },
+  {
+   "id": "storm",
+   "dur": 4.0,
+   "place": "street",
+   "mood": "worried",
+   "ambience": "rain",
+   "transition": "whip",
+   "whip_dir": "right",
+   "camera": {
+    "preset": "low",
+    "target": [
+     94.8,
+     1.3,
+     5.5
+    ],
+    "yaw": 20,
+    "dist": 4.0,
+    "camHeight": 0.35,
+    "fov": 52
+   },
+   "line": "l_storm",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "hud": {
+    "to": 15,
+    "mode": "steps",
+    "steps": 3,
+    "window": [
+     1.4,
+     3.6
+    ]
+   },
+   "events": [
+    {
+     "id": "lightning",
+     "at": 0.8,
+     "what": "Blitz schlägt ein, Regen setzt ein",
+     "sfx": [
+      "zap",
+      "boom"
+     ],
+     "gain_db": -6,
+     "shake": {
+      "amp": 0.06,
+      "dur": 0.7
+     }
+    }
+   ],
+   "data": {
+    "you": [
+     94.8,
+     0.12,
+     3.0,
+     0
+    ],
+    "youTo": [
+     94.8,
+     0.12,
+     8.0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "blackout",
+   "dur": 4.0,
+   "place": "city",
+   "mood": "shock",
+   "ambience": "rain",
+   "transition": "dip",
+   "camera": {
+    "preset": "high",
+    "target": [
+     0,
+     8,
+     -220
+    ],
+    "yaw": 15,
+    "dist": 95,
+    "height": 75,
+    "swing": 8,
+    "fov": 50
+   },
+   "line": "l_blackout",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "hud": {
+    "label": "critical",
+    "to": 10,
+    "mode": "steps",
+    "steps": 3,
+    "window": [
+     1.0,
+     3.4
+    ],
+    "tick": "pop"
+   },
+   "events": [
+    {
+     "id": "city_dark",
+     "at": 0.8,
+     "what": "die Stadt wird Block für Block dunkel",
+     "sfx": "power_down",
+     "gain_db": -4,
+     "flash": "loss"
+    }
+   ]
+  },
+  {
+   "id": "kiosk",
+   "dur": 3.6,
+   "place": "street",
+   "mood": "sad",
+   "ambience": "rain",
+   "transition": "dip",
+   "camera": {
+    "preset": "orbit",
+    "target": [
+     94.2,
+     0.9,
+     13.0
+    ],
+    "yaw": 80,
+    "dist": 3.4,
+    "height": 0.4,
+    "swing": 44,
+    "fov": 46
+   },
+   "line": "l_kiosk",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "hud": {
+    "to": 6,
+    "mode": "steps",
+    "steps": 2,
+    "window": [
+     1.6,
+     3.0
+    ]
+   },
+   "events": [
+    {
+     "id": "kiosk_tap",
+     "at": 0.5,
+     "what": "er schlägt auf die tote Ladesäule",
+     "sfx": "thud",
+     "gain_db": -10
+    },
+    {
+     "id": "kneel",
+     "at": 1.1,
+     "what": "Ladesäule tot – er sinkt auf die Knie",
+     "sfx": "heartbeat",
+     "gain_db": -6,
+     "hud_to": 8,
+     "flash": "loss"
+    }
+   ],
+   "data": {
+    "you": [
+     94.2,
+     0.12,
+     13.0,
+     1.5708
+    ],
+    "youFrom": [
+     94.4,
+     0.12,
+     16.5,
+     3.1416
+    ]
+   }
+  },
+  {
+   "id": "home",
+   "dur": 3.2,
+   "place": "street",
+   "mood": "worried",
+   "ambience": "rain",
+   "transition": "cut",
+   "camera": {
+    "preset": "track",
+    "a": [
+     93.8,
+     2.0,
+     21.5
+    ],
+    "b": [
+     93.8,
+     2.2,
+     27.5
+    ],
+    "yaw": 160,
+    "dist": 6.0,
+    "height": 0.3,
+    "fov": 50
+   },
+   "line": "l_home",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "hud": {
+    "to": 3,
+    "mode": "steps",
+    "steps": 3,
+    "window": [
+     1.0,
+     2.8
+    ]
+   },
+   "events": [
+    {
+     "id": "window_seen",
+     "at": 0.4,
+     "what": "sein Fenster leuchtet noch",
+     "sfx": "ding",
+     "gain_db": -12
+    }
+   ],
+   "data": {
+    "you": [
+     94.6,
+     0.12,
+     18.0,
+     0
+    ],
+    "youTo": [
+     94.6,
+     0.12,
+     24.0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "plug",
+   "dur": 4.0,
+   "place": "bedroom",
+   "mood": "relief",
+   "ambience": "rain",
+   "transition": "dip",
+   "camera": {
+    "preset": "orbit",
+    "target": [
+     0.15,
+     0.95,
+     -0.45
+    ],
+    "yaw": -4,
+    "dist": 2.6,
+    "height": 0.35,
+    "swing": 24,
+    "fov": 46
+   },
+   "line": "l_plug",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "hud": {
+    "label": "charging",
+    "to": 5,
+    "mode": "steps",
+    "steps": 2,
+    "window": [
+     2.0,
+     3.4
+    ],
+    "tick": "pop"
+   },
+   "events": [
+    {
+     "id": "plug_in",
+     "at": 1.4,
+     "what": "er steckt das Ladekabel ein",
+     "sfx": "charge",
+     "gain_db": -6,
+     "hud_to": 4,
+     "flash": "gain"
+    }
+   ],
+   "data": {
+    "you": [
+     0.3,
+     0,
+     -0.55,
+     0
+    ]
+   }
+  },
+  {
+   "id": "twist",
+   "dur": 4.4,
+   "place": "bedroom",
+   "mood": "shock",
+   "ambience": "rain",
+   "transition": "cut",
+   "camera": {
+    "preset": "push",
+    "target": [
+     0.3,
+     1.62,
+     -0.55
+    ],
+    "yaw": 8,
+    "dist": 1.7,
+    "distTo": 1.25,
+    "height": 0.02,
+    "fov": 40,
+    "drift": 0.08
+   },
+   "hud": {
+    "label": "critical"
+   },
+   "events": [
+    {
+     "id": "lights_out",
+     "at": 0.8,
+     "what": "Pointe: auch zu Hause fällt der Strom aus",
+     "sfx": "power_down",
+     "gain_db": -3,
+     "hud_to": 4,
+     "flash": "loss"
+    },
+    {
+     "id": "dread",
+     "at": 2.4,
+     "what": "Akku-Wert pulsiert rot",
+     "sfx": "heartbeat",
+     "gain_db": -8,
+     "flash": "warn"
+    }
+   ],
+   "data": {
+    "you": [
+     0.3,
+     0,
+     -0.55,
+     0
+    ]
+   }
+  }
+ ]
+}

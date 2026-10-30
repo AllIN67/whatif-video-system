@@ -1,6 +1,6 @@
 # whatif-video-system
 
-Produktionssystem für eigenständige, technisch geprüfte **„What if …?“-Kurzvideos** (9:16, mindestens 60 s, Englisch; zwei Produktionsstile: A „Earth“ mit Sprecher, B stumm nach TikTok-Referenz). Das Repository enthält die kreative und technische Regelbasis, die Belege aus 15 Referenzvideos, einen Claude-Code-Skill für den Arbeitsablauf und Werkzeuge für Analyse und Qualitätsabnahme.
+Produktionssystem für eigenständige, geprüfte **„What if …?“-Kurzvideos** (9:16, mindestens 60 s, Englisch). **Aktives Produktionsziel: Stil B** (stumm, visuelles Storytelling, HUD, Sounddesign) nach dem eingefrorenen Produktionsstandard `WHATIF_STYLE_GUIDE.md` Abschnitt 18. Stil A („Earth“, Sprecher) ist archiviert. Das Repository enthält die kreative und technische Regelbasis, die Belege aus 15 Referenzvideos, einen Claude-Code-Skill für den Arbeitsablauf und Werkzeuge für Analyse und Qualitätsabnahme.
 
 Eigenständiges Projekt – unabhängig von `AllIN67/oxygen-video`; von dort wurden weder Dateien noch Regeln übernommen.
 
@@ -8,7 +8,9 @@ Eigenständiges Projekt – unabhängig von `AllIN67/oxygen-video`; von dort wur
 
 | Datei | Zweck |
 |---|---|
-| `WHATIF_STYLE_GUIDE.md` | **Quelle der Wahrheit**: Format, Sprache, Hook, Dramaturgie, Kamera, Bild, Schnitt, Effekte, Ton, Technik, QA, Hypothesen |
+| `WHATIF_STYLE_GUIDE.md` | **Quelle der Wahrheit**; **Abschnitt 18 = Produktionsstandard Stil B (Vorrang, Architektur-Freeze)** |
+| `templates/beats.json`, `templates/quality_review.md` | Vorlage Beat-Sheet; dreistufige Freigabe (technisch, visuell, dramaturgisch) |
+| `productions/what-if-phone-battery-life/` | Referenzproduktion des Standards (Testvideo der Systemüberarbeitung) |
 | `STYLE_A_EARTH.md` | Regeln für Produktionsstil A (Earth, mit Sprecher); Stil B steht im Style-Guide |
 | `VIDEO_PRODUCTION_CHECKLIST.md` | Abhakliste für jedes Video (Thema → Freigabe → Dokumentation) |
 | `REFERENCE_ANALYSIS.md` | Belegbasis: Einzelanalyse R01–R15, Vergleich, Schwächen, Grenzen der Analyse |
@@ -64,6 +66,30 @@ pipeline/encode.mjs          ein H.264-Encode (CRF 16, BT.709, 30 fps CFR) + AAC
 tools/video_qa.py --mode render --plan timeline.json  +  tools/inspect_frames.py --report …   (+ tools/av_sync.py bei Synchron-Markern)
 ```
 
+**Stil B – Produktionsstandard (Guide 18):** `beats.json` ist die einzige Zeitquelle. Daraus erzeugt
+`tools/build_timeline.mjs` die `timeline.json` (Einstellungen mit Kamera-Vorlagen, HUD-Stufen/Akzente, Textzeiten, Ereignisse,
+Klangeinsätze auf den Ereignis-Frames, Whip-Luftzüge, Musik- und Atmosphären-Betten). `scene.js` liest Zeiten über
+`kit.beatClock(timeline)` – Bild, HUD und Ton laufen dadurch nicht auseinander.
+
+```
+beats.json + text.en.json + scene.js
+   │  node tools/build_timeline.mjs productions/<slug>          → timeline.json (nie von Hand ändern)
+   │  node tools/validate_production.mjs productions/<slug>     → Regeln inkl. Standard B (Kamera-Abwechslung, Ereignisse, HUD, Ton)
+   │  node tools/still.mjs --production productions/<slug> --at …   Vorschau je Beat
+   ▼  node pipeline/run.mjs --production productions/<slug>     (prüft, dass timeline.json zur beats.json passt)
+```
+
+| Baustein | Datei | Zweck |
+|---|---|---|
+| Schauspiel | `kit/human.js` → `act(spur, t)` | Posen/Gefühle/Blick weich überblendet, Blinzeln, Wangen, Schweißtropfen; 26 Posen, 11 Gefühle |
+| Kamera-Vorlagen | `kit/camera.js` → `shotKeys()` | push, pull, close, orbit, low, high, pov, track, still – mit Bildgrößen-Klasse für die Abwechslungsprüfung |
+| Beats/Ereignisse | `kit/beats.js` → `beatClock()` | `B.ev('id')`, `B.beat('id')`, `B.active(t)` |
+| Licht je Beat | `kit/core.js` → `applyLook()` | Stimmungen day … storm, blackout, nightRoom; Überblendung als Ereignis |
+| Effekte | `kit/fx.js` | Regen, Funkenstoß (deterministisch) |
+| HUD | `overlay.js` + `brand.json` | Gestaltung nach R07/R19/R20, Akzente loss/gain/warn, Stufen-Impuls, Endkarte |
+| Klänge | `tools/sfx_synth.py` | 25 selbst erzeugte Klänge inkl. Atmosphären (room, city, rain) |
+| QA | `tools/video_qa.py` | zusätzlich: Synchronität der Ereignis-Klänge (±1 Frame), Monotonie-Kandidaten |
+
 Alles in einem Befehl (bricht beim ersten Fehler ab, schreibt `render/run_log.json`):
 
 ```bash
@@ -88,7 +114,7 @@ node pipeline/run.mjs --production productions/<slug>
 
 **Ergebnis des End-to-End-Tests** (`productions/_pipeline_test/LOG.md`): 62-s-Testvideo, `video_qa.py` PASS, A/V-Versatz +4 ms, alle Kontaktbögen und 9 Übergangs-Streifen gesichtet; Hörprüfung durch einen Menschen steht aus.
 
-**Signalfarbe:** `pipeline/runtime/brand.json` enthält einen **Platzhalter** (`signal_is_placeholder: true`); die endgültige Farbe wird beim ersten echten Video festgelegt.
+**Signalfarbe:** `#F5C04A` (warmes Gold wie in R07/R19/R20), Alarm `#FF4D4D` – festgelegt und eingefroren am 2026-10-30 (`pipeline/runtime/brand.json`, Guide 18.5).
 
 **Renderzeit** (Cloud-Container, 4 Kerne, keine GPU): ≈ 0,4 s pro Frame → ≈ 13–17 min für 61–80 s. Parallele Browser bringen hier keinen Gewinn (gemessen).
 
@@ -96,8 +122,8 @@ node pipeline/run.mjs --production productions/<slug>
 
 | Auftrag | Regeln | Profil | Referenz |
 |---|---|---|---|
-| `PRODUKTIONSSTIL: A (Earth)` | `STYLE_A_EARTH.md` | `"profile": "voiceover"` | `productions/earth-stops-1-second/` |
-| `PRODUKTIONSSTIL: B (TikTok-Referenz)` | `WHATIF_STYLE_GUIDE.md` 16–17, Rezept B1/B2 | Standard | Messberichte R04, R07, R16–R18 |
+| Standard (jedes Thema): **Stil B** | `WHATIF_STYLE_GUIDE.md` 18 (+16 Rezept B1/B2) | Standard + `beats.json` | `productions/what-if-phone-battery-life/`, R07, R19, R20 |
+| nur bei wörtlich `PRODUKTIONSSTIL: A (Earth)` (archiviert) | `STYLE_A_EARTH.md` | `"profile": "voiceover"` | `productions/earth-stops-1-second/` |
 
 **Mindestlänge 60 s für jedes Video.** `validate_production.mjs` und `video_qa.py` lehnen kürzere Videos ab; `timeline.qa` kann die Grenze nur anheben. `--skip-validate`/`--qa-ignore-length` (`run.mjs`) und `--ignore-length` (`video_qa.py`) sind nur für technische Test-Clips (`tests/…`, `productions/_…`) erlaubt.
 
@@ -134,6 +160,7 @@ npm test     # node --test tests/*.mjs  +  python3 -m unittest (tests/test_*.py)
 | `test_audio_mix.py` | Länge, −14 ± 1 LUFS, True Peak ≤ −1, Ein-/Ausblendung, keine Knackser, sample-genaue Platzierung |
 | `test_pipeline_run.mjs` | Gesamtablauf auf 3-s-Fixture: Spezifikation, QA ohne FAIL, A/V-Versatz ≤ 1 Frame |
 | `test_captions.mjs` | Untertitel-Seiten (max. Wörter, keine Ein-Wort-Blitzseiten), Profil voiceover: gültig + Regelverstöße |
+| `test_build_timeline.mjs` | Kamera-Vorlagen; Ereignis/Klang/HUD-Akzent auf demselben Frame; Whip-Spitze auf dem Schnitt; HUD-Stufen; Standard-B-Regeln |
 
 ## Skill verwenden
 
@@ -195,7 +222,8 @@ Zusätzlich an den Referenzen kalibriert (Letterbox-Zuschnitt, Bewegungsübergä
 ## Bekannte Einschränkungen
 
 - Erstes Inhaltsvideo: `productions/earth-stops-1-second/` (Stil A, technisch geprüft, Hörprüfung ausstehend). Mit 41 s erfüllt es die Mindestlänge 60 s nicht mehr – Stilreferenz, nicht veröffentlichungsfähig (`STYLE_A_EARTH.md`, Abschnitt 6).
-- Signalfarbe ist ein Platzhalter; Musik nur selbst erzeugt (keine lizenzierte Musik eingebunden).
+- Musik nur selbst erzeugt (`tools/music_synth.py`, keine lizenzierte Musik eingebunden).
+- Referenzproduktion Stil B: `productions/what-if-phone-battery-life/` (Stand siehe dessen `LOG.md` und `quality_review.md`).
 - **Claude kann Audio nicht hören.** Ton wird gemessen; die Hörprüfung vor der Freigabe muss ein Mensch durchführen.
 - Automatische Bildprüfung findet Kandidaten, keine Gewissheit: Abblend-Übergänge, Zeitraffer und Partikel erzeugen Fehlalarme; sehr kurze Fehler zwischen den 1-s-Kontaktbögen findet nur die Frame-Messung bzw. die Bildstreifen.
 - Referenzvideos und Kontaktbögen sind nicht versioniert (Urheberrecht). In einer neuen Umgebung müssen sie erneut bereitgestellt werden.

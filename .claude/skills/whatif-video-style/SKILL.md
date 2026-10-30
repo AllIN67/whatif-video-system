@@ -1,100 +1,81 @@
 ---
 name: whatif-video-style
-description: Arbeitsablauf für What-if-Kurzvideos im Repository whatif-video-system – von der What-if-Frage über Dramaturgie, Szenenplan, Kamera, Text-HUD und Sound bis zu Render, vollständiger QA (video_qa.py, Sichtprüfung, Hörprüfung) und Produktionsprotokoll. Verwenden bei jeder Planung, Produktion, Überarbeitung oder Prüfung eines Videos dieses Projekts sowie bei Fragen zu seinem Stil. Inhaltliche Quelle der Wahrheit ist WHATIF_STYLE_GUIDE.md.
+description: Arbeitsablauf für What-if-Kurzvideos im Repository whatif-video-system (Stil B, stumm) – vom Thema über Story, Beat-Sheet (beats.json), Baukasten-Szene, Sound-Ereignisse, Vorschau, Render und dreistufige QA (technisch, visuell, dramaturgisch) bis zur Auslieferung der MP4 als Anhang. Verwenden bei jeder Planung, Produktion, Überarbeitung oder Prüfung eines Videos dieses Projekts sowie bei Fragen zu seinem Stil. Inhaltliche Quelle der Wahrheit ist WHATIF_STYLE_GUIDE.md, Abschnitt 18.
 ---
 
-# What-if-Video – Arbeitsablauf
+# What-if-Video – Arbeitsablauf (Stil B, eingefroren)
 
-Dieser Skill beschreibt **wie** gearbeitet wird. **Was** gilt (Regeln, Maße, Grenzwerte), steht ausschließlich in `WHATIF_STYLE_GUIDE.md` im Repository-Root. Regeln hier nicht duplizieren oder aus dem Gedächtnis anwenden – immer im Guide nachlesen.
+Dieser Skill beschreibt **wie** gearbeitet wird. **Was** gilt, steht in `WHATIF_STYLE_GUIDE.md` – **Abschnitt 18 hat Vorrang**.
+Regeln nicht aus dem Gedächtnis anwenden, sondern nachlesen. Die Architektur ist eingefroren (Guide 18.10): kein Umbau, keine
+erneute Repository-Analyse pro Video. Neue Kit-Teile sind erlaubt, wenn ein Thema sie braucht.
 
 ## Wann verwenden
 
-- Neues Video planen oder produzieren („mach ein Video über …“, „What if …“).
-- Bestehendes Video überarbeiten, neu rendern oder prüfen.
-- Fragen zu Format, Stil, Sprache, QA dieses Projekts.
+- „Mach ein Video über …“, „What if …“, ein bloßes Thema → komplette Produktion (Stil B, Rezept B1).
+- Überarbeitung/Neu-Render/Prüfung eines vorhandenen Videos; Fragen zu Format und Stil.
+- Nicht für andere Projekte; der globale Skill `whatif-3d-style` gilt hier nicht.
+- Stil A (Sprecher) nur bei wörtlichem `PRODUKTIONSSTIL: A (Earth)` → dann `STYLE_A_EARTH.md`; sonst nie.
 
-Nicht verwenden für andere Projekte. Insbesondere gilt in diesem Repository **nicht** der ältere Skill `whatif-3d-style` (anderes Projekt, andere Regeln), falls er in der Umgebung sichtbar ist.
+## Schritt 0 – Laden (kurz)
 
-**Keine Videoproduktion ohne ausdrücklichen Auftrag des Nutzers.** Analyse- und Planungsfragen beantworten ist erlaubt; Rendern erst nach Auftrag.
+1. Guide Abschnitt 18 lesen (dazu bei Bedarf 16.1/16.2 Rezept, 2 Hook, 4 Text, 9 Ton).
+2. `VIDEO_PRODUCTION_CHECKLIST.md` öffnen. Vorlagen: `templates/beats.json`, `templates/production_log.md`, `templates/quality_review.md`.
+3. **Referenzproduktion = Mindestniveau** (Guide 18.11): `productions/what-if-phone-battery-life/` (beats.json, scene.js, LOG.md, quality_review.md). Als Muster nachschlagen, nicht kopieren.
+4. Werkzeuge: `node --version`, `ffmpeg -version`, `ls node_modules/three` (sonst `npm install`).
 
-## Schritt 0 – Laden
+## Schritt 1 – Thema → Story
 
-1. **Produktionsstil bestimmen:** Der Auftrag nennt `PRODUKTIONSSTIL: A (Earth)` oder `PRODUKTIONSSTIL: B (TikTok-Referenz)`. Fehlt die Angabe oder ist sie unklar: **nachfragen und nichts planen**, nie selbst wählen. Bei Stil B Rezept B1 (Standard) oder B2 festlegen. Stil und Rezept ins LOG.
-   - Stil A: `STYLE_A_EARTH.md` lesen, Referenz `productions/earth-stops-1-second/` (`scene_plan.md`, `timeline.json`, `voiceover.json`); dazu aus dem Guide die gemeinsamen Abschnitte (dort aufgezählt).
-   - Stil B: `WHATIF_STYLE_GUIDE.md` lesen, **zuerst Abschnitt 16 (Rezepte B1/B2)** und 17.
-   - Stile nicht mischen (Guide 17). **Jedes Video ≥ 60 s** – Länge über zusätzliche Konsequenzen und visuelle Entwicklung, nie über Leerlauf.
-2. `VIDEO_PRODUCTION_CHECKLIST.md` lesen – sie ist die Abhakliste für diesen Ablauf.
-3. Bei Stil- oder Begründungsfragen: `REFERENCE_ANALYSIS.md` und `references/analysis/MEASUREMENTS.md`.
-4. Bei Überarbeitung: vorhandenes `productions/<slug>/LOG.md` lesen.
-5. Werkzeuge prüfen: `ffmpeg -version`, `python3 --version`, `node --version`; fehlende Werkzeuge melden statt still zu ersetzen.
+- Frage ≤ 10 Wörter, zweite Person. HUD-Messgröße mit Start/Ende, die sich in **jedem** Beat ändern kann.
+- Pointe zuerst festlegen und **früh vorbereiten** (Aufbau → Auszahlung). Wechsel aus Hoffnung und Rückschlag planen.
+- 15–18 Beats à 2–4,5 s, ≥ 5 Orte, ≥ 4 Gefühle der Hauptfigur mit Entwicklung. Zahlen mit Quelle im LOG.
+- `productions/<slug>/` anlegen, `templates/production_log.md` → `LOG.md`.
 
-## Schritt 1 – Szenario analysieren
+## Schritt 2 – Beat-Sheet
 
-- Frage nach Guide 1.4 und 2 formulieren (≤ 10 Wörter). Bei Themen außerhalb des Themenpools (Guide 1.4) beim Nutzer nachfragen.
-- HUD-Messgröße mit Start- und Endzustand festlegen; prüfen, ob sie sich ab Sekunde 0 sichtbar verändert.
-- 8–12 mögliche Konsequenzen sammeln, Fakten recherchieren, **jede Zahl mit Quelle** notieren. Unsichere Fakten als unsicher kennzeichnen, nicht erfinden.
-- Pointe/Wendung zuerst festlegen, dann rückwärts eskalieren.
-- Slug wählen, `productions/<slug>/` anlegen, `templates/production_log.md` → `LOG.md` kopieren.
+- `templates/beats.json` → `productions/<slug>/beats.json`. Pro Beat: `place`, `mood`, `camera` (Vorlage aus `kit/camera.js`),
+  `events` (jedes mit `what`, Schlüsselereignisse mit `sfx`, HUD-Sprung `hud_to`/Akzent `flash`), `hud`, `line`, `ambience`, `data` (Positionen).
+- Texte nur in `text.en.json` (Titel, HUD-Labels, Zeilen, Endkarte).
+- `node tools/build_timeline.mjs productions/<slug>` → `node tools/validate_production.mjs productions/<slug>` muss **OK** melden
+  (Standard-B-Regeln: Kamera-Abwechslung, Ereignis pro Beat, HUD-Dynamik, Gefühle, Orte, Ton-Synchronität).
+- Warnungen `[18.11]` (unter Referenzniveau) beheben – Beat-Sheet anreichern – oder im LOG begründen. Ohne `beats.json` lehnt
+  der Validator eine Stil-B-Produktion ab.
 
-## Schritt 2 – Dramaturgie und Szenenplan
+## Schritt 3 – Szene
 
-- Akte A–E nach Guide 3.1 auf die Ziellänge verteilen.
-- `templates/scene_plan.md` → `productions/<slug>/scene_plan.md` ausfüllen: jede Zeile mit Zeit, Bild, Kamera, HUD, Text-ID, Ton, Übergang, Effektfunktion.
-- Alle Bildschirmtexte nur in `productions/<slug>/text.en.json` (Sprachunabhängigkeit, Guide 1.3).
-- Prüfungen aus dem Szenenplan-Template abhaken (Ereignis ≤ 10 s, Zustandsänderung ≤ 6 s, Ende ≤ 5 s nach Pointe, Blitzregel).
-- Szenenplan dem Nutzer kurz vorstellen, wenn der Auftrag nicht ausdrücklich „direkt durchproduzieren“ lautet.
+- `scene.js` nur mit dem Kit: `kit.human().act(spur, t)`, `kit.beatClock(timeline)` für alle Zeiten, `beats[].data` für Positionen,
+  `kit.applyLook()` je Beat, `kit.fx`, `props`, `places`. Keine Zeitkonstanten, keine harten Posenwechsel.
+- Fehlende Teile im Kit ergänzen (Schnittstellen nicht ändern) und im LOG nennen.
 
-## Schritt 3 – Kamera, Bild, Effekte, Sound planen
+## Schritt 4 – Vorschau (Pflicht vor dem Rendern)
 
-- Ein Kamera-Paradigma P1–P4 wählen (Guide 5.1) und im LOG begründen.
-- Licht-/Farbverlauf als Dramaturgie festlegen (Guide 6.2); Erkennungsmerkmale (Guide 6.4) übernehmen.
-- Pro Effekt die Erzählfunktion eintragen (Guide 8).
-- Tonplan: Lautheitsverlauf, Akzente, bewusste Stille, Musikquelle **mit Lizenz** (Guide 9). Ohne lizenzierte Musik: nachfragen bzw. als Einschränkung dokumentieren, keine fremde Musik verwenden.
-
-## Schritt 4 – An die Pipeline anpassen
-
-- **Szene immer mit dem Baukasten bauen** (`pipeline/runtime/kit/`, Beispiel `productions/_kit_demo/scene.js`): Würfel-Menschen mit Gesicht, Requisiten, Orte. Keine Fotorealistik, kein Realismus-3D, keine KI-Bild-/Videogenerierung (Guide 6.1, 16).
-- Fehlende Teile im Kit ergänzen, nicht nur in der Produktion.
-- Jede Einstellung zuerst mit `node tools/still.mjs --production productions/<slug> --at …` als Vorschaubild prüfen und dem Nutzer den Kontaktbogen zeigen, bevor das ganze Video gerendert wird.
-
-- Zuerst prüfen, was im Repository existiert (`ls`, `README.md`, LOG früherer Produktionen). Vorhandene, funktionierende Pipeline-Komponenten wiederverwenden, nicht ohne Grund ersetzen.
-- Gibt es noch keine Pipeline: Empfehlung aus Guide 10.3 umsetzen und die Entscheidung im Guide-Änderungsprotokoll + LOG festhalten. Neue Abhängigkeiten nur, wenn nötig, und im LOG begründen.
-- Unverhandelbar unabhängig von der Technik: deterministisches Rendern pro Frame, globale Zeitachse, 30 fps CFR, Ausgabeformat nach Guide 10.1/10.2.
+- `node tools/still.mjs --production productions/<slug> --at <Mitte jedes Beats + Ereigniszeiten>` und `stills/contact.jpg` ansehen.
+- Prüfen: Figur im Bild (9:16 = schmaler Bildwinkel), Gesicht lesbar, Kamera nicht in Wänden/Figuren, Licht je Ort, HUD/Texte frei.
+- Korrigieren in `beats.json` (Kamera/Positionen) bzw. `scene.js`, neu bauen, erneut Vorschau – bis alle Beats stimmen.
 
 ## Schritt 5 – Rendern
 
-- Komplettes Video rendern; Befehl und Git-Commit im LOG.
-- Audio separat mischen und normalisieren (Guide 9.4), dann muxen.
+- Vor dem Rendern committen (sonst meldet `run_log.json` „dirty“). Dann `node pipeline/run.mjs --production productions/<slug>`
+  (Hintergrund; ≈ 0,5–1,2 s pro Frame). Während des Renderns keine Dateien unter `pipeline/` oder der Produktion ändern
+  (Fingerabdruck → Teilstücke werden verworfen).
 
-## Schritt 6 – Qualitätsprüfung (vollständig, nicht stichprobenartig)
+## Schritt 6 – Qualitätskontrolle (drei Stufen, vollständig)
 
-```bash
-python3 tools/video_qa.py productions/<slug>/render/final.mp4 --out productions/<slug>/qa --mode render
-python3 tools/inspect_frames.py productions/<slug>/render/final.mp4 --report productions/<slug>/qa/report.json --out productions/<slug>/qa/strips
-```
-
-1. `qa/report.md` lesen; Status und **alle** Meldungen ins LOG.
-2. **Jeden** Kontaktbogen `qa/sheet_*.jpg` mit dem Read-Werkzeug ansehen – inklusive des letzten (Ende).
-3. `qa/shots.jpg` gegen den Szenenplan prüfen.
-4. **Jeden** Streifen in `qa/strips/` ansehen und jede REVIEW-Meldung als „beabsichtigt“ (mit Grund) oder „Fehler“ einstufen.
-5. Texte auf Rechtschreibung, Lesbarkeit (240-px-Kontaktbogen), Sicherheitszone, Dauer prüfen.
-6. Hörprüfung: Claude kann nicht hören. Messwerte (Lautheit, Klick-Kandidaten, Lautheitsverlauf) auswerten und den Nutzer **ausdrücklich um die Hörprüfung bitten** (Guide 11.3).
-
-Nie behaupten, etwas sei geprüft, das nicht geprüft wurde. Im LOG genau festhalten, welche Bögen/Streifen angesehen wurden.
+1. **Technisch:** `qa/report.md` lesen (Status, Synchronität der Ereignis-Klänge, Monotonie-Kandidaten, alle Meldungen).
+2. **Visuell:** **jeden** `qa/sheet_*.jpg` (inkl. Ende), `qa/shots.jpg`, **jeden** Streifen in `qa/strips/` ansehen; jede REVIEW-Meldung
+   als „beabsichtigt“ (Grund) oder „Fehler“ einstufen.
+3. **Dramaturgisch:** Ablauf gegen Beat-Sheet prüfen (Einstieg, Entwicklung, Eskalation, Pointe, Ende).
+- `productions/<slug>/quality_review.md` (legt `run.mjs` aus der Vorlage an) ausfüllen; nur Gesehenes als OK eintragen.
+- Bekannte Schwächen der Referenz vermeiden (Guide 18.11): zu dunkle Nachtszenen, Anschlussfehler über Schnitte, Text im Blitz.
+- Hörprüfung kann Claude nicht leisten → ausdrücklich beim Nutzer anfragen.
 
 ## Schritt 7 – Fehler beheben
 
-- Pro Fehler: Zeitpunkt, Ursache (Guide 12), Korrektur **an der Ursache** (Szene, Zeitachse, Asset, Mischung) – kein Kaschieren im Schnitt.
-- Danach komplett neu rendern und Schritt 6 **vollständig** wiederholen. Schleife, bis keine Fehler offen sind.
+- Ursache beheben (Beat-Sheet, Szene, Kit), neu bauen, neu rendern, Schritt 6 komplett wiederholen.
 
-## Schritt 8 – Freigabe und Dokumentation
+## Schritt 8 – Auslieferung und Abschluss
 
-- Status nach Guide 11.4 setzen. `FREIGEGEBEN` nur mit bestätigter menschlicher Hörprüfung.
-- LOG vervollständigen: Entscheidungen, Abweichungen vom Guide mit Begründung, Quellen, Lizenzen, alle QA-Durchläufe, bekannte Einschränkungen, Vorschläge für den Guide.
-- Abschlussbericht an den Nutzer: Datei, Status, was geprüft wurde (und was nicht), offene Punkte.
-- Commit nur der Projektdateien (Render-Ausgaben und JPGs sind per `.gitignore` ausgeschlossen); kein Push ohne Auftrag.
-
-## Voraussetzungen und Aufruf
-
-- Der Skill liegt projektbezogen unter `.claude/skills/whatif-video-style/` und ist nur verfügbar, wenn Claude Code in diesem Repository arbeitet (Repository als Arbeitsverzeichnis bzw. der Sitzung hinzugefügt).
-- Aufruf: `/whatif-video-style` oder durch eine Aufgabenbeschreibung, die zur Skill-Beschreibung passt. Er wird nicht automatisch in anderen Projekten oder Chats geladen.
+1. Tatsächliche Datei ermitteln (`ls -la productions/<slug>/render/final.mp4`, `ffprobe`).
+2. Sende-Werkzeug prüfen (z. B. `SendUserFile`) und die MP4 **als Anhang** übergeben; Ergebnis der Übergabe prüfen und melden.
+   Ein Pfad allein ist keine Auslieferung; bei Fehlschlag Fehler dokumentieren.
+3. LOG + quality_review vervollständigen; Status nach Guide 18.8. Commit nur Projektdateien (MP4/JPG/PNG sind ausgeschlossen).
+4. Abschlussbericht: Datei, Status, was geprüft wurde und was nicht, offene Punkte, Bitte um Hörprüfung.

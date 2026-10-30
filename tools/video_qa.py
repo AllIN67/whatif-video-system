@@ -439,6 +439,65 @@ def apply_plan(plan_path, frames, v, a, fps):
         a["loudness_jumps"] = [j for j in a["loudness_jumps"] if not near(j["t"], cues + auto, 0.4)]
 
 
+# Klänge mit weichem Einsatz (Luftzug, Flächen) haben keinen messbaren Anschlag – sie werden nicht auf Synchronität geprüft
+SOFT_SFX = {"whoosh", "swoosh", "riser", "appear", "shimmer", "rumble", "drone", "city", "rain", "room", "hum", "tension"}
+SYNC_TOL_S = 0.034  # ±1 Frame bei 30 fps (Style-Guide 9.3)
+MONOTONY_WINDOW_S = 3.0
+MONOTONY_YDIF = 0.5  # mittlere Bilddifferenz darunter = kaum Bewegung (R07-Minimum 1,4; R19-Weltall-Teil 0,06–0,2)
+
+
+def sfx_sync(path, tl):
+    """Prüft im fertigen Ton, ob jeder Ereignis-Klang (audio.sfx mit event) auf seinem Frame einsetzt.
+    Kurzzeit-Energie in 5-ms-Fenstern; gesucht wird der steilste Anstieg im Bereich t−15 … t+60 ms gegenüber dem
+    Pegel davor (t−80 … t−15 ms). Ergebnis je Einsatz: erkannt (Anstieg ≥ 3 dB, Versatz in ms) oder „verdeckt“
+    (lauterer Klang/Musik zur selben Zeit – dann nur per Hörprüfung zu beurteilen)."""
+    sr = 16000
+    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", path, "-ac", "1", "-ar", str(sr), "-f", "s16le", "-"],
+                         capture_output=True).stdout
+    import array
+    x = array.array("h", raw)
+    W = sr // 200  # 5 ms
+    env = []
+    for i in range(0, len(x) - W, W):
+        s = 0
+        for v in x[i:i + W]:
+            s += v * v
+        env.append(10 * math.log10(s / W / 32768 ** 2 + 1e-12))
+    out = []
+    for c in tl.get("audio", {}).get("sfx", []):
+        name = c["src"].split(":", 1)[-1]
+        if not c.get("event") or name in SOFT_SFX:
+            continue
+        k = int(round(c["t"] * 200))
+        pre = env[max(0, k - 16):max(0, k - 3)] or [-120.0]
+        base = sorted(pre)[len(pre) // 2]
+        win = [i for i in range(max(1, k - 3), min(len(env), k + 13))]
+        if not win:
+            continue
+        rise_i = max(win, key=lambda i: env[i] - env[i - 1])
+        peak = max(env[i] for i in win)
+        detected = peak - base >= 3.0
+        out.append({"t": c["t"], "sfx": name, "event": c["event"], "detected": detected,
+                    "offset_ms": round((rise_i - k) * 5) if detected else None, "rise_db": round(peak - base, 1)})
+    return out
+
+
+def monotony(frames, fps):
+    """3-s-Fenster mit kaum Bewegung (Kandidaten für Leerlauf/Standbild-Wirkung)."""
+    y = [f["ydif"] or 0.0 for f in frames]
+    n = int(MONOTONY_WINDOW_S * fps)
+    hits = []
+    for k in range(0, max(0, len(y) - n), int(fps / 2)):
+        m = sum(y[k:k + n]) / n
+        if m < MONOTONY_YDIF:
+            t = round(k / fps, 1)
+            if hits and t - hits[-1][1] <= 0.5 + 1e-9:
+                hits[-1][1] = round(t + MONOTONY_WINDOW_S, 1)
+            else:
+                hits.append([t, round(t + MONOTONY_WINDOW_S, 1)])
+    return hits
+
+
 def is_technical_clip(path):
     """Technische Test-Clips: unter tests/ oder in productions/_<name>/ (Unterstrich = keine Veröffentlichung)."""
     parts = os.path.normpath(os.path.abspath(path)).split(os.sep)
@@ -531,6 +590,16 @@ def evaluate(info, v, a, black, freezes, ignore_length=False):
         long_sil = [s for s in a["silences"] if s["end"] - s["start"] > 1.5]
         if long_sil:
             reviews.append(f"Stille > 1,5 s (nur ok, wenn beabsichtigt): {long_sil}")
+        late = [c for c in a.get("sfx_sync", []) if c["detected"] and abs(c["offset_ms"]) > SYNC_TOL_S * 1000]
+        masked = [c for c in a.get("sfx_sync", []) if not c["detected"]]
+        if late:
+            reviews.append(f"Ereignis-Klänge > ±{SYNC_TOL_S * 1000:.0f} ms versetzt (anhören!): "
+                           f"{[(c['t'], c['sfx'], c['offset_ms']) for c in late]}")
+        if masked:
+            reviews.append(f"Ereignis-Klänge verdeckt – Anstieg < 3 dB, nur per Hörprüfung beurteilbar: "
+                           f"{[(c['t'], c['sfx']) for c in masked]}")
+    if v.get("monotony"):
+        reviews.append(f"Monotonie-Kandidaten (3 s kaum Bewegung, Sichtprüfung): {v['monotony']}")
     status = "FAIL" if fails else ("REVIEW" if reviews else "PASS")
     return status, fails, reviews
 
@@ -569,6 +638,7 @@ def write_md(path, out, rep):
             f"{sum(w['visible'] for w in v['planned_transitions'])}; Kandidaten an geplanten Übergängen (erwartet): "
             f"Sprung {[j['t'] for j in v['planned_jump_candidates']]}, Flackern {v['planned_flicker_candidates']}"]
            if 'planned_transitions' in v else []),
+         f"- Monotonie-Kandidaten (3 s mittlere Bilddifferenz < {MONOTONY_YDIF}): {v.get('monotony') or 'keine'}",
          f"- Mittlere Helligkeit (Y 0–255): {v['mean_luma']}, mittlere Bilddifferenz: {v['mean_motion_ydif']}", "",
          "## Ton", "",
          f"- Integrierte Lautheit: {a.get('integrated_lufs')} LUFS, LRA {a.get('lra_lu')} LU, "
@@ -579,6 +649,9 @@ def write_md(path, out, rep):
          f"- Klick-Kandidaten (HF-Transienten, oft auch gewollte SFX): {[c['t'] for c in a['click_candidates']][:30] or 'keine'}",
          *([f"- An geplanten Ton-Ereignissen (beim Anhören bestätigen): Transienten {[c['t'] for c in a['planned_click_candidates']]}, "
             f"Lautheitssprünge {[j['t'] for j in a['planned_loudness_jumps']]}"] if 'planned_click_candidates' in a else []),
+         *([f"- Synchronität Ereignis-Klänge (steilster Anstieg im Bereich −15…+60 ms): "
+            f"{sum(c['detected'] for c in a['sfx_sync'])}/{len(a['sfx_sync'])} erkannt (übrige verdeckt), Versatz (ms) "
+            f"{[c['offset_ms'] for c in a['sfx_sync']]}"] if a.get('sfx_sync') else []),
          f"- Erste 50 ms: {a['first_50ms_rms_db']} dB RMS; letzte 50 ms: {a['last_50ms_rms_db']} dB RMS; "
          f"letzte Sekunde: {a['last_1s_rms_db']} dB RMS",
          "- Lautheitsverlauf (Short-Term-LUFS, alle 2 s): " + " ".join(
@@ -588,7 +661,9 @@ def write_md(path, out, rep):
         L += ["## Bewertung", "", f"**Status: {rep['status']}**", ""]
         L += [f"- ❌ {x}" for x in rep["fails"]] + [f"- ⚠️ {x}" for x in rep["reviews"]]
         L += ["", "Automatische Prüfung ersetzt nicht die Sichtprüfung (Kontaktbögen, shots.jpg) und "
-              "das vollständige Anhören. Siehe VIDEO_PRODUCTION_CHECKLIST.md.", ""]
+              "das vollständige Anhören. Siehe VIDEO_PRODUCTION_CHECKLIST.md.", "",
+              "**Status bezieht sich nur auf die technische Prüfung.** Visuelle und dramaturgische Freigabe: "
+              "`templates/quality_review.md` ausfüllen (Monotonie, Figuren, Kamera, HUD, Einstieg, Eskalation, Ende).", ""]
     L += ["## Einstellungen", "", "| # | Start (s) | Dauer (s) | Frames |", "|---|---|---|---|"]
     L += [f"| {k + 1} | {s['start']} | {s['dur']} | {s['frames']} |" for k, s in enumerate(v["shots"])]
     with open(os.path.join(out, "report.md"), "w") as fh:
@@ -626,8 +701,11 @@ def main():
     frames, black, freezes = video_pass(args.video, args.out, crop)
     v = analyse_frames(frames, fps)
     a = audio_pass(args.video, args.out, info["duration"]) if "audio" in info else {}
+    v["monotony"] = monotony(frames, fps)
     if args.plan:
         apply_plan(args.plan, frames, v, a, fps)
+        if a:
+            a["sfx_sync"] = sfx_sync(args.video, json.load(open(args.plan)))
     if not args.no_sheets:
         contact_sheets(args.video, args.out, info["duration"], v["shots"], fps)
     v["letterbox_crop"] = crop

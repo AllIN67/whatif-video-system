@@ -36,7 +36,7 @@ export function checkLength(timeline, E, W) {
   }
 }
 
-export function validate(timeline, text, { lang = 'en', wordTimes = null } = {}) {
+export function validate(timeline, text, { lang = 'en', wordTimes = null, requireBeats = false } = {}) {
   const errors = [];
   const warnings = [];
   const E = (rule, msg) => errors.push(`[${rule}] ${msg}`);
@@ -137,7 +137,141 @@ export function validate(timeline, text, { lang = 'en', wordTimes = null } = {})
   // Seed für deterministische Effekte (8)
   if (!Number.isInteger(timeline.seed)) E('8', 'timeline.seed (ganzzahlig) fehlt – Effekte müssen geseedet sein');
 
+  // HUD-Akzente gehören in ihr Segment (6.5)
+  for (const [i, s] of hud.entries()) {
+    const segEnd = i + 1 < hud.length ? hud[i + 1].from : dur;
+    for (const f of s.flashes || []) {
+      if (!['loss', 'gain', 'warn'].includes(f.kind)) E('6.3', `HUD „${s.id}“: Akzent „${f.kind}“ unbekannt (loss, gain, warn)`);
+      if (f.t < s.from || f.t >= segEnd) E('6.5', `HUD „${s.id}“: Akzent bei ${f.t} s außerhalb des Segments ${s.from}–${segEnd} s`);
+    }
+  }
+  // Endkarte (7.4): Text aus der Textdatei, ≤ 10 Wörter
+  if (timeline.endcard) {
+    const et = text.endcard?.title;
+    if (!et) E('1.3', `Endkarte: endcard.title fehlt in text.${lang}.json`);
+    else if (words(et) > 10) E('4', `Endkarte: ${words(et)} Wörter (max. 10)`);
+    if (timeline.endcard.in >= dur) E('7.4', 'Endkarte beginnt nach Videoende');
+  }
+
+  // Produktionsstandard Stil B (Abschnitt 18) – nur für Zeitachsen aus beats.json (tools/build_timeline.mjs)
+  if (timeline.beats) checkStandardB(timeline, ptl, E, W);
+  else if (requireBeats) E('18.1', 'timeline.json ist nicht aus beats.json erzeugt – Stil-B-Produktionen brauchen productions/<slug>/beats.json (node tools/build_timeline.mjs)');
+
   return { errors, warnings };
+}
+
+// Messbare Regeln aus der Referenzanalyse R07/R19/R20 (Guide 18). Ziel: Monotonie, Kamera-Wiederholung,
+// stillstehende HUDs und unsynchronen Ton schon VOR dem Rendern verhindern.
+export const STANDARD_B = {
+  beatMin: 1.8, // kürzester Beat (s); kürzere nur als Einschub (Reaktion), siehe beatMinInsert
+  beatMinInsert: 1.0,
+  beatMax: 6.0, // R07/R19: 4,0 s, R20: 1,5–5 s
+  medianRange: [2.5, 4.6],
+  minFramings: 4,
+  maxFramingShare: 0.45,
+  minPlacesB1: 5,
+  minMoods: 4,
+  minHudChangeShare: 0.7,
+};
+
+// Referenzniveau = vom Nutzer abgenommenes Testvideo productions/what-if-phone-battery-life (2026-10-30, Guide 18.11).
+// Unterschreitung ist kein Fehler, aber eine Warnung, die im LOG begründet werden muss (nicht ohne Grund zurückfallen).
+export const REFERENCE_B = {
+  eventsPerBeat: 1.5, // Referenz 1,53
+  framings: 6, // close, medium, wide, low, high, pov
+  presets: 6, // Referenz 7
+  moods: 6, // Referenz 8
+  places: 6, // Referenz 7
+  hudChangeShare: 1.0, // Referenz: HUD ändert sich in jedem Beat
+  sfxEventShare: 0.9, // Referenz: alle Ereignisse mit Klang
+  flashesPerBeat: 0.5, // Referenz 11 Akzente / 17 Beats
+  hudLabels: 4, // Referenz 5 Segmente / 4 Labels
+};
+
+export function checkStandardB(timeline, ptl, E, W) {
+  const S = STANDARD_B;
+  const beats = timeline.beats;
+  const r2 = (x) => Math.round(x * 100) / 100;
+  const lens = beats.map((b) => b.to - b.from);
+  const sorted = [...lens].sort((a, b) => a - b);
+  const median = sorted[Math.floor(sorted.length / 2)];
+  beats.forEach((b, i) => {
+    const L = lens[i];
+    if (L > S.beatMax + 1e-9) E('18.2', `Beat ${b.id}: ${r2(L)} s (max. ${S.beatMax} s – Referenzen wechseln alle 2–4 s)`);
+    if (L < S.beatMinInsert - 1e-9) E('18.2', `Beat ${b.id}: ${r2(L)} s (min. ${S.beatMinInsert} s)`);
+    else if (L < S.beatMin - 1e-9) W('18.2', `Beat ${b.id}: ${r2(L)} s – nur als Reaktions-Einschub sinnvoll`);
+  });
+  if (median < S.medianRange[0] || median > S.medianRange[1]) W('18.2', `Median-Beatlänge ${r2(median)} s außerhalb ${S.medianRange.join('–')} s`);
+
+  // Kamera-Abwechslung (18.3)
+  for (let i = 1; i < beats.length; i++) {
+    const a = beats[i - 1];
+    const b = beats[i];
+    if (a.framing === b.framing && a.preset === b.preset) E('18.3', `Beats ${a.id} → ${b.id}: gleiche Kamera (${b.preset}/${b.framing}) zweimal hintereinander`);
+  }
+  // Whip aus Innenräumen dreht die Kamera in eine Wand (Testvideo 2026-10-30: 2-Frame-Flächen, QA-FAIL)
+  const INTERIOR = new Set(['bedroom', 'kitchen', 'cafe', 'office', 'classroom']);
+  ptl.shots.forEach((s, i) => {
+    if (i > 0 && s.transition.type === 'whip' && INTERIOR.has(beats[i - 1]?.place)) W('18.3', `Whip von ${beats[i - 1].id} (Innenraum ${beats[i - 1].place}) – Abblende verwenden`);
+  });
+  const counts = {};
+  for (const b of beats) counts[b.framing] = (counts[b.framing] || 0) + 1;
+  const nF = Object.keys(counts).length;
+  if (nF < S.minFramings) E('18.3', `nur ${nF} Bildgrößen (${Object.keys(counts).join(', ')}) – mindestens ${S.minFramings} (close, medium, wide, low, high, pov)`);
+  for (const [k, n] of Object.entries(counts)) if (n / beats.length > S.maxFramingShare) W('18.3', `Bildgröße „${k}“ in ${n}/${beats.length} Beats (max. ${S.maxFramingShare * 100} %)`);
+
+  // Orte, Gefühle (18.4)
+  const places = new Set(beats.map((b) => b.place).filter(Boolean));
+  if (timeline.recipe === 'B1' && places.size < S.minPlacesB1) E('18.4', `nur ${places.size} Orte (Rezept B1: ≥ ${S.minPlacesB1})`);
+  const moods = new Set(beats.map((b) => b.mood).filter(Boolean));
+  if (moods.size < S.minMoods) E('18.4', `nur ${moods.size} Gefühle der Hauptfigur (${[...moods].join(', ')}) – mindestens ${S.minMoods}, sichtbare Entwicklung`);
+  for (const b of beats) if (!b.mood) W('18.4', `Beat ${b.id}: kein Gefühl (mood) der Hauptfigur angegeben`);
+
+  // Jeder Beat hat ein sichtbares Ereignis (18.2) – R07/R19: jede 4-s-Szene enthält eine Aktion
+  const evByBeat = {};
+  for (const e of timeline.events || []) (evByBeat[e.beat] ||= []).push(e);
+  for (const b of beats) if (!evByBeat[b.id]?.length) E('18.2', `Beat ${b.id}: kein Ereignis – jede Einstellung braucht eine sichtbare Aktion`);
+
+  // HUD verändert sich in den meisten Beats (18.5)
+  const hudShare = beats.filter((b) => b.hud_change).length / beats.length;
+  if (hudShare < S.minHudChangeShare) E('18.5', `HUD ändert sich nur in ${Math.round(hudShare * 100)} % der Beats (min. ${S.minHudChangeShare * 100} %)`);
+
+  // Ton (18.6): jedes Ereignis mit sfx hat einen Klang genau auf seinem Frame; Akzente/Auslöser brauchen Klang
+  const sfx = timeline.audio?.sfx || [];
+  const fps = ptl.fps;
+  for (const e of timeline.events || []) {
+    for (const name of e.sfx || []) {
+      if (!sfx.some((s) => s.src === `gen:${name}` && Math.abs(s.t - e.t) < 0.5 / fps)) E('18.6', `Ereignis ${e.id}: Klang ${name} liegt nicht auf ${e.t} s`);
+    }
+    if ((e.flash || e.trigger) && !(e.sfx || []).length) W('18.6', `Ereignis ${e.id} (${e.flash ? 'HUD-Akzent' : 'Auslöser'}) ohne Klang`);
+  }
+  const keyEvents = (timeline.events || []).filter((e) => (e.sfx || []).length);
+  if (keyEvents.length < beats.length * 0.6) W('18.6', `nur ${keyEvents.length} Ereignisse mit Klang bei ${beats.length} Beats`);
+  // Wiederholung desselben Klangs direkt hintereinander (≥ 4×) wirkt mechanisch
+  const evSfx = sfx.filter((s) => s.event && s.event !== 'hud_step' && !String(s.event).startsWith('cut:')).map((s) => s.src);
+  for (let i = 3; i < evSfx.length; i++) if (evSfx[i] === evSfx[i - 1] && evSfx[i] === evSfx[i - 2] && evSfx[i] === evSfx[i - 3]) W('18.6', `Klang ${evSfx[i]} viermal hintereinander`);
+
+  // Ende (18.7): Endkarte oder Frage an den Zuschauer
+  if (!timeline.endcard) W('18.7', 'keine Endkarte (Frage an den Zuschauer / „Part 2?“)');
+
+  // Referenzniveau (18.11): Werte des abgenommenen Testvideos; Unterschreitung im LOG begründen
+  const R = REFERENCE_B;
+  const ev = timeline.events || [];
+  const under = (what, have, want) => W('18.11', `unter Referenzniveau: ${what} ${have} (Referenz ≥ ${want}) – im LOG begründen`);
+  const epb = Math.round((ev.length / beats.length) * 100) / 100;
+  if (epb < R.eventsPerBeat) under('Ereignisse pro Beat', epb, R.eventsPerBeat);
+  if (nF < R.framings) under('Bildgrößen', nF, R.framings);
+  const nP = new Set(beats.map((b) => b.preset)).size;
+  if (nP < R.presets) under('Kamera-Vorlagen', nP, R.presets);
+  if (moods.size < R.moods) under('Gefühle', moods.size, R.moods);
+  if (places.size < R.places) under('Orte', places.size, R.places);
+  if (hudShare < R.hudChangeShare) under('Anteil Beats mit HUD-Änderung', Math.round(hudShare * 100) / 100, R.hudChangeShare);
+  const sfxShare = ev.length ? ev.filter((e) => (e.sfx || []).length).length / ev.length : 0;
+  if (sfxShare < R.sfxEventShare) under('Anteil Ereignisse mit Klang', Math.round(sfxShare * 100) / 100, R.sfxEventShare);
+  const fl = (timeline.hud || []).reduce((n, h) => n + (h.flashes || []).length, 0);
+  if (fl / beats.length < R.flashesPerBeat) under('HUD-Akzente pro Beat', Math.round((fl / beats.length) * 100) / 100, R.flashesPerBeat);
+  const labels = new Set((timeline.hud || []).map((h) => h.id)).size;
+  if (labels < R.hudLabels) under('HUD-Labels', labels, R.hudLabels);
 }
 
 // Profil „voiceover“ = Stil A (Earth): Sprecher, Wort-für-Wort-Untertitel und Einblendungen statt Titel/HUD/Zeilen.
@@ -218,7 +352,11 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   }
   const tl = JSON.parse(fs.readFileSync(path.join(dir, 'timeline.json'), 'utf8'));
   const tx = JSON.parse(fs.readFileSync(path.join(dir, `text.${lang}.json`), 'utf8'));
-  const res = validate(tl, tx, { lang, wordTimes: loadWords(dir, tl) });
+  // Stil B (alles außer Profil voiceover und technischen Test-Clips productions/_… / tests/…) braucht beats.json
+  const rel = path.relative(process.cwd(), path.resolve(dir)).split(path.sep);
+  const technical = rel[0] === 'tests' || (rel[0] === 'productions' && (rel[1] || '').startsWith('_'));
+  const requireBeats = tl.profile !== 'voiceover' && !technical;
+  const res = validate(tl, tx, { lang, wordTimes: loadWords(dir, tl), requireBeats });
   if (args.includes('--json')) console.log(JSON.stringify(res, null, 1));
   else {
     for (const e of res.errors) console.log(`❌ ${e}`);

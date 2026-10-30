@@ -1,121 +1,59 @@
-# Video-Produktions-Checkliste
+# Video-Produktions-Checkliste (Stil B, Guide 18)
 
-Für **jedes** Video abarbeiten. Regeln und Begründungen stehen in `WHATIF_STYLE_GUIDE.md` (Abschnittsnummern in Klammern). Ein Punkt gilt erst als erledigt, wenn er im Produktionsprotokoll (`productions/<slug>/LOG.md`, Vorlage `templates/production_log.md`) mit Ergebnis vermerkt ist.
+Für **jedes** Video abarbeiten. Regeln stehen in `WHATIF_STYLE_GUIDE.md` (Abschnittsnummern in Klammern; **18 hat Vorrang**).
+Ein Punkt gilt erst als erledigt, wenn er im Produktionsprotokoll (`productions/<slug>/LOG.md`) bzw. in
+`productions/<slug>/quality_review.md` mit Ergebnis vermerkt ist. Stil A (archiviert) nur bei ausdrücklichem Auftrag → `STYLE_A_EARTH.md`.
 
-**Produktionsstil zuerst:** `PRODUKTIONSSTIL: A (Earth)` → zusätzlich `STYLE_A_EARTH.md`; `PRODUKTIONSSTIL: B (TikTok-Referenz)` → Rezept B1 oder B2 (16). Fehlt die Angabe: nachfragen (17). Punkte, die nur für einen Stil gelten, sind mit [A] bzw. [B] markiert.
+Ablage pro Video: `productions/<slug>/` mit `LOG.md`, `beats.json`, `timeline.json` (erzeugt), `text.en.json`, `scene.js`,
+`quality_review.md`, `qa/`, `render/` (nicht versioniert).
 
-Ablage pro Video: `productions/<slug>/` mit `LOG.md`, `scene_plan.md`, `text.en.json`, Quellcode/Assets, `render/` (nicht versioniert), `qa/`.
+## 1. Thema und Story
 
----
+- [ ] Rezept B1 (Standard) bzw. B2 im LOG (17, 16)
+- [ ] Frage „What if …?“, ≤ 10 Wörter (2)
+- [ ] HUD-Messgröße mit Start → Ende, ändert sich in ≥ 70 % der Beats (18.5)
+- [ ] Pointe festgelegt und früh vorbereitet (Aufbau → Auszahlung) (18.7)
+- [ ] Hoffnung/Rückschlag-Wechsel geplant; Fakten mit Quelle im LOG (3.2)
+- [ ] Themen-Ausschlüsse geprüft (keine realen Personen, Logos, Religion/Politik) (1.4)
 
-## 1. Thema und zentrale What-if-Frage
+## 2. Beat-Sheet (`beats.json`)
 
-- [ ] Produktionsstil (A / B) und bei B das Rezept (B1 / B2) im Protokoll (17)
-- [ ] [B] Frage formuliert: „What if …?“, ≤ 10 Wörter, max. 2 Zeilen (2)
-- [ ] Messgröße für den HUD festgelegt (Start → Endzustand, Einheit) (1.4)
-- [ ] ≥ 5 eskalierende Konsequenzen gesammelt (1.4)
-- [ ] Pointe/Wendung festgelegt (3.2)
-- [ ] Fakten recherchiert, **jede Zahl mit Quelle** im Protokoll (3.2)
-- [ ] Themen-Ausschlüsse geprüft: keine realen Personen, Logos, fremden Figuren; Themenpool beachtet (1.4)
+- [ ] 15–18 Beats, Länge ≥ 60 s (B1: 61–64 s); Beatlänge 1,8–6 s (18.2)
+- [ ] Jeder Beat: Ort, Gefühl, Kamera-Vorlage, ≥ 1 Ereignis mit `what` (18.2–18.4)
+- [ ] ≥ 5 Orte (B1), ≥ 4 Gefühle mit Entwicklung (18.4)
+- [ ] Kamera: nie zweimal gleich hintereinander, ≥ 4 Bildgrößen, ≥ 1 Reaktions-Nahaufnahme, ≥ 1 Totale/Aufsicht (18.3)
+- [ ] Klang auf jedem Schlüsselereignis (Auslöser, Akzente, Pointe), sonst sparsam; Musikplan mit Ruhe vor der Pointe (18.6)
+- [ ] Texte nur in `text.en.json`: Titel, HUD-Labels, 12–24 Zeilen à 3–10 Wörter, Endkarte (4)
+- [ ] `node tools/build_timeline.mjs productions/<slug>` + `node tools/validate_production.mjs productions/<slug>` → **OK**
+- [ ] Keine Warnung `[18.11]` (Referenzniveau des Testvideos) – oder Begründung im LOG (18.11)
 
-## 2. Hook und Dramaturgie
+## 3. Szene und Vorschau
 
-- [ ] Frame 0: bewegte Szene + Text ([B] Titel + HUD, [A] Hook-Einblendung) (2)
-- [ ] HUD-Wert ändert sich in den ersten 2 s (2)
-- [ ] Auslösendes Ereignis spätestens bei 10 s (2)
-- [ ] Akte A–E mit Zeiten geplant; Eskalation monoton; ≥ 2 HUD-Label-Wechsel geprüft (3)
-- [ ] Global/persönlich-Wechsel geprüft (3.2)
-- [ ] Geplante Länge **≥ 60 s** (Standard 61–80 s), verlängert durch zusätzliche Konsequenzen/visuelle Entwicklung, nicht durch Leerlauf (10.1)
+- [ ] `scene.js` nur mit Kit; Zeiten nur über `kit.beatClock`, Positionen aus `beats[].data`, Bewegung über `act()` (18.1, 18.4)
+- [ ] Lichtstimmung je Ort (`applyLook`) (18.4)
+- [ ] Neue Teile im Kit ergänzt und im LOG genannt
+- [ ] `tools/still.mjs` für jeden Beat angesehen: Figur im Bild, Gesicht lesbar, Kamera frei, Texte frei (18.3)
 
-## 3. Szenenplan
+## 4. Rendern
 
-- [ ] `scene_plan.md` nach Vorlage vollständig (Zeit, Bild, Kamera, HUD, Text, Ton, Übergang) (4)
-- [ ] Texte nur in `text.en.json`; 12–24 Zeilen; je 3–10 Wörter (4, 1.3)
-- [ ] Anzeigedauer je Zeile = max(1,8 s; Wörter/3 + 0,6 s), ≤ 4,5 s (4)
-- [ ] Bild-vor-Text-Prüfung: keine Zeile beschreibt nur Sichtbares (4)
-- [ ] Spätestens alle 6 s eine sichtbare Zustandsänderung (7.1)
+- [ ] Vor dem Rendern committet; `node pipeline/run.mjs --production productions/<slug>`; Befehl + Commit im LOG
+- [ ] Während des Renderns keine Dateien unter `pipeline/` oder der Produktion geändert
 
-## 4. Visuelle Umsetzung, Kamera, Übergänge
+## 5. Qualitätskontrolle (`templates/quality_review.md`)
 
-- [ ] Ein Kamera-Paradigma P1–P4 gewählt und begründet (5.1)
-- [ ] Augenhöhe als Standard; Orientierungs-Totale bei Maßstabswechsel (5.2)
-- [ ] Nur echte 3D-Kamera, weiche Kurven, keine 2D-Zooms (5.2)
-- [ ] Vorder-/Mittel-/Hintergrund in jeder Einstellung; Referenzobjekte für Maßstab (6.1)
-- [ ] Lichtverlauf dramaturgisch; **Blitzregel** (≤ 3 großflächige Hell-Dunkel-Wechsel/s) (6.2)
-- [ ] Typografie-Maße, Sicherheitszone, Scrim, Tabular-Ziffern (6.3)
-- [ ] Erkennungsmerkmale 6.4 umgesetzt (Fortschrittsskala, Signalfarbe, Schriften)
-- [ ] Übergänge nur aus Tabelle 7.2; Text blendet vor dem Schnitt aus (7.1)
-- [ ] Jeder Effekt mit Erzählfunktion im Szenenplan; Effekt-Seeds fest (8)
-- [ ] Assets/Schriften mit Lizenz im Protokoll (6.3)
+- [ ] **A technisch:** `qa/report.md`: Status, Format, Frames, Lautheit, **Synchronität der Ereignis-Klänge**, Monotonie-Kandidaten, jede REVIEW-Meldung eingestuft (11.1, 18.8)
+- [ ] **B visuell:** **alle** `qa/sheet_*.jpg` inkl. Ende, `qa/shots.jpg`, **alle** `qa/strips/*` angesehen (11.2)
+- [ ] **C dramaturgisch:** Einstieg, Entwicklung, Abwechslung, Eskalation, Pointe/Ende; Vergleich mit R07/R19/R20 (18.7)
+- [ ] **D Hörprüfung** beim Nutzer angefragt (11.3)
 
-## 5. Audio und Sounddesign
+## 6. Fehler beheben, erneut rendern
 
-- [ ] [B] Kein Sprecher (9.1) · [A] Sprecher nach `STYLE_A_EARTH.md`, Hörprüfung der Stimme
-- [ ] Musik mit dokumentierter Lizenz; instrumental bevorzugt (9.2)
-- [ ] Lautheitsdramaturgie geplant: Aufbau, Rückgang vor Schlüsselmoment, Maximum am Höhepunkt (9.2)
-- [ ] Jedes Schlüsselereignis: Ton-Akzent oder bewusste Stille, framegenau (9.3)
-- [ ] 5–10 ms Fades auf jedem Clip (9.3)
-- [ ] Mischung auf −14 LUFS ± 1, True Peak ≤ −1 dBTP; Fade-out ≥ 0,5 s (9.4, 7.4)
+- [ ] Je Fehler: Zeitpunkt, Ursache, Korrektur an der Ursache (Beat-Sheet/Szene/Kit) (12)
+- [ ] Neu gerendert, Abschnitt 5 vollständig wiederholt
 
-## 6. Rendern
+## 7. Auslieferung und Abschluss
 
-```bash
-node tools/validate_production.mjs productions/<slug>      # Regeln vor dem Rendern (muss „OK“ melden)
-node pipeline/run.mjs --production productions/<slug>      # Frames → Ton → Encode → QA → Bildstreifen
-```
-
-`run.mjs` führt die Schritte 6–8 (automatischer Teil) nacheinander aus, bricht beim ersten Fehler ab und schreibt `render/run_log.json`. Nach einem Abbruch denselben Befehl erneut starten: fertige Teilstücke werden wiederverwendet.
-
-- [ ] `validate_production.mjs` meldet OK (Warnungen begründet im LOG)
-- [ ] Deterministisch: Frame n wird für t = n/30 berechnet, keine Echtzeit-Aufnahme (10.2)
-- [ ] Alle Assets vor Frame 0 geladen; globale Zeitachse (10.2, 12)
-- [ ] Encode: 1080×1920, 30 fps CFR, H.264 High, yuv420p, BT.709, CRF ≤ 18, AAC 48 kHz ≥ 192 kbit/s, `+faststart` (10.1)
-- [ ] Render-Befehl und Versionsstand (Git-Commit) im Protokoll – vor dem Rendern committen, damit `run_log.json` keinen „dirty“-Stand meldet
-
-## 7. Technische Eigenschaften prüfen
-
-```bash
-python3 tools/video_qa.py productions/<slug>/render/final.mp4 --out productions/<slug>/qa --mode render
-```
-
-- [ ] Status im Protokoll eingetragen (PASS / REVIEW / FAIL) mit allen Meldungen
-- [ ] Format, Bildrate, Länge, A/V-Länge, Startzeiten korrekt (11.1)
-
-## 8. Komplette MP4 untersuchen
-
-```bash
-python3 tools/inspect_frames.py productions/<slug>/render/final.mp4 --report productions/<slug>/qa/report.json --out productions/<slug>/qa/strips
-```
-
-- [ ] **Alle** Kontaktbögen `qa/sheet_*.jpg` angesehen – Anfang, Mitte **und Ende** (11.2)
-- [ ] `qa/shots.jpg` angesehen: Einstellungsfolge wie geplant
-- [ ] **Jeder** Bildstreifen in `qa/strips/` angesehen (jeder Schnitt, Übergang, REVIEW-Kandidat)
-- [ ] Jeder REVIEW-Punkt einzeln als „beabsichtigt“ (mit Grund) oder „Fehler“ eingestuft
-- [ ] Alle Texte: Rechtschreibung, Lesbarkeit auf 240-px-Kontaktbogen, Sicherheitszone, Dauer
-- [ ] Kontinuität und HUD-Stetigkeit geprüft
-- [ ] **Hörprüfung durch einen Menschen**: Kopfhörer + Handylautsprecher, komplette Länge; keine Knackser/Rauschen/Verzerrung, synchron, sauberes Ende (11.3)
-
-## 9. Fehler beheben
-
-Für jeden Fehler im Protokoll: Zeitpunkt · Beschreibung · wahrscheinlichste Ursache · Korrektur an der **Produktionslogik bzw. Szene** (nicht nur Symptom überdecken) (12).
-
-- [ ] Alle FAIL-Punkte behoben
-- [ ] Alle als Fehler eingestuften REVIEW-Punkte behoben
-
-## 10. Erneut rendern und erneut prüfen
-
-- [ ] Neu gerendert (komplett, nicht nur Teilstücke einfügen)
-- [ ] Schritte 7 und 8 **vollständig** wiederholt, neuer QA-Bericht im Protokoll
-- [ ] Schleife 9–10 wiederholen, bis keine Fehler mehr offen sind
-
-## 11. Freigabe
-
-- [ ] `TECHNISCH GEPRÜFT`: 11.1 PASS (oder REVIEW mit allen Punkten begründet) + Sichtprüfung vollständig
-- [ ] `FREIGEGEBEN`: zusätzlich Hörprüfung durch einen Menschen bestätigt (Name/Datum)
-- [ ] Erst danach Datei als final kennzeichnen (`render/final_APPROVED.mp4`)
-
-## 12. Ergebnis dokumentieren
-
-- [ ] Protokoll vollständig: Thema, Entscheidungen, Abweichungen vom Style-Guide mit Begründung, Quellen, Lizenzen, QA-Ergebnisse aller Durchläufe, bekannte Einschränkungen
-- [ ] Erkenntnisse für den Style-Guide notiert (nur Vorschläge; Änderung des Guides erst mit Belegen)
-- [ ] Nach Veröffentlichung: Analytics nach 7 Tagen eintragen (Wiedergabequote, Abschlussrate, 3-s-Rate, Shares/Kommentare/Follower pro 1.000)
+- [ ] Tatsächliche MP4 ermittelt (`ls -la`, `ffprobe`)
+- [ ] Mit dem Sende-Werkzeug als Anhang übergeben, Erfolg geprüft (Pfad allein reicht nicht)
+- [ ] Status: `TECHNISCH GEPRÜFT` / `QUALITÄT GEPRÜFT` / `FREIGEGEBEN` (nur mit bestätigter Hörprüfung) (18.8)
+- [ ] LOG vollständig (Entscheidungen, Abweichungen, Quellen, Lizenzen, QA-Durchläufe, Einschränkungen); Commit ohne Render-Ausgaben

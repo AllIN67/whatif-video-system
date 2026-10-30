@@ -1,0 +1,44 @@
+{
+ "_comment": "Vorlage Beat-Sheet (Guide 18). Kopieren nach productions/<slug>/beats.json, Beats ergänzen (15–18), dann: node tools/build_timeline.mjs productions/<slug> && node tools/validate_production.mjs productions/<slug>. Kamera-Vorlagen: push, pull, close, orbit, low, high, pov (eye), track (a, b), still. Klänge: tools/sfx_synth.py (pop, ding, loss, thud, crash, zap, shimmer, buzz, power_down, charge, heartbeat, impact, boom, hit, appear, rumble …). HUD-Akzente: loss, gain, warn. Atmosphären: room, city, rain. Lichtstimmung setzt scene.js je Beat (kit.applyLook).",
+ "recipe": "B1",
+ "fps": 30,
+ "seed": 1,
+ "title": { "in": 0, "out": 3.4 },
+ "hud": { "start": 0, "decimals": 0 },
+ "pointe": "pointe_event",
+ "endcard": { "beat": "end", "at": 1.4, "center": 0.32 },
+ "post": { "vignette": 0.18 },
+ "audio": {
+  "fade_out": 1.2,
+  "tick_gain_db": -17,
+  "whoosh_gain_db": -12,
+  "ambience_gain_db": -15,
+  "music": {
+   "bpm": 112, "root": "D", "seed": 1, "gain_db": -10,
+   "sections": [
+    { "from": 0, "to": 20, "style": "pulse" },
+    { "from": 20, "to": 50, "style": "drive" },
+    { "from": 50, "to": 56, "style": "calm" },
+    { "from": 56, "to": 57, "style": "silence" },
+    { "from": 57, "to": 62, "style": "pulse" }
+   ]
+  }
+ },
+ "beats": [
+  { "id": "hook", "dur": 4.0, "place": "bedroom", "mood": "neutral", "ambience": "room",
+    "camera": { "preset": "orbit", "target": [0, 1.2, 0], "yaw": 30, "dist": 2.8, "height": 0.6, "swing": 14 },
+    "hud": { "label": "metric", "to": 3, "mode": "steps", "steps": 3, "window": [0.8, 3.4], "tick": "pop" },
+    "events": [
+     { "id": "trigger_event", "at": 1.0, "what": "Auslöser – sichtbar ab Sekunde 1", "sfx": "pop", "gain_db": -10, "trigger": true }
+    ],
+    "data": { "you": [0, 0, 0, 0] } },
+  { "id": "end", "dur": 4.0, "place": "street", "mood": "shock", "ambience": "city", "transition": "dip",
+    "camera": { "preset": "close", "target": [100, 1.8, 0], "yaw": 0, "dist": 1.4 },
+    "line": "l_end",
+    "hud": { "to": 10, "mode": "linear", "window": [0.3, 3.5] },
+    "events": [
+     { "id": "pointe_event", "at": 0.8, "what": "Pointe als eigenes Ereignis", "sfx": "impact", "gain_db": -4, "flash": "loss" }
+    ],
+    "data": { "you": [100, 0.12, 0, 0] } }
+ ]
+}

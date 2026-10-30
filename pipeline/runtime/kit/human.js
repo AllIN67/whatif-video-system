@@ -7,8 +7,12 @@
 //   h.pose('walk', t * 1.6);   // Phase in Schritten (zyklisch)
 //   h.mood('sad');
 //
-// Posen: stand, walk, run, wave, sit, armsUp, facepalm, phone, shrug, slump, lie, point, carry
-// Gefühle: neutral, happy, sad, angry, shock, tired, worried
+// Posen: stand, walk, run, wave, sit, armsUp, facepalm, phone, shrug, slump, lie, liePhone, point, carry,
+//   cheer, jump*, recoil, lookUp, think, kneel, crouch, reach, pant, fall*, phoneTalk (* Einmal-Posen, act(): local)
+//   Schauspiel mit weichen Übergängen: h.act(spur, t) – siehe unten
+//   Oberkörper-Posen sitzend: h.pose('facepalm', p, { seated: true }) (Beine/Hüfte wie 'sit');
+//   Aufstehen weich: h.pose('stand', p, { seated: 1 - k }) mit k 0 → 1
+// Gefühle: neutral, happy, laugh, relief, sad, worried, panic, angry, shock, tired, smug
 import { clamp01 } from './core.js';
 
 export const SKIN = [0xe8c4a0, 0xd9a77e, 0xb07a52, 0x8a5a3b, 0x5e3b27, 0xf1d3b8];
@@ -70,6 +74,14 @@ export function createHumanFactory(THREE, core) {
       return { m: b, sx };
     });
     head.add(cbox(0.05, 0.07, 0.03, skin, [0, 0.135, fz + 0.012])); // Nase
+    // Wangen (Freude/Scham) und Schweißtropfen (Angst/Stress): bei kleinen Bildgrößen die deutlichsten Gefühlssignale
+    const cheeks = [-1, 1].map((sx) => {
+      const c = cbox(0.06, 0.03, 0.006, mat(0xe8857a), [sx * 0.105, 0.125, fz], { cast: false, receive: false });
+      head.add(c);
+      return c;
+    });
+    const sweat = cbox(0.035, 0.06, 0.035, mat(0x8fd3ff, { roughness: 0.2 }), [HW / 2 + 0.01, 0.27, fz - 0.03], { cast: false, receive: false });
+    head.add(sweat);
     // Mund aus zwei Hälften → Lächeln/Traurig durch Kippen, Schock durch Öffnen
     const mouthMat = mat(0x6a2a24);
     const mouth = [-1, 1].map((sx) => {
@@ -248,21 +260,131 @@ export function createHumanFactory(THREE, core) {
         armL.shoulder.rotation.z = 0.12;
         armR.shoulder.rotation.z = -0.12;
       },
+      // Liegend, Handy über dem Gesicht (rechte Hand; Handy mit hold() anhängen)
+      liePhone() {
+        POSES.lie();
+        armR.shoulder.rotation.x = -1.25;
+        armR.shoulder.rotation.z = 0.35;
+        armR.elbow.rotation.x = -1.0;
+        head.rotation.x = 0.25;
+      },
+    };
+    // Sitzende Beine/Hüfte für beliebige Oberkörper-Posen; k = 1 sitzt, 0 steht (Zwischenwerte = Aufstehen/Hinsetzen)
+    // Weitere Posen für Reaktionen und Handlung (Referenzen R07/R19/R20: Figuren reagieren sichtbar auf jedes Ereignis).
+    // Einmal-Posen (jump, recoil, fall) erwarten als Phase die Zeit seit Beginn (act() übergibt sie mit local: true).
+    Object.assign(POSES, {
+      cheer(p) {
+        POSES.armsUp(p);
+        body.position.y = 0.06 * Math.abs(Math.sin(p * TAU * 1.5));
+        armL.elbow.rotation.z = 0.3;
+        armR.elbow.rotation.z = -0.3;
+      },
+      jump(p) {
+        const k = clamp01(p / 0.55);
+        relax();
+        body.position.y = 0.38 * Math.sin(Math.PI * k);
+        armL.shoulder.rotation.z = 0.08 + 2.2 * Math.sin(Math.PI * k);
+        armR.shoulder.rotation.z = -0.08 - 2.2 * Math.sin(Math.PI * k);
+        legL.knee.rotation.x = legR.knee.rotation.x = 0.6 * Math.sin(Math.PI * k);
+        legL.hip.rotation.x = legR.hip.rotation.x = -0.3 * Math.sin(Math.PI * k);
+      },
+      recoil() {
+        spine.rotation.x = -0.22;
+        head.rotation.x = -0.2;
+        armL.shoulder.rotation.x = armR.shoulder.rotation.x = -1.25;
+        armL.shoulder.rotation.z = 0.35;
+        armR.shoulder.rotation.z = -0.35;
+        armL.elbow.rotation.x = armR.elbow.rotation.x = -1.3;
+        legR.hip.rotation.x = 0.25;
+        legL.hip.rotation.x = -0.1;
+      },
+      lookUp() {
+        relax();
+        head.rotation.x = -0.55;
+        spine.rotation.x = -0.12;
+      },
+      think() {
+        relax();
+        armR.shoulder.rotation.x = -1.1;
+        armR.shoulder.rotation.z = 0.5;
+        armR.elbow.rotation.x = -2.1;
+        armL.shoulder.rotation.x = -0.4;
+        armL.shoulder.rotation.z = -0.45;
+        armL.elbow.rotation.x = -1.4;
+        head.rotation.z = 0.12;
+        head.rotation.x = -0.08;
+      },
+      kneel() {
+        body.position.y = -0.46;
+        legL.hip.rotation.x = -1.55;
+        legL.knee.rotation.x = 1.55;
+        legR.hip.rotation.x = 0.05;
+        legR.knee.rotation.x = 1.5;
+        spine.rotation.x = 0.25;
+        head.rotation.x = 0.35;
+        armL.shoulder.rotation.x = armR.shoulder.rotation.x = -0.3;
+        armL.elbow.rotation.x = armR.elbow.rotation.x = -0.4;
+      },
+      crouch() {
+        body.position.y = -0.4;
+        legL.hip.rotation.x = legR.hip.rotation.x = -1.35;
+        legL.knee.rotation.x = legR.knee.rotation.x = 2.1;
+        spine.rotation.x = 0.45;
+        armL.shoulder.rotation.x = armR.shoulder.rotation.x = -1.0;
+        armL.elbow.rotation.x = armR.elbow.rotation.x = -0.5;
+      },
+      reach() {
+        relax();
+        spine.rotation.x = 0.45;
+        armR.shoulder.rotation.x = -1.35;
+        armR.elbow.rotation.x = -0.15;
+        head.rotation.x = -0.1;
+      },
+      pant(p) {
+        spine.rotation.x = 0.62 + 0.04 * Math.sin(p * TAU * 2.2);
+        head.rotation.x = -0.35;
+        armL.shoulder.rotation.x = armR.shoulder.rotation.x = -0.75;
+        armL.elbow.rotation.x = armR.elbow.rotation.x = -0.1;
+        legL.hip.rotation.x = legR.hip.rotation.x = -0.25;
+        legL.knee.rotation.x = legR.knee.rotation.x = 0.35;
+        body.position.y = -0.05;
+      },
+      // Zusammensacken auf den Boden (Phase = Zeit seit Beginn, 0,5 s)
+      fall(p) {
+        const k = clamp01(p / 0.5);
+        POSES.kneel();
+        body.position.y = -0.46 * k;
+        spine.rotation.x = 0.25 + 0.5 * k;
+      },
+      phoneTalk() {
+        relax();
+        armR.shoulder.rotation.x = -0.9;
+        armR.shoulder.rotation.z = 0.5;
+        armR.elbow.rotation.x = -2.3;
+      },
+    });
+    const seatLegs = (k = 1) => {
+      body.position.y = -0.47 * k;
+      legL.hip.rotation.x = legR.hip.rotation.x = (-Math.PI / 2) * k;
+      legL.knee.rotation.x = legR.knee.rotation.x = (Math.PI / 2) * k;
     };
 
-    // Gefühle über Brauen, Augen, Mund
+    // Gefühle über Brauen, Augen, Mund, Wangen (cheek) und Schweißtropfen (sweat)
     const MOODS = {
-      neutral: { brow: 0, browY: 0, eye: 1, mouth: 0, open: 1 },
-      happy: { brow: 0.1, browY: 0.01, eye: 0.8, mouth: 0.35, open: 1 },
-      sad: { brow: -0.45, browY: 0, eye: 0.9, mouth: -0.35, open: 1 },
-      worried: { brow: -0.35, browY: 0.012, eye: 1.1, mouth: -0.15, open: 1.4 },
-      angry: { brow: 0.5, browY: -0.012, eye: 0.8, mouth: -0.25, open: 1.3 },
-      shock: { brow: -0.1, browY: 0.025, eye: 1.4, mouth: 0, open: 3.4 },
-      tired: { brow: -0.2, browY: -0.006, eye: 0.35, mouth: -0.1, open: 1 },
+      neutral: { brow: 0, browY: 0, eye: 1, mouth: 0, open: 1, cheek: 0, sweat: 0 },
+      happy: { brow: 0.1, browY: 0.01, eye: 0.8, mouth: 0.35, open: 1, cheek: 1, sweat: 0 },
+      laugh: { brow: -0.15, browY: 0.018, eye: 0.3, mouth: 0.4, open: 2.6, cheek: 1, sweat: 0 },
+      relief: { brow: -0.25, browY: 0.012, eye: 0.25, mouth: 0.3, open: 1.2, cheek: 0.6, sweat: 0 },
+      sad: { brow: -0.45, browY: 0, eye: 0.9, mouth: -0.35, open: 1, cheek: 0, sweat: 0 },
+      worried: { brow: -0.35, browY: 0.012, eye: 1.1, mouth: -0.15, open: 1.4, cheek: 0, sweat: 1 },
+      panic: { brow: -0.42, browY: 0.024, eye: 1.4, mouth: -0.3, open: 3.0, cheek: 0, sweat: 1 },
+      angry: { brow: 0.5, browY: -0.012, eye: 0.8, mouth: -0.25, open: 1.3, cheek: 0.4, sweat: 0 },
+      shock: { brow: -0.1, browY: 0.025, eye: 1.4, mouth: 0, open: 3.4, cheek: 0, sweat: 0 },
+      tired: { brow: -0.2, browY: -0.006, eye: 0.35, mouth: -0.1, open: 1, cheek: 0, sweat: 0 },
+      smug: { brow: 0.25, browY: 0, eye: 0.6, mouth: 0.25, open: 1, cheek: 0.3, sweat: 0 },
     };
-    const mood = (name, blink = false) => {
-      const M = MOODS[name];
-      if (!M) throw new Error(`Unbekanntes Gefühl "${name}"`);
+    const MOOD_KEYS = Object.keys(MOODS.neutral);
+    const setMood = (M, blink) => {
       for (const b of brows) {
         b.m.rotation.z = b.sx * M.brow; // brow < 0: innen hoch = traurig, brow > 0: innen runter = wütend
         b.m.position.y = 0.245 + M.browY;
@@ -272,22 +394,105 @@ export function createHumanFactory(THREE, core) {
         h.pivot.rotation.z = h.sx * M.mouth;
         h.m.scale.y = M.open;
       }
+      for (const c of cheeks) {
+        c.visible = M.cheek > 0.05;
+        c.scale.set(M.cheek, M.cheek, 1);
+      }
+      sweat.visible = M.sweat > 0.05;
+      sweat.scale.setScalar(Math.max(0.01, M.sweat));
     };
+    const moodOf = (name) => {
+      const M = MOODS[name];
+      if (!M) throw new Error(`Unbekanntes Gefühl "${name}"`);
+      return M;
+    };
+    const mood = (name, blink = false) => setMood(moodOf(name), blink);
+
+    // Gelenkzustand als Zahlenfeld – Grundlage für weiche Überblendungen zwischen Posen (act()).
+    const snap = () => {
+      const a = [];
+      for (const j of joints) a.push(j.rotation.x, j.rotation.y, j.rotation.z);
+      a.push(body.position.x, body.position.y, body.position.z, body.rotation.x, body.rotation.y, body.rotation.z, neck.position.y);
+      return a;
+    };
+    const unsnap = (a) => {
+      let i = 0;
+      for (const j of joints) j.rotation.set(a[i++], a[i++], a[i++]);
+      body.position.set(a[i++], a[i++], a[i++]);
+      body.rotation.set(a[i++], a[i++], a[i++]);
+      neck.position.y = a[i++];
+    };
+    const smoothK = (x) => {
+      const c = clamp01(x);
+      return c * c * (3 - 2 * c);
+    };
+    const blinkSeed = (o.blinkSeed ?? Math.abs(Math.sin(shirt * 0.37 + (o.scale ?? 1) * 11))) * 3.1;
 
     const api = {
       root,
       head,
       hands: { left: armL.hand, right: armR.hand },
-      pose(name, phase = 0) {
+      pose(name, phase = 0, { seated = false } = {}) {
         const f = POSES[name];
         if (!f) throw new Error(`Unbekannte Pose "${name}"`);
         reset();
         neck.position.y = 0.62;
         f(phase);
+        if (seated) seatLegs(seated === true ? 1 : clamp01(seated));
         return api;
       },
       mood(name, blink) {
         mood(name, blink);
+        return api;
+      },
+      // Schauspiel-Spur: Posen, Gefühle und Blick werden zeitlich überblendet statt umgeschaltet
+      // (frühere Produktionen: harte Posenwechsel in einem Frame → steif bzw. Sprung).
+      //   h.act([{ t: 0, pose: 'stand', mood: 'neutral' },
+      //          { t: 1.2, pose: 'recoil', mood: 'shock', blend: 0.15 },     // schnelle Reaktion
+      //          { t: 2.0, pose: 'walk', speed: 1.6, look: [0.4, 0] }], t)
+      // Schlüssel: t (s, absolut), pose, phase-Rate speed (Zyklen/s, Standard 1), local (Phase = Zeit seit t),
+      // mood, look [yaw, pitch], seated (0…1), blend (s, Standard 0.3). Automatisches Blinzeln (blink: false aus).
+      act(track, t, { blink = true } = {}) {
+        if (!track.length) throw new Error('act: leere Spur');
+        let i = 0;
+        while (i + 1 < track.length && t >= track[i + 1].t) i++;
+        const cur = track[i];
+        const posed = (k) => {
+          const ph = k.local ? Math.max(0, t - k.t) : t * (k.speed ?? 1);
+          api.pose(k.pose, ph, { seated: k.seated ?? false });
+          return snap();
+        };
+        // Pose: aktuelle Pose aus dem vorigen Schlüssel überblenden
+        const prevPose = [...track.slice(0, i)].reverse().find((k) => k.pose);
+        const curPose = cur.pose ? cur : prevPose;
+        if (!curPose) throw new Error('act: erster Schlüssel braucht eine Pose');
+        const B = posed(curPose);
+        const bw = cur.pose && prevPose ? smoothK((t - cur.t) / (cur.blend ?? 0.3)) : 1;
+        if (bw < 1) {
+          const A = posed(prevPose);
+          unsnap(A.map((v, j) => v + (B[j] - v) * bw));
+        } else unsnap(B);
+        // Gefühl: letzter gesetzter Wert, Überblendung vom vorigen
+        const moods = track.slice(0, i + 1).filter((k) => k.mood);
+        const mk = moods[moods.length - 1];
+        const mp = moods[moods.length - 2];
+        const M1 = moodOf(mk ? mk.mood : 'neutral');
+        const mw = mp ? smoothK((t - mk.t) / (mk.blend ?? 0.25)) : 1;
+        const M0 = mp ? moodOf(mp.mood) : M1;
+        const M = {};
+        for (const key of MOOD_KEYS) M[key] = M0[key] + (M1[key] - M0[key]) * mw;
+        const bl = blink && M.eye > 0.5 && (t + blinkSeed) % 3.3 < 0.11;
+        setMood(M, bl);
+        // Blick
+        const looks = track.slice(0, i + 1).filter((k) => k.look);
+        const lk = looks[looks.length - 1];
+        const lp = looks[looks.length - 2];
+        if (lk) {
+          const lw = lp ? smoothK((t - lk.t) / (lk.blend ?? 0.35)) : 1;
+          const y0 = lp ? lp.look[0] : 0;
+          const p0 = lp ? lp.look[1] : 0;
+          api.look(y0 + (lk.look[0] - y0) * lw, p0 + (lk.look[1] - p0) * lw);
+        }
         return api;
       },
       // Kopf drehen (Bogenmaß): links/rechts und nicken

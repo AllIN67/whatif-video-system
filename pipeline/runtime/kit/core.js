@@ -87,5 +87,38 @@ export function createCore(THREE) {
     return { hemi, sun, look: L };
   };
 
-  return { mat, box, cbox, group, setupLook, LOOKS };
+  // Licht-Stimmung pro Beat/Ort wechseln oder überblenden (k = 0 → a, 1 → b), ohne neue Lichter.
+  // Referenzen R19/R20: jeder Ort hat seine eigene Stimmung (Tag, Dämmerung, Nacht, Innenraum); Wechsel nur am Schnitt
+  // oder als Ereignis (Stromausfall, Gewitter). lights = Rückgabe von setupLook.
+  const _ca = new THREE.Color();
+  const _cb = new THREE.Color();
+  const mixHex = (a, b, k) => _ca.setHex(a).lerp(_cb.setHex(b), k);
+  const applyLook = ({ scene, renderer, hemi, sun }, a, b = a, k = 0) => {
+    const A = typeof a === 'string' ? LOOKS[a] : a;
+    const B = typeof b === 'string' ? LOOKS[b] : b;
+    if (!A || !B) throw new Error(`applyLook: unbekannte Stimmung ${a}/${b}`);
+    if (!scene.background?.isColor) scene.background = new THREE.Color();
+    scene.background.copy(mixHex(A.sky, B.sky, k));
+    const fa = A.fog || [A.sky, 400, 1000];
+    const fb = B.fog || [B.sky, 400, 1000];
+    if (!scene.fog) scene.fog = new THREE.Fog(0, 1, 2);
+    scene.fog.color.copy(mixHex(fa[0], fb[0], k));
+    scene.fog.near = fa[1] + (fb[1] - fa[1]) * k;
+    scene.fog.far = fa[2] + (fb[2] - fa[2]) * k;
+    hemi.color.copy(mixHex(A.hemi[0], B.hemi[0], k));
+    hemi.groundColor.copy(mixHex(A.hemi[1], B.hemi[1], k));
+    hemi.intensity = A.hemi[2] + (B.hemi[2] - A.hemi[2]) * k;
+    sun.color.copy(mixHex(A.sun[0], B.sun[0], k));
+    sun.intensity = A.sun[1] + (B.sun[1] - A.sun[1]) * k;
+    if (renderer) renderer.toneMappingExposure = A.exposure + (B.exposure - A.exposure) * k;
+  };
+  // zusätzliche Stimmungen für Stil B
+  Object.assign(LOOKS, {
+    dusk: { sky: 0x5d6d8f, fog: [0x5d6d8f, 25, 120], hemi: [0xb8c4e8, 0x3a3540, 0.9], sun: [0xffb47a, 1.2], exposure: 1.05 },
+    storm: { sky: 0x3d4552, fog: [0x3d4552, 14, 70], hemi: [0x9aa6b8, 0x2a2e33, 0.85], sun: [0xc8d4e8, 0.45], exposure: 1.1 },
+    blackout: { sky: 0x070912, fog: [0x070912, 20, 110], hemi: [0x40507a, 0x0c0c12, 0.32], sun: [0x8090c0, 0.15], exposure: 1.15 },
+    nightRoom: { sky: 0x101626, fog: null, hemi: [0x8a9ad0, 0x2a2630, 0.85], sun: [0xffd9a0, 0.45], exposure: 1.2 },
+  });
+
+  return { mat, box, cbox, group, setupLook, applyLook, LOOKS };
 }

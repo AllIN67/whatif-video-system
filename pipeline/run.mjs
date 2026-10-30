@@ -13,6 +13,7 @@ import { ROOT } from './server.mjs';
 import { renderFrames } from './render_frames.mjs';
 import { encode } from './encode.mjs';
 import { validate, loadWords } from '../tools/validate_production.mjs';
+import { buildTimeline } from '../tools/build_timeline.mjs';
 
 function git(args) {
   try {
@@ -73,11 +74,20 @@ export async function run({ production, lang = 'en', skipValidate = false, qaIgn
         return { words: path.relative(ROOT, path.join(prodDir, 'voice', 'words.json')) };
       });
     }
+    // Stil B: timeline.json muss exakt aus beats.json erzeugt sein (eine Zeitquelle für Bild, HUD und Ton)
+    if (fs.existsSync(path.join(prodDir, 'beats.json'))) {
+      await step(log, 'Beat-Sheet aktuell (build_timeline.mjs)', () => {
+        const want = JSON.stringify(buildTimeline(JSON.parse(fs.readFileSync(path.join(prodDir, 'beats.json'), 'utf8'))));
+        const have = JSON.stringify(JSON.parse(fs.readFileSync(path.join(prodDir, 'timeline.json'), 'utf8')));
+        if (want !== have) throw new Error(`timeline.json ist nicht aus beats.json erzeugt – zuerst: node tools/build_timeline.mjs ${rel}`);
+        return { ok: true };
+      });
+    }
     if (!skipValidate) {
       await step(log, 'Validierung', () => {
         const tl = JSON.parse(fs.readFileSync(path.join(prodDir, 'timeline.json'), 'utf8'));
         const tx = JSON.parse(fs.readFileSync(path.join(prodDir, `text.${lang}.json`), 'utf8'));
-        const r = validate(tl, tx, { lang, wordTimes: loadWords(prodDir, tl) });
+        const r = validate(tl, tx, { lang, wordTimes: loadWords(prodDir, tl), requireBeats: tl.profile !== 'voiceover' && !isTechnical(rel) });
         for (const w of r.warnings) console.log(`⚠️  ${w}`);
         if (r.errors.length) {
           for (const e of r.errors) console.log(`❌ ${e}`);
@@ -106,12 +116,19 @@ export async function run({ production, lang = 'en', skipValidate = false, qaIgn
       if (code !== 0) throw new Error('inspect_frames.py fehlgeschlagen');
       return { strips: fs.readdirSync(path.join(qaDir, 'strips')).length };
     });
+    // Freigabebogen (Guide 18.8) anlegen, falls noch nicht vorhanden – die visuelle/dramaturgische Prüfung ist Pflicht
+    const qr = path.join(prodDir, 'quality_review.md');
+    if (!isTechnical(rel) && !fs.existsSync(qr)) {
+      fs.writeFileSync(qr, fs.readFileSync(path.join(ROOT, 'templates', 'quality_review.md'), 'utf8').replace(/<slug>/g, path.basename(prodDir)));
+      log.quality_review_created = path.relative(ROOT, qr);
+    }
     log.final = enc.final;
     log.qa_status = qa.status;
     log.finished = new Date().toISOString();
     save();
     console.log(`\nFertig: ${path.relative(ROOT, enc.final)} · QA ${qa.status} · Bericht ${path.relative(ROOT, path.join(qaDir, 'report.md'))}`);
-    console.log('Hinweis: Status ist höchstens „technisch geprüft“ nach vollständiger Sichtprüfung; die Hörprüfung durch einen Menschen steht aus.');
+    console.log('Nächste Pflichtschritte (Guide 18.8): alle qa/sheet_*.jpg, qa/shots.jpg und qa/strips/* ansehen, quality_review.md ausfüllen,');
+    console.log(`MP4 als Anhang ausliefern (${path.relative(ROOT, enc.final)}), Hörprüfung beim Nutzer anfragen. Technischer Status ≠ Freigabe.`);
     return log;
   } catch (e) {
     log.error = String(e.message || e);

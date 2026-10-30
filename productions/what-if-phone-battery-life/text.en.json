@@ -1,0 +1,26 @@
+{
+ "lang": "en",
+ "number_locale": "en-US",
+ "title": { "text": "What if your phone battery was your life?", "highlight": "battery" },
+ "hud": {
+  "battery": { "label": "YOUR LIFE", "unit": "%", "sub": "= PHONE BATTERY" },
+  "lowpower": { "label": "LOW POWER MODE", "unit": "%", "sub": "DON'T MOVE" },
+  "critical": { "label": "CRITICAL", "unit": "%", "sub": "FIND A CHARGER" },
+  "charging": { "label": "CHARGING", "unit": "%", "sub": "HOME" }
+ },
+ "lines": {
+  "l_swipe": "Every swipe costs you a little life.",
+  "l_maps": "Maps drains you even faster.",
+  "l_outlet": "One free outlet. Someone was faster.",
+  "l_call": "Then your boss starts a video call.",
+  "l_lowpower": "Low power mode. You stop moving.",
+  "l_powerbank": "A stranger shares a power bank!",
+  "l_empty": "It was almost empty.",
+  "l_storm": "Then a storm hits the city.",
+  "l_blackout": "The whole city loses power.",
+  "l_kiosk": "Every charger in town is dead.",
+  "l_home": "But your home still has light.",
+  "l_plug": "You made it home."
+ },
+ "endcard": { "title": "How long would you last?", "sub": "Part 2?" }
+}

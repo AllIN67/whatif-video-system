@@ -1,12 +1,12 @@
 # WHATIF STYLE GUIDE
 
 **Maßgebliche kreative und technische Grundlage für alle Videos dieses Projekts.**
-Version 1.3 · 2026-10-29 · Belegbasis: `REFERENCE_ANALYSIS.md` (R01–R15), Abschnitt 16 (R16–R18) und `references/analysis/MEASUREMENTS.md`.
+Version 2.1 · 2026-10-30 · Belegbasis: `REFERENCE_ANALYSIS.md` (R01–R15, Abschnitt 9: R07/R19/R20), Abschnitt 16 (R16–R18) und `references/analysis/MEASUREMENTS.md`.
 
-**Zwei Produktionsstile – jeder Auftrag nennt genau einen (Abschnitt 17):**
-
-- `PRODUKTIONSSTIL: A (Earth)` – Sprecher-Erklärvideo, Regeln in `STYLE_A_EARTH.md`.
-- `PRODUKTIONSSTIL: B (TikTok-Referenz)` – stummes What-if-Video nach diesem Guide, Rezept **B1** (Standard) oder **B2** (Abschnitt 16).
+**Aktives Produktionsziel ist ausschließlich Stil B** – stummes What-if-Video, Rezept **B1** (Standard) oder **B2**.
+**Abschnitt 18 ist der verbindliche, eingefrorene Produktionsstandard** und hat bei Widersprüchen Vorrang vor den Abschnitten 1–17.
+Stil A (`STYLE_A_EARTH.md`, Sprecher) ist archiviert und wird nur auf ausdrücklichen Auftrag verwendet; er beeinflusst die
+aktive Produktion nicht (Abschnitt 17).
 
 **Mindestlänge für jedes Video: 60 s** (alle Stile, Abschnitt 10.1).
 
@@ -433,7 +433,7 @@ Abschnitt 16 beschreibt **Stil B**. Jedes Stil-B-Video folgt **genau einem** der
 
 ### 16.3 Baukasten und Vorschau
 
-- `pipeline/runtime/kit/` – `createKit({ THREE, scene, renderer, rng })` liefert: `human()` (Posen: stand, walk, run, wave, sit, armsUp, facepalm, phone, shrug, slump, lie, point, carry · Gefühle: neutral, happy, sad, worried, angry, shock, tired), `props.*` (Bett, Wecker, Küche, Toaster, Handy mit Chat/Sperrbildschirm, Schild, Auto, Bus, Gebäude, Bank, Baum, Laterne, Regenschirm, Karton …), `places.*` (bedroom, kitchen, street, park, office), `crowd()`, `sunAt()`, `activeSet()`.
+- `pipeline/runtime/kit/` – `createKit({ THREE, scene, renderer, rng })` liefert: `human()` mit **`act(spur, t)`** (weiche Übergänge; Posen: stand, walk, run, wave, sit, armsUp, facepalm, phone, phoneTalk, shrug, slump, lie, liePhone, point, carry, cheer, jump, recoil, lookUp, think, kneel, crouch, reach, pant, fall · Gefühle: neutral, happy, laugh, relief, sad, worried, panic, angry, shock, tired, smug – mit Wangen und Schweißtropfen), `props.*` (Bett, Wecker, Küche, Toaster, Handy mit Sperrbildschirm/Chat/Akku/Anruf, Schild, Auto, Bus, Gebäude mit schaltbarem Fensterlicht, Bank, Baum, Laterne, Regenschirm, Karton, Gedankenblase, Powerbank, Steckdose, Ladekabel, Ladesäule, Taube, Blitz …), `places.*` (bedroom, kitchen, street, park, office, cafe, classroom), `fx.*` (Regen, Funkenstoß), `applyLook()` (Lichtstimmung je Beat: day, overcast, sunset, night, interior, dusk, storm, blackout, nightRoom), `shotKeys()` (Kamera-Vorlagen), `beatClock()` (Beats/Ereignisse aus der Zeitachse), `crowd()`, `sunAt()`, `activeSet()`.
 - Beispiel aller Teile: `productions/_kit_demo/scene.js`.
 - **Vorschau statt Komplett-Render:** `node tools/still.mjs --production productions/<slug> --at 2,6,10` rendert einzelne Bilder in Sekunden. Jede Einstellung erst per Vorschau prüfen, dann das ganze Video rendern.
 - Fehlt ein Teil, wird es **im Kit** ergänzt (nicht nur in einer Produktion), damit jedes weitere Video schneller geht.
@@ -442,13 +442,134 @@ Abschnitt 16 beschreibt **Stil B**. Jedes Stil-B-Video folgt **genau einem** der
 
 | Auftrag | Stil | Regeln | Profil (`timeline.json`) | Referenz |
 |---|---|---|---|---|
-| `PRODUKTIONSSTIL: A (Earth)` | A | `STYLE_A_EARTH.md` | `"profile": "voiceover"` | `productions/earth-stops-1-second/` (eigene Produktion) |
+| `PRODUKTIONSSTIL: A (Earth)` – **archiviert**, nur auf ausdrücklichen Auftrag | A | `STYLE_A_EARTH.md` | `"profile": "voiceover"` | `productions/earth-stops-1-second/` (eigene Produktion) |
 | `PRODUKTIONSSTIL: B (TikTok-Referenz)` | B, Rezept B1 oder B2 | dieser Guide, Abschnitt 16 | Standardprofil (ohne `profile`) | B1: R04, R07, R17, R18 · B2: R16 (Messberichte in `references/analysis/`) |
 
-- **[V]** Jeder Produktionsauftrag nennt den Stil. **Fehlt die Angabe, wird nachgefragt** – nie selbst gewählt. Bei Stil B wird zusätzlich B1 oder B2 festgelegt (ohne Angabe: B1 vorschlagen und bestätigen lassen).
+- **[V] (ab 2.0)** Jeder Auftrag ohne ausdrückliche Stil-A-Angabe ist **Stil B**, Rezept **B1**, sofern das Thema nicht klar in Rezept B2 fällt (dann B2 und im LOG begründen). Es wird nicht mehr nach dem Stil gefragt. Stil A nur, wenn der Auftrag wörtlich `PRODUKTIONSSTIL: A (Earth)` nennt.
 - **[V]** Stile werden nicht gemischt: Stil A übernimmt keine Titelfrage/HUD/Zeilen-Untertitel, Stil B keinen Sprecher und keine Wort-für-Wort-Untertitel. Gemeinsam genutzt werden Pipeline, Baukasten, Ton- und QA-Werkzeuge.
 - **[V]** Thema, Länge (≥ 60 s), Format, Sprache, QA und Ausgabe bleiben Teil jedes Auftrags.
 - Stil, Rezept und Referenz stehen im Produktionsprotokoll.
+
+## 18. Produktionsstandard Stil B (verbindlich, eingefroren seit 2026-10-30)
+
+Grundlage: Sichtung und Messung von R07, R19, R20 (`REFERENCE_ANALYSIS.md`, Abschnitt 9) und die Fehleranalyse der bisherigen
+Produktionen (unten 18.9). Alles, was hier steht, ist **[V]** und wird – soweit messbar – von `tools/validate_production.mjs`
+(vor dem Rendern) und `tools/video_qa.py` (nach dem Rendern) geprüft.
+
+### 18.1 Arbeitsablauf (fest)
+
+THEMA → STORY → **BEAT-SHEET** (`beats.json`) → ASSETS (Baukasten) → ANIMATION (`scene.js` mit `act()`) → SOUND-DESIGN (Ereignisse
+im Beat-Sheet) → VORSCHAU (`tools/still.mjs`) → RENDERING (`pipeline/run.mjs`) → QUALITÄTSKONTROLLE (technisch + visuell +
+dramaturgisch, `templates/quality_review.md`) → MP4-AUSLIEFERUNG (Datei als Anhang senden).
+
+- `productions/<slug>/beats.json` ist die **einzige Zeitquelle**. `node tools/build_timeline.mjs productions/<slug>` erzeugt daraus
+  `timeline.json` (Einstellungen, Kamera, HUD, Textzeiten, Ereignisse, Klangeinsätze, Betten). `timeline.json` wird nie von Hand
+  bearbeitet; `run.mjs` bricht ab, wenn sie nicht zur `beats.json` passt.
+- `scene.js` liest Zeiten nur über `kit.beatClock(timeline)` (`B.ev('id')`, `B.beat('id')`) und Positionen über `beats[].data`.
+  Keine Zeitkonstanten in der Szene → Bild, HUD und Ton können nicht auseinanderlaufen.
+
+### 18.2 Takt und Ereignisse
+
+| Regel | Wert | Beleg |
+|---|---|---|
+| Beat = eine Einstellung an einem Ort mit **mindestens einem sichtbaren Ereignis** | Fehler, wenn ein Beat kein Ereignis hat | R07/R19: jede 4-s-Szene hat eine Aktion |
+| Beatlänge | 1,8–6,0 s (1,0–1,8 s nur als Reaktions-Einschub); Median 2,5–4,6 s | R07/R19 4,0 s, R20 Median 1,5 s |
+| Länge | ≥ 60 s, B1 Standard 61–64 s, 15–18 Beats | |
+| Übergänge | Ortswechsel: `dip` (4–6 Frames) oder `whip`; gleicher Ort: harter Schnitt | R19 Abblenden, R20 Whips |
+| Ereignis-Typen | Aufprall, Verwandlung, Ankunft/Gehen einer Figur, Gegenstand ändert Zustand, Licht kippt, Reaktion | |
+
+### 18.3 Kamera
+
+- Vorlagen aus `pipeline/runtime/kit/camera.js`: `push`, `pull`, `close`, `orbit`, `low`, `high`, `pov`, `track`, `still`. Jede liefert eine
+  Bildgrößen-Klasse (close, medium, wide, low, high, pov).
+- **Nie zweimal dieselbe Vorlage + Bildgröße hintereinander** (Fehler). Mindestens **4 Bildgrößen** pro Video (Fehler), keine über 45 % (Warnung).
+- Die Kamera bewegt sich in jedem Beat (alle Vorlagen haben eingebaute Bewegung).
+- **9:16 hat nur ≈ 28° horizontalen Bildwinkel** (bei fov 48°): Bei `track` muss sich die Figur gleichmäßig mit der Kamera bewegen,
+  sonst verlässt sie das Bild (im Testvideo gefunden). Zwei Figuren gemeinsam im Bild: Kamera senkrecht zu ihrer Verbindungslinie, Abstand der Figuren ≤ 1 m. Innenräume: Kamera bleibt auf der offenen Seite (+z) bzw. innerhalb der Wände; **aus Innenräumen kein Whip** (der Schwenk dreht die Kamera in eine Wand → 2-Frame-Flächen, QA-FAIL), stattdessen `dip`.
+- Reaktions-Nahaufnahme (`close`) nach jedem großen Ereignis an der Hauptfigur; mindestens eine Totale/Aufsicht (`high`) zur Orientierung.
+
+### 18.4 Figuren und Orte
+
+- Figuren nur aus `kit.human()`; Hauptfigur in allen Beats dasselbe Objekt (Kontinuität). Bewegung nur über `act()` – keine
+  harten Posenwechsel. Jede Spur beginnt mit Pose + Gefühl; Reaktionen mit `blend` 0,08–0,15 s, ruhige Wechsel 0,3–0,6 s.
+- **Gefühl im Beat-Sheet** (`mood`) für jeden Beat; mindestens **4 verschiedene Gefühle** mit erkennbarer Entwicklung (Fehler).
+- Rezept B1: mindestens **5 Orte** (Fehler). Jeder Ort mit eigener Lichtstimmung (`applyLook`); Wechsel innerhalb eines Beats nur als Ereignis.
+- Jede Einstellung hat Vorder-, Mittel- und Hintergrund und erzählende Requisiten (Handy-Bildschirm, Schild, leerer Stuhl …).
+- Neue Teile werden **im Kit** ergänzt, nicht nur in der Produktion.
+
+### 18.5 HUD (Gestaltung nach R07/R19/R20)
+
+- Label: Montserrat 700, Versalien, gesperrt; Wert: Fraunces 600 mit festen Ziffernbreiten (Serifenziffern wie in den Referenzen);
+  Unterzeile: Montserrat 700, Versalien; dünne Fortschrittsskala in der Signalfarbe (Erkennungsmerkmal 6.4). Signalfarbe `#F5C04A`
+  (warmes Gold wie alle drei Referenzen), Alarmfarbe `#FF4D4D` (`pipeline/runtime/brand.json`). Diese Werte sind eingefroren.
+- Der Wert ändert sich in **mindestens 70 % der Beats** (Fehler darunter): stetig (`mode: linear`) oder in Stufen (`mode: steps`, jeder Schritt
+  mit kurzem Größenimpuls). Label wechselt mit jedem Akt (≥ 2 Wechsel).
+- Ereignisse mit Bedeutung für den Wert bekommen einen **Akzent**: `loss` (Verlust, Alarmfarbe), `gain` (Gewinn, Signalfarbe), `warn`
+  (Pulsieren). Akzent, Wertsprung und Klang liegen auf demselben Frame (Builder).
+- Nur Messgrößen, die zum Thema passen; HUD-Zahl und Bildschirm-Anzeigen in der Szene stammen aus demselben Wert (`hudAt`).
+
+### 18.6 Ton
+
+- Musikbett (`audio.music`, Stile pulse/drive/drive_hi/calm/silence) mit Lautheitsdramaturgie: Aufbau, **Ruhe direkt vor der Pointe**, Höhepunkt.
+- Atmosphäre je Ort (`ambience`: room, city, rain …), Überblendung 0,25 s.
+- **Klang auf jedem Schlüsselereignis** (Auslöser, HUD-Akzent, Pointe) – Pflicht; sonst sparsam (Referenzen: 2–10 Einzel-Effekte).
+  Whip bekommt automatisch einen Luftzug mit Spitze auf dem Schnitt; HUD-Stufen optional einen leisen `pop` (`tick`).
+- Klänge beginnen auf dem Frame des Ereignisses (Builder) und werden im fertigen Ton nachgemessen (`video_qa.py`: „Synchronität“, ±1 Frame).
+- Nicht viermal derselbe Ereignis-Klang hintereinander (Warnung). Bibliothek: `tools/sfx_synth.py` (alle Klänge selbst erzeugt, lizenzfrei).
+- Kein Sprecher, keine TTS.
+
+### 18.7 Dramaturgie
+
+- Frame 0: Situation in Bewegung + Titel + laufender HUD; auslösendes Ereignis ≤ 10 s (meist ≤ 2 s).
+- Wechsel aus Hoffnung und Rückschlag (Gewinn → Verlust) treibt die Eskalation; HUD-Verlauf und Gefühle zeigen die Richtung.
+- Pointe = eigenes Ereignis mit Klang, vorbereitet durch ein früheres Ereignis (Aufbau → Auszahlung); danach ≤ 5 s.
+- Ende: Endkarte mit Frage an den Zuschauer und/oder „Part 2?“ (`endcard`).
+
+### 18.8 Qualitätskontrolle in drei Stufen
+
+1. **Technisch:** `video_qa.py --mode render --plan timeline.json` (Format, Frames, Ton, Synchronität, Monotonie-Kandidaten).
+2. **Visuell:** alle Kontaktbögen, `shots.jpg`, alle Bildstreifen; Checkliste B in `templates/quality_review.md`.
+3. **Dramaturgisch:** Video in Echtzeit ansehen; Checkliste C.
+Ein technisches PASS ist **keine** Freigabe. Status: `TECHNISCH GEPRÜFT` → `QUALITÄT GEPRÜFT` → `FREIGEGEBEN` (mit menschlicher Hörprüfung).
+
+### 18.9 Warum frühere Überarbeitungen nicht sichtbar wirkten (Befund 2026-10-30)
+
+| Art | Ursache | Behebung |
+|---|---|---|
+| technisch | Verbesserungen lagen auf **nicht zusammengeführten Zweigen** (Café, Gedankenblase, sitzende Posen, HUD-Akzente, Endkarte); jede Produktion begann wieder beim alten Kit; drei Zweige legten drei verschiedene Signalfarben fest | Teile ins Kit übernommen; Signalfarbe eingefroren; Architektur-Freeze |
+| Animation | `pose()` schaltete in einem Frame um → Figuren wirkten steif, Reaktionen fehlten oder sprangen | `act()` mit Überblendungen, Reaktionsposen, Gefühlsübergängen, Blinzeln |
+| Szenengenerierung | Kamera, HUD, Text und Klang wurden getrennt von Hand in `timeline.json` und `scene.js` gepflegt (Produktionen mit 1.100–1.300 Zeilen Szenencode) | Beat-Sheet + Builder + Kamera-Vorlagen |
+| visuell | eine Lichtstimmung für alle Orte; Kamera-Wiederholungen | `applyLook` je Beat, Validator-Regeln 18.3 |
+| HUD | Wert änderte sich nur pro Segment, keine Reaktion auf Ereignisse | Stufen, Akzente, Impulse; Regel ≥ 70 % der Beats |
+| Sounddesign | Klangzeiten von Hand, unabhängig von der Szene; keine Kontrolle im fertigen Ton | Ereignis-gekoppelte Klänge, Synchronitätsmessung |
+| Qualitätskontrolle | `video_qa.py` prüfte nur Technik; „technisch geprüft“ wurde als Qualität gelesen | dreistufige Freigabe, Monotonie-Kandidaten, Standard-B-Regeln vor dem Rendern |
+
+### 18.11 Referenzproduktion = verbindliches Mindestniveau (abgenommen 2026-10-30)
+
+Das Testvideo `productions/what-if-phone-battery-life/` wurde vom Auftraggeber vollständig abgenommen und ist der **verbindliche
+Qualitätsmaßstab**. Neue Videos sind eigenständig (eigenes Thema, eigene Orte, eigene Pointe), fallen aber nicht ohne konkreten,
+im LOG begründeten Grund hinter diese Werte zurück. `validate_production.mjs` meldet jede Unterschreitung als Warnung `[18.11]`.
+
+| Merkmal | Referenzwert (Testvideo) | Prüfung |
+|---|---|---|
+| Ereignisdichte | 26 Ereignisse / 17 Beats = 1,5 pro Beat | Warnung < 1,5 |
+| Kamerawechsel | 7 Vorlagen, 6 Bildgrößen, nie zweimal gleich hintereinander | Fehler bei Wiederholung / < 4 Bildgrößen; Warnung < 6 |
+| Figurenreaktionen | 8 Gefühle mit Entwicklung, Reaktionsposen (recoil, jump, kneel, reach …), Blinzeln, Schweiß/Wangen | Fehler < 4, Warnung < 6 |
+| Orte/Licht | 7 Orte, je eigene Lichtstimmung, Lichtwechsel als Ereignis | Fehler < 5 (B1), Warnung < 6 |
+| HUD-Dynamik | Wert ändert sich in 100 % der Beats, 11 Akzente, 4 Labels | Fehler < 70 %, Warnungen < 100 % / < 0,5 Akzente pro Beat / < 4 Labels |
+| Sound-Synchronisation | alle Ereignisse mit Klang; gemessen −15 … +10 ms | Fehler bei Versatz im Plan; Warnung < 90 % mit Klang; Messung in `video_qa.py` |
+| Dramaturgie | Hoffnung/Rückschlag, früh vorbereitete Pointe, Endkarte mit Frage + „Part 2?“, 3,6 s nach der Pointe | Pointe/Ende Fehler, Endkarte Warnung; Rest in `quality_review.md` C |
+| Bildqualität | Würfel-Figuren mit Gesicht, Requisiten mit Erzählfunktion, keine Schwarzbilder/Kurz-Einstellungen, keine Monotonie-Kandidaten | `video_qa.py` + `quality_review.md` B |
+
+Bekannte Schwächen der Referenz, die **nicht** wiederholt werden sollen: zu dunkle Nachtszenen (Gesicht unlesbar),
+Anschlussfehler über einen Schnitt (Pose wechselt), Text während eines Blitzes, wichtige Requisiten zu klein in der Ich-Perspektive.
+
+### 18.10 Architektur-Freeze
+
+Ab 2026-10-30 werden Pipeline, Kit-Schnittstellen, Beat-Sheet-Format, HUD-Gestaltung, Signalfarbe und Prüfregeln **nicht mehr
+umgebaut**. Zulässig sind nur: (a) Korrektur eines konkreten Fehlers, (b) Behebung eines nachgewiesenen Qualitätsproblems (mit
+Beleg im LOG), (c) **neue Kit-Teile** (Orte, Requisiten, Posen, Klänge), die ein Thema braucht – ohne bestehende Schnittstellen zu
+ändern. Jede solche Änderung kommt ins Änderungsprotokoll. Neue Videos analysieren nicht erneut das Repository.
 
 Änderungen an diesem Style-Guide nur auf Basis dokumentierter Ergebnisse (Produktionsprotokolle, Analytics). Jede Änderung mit Datum und Begründung unten eintragen.
 
@@ -460,3 +581,5 @@ Abschnitt 16 beschreibt **Stil B**. Jedes Stil-B-Video folgt **genau einem** der
 | 2026-10-27 | 1.1 | 10.3: Render-Pipeline entschieden und umgesetzt (Three.js + headless Chromium + FFmpeg, deterministisch) | Implementierungsplan freigegeben; Machbarkeit, Determinismus und Renderzeit gemessen; Tests in `tests/` |
 | 2026-10-29 | 1.2 | Abschnitt 16: zwei Erfolgsrezepte (Eskalations-Zähler, X verschwindet 5 s), Baukasten `pipeline/runtime/kit/`, Vorschau `tools/still.mjs` | Analyse R16–R18 + R04/R07 (vom Auftraggeber benannte erfolgreiche Kanäle); erstes Testvideo wich vom Stil ab (Fotorealistik) |
 | 2026-10-29 | 1.3 | Zwei Produktionsstile (A Earth, B mit Rezepten B1/B2, Abschnitt 17, `STYLE_A_EARTH.md`); Rezepte A/B → B1/B2 umbenannt; Mindestlänge 60 s für jedes Video, technisch erzwungen | Auftrag des Nutzers (Stilauswahl je Auftrag; jedes Video ≥ 60 s) |
+| 2026-10-30 | 2.0 | Abschnitt 18 „Produktionsstandard Stil B“ (verbindlich, Vorrang), Architektur-Freeze 18.10; Stil B als einziges aktives Ziel, Stil A archiviert (17); HUD-Gestaltung und Signalfarbe nach R07/R19/R20 (18.5, ersetzt 6.3 HUD-Schrift „Monospace“ und 6.4 Punkt 2/3 „nicht Gold“); 16.3 Kit-Bestand | Auftrag des Nutzers (finale Systemüberarbeitung); Sichtung R07/R19/R20 (`REFERENCE_ANALYSIS.md` 9); Fehleranalyse 18.9; Testvideo `productions/what-if-phone-battery-life` |
+| 2026-10-30 | 2.1 | 18.11: abgenommenes Testvideo als verbindliches Mindestniveau; Validator erzwingt `beats.json` für Stil B und warnt bei Unterschreitung; `run.mjs` legt `quality_review.md` an | Abnahme durch den Auftraggeber; Prüfung, ob der Standard im Ablauf greift |

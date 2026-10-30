@@ -1,9 +1,14 @@
 # Anweisungen für Claude Code
 
-- Dieses Repository produziert What-if-Kurzvideos. Maßgeblich ist `WHATIF_STYLE_GUIDE.md`; der Arbeitsablauf steht im Skill `/whatif-video-style` (`.claude/skills/whatif-video-style/SKILL.md`), die Abhakliste in `VIDEO_PRODUCTION_CHECKLIST.md`.
-- Jeder Produktionsauftrag nennt `PRODUKTIONSSTIL: A (Earth)` oder `PRODUKTIONSSTIL: B (TikTok-Referenz)`. Fehlt die Angabe: nachfragen, nie selbst wählen. Stil A → `STYLE_A_EARTH.md`; Stil B → `WHATIF_STYLE_GUIDE.md` Abschnitt 16 (Rezept B1 Standard, B2 Alternative). Übersicht: Guide Abschnitt 17.
-- Jedes Video ist mindestens 60 s lang (alle Stile); länger durch Dramaturgie, nie durch Leerlauf. Szenen nur mit dem Baukasten `pipeline/runtime/kit/` bauen; Vorschau mit `tools/still.mjs`.
+- Dieses Repository produziert What-if-Kurzvideos. **Einziges aktives Produktionsziel ist Stil B** (stumm, Rezept B1 Standard, B2 Alternative). Maßgeblich ist `WHATIF_STYLE_GUIDE.md`, **Abschnitt 18 (Produktionsstandard Stil B) hat Vorrang**; Arbeitsablauf im Skill `/whatif-video-style` (`.claude/skills/whatif-video-style/SKILL.md`), Abhakliste `VIDEO_PRODUCTION_CHECKLIST.md`.
+- Ein Thema genügt als Auftrag: Stil B, Rezept B1 (B2 nur, wenn das Thema klar „X verschwindet für 5 Sekunden“ ist). Nicht nach dem Stil fragen. Stil A (`STYLE_A_EARTH.md`, Sprecher/TTS) ist archiviert und nur zu verwenden, wenn der Auftrag wörtlich `PRODUKTIONSSTIL: A (Earth)` nennt; nichts aus Stil A in Stil-B-Videos übernehmen.
+- Fester Ablauf: THEMA → STORY → `beats.json` → ASSETS (Kit) → ANIMATION (`scene.js`, `act()`) → SOUND (Ereignisse im Beat-Sheet) → `tools/build_timeline.mjs` → Vorschau `tools/still.mjs` → `pipeline/run.mjs` → QA technisch + visuell + dramaturgisch (`templates/quality_review.md`) → MP4-Auslieferung.
+- `timeline.json` nie von Hand bearbeiten – sie wird aus `beats.json` erzeugt. Szenen nur mit dem Baukasten `pipeline/runtime/kit/` bauen; fehlende Teile im Kit ergänzen. Vorlage: `templates/beats.json`, Beispiel: `productions/what-if-phone-battery-life/`.
+- **Qualitätsmaßstab:** das abgenommene Testvideo `productions/what-if-phone-battery-life/` (Guide 18.11). Neue Videos sind eigenständig, fallen aber nicht ohne im LOG begründeten Grund dahinter zurück; Validator-Warnungen `[18.11]` sind zu beheben oder zu begründen.
+- Jedes Video ist mindestens 60 s lang; länger durch Dramaturgie, nie durch Leerlauf.
+- **Architektur-Freeze (Guide 18.10):** Pipeline, Kit-Schnittstellen, Beat-Sheet-Format, HUD-Gestaltung, Signalfarbe und Prüfregeln nicht umbauen. Erlaubt: konkrete Fehlerkorrektur, belegte Qualitätsbehebung, neue Kit-Teile ohne Schnittstellenänderung. Bei neuen Videos nicht erneut das ganze Repository analysieren.
 - Der globale Skill `whatif-3d-style` (falls sichtbar) gehört zu einem anderen Projekt und gilt hier nicht.
-- Kein Video rendern ohne ausdrücklichen Auftrag des Nutzers.
-- Nichts als geprüft melden, was nicht geprüft wurde. Ton kann nicht gehört werden – Hörprüfung immer beim Nutzer anfragen.
+- Kein Video rendern ohne ausdrücklichen Auftrag des Nutzers. Ein Produktionsauftrag („produziere ein Video über …“) ist ein Render-Auftrag.
+- **Auslieferung:** Nach jedem erfolgreichen Rendering die tatsächliche Datei (`productions/<slug>/render/final.mp4`) mit dem verfügbaren Sende-Werkzeug (z. B. `SendUserFile`) als abspielbaren Anhang übergeben und den Erfolg prüfen; ein Dateipfad allein gilt nicht als Auslieferung. Scheitert die Übergabe, den Fehler melden.
+- Nichts als geprüft melden, was nicht geprüft wurde. Ein technisches PASS ist keine Qualitätsfreigabe. Ton kann nicht gehört werden – Hörprüfung immer beim Nutzer anfragen.
 - Referenzvideos (`references/videos/`), Render-Ausgaben und Bilder nie committen (siehe `.gitignore`).

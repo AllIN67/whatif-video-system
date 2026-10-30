@@ -59,6 +59,10 @@ def main():
     if not ts:
         raise SystemExit("Keine Zeitpunkte (--at oder --report angeben).")
     os.makedirs(args.out, exist_ok=True)
+    # Streifen eines früheren Renders entfernen – sonst werden alte Bilder als aktueller Befund gesichtet
+    for f in os.listdir(args.out):
+        if f.startswith("strip_") and f.endswith(".jpg"):
+            os.remove(os.path.join(args.out, f))
     for t in sorted(set(ts)):
         start = max(0.0, t - 5 / args.fps)
         out = os.path.join(args.out, f"strip_{t:08.3f}.jpg")

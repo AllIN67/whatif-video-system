@@ -10,6 +10,7 @@ const FONT_FILES = [
   ['Fraunces', 600, 'italic', 'fraunces/files/fraunces-latin-600-italic.woff2'],
   ['JetBrains Mono', 400, 'normal', 'jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2'],
   ['JetBrains Mono', 700, 'normal', 'jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2'],
+  ['Montserrat', 700, 'normal', 'montserrat/files/montserrat-latin-700-normal.woff2'],
 ];
 
 async function loadFonts() {
@@ -26,6 +27,39 @@ async function loadFonts() {
 
 function esc(s) {
   return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+}
+
+// '#rrggbb' → [r,g,b]; Mischung zweier Farben (x = 0 → a, x = 1 → b)
+function hexRgb(h) {
+  const n = parseInt(h.slice(1), 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+}
+function mixColor(a, b, x) {
+  const A = hexRgb(a);
+  const B = hexRgb(b);
+  return `rgb(${A.map((v, i) => Math.round(v + (B[i] - v) * x)).join(',')})`;
+}
+
+// HUD-Akzente (timeline.hud[].flashes, von build_timeline.mjs aus den Ereignissen erzeugt):
+//   loss – Wert fällt/Schaden: Alarmfarbe + Größenimpuls · gain – Gewinn: Signalfarbe + Größenimpuls
+//   warn – Pulsieren ohne Wertänderung (Gefahr naht)
+export const FLASH_DUR = { loss: 0.9, gain: 0.9, warn: 0.7 };
+export function hudFlashAt(seg, t) {
+  let cur = null;
+  for (const f of seg?.flashes || []) {
+    const dur = FLASH_DUR[f.kind];
+    if (!dur) throw new Error(`HUD-Akzent "${f.kind}" unbekannt (erlaubt: ${Object.keys(FLASH_DUR).join(', ')})`);
+    if (t >= f.t && t < f.t + dur) cur = { kind: f.kind, x: (t - f.t) / dur };
+  }
+  return cur;
+}
+// Stufen-Impuls: jeder Sprung eines 'hold'-Keys lässt den Wert kurz anwachsen (der Zähler „tickt“ sichtbar)
+const STEP_PULSE = 0.22;
+export function hudStepPulse(seg, t) {
+  let last = -Infinity;
+  for (const k of seg?.value?.keys || []) if (k[2] === 'hold' && k[0] <= t) last = Math.max(last, k[0]);
+  const x = (t - last) / STEP_PULSE;
+  return x >= 0 && x < 1 ? Math.pow(1 - x, 2) : 0;
 }
 
 function highlight(text, word, color) {
@@ -59,11 +93,16 @@ export async function createOverlay({ root, brand, text, timeline }) {
     #wif-hud { left:${L.hud_left}px; top:${L.hud_value_baseline * H - L.hud_value_size - L.hud_label_size - 14}px; }
     #wif-hud::before { content:""; position:absolute; left:-60px; top:-50px; width:560px; height:300px;
       background: radial-gradient(ellipse at 30% 50%, ${brand.scrim} 0%, rgba(0,0,0,0) 70%); z-index:-1; }
-    #wif-hud-label { font: 700 ${L.hud_label_size}px/1 "${brand.fonts.mono}", monospace; letter-spacing:0.14em; opacity:0.75; }
-    #wif-hud-value { font: 700 ${L.hud_value_size}px/1.05 "${brand.fonts.mono}", monospace; font-variant-numeric: tabular-nums; margin-top:12px; white-space:nowrap; }
+    #wif-hud-label { font: 700 ${L.hud_label_size}px/1 "${brand.fonts.label || brand.fonts.mono}", sans-serif; letter-spacing:0.14em; opacity:0.85; }
+    #wif-hud-value { font: ${brand.fonts.value_weight || 600} ${L.hud_value_size}px/1.05 "${brand.fonts.value || brand.fonts.mono}", serif; font-variant-numeric: tabular-nums lining-nums; font-feature-settings: "tnum" 1, "lnum" 1; margin-top:10px; white-space:nowrap; transform-origin:0 60%; }
     #wif-hud-bar { margin-top:14px; width:${L.hud_bar_width}px; height:${L.hud_bar_height}px; background:rgba(255,255,255,0.28); border-radius:3px; overflow:hidden; box-shadow:0 0 10px rgba(0,0,0,0.5); }
     #wif-hud-fill { height:100%; width:0; background:${brand.signal}; }
-    #wif-hud-sub { margin-top:12px; font: 400 ${L.hud_sub_size}px/1.2 "${brand.fonts.mono}", monospace; letter-spacing:0.08em; opacity:0.75; }
+    #wif-hud-sub { margin-top:12px; font: 700 ${L.hud_sub_size}px/1.2 "${brand.fonts.label || brand.fonts.mono}", sans-serif; letter-spacing:0.1em; opacity:0.8; }
+    #wif-end { left:${L.safe.x0 * W}px; width:${(L.safe.x1 - L.safe.x0) * W}px; transform:translateY(-50%); text-align:center; }
+    #wif-end::before { content:""; position:absolute; left:-40px; right:-40px; top:-60px; bottom:-60px;
+      background: radial-gradient(ellipse at 50% 50%, ${brand.title_scrim || brand.scrim} 0%, rgba(0,0,0,0) 72%); z-index:-1; }
+    #wif-end-title { font: 600 ${L.end_title_size || 68}px/1.12 "${brand.fonts.serif}", serif; letter-spacing:-0.01em; }
+    #wif-end-sub { margin-top:22px; font: italic 400 ${L.end_sub_size || 46}px/1.22 "${brand.fonts.serif}", serif; color:${brand.signal}; }
     #wif-line-wrap { left:${L.safe.x0 * W}px; width:${(L.safe.x1 - L.safe.x0) * W}px; top:${L.line_center * H}px; transform:translateY(-50%); text-align:center; }
     #wif-line-wrap::before { content:""; position:absolute; left:-40px; right:-40px; top:-40px; bottom:-40px;
       background: radial-gradient(ellipse at 50% 50%, ${brand.scrim} 0%, rgba(0,0,0,0) 72%); z-index:-1; }
@@ -73,10 +112,11 @@ export async function createOverlay({ root, brand, text, timeline }) {
   <div id="wif-title" class="wif"></div>
   <div id="wif-hud" class="wif"><div id="wif-hud-label"></div><div id="wif-hud-value"></div><div id="wif-hud-bar"><div id="wif-hud-fill"></div></div><div id="wif-hud-sub"></div></div>
   <div id="wif-line-wrap" class="wif"><div id="wif-line"></div></div>
+  <div id="wif-end" class="wif"><div id="wif-end-title"></div><div id="wif-end-sub"></div></div>
   <div id="wif-sync"></div>`;
 
   const $ = (id) => root.querySelector('#' + id);
-  const el = { title: $('wif-title'), hud: $('wif-hud'), label: $('wif-hud-label'), value: $('wif-hud-value'), fill: $('wif-hud-fill'), sub: $('wif-hud-sub'), lineWrap: $('wif-line-wrap'), line: $('wif-line'), sync: $('wif-sync') };
+  const el = { title: $('wif-title'), hud: $('wif-hud'), label: $('wif-hud-label'), value: $('wif-hud-value'), fill: $('wif-hud-fill'), sub: $('wif-hud-sub'), lineWrap: $('wif-line-wrap'), line: $('wif-line'), end: $('wif-end'), endTitle: $('wif-end-title'), endSub: $('wif-end-sub'), sync: $('wif-sync') };
 
   // Inhalte prüfen: jede referenzierte ID muss in der Textdatei existieren
   const lines = timeline.lines || [];
@@ -84,6 +124,15 @@ export async function createOverlay({ root, brand, text, timeline }) {
   for (const s of timeline.hud || []) if (!(s.id in (text.hud || {}))) throw new Error(`HUD-ID "${s.id}" fehlt in text.${text.lang}.json`);
   if (timeline.title && !text.title) throw new Error('Titel fehlt in der Textdatei');
   if (text.title) el.title.innerHTML = highlight(text.title.text, text.title.highlight, brand.signal);
+  // Endkarte (Rezept B: Frage an den Zuschauer / „Part 2?“), Text aus text.<lang>.json → endcard
+  const ec = timeline.endcard;
+  if (ec) {
+    if (!text.endcard?.title) throw new Error(`Endkarte fehlt in text.${text.lang}.json (endcard.title)`);
+    el.endTitle.textContent = text.endcard.title;
+    el.endSub.textContent = text.endcard.sub || '';
+    el.end.style.top = `${(ec.center ?? L.end_center) * H}px`;
+  }
+  el.end.style.opacity = '0';
   const syncFrames = new Set(timeline.sync_markers || []);
 
   let lastLineId = null;
@@ -108,6 +157,27 @@ export async function createOverlay({ root, brand, text, timeline }) {
         const shown = finalText ?? `${fmt(h.value * (def.scale ?? 1), h.decimals)}${def.unit || ''}`;
         if (el.value.textContent !== shown) el.value.textContent = shown;
         el.fill.style.width = `${(finalText ? 1 : h.progress) * 100}%`;
+        // Akzente: Ereignis-Blinken (loss/gain/warn) und Stufen-Impuls bei jedem Zählerschritt
+        const seg = timeline.hud.find((s) => s.id === h.id && s.from === h.segFrom);
+        const fl = hudFlashAt(seg, t);
+        const alarm = brand.alarm || '#FF4545';
+        let color = brand.text;
+        let bar = brand.signal;
+        let scale = 1 + 0.07 * hudStepPulse(seg, t);
+        if (fl && fl.kind !== 'warn') {
+          const accent = fl.kind === 'loss' ? alarm : brand.signal;
+          const k = fl.x < 0.35 ? 1 : 1 - (fl.x - 0.35) / 0.65;
+          color = mixColor(brand.text, accent, k);
+          bar = mixColor(brand.signal, accent, k);
+          scale = Math.max(scale, 1 + 0.14 * Math.pow(1 - fl.x, 3));
+        } else if (fl) {
+          const k = 0.6 * Math.sin(Math.PI * fl.x);
+          color = mixColor(brand.text, alarm, k);
+          bar = mixColor(brand.signal, alarm, k);
+        }
+        el.value.style.color = color;
+        el.fill.style.background = bar;
+        el.value.style.transform = scale > 1.0005 ? `scale(${scale.toFixed(4)})` : 'none';
         // Label-Wechsel weich einblenden – aber nicht beim ersten Segment (Frame 0 zeigt den HUD sofort voll)
         const first = h.segFrom <= (timeline.hud[0]?.from ?? 0);
         const since = t - h.segFrom;
@@ -129,13 +199,14 @@ export async function createOverlay({ root, brand, text, timeline }) {
         lastLineId = cur.id;
       }
       el.lineWrap.style.opacity = String(op);
+      if (ec) el.end.style.opacity = String(fadeOpacity(t, ec.in, ec.out ?? Infinity, brand.fades.end_in ?? 0.4, 0));
       // Synchron-Marker (nur Testproduktionen)
       el.sync.style.opacity = syncFrames.has(frame) ? '1' : '0';
     },
     // Für die Layout-Prüfung: Rechtecke aller sichtbaren Textelemente
     rects() {
       const out = [];
-      for (const [name, node] of [['title', el.title], ['hud', el.hud], ['line', el.lineWrap]]) {
+      for (const [name, node] of [['title', el.title], ['hud', el.hud], ['line', el.lineWrap], ['endcard', el.end]]) {
         if (Number(getComputedStyle(node).opacity) <= 0) continue;
         // tatsächliche Ausdehnung der Glyphen, nicht der Block-Box
         const range = document.createRange();
