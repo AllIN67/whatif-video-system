@@ -60,7 +60,7 @@
   {
    "id": "alarm", "dur": 3.6, "place": "bedroom", "mood": "angry", "ambience": "room", "transition": "dip",
    "line": "l_day1",
-   "camera": { "preset": "close", "target": [0.8, 1.05, -1.25], "yaw": -60, "dist": 3.0, "height": 0.3, "swing": 6, "fov": 46 },
+   "camera": { "preset": "close", "target": [0.6, 1.1, -1.1], "yaw": -60, "dist": 3.0, "height": 0.3, "swing": 6, "fov": 46 },
    "hud": { "label": "days", "to": 1, "mode": "steps", "steps": 1, "window": [0.0, 0.0], "tick": "pop" },
    "events": [
     { "id": "bags", "at": 0.1, "what": "Augenringe werden sichtbar (Körper zeigt den Schlafmangel)", "premise": "visible", "sfx": "heartbeat", "gain_db": -12, "flash": "loss" },
@@ -136,7 +136,7 @@
   {
    "id": "kitchen_confused", "dur": 4.0, "place": "kitchen", "mood": "worried", "ambience": "room", "transition": "dip",
    "line": "l_toaster",
-   "camera": { "preset": "push", "target": [-39.7, 1.3, -1.5], "yaw": 28, "dist": 3.3, "distTo": 2.7, "height": 0.25, "fov": 44 },
+   "camera": { "preset": "push", "target": [-40.0, 1.3, -1.45], "yaw": 28, "dist": 3.3, "distTo": 2.7, "height": 0.25, "fov": 44 },
    "hud": { "to": 22, "mode": "steps", "steps": 1, "window": [0.3, 0.3], "tick": "pop" },
    "events": [
     { "id": "phone_in", "at": 0.9, "what": "Figur steckt das Handy in den Toaster", "premise": "visible", "sfx": "thud", "gain_db": -12 },

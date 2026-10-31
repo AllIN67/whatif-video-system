@@ -267,10 +267,11 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
         you.act([
           { t: at('alarm'), pose: 'stand', seated: 1, mood: 'tired', look: [0, 0] },
           { t: ev('alarm_rings'), mood: 'angry', look: [0.35, -0.1], blend: 0.2 },
-          { t: ev('slap') - 0.25, pose: 'reach', seated: 1, look: [0.9, 0.1], blend: 0.15 },
+          { t: ev('slap') - 0.25, pose: 'wave', speed: 1.5, seated: 1, look: [0.5, 0.05], blend: 0.15 },
           { t: ev('slap') + 0.35, pose: 'stand', seated: 1, mood: 'tired', look: [0.1, 0], blend: 0.4 },
         ], t);
-        you.root.rotation.y = lerp(0, 0.9, ramp(t, ev('slap') - 0.35, ev('slap') - 0.05)) * (1 - ramp(t, ev('slap') + 0.3, ev('slap') + 0.7));
+        // kein Wegdrehen aus dem Bild (9:16): nur Arm + Blick zum Wecker (QA-Durchlauf 3)
+        you.root.rotation.y = 0;
         const ring = t >= ev('alarm_rings') && t < ev('slap');
         clock7.position.set(1.4 + (ring ? 0.008 * Math.sin(t * 90) : 0), 0.5 + (ring ? 0.006 * Math.abs(Math.sin(t * 70)) : 0), -1.985);
       } else clock7.position.set(1.4, 0.5, -1.985);
