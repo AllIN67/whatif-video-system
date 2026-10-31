@@ -120,3 +120,19 @@ für künftige Kit-Ergänzungen (Guide 18.10 erlaubt neue Kit-Teile).
 
 **Vom Auftraggeber am 2026-10-30 vollständig abgenommen** („gefällt mir vollständig“) und zum verbindlichen Produktionsstandard erklärt (Guide 18.11).
 Eine ausdrückliche Bestätigung der Hörprüfung (Kopfhörer + Handylautsprecher) liegt nicht gesondert vor.
+
+## 8. Nach Veröffentlichung – Analytics und Hook-Befund (2026-10-31)
+
+| Plattform | Aufrufe | Länge | Ø Wiedergabe s | Abschlussrate | nach 2 s % | 50 %-Punkt (s) | Likes-Spitze (s) |
+|---|---|---|---|---|---|---|---|
+| (Angabe Auftraggeber) | ≈ 3.100 | 64 s | 27,4 | 19 % | ≈ 75 | ≈ 14 | 1 |
+
+- **Befund (gesichtet an 12 Vorschaubildern 0–17 s, `REFERENCE_ANALYSIS.md` 10.3):** Frame 0–3 s zeigt eine schlafende Figur, das
+  Handy ist hinter dem Titel nicht erkennbar; der Auslöser ist ein HUD-Abzug von 1 %. Bis 14 s: 4 Prämissen-Ereignisse, alle nur
+  als Zahl (−1/−2/−2/−6), dazu 5 Alltagsereignisse ohne Prämissenbezug (Wecker, Toast, Bus, Keuchen, Steckdose gesehen); Toast und
+  Bus sind in den Vorschaubildern nicht einmal im Bild. Der erste große Verlust (77 → 32 %) kommt bei 21,6 s.
+- **Einordnung:** plausible Ursache des Abgangs bis 14 s, nicht bewiesen (eine Messreihe, kein Vergleich).
+- **Folge:** Guide 18.12 (Hook-Standard). `beats.json` dokumentiert den tatsächlichen Einstieg (`hook`, `premise`); der Validator
+  meldet dafür 2 Fehler `[18.12]` – **beabsichtigt**. Das Video ist für Bild, Kamera, HUD und Ton weiterhin Maßstab (18.11), für den
+  Einstieg Gegenbeispiel. Ein Neu-Render ist erst mit neuem Einstieg zulässig (Beispiel in Guide 18.12). Bild und Ton des
+  ausgelieferten Videos sind unverändert (nur additive Felder in `beats.json`/`timeline.json`).

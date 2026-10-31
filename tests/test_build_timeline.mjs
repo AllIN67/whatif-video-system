@@ -23,6 +23,7 @@ function sheet(n = 16) {
     title: { in: 0, out: 3.4 },
     hud: { start: 100 },
     pointe: 'e15',
+    hook: { type: 'proof', proof: 'e0', question: 'How long can you last?', stakes: 'Every percent is your life.', withheld: 'The ending at home.' },
     endcard: { beat: 'b15', at: 0.3 },
     audio: { fade_out: 1.2 },
     beats: Array.from({ length: n }, (_, i) => ({
@@ -34,7 +35,7 @@ function sheet(n = 16) {
       camera: CAMS[i % CAMS.length],
       line: `l${i}`,
       hud: { label: i < 8 ? 'battery' : 'critical', to: 100 - (i + 1) * 5, mode: 'steps', steps: 2, window: [0.5, 3.0], tick: 'pop' },
-      events: [{ id: `e${i}`, at: 1.0 + (i % 3) * 0.1, sfx: 'thud', flash: i % 4 === 0 ? 'loss' : undefined, trigger: i === 1 }],
+      events: [{ id: `e${i}`, at: 1.0 + (i % 3) * 0.1, sfx: 'thud', flash: i % 4 === 0 ? 'loss' : undefined, trigger: i === 1, ...(i < 4 ? { premise: i % 2 ? 'hud' : 'visible' } : {}) }],
     })),
   };
 }
@@ -132,4 +133,44 @@ test('Stil B ohne beats.json wird abgelehnt; Referenzniveau als Warnung', () => 
   const r = validate(tl, text(), { requireBeats: true });
   assert.deepEqual(r.errors, []);
   assert.match(r.warnings.join('\n'), /unter Referenzniveau: Ereignisse pro Beat/);
+});
+
+test('Hook-Standard 18.12: schwacher Einstieg wird erkannt, Hook-Typen nicht schablonenhaft', () => {
+  const run = (mut) => {
+    const B = sheet();
+    mut(B);
+    return validate(buildTimeline(B), text());
+  };
+  const errs = (mut) => run(mut).errors.join('\n');
+  const warns = (mut) => run(mut).warnings.join('\n');
+  assert.deepEqual(run(() => {}).errors, []);
+  assert.match(errs((B) => delete B.hook), /hook fehlt/);
+  assert.match(errs((B) => delete B.hook.question), /hook\.question fehlt/);
+  assert.match(errs((B) => (B.hook.type = 'intro')), /unbekannt/);
+  // Akku-Video-Muster: Auslöser ist nur ein HUD-Abzug → kein Beweis im Bild
+  assert.match(errs((B) => (B.beats[0].events[0].premise = 'hud')), /keine sichtbare Prämissen-Konsequenz/);
+  // Beweis zu spät für Typ proof, aber zulässig für mystery (R20: Geheimnis ab Frame 0, Schlag später)
+  const late = (B) => { B.hook.proof = 'e1'; B.beats[1].events[0].premise = 'visible'; };
+  assert.match(errs(late), /Hook-Typ proof: ≤ 2 s/);
+  assert.equal(/Beweis-Ereignis/.test(errs((B) => { late(B); B.hook.type = 'mystery'; })), false);
+  // nur Zahlenabzüge bis 15 s
+  assert.match(errs((B) => { B.beats[2].events[0].premise = 'hud'; }), /im Bild sichtbare Prämissen-Konsequenzen/);
+  // Füllstoff: Alltagsereignisse ohne Prämissenbezug im Hook-Fenster
+  const filler = (B) => { B.beats[1].events.push({ id: 'toast', at: 2.0, what: 'Toast verbrennt' }, { id: 'bus', at: 2.6, what: 'Bus fährt ab' }); delete B.beats[3].events[0].premise; };
+  const w = warns(filler);
+  assert.match(w, /ohne Prämissenbezug \(.*toast.*bus/);
+  assert.match(w, /Beat b3 .* ohne Prämissen-Ereignis/);
+  // Pointe im Hook-Fenster verrät das Ende
+  assert.match(errs((B) => (B.pointe = 'e2')), /Pointe .* im Hook-Fenster/);
+});
+
+test('Hook-Standard 18.12: Referenzproduktion (Akku-Video) besteht den Einstieg nicht – beabsichtigt', async () => {
+  const fs = await import('node:fs');
+  const B = JSON.parse(fs.readFileSync(new URL('../productions/what-if-phone-battery-life/beats.json', import.meta.url), 'utf8'));
+  const tl = buildTimeline(B);
+  const tx = JSON.parse(fs.readFileSync(new URL('../productions/what-if-phone-battery-life/text.en.json', import.meta.url), 'utf8'));
+  const r = validate(tl, tx, { requireBeats: true });
+  const hookErr = r.errors.filter((e) => e.startsWith('[18.12]'));
+  assert.ok(hookErr.some((e) => /keine sichtbare Prämissen-Konsequenz/.test(e)), hookErr.join('\n'));
+  assert.ok(r.errors.every((e) => e.startsWith('[18.12]')), r.errors.join('\n'));
 });

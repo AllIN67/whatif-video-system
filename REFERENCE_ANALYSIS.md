@@ -367,3 +367,88 @@ Akt** (HE RETURNS IN → FRIDAY 7:41 PM → RIGHT NOW 8.3 billion → AT YOUR TA
 - Nicht bestätigt: „SFX auf jedes Ereignis“. Die Referenzen setzen Einzel-Effekte sparsam; Pflicht ist der Klang auf
   **Schlüsselereignissen**, nicht auf jedem Schnitt.
 - Guide 16.1 („alle 3–4 s ein Ereignis“) ist bestätigt und präzisiert: 4,0 s in R07/R19.
+
+## 10. Nachtrag 2026-10-31: Hook-Analyse (0–15 s) – Grundlage für Guide 18.12
+
+Anlass: Analytics des ersten veröffentlichten Videos (`productions/what-if-phone-battery-life`, Angaben des Auftraggebers,
+nicht geprüft): ≈ 3.100 Aufrufe, 64 s, Ø Wiedergabe 27,4 s, 19 % vollständig, **≈ 75 % nach 2 s, ≈ 50 % bei 14 s**, die
+meisten Likes in Sekunde 1.
+
+**Zugriffsstatus – ausdrücklich:** In dieser Sitzung lagen die Referenzvideos **nicht** vor (`references/videos/` fehlt in der
+Cloud-Sitzung, siehe Abschnitt 7). R07, R19 und R20 konnten deshalb **nicht erneut angesehen** werden. Verwendet wurden:
+(a) die versionierten Frame-Messungen `references/analysis/R07|R19|R20/frames.tsv` (Bewegung = mittlere Bilddifferenz,
+Helligkeit, Schnitt-Score), neu ausgewertet je Sekunde für 0–15 s; (b) die am 2026-10-30 dokumentierte Sichtung (Abschnitt 9.1).
+Unser eigener Einstieg wurde dagegen **tatsächlich angesehen**: 12 Vorschaubilder bei 0 / 0,3 / 1,0 / 1,6 / 3,0 / 4,6 / 6,2 /
+8,5 / 10,1 / 12,4 / 14,8 / 17,0 s (`tools/still.mjs`, aktueller Stand von `beats.json`/`scene.js`).
+Für eine echte Bildsichtung der Referenz-Hooks (Vollbildrate 0–5 s) müssen die drei Dateien erneut bereitgestellt werden.
+
+### 10.1 Messung 0–15 s (Bewegung je Sekunde, `frames.tsv`) [B]
+
+| s | R07 | R19 | R20 | Akku-Video |
+|---|---|---|---|---|
+| 0 | **6,1** | 3,9 | 0,7 | 1,0 |
+| 1 | 2,6 | **4,5** | 1,3 | 0,7 |
+| 2 | 2,5 | 0,9 | 0,8 | 0,8 |
+| 3 | 2,6 | 1,6 | 1,6 | 1,1 |
+| 4 | 6,1 | 3,6 | 8,2 | 4,6 |
+| 5–11 (Mittel) | 4,0 | 2,2 | 2,5 | 2,5 |
+| 12 | 4,0 | 4,0 | **10,7** | 3,9 |
+| Ø 0–15 s | 4,0 | 2,4 | 3,3 | 2,6 |
+
+- **[B]** R07 und R19 haben ihr Bewegungsmaximum der ersten Sekunden **in Sekunde 0–1** (R19: Autoaufprall bei 1,35 s, Sichtung 9.1).
+  Das Akku-Video ist in 0–3 s fast unbewegt (0,7–1,1).
+- **[B]** R20 ist in 0–12 s ebenso ruhig wie unser Einstieg (0,7–1,6, Ausnahme Whip bei 4 s) – und gilt trotzdem als viral.
+  Unterschied laut Sichtung 9.1: Der HUD zeigt ab Frame 0 **verrauschte Ziffern „HE RETURNS IN ??:??:??“** – ein Geheimnis mit
+  angekündigtem Ereignis; der Schlag kommt bei 12,3 s.
+- **[I]** „Viel Bewegung in Sekunde 0“ ist also **keine** allgemeine Eigenschaft starker Hooks. Gemeinsam ist allen drei Referenzen
+  etwas anderes (10.2).
+
+### 10.2 Was die Referenz-Hooks gemeinsam haben [I, aus B abgeleitet]
+
+| Eigenschaft | R07 (Schrumpfen) | R19 (Unsterblich) | R20 (Wiederkunft) |
+|---|---|---|---|
+| **Frame 0 ist nicht normal** (Bild oder HUD zeigt eine Anomalie) | HEIGHT zählt ab Frame 0 jeden Frame herunter | Auto rast auf die Figur zu | HUD „??:??:??“ – Zeit unbekannt |
+| **Prämisse wird vorgeführt, nicht erklärt** | Figur wird sichtbar kleiner, Bett wird zum Berg (4 s) | Auto prallt **ab** – nur möglich, weil die Figur unsterblich ist (1,35 s) | Countdown kündigt an; Blitz bei 12,3 s |
+| **Einsatz sofort klar** (was steht auf dem Spiel?) | „Wie klein wird es?“ | „Was kann mich noch töten?“ | „Wann – und was dann?“ |
+| **Jede weitere Stufe ist nur in dieser Welt möglich** | Hund, Münze, Ameise als Riesen | Friedhof 2100, Stadt 2300 … | Gegenüber verschwindet, Menschen steigen auf |
+| **Hook-Typ** | laufender Prozess | Beweis am Extremfall | Bevorstehen/Geheimnis |
+
+**Unmöglichkeitstest [I]:** In allen drei Referenzen würde das erste Ereignis **ohne die Prämisse anders aussehen** (ein Auto
+prallt nicht ab; Menschen schrumpfen nicht; eine Uhr zeigt keine Fragezeichen). Das ist das gemeinsame Merkmal – nicht
+Schnittfrequenz und nicht Bewegungsmenge.
+
+### 10.3 Unser Einstieg, gesichtet [B]
+
+| Zeit | Bild (Vorschau) | Unmöglichkeitstest |
+|---|---|---|
+| 0–3,0 s | Figur liegt im Bett, Augen fast geschlossen; Handy in der erhobenen Hand **hinter dem Titel nicht erkennbar**; Wecker (0,3 s) nicht als Ereignis sichtbar | ❌ ohne Titel/HUD: „Mann schläft“ |
+| 1,5 s | Auslöser = HUD 100 → 99 % | ❌ nur eine Zahl ändert sich; Bild identisch mit normalem Alltag |
+| 4,6–6,2 s | Küche, Halbnah, Figur sieht besorgt aufs Handy; **Toast/Rauch nicht im Bild** | ❌ Handy benutzen ist Alltag; Toast hat keinen Bezug zur Prämisse |
+| 8,5 s | Straße, Figur läuft; **der abfahrende Bus ist nicht im Bild** | ❌ Bus verpassen hat keinen Bezug zur Prämisse |
+| 10,1 s | HUD 86 % rot (Karten-App) | ❌ nur Zahl |
+| 12,4 s | Nah, Figur keucht | ❌ Keuchen nach Laufen ist Alltag |
+| 14,8 s | Café, Ich-Perspektive, Figur nicht im Bild | (Steckdose = Prämissenbezug, aber klein) |
+| 0–17 s | Der Körper der Figur verändert sich mit dem Akkustand **nicht** (bei 79 % wie bei 100 %) | ❌ „Leben“ ist nur eine Zahl |
+
+- **[B]** Bis 14 s: 9 Ereignisse; davon 4 mit Prämissenbezug (`first_tap`, `swipe1`, `swipe2`, `maps_open`) – **alle vier nur als
+  HUD-Abzug** (−1, −2, −2, −6 Prozentpunkte). Die übrigen 5 (Wecker, Toast, Bus, Keuchen, Steckdose gesehen) würden ohne Prämisse
+  genauso passieren. Der erste große Verlust (Videoanruf, 77 → 32 %) liegt bei **21,6 s** – nachdem laut Analytics ≈ 50 % gegangen sind.
+- **[B]** HUD bis 15 s: 100 → 78 % (≈ 23 % des im Video durchlaufenen Bereichs 100 → 4 %). Was bei 0 % passiert, wird nie gezeigt
+  oder angedeutet – der Einsatz bleibt abstrakt.
+- **[I]** Die Likes in Sekunde 1 sprechen dafür, dass die **Frage** (Prämisse) ankommt; der Abfall bis 14 s spricht dafür, dass das
+  **Bild** sie nicht einlöst. Das ist eine plausible Deutung, kein Beweis (eine Messreihe, keine Vergleichsgruppe).
+
+### 10.4 Warum die Regeln diesen Einstieg erzeugt haben [B – Regeltext]
+
+| Regel (Stand 2.1) | Wortlaut / Wirkung |
+|---|---|
+| Guide 3.1 Akt A | „0–4 s: Titelfrage, **normale Welt**“; Auslösung erst in Akt B „4–12 s“ → schreibt einen ruhigen Alltagseinstieg vor |
+| Guide 2 | erste Zeile „**verortet** den Zuschauer („You are …“, „It's 3 AM.“)“ → lädt zu Aufwach-/Alltagsszenen ein |
+| Guide 2 / 18.7, Validator | Auslöser = **irgendein** Ereignis mit `trigger: true` ≤ 10 s; HUD muss sich in 2 s „sichtbar“ ändern → 100 → 99 % genügt |
+| Guide 16.1 (B1) | „Alltag, zweite Person“, „viele Requisiten (Bett, Toaster, Bus …)“ → Toaster/Bus werden zu Ereignissen statt Kulisse |
+| Guide 18.2 / 18.11 | „jeder Beat ein sichtbares Ereignis“, „≥ 1,5 Ereignisse pro Beat“ → zählt Ereignisse, **nicht ihren Bezug zur Prämisse**; Füllereignisse erhöhen sogar die Kennzahl |
+| Skill Schritt 1, Checkliste | kein Schritt „Hook entwickeln“; Pointe wird zuerst geplant, der Anfang nie bewusst gegen Alternativen abgewogen |
+| `quality_review.md` C | „Frame 0 zeigt Situation + Titel + laufenden HUD“ → prüft Vorhandensein, nicht Stärke |
+
+Folgerung: Das System hat genau das geliefert, was es verlangte. Die Pipeline ist nicht die Ursache (sie hat Ereignisse, HUD-Sprünge,
+Reaktionsposen, Kamerawackeln und Blitze, die einen starken Einstieg tragen können – siehe Pointe und Stromausfall im selben Video).

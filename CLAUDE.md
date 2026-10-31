@@ -6,6 +6,7 @@
 - `timeline.json` nie von Hand bearbeiten – sie wird aus `beats.json` erzeugt. Szenen nur mit dem Baukasten `pipeline/runtime/kit/` bauen; fehlende Teile im Kit ergänzen. Vorlage: `templates/beats.json`, Beispiel: `productions/what-if-phone-battery-life/`.
 - **Qualitätsmaßstab:** das abgenommene Testvideo `productions/what-if-phone-battery-life/` (Guide 18.11). Neue Videos sind eigenständig, fallen aber nicht ohne im LOG begründeten Grund dahinter zurück; Validator-Warnungen `[18.11]` sind zu beheben oder zu begründen.
 - Jedes Video ist mindestens 60 s lang; länger durch Dramaturgie, nie durch Leerlauf.
+- **Hook (Guide 18.12):** Einstieg vor dem Beat-Sheet aus drei Entwürfen wählen; die Prämisse wird in ≤ 2 s im Bild vorgeführt (Unmöglichkeitstest) bzw. ab Frame 0 als Geheimnis/Countdown angekündigt; bis 15 s nur Prämissen-Konsequenzen. Für den Einstieg ist das Akku-Video Gegenbeispiel, nicht Maßstab.
 - **Architektur-Freeze (Guide 18.10):** Pipeline, Kit-Schnittstellen, Beat-Sheet-Format, HUD-Gestaltung, Signalfarbe und Prüfregeln nicht umbauen. Erlaubt: konkrete Fehlerkorrektur, belegte Qualitätsbehebung, neue Kit-Teile ohne Schnittstellenänderung. Bei neuen Videos nicht erneut das ganze Repository analysieren.
 - Der globale Skill `whatif-3d-style` (falls sichtbar) gehört zu einem anderen Projekt und gilt hier nicht.
 - Kein Video rendern ohne ausdrücklichen Auftrag des Nutzers. Ein Produktionsauftrag („produziere ein Video über …“) ist ein Render-Auftrag.

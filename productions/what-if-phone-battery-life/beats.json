@@ -16,6 +16,14 @@
   ]
  },
  "pointe": "lights_out",
+ "hook": {
+  "_comment": "Nachträglich dokumentiert (2026-10-31, Guide 18.12): der TATSÄCHLICHE Einstieg dieses Videos – Gegenbeispiel. Analytics: ≈ 50 % Abgang bis 14 s. Neu-Render erst mit neuem Einstieg (Beispiel in Guide 18.12).",
+  "type": "process",
+  "proof": "first_tap",
+  "question": "What happens when your battery hits 0 %?",
+  "stakes": "Only stated in the HUD sub-line (= PHONE BATTERY); never shown on the body.",
+  "withheld": "City blackout and the blackout at home (pointe)."
+ },
  "endcard": {
   "beat": "twist",
   "at": 1.6,
@@ -133,7 +141,8 @@
      "sfx": "pop",
      "gain_db": -12,
      "hud_to": 99,
-     "trigger": true
+     "trigger": true,
+     "premise": "hud"
     }
    ],
    "data": {
@@ -186,7 +195,8 @@
      "what": "Wischen: −2 %",
      "sfx": "pop",
      "gain_db": -12,
-     "hud_to": 95
+     "hud_to": 95,
+     "premise": "hud"
     },
     {
      "id": "swipe2",
@@ -194,7 +204,8 @@
      "what": "Wischen: −2 %",
      "sfx": "pop",
      "gain_db": -12,
-     "hud_to": 93
+     "hud_to": 93,
+     "premise": "hud"
     },
     {
      "id": "toast_smoke",
@@ -266,7 +277,8 @@
      "sfx": "loss",
      "gain_db": -7,
      "hud_to": 86,
-     "flash": "loss"
+     "flash": "loss",
+     "premise": "hud"
     }
    ],
    "data": {

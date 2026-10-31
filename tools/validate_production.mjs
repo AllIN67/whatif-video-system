@@ -154,7 +154,10 @@ export function validate(timeline, text, { lang = 'en', wordTimes = null, requir
   }
 
   // Produktionsstandard Stil B (Abschnitt 18) – nur für Zeitachsen aus beats.json (tools/build_timeline.mjs)
-  if (timeline.beats) checkStandardB(timeline, ptl, E, W);
+  if (timeline.beats) {
+    checkStandardB(timeline, ptl, E, W);
+    checkHook(timeline, E, W);
+  }
   else if (requireBeats) E('18.1', 'timeline.json ist nicht aus beats.json erzeugt – Stil-B-Produktionen brauchen productions/<slug>/beats.json (node tools/build_timeline.mjs)');
 
   return { errors, warnings };
@@ -272,6 +275,64 @@ export function checkStandardB(timeline, ptl, E, W) {
   if (fl / beats.length < R.flashesPerBeat) under('HUD-Akzente pro Beat', Math.round((fl / beats.length) * 100) / 100, R.flashesPerBeat);
   const labels = new Set((timeline.hud || []).map((h) => h.id)).size;
   if (labels < R.hudLabels) under('HUD-Labels', labels, R.hudLabels);
+}
+
+// Hook-Standard (Guide 18.12): Der Einstieg muss die Prämisse VORFÜHREN. Geprüft wird, was das Beat-Sheet erklärt
+// (hook-Block, events[].premise); ob eine „visible“-Angabe stimmt, prüft QA H3 am Vorschaubild.
+// Anlass: Akku-Video – Auslöser war ein HUD-Abzug von 1 %, bis 14 s nur Zahlenabzüge und Alltagsereignisse (REFERENCE_ANALYSIS 10).
+export const HOOK = {
+  window: 15, // s – Hook-Fenster (Analytics: ≈ 50 % Abgang bis 14 s)
+  types: ['proof', 'process', 'countdown', 'mystery'],
+  proofMax: { proof: 2.0, process: 2.0, countdown: 10, mystery: 10 },
+  minPremise: 3, // Prämissen-Ereignisse bis 15 s
+  minVisible: 2, // davon im Bild
+  maxGap: 5, // s zwischen zwei Prämissen-Ereignissen (ab dem Beweis)
+  maxFillerShare: 1 / 3,
+};
+
+export function checkHook(timeline, E, W) {
+  const H = HOOK;
+  const r2 = (x) => Math.round(x * 100) / 100;
+  const hk = timeline.hook;
+  const events = timeline.events || [];
+  if (!hk) {
+    E('18.12', 'hook fehlt in beats.json (type, proof, question, stakes, withheld) – Einstieg nach Guide 18.12 entwerfen');
+    return;
+  }
+  if (!H.types.includes(hk.type)) E('18.12', `hook.type „${hk.type}“ unbekannt (${H.types.join(', ')})`);
+  for (const k of ['question', 'stakes', 'withheld']) if (!String(hk[k] || '').trim()) E('18.12', `hook.${k} fehlt`);
+  const proof = events.find((e) => e.id === hk.proof);
+  if (!proof) E('18.12', `hook.proof „${hk.proof}“ ist kein Ereignis`);
+  else {
+    const max = H.proofMax[hk.type] ?? 2;
+    if (proof.premise !== 'visible') E('18.12', `Beweis-Ereignis ${proof.id} ist keine sichtbare Prämissen-Konsequenz (premise: "visible") – Unmöglichkeitstest: würde das Bild ohne Prämisse genauso aussehen?`);
+    if (proof.t > max + 1e-9) E('18.12', `Beweis-Ereignis ${proof.id} bei ${proof.t} s (Hook-Typ ${hk.type}: ≤ ${max} s)`);
+    if (!(proof.sfx || []).length) W('18.12', `Beweis-Ereignis ${proof.id} ohne Klang`);
+  }
+  const inWin = events.filter((e) => e.t < H.window);
+  const prem = inWin.filter((e) => e.premise === 'visible' || e.premise === 'hud');
+  const vis = prem.filter((e) => e.premise === 'visible');
+  if (prem.length < H.minPremise) E('18.12', `nur ${prem.length} Prämissen-Ereignisse bis ${H.window} s (min. ${H.minPremise})`);
+  if (vis.length < H.minVisible) E('18.12', `nur ${vis.length} im Bild sichtbare Prämissen-Konsequenzen bis ${H.window} s (min. ${H.minVisible}; HUD-Abzüge allein zeigen die Prämisse nicht)`);
+  const start = proof ? proof.t : 0;
+  const pts = [start, ...prem.map((e) => e.t).filter((t) => t > start), H.window].sort((a, b) => a - b);
+  for (let i = 1; i < pts.length; i++) if (pts[i] - pts[i - 1] > H.maxGap + 1e-9) W('18.12', `keine neue Prämissen-Konsequenz zwischen ${r2(pts[i - 1])} s und ${r2(pts[i])} s (> ${H.maxGap} s)`);
+  const filler = inWin.filter((e) => !e.premise);
+  if (inWin.length && filler.length / inWin.length > H.maxFillerShare + 1e-9) {
+    W('18.12', `${filler.length} von ${inWin.length} Ereignissen bis ${H.window} s ohne Prämissenbezug (${filler.map((e) => e.id).join(', ')}) – Füllstoff streichen oder zur Prämissen-Konsequenz machen`);
+  }
+  for (const b of timeline.beats || []) {
+    if (b.from >= H.window) continue;
+    if (!prem.some((e) => e.beat === b.id)) W('18.12', `Beat ${b.id} (${r2(b.from)} s) im Hook-Fenster ohne Prämissen-Ereignis`);
+  }
+  // Nichts vorwegnehmen (H8): Pointe und letztes HUD-Label nicht vor 15 s
+  if (timeline.pointe != null && timeline.pointe < H.window) E('18.12', `Pointe bei ${timeline.pointe} s liegt im Hook-Fenster`);
+  const hud = timeline.hud || [];
+  if (hud.length > 1) {
+    const last = hud[hud.length - 1].id;
+    const early = hud.find((h) => h.id === last && h.from < H.window);
+    if (early) W('18.12', `End-Label „${last}“ erscheint schon bei ${early.from} s – verrät den Endzustand`);
+  }
 }
 
 // Profil „voiceover“ = Stil A (Earth): Sprecher, Wort-für-Wort-Untertitel und Einblendungen statt Titel/HUD/Zeilen.
