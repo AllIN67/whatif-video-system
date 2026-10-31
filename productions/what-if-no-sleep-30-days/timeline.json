@@ -586,36 +586,36 @@
      {
       "t": 42.6,
       "pos": [
-       0.585,
-       0.3,
-       120.113
+       -0.952,
+       1.7,
+       119.565
       ],
       "look": [
        -2.4,
-       1.25,
-       118.1
+       0.95,
+       118.35
       ],
-      "fov": 50
+      "fov": 46
      },
      {
       "t": 47,
       "pos": [
-       0.27,
-       0.3,
-       119.179
+       -0.96,
+       1.7,
+       119.181
       ],
       "look": [
        -2.4,
-       1.25,
-       118.1
+       0.95,
+       118.35
       ],
-      "fov": 50
+      "fov": 46
      }
     ]
    },
    "transition_in": {
-    "type": "whip",
-    "direction": "left"
+    "type": "dip",
+    "frames": 6
    }
   },
   {
@@ -656,8 +656,8 @@
     ]
    },
    "transition_in": {
-    "type": "whip",
-    "direction": "right"
+    "type": "dip",
+    "frames": 6
    }
   },
   {
@@ -1696,8 +1696,8 @@
    "to": 47,
    "place": "park",
    "mood": "tired",
-   "framing": "low",
-   "preset": "low",
+   "framing": "close",
+   "preset": "close",
    "hud_change": true,
    "data": {
     "you": [
@@ -2183,12 +2183,6 @@
     "event": "last_window"
    },
    {
-    "src": "gen:whoosh",
-    "t": 42.266667,
-    "gain_db": -12,
-    "event": "cut:park"
-   },
-   {
     "src": "gen:pop",
     "t": 42.9,
     "gain_db": -18,
@@ -2217,12 +2211,6 @@
     "t": 45.8,
     "gain_db": -18,
     "event": "hud_step"
-   },
-   {
-    "src": "gen:whoosh",
-    "t": 46.666667,
-    "gain_db": -12,
-    "event": "cut:countdown"
    },
    {
     "src": "gen:appear",

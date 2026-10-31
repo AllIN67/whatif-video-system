@@ -154,9 +154,11 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
   const place = (h, p, rot) => h.setPosition(p[0], p[1], p[2], rot ?? p[3] ?? 0);
   const LOOK = {
     hook: 'nightRoom', flood: 'nightRoom', alarm: 'interior', office: 'interior', classroom: 'interior', kitchen_hope: 'interior',
-    record: 'day', hallucinate: 'day', shock_close: 'day', kitchen_confused: 'interior', night_city: 'night', park: 'day',
+    record: 'day', hallucinate: 'day', shock_close: 'day', kitchen_confused: 'interior', night_city: 'night', park: 'dusk',
     countdown: 'storm', sleep: 'nightRoom', twist: 'nightRoom',
   };
+  // Abendpark etwas dunkler: Helligkeitssprung an den Abblenden (Nacht → Park → Regen) bleibt moderat (QA-Durchlauf 2)
+  const PARK_DUSK = { ...kit.LOOKS.dusk, exposure: 0.88 };
   const FATIGUE = { hook: 0, flood: 0.1, alarm: 0.35, office: 0.45, kitchen_hope: 0.5, record: 0.6, hallucinate: 0.65, shock_close: 0.75, kitchen_confused: 0.8, night_city: 0.85, park: 0.95, countdown: 1, sleep: 1, twist: 0.8 };
 
   // Schaf springt quer über das Bett (x-Richtung); s = Sekunden seit Absprung
@@ -195,6 +197,7 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
 
       // Licht je Beat; Morgendämmerung und Schlafen als Überblendung
       if (id === 'flood') kit.applyLook(L, 'nightRoom', 'interior', ramp(t, ev('dawn'), ev('dawn') + 1.2));
+      else if (id === 'park') kit.applyLook(L, PARK_DUSK);
       else kit.applyLook(L, LOOK[id]);
       const origin = id === 'classroom' ? [40, 0, 0] : id === 'night_city' ? [96, 0, 10] : b.data?.you || [0, 0, 0];
       kit.sunAt(lights.sun, origin);
