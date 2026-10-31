@@ -1,0 +1,27 @@
+{
+ "lang": "en",
+ "number_locale": "en-US",
+ "title": { "text": "What if you couldn't sleep for 30 days?", "highlight": "sleep" },
+ "hud": {
+  "sheep": { "label": "SHEEP COUNTED", "unit": "", "sub": "NIGHT 1 · STILL AWAKE" },
+  "days": { "label": "DAYS WITHOUT SLEEP", "unit": "", "sub": "SLEEP: BLOCKED" },
+  "record": { "label": "DAYS WITHOUT SLEEP", "unit": "", "sub": "RECORD: 18.9 DAYS (1986)" },
+  "countdown": { "label": "SLEEP RETURNS IN", "unit": " h", "sub": "DAY 30" },
+  "slept": { "label": "TIME ASLEEP", "unit": " s", "sub": "FINALLY" }
+ },
+ "lines": {
+  "l_brain": "Your body is exhausted. Your brain isn't.",
+  "l_day1": "Day 1. You never slept.",
+  "l_nod": "Day 3. Your brain tries to sleep. Denied.",
+  "l_class": "Day 4. Everyone can sleep. Even the teacher.",
+  "l_extra": "Day 7. Extra hours. Time for everything.",
+  "l_record": "Day 19. Longer than anyone on record.",
+  "l_see": "Then your brain starts seeing things.",
+  "l_toaster": "Day 22. Simple things stop making sense.",
+  "l_alone": "Day 25. The whole world sleeps without you.",
+  "l_beg": "Day 28. Your body begs for rest.",
+  "l_return": "Day 30. Sleep comes back tonight.",
+  "l_sleep": "You finally fall asleep."
+ },
+ "endcard": { "title": "Would you hit snooze?", "sub": "Part 2?" }
+}

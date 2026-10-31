@@ -1,0 +1,202 @@
+{
+ "_comment": "Beat-Sheet (Quelle der Wahrheit). timeline.json wird daraus erzeugt: node tools/build_timeline.mjs productions/what-if-no-sleep-30-days",
+ "recipe": "B1",
+ "fps": 30,
+ "seed": 30,
+ "title": { "in": 0, "out": 3.4 },
+ "hud": { "start": 0, "decimals": 0 },
+ "pointe": "alarm_final",
+ "hook": {
+  "type": "process",
+  "proof": "bubble_pop",
+  "question": "How long can a body go without sleep – and what breaks first?",
+  "stakes": "Sleep is physically blocked: the Z-bubble bursts every time, the night passes, eye bags grow.",
+  "withheld": "Day 19 record, hallucinations, day 30 return of sleep and the alarm pointe."
+ },
+ "endcard": { "beat": "twist", "at": 2.2, "center": 0.3 },
+ "post": { "vignette": 0.18 },
+ "audio": {
+  "fade_out": 1.2,
+  "tick_gain_db": -18,
+  "whoosh_gain_db": -12,
+  "ambience_gain_db": -15,
+  "music": {
+   "bpm": 104, "root": "E", "seed": 9, "gain_db": -10,
+   "sections": [
+    { "from": 0, "to": 11.6, "style": "pulse" },
+    { "from": 11.6, "to": 28.0, "style": "drive" },
+    { "from": 28.0, "to": 34.0, "style": "pulse" },
+    { "from": 34.0, "to": 47.0, "style": "drive" },
+    { "from": 47.0, "to": 51.2, "style": "drive_hi" },
+    { "from": 51.2, "to": 56.2, "style": "calm" },
+    { "from": 56.2, "to": 57.0, "style": "silence" },
+    { "from": 57.0, "to": 61.4, "style": "pulse" }
+   ]
+  }
+ },
+ "beats": [
+  {
+   "id": "hook", "dur": 4.0, "place": "bedroom", "mood": "shock", "ambience": "room",
+   "camera": { "preset": "orbit", "target": [0.3, 1.35, -1.4], "yaw": 14, "dist": 4.4, "height": 0.45, "swing": 14, "fov": 50 },
+   "hud": { "label": "sheep", "to": 140, "mode": "linear", "window": [0.0, 3.9] },
+   "events": [
+    { "id": "bubble_pop", "at": 0.5, "what": "Z-Gedankenblase über dem Kopf platzt, Augen springen auf (Schlaf blockiert)", "premise": "visible", "sfx": "pop", "gain_db": -6, "trigger": true, "flash": "warn" },
+    { "id": "sheep_more", "at": 1.4, "what": "zwei Schafe springen gleichzeitig über das Bett und blöken", "premise": "visible", "sfx": "bleat", "gain_db": -11 },
+    { "id": "sit_up", "at": 2.7, "what": "Figur dreht den Kopf zur Kamera, starrt mit weit offenen Augen", "sfx": "thud", "gain_db": -14 }
+   ],
+   "data": { "you": [0.3, 0.55, -1.4, 0], "sit": [0.3, 0, -0.55, 0] }
+  },
+  {
+   "id": "flood", "dur": 4.0, "place": "bedroom", "mood": "tired", "ambience": "room",
+   "line": "l_brain",
+   "camera": { "preset": "high", "target": [0.2, 0.4, -0.7], "yaw": 20, "dist": 3.0, "height": 5.2, "swing": 10, "fov": 52 },
+   "hud": { "to": 1000, "mode": "linear", "window": [0.1, 3.4] },
+   "events": [
+    { "id": "sheep_wave", "at": 0.6, "what": "Schafherde füllt das Zimmer, springt in Wellen über das Bett", "premise": "visible", "sfx": "bleat", "gain_db": -9 },
+    { "id": "dawn", "at": 2.6, "what": "Fenster wird hell – die ganze Nacht ist vorbei, Augen immer noch offen", "premise": "visible", "sfx": "shimmer", "gain_db": -12, "flash": "warn" }
+   ],
+   "data": { "you": [0.3, 0, -0.55, 0] }
+  },
+  {
+   "id": "alarm", "dur": 3.6, "place": "bedroom", "mood": "angry", "ambience": "room", "transition": "dip",
+   "line": "l_day1",
+   "camera": { "preset": "close", "target": [0.8, 1.05, -1.25], "yaw": -60, "dist": 3.0, "height": 0.3, "swing": 6, "fov": 46 },
+   "hud": { "label": "days", "to": 1, "mode": "steps", "steps": 1, "window": [0.0, 0.0], "tick": "pop" },
+   "events": [
+    { "id": "bags", "at": 0.1, "what": "Augenringe werden sichtbar (Körper zeigt den Schlafmangel)", "premise": "visible", "sfx": "heartbeat", "gain_db": -12, "flash": "loss" },
+    { "id": "alarm_rings", "at": 0.9, "what": "Wecker klingelt 7:00 – für jemanden, der nie geschlafen hat (Aufbau der Pointe)", "sfx": "alarm", "gain_db": -12 },
+    { "id": "slap", "at": 1.9, "what": "Figur schlägt genervt auf den Wecker", "sfx": "thud", "gain_db": -10 }
+   ],
+   "data": { "you": [0.3, 0, -0.55, 0] }
+  },
+  {
+   "id": "office", "dur": 4.2, "place": "office", "mood": "tired", "ambience": "room", "transition": "dip",
+   "line": "l_nod",
+   "camera": { "preset": "push", "target": [-90, 1.15, 0.95], "yaw": 205, "dist": 2.6, "distTo": 1.9, "height": 0.25, "fov": 45 },
+   "hud": { "to": 3, "mode": "steps", "steps": 2, "window": [0.2, 0.6], "tick": "pop" },
+   "events": [
+    { "id": "nod1", "at": 1.0, "what": "Kopf sackt weg, Z-Blase entsteht – und platzt, Kopf schnellt hoch", "premise": "visible", "sfx": "pop", "gain_db": -8, "flash": "warn" },
+    { "id": "nod2", "at": 2.6, "what": "zweiter Versuch, wieder platzt die Blase; Kollegen drehen sich um", "premise": "visible", "sfx": "zap", "gain_db": -14 }
+   ],
+   "data": { "you": [-90, 0, 0.95, 3.1416] }
+  },
+  {
+   "id": "classroom", "dur": 4.0, "place": "classroom", "mood": "worried", "ambience": "room", "transition": "dip",
+   "line": "l_class",
+   "camera": { "preset": "pov", "eye": [40.75, 1.45, 2.9], "eyeTo": [40.7, 1.4, 2.5], "target": [40.6, 0.9, -2.4], "fov": 56, "sway": 0.02 },
+   "hud": { "to": 4, "mode": "steps", "steps": 1, "window": [0.3, 0.3], "tick": "pop" },
+   "events": [
+    { "id": "class_zzz", "at": 0.8, "what": "über allen Mitschülern erscheinen Z-Blasen – sie schlafen ein", "premise": "visible", "sfx": "pop", "gain_db": -12 },
+    { "id": "teacher_sleeps", "at": 2.4, "what": "auch die Lehrerin sackt am Pult weg, ihre Blase erscheint", "premise": "visible", "sfx": "thud", "gain_db": -10 }
+   ],
+   "data": { "teacher": [41.3, 0, -2.4, 0] }
+  },
+  {
+   "id": "kitchen_hope", "dur": 4.0, "place": "kitchen", "mood": "happy", "ambience": "room", "transition": "dip",
+   "line": "l_extra",
+   "camera": { "preset": "pull", "target": [-39.6, 1.2, -1.3], "yaw": 24, "dist": 2.4, "distTo": 4.2, "height": 0.35, "fov": 46 },
+   "hud": { "to": 7, "mode": "steps", "steps": 3, "window": [0.3, 2.6], "tick": "pop" },
+   "events": [
+    { "id": "toast_stack", "at": 0.9, "what": "4 Uhr früh: Toaster spuckt Toast um Toast, Stapel wächst", "premise": "hud", "sfx": "pop", "gain_db": -10 },
+    { "id": "cheer", "at": 2.4, "what": "Figur jubelt – 24 Stunden am Tag Zeit (Hoffnung)", "sfx": "charge", "gain_db": -10, "flash": "gain" }
+   ],
+   "data": { "you": [-39.95, 0, -1.1, 0] }
+  },
+  {
+   "id": "record", "dur": 4.2, "place": "street", "mood": "laugh", "ambience": "city", "transition": "dip",
+   "line": "l_record",
+   "camera": { "preset": "low", "target": [94.6, 1.45, 2.0], "yaw": 80, "dist": 4.4, "camHeight": 0.3, "fov": 50 },
+   "hud": { "label": "record", "to": 19, "mode": "steps", "steps": 6, "window": [0.2, 2.0], "tick": "tick" },
+   "events": [
+    { "id": "record_broken", "at": 2.1, "what": "Menge jubelt, Konfetti – länger wach als je ein Mensch dokumentiert", "premise": "visible", "sfx": "ding", "gain_db": -8, "flash": "gain" },
+    { "id": "crowd_lift", "at": 2.9, "what": "Figur reißt die Arme hoch", "sfx": "charge", "gain_db": -14 }
+   ],
+   "data": { "you": [94.6, 0.12, 2.0, 1.5708] }
+  },
+  {
+   "id": "hallucinate", "dur": 3.8, "place": "street", "mood": "shock", "ambience": "city",
+   "line": "l_see",
+   "camera": { "preset": "orbit", "target": [94.8, 1.0, 2.0], "yaw": 55, "dist": 6.2, "height": 1.6, "swing": 26, "fov": 48 },
+   "hud": { "label": "days", "to": 20, "mode": "steps", "steps": 1, "window": [1.6, 1.6], "tick": "pop" },
+   "events": [
+    { "id": "first_sheep", "at": 0.7, "what": "ein Jubelnder wird zum Schaf (Halluzination)", "premise": "visible", "sfx": "bleat", "gain_db": -9 },
+    { "id": "all_sheep", "at": 1.9, "what": "die ganze Menge sind jetzt Schafe", "premise": "visible", "sfx": "bleat", "gain_db": -8, "flash": "warn" }
+   ],
+   "data": { "you": [94.6, 0.12, 2.0, 1.5708] }
+  },
+  {
+   "id": "shock_close", "dur": 2.2, "place": "street", "mood": "panic", "ambience": "city",
+   "camera": { "preset": "close", "target": [94.6, 1.78, 2.0], "yaw": 95, "dist": 1.75, "height": 0.03, "swing": 6, "fov": 40 },
+   "hud": { "to": 21, "mode": "steps", "steps": 1, "window": [0.9, 0.9], "tick": "pop" },
+   "events": [
+    { "id": "recoil", "at": 0.25, "what": "Figur weicht zurück, reibt sich die Augen, tiefe Augenringe", "premise": "visible", "sfx": "heartbeat", "gain_db": -8, "flash": "loss" }
+   ],
+   "data": { "you": [94.6, 0.12, 2.0, 1.5708] }
+  },
+  {
+   "id": "kitchen_confused", "dur": 4.0, "place": "kitchen", "mood": "worried", "ambience": "room", "transition": "dip",
+   "line": "l_toaster",
+   "camera": { "preset": "push", "target": [-39.7, 1.3, -1.5], "yaw": 28, "dist": 3.3, "distTo": 2.7, "height": 0.25, "fov": 44 },
+   "hud": { "to": 22, "mode": "steps", "steps": 1, "window": [0.3, 0.3], "tick": "pop" },
+   "events": [
+    { "id": "phone_in", "at": 0.9, "what": "Figur steckt das Handy in den Toaster", "premise": "visible", "sfx": "thud", "gain_db": -12 },
+    { "id": "phone_pops", "at": 2.5, "what": "Toaster schleudert das Handy heraus, Figur starrt verständnislos", "premise": "visible", "sfx": "pop", "gain_db": -6, "flash": "warn" }
+   ],
+   "data": { "you": [-40.2, 0, -1.25, 0] }
+  },
+  {
+   "id": "night_city", "dur": 4.6, "place": "street", "mood": "sad", "ambience": "city", "transition": "dip",
+   "line": "l_alone",
+   "camera": { "preset": "high", "target": [96.5, 0.5, 10], "yaw": 70, "dist": 11, "height": 10, "swing": 10, "fov": 50 },
+   "hud": { "to": 25, "mode": "steps", "steps": 3, "window": [0.3, 2.8], "tick": "pop" },
+   "events": [
+    { "id": "windows_dark", "at": 0.8, "what": "Fenster der Stadt erlöschen eines nach dem anderen – alle schlafen", "premise": "visible", "sfx": "power_down", "gain_db": -16 },
+    { "id": "last_window", "at": 3.0, "what": "letztes Fenster aus, nur die Figur steht wach unter der Laterne", "premise": "visible", "sfx": "loss", "gain_db": -12, "flash": "loss" }
+   ],
+   "data": { "you": [94.6, 0.12, 10, 1.5708] }
+  },
+  {
+   "id": "park", "dur": 4.4, "place": "park", "mood": "tired", "ambience": "city", "transition": "dip",
+   "line": "l_beg",
+   "camera": { "preset": "low", "target": [-2.4, 1.25, 118.1], "yaw": 62, "dist": 3.6, "camHeight": 0.3, "fov": 50 },
+   "hud": { "to": 28, "mode": "steps", "steps": 3, "window": [0.3, 3.2], "tick": "pop" },
+   "events": [
+    { "id": "pigeon_lands", "at": 0.9, "what": "Taube landet auf der liegenden Figur – die Augen bleiben offen", "premise": "visible", "sfx": "thud", "gain_db": -16 },
+    { "id": "bubble_tries", "at": 2.2, "what": "Z-Blase entsteht und platzt dreimal hintereinander", "premise": "visible", "sfx": "pop", "gain_db": -9, "flash": "warn" }
+   ],
+   "data": { "you": [-2.4, 0.47, 119.0, 0] }
+  },
+  {
+   "id": "countdown", "dur": 4.2, "place": "street", "mood": "happy", "ambience": "rain", "transition": "dip",
+   "line": "l_return",
+   "camera": { "preset": "track", "a": [94.8, 1.3, 3.4], "b": [94.8, 1.3, 8.6], "yaw": 62, "dist": 5.3, "height": 0.4, "fov": 48 },
+   "hud": { "label": "countdown", "to": 3, "mode": "linear", "window": [0.25, 4.0] },
+   "events": [
+    { "id": "countdown_on", "at": 0.15, "what": "Countdown erscheint: Schlaf kehrt heute Nacht zurück", "sfx": "appear", "gain_db": -10, "flash": "warn", "hud_to": 24 },
+    { "id": "splash", "at": 2.4, "what": "Figur rennt durch den Regen nach Hause, springt über eine Pfütze", "sfx": "thud", "gain_db": -14 }
+   ],
+   "data": { "you": [94.8, 0.12, 3.0, 0], "youTo": [94.8, 0.12, 9.0, 0] }
+  },
+  {
+   "id": "sleep", "dur": 4.8, "place": "bedroom", "mood": "relief", "ambience": "room", "transition": "dip",
+   "line": "l_sleep",
+   "camera": { "preset": "orbit", "target": [0.3, 0.85, -1.1], "yaw": -10, "dist": 2.9, "height": 0.6, "swing": 20, "fov": 46 },
+   "hud": { "to": 0, "mode": "linear", "window": [0.0, 1.8] },
+   "events": [
+    { "id": "lie_down", "at": 0.6, "what": "Figur lässt sich ins Bett fallen", "sfx": "thud", "gain_db": -12 },
+    { "id": "sleep_back", "at": 1.8, "what": "Countdown 0: Z-Blase bleibt endlich stehen, Augen schließen sich", "premise": "visible", "sfx": "shimmer", "gain_db": -8, "flash": "gain" }
+   ],
+   "data": { "sit": [0.3, 0, -0.55, 0], "you": [0.3, 0.55, -1.4, 0] }
+  },
+  {
+   "id": "twist", "dur": 5.4, "place": "bedroom", "mood": "shock", "ambience": "room",
+   "camera": { "preset": "push", "target": [0.85, 0.75, -2.05], "yaw": 30, "dist": 3.0, "distTo": 2.5, "height": 0.55, "fov": 46, "drift": 0.04 },
+   "hud": { "label": "slept", "to": 59, "mode": "linear", "window": [0.0, 0.95] },
+   "events": [
+    { "id": "alarm_final", "at": 1.0, "what": "Pointe: Wecker springt auf 7:00 und klingelt – nach einer Minute Schlaf", "sfx": ["alarm", "impact"], "gain_db": -6, "flash": "loss", "shake": { "amp": 0.03, "dur": 0.5 }, "hud_to": 60 },
+    { "id": "eyes_open", "at": 1.2, "what": "Augen reißen auf, Blase platzt", "sfx": "pop", "gain_db": -10 }
+   ],
+   "data": { "you": [0.3, 0.55, -1.4, 0] }
+  }
+ ]
+}

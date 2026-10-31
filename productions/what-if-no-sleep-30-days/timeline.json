@@ -1,0 +1,2314 @@
+{
+ "_comment": "ERZEUGT von tools/build_timeline.mjs aus beats.json – nicht von Hand ändern.",
+ "fps": 30,
+ "duration": 61.4,
+ "seed": 30,
+ "recipe": "B1",
+ "pointe": 57,
+ "title": {
+  "in": 0,
+  "out": 3.4
+ },
+ "shots": [
+  {
+   "id": "hook",
+   "from": 0,
+   "to": 4,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 0,
+      "pos": [
+       0.836,
+       1.8,
+       2.967
+      ],
+      "look": [
+       0.3,
+       1.35,
+       -1.4
+      ],
+      "fov": 50
+     },
+     {
+      "t": 1,
+      "pos": [
+       1.102,
+       1.8,
+       2.926
+      ],
+      "look": [
+       0.3,
+       1.35,
+       -1.4
+      ],
+      "fov": 50
+     },
+     {
+      "t": 2,
+      "pos": [
+       1.364,
+       1.8,
+       2.869
+      ],
+      "look": [
+       0.3,
+       1.35,
+       -1.4
+      ],
+      "fov": 50
+     },
+     {
+      "t": 3,
+      "pos": [
+       1.623,
+       1.8,
+       2.796
+      ],
+      "look": [
+       0.3,
+       1.35,
+       -1.4
+      ],
+      "fov": 50
+     },
+     {
+      "t": 4,
+      "pos": [
+       1.877,
+       1.8,
+       2.708
+      ],
+      "look": [
+       0.3,
+       1.35,
+       -1.4
+      ],
+      "fov": 50
+     }
+    ]
+   }
+  },
+  {
+   "id": "flood",
+   "from": 4,
+   "to": 8,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 4,
+      "pos": [
+       0.976,
+       5.86,
+       2.198
+      ],
+      "look": [
+       0.2,
+       0.4,
+       -0.7
+      ],
+      "fov": 52
+     },
+     {
+      "t": 8,
+      "pos": [
+       1.341,
+       5.34,
+       1.747
+      ],
+      "look": [
+       0.2,
+       0.4,
+       -0.7
+      ],
+      "fov": 52
+     }
+    ]
+   }
+  },
+  {
+   "id": "alarm",
+   "from": 8,
+   "to": 11.6,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 8,
+      "pos": [
+       -2.087,
+       1.35,
+       0.221
+      ],
+      "look": [
+       0.8,
+       1.05,
+       -1.25
+      ],
+      "fov": 46
+     },
+     {
+      "t": 11.6,
+      "pos": [
+       -1.59,
+       1.35,
+       0.302
+      ],
+      "look": [
+       0.8,
+       1.05,
+       -1.25
+      ],
+      "fov": 46
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "office",
+   "from": 11.6,
+   "to": 15.8,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 11.6,
+      "pos": [
+       -90.986,
+       1.4,
+       -1.459
+      ],
+      "look": [
+       -90,
+       1.15,
+       0.95
+      ],
+      "fov": 45
+     },
+     {
+      "t": 15.8,
+      "pos": [
+       -90.916,
+       1.4,
+       -0.719
+      ],
+      "look": [
+       -90,
+       1.15,
+       0.95
+      ],
+      "fov": 45
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "classroom",
+   "from": 15.8,
+   "to": 19.8,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 15.8,
+      "pos": [
+       40.75,
+       1.46,
+       2.9
+      ],
+      "look": [
+       40.6,
+       0.903,
+       -2.4
+      ],
+      "fov": 56
+     },
+     {
+      "t": 16.8,
+      "pos": [
+       40.757,
+       1.434,
+       2.8
+      ],
+      "look": [
+       40.606,
+       0.899,
+       -2.4
+      ],
+      "fov": 56
+     },
+     {
+      "t": 17.8,
+      "pos": [
+       40.716,
+       1.42,
+       2.7
+      ],
+      "look": [
+       40.597,
+       0.899,
+       -2.4
+      ],
+      "fov": 56
+     },
+     {
+      "t": 18.8,
+      "pos": [
+       40.697,
+       1.423,
+       2.6
+      ],
+      "look": [
+       40.595,
+       0.903,
+       -2.4
+      ],
+      "fov": 56
+     },
+     {
+      "t": 19.8,
+      "pos": [
+       40.716,
+       1.388,
+       2.5
+      ],
+      "look": [
+       40.605,
+       0.897,
+       -2.4
+      ],
+      "fov": 56
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "kitchen_hope",
+   "from": 19.8,
+   "to": 23.8,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 19.8,
+      "pos": [
+       -38.738,
+       1.55,
+       0.943
+      ],
+      "look": [
+       -39.6,
+       1.2,
+       -1.3
+      ],
+      "fov": 46
+     },
+     {
+      "t": 23.8,
+      "pos": [
+       -37.778,
+       1.55,
+       2.486
+      ],
+      "look": [
+       -39.6,
+       1.2,
+       -1.3
+      ],
+      "fov": 46
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "record",
+   "from": 23.8,
+   "to": 28,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 23.8,
+      "pos": [
+       98.83,
+       0.3,
+       3.213
+      ],
+      "look": [
+       94.6,
+       1.45,
+       2
+      ],
+      "fov": 50
+     },
+     {
+      "t": 28,
+      "pos": [
+       98.111,
+       0.3,
+       2.246
+      ],
+      "look": [
+       94.6,
+       1.45,
+       2
+      ],
+      "fov": 50
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "hallucinate",
+   "from": 28,
+   "to": 31.8,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 28,
+      "pos": [
+       98.949,
+       2.6,
+       6.607
+      ],
+      "look": [
+       94.8,
+       1,
+       2
+      ],
+      "fov": 48
+     },
+     {
+      "t": 28.95,
+      "pos": [
+       99.444,
+       2.6,
+       6.108
+      ],
+      "look": [
+       94.8,
+       1,
+       2
+      ],
+      "fov": 48
+     },
+     {
+      "t": 29.9,
+      "pos": [
+       99.879,
+       2.6,
+       5.556
+      ],
+      "look": [
+       94.8,
+       1,
+       2
+      ],
+      "fov": 48
+     },
+     {
+      "t": 30.85,
+      "pos": [
+       100.249,
+       2.6,
+       4.958
+      ],
+      "look": [
+       94.8,
+       1,
+       2
+      ],
+      "fov": 48
+     },
+     {
+      "t": 31.8,
+      "pos": [
+       100.549,
+       2.6,
+       4.323
+      ],
+      "look": [
+       94.8,
+       1,
+       2
+      ],
+      "fov": 48
+     }
+    ]
+   }
+  },
+  {
+   "id": "shock_close",
+   "from": 31.8,
+   "to": 34,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 31.8,
+      "pos": [
+       96.489,
+       1.81,
+       1.934
+      ],
+      "look": [
+       94.6,
+       1.78,
+       2
+      ],
+      "fov": 40
+     },
+     {
+      "t": 34,
+      "pos": [
+       96.246,
+       1.81,
+       1.769
+      ],
+      "look": [
+       94.6,
+       1.78,
+       2
+      ],
+      "fov": 40
+     }
+    ]
+   }
+  },
+  {
+   "id": "kitchen_confused",
+   "from": 34,
+   "to": 38,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 34,
+      "pos": [
+       -38.261,
+       1.55,
+       1.472
+      ],
+      "look": [
+       -39.7,
+       1.3,
+       -1.5
+      ],
+      "fov": 44
+     },
+     {
+      "t": 38,
+      "pos": [
+       -38.322,
+       1.55,
+       0.825
+      ],
+      "look": [
+       -39.7,
+       1.3,
+       -1.5
+      ],
+      "fov": 44
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "night_city",
+   "from": 38,
+   "to": 42.6,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 38,
+      "pos": [
+       106.469,
+       11,
+       14.649
+      ],
+      "look": [
+       96.5,
+       0.5,
+       10
+      ],
+      "fov": 50
+     },
+     {
+      "t": 42.6,
+      "pos": [
+       106.063,
+       10,
+       12.562
+      ],
+      "look": [
+       96.5,
+       0.5,
+       10
+      ],
+      "fov": 50
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "park",
+   "from": 42.6,
+   "to": 47,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 42.6,
+      "pos": [
+       0.585,
+       0.3,
+       120.113
+      ],
+      "look": [
+       -2.4,
+       1.25,
+       118.1
+      ],
+      "fov": 50
+     },
+     {
+      "t": 47,
+      "pos": [
+       0.27,
+       0.3,
+       119.179
+      ],
+      "look": [
+       -2.4,
+       1.25,
+       118.1
+      ],
+      "fov": 50
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "countdown",
+   "from": 47,
+   "to": 51.2,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 47,
+      "pos": [
+       99.48,
+       1.7,
+       5.888
+      ],
+      "look": [
+       94.8,
+       1.3,
+       3.4
+      ],
+      "fov": 48
+     },
+     {
+      "t": 51.2,
+      "pos": [
+       99.48,
+       1.7,
+       11.088
+      ],
+      "look": [
+       94.8,
+       1.3,
+       8.6
+      ],
+      "fov": 48
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "sleep",
+   "from": 51.2,
+   "to": 56,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 51.2,
+      "pos": [
+       -0.692,
+       1.45,
+       1.625
+      ],
+      "look": [
+       0.3,
+       0.85,
+       -1.1
+      ],
+      "fov": 46
+     },
+     {
+      "t": 52.4,
+      "pos": [
+       -0.451,
+       1.45,
+       1.701
+      ],
+      "look": [
+       0.3,
+       0.85,
+       -1.1
+      ],
+      "fov": 46
+     },
+     {
+      "t": 53.6,
+      "pos": [
+       -0.204,
+       1.45,
+       1.756
+      ],
+      "look": [
+       0.3,
+       0.85,
+       -1.1
+      ],
+      "fov": 46
+     },
+     {
+      "t": 54.8,
+      "pos": [
+       0.047,
+       1.45,
+       1.789
+      ],
+      "look": [
+       0.3,
+       0.85,
+       -1.1
+      ],
+      "fov": 46
+     },
+     {
+      "t": 56,
+      "pos": [
+       0.3,
+       1.45,
+       1.8
+      ],
+      "look": [
+       0.3,
+       0.85,
+       -1.1
+      ],
+      "fov": 46
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "twist",
+   "from": 56,
+   "to": 61.4,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 56,
+      "pos": [
+       2.333,
+       1.3,
+       0.558
+      ],
+      "look": [
+       0.85,
+       0.75,
+       -2.05
+      ],
+      "fov": 46
+     },
+     {
+      "t": 61.4,
+      "pos": [
+       2.117,
+       1.3,
+       0.105
+      ],
+      "look": [
+       0.85,
+       0.75,
+       -2.05
+      ],
+      "fov": 46
+     }
+    ]
+   },
+   "shake": [
+    {
+     "t": 57,
+     "dur": 0.5,
+     "amp": 0.03,
+     "freq": 9
+    }
+   ]
+  }
+ ],
+ "hud": [
+  {
+   "id": "sheep",
+   "from": 0,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      0,
+      0
+     ],
+     [
+      3.9,
+      140,
+      "linear"
+     ],
+     [
+      4.1,
+      140,
+      "linear"
+     ],
+     [
+      7.4,
+      1000,
+      "linear"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 0.5,
+     "kind": "warn"
+    },
+    {
+     "t": 6.6,
+     "kind": "warn"
+    }
+   ]
+  },
+  {
+   "id": "days",
+   "from": 8,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      8,
+      1
+     ],
+     [
+      11.8,
+      2,
+      "hold"
+     ],
+     [
+      12.2,
+      3,
+      "hold"
+     ],
+     [
+      16.1,
+      4,
+      "hold"
+     ],
+     [
+      20.1,
+      5,
+      "hold"
+     ],
+     [
+      21.266667,
+      6,
+      "hold"
+     ],
+     [
+      22.4,
+      7,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 8.1,
+     "kind": "loss"
+    },
+    {
+     "t": 12.6,
+     "kind": "warn"
+    },
+    {
+     "t": 22.2,
+     "kind": "gain"
+    }
+   ]
+  },
+  {
+   "id": "record",
+   "from": 23.8,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      23.8,
+      7
+     ],
+     [
+      24,
+      9,
+      "hold"
+     ],
+     [
+      24.366667,
+      11,
+      "hold"
+     ],
+     [
+      24.733333,
+      13,
+      "hold"
+     ],
+     [
+      25.066667,
+      15,
+      "hold"
+     ],
+     [
+      25.433333,
+      17,
+      "hold"
+     ],
+     [
+      25.8,
+      19,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 25.9,
+     "kind": "gain"
+    }
+   ]
+  },
+  {
+   "id": "days",
+   "from": 28,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      28,
+      19
+     ],
+     [
+      29.6,
+      20,
+      "hold"
+     ],
+     [
+      32.7,
+      21,
+      "hold"
+     ],
+     [
+      34.3,
+      22,
+      "hold"
+     ],
+     [
+      38.3,
+      23,
+      "hold"
+     ],
+     [
+      39.566667,
+      24,
+      "hold"
+     ],
+     [
+      40.8,
+      25,
+      "hold"
+     ],
+     [
+      42.9,
+      26,
+      "hold"
+     ],
+     [
+      44.333333,
+      27,
+      "hold"
+     ],
+     [
+      45.8,
+      28,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 29.9,
+     "kind": "warn"
+    },
+    {
+     "t": 32.033333,
+     "kind": "loss"
+    },
+    {
+     "t": 36.5,
+     "kind": "warn"
+    },
+    {
+     "t": 41,
+     "kind": "loss"
+    },
+    {
+     "t": 44.8,
+     "kind": "warn"
+    }
+   ]
+  },
+  {
+   "id": "countdown",
+   "from": 47,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      47,
+      28
+     ],
+     [
+      47.166667,
+      24,
+      "hold"
+     ],
+     [
+      47.266667,
+      24,
+      "linear"
+     ],
+     [
+      51,
+      3,
+      "linear"
+     ],
+     [
+      51.2,
+      3,
+      "linear"
+     ],
+     [
+      53,
+      0,
+      "linear"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 47.166667,
+     "kind": "warn"
+    },
+    {
+     "t": 53,
+     "kind": "gain"
+    }
+   ]
+  },
+  {
+   "id": "slept",
+   "from": 56,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      56,
+      0
+     ],
+     [
+      56.966667,
+      59,
+      "linear"
+     ],
+     [
+      57,
+      60,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 57,
+     "kind": "loss"
+    }
+   ]
+  }
+ ],
+ "lines": [
+  {
+   "id": "l_brain",
+   "in": 4.3,
+   "out": 7.866667
+  },
+  {
+   "id": "l_day1",
+   "in": 8.3,
+   "out": 11.466667
+  },
+  {
+   "id": "l_nod",
+   "in": 11.9,
+   "out": 15.666667
+  },
+  {
+   "id": "l_class",
+   "in": 16.1,
+   "out": 19.666667
+  },
+  {
+   "id": "l_extra",
+   "in": 20.1,
+   "out": 23.666667
+  },
+  {
+   "id": "l_record",
+   "in": 24.1,
+   "out": 27.866667
+  },
+  {
+   "id": "l_see",
+   "in": 28.3,
+   "out": 31.666667
+  },
+  {
+   "id": "l_toaster",
+   "in": 34.3,
+   "out": 37.866667
+  },
+  {
+   "id": "l_alone",
+   "in": 38.3,
+   "out": 42.466667
+  },
+  {
+   "id": "l_beg",
+   "in": 42.9,
+   "out": 46.866667
+  },
+  {
+   "id": "l_return",
+   "in": 47.3,
+   "out": 51.066667
+  },
+  {
+   "id": "l_sleep",
+   "in": 51.5,
+   "out": 55.866667
+  }
+ ],
+ "events": [
+  {
+   "t": 0.5,
+   "id": "bubble_pop",
+   "beat": "hook",
+   "trigger": true,
+   "what": "Z-Gedankenblase über dem Kopf platzt, Augen springen auf (Schlaf blockiert)",
+   "sfx": [
+    "pop"
+   ],
+   "flash": "warn",
+   "premise": "visible"
+  },
+  {
+   "t": 1.4,
+   "id": "sheep_more",
+   "beat": "hook",
+   "what": "zwei Schafe springen gleichzeitig über das Bett und blöken",
+   "sfx": [
+    "bleat"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 2.7,
+   "id": "sit_up",
+   "beat": "hook",
+   "what": "Figur dreht den Kopf zur Kamera, starrt mit weit offenen Augen",
+   "sfx": [
+    "thud"
+   ]
+  },
+  {
+   "t": 4.6,
+   "id": "sheep_wave",
+   "beat": "flood",
+   "what": "Schafherde füllt das Zimmer, springt in Wellen über das Bett",
+   "sfx": [
+    "bleat"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 6.6,
+   "id": "dawn",
+   "beat": "flood",
+   "what": "Fenster wird hell – die ganze Nacht ist vorbei, Augen immer noch offen",
+   "sfx": [
+    "shimmer"
+   ],
+   "flash": "warn",
+   "premise": "visible"
+  },
+  {
+   "t": 8.1,
+   "id": "bags",
+   "beat": "alarm",
+   "what": "Augenringe werden sichtbar (Körper zeigt den Schlafmangel)",
+   "sfx": [
+    "heartbeat"
+   ],
+   "flash": "loss",
+   "premise": "visible"
+  },
+  {
+   "t": 8.9,
+   "id": "alarm_rings",
+   "beat": "alarm",
+   "what": "Wecker klingelt 7:00 – für jemanden, der nie geschlafen hat (Aufbau der Pointe)",
+   "sfx": [
+    "alarm"
+   ]
+  },
+  {
+   "t": 9.9,
+   "id": "slap",
+   "beat": "alarm",
+   "what": "Figur schlägt genervt auf den Wecker",
+   "sfx": [
+    "thud"
+   ]
+  },
+  {
+   "t": 12.6,
+   "id": "nod1",
+   "beat": "office",
+   "what": "Kopf sackt weg, Z-Blase entsteht – und platzt, Kopf schnellt hoch",
+   "sfx": [
+    "pop"
+   ],
+   "flash": "warn",
+   "premise": "visible"
+  },
+  {
+   "t": 14.2,
+   "id": "nod2",
+   "beat": "office",
+   "what": "zweiter Versuch, wieder platzt die Blase; Kollegen drehen sich um",
+   "sfx": [
+    "zap"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 16.6,
+   "id": "class_zzz",
+   "beat": "classroom",
+   "what": "über allen Mitschülern erscheinen Z-Blasen – sie schlafen ein",
+   "sfx": [
+    "pop"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 18.2,
+   "id": "teacher_sleeps",
+   "beat": "classroom",
+   "what": "auch die Lehrerin sackt am Pult weg, ihre Blase erscheint",
+   "sfx": [
+    "thud"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 20.7,
+   "id": "toast_stack",
+   "beat": "kitchen_hope",
+   "what": "4 Uhr früh: Toaster spuckt Toast um Toast, Stapel wächst",
+   "sfx": [
+    "pop"
+   ],
+   "premise": "hud"
+  },
+  {
+   "t": 22.2,
+   "id": "cheer",
+   "beat": "kitchen_hope",
+   "what": "Figur jubelt – 24 Stunden am Tag Zeit (Hoffnung)",
+   "sfx": [
+    "charge"
+   ],
+   "flash": "gain"
+  },
+  {
+   "t": 25.9,
+   "id": "record_broken",
+   "beat": "record",
+   "what": "Menge jubelt, Konfetti – länger wach als je ein Mensch dokumentiert",
+   "sfx": [
+    "ding"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 26.7,
+   "id": "crowd_lift",
+   "beat": "record",
+   "what": "Figur reißt die Arme hoch",
+   "sfx": [
+    "charge"
+   ]
+  },
+  {
+   "t": 28.7,
+   "id": "first_sheep",
+   "beat": "hallucinate",
+   "what": "ein Jubelnder wird zum Schaf (Halluzination)",
+   "sfx": [
+    "bleat"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 29.9,
+   "id": "all_sheep",
+   "beat": "hallucinate",
+   "what": "die ganze Menge sind jetzt Schafe",
+   "sfx": [
+    "bleat"
+   ],
+   "flash": "warn",
+   "premise": "visible"
+  },
+  {
+   "t": 32.033333,
+   "id": "recoil",
+   "beat": "shock_close",
+   "what": "Figur weicht zurück, reibt sich die Augen, tiefe Augenringe",
+   "sfx": [
+    "heartbeat"
+   ],
+   "flash": "loss",
+   "premise": "visible"
+  },
+  {
+   "t": 34.9,
+   "id": "phone_in",
+   "beat": "kitchen_confused",
+   "what": "Figur steckt das Handy in den Toaster",
+   "sfx": [
+    "thud"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 36.5,
+   "id": "phone_pops",
+   "beat": "kitchen_confused",
+   "what": "Toaster schleudert das Handy heraus, Figur starrt verständnislos",
+   "sfx": [
+    "pop"
+   ],
+   "flash": "warn",
+   "premise": "visible"
+  },
+  {
+   "t": 38.8,
+   "id": "windows_dark",
+   "beat": "night_city",
+   "what": "Fenster der Stadt erlöschen eines nach dem anderen – alle schlafen",
+   "sfx": [
+    "power_down"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 41,
+   "id": "last_window",
+   "beat": "night_city",
+   "what": "letztes Fenster aus, nur die Figur steht wach unter der Laterne",
+   "sfx": [
+    "loss"
+   ],
+   "flash": "loss",
+   "premise": "visible"
+  },
+  {
+   "t": 43.5,
+   "id": "pigeon_lands",
+   "beat": "park",
+   "what": "Taube landet auf der liegenden Figur – die Augen bleiben offen",
+   "sfx": [
+    "thud"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 44.8,
+   "id": "bubble_tries",
+   "beat": "park",
+   "what": "Z-Blase entsteht und platzt dreimal hintereinander",
+   "sfx": [
+    "pop"
+   ],
+   "flash": "warn",
+   "premise": "visible"
+  },
+  {
+   "t": 47.166667,
+   "id": "countdown_on",
+   "beat": "countdown",
+   "what": "Countdown erscheint: Schlaf kehrt heute Nacht zurück",
+   "sfx": [
+    "appear"
+   ],
+   "flash": "warn"
+  },
+  {
+   "t": 49.4,
+   "id": "splash",
+   "beat": "countdown",
+   "what": "Figur rennt durch den Regen nach Hause, springt über eine Pfütze",
+   "sfx": [
+    "thud"
+   ]
+  },
+  {
+   "t": 51.8,
+   "id": "lie_down",
+   "beat": "sleep",
+   "what": "Figur lässt sich ins Bett fallen",
+   "sfx": [
+    "thud"
+   ]
+  },
+  {
+   "t": 53,
+   "id": "sleep_back",
+   "beat": "sleep",
+   "what": "Countdown 0: Z-Blase bleibt endlich stehen, Augen schließen sich",
+   "sfx": [
+    "shimmer"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 57,
+   "id": "alarm_final",
+   "beat": "twist",
+   "what": "Pointe: Wecker springt auf 7:00 und klingelt – nach einer Minute Schlaf",
+   "sfx": [
+    "alarm",
+    "impact"
+   ],
+   "flash": "loss"
+  },
+  {
+   "t": 57.2,
+   "id": "eyes_open",
+   "beat": "twist",
+   "what": "Augen reißen auf, Blase platzt",
+   "sfx": [
+    "pop"
+   ]
+  }
+ ],
+ "beats": [
+  {
+   "id": "hook",
+   "from": 0,
+   "to": 4,
+   "place": "bedroom",
+   "mood": "shock",
+   "framing": "medium",
+   "preset": "orbit",
+   "hud_change": true,
+   "data": {
+    "you": [
+     0.3,
+     0.55,
+     -1.4,
+     0
+    ],
+    "sit": [
+     0.3,
+     0,
+     -0.55,
+     0
+    ]
+   }
+  },
+  {
+   "id": "flood",
+   "from": 4,
+   "to": 8,
+   "place": "bedroom",
+   "mood": "tired",
+   "framing": "high",
+   "preset": "high",
+   "hud_change": true,
+   "data": {
+    "you": [
+     0.3,
+     0,
+     -0.55,
+     0
+    ]
+   }
+  },
+  {
+   "id": "alarm",
+   "from": 8,
+   "to": 11.6,
+   "place": "bedroom",
+   "mood": "angry",
+   "framing": "close",
+   "preset": "close",
+   "hud_change": true,
+   "data": {
+    "you": [
+     0.3,
+     0,
+     -0.55,
+     0
+    ]
+   }
+  },
+  {
+   "id": "office",
+   "from": 11.6,
+   "to": 15.8,
+   "place": "office",
+   "mood": "tired",
+   "framing": "medium",
+   "preset": "push",
+   "hud_change": true,
+   "data": {
+    "you": [
+     -90,
+     0,
+     0.95,
+     3.1416
+    ]
+   }
+  },
+  {
+   "id": "classroom",
+   "from": 15.8,
+   "to": 19.8,
+   "place": "classroom",
+   "mood": "worried",
+   "framing": "pov",
+   "preset": "pov",
+   "hud_change": true,
+   "data": {
+    "teacher": [
+     41.3,
+     0,
+     -2.4,
+     0
+    ]
+   }
+  },
+  {
+   "id": "kitchen_hope",
+   "from": 19.8,
+   "to": 23.8,
+   "place": "kitchen",
+   "mood": "happy",
+   "framing": "medium",
+   "preset": "pull",
+   "hud_change": true,
+   "data": {
+    "you": [
+     -39.95,
+     0,
+     -1.1,
+     0
+    ]
+   }
+  },
+  {
+   "id": "record",
+   "from": 23.8,
+   "to": 28,
+   "place": "street",
+   "mood": "laugh",
+   "framing": "low",
+   "preset": "low",
+   "hud_change": true,
+   "data": {
+    "you": [
+     94.6,
+     0.12,
+     2,
+     1.5708
+    ]
+   }
+  },
+  {
+   "id": "hallucinate",
+   "from": 28,
+   "to": 31.8,
+   "place": "street",
+   "mood": "shock",
+   "framing": "wide",
+   "preset": "orbit",
+   "hud_change": true,
+   "data": {
+    "you": [
+     94.6,
+     0.12,
+     2,
+     1.5708
+    ]
+   }
+  },
+  {
+   "id": "shock_close",
+   "from": 31.8,
+   "to": 34,
+   "place": "street",
+   "mood": "panic",
+   "framing": "close",
+   "preset": "close",
+   "hud_change": true,
+   "data": {
+    "you": [
+     94.6,
+     0.12,
+     2,
+     1.5708
+    ]
+   }
+  },
+  {
+   "id": "kitchen_confused",
+   "from": 34,
+   "to": 38,
+   "place": "kitchen",
+   "mood": "worried",
+   "framing": "medium",
+   "preset": "push",
+   "hud_change": true,
+   "data": {
+    "you": [
+     -40.2,
+     0,
+     -1.25,
+     0
+    ]
+   }
+  },
+  {
+   "id": "night_city",
+   "from": 38,
+   "to": 42.6,
+   "place": "street",
+   "mood": "sad",
+   "framing": "high",
+   "preset": "high",
+   "hud_change": true,
+   "data": {
+    "you": [
+     94.6,
+     0.12,
+     10,
+     1.5708
+    ]
+   }
+  },
+  {
+   "id": "park",
+   "from": 42.6,
+   "to": 47,
+   "place": "park",
+   "mood": "tired",
+   "framing": "low",
+   "preset": "low",
+   "hud_change": true,
+   "data": {
+    "you": [
+     -2.4,
+     0.47,
+     119,
+     0
+    ]
+   }
+  },
+  {
+   "id": "countdown",
+   "from": 47,
+   "to": 51.2,
+   "place": "street",
+   "mood": "happy",
+   "framing": "wide",
+   "preset": "track",
+   "hud_change": true,
+   "data": {
+    "you": [
+     94.8,
+     0.12,
+     3,
+     0
+    ],
+    "youTo": [
+     94.8,
+     0.12,
+     9,
+     0
+    ]
+   }
+  },
+  {
+   "id": "sleep",
+   "from": 51.2,
+   "to": 56,
+   "place": "bedroom",
+   "mood": "relief",
+   "framing": "medium",
+   "preset": "orbit",
+   "hud_change": true,
+   "data": {
+    "sit": [
+     0.3,
+     0,
+     -0.55,
+     0
+    ],
+    "you": [
+     0.3,
+     0.55,
+     -1.4,
+     0
+    ]
+   }
+  },
+  {
+   "id": "twist",
+   "from": 56,
+   "to": 61.4,
+   "place": "bedroom",
+   "mood": "shock",
+   "framing": "medium",
+   "preset": "push",
+   "hud_change": true,
+   "data": {
+    "you": [
+     0.3,
+     0.55,
+     -1.4,
+     0
+    ]
+   }
+  }
+ ],
+ "audio": {
+  "fade_out": 1.2,
+  "beds": [
+   {
+    "src": "music:main",
+    "start": 0,
+    "end": 61.4,
+    "gain_db": -10
+   },
+   {
+    "src": "gen:room",
+    "start": 0,
+    "end": 23.8,
+    "gain_db": -15,
+    "automation": [
+     [
+      0,
+      -40
+     ],
+     [
+      0.25,
+      0
+     ],
+     [
+      23.55,
+      0
+     ],
+     [
+      23.8,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:city",
+    "start": 23.8,
+    "end": 34,
+    "gain_db": -15,
+    "automation": [
+     [
+      23.8,
+      -40
+     ],
+     [
+      24.05,
+      0
+     ],
+     [
+      33.75,
+      0
+     ],
+     [
+      34,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:room",
+    "start": 34,
+    "end": 38,
+    "gain_db": -15,
+    "automation": [
+     [
+      34,
+      -40
+     ],
+     [
+      34.25,
+      0
+     ],
+     [
+      37.75,
+      0
+     ],
+     [
+      38,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:city",
+    "start": 38,
+    "end": 47,
+    "gain_db": -15,
+    "automation": [
+     [
+      38,
+      -40
+     ],
+     [
+      38.25,
+      0
+     ],
+     [
+      46.75,
+      0
+     ],
+     [
+      47,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:rain",
+    "start": 47,
+    "end": 51.2,
+    "gain_db": -15,
+    "automation": [
+     [
+      47,
+      -40
+     ],
+     [
+      47.25,
+      0
+     ],
+     [
+      50.95,
+      0
+     ],
+     [
+      51.2,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:room",
+    "start": 51.2,
+    "end": 61.4,
+    "gain_db": -15,
+    "automation": [
+     [
+      51.2,
+      -40
+     ],
+     [
+      51.45,
+      0
+     ],
+     [
+      61.15,
+      0
+     ],
+     [
+      61.4,
+      -40
+     ]
+    ]
+   }
+  ],
+  "sfx": [
+   {
+    "src": "gen:pop",
+    "t": 0.5,
+    "gain_db": -6,
+    "event": "bubble_pop"
+   },
+   {
+    "src": "gen:bleat",
+    "t": 1.4,
+    "gain_db": -11,
+    "event": "sheep_more"
+   },
+   {
+    "src": "gen:thud",
+    "t": 2.7,
+    "gain_db": -14,
+    "event": "sit_up"
+   },
+   {
+    "src": "gen:bleat",
+    "t": 4.6,
+    "gain_db": -9,
+    "event": "sheep_wave"
+   },
+   {
+    "src": "gen:shimmer",
+    "t": 6.6,
+    "gain_db": -12,
+    "event": "dawn"
+   },
+   {
+    "src": "gen:pop",
+    "t": 8,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 8.1,
+    "gain_db": -12,
+    "event": "bags"
+   },
+   {
+    "src": "gen:alarm",
+    "t": 8.9,
+    "gain_db": -12,
+    "event": "alarm_rings"
+   },
+   {
+    "src": "gen:thud",
+    "t": 9.9,
+    "gain_db": -10,
+    "event": "slap"
+   },
+   {
+    "src": "gen:pop",
+    "t": 11.8,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 12.2,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 12.6,
+    "gain_db": -8,
+    "event": "nod1"
+   },
+   {
+    "src": "gen:zap",
+    "t": 14.2,
+    "gain_db": -14,
+    "event": "nod2"
+   },
+   {
+    "src": "gen:pop",
+    "t": 16.1,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 16.6,
+    "gain_db": -12,
+    "event": "class_zzz"
+   },
+   {
+    "src": "gen:thud",
+    "t": 18.2,
+    "gain_db": -10,
+    "event": "teacher_sleeps"
+   },
+   {
+    "src": "gen:pop",
+    "t": 20.1,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 20.7,
+    "gain_db": -10,
+    "event": "toast_stack"
+   },
+   {
+    "src": "gen:pop",
+    "t": 21.266667,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:charge",
+    "t": 22.2,
+    "gain_db": -10,
+    "event": "cheer"
+   },
+   {
+    "src": "gen:pop",
+    "t": 22.4,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 24,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 24.366667,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 24.733333,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 25.066667,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 25.433333,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 25.8,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:ding",
+    "t": 25.9,
+    "gain_db": -8,
+    "event": "record_broken"
+   },
+   {
+    "src": "gen:charge",
+    "t": 26.7,
+    "gain_db": -14,
+    "event": "crowd_lift"
+   },
+   {
+    "src": "gen:bleat",
+    "t": 28.7,
+    "gain_db": -9,
+    "event": "first_sheep"
+   },
+   {
+    "src": "gen:pop",
+    "t": 29.6,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:bleat",
+    "t": 29.9,
+    "gain_db": -8,
+    "event": "all_sheep"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 32.033333,
+    "gain_db": -8,
+    "event": "recoil"
+   },
+   {
+    "src": "gen:pop",
+    "t": 32.7,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 34.3,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:thud",
+    "t": 34.9,
+    "gain_db": -12,
+    "event": "phone_in"
+   },
+   {
+    "src": "gen:pop",
+    "t": 36.5,
+    "gain_db": -6,
+    "event": "phone_pops"
+   },
+   {
+    "src": "gen:pop",
+    "t": 38.3,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:power_down",
+    "t": 38.8,
+    "gain_db": -16,
+    "event": "windows_dark"
+   },
+   {
+    "src": "gen:pop",
+    "t": 39.566667,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 40.8,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:loss",
+    "t": 41,
+    "gain_db": -12,
+    "event": "last_window"
+   },
+   {
+    "src": "gen:pop",
+    "t": 42.9,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:thud",
+    "t": 43.5,
+    "gain_db": -16,
+    "event": "pigeon_lands"
+   },
+   {
+    "src": "gen:pop",
+    "t": 44.333333,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 44.8,
+    "gain_db": -9,
+    "event": "bubble_tries"
+   },
+   {
+    "src": "gen:pop",
+    "t": 45.8,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:appear",
+    "t": 47.166667,
+    "gain_db": -10,
+    "event": "countdown_on"
+   },
+   {
+    "src": "gen:thud",
+    "t": 49.4,
+    "gain_db": -14,
+    "event": "splash"
+   },
+   {
+    "src": "gen:thud",
+    "t": 51.8,
+    "gain_db": -12,
+    "event": "lie_down"
+   },
+   {
+    "src": "gen:shimmer",
+    "t": 53,
+    "gain_db": -8,
+    "event": "sleep_back"
+   },
+   {
+    "src": "gen:alarm",
+    "t": 57,
+    "gain_db": -6,
+    "event": "alarm_final"
+   },
+   {
+    "src": "gen:impact",
+    "t": 57,
+    "gain_db": -6,
+    "event": "alarm_final"
+   },
+   {
+    "src": "gen:pop",
+    "t": 57.2,
+    "gain_db": -10,
+    "event": "eyes_open"
+   }
+  ],
+  "music": {
+   "main": {
+    "bpm": 104,
+    "root": "E",
+    "seed": 9,
+    "sections": [
+     {
+      "from": 0,
+      "to": 11.6,
+      "style": "pulse"
+     },
+     {
+      "from": 11.6,
+      "to": 28,
+      "style": "drive"
+     },
+     {
+      "from": 28,
+      "to": 34,
+      "style": "pulse"
+     },
+     {
+      "from": 34,
+      "to": 47,
+      "style": "drive"
+     },
+     {
+      "from": 47,
+      "to": 51.2,
+      "style": "drive_hi"
+     },
+     {
+      "from": 51.2,
+      "to": 56.2,
+      "style": "calm"
+     },
+     {
+      "from": 56.2,
+      "to": 57,
+      "style": "silence"
+     },
+     {
+      "from": 57,
+      "to": 61.4,
+      "style": "pulse"
+     }
+    ],
+    "duration": 61.4
+   }
+  }
+ },
+ "post": {
+  "vignette": 0.18
+ },
+ "hook": {
+  "type": "process",
+  "proof": "bubble_pop",
+  "question": "How long can a body go without sleep – and what breaks first?",
+  "stakes": "Sleep is physically blocked: the Z-bubble bursts every time, the night passes, eye bags grow.",
+  "withheld": "Day 19 record, hallucinations, day 30 return of sleep and the alarm pointe."
+ },
+ "endcard": {
+  "in": 58.2,
+  "center": 0.3
+ }
+}
