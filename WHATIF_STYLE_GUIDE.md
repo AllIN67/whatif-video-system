@@ -532,7 +532,9 @@ dramaturgisch, `templates/quality_review.md`) → MP4-AUSLIEFERUNG (Datei als An
 1. **Technisch:** `video_qa.py --mode render --plan timeline.json` (Format, Frames, Ton, Synchronität, Monotonie-Kandidaten).
 2. **Visuell:** alle Kontaktbögen, `shots.jpg`, alle Bildstreifen; Checkliste B in `templates/quality_review.md`.
 3. **Dramaturgisch:** Video in Echtzeit ansehen; Checkliste C.
-Ein technisches PASS ist **keine** Freigabe. Status: `TECHNISCH GEPRÜFT` → `QUALITÄT GEPRÜFT` → `FREIGEGEBEN` (mit menschlicher Hörprüfung).
+Ein technisches PASS ist **keine** Freigabe. Status: `TECHNISCH GEPRÜFT` → `QUALITÄT GEPRÜFT` (inkl. Hook-Prüfung H, 18.12) → `FREIGEGEBEN` (mit menschlicher Hörprüfung).
+Der Validator prüft beim Hook nur Struktur, Zeitpunkte und die **Selbstauskunft** des Beat-Sheets (`premise`); ob ein Einstieg
+überzeugt, entscheidet allein die Sichtprüfung H an echten Bildern.
 
 ### 18.9 Warum frühere Überarbeitungen nicht sichtbar wirkten (Befund 2026-10-30)
 
@@ -600,7 +602,7 @@ sichtbar schrumpft (R07), eine Uhr mit Fragezeichen (R20), bestehen ihn.
 | H6 | **Eskalation 3–15 s:** mindestens **3 Prämissen-Ereignisse** bis 15 s, davon **≥ 2 im Bild sichtbar** (`premise: "visible"`, nicht nur HUD); jedes größer, näher oder persönlicher als das vorige; Abstand zwischen zwei Prämissen-Ereignissen ≤ 5 s. | Validator (Fehler/Warnung) + QA H5 |
 | H7 | **Kein Füllstoff:** Ereignisse ohne Prämissenbezug (Toast verbrennt, Bus fährt ab) sind bis 15 s höchstens Kulisse; ≤ 1/3 der Ereignisse im Hook-Fenster. Jeder Beat bis 15 s enthält ein Prämissen-Ereignis. | Validator (Warnung) |
 | H8 | **Nichts vorwegnehmen** (`hook.withheld`): Pointe, Endzustand und letztes HUD-Label erscheinen nicht vor 15 s. Der Einstieg zeigt die Richtung, nicht das Ziel. | Validator (Pointe/Label) + QA H6 |
-| H9 | **Text folgt dem Bild:** die erste Zeile erklärt nicht, was der Hook zeigt, sondern verschärft die Frage oder den Einsatz. Die Zeile darf bei ≈ 2,5–5 s kommen; „verortende“ Zeilen („It's 3 AM.“) nur, wenn das Bild bereits eine Anomalie zeigt. | QA H4 |
+| H9 | **Text folgt dem Bild:** die erste Zeile erklärt nicht, was der Hook zeigt, sondern verschärft die Frage oder den Einsatz. Die Zeile kommt nach dem Titel (3,5–5,0 s, wie Abschnitt 2); „verortende“ Zeilen („It's 3 AM.“) nur, wenn das Bild bereits eine Anomalie zeigt. | QA H4 |
 | H10 | **Hook-Entwurf vor dem Beat-Sheet:** drei Einstiege **verschiedener Hook-Typen oder Bildideen** skizzieren (je: Frame 0, Beweis-Ereignis, Frage, was zurückgehalten wird), gegen H1–H9 bewerten, besten wählen; Entwurf + Wahl im LOG. Hook-Typ und Eröffnungsbild der letzten drei Produktionen nennen; Wiederholung begründen. | LOG + QA H7 |
 
 **Bewusst nicht geregelt:** Schnittfrequenz, Bewegungsmenge, Lautstärke des Einstiegs. R20 ist in 0–12 s so ruhig wie unser

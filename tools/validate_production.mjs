@@ -403,6 +403,18 @@ export function loadWords(dir, timeline) {
   return f && fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : null;
 }
 
+// Hook-Entwurf (18.12 H10) liegt nicht im Beat-Sheet, sondern im LOG. Nur über die Kommandozeile geprüft (Datei-basiert):
+// drei ausgefüllte Zeilen der Tabelle „Hook-Entwurf“ und eine Wahl. Prüft Vorhandensein, nicht Qualität.
+export function checkHookDraft(logText, W) {
+  if (logText == null) return W('18.12', 'LOG.md fehlt – Hook-Entwurf (3 Ansätze) nicht dokumentiert');
+  const i = logText.indexOf('Hook-Entwurf');
+  if (i < 0) return W('18.12', 'LOG.md: Abschnitt „Hook-Entwurf“ fehlt (3 Ansätze, Guide 18.12 H10)');
+  const rows = logText.slice(i).split('\n').filter((l) => /^\|\s*[123]\s*\|/.test(l));
+  const filled = rows.filter((l) => l.split('|').slice(2, -1).filter((c) => c.trim()).length >= 4);
+  if (filled.length < 3) W('18.12', `LOG.md: nur ${filled.length} von 3 Hook-Ansätzen ausgefüllt`);
+  if (!/Gewählt:\s*#\s*\d/.test(logText.slice(i))) W('18.12', 'LOG.md: Wahl des Hook-Ansatzes („Gewählt: # …“) fehlt');
+}
+
 if (import.meta.url === `file://${process.argv[1]}`) {
   const args = process.argv.slice(2);
   const dir = args.find((a) => !a.startsWith('--'));
@@ -418,11 +430,16 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const technical = rel[0] === 'tests' || (rel[0] === 'productions' && (rel[1] || '').startsWith('_'));
   const requireBeats = tl.profile !== 'voiceover' && !technical;
   const res = validate(tl, tx, { lang, wordTimes: loadWords(dir, tl), requireBeats });
+  if (tl.beats && requireBeats) {
+    const lf = path.join(dir, 'LOG.md');
+    checkHookDraft(fs.existsSync(lf) ? fs.readFileSync(lf, 'utf8') : null, (r, m) => res.warnings.push(`[${r}] ${m}`));
+  }
   if (args.includes('--json')) console.log(JSON.stringify(res, null, 1));
   else {
     for (const e of res.errors) console.log(`❌ ${e}`);
     for (const w of res.warnings) console.log(`⚠️  ${w}`);
     console.log(res.errors.length ? `FEHLER: ${res.errors.length}` : `OK (${res.warnings.length} Warnungen)`);
+    if (tl.beats) console.log(`Hook-Sichtprüfung (Pflicht, quality_review.md H – der Validator ersetzt sie nicht):\n  node tools/still.mjs --production ${dir} --at 0,0.5,1,2,3,5,8,12,15`);
   }
   process.exit(res.errors.length ? 1 : 0);
 }
