@@ -92,12 +92,12 @@
    "data": { "teacher": [41.3, 0, -2.4, 0] }
   },
   {
-   "id": "kitchen_hope", "dur": 4.0, "place": "kitchen", "mood": "happy", "ambience": "room", "transition": "dip",
+   "id": "kitchen_hope", "dur": 4.0, "place": "kitchen", "mood": "happy", "ambience": "room", "transition": "dip", "frames": 6,
    "line": "l_extra",
    "camera": { "preset": "pull", "target": [-39.6, 1.2, -1.3], "yaw": 24, "dist": 2.4, "distTo": 4.2, "height": 0.35, "fov": 46 },
    "hud": { "to": 7, "mode": "steps", "steps": 3, "window": [0.3, 2.6], "tick": "pop" },
    "events": [
-    { "id": "toast_stack", "at": 0.9, "what": "4 Uhr früh: Toaster spuckt Toast um Toast, Stapel wächst", "premise": "hud", "sfx": "pop", "gain_db": -10 },
+    { "id": "toast_stack", "at": 0.9, "what": "Toaster spuckt Toast um Toast, Stapel wächst – Zeit für alles", "premise": "hud", "sfx": "pop", "gain_db": -10 },
     { "id": "cheer", "at": 2.4, "what": "Figur jubelt – 24 Stunden am Tag Zeit (Hoffnung)", "sfx": "charge", "gain_db": -10, "flash": "gain" }
    ],
    "data": { "you": [-39.95, 0, -1.1, 0] }
@@ -147,16 +147,16 @@
   {
    "id": "night_city", "dur": 4.6, "place": "street", "mood": "sad", "ambience": "city", "transition": "dip",
    "line": "l_alone",
-   "camera": { "preset": "high", "target": [96.5, 0.5, 10], "yaw": 70, "dist": 11, "height": 10, "swing": 10, "fov": 50 },
+   "camera": { "preset": "high", "target": [96.5, 0.5, 10], "yaw": 70, "dist": 11, "height": 10, "swing": 26, "fov": 50 },
    "hud": { "to": 25, "mode": "steps", "steps": 3, "window": [0.3, 2.8], "tick": "pop" },
    "events": [
     { "id": "windows_dark", "at": 0.8, "what": "Fenster der Stadt erlöschen eines nach dem anderen – alle schlafen", "premise": "visible", "sfx": "power_down", "gain_db": -16 },
     { "id": "last_window", "at": 3.0, "what": "letztes Fenster aus, nur die Figur steht wach unter der Laterne", "premise": "visible", "sfx": "loss", "gain_db": -12, "flash": "loss" }
    ],
-   "data": { "you": [94.6, 0.12, 10, 1.5708] }
+   "data": { "you": [94.6, 0.12, 10, 1.5708], "from": [94.6, 0.12, 8.6, 0] }
   },
   {
-   "id": "park", "dur": 4.4, "place": "park", "mood": "tired", "ambience": "city", "transition": "dip",
+   "id": "park", "dur": 4.4, "place": "park", "mood": "tired", "ambience": "city", "transition": "whip", "whip_dir": "left",
    "line": "l_beg",
    "camera": { "preset": "low", "target": [-2.4, 1.25, 118.1], "yaw": 62, "dist": 3.6, "camHeight": 0.3, "fov": 50 },
    "hud": { "to": 28, "mode": "steps", "steps": 3, "window": [0.3, 3.2], "tick": "pop" },
@@ -167,7 +167,7 @@
    "data": { "you": [-2.4, 0.47, 119.0, 0] }
   },
   {
-   "id": "countdown", "dur": 4.2, "place": "street", "mood": "happy", "ambience": "rain", "transition": "dip",
+   "id": "countdown", "dur": 4.2, "place": "street", "mood": "happy", "ambience": "rain", "transition": "whip", "whip_dir": "right",
    "line": "l_return",
    "camera": { "preset": "track", "a": [94.8, 1.3, 3.4], "b": [94.8, 1.3, 8.6], "yaw": 62, "dist": 5.3, "height": 0.4, "fov": 48 },
    "hud": { "label": "countdown", "to": 3, "mode": "linear", "window": [0.25, 4.0] },

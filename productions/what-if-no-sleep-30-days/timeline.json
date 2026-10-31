@@ -331,7 +331,8 @@
     ]
    },
    "transition_in": {
-    "type": "dip"
+    "type": "dip",
+    "frames": 6
    }
   },
   {
@@ -544,9 +545,9 @@
      {
       "t": 38,
       "pos": [
-       106.469,
+       105.725,
        11,
-       14.649
+       15.991
       ],
       "look": [
        96.5,
@@ -558,9 +559,9 @@
      {
       "t": 42.6,
       "pos": [
-       106.063,
+       106.326,
        10,
-       12.562
+       11.207
       ],
       "look": [
        96.5,
@@ -613,7 +614,8 @@
     ]
    },
    "transition_in": {
-    "type": "dip"
+    "type": "whip",
+    "direction": "left"
    }
   },
   {
@@ -654,7 +656,8 @@
     ]
    },
    "transition_in": {
-    "type": "dip"
+    "type": "whip",
+    "direction": "right"
    }
   },
   {
@@ -1285,7 +1288,7 @@
    "t": 20.7,
    "id": "toast_stack",
    "beat": "kitchen_hope",
-   "what": "4 Uhr früh: Toaster spuckt Toast um Toast, Stapel wächst",
+   "what": "Toaster spuckt Toast um Toast, Stapel wächst – Zeit für alles",
    "sfx": [
     "pop"
    ],
@@ -1678,6 +1681,12 @@
      0.12,
      10,
      1.5708
+    ],
+    "from": [
+     94.6,
+     0.12,
+     8.6,
+     0
     ]
    }
   },
@@ -2174,6 +2183,12 @@
     "event": "last_window"
    },
    {
+    "src": "gen:whoosh",
+    "t": 42.266667,
+    "gain_db": -12,
+    "event": "cut:park"
+   },
+   {
     "src": "gen:pop",
     "t": 42.9,
     "gain_db": -18,
@@ -2202,6 +2217,12 @@
     "t": 45.8,
     "gain_db": -18,
     "event": "hud_step"
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 46.666667,
+    "gain_db": -12,
+    "event": "cut:countdown"
    },
    {
     "src": "gen:appear",

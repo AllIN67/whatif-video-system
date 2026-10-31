@@ -153,7 +153,7 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
   // ---------- Hilfen ----------
   const place = (h, p, rot) => h.setPosition(p[0], p[1], p[2], rot ?? p[3] ?? 0);
   const LOOK = {
-    hook: 'nightRoom', flood: 'nightRoom', alarm: 'interior', office: 'interior', classroom: 'interior', kitchen_hope: 'nightRoom',
+    hook: 'nightRoom', flood: 'nightRoom', alarm: 'interior', office: 'interior', classroom: 'interior', kitchen_hope: 'interior',
     record: 'day', hallucinate: 'day', shock_close: 'day', kitchen_confused: 'interior', night_city: 'night', park: 'day',
     countdown: 'storm', sleep: 'nightRoom', twist: 'nightRoom',
   };
@@ -365,7 +365,7 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
         const p = pos('kitchen_confused');
         const ti = ev('phone_in');
         const tp = ev('phone_pops');
-        const turn = ramp(t, ti - 0.55, ti - 0.2) * (1 - ramp(t, ti + 0.35, ti + 0.75));
+        const turn = ramp(t, ti - 0.55, ti - 0.2) * (1 - ramp(t, ti + 0.35, ti + 0.95));
         you.setPosition(p[0], p[1], p[2], Math.PI * turn);
         you.act([
           { t: at('kitchen_confused'), pose: 'phone', mood: 'tired', look: [0, 0.05] },
@@ -433,9 +433,14 @@ export async function build({ THREE, scene, renderer, rng, timeline }) {
         if (id === 'record') confetti.forEach((c, i) => c.update(t - rb - i * 0.12, [94.0 + i * 0.4, 2.4, 2.0 + (i - 1) * 1.2]));
       }
       if (id === 'night_city') {
-        place(you, pos('night_city'));
+        // langsamer Gang allein durch die Nacht, Halt unter der Laterne, Blick zu den erlöschenden Fenstern
+        const a = pos('night_city', 'from');
+        const z = pos('night_city');
+        const kw = ramp(t, at('night_city'), ev('windows_dark') + 1.2);
+        you.setPosition(a[0], a[1], lerp(a[2], z[2], kw), kw < 0.85 ? 0 : lerp(0, z[3], ramp(t, ev('windows_dark') + 0.9, ev('windows_dark') + 1.5)));
         you.act([
-          { t: at('night_city'), pose: 'stand', mood: 'tired', look: [0.6, -0.2] },
+          { t: at('night_city'), pose: 'walk', speed: 0.8, mood: 'tired', look: [0.6, -0.2] },
+          { t: ev('windows_dark') + 1.1, pose: 'stand', blend: 0.4 },
           { t: ev('windows_dark') + 0.4, mood: 'sad', look: [-0.5, -0.3], blend: 0.8 },
           { t: ev('last_window'), pose: 'lookUp', blend: 0.6 },
         ], t);
