@@ -150,6 +150,66 @@ SOUNDS = {
         f"anoisesrc=d=90:c=brown:r={SR}:a=0.25:s=101,lowpass=f=250[a];"
         f"anoisesrc=d=90:c=pink:r={SR}:a=0.03:s=102,lowpass=f=3000[b];"
         "[a][b]amix=inputs=2:normalize=0,pan=stereo|c0=c0|c1=c0[out]")),
+    # ---- Ergänzt 2026-11-01 (what-if-one-argument-last-goodbye): Auto, Unfall, Familie, Friedhof ----
+    # Anlasser + Motor springt an (Boxer-Klang: tiefe Grundfrequenz mit Obertönen, kurzer Gasstoß)
+    "engine_start": (2.4, (
+        f"anoisesrc=d=2.4:c=brown:r={SR}:a=0.8:s=111,lowpass=f=500,{_env('lt(t,0.55)*(0.55+0.45*sin(2*PI*12*t))')}[a];"
+        "aevalsrc='gte(t,0.5)*min(1,(t-0.5)/0.05)*(0.75+0.25*sin(PI*(48*t+gte(t,0.6)*(52*0.9/PI)*(1-cos(PI*min(t-0.6,0.9)/0.9)))))"
+        "*(0.5*sin(2*PI*(48*t+gte(t,0.6)*(52*0.9/PI)*(1-cos(PI*min(t-0.6,0.9)/0.9))))"
+        "+0.3*sin(4*PI*(48*t+gte(t,0.6)*(52*0.9/PI)*(1-cos(PI*min(t-0.6,0.9)/0.9))))"
+        f"+0.18*sin(6*PI*(48*t+gte(t,0.6)*(52*0.9/PI)*(1-cos(PI*min(t-0.6,0.9)/0.9)))))*min(1,(2.4-t)/0.6)':d=2.4:s={SR}[b];"
+        "[a][b]amix=inputs=2:normalize=0,lowpass=f=1800,pan=stereo|c0=c0|c1=c0[out]")),
+    # Hochdrehen/Beschleunigen (2,8 s, steigende Drehzahl)
+    "rev": (2.8, (
+        "aevalsrc='min(1,t/0.12)*min(1,(2.8-t)/0.5)*(0.75+0.25*sin(PI*(70*t+28*t*t)))"
+        "*(0.45*sin(2*PI*(70*t+28*t*t))+0.3*sin(4*PI*(70*t+28*t*t))+0.2*sin(6*PI*(70*t+28*t*t))+0.1*sin(10*PI*(70*t+28*t*t)))'"
+        f":d=2.8:s={SR}[a];"
+        f"anoisesrc=d=2.8:c=pink:r={SR}:a=0.25:s=112,bandpass=f=900:width_type=o:w=2,{_env('min(1,t/0.2)*min(1,(2.8-t)/0.5)')}[b];"
+        "[a][b]amix=inputs=2:normalize=0,lowpass=f=2600,pan=stereo|c0=c0|c1=c0[out]")),
+    # Reifenquietschen (1,6 s): FM-Ton + Bandrauschen
+    "screech": (1.6, (
+        f"aevalsrc='0.32*sin(2*PI*1150*t+5*sin(2*PI*7*t))*min(1,t/0.05)*sqrt(max(0,1-t/1.6))':d=1.6:s={SR}[a];"
+        f"anoisesrc=d=1.6:c=white:r={SR}:a=0.5:s=113,bandpass=f=1900:width_type=o:w=0.6,{_env('min(1,t/0.05)*sqrt(max(0,1-t/1.6))')}[b];"
+        "[a][b]amix=inputs=2:normalize=0,pan=stereo|c0=c0|c1=0.85*c0[out]")),
+    # Herz steht still: langer, leiser Dauerton, weich ausklingend (stilisiert)
+    "flatline": (3.2, (
+        f"aevalsrc='0.32*sin(2*PI*880*t)*min(1,t/0.02)*min(1,(3.2-t)/1.6)':d=3.2:s={SR},"
+        "pan=stereo|c0=c0|c1=c0[out]")),
+    # Papier raschelt (Zeichnung)
+    "paper": (0.6, (
+        f"anoisesrc=d=0.6:c=white:r={SR}:a=0.5:s=114,highpass=f=1800,lowpass=f=7000,"
+        f"{_env('min(1,t/0.01)*exp(-4*t)*(0.35+0.65*gt(sin(2*PI*23*t+3*sin(2*PI*5*t)),0))')},"
+        "pan=stereo|c0=c0|c1=0.9*c0[out]")),
+    # Schlüsselbund klimpert
+    "keys": (0.6, (
+        "aevalsrc='0.22*sin(2*PI*3200*t)*exp(-14*t)+0.2*sin(2*PI*4100*(t-0.06))*exp(-16*(t-0.06))*gte(t,0.06)"
+        "+0.18*sin(2*PI*2750*(t-0.13))*exp(-15*(t-0.13))*gte(t,0.13)+0.16*sin(2*PI*5200*(t-0.2))*exp(-18*(t-0.2))*gte(t,0.2)"
+        f"+0.14*sin(2*PI*3650*(t-0.27))*exp(-18*(t-0.27))*gte(t,0.27)':d=0.6:s={SR},"
+        "pan=stereo|c0=c0|c1=c0[out]")),
+    # Tür knallt zu (tiefer Schlag + Rahmenklappern)
+    "slam": (1.2, (
+        f"aevalsrc='0.95*sin(2*PI*(55*t+20*(1-exp(-20*t))))*exp(-7*t)*min(1,t/0.002)':d=1.2:s={SR}[a];"
+        f"anoisesrc=d=1.2:c=brown:r={SR}:a=0.8:s=115,lowpass=f=900,{_env('exp(-10*t)')}[b];"
+        f"anoisesrc=d=1.2:c=white:r={SR}:a=0.4:s=116,bandpass=f=800:width_type=o:w=1,{_env('exp(-40*t)+0.3*exp(-30*abs(t-0.09))')}[c];"
+        "[a][b][c]amix=inputs=3:normalize=0,pan=stereo|c0=c0|c1=c0[out]")),
+    # Warnblinker (Klick alle 0,4 s)
+    "blinker": (2.4, (
+        f"aevalsrc='0.45*sin(2*PI*2300*t)*exp(-160*mod(t,0.4))+0.3*sin(2*PI*1700*(t-0.2))*exp(-160*mod(t+0.2,0.4))*gte(t,0.2)':d=2.4:s={SR},"
+        "lowpass=f=5000,pan=stereo|c0=c0|c1=c0[out]")),
+    # Sanfter, warmer Glockenakkord (Umarmung, letzte Botschaft)
+    "warmth": (3.0, (
+        "aevalsrc='(0.28*sin(2*PI*587.33*t)+0.22*sin(2*PI*739.99*t+0.5)+0.2*sin(2*PI*880*t+1.0)+0.08*sin(2*PI*1174.66*t+1.7))"
+        f"*min(1,t/0.25)*exp(-0.9*t)':d=3.0:s={SR},"
+        "pan=stereo|c0=c0|c1=0.92*c0[out]")),
+    # Atmosphären: Wind im Freien (Friedhof), Fahrgeräusch (Reifen + Motorbrummen)
+    "wind": (90.0, (
+        f"anoisesrc=d=90:c=pink:r={SR}:a=0.95:s=117,highpass=f=120,lowpass=f=900,{_env('0.55+0.45*sin(2*PI*0.13*t)*sin(2*PI*0.07*t+1)')}[a];"
+        f"anoisesrc=d=90:c=pink:r={SR}:a=0.95:s=118,highpass=f=120,lowpass=f=900,{_env('0.55+0.45*sin(2*PI*0.11*t+2)*sin(2*PI*0.05*t)')}[b];"
+        "[a][b]join=inputs=2:channel_layout=stereo[out]")),
+    "road": (90.0, (
+        f"anoisesrc=d=90:c=brown:r={SR}:a=0.7:s=119,lowpass=f=380[a];"
+        f"aevalsrc='0.22*sin(2*PI*68*t)*(0.8+0.2*sin(2*PI*34*t))+0.12*sin(2*PI*136*t)':d=90:s={SR}[b];"
+        "[a][b]amix=inputs=2:normalize=0,pan=stereo|c0=c0|c1=c0[out]")),
     # Synchron-Marker: 3-kHz-Ton, 80 ms, weiche Flanken (5 ms)
     "tick": (0.08, (
         f"aevalsrc='0.6*sin(2*PI*3000*t)*min(1,min(t/0.005,(0.08-t)/0.005))':d=0.08:s={SR},"
