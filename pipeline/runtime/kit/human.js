@@ -251,6 +251,14 @@ export function createHumanFactory(THREE, core) {
         armR.shoulder.rotation.x = -1.5;
         armR.elbow.rotation.x = -0.05;
       },
+      // Senkrecht nach oben zeigen, Blick folgt (ergänzt 2026-11-01, what-if-fold-paper-42-times)
+      pointUp() {
+        relax();
+        armR.shoulder.rotation.x = -2.95;
+        armR.shoulder.rotation.z = -0.12;
+        armR.elbow.rotation.x = -0.05;
+        head.rotation.x = -0.35;
+      },
       shrug(p) {
         const k = 0.5 + 0.5 * Math.sin(p * TAU);
         armL.shoulder.rotation.z = 0.35;

@@ -105,7 +105,7 @@ export function buildTimeline(B) {
     const h = b.hud || {};
     if (h.label && h.label !== label) {
       if (label) b.labelChange = true;
-      segStarts.push({ id: h.label, from: b.from, bar: h.bar, final: h.final });
+      segStarts.push({ id: h.label, from: b.from, bar: h.bar, final: h.final, decimals: h.decimals });
       label = h.label;
     } else if (!label) throw new Error(`Beat ${b.id}: erster Beat braucht hud.label`);
     // Wertsprünge aus Ereignissen und Beat-Fenster in zeitlicher Reihenfolge
@@ -127,10 +127,12 @@ export function buildTimeline(B) {
         if (it.t > last[0]) keys.push([it.t, cur, 'linear']);
         keys.push([it.t2, it.v, 'linear']);
       } else {
+        // steps: gleich große Stufen · geo (EXPERIMENT 2026-11-01): Stufen mit gleichem Faktor (Verdopplung, Größenordnungen)
         const n = Math.max(1, it.steps);
+        const geo = it.kind === 'geo' && cur > 0 && it.v > 0;
         for (let k = 0; k < n; k++) {
           const tk = snap(n === 1 ? it.t : it.t + ((it.t2 - it.t) * k) / (n - 1));
-          const vk = cur + ((it.v - cur) * (k + 1)) / n;
+          const vk = geo ? cur * Math.pow(it.v / cur, (k + 1) / n) : cur + ((it.v - cur) * (k + 1)) / n;
           keys.push([tk, H.decimals ? Number(vk.toFixed(H.decimals)) : Math.round(vk), 'hold']);
           if (it.tick) ticks.push({ t: tk, sfx: it.tick });
         }
@@ -140,7 +142,7 @@ export function buildTimeline(B) {
   const hud = segStarts.map((s, i) => {
     const end = i + 1 < segStarts.length ? segStarts[i + 1].from : duration;
     const inner = keys.filter(([kt]) => kt > s.from && kt < end);
-    const seg = { id: s.id, from: s.from, decimals: H.decimals ?? 0, value: { ease: 'linear', keys: [[s.from, valueAt(s.from)], ...inner] } };
+    const seg = { id: s.id, from: s.from, decimals: s.decimals ?? H.decimals ?? 0, value: { ease: 'linear', keys: [[s.from, valueAt(s.from)], ...inner] } };
     if (seg.value.keys.length === 1) seg.value.keys.push([r6(end), valueAt(s.from)]);
     if (s.bar) seg.bar = s.bar;
     else if (H.bar) seg.bar = H.bar;

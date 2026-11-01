@@ -282,8 +282,9 @@ export function checkStandardB(timeline, ptl, E, W) {
 // Anlass: Akku-Video – Auslöser war ein HUD-Abzug von 1 %, bis 14 s nur Zahlenabzüge und Alltagsereignisse (REFERENCE_ANALYSIS 10).
 export const HOOK = {
   window: 15, // s – Hook-Fenster (Analytics: ≈ 50 % Abgang bis 14 s)
-  types: ['proof', 'process', 'countdown', 'mystery'],
-  proofMax: { proof: 2.0, process: 2.0, countdown: 10, mystery: 10 },
+  // flashforward (EXPERIMENT 2026-11-01, Referenz V4 „lightning“): Frame 0 zeigt den Höhepunkt (nicht die Pointe), dann Rücksprung.
+  types: ['proof', 'process', 'countdown', 'mystery', 'flashforward'],
+  proofMax: { proof: 2.0, process: 2.0, countdown: 10, mystery: 10, flashforward: 2.0 },
   minPremise: 3, // Prämissen-Ereignisse bis 15 s
   minVisible: 2, // davon im Bild
   maxGap: 5, // s zwischen zwei Prämissen-Ereignissen (ab dem Beweis)
