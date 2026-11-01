@@ -3,8 +3,8 @@
  "mode": "render",
  "probe": {
   "duration": 71.0,
-  "size_bytes": 37728728,
-  "bitrate_kbps": 4251,
+  "size_bytes": 39661382,
+  "bitrate_kbps": 4469,
   "video": {
    "codec": "h264",
    "width": 1080,
@@ -37,7 +37,6 @@
    17.8,
    20.8,
    31.6,
-   34.6,
    38.6,
    38.7,
    43.8,
@@ -46,7 +45,7 @@
    58.6,
    62.4
   ],
-  "cut_count": 15,
+  "cut_count": 14,
   "motion_transitions": [
    {
     "start": 24.6,
@@ -66,11 +65,11 @@
    },
    {
     "start": 34.467,
-    "end": 34.767,
-    "frames": 10,
-    "peak_ydif": 21.8,
-    "baseline_ydif": 5.5,
-    "mid_n": 1039
+    "end": 34.733,
+    "frames": 9,
+    "peak_ydif": 36.6,
+    "baseline_ydif": 5.2,
+    "mid_n": 1038
    },
    {
     "start": 62.3,
@@ -145,15 +144,9 @@
    },
    {
     "start": 34.6,
-    "frames": 1,
-    "dur": 0.033,
-    "mid_n": 1038
-   },
-   {
-    "start": 34.633,
-    "frames": 119,
-    "dur": 3.967,
-    "mid_n": 1098
+    "frames": 120,
+    "dur": 4.0,
+    "mid_n": 1097
    },
    {
     "start": 38.6,
@@ -205,21 +198,15 @@
    }
   ],
   "shot_stats": {
-   "count": 20,
-   "median_s": 3.55,
-   "mean_s": 3.55,
-   "min_s": 0.03,
+   "count": 19,
+   "median_s": 3.6,
+   "mean_s": 3.74,
+   "min_s": 0.07,
    "max_s": 8.6,
-   "cuts_per_10s": 2.11,
-   "shot_changes_per_10s": 2.68
+   "cuts_per_10s": 1.97,
+   "shot_changes_per_10s": 2.54
   },
   "flash_shots": [
-   {
-    "start": 34.6,
-    "frames": 1,
-    "dur": 0.033,
-    "mid_n": 1038
-   },
    {
     "start": 38.6,
     "frames": 3,
@@ -267,9 +254,9 @@
     "local_median": 1.51
    },
    {
-    "t": 52.8,
-    "ydif": 15.63,
-    "local_median": 0.35
+    "t": 52.1,
+    "ydif": 16.1,
+    "local_median": 0.67
    }
   ],
   "flicker_candidates": [
@@ -277,7 +264,7 @@
   ],
   "first_cut_s": 4.4,
   "first_shot_change_s": 4.4,
-  "mean_luma": 78.4,
+  "mean_luma": 78.6,
   "mean_motion_ydif": 2.86,
   "monotony": [
    [
@@ -353,14 +340,14 @@
     "t": 34.6,
     "type": "whip",
     "frames": 0,
-    "peak_ydif": 40.58,
+    "peak_ydif": 36.63,
     "visible": true
    },
    {
     "t": 37.6,
     "type": "cut",
     "frames": 0,
-    "peak_ydif": 24.41,
+    "peak_ydif": 24.71,
     "visible": true
    },
    {
@@ -395,7 +382,7 @@
     "t": 55.0,
     "type": "cut",
     "frames": 0,
-    "peak_ydif": 53.09,
+    "peak_ydif": 53.1,
     "visible": true
    },
    {
@@ -416,7 +403,7 @@
     "t": 66.0,
     "type": "cut",
     "frames": 0,
-    "peak_ydif": 0.0,
+    "peak_ydif": 0.6,
     "visible": false
    }
   ],
@@ -457,7 +444,7 @@
  },
  "audio": {
   "integrated_lufs": -14.2,
-  "lra_lu": 20.3,
+  "lra_lu": 20.2,
   "true_peak_dbtp": -1.2,
   "short_term_lufs_per_s": [
    [
@@ -670,7 +657,7 @@
    ],
    [
     53,
-    -30.9
+    -30.4
    ],
    [
     54,
@@ -682,7 +669,7 @@
    ],
    [
     56,
-    -32.4
+    -33.3
    ],
    [
     57,
@@ -753,7 +740,7 @@
    }
   ],
   "peak_dbfs": -1.370329,
-  "rms_dbfs": -17.932288,
+  "rms_dbfs": -17.932285,
   "flat_factor": 0.0,
   "peak_count": 2.0,
   "dc_offset": 0.000432,
@@ -1015,9 +1002,9 @@
     "context_median_db": -45.7
    },
    {
-    "t": 52.82,
-    "hf_peak_db": -24.8,
-    "context_median_db": -61.8
+    "t": 52.08,
+    "hf_peak_db": -24.5,
+    "context_median_db": -58.1
    },
    {
     "t": 53.92,
@@ -1075,11 +1062,6 @@
     "t": 47.3,
     "from_lufs": -31.1,
     "to_lufs": -18.0
-   },
-   {
-    "t": 53.1,
-    "from_lufs": -38.7,
-    "to_lufs": -25.8
    },
    {
     "t": 56.1,
@@ -1464,12 +1446,12 @@
     "rise_db": 6.8
    },
    {
-    "t": 52.8,
+    "t": 52.066667,
     "sfx": "paper",
     "event": "drawing_placed",
     "detected": true,
     "offset_ms": 20,
-    "rise_db": 18.8
+    "rise_db": 15.9
    },
    {
     "t": 53.9,
@@ -1508,38 +1490,30 @@
  "black": [
   [
    62.4,
+   62.8
+  ],
+  [
+   65.9667,
    66.2667
   ]
  ],
  "freezes": [
   [
-   62.4,
-   62.9
-  ],
-  [
-   62.9,
-   65.7667
-  ],
-  [
-   65.7667,
-   66.3
-  ],
-  [
-   66.6,
+   66.5333,
    70.9667
   ]
  ],
  "status": "FAIL",
  "fails": [
-  "Schwarzbilder: [(62.4, 66.2667)]",
-  "Einstellungen < 4 Frames (Blitzbild/Sprung): [34.6, 38.6, 62.333]"
+  "Schwarzbilder: [(62.4, 62.8), (65.9667, 66.2667)]",
+  "Einstellungen < 4 Frames (Blitzbild/Sprung): [38.6, 62.333]"
  ],
  "reviews": [
-  "Sprungkandidaten ohne Schnitt: [23.8, 24.5, 32.0, 33.2, 48.1, 48.3, 52.8]",
+  "Sprungkandidaten ohne Schnitt: [23.8, 24.5, 32.0, 33.2, 48.1, 48.3, 52.1]",
   "Flacker-Kandidaten: [24.5]",
   "Geplante Übergänge im Bild nicht erkennbar (prüfen): [66.0]",
-  "Standbild-Phasen ≥ 0.5 s (nur ok, wenn beabsichtigt): [(62.4, 62.9), (62.9, 65.77), (65.77, 66.3), (66.6, 70.97)]",
-  "Lautheitsumfang (LRA) 20.3 LU außerhalb 6–16 LU (Style-Guide 9.4)",
+  "Standbild-Phasen ≥ 0.5 s (nur ok, wenn beabsichtigt): [(66.53, 70.97)]",
+  "Lautheitsumfang (LRA) 20.2 LU außerhalb 6–16 LU (Style-Guide 9.4)",
   "Klick-Kandidaten (anhören!): [7.86, 11.6, 12.5, 12.85, 13.57, 13.92, 14.28, 14.64, 15.0, 15.35, 15.71, 16.07, 16.42, 16.78, 17.14, 17.5, 17.85, 18.21, 18.57, 19.28, 19.64, 20.0, 20.35, 20.71, 21.07, 21.42, 23.21, 23.57, 23.88, 24.28]",
   "Ereignis-Klänge > ±34 ms versetzt (anhören!): [(36.3, 'screech', 50), (59.2, 'warmth', 40)]",
   "Ereignis-Klänge verdeckt – Anstieg < 3 dB, nur per Hörprüfung beurteilbar: [(39.1, 'thud'), (41.1, 'blinker'), (44.4, 'heartbeat'), (48.4, 'pop'), (48.8, 'pop'), (49.2, 'pop'), (49.6, 'pop'), (49.9, 'paper')]",
