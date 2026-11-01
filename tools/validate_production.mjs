@@ -154,7 +154,10 @@ export function validate(timeline, text, { lang = 'en', wordTimes = null, requir
   }
 
   // Produktionsstandard Stil B (Abschnitt 18) – nur für Zeitachsen aus beats.json (tools/build_timeline.mjs)
-  if (timeline.beats) checkStandardB(timeline, ptl, E, W);
+  if (timeline.beats) {
+    checkStandardB(timeline, ptl, E, W);
+    checkHook(timeline, E, W);
+  }
   else if (requireBeats) E('18.1', 'timeline.json ist nicht aus beats.json erzeugt – Stil-B-Produktionen brauchen productions/<slug>/beats.json (node tools/build_timeline.mjs)');
 
   return { errors, warnings };
@@ -274,6 +277,64 @@ export function checkStandardB(timeline, ptl, E, W) {
   if (labels < R.hudLabels) under('HUD-Labels', labels, R.hudLabels);
 }
 
+// Hook-Standard (Guide 18.12): Der Einstieg muss die Prämisse VORFÜHREN. Geprüft wird, was das Beat-Sheet erklärt
+// (hook-Block, events[].premise); ob eine „visible“-Angabe stimmt, prüft QA H3 am Vorschaubild.
+// Anlass: Akku-Video – Auslöser war ein HUD-Abzug von 1 %, bis 14 s nur Zahlenabzüge und Alltagsereignisse (REFERENCE_ANALYSIS 10).
+export const HOOK = {
+  window: 15, // s – Hook-Fenster (Analytics: ≈ 50 % Abgang bis 14 s)
+  types: ['proof', 'process', 'countdown', 'mystery'],
+  proofMax: { proof: 2.0, process: 2.0, countdown: 10, mystery: 10 },
+  minPremise: 3, // Prämissen-Ereignisse bis 15 s
+  minVisible: 2, // davon im Bild
+  maxGap: 5, // s zwischen zwei Prämissen-Ereignissen (ab dem Beweis)
+  maxFillerShare: 1 / 3,
+};
+
+export function checkHook(timeline, E, W) {
+  const H = HOOK;
+  const r2 = (x) => Math.round(x * 100) / 100;
+  const hk = timeline.hook;
+  const events = timeline.events || [];
+  if (!hk) {
+    E('18.12', 'hook fehlt in beats.json (type, proof, question, stakes, withheld) – Einstieg nach Guide 18.12 entwerfen');
+    return;
+  }
+  if (!H.types.includes(hk.type)) E('18.12', `hook.type „${hk.type}“ unbekannt (${H.types.join(', ')})`);
+  for (const k of ['question', 'stakes', 'withheld']) if (!String(hk[k] || '').trim()) E('18.12', `hook.${k} fehlt`);
+  const proof = events.find((e) => e.id === hk.proof);
+  if (!proof) E('18.12', `hook.proof „${hk.proof}“ ist kein Ereignis`);
+  else {
+    const max = H.proofMax[hk.type] ?? 2;
+    if (proof.premise !== 'visible') E('18.12', `Beweis-Ereignis ${proof.id} ist keine sichtbare Prämissen-Konsequenz (premise: "visible") – Unmöglichkeitstest: würde das Bild ohne Prämisse genauso aussehen?`);
+    if (proof.t > max + 1e-9) E('18.12', `Beweis-Ereignis ${proof.id} bei ${proof.t} s (Hook-Typ ${hk.type}: ≤ ${max} s)`);
+    if (!(proof.sfx || []).length) W('18.12', `Beweis-Ereignis ${proof.id} ohne Klang`);
+  }
+  const inWin = events.filter((e) => e.t < H.window);
+  const prem = inWin.filter((e) => e.premise === 'visible' || e.premise === 'hud');
+  const vis = prem.filter((e) => e.premise === 'visible');
+  if (prem.length < H.minPremise) E('18.12', `nur ${prem.length} Prämissen-Ereignisse bis ${H.window} s (min. ${H.minPremise})`);
+  if (vis.length < H.minVisible) E('18.12', `nur ${vis.length} im Bild sichtbare Prämissen-Konsequenzen bis ${H.window} s (min. ${H.minVisible}; HUD-Abzüge allein zeigen die Prämisse nicht)`);
+  const start = proof ? proof.t : 0;
+  const pts = [start, ...prem.map((e) => e.t).filter((t) => t > start), H.window].sort((a, b) => a - b);
+  for (let i = 1; i < pts.length; i++) if (pts[i] - pts[i - 1] > H.maxGap + 1e-9) W('18.12', `keine neue Prämissen-Konsequenz zwischen ${r2(pts[i - 1])} s und ${r2(pts[i])} s (> ${H.maxGap} s)`);
+  const filler = inWin.filter((e) => !e.premise);
+  if (inWin.length && filler.length / inWin.length > H.maxFillerShare + 1e-9) {
+    W('18.12', `${filler.length} von ${inWin.length} Ereignissen bis ${H.window} s ohne Prämissenbezug (${filler.map((e) => e.id).join(', ')}) – Füllstoff streichen oder zur Prämissen-Konsequenz machen`);
+  }
+  for (const b of timeline.beats || []) {
+    if (b.from >= H.window) continue;
+    if (!prem.some((e) => e.beat === b.id)) W('18.12', `Beat ${b.id} (${r2(b.from)} s) im Hook-Fenster ohne Prämissen-Ereignis`);
+  }
+  // Nichts vorwegnehmen (H8): Pointe und letztes HUD-Label nicht vor 15 s
+  if (timeline.pointe != null && timeline.pointe < H.window) E('18.12', `Pointe bei ${timeline.pointe} s liegt im Hook-Fenster`);
+  const hud = timeline.hud || [];
+  if (hud.length > 1) {
+    const last = hud[hud.length - 1].id;
+    const early = hud.find((h) => h.id === last && h.from < H.window);
+    if (early) W('18.12', `End-Label „${last}“ erscheint schon bei ${early.from} s – verrät den Endzustand`);
+  }
+}
+
 // Profil „voiceover“ = Stil A (Earth): Sprecher, Wort-für-Wort-Untertitel und Einblendungen statt Titel/HUD/Zeilen.
 // Regeln: STYLE_A_EARTH.md. Mindestlänge 60 s wie alle Stile.
 // Prüft die messbaren Regeln, die unabhängig vom Profil gelten, plus die Untertitel-/Einblendungs-Regeln.
@@ -342,6 +403,18 @@ export function loadWords(dir, timeline) {
   return f && fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : null;
 }
 
+// Hook-Entwurf (18.12 H10) liegt nicht im Beat-Sheet, sondern im LOG. Nur über die Kommandozeile geprüft (Datei-basiert):
+// drei ausgefüllte Zeilen der Tabelle „Hook-Entwurf“ und eine Wahl. Prüft Vorhandensein, nicht Qualität.
+export function checkHookDraft(logText, W) {
+  if (logText == null) return W('18.12', 'LOG.md fehlt – Hook-Entwurf (3 Ansätze) nicht dokumentiert');
+  const i = logText.indexOf('Hook-Entwurf');
+  if (i < 0) return W('18.12', 'LOG.md: Abschnitt „Hook-Entwurf“ fehlt (3 Ansätze, Guide 18.12 H10)');
+  const rows = logText.slice(i).split('\n').filter((l) => /^\|\s*[123]\s*\|/.test(l));
+  const filled = rows.filter((l) => l.split('|').slice(2, -1).filter((c) => c.trim()).length >= 4);
+  if (filled.length < 3) W('18.12', `LOG.md: nur ${filled.length} von 3 Hook-Ansätzen ausgefüllt`);
+  if (!/Gewählt:\s*#\s*\d/.test(logText.slice(i))) W('18.12', 'LOG.md: Wahl des Hook-Ansatzes („Gewählt: # …“) fehlt');
+}
+
 if (import.meta.url === `file://${process.argv[1]}`) {
   const args = process.argv.slice(2);
   const dir = args.find((a) => !a.startsWith('--'));
@@ -357,11 +430,16 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const technical = rel[0] === 'tests' || (rel[0] === 'productions' && (rel[1] || '').startsWith('_'));
   const requireBeats = tl.profile !== 'voiceover' && !technical;
   const res = validate(tl, tx, { lang, wordTimes: loadWords(dir, tl), requireBeats });
+  if (tl.beats && requireBeats) {
+    const lf = path.join(dir, 'LOG.md');
+    checkHookDraft(fs.existsSync(lf) ? fs.readFileSync(lf, 'utf8') : null, (r, m) => res.warnings.push(`[${r}] ${m}`));
+  }
   if (args.includes('--json')) console.log(JSON.stringify(res, null, 1));
   else {
     for (const e of res.errors) console.log(`❌ ${e}`);
     for (const w of res.warnings) console.log(`⚠️  ${w}`);
     console.log(res.errors.length ? `FEHLER: ${res.errors.length}` : `OK (${res.warnings.length} Warnungen)`);
+    if (tl.beats) console.log(`Hook-Sichtprüfung (Pflicht, quality_review.md H – der Validator ersetzt sie nicht):\n  node tools/still.mjs --production ${dir} --at 0,0.5,1,2,3,5,8,12,15`);
   }
   process.exit(res.errors.length ? 1 : 0);
 }

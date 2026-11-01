@@ -71,6 +71,8 @@ Das Format-Versprechen an den Zuschauer: *„In einer Minute erlebst du, was wir
 
 Belege: Titel ab Frame 0 über bewegtem Bild in 14/14 What-if-Referenzen; HUD ab Frame 0 in 14/14; erste Untertitelzeile bei ≈3–5 s.
 
+> **Ab Version 2.2 gilt für 0–15 s zusätzlich und vorrangig der Hook-Standard 18.12** (Prämisse vorführen, Unmöglichkeitstest, Beweis-Ereignis ≤ 2 s bzw. Geheimnis ab Frame 0). Wo diese Tabelle weniger verlangt (z. B. „Auslöser spätestens bei 10 s“), gilt 18.12.
+
 | Regel | Typ |
 |---|---|
 | **Frame 0 zeigt bereits: bewegte Szene + Titelfrage + HUD.** Kein Logo, kein Intro, keine Schwarzblende länger als 3 Frames. | [V] |
@@ -78,7 +80,7 @@ Belege: Titel ab Frame 0 über bewegtem Bild in 14/14 What-if-Referenzen; HUD ab
 | Genau **ein** Schlüsselwort in der Signalfarbe (Abschnitt 6.4). | [S] *(10/14 Referenzen)* |
 | Titel steht 2,5–4,0 s, dann 0,3–0,5 s Ausblendung. | [V] |
 | Der HUD-Wert **verändert sich in den ersten 2 s** sichtbar (Countdown läuft, Zähler steigt/fällt). | [V] *(R06, R07, R08, R11–R15)* |
-| Erste Untertitelzeile zwischen 3,5 und 5,0 s; sie verortet den Zuschauer („You are …“, „It's 3 AM.“). | [S] |
+| Erste Untertitelzeile zwischen 3,5 und 5,0 s; sie verschärft Frage oder Einsatz. Verortende Zeilen („It's 3 AM.“) nur, wenn das Bild bereits eine Anomalie zeigt (18.12 H9). | [S] |
 | Das auslösende Ereignis (oder sein unmittelbares Bevorstehen per Countdown) ist **spätestens bei 10 s** sichtbar. | [V] *(R01 ≈10 s, R06 ≈8,5 s, R15 ≈7 s)* |
 | Der Titel muss vor dem Ausblenden auf dem Kontaktbogen (240 px Breite) lesbar sein. | [V] |
 | **Zurückgehalten** wird immer: wie schlimm es wird und wie es endet. Der HUD zeigt die Richtung, nicht das Ziel. | [V] |
@@ -93,8 +95,8 @@ Belege: Titel ab Frame 0 über bewegtem Bild in 14/14 What-if-Referenzen; HUD ab
 
 | Akt | Zeit | Inhalt | HUD |
 |---|---|---|---|
-| A Prämisse | 0–4 s | Titelfrage, normale Welt | Startwert läuft |
-| B Auslösung | 4–12 s | Ereignis tritt ein / Countdown endet; Zuschauer verortet | ggf. 1. Label-Wechsel |
+| A Prämisse | 0–3 s | Titelfrage + **Prämisse wird vorgeführt** (Beweis-Ereignis ≤ 2 s bzw. Geheimnis/Countdown ab Frame 0, 18.12) – keine „normale Welt“ als Einstieg | Startwert läuft, reagiert auf den Beweis |
+| B Auslösung | 3–15 s | ≥ 3 neue Prämissen-Konsequenzen, ≥ 2 im Bild; Frage wächst (18.12 H6) | ggf. 1. Label-Wechsel |
 | C Eskalation | 12 s – ≈75 % der Laufzeit | 5–9 Stufen à 4–8 s, jede größer/näher/persönlicher | Wert eskaliert; Label-Wechsel pro Phase |
 | D Höhepunkt + Wendung | ≈75–90 % | maximale Konsequenz, dann Twist oder persönlicher Moment | Endzustand („HERE“, „0 %“, „BACK“) |
 | E Abschluss | letzte 2–5 s | Pointe/Frage/Fortsetzung | – |
@@ -410,7 +412,7 @@ Abschnitt 16 beschreibt **Stil B**. Jedes Stil-B-Video folgt **genau einem** der
 
 | Baustein | Vorgabe |
 |---|---|
-| Frage | Alltag, zweite Person: „What if you …?“ / „What if everyone … except you?“ |
+| Frage | Alltag, zweite Person: „What if you …?“ / „What if everyone … except you?“ – Alltag ist der **Schauplatz**, nicht der Einstieg: die ersten 15 s zeigen nur Prämissen-Konsequenzen (18.12) |
 | HUD | Zähler, der Schritt für Schritt steigt/fällt („BAD THINGS TODAY 1 → 15“, „PEOPLE ON EARTH 8,199,999,707 → 2“, „HEIGHT 1.49 m …“) |
 | Takt | **Alle 3–4 s ein neues Ereignis**, jedes an einem eigenen kleinen Ort; Wechsel per kurzer Abblende (`dip`, 4 Frames) oder Whip |
 | Figuren | Würfel-Menschen **mit Gesicht**; Gefühl ist in jeder Einstellung lesbar (Brauen, Mund); Hauptfigur sieht überall gleich aus |
@@ -476,6 +478,7 @@ dramaturgisch, `templates/quality_review.md`) → MP4-AUSLIEFERUNG (Datei als An
 | Beatlänge | 1,8–6,0 s (1,0–1,8 s nur als Reaktions-Einschub); Median 2,5–4,6 s | R07/R19 4,0 s, R20 Median 1,5 s |
 | Länge | ≥ 60 s, B1 Standard 61–64 s, 15–18 Beats | |
 | Übergänge | Ortswechsel: `dip` (4–6 Frames) oder `whip`; gleicher Ort: harter Schnitt | R19 Abblenden, R20 Whips |
+| Helligkeit an Übergängen | Abblende/Whip zwischen sehr hellen und sehr dunklen Szenen (z. B. Tag ≈ 160 → Nacht ≈ 30 mittlere Helligkeit) vermeiden: `video_qa.py` meldet dann „Einstellung < 4 Frames“ (FAIL), obwohl das Bild sauber ist. Lichtstimmung angleichen oder 6-Frame-Abblende; vorab mit `tools/still.mjs` an den Übergangsframes prüfen | Produktion `what-if-no-sleep-30-days`, LOG 5 |
 | Ereignis-Typen | Aufprall, Verwandlung, Ankunft/Gehen einer Figur, Gegenstand ändert Zustand, Licht kippt, Reaktion | |
 
 ### 18.3 Kamera
@@ -520,7 +523,7 @@ dramaturgisch, `templates/quality_review.md`) → MP4-AUSLIEFERUNG (Datei als An
 
 ### 18.7 Dramaturgie
 
-- Frame 0: Situation in Bewegung + Titel + laufender HUD; auslösendes Ereignis ≤ 10 s (meist ≤ 2 s).
+- Frame 0: Situation in Bewegung + Titel + laufender HUD; Einstieg nach dem Hook-Standard **18.12** (Beweis-Ereignis ≤ 2 s bzw. Geheimnis/Countdown ab Frame 0; bis 15 s ≥ 3 Prämissen-Konsequenzen, kein Füllstoff).
 - Wechsel aus Hoffnung und Rückschlag (Gewinn → Verlust) treibt die Eskalation; HUD-Verlauf und Gefühle zeigen die Richtung.
 - Pointe = eigenes Ereignis mit Klang, vorbereitet durch ein früheres Ereignis (Aufbau → Auszahlung); danach ≤ 5 s.
 - Ende: Endkarte mit Frage an den Zuschauer und/oder „Part 2?“ (`endcard`).
@@ -530,7 +533,9 @@ dramaturgisch, `templates/quality_review.md`) → MP4-AUSLIEFERUNG (Datei als An
 1. **Technisch:** `video_qa.py --mode render --plan timeline.json` (Format, Frames, Ton, Synchronität, Monotonie-Kandidaten).
 2. **Visuell:** alle Kontaktbögen, `shots.jpg`, alle Bildstreifen; Checkliste B in `templates/quality_review.md`.
 3. **Dramaturgisch:** Video in Echtzeit ansehen; Checkliste C.
-Ein technisches PASS ist **keine** Freigabe. Status: `TECHNISCH GEPRÜFT` → `QUALITÄT GEPRÜFT` → `FREIGEGEBEN` (mit menschlicher Hörprüfung).
+Ein technisches PASS ist **keine** Freigabe. Status: `TECHNISCH GEPRÜFT` → `QUALITÄT GEPRÜFT` (inkl. Hook-Prüfung H, 18.12) → `FREIGEGEBEN` (mit menschlicher Hörprüfung).
+Der Validator prüft beim Hook nur Struktur, Zeitpunkte und die **Selbstauskunft** des Beat-Sheets (`premise`); ob ein Einstieg
+überzeugt, entscheidet allein die Sichtprüfung H an echten Bildern.
 
 ### 18.9 Warum frühere Überarbeitungen nicht sichtbar wirkten (Befund 2026-10-30)
 
@@ -561,6 +566,8 @@ im LOG begründeten Grund hinter diese Werte zurück. `validate_production.mjs` 
 | Dramaturgie | Hoffnung/Rückschlag, früh vorbereitete Pointe, Endkarte mit Frage + „Part 2?“, 3,6 s nach der Pointe | Pointe/Ende Fehler, Endkarte Warnung; Rest in `quality_review.md` C |
 | Bildqualität | Würfel-Figuren mit Gesicht, Requisiten mit Erzählfunktion, keine Schwarzbilder/Kurz-Einstellungen, keine Monotonie-Kandidaten | `video_qa.py` + `quality_review.md` B |
 
+**Ausnahme Einstieg:** Für die ersten 15 s ist das Testvideo **kein** Maßstab, sondern Gegenbeispiel (Analytics: ≈ 50 % Abgang bis 14 s; Analyse `REFERENCE_ANALYSIS.md` 10). Dort gilt 18.12; der Validator meldet für das Testvideo selbst Hook-Fehler (beabsichtigt, dokumentiert).
+
 Bekannte Schwächen der Referenz, die **nicht** wiederholt werden sollen: zu dunkle Nachtszenen (Gesicht unlesbar),
 Anschlussfehler über einen Schnitt (Pose wechselt), Text während eines Blitzes, wichtige Requisiten zu klein in der Ich-Perspektive.
 
@@ -570,8 +577,61 @@ Ab 2026-10-30 werden Pipeline, Kit-Schnittstellen, Beat-Sheet-Format, HUD-Gestal
 umgebaut**. Zulässig sind nur: (a) Korrektur eines konkreten Fehlers, (b) Behebung eines nachgewiesenen Qualitätsproblems (mit
 Beleg im LOG), (c) **neue Kit-Teile** (Orte, Requisiten, Posen, Klänge), die ein Thema braucht – ohne bestehende Schnittstellen zu
 ändern. Jede solche Änderung kommt ins Änderungsprotokoll. Neue Videos analysieren nicht erneut das Repository.
+Version 2.2 (Hook-Standard 18.12) ist eine solche belegte Qualitätsbehebung: additive Beat-Sheet-Felder (`hook`, `events[].premise`)
+und neue Prüfregeln `[18.12]`; Pipeline, Renderer, Kit und bestehende Felder bleiben unverändert.
 
 Änderungen an diesem Style-Guide nur auf Basis dokumentierter Ergebnisse (Produktionsprotokolle, Analytics). Jede Änderung mit Datum und Begründung unten eintragen.
+
+### 18.12 Hook-Standard (0–15 s) – verbindlich ab 2.2
+
+Grundlage: Analytics des Akku-Videos (≈ 50 % Abgang bis 14 s) und Hook-Analyse `REFERENCE_ANALYSIS.md` Abschnitt 10. Dieser
+Abschnitt hat für die ersten 15 s **Vorrang vor 2, 3.1 und 16.1**. Er legt fest, *was* der Einstieg leisten muss, nicht *wie* er
+aussieht – Bild, Ort und Ablauf entstehen aus dem Thema.
+
+**Kernregel – Prämisse vorführen, nicht erklären.** Das erste Schlüsselereignis (`hook.proof`) besteht den
+**Unmöglichkeitstest**: *Würde dieses Bild ohne die Prämisse genauso aussehen?* Wenn ja, ist es kein Hook. Ein HUD-Abzug, ein
+Wecker oder ein Mensch, der aufs Handy schaut, bestehen ihn nicht; ein Auto, das von der Figur abprallt (R19), eine Figur, die
+sichtbar schrumpft (R07), eine Uhr mit Fragezeichen (R20), bestehen ihn.
+
+| # | Regel | Prüfung |
+|---|---|---|
+| H1 | **Frame 0 ist nicht normal:** Bild *oder* HUD zeigt bereits eine Anomalie (laufender Prozess, Bedrohung im Anflug, unmöglicher Messwert, Geheimnis). Kein Aufwachen, kein Ankommen, keine Vorstellung der Figur als Einstieg. | QA H1 |
+| H2 | **Hook-Typ** wird je Thema gewählt und begründet (keine Schablone): `proof` – Regel am Extremfall vorgeführt (R19) · `process` – Verwandlung läuft ab Frame 0 sichtbar (R07) · `countdown` – Uhr läuft auf das Ereignis zu (R06, R15) · `mystery` – unbekannter Wert/angekündigtes Ereignis (R20). | Validator (Feld) + LOG |
+| H3 | **Beweis-Ereignis** `hook.proof`: sichtbare Prämissen-Konsequenz (`premise: "visible"`) mit Klang; bei `proof`/`process` **≤ 2,0 s**, bei `countdown`/`mystery` ≤ 10 s (das Geheimnis/der Countdown steht dann ab Frame 0 im HUD). | Validator (Fehler) |
+| H4 | **Einsatz** (`hook.stakes`) ist bis 3 s ohne Untertitel erkennbar: Was steht auf dem Spiel, wohin zeigt der HUD? Die Figur reagiert körperlich (Gesicht + Pose) auf das Beweis-Ereignis. | QA H2, H3 |
+| H5 | **Offene Frage** (`hook.question`): die konkrete Frage, die sich der Zuschauer bei 3 s stellt („Was kann mich noch töten?“). Sie bleibt bis zur Pointe offen und wird bis 15 s größer, nicht beantwortet. | QA H4 |
+| H6 | **Eskalation 3–15 s:** mindestens **3 Prämissen-Ereignisse** bis 15 s, davon **≥ 2 im Bild sichtbar** (`premise: "visible"`, nicht nur HUD); jedes größer, näher oder persönlicher als das vorige; Abstand zwischen zwei Prämissen-Ereignissen ≤ 5 s. | Validator (Fehler/Warnung) + QA H5 |
+| H7 | **Kein Füllstoff:** Ereignisse ohne Prämissenbezug (Toast verbrennt, Bus fährt ab) sind bis 15 s höchstens Kulisse; ≤ 1/3 der Ereignisse im Hook-Fenster. Jeder Beat bis 15 s enthält ein Prämissen-Ereignis. | Validator (Warnung) |
+| H8 | **Nichts vorwegnehmen** (`hook.withheld`): Pointe, Endzustand und letztes HUD-Label erscheinen nicht vor 15 s. Der Einstieg zeigt die Richtung, nicht das Ziel. | Validator (Pointe/Label) + QA H6 |
+| H9 | **Text folgt dem Bild:** die erste Zeile erklärt nicht, was der Hook zeigt, sondern verschärft die Frage oder den Einsatz. Die Zeile kommt nach dem Titel (3,5–5,0 s, wie Abschnitt 2); „verortende“ Zeilen („It's 3 AM.“) nur, wenn das Bild bereits eine Anomalie zeigt. | QA H4 |
+| H10 | **Hook-Entwurf vor dem Beat-Sheet:** drei Einstiege **verschiedener Hook-Typen oder Bildideen** skizzieren (je: Frame 0, Beweis-Ereignis, Frage, was zurückgehalten wird), gegen H1–H9 bewerten, besten wählen; Entwurf + Wahl im LOG. Hook-Typ und Eröffnungsbild der letzten drei Produktionen nennen; Wiederholung begründen. | LOG + QA H7 |
+
+**Bewusst nicht geregelt:** Schnittfrequenz, Bewegungsmenge, Lautstärke des Einstiegs. R20 ist in 0–12 s so ruhig wie unser
+Akku-Video (gemessen) und trägt den Einstieg trotzdem über ein Geheimnis; mehr Schnitte ersetzen keine Prämissen-Konsequenz.
+Hektik ohne Prämissenbezug ist Füllstoff im Sinne von H7.
+
+**Beat-Sheet (additiv, keine Formatänderung bestehender Felder):**
+
+```json
+"hook": {
+  "type": "proof",
+  "proof": "car_bounce",
+  "question": "What could still kill you?",
+  "stakes": "Nothing hurts you – so what is left to lose?",
+  "withheld": "The ending: being the last living thing."
+},
+"events": [{ "id": "car_bounce", "at": 1.2, "what": "Auto prallt von der Figur ab", "premise": "visible", "sfx": "crash", "trigger": true }]
+```
+
+`premise`: `"visible"` = Konsequenz der Prämisse **im Bild** (Figur/Welt verändert sich so, wie es nur in dieser Welt möglich ist) ·
+`"hud"` = Konsequenz nur als Messwert · ohne Feld = Alltags-/Kulissenereignis. Die Angabe ist eine Behauptung des Autors; QA H3
+prüft jede `visible`-Angabe im Hook-Fenster am Vorschaubild.
+
+**Beispiel (nicht umgesetzt, nur zur Veranschaulichung):** Akku-Video, Typ `proof`. Frame 0: Das kleine Geschwister schnappt sich
+das Handy und startet ein Spiel; ab 0,4 s fällt der HUD rasant (100 → 86 %, Akzent `loss`), die Figur greift sich an die Brust und
+sackt zusammen (`recoil` → `slump`, `panic`) – *jeder Fingertipp des Kindes kostet dich Leben*. Frage: „Will you survive the day?“
+Eskalation bis 15 s: Helligkeit auf Maximum = Atemnot; ein Kollege „leiht“ sich das Ladekabel; der Chef ruft per Video an. Zurückgehalten:
+Stromausfall der Stadt und der Pointe zu Hause. Toast und Bus entfallen.
 
 ### Änderungsprotokoll
 
@@ -583,3 +643,4 @@ Beleg im LOG), (c) **neue Kit-Teile** (Orte, Requisiten, Posen, Klänge), die ei
 | 2026-10-29 | 1.3 | Zwei Produktionsstile (A Earth, B mit Rezepten B1/B2, Abschnitt 17, `STYLE_A_EARTH.md`); Rezepte A/B → B1/B2 umbenannt; Mindestlänge 60 s für jedes Video, technisch erzwungen | Auftrag des Nutzers (Stilauswahl je Auftrag; jedes Video ≥ 60 s) |
 | 2026-10-30 | 2.0 | Abschnitt 18 „Produktionsstandard Stil B“ (verbindlich, Vorrang), Architektur-Freeze 18.10; Stil B als einziges aktives Ziel, Stil A archiviert (17); HUD-Gestaltung und Signalfarbe nach R07/R19/R20 (18.5, ersetzt 6.3 HUD-Schrift „Monospace“ und 6.4 Punkt 2/3 „nicht Gold“); 16.3 Kit-Bestand | Auftrag des Nutzers (finale Systemüberarbeitung); Sichtung R07/R19/R20 (`REFERENCE_ANALYSIS.md` 9); Fehleranalyse 18.9; Testvideo `productions/what-if-phone-battery-life` |
 | 2026-10-30 | 2.1 | 18.11: abgenommenes Testvideo als verbindliches Mindestniveau; Validator erzwingt `beats.json` für Stil B und warnt bei Unterschreitung; `run.mjs` legt `quality_review.md` an | Abnahme durch den Auftraggeber; Prüfung, ob der Standard im Ablauf greift |
+| 2026-10-31 | 2.2 | 18.12 Hook-Standard (Unmöglichkeitstest, Hook-Typen, Beweis-Ereignis, Prämissen-Ereignisse, Füllstoff, Vorwegnahme, Hook-Entwurf); 2, 3.1, 16.1, 18.7, 18.11 angepasst; Beat-Sheet additiv `hook` + `events[].premise`; Validator-Regeln `[18.12]`; QA-Abschnitt H | Analytics Akku-Video (≈ 50 % Abgang bis 14 s), Hook-Analyse `REFERENCE_ANALYSIS.md` 10; Regeltext von 2/3.1/16.1 schrieb einen Alltagseinstieg vor (10.4). Auftrag des Nutzers 2026-10-31 |

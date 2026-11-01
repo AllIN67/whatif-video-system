@@ -82,6 +82,14 @@ export function createHumanFactory(THREE, core) {
       head.add(c);
       return c;
     });
+    // Augenringe (Übermüdung): dunkle Flächen unter den Augen, Stärke über api.fatigue(0…1) – Zustand am Körper sichtbar
+    const bagMat = mat(0x5a3f5c, { transparent: true, opacity: 0 });
+    const bags = [-1, 1].map((sx) => {
+      const b = cbox(0.06, 0.028, 0.006, bagMat, [sx * 0.07, 0.152, fz + 0.001], { cast: false, receive: false });
+      b.visible = false;
+      head.add(b);
+      return b;
+    });
     const sweat = cbox(0.035, 0.06, 0.035, mat(0x8fd3ff, { roughness: 0.2 }), [HW / 2 + 0.01, 0.27, fz - 0.03], { cast: false, receive: false });
     head.add(sweat);
     // Mund aus zwei Hälften → Lächeln/Traurig durch Kippen, Schock durch Öffnen
@@ -623,6 +631,16 @@ export function createHumanFactory(THREE, core) {
           const y0 = lp ? lp.look[0] : 0;
           const p0 = lp ? lp.look[1] : 0;
           api.look(y0 + (lk.look[0] - y0) * lw, p0 + (lk.look[1] - p0) * lw);
+        }
+        return api;
+      },
+      // Übermüdung 0…1: Augenringe werden größer und dunkler
+      fatigue(k = 0) {
+        const c = Math.max(0, Math.min(1, k));
+        bagMat.opacity = 0.85 * c;
+        for (const b of bags) {
+          b.visible = c > 0.02;
+          b.scale.set(0.8 + 0.4 * c, 0.7 + 0.9 * c, 1);
         }
         return api;
       },

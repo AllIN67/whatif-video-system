@@ -125,6 +125,15 @@ SOUNDS = {
         f"aevalsrc='0.8*sin(2*PI*52*t)*exp(-14*t)*min(1,t/0.004)"
         f" + 0.55*sin(2*PI*48*(t-0.24))*exp(-16*(t-0.24))*gte(t,0.24)':d=0.9:s={SR},lowpass=f=300,"
         "pan=stereo|c0=c0|c1=c0[out]")),
+    # Schaf blökt („mäh“): Sägezahn-artiger Ton mit Vibrato und Formant (2026-10-31, Schlaf-Video)
+    "bleat": (0.8, (
+        f"aevalsrc='(0.5*sin(2*PI*(310*t+1.6*sin(2*PI*7*t)))+0.35*sin(2*PI*(620*t+3.2*sin(2*PI*7*t)))+0.2*sin(2*PI*(930*t+4.8*sin(2*PI*7*t))))"
+        f"*min(1,t/0.04)*exp(-2.2*t)*(0.75+0.25*sin(2*PI*21*t))':d=0.8:s={SR},"
+        "bandpass=f=900:width_type=o:w=2.2,pan=stereo|c0=c0|c1=c0[out]")),
+    # Wecker: vier schnelle Piep-Folgen (2,2 kHz), 1,2 s
+    "alarm": (1.2, (
+        f"aevalsrc='0.45*sin(2*PI*2200*t)*gt(sin(2*PI*8*t),0)*lt(mod(t,0.3),0.2)*min(1,t/0.003)':d=1.2:s={SR},"
+        "pan=stereo|c0=c0|c1=c0[out]")),
     # Atmosphären (Betten, 90 s, weich): Stadt, Regen, Raumton
     "city": (90.0, (
         f"anoisesrc=d=90:c=brown:r={SR}:a=0.5:s=71,lowpass=f=420,{_env('0.8+0.2*sin(2*PI*0.05*t)')}[a];"

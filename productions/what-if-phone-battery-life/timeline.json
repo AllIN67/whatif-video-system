@@ -1372,7 +1372,8 @@
    "what": "erster Tipp auf das Handy kostet 1 %",
    "sfx": [
     "pop"
-   ]
+   ],
+   "premise": "hud"
   },
   {
    "t": 4.9,
@@ -1381,7 +1382,8 @@
    "what": "Wischen: −2 %",
    "sfx": [
     "pop"
-   ]
+   ],
+   "premise": "hud"
   },
   {
    "t": 5.6,
@@ -1390,7 +1392,8 @@
    "what": "Wischen: −2 %",
    "sfx": [
     "pop"
-   ]
+   ],
+   "premise": "hud"
   },
   {
    "t": 6.1,
@@ -1418,7 +1421,8 @@
    "sfx": [
     "loss"
    ],
-   "flash": "loss"
+   "flash": "loss",
+   "premise": "hud"
   },
   {
    "t": 12.366667,
@@ -2375,6 +2379,14 @@
  },
  "post": {
   "vignette": 0.18
+ },
+ "hook": {
+  "_comment": "Nachträglich dokumentiert (2026-10-31, Guide 18.12): der TATSÄCHLICHE Einstieg dieses Videos – Gegenbeispiel. Analytics: ≈ 50 % Abgang bis 14 s. Neu-Render erst mit neuem Einstieg (Beispiel in Guide 18.12).",
+  "type": "process",
+  "proof": "first_tap",
+  "question": "What happens when your battery hits 0 %?",
+  "stakes": "Only stated in the HUD sub-line (= PHONE BATTERY); never shown on the body.",
+  "withheld": "City blackout and the blackout at home (pointe)."
  },
  "endcard": {
   "in": 58.6,

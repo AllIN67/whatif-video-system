@@ -20,13 +20,18 @@ erneute Repository-Analyse pro Video. Neue Kit-Teile sind erlaubt, wenn ein Them
 
 1. Guide Abschnitt 18 lesen (dazu bei Bedarf 16.1/16.2 Rezept, 2 Hook, 4 Text, 9 Ton).
 2. `VIDEO_PRODUCTION_CHECKLIST.md` öffnen. Vorlagen: `templates/beats.json`, `templates/production_log.md`, `templates/quality_review.md`.
-3. **Referenzproduktion = Mindestniveau** (Guide 18.11): `productions/what-if-phone-battery-life/` (beats.json, scene.js, LOG.md, quality_review.md). Als Muster nachschlagen, nicht kopieren.
+3. **Referenzproduktion = Mindestniveau** (Guide 18.11): `productions/what-if-phone-battery-life/` (beats.json, scene.js, LOG.md, quality_review.md). Als Muster nachschlagen, nicht kopieren. **Ausnahme: ihr Einstieg (0–15 s) ist Gegenbeispiel** – Hook nach Guide 18.12.
 4. Werkzeuge: `node --version`, `ffmpeg -version`, `ls node_modules/three` (sonst `npm install`).
 
 ## Schritt 1 – Thema → Story
 
 - Frage ≤ 10 Wörter, zweite Person. HUD-Messgröße mit Start/Ende, die sich in **jedem** Beat ändern kann.
 - Pointe zuerst festlegen und **früh vorbereiten** (Aufbau → Auszahlung). Wechsel aus Hoffnung und Rückschlag planen.
+- **Hook entwickeln (Guide 18.12, Pflicht):** drei Einstiege verschiedener Typen (`proof`, `process`, `countdown`, `mystery`) oder
+  Bildideen skizzieren – je Frame 0, Beweis-Ereignis, Frage bei 3 s, was zurückgehalten wird – und mit dem **Unmöglichkeitstest**
+  bewerten („Sähe dieses Bild ohne die Prämisse genauso aus?“). Den Typ wählen, der zum Thema passt, nicht den vom letzten Video.
+  Kein Aufwachen/Ankommen/Alltag als Einstieg; Alltag ist Schauplatz, nicht Ereignis. Bis 15 s nur Prämissen-Konsequenzen,
+  jede größer/näher/persönlicher. Entwurf + Wahl ins LOG.
 - 15–18 Beats à 2–4,5 s, ≥ 5 Orte, ≥ 4 Gefühle der Hauptfigur mit Entwicklung. Zahlen mit Quelle im LOG.
 - `productions/<slug>/` anlegen, `templates/production_log.md` → `LOG.md`.
 
@@ -36,7 +41,8 @@ erneute Repository-Analyse pro Video. Neue Kit-Teile sind erlaubt, wenn ein Them
   `events` (jedes mit `what`, Schlüsselereignisse mit `sfx`, HUD-Sprung `hud_to`/Akzent `flash`), `hud`, `line`, `ambience`, `data` (Positionen).
 - Texte nur in `text.en.json` (Titel, HUD-Labels, Zeilen, Endkarte).
 - `node tools/build_timeline.mjs productions/<slug>` → `node tools/validate_production.mjs productions/<slug>` muss **OK** melden
-  (Standard-B-Regeln: Kamera-Abwechslung, Ereignis pro Beat, HUD-Dynamik, Gefühle, Orte, Ton-Synchronität).
+  (Standard-B-Regeln: Kamera-Abwechslung, Ereignis pro Beat, HUD-Dynamik, Gefühle, Orte, Ton-Synchronität; Hook `[18.12]`:
+  `hook`-Block, Ereignisse mit `premise: "visible"|"hud"` markieren).
 - Warnungen `[18.11]` (unter Referenzniveau) beheben – Beat-Sheet anreichern – oder im LOG begründen. Ohne `beats.json` lehnt
   der Validator eine Stil-B-Produktion ab.
 
@@ -50,6 +56,7 @@ erneute Repository-Analyse pro Video. Neue Kit-Teile sind erlaubt, wenn ein Them
 
 - `node tools/still.mjs --production productions/<slug> --at <Mitte jedes Beats + Ereigniszeiten>` und `stills/contact.jpg` ansehen.
 - Prüfen: Figur im Bild (9:16 = schmaler Bildwinkel), Gesicht lesbar, Kamera nicht in Wänden/Figuren, Licht je Ort, HUD/Texte frei.
+- **Hook-Vorschau** `--at 0,0.5,1,2,3,5,8,12,15` und `quality_review.md` Abschnitt H vor dem Rendern ausfüllen; ein Nein bei H1–H3 → Einstieg neu.
 - Korrigieren in `beats.json` (Kamera/Positionen) bzw. `scene.js`, neu bauen, erneut Vorschau – bis alle Beats stimmen.
 
 ## Schritt 5 – Rendern
@@ -63,7 +70,7 @@ erneute Repository-Analyse pro Video. Neue Kit-Teile sind erlaubt, wenn ein Them
 1. **Technisch:** `qa/report.md` lesen (Status, Synchronität der Ereignis-Klänge, Monotonie-Kandidaten, alle Meldungen).
 2. **Visuell:** **jeden** `qa/sheet_*.jpg` (inkl. Ende), `qa/shots.jpg`, **jeden** Streifen in `qa/strips/` ansehen; jede REVIEW-Meldung
    als „beabsichtigt“ (Grund) oder „Fehler“ einstufen.
-3. **Dramaturgisch:** Ablauf gegen Beat-Sheet prüfen (Einstieg, Entwicklung, Eskalation, Pointe, Ende).
+3. **Dramaturgisch:** Ablauf gegen Beat-Sheet prüfen (Einstieg, Entwicklung, Eskalation, Pointe, Ende); **Hook** nach Abschnitt H.
 - `productions/<slug>/quality_review.md` (legt `run.mjs` aus der Vorlage an) ausfüllen; nur Gesehenes als OK eintragen.
 - Bekannte Schwächen der Referenz vermeiden (Guide 18.11): zu dunkle Nachtszenen, Anschlussfehler über Schnitte, Text im Blitz.
 - Hörprüfung kann Claude nicht leisten → ausdrücklich beim Nutzer anfragen.

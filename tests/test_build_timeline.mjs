@@ -2,7 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { buildTimeline } from '../tools/build_timeline.mjs';
-import { validate, checkStandardB } from '../tools/validate_production.mjs';
+import { validate, checkStandardB, checkHookDraft } from '../tools/validate_production.mjs';
 import { shotKeys, PRESET_NAMES } from '../pipeline/runtime/kit/camera.js';
 import { prepare, hudAt } from '../pipeline/runtime/timeline.js';
 
@@ -23,6 +23,7 @@ function sheet(n = 16) {
     title: { in: 0, out: 3.4 },
     hud: { start: 100 },
     pointe: 'e15',
+    hook: { type: 'proof', proof: 'e0', question: 'How long can you last?', stakes: 'Every percent is your life.', withheld: 'The ending at home.' },
     endcard: { beat: 'b15', at: 0.3 },
     audio: { fade_out: 1.2 },
     beats: Array.from({ length: n }, (_, i) => ({
@@ -34,7 +35,7 @@ function sheet(n = 16) {
       camera: CAMS[i % CAMS.length],
       line: `l${i}`,
       hud: { label: i < 8 ? 'battery' : 'critical', to: 100 - (i + 1) * 5, mode: 'steps', steps: 2, window: [0.5, 3.0], tick: 'pop' },
-      events: [{ id: `e${i}`, at: 1.0 + (i % 3) * 0.1, sfx: 'thud', flash: i % 4 === 0 ? 'loss' : undefined, trigger: i === 1 }],
+      events: [{ id: `e${i}`, at: 1.0 + (i % 3) * 0.1, sfx: 'thud', flash: i % 4 === 0 ? 'loss' : undefined, trigger: i === 1, ...(i < 4 ? { premise: i % 2 ? 'hud' : 'visible' } : {}) }],
     })),
   };
 }
@@ -132,4 +133,111 @@ test('Stil B ohne beats.json wird abgelehnt; Referenzniveau als Warnung', () => 
   const r = validate(tl, text(), { requireBeats: true });
   assert.deepEqual(r.errors, []);
   assert.match(r.warnings.join('\n'), /unter Referenzniveau: Ereignisse pro Beat/);
+});
+
+test('Hook-Standard 18.12: schwacher Einstieg wird erkannt, Hook-Typen nicht schablonenhaft', () => {
+  const run = (mut) => {
+    const B = sheet();
+    mut(B);
+    return validate(buildTimeline(B), text());
+  };
+  const errs = (mut) => run(mut).errors.join('\n');
+  const warns = (mut) => run(mut).warnings.join('\n');
+  assert.deepEqual(run(() => {}).errors, []);
+  assert.match(errs((B) => delete B.hook), /hook fehlt/);
+  assert.match(errs((B) => delete B.hook.question), /hook\.question fehlt/);
+  assert.match(errs((B) => (B.hook.type = 'intro')), /unbekannt/);
+  // Akku-Video-Muster: Auslöser ist nur ein HUD-Abzug → kein Beweis im Bild
+  assert.match(errs((B) => (B.beats[0].events[0].premise = 'hud')), /keine sichtbare Prämissen-Konsequenz/);
+  // Beweis zu spät für Typ proof, aber zulässig für mystery (R20: Geheimnis ab Frame 0, Schlag später)
+  const late = (B) => { B.hook.proof = 'e1'; B.beats[1].events[0].premise = 'visible'; };
+  assert.match(errs(late), /Hook-Typ proof: ≤ 2 s/);
+  assert.equal(/Beweis-Ereignis/.test(errs((B) => { late(B); B.hook.type = 'mystery'; })), false);
+  // nur Zahlenabzüge bis 15 s
+  assert.match(errs((B) => { B.beats[2].events[0].premise = 'hud'; }), /im Bild sichtbare Prämissen-Konsequenzen/);
+  // Füllstoff: Alltagsereignisse ohne Prämissenbezug im Hook-Fenster
+  const filler = (B) => { B.beats[1].events.push({ id: 'toast', at: 2.0, what: 'Toast verbrennt' }, { id: 'bus', at: 2.6, what: 'Bus fährt ab' }); delete B.beats[3].events[0].premise; };
+  const w = warns(filler);
+  assert.match(w, /ohne Prämissenbezug \(.*toast.*bus/);
+  assert.match(w, /Beat b3 .* ohne Prämissen-Ereignis/);
+  // Pointe im Hook-Fenster verrät das Ende
+  assert.match(errs((B) => (B.pointe = 'e2')), /Pointe .* im Hook-Fenster/);
+});
+
+test('Hook-Standard 18.12: Referenzproduktion (Akku-Video) besteht den Einstieg nicht – beabsichtigt', async () => {
+  const fs = await import('node:fs');
+  const B = JSON.parse(fs.readFileSync(new URL('../productions/what-if-phone-battery-life/beats.json', import.meta.url), 'utf8'));
+  const tl = buildTimeline(B);
+  const tx = JSON.parse(fs.readFileSync(new URL('../productions/what-if-phone-battery-life/text.en.json', import.meta.url), 'utf8'));
+  const r = validate(tl, tx, { requireBeats: true });
+  const hookErr = r.errors.filter((e) => e.startsWith('[18.12]'));
+  assert.ok(hookErr.some((e) => /keine sichtbare Prämissen-Konsequenz/.test(e)), hookErr.join('\n'));
+  assert.ok(r.errors.every((e) => e.startsWith('[18.12]')), r.errors.join('\n'));
+});
+
+// Positivtests: vier verschiedene Hook-Typen (R19 Beweis, R07 Prozess, R06/R15 Countdown, R20 Geheimnis) bestehen –
+// der Standard ist keine Akku-Schablone. Negativtests: typische schwache Einstiege.
+function hookSheet({ type, proofAt, events }) {
+  const B = sheet();
+  B.hook = { type, proof: 'proof', question: 'Q?', stakes: 'S', withheld: 'W' };
+  B.beats.forEach((b) => (b.events = [{ id: `e${b.id.slice(1)}`, at: 1.0, sfx: 'thud' }]));
+  B.beats[0].events = [{ id: 'proof', at: proofAt, sfx: 'crash', premise: 'visible', trigger: true }];
+  for (const [beat, id, at, premise] of events) B.beats[beat].events.push({ id, at, sfx: 'pop', ...(premise ? { premise } : {}) });
+  B.pointe = 'e15';
+  return B;
+}
+const hookErrors = (B) => validate(buildTimeline(B), text()).errors.filter((e) => e.startsWith('[18.12]'));
+const hookWarnings = (B) => validate(buildTimeline(B), text()).warnings.filter((e) => e.startsWith('[18.12]'));
+const STRONG = [[1, 'p1', 0.5, 'visible'], [2, 'p2', 0.5, 'visible'], [3, 'p3', 0.5, 'hud']];
+
+test('18.12 positiv: Beweis (R19), Prozess (R07), Countdown (R06), Geheimnis (R20) bestehen ohne Hook-Fehler', () => {
+  for (const [type, proofAt] of [['proof', 1.3], ['process', 0.1], ['countdown', 3.5], ['mystery', 3.9]]) {
+    const B = hookSheet({ type, proofAt, events: STRONG });
+    // Prämissen-Ereignis in jedem Beat des Hook-Fensters
+    B.beats[0].events.push({ id: 'react', at: 2.5, premise: 'visible' });
+    assert.deepEqual(hookErrors(B), [], type);
+    assert.deepEqual(hookWarnings(B).filter((w) => !/ohne Prämissenbezug/.test(w)), [], type);
+  }
+});
+
+test('18.12 negativ: Alltagseinstieg, Erklärung statt Beweis, zu später Beweis, Zahl statt Bild, Füllstoff', () => {
+  // Aufwachen/Alltag ohne Prämisse bis 15 s → Beweis fehlt, zu wenige Prämissen-Ereignisse
+  const daily = hookSheet({ type: 'proof', proofAt: 1.0, events: [] });
+  daily.beats[0].events[0].premise = undefined;
+  const e1 = hookErrors(daily).join('\n');
+  assert.match(e1, /keine sichtbare Prämissen-Konsequenz/);
+  assert.match(e1, /Prämissen-Ereignisse bis 15 s/);
+  // Beweis erst nach 6 s bei Typ proof
+  assert.match(hookErrors(hookSheet({ type: 'proof', proofAt: 1.0, events: STRONG })).join(''), /^$/);
+  const late = hookSheet({ type: 'proof', proofAt: 3.9, events: STRONG });
+  late.beats[0].dur = 4.0;
+  assert.match(hookErrors(late).join('\n'), /≤ 2 s/);
+  // nur HUD-Abzüge
+  const hudOnly = hookSheet({ type: 'process', proofAt: 0.5, events: STRONG.map(([b, id, at]) => [b, id, at, 'hud']) });
+  assert.match(hookErrors(hudOnly).join('\n'), /im Bild sichtbare/);
+  // Füllstoff (Toast, Bus, Keuchen) zwischen den Prämissen-Ereignissen
+  const filler = hookSheet({ type: 'proof', proofAt: 1.0, events: [...STRONG, [1, 'toast', 2.0], [2, 'bus', 2.0], [2, 'gasp', 3.0]] });
+  assert.match(hookWarnings(filler).join('\n'), /ohne Prämissenbezug \(.*toast.*bus.*gasp/);
+  // Lücke > 5 s ohne neue Konsequenz
+  const gap = hookSheet({ type: 'proof', proofAt: 1.0, events: [[1, 'p1', 0.5, 'visible'], [3, 'p3', 1.5, 'visible']] });
+  assert.match(hookWarnings(gap).join('\n'), /keine neue Prämissen-Konsequenz zwischen/);
+});
+
+test('18.12 Grenze (dokumentiert): falsche Selbstauskunft „visible“ wird NICHT erkannt', () => {
+  // Akku-Muster, aber jedes Ereignis fälschlich als sichtbar markiert → Validator ohne Hook-Fehler.
+  // Deshalb ist die Sichtprüfung H (quality_review.md) Pflicht; der Validator beurteilt keine Bilder.
+  const B = hookSheet({ type: 'proof', proofAt: 1.5, events: [[1, 'swipe', 0.7, 'visible'], [2, 'toast', 1.0, 'visible'], [3, 'bus', 0.5, 'visible']] });
+  assert.deepEqual(hookErrors(B), []);
+});
+
+test('18.12 Hook-Entwurf im LOG: drei ausgefüllte Ansätze + Wahl', () => {
+  const W = [];
+  const w = (r, m) => W.push(m);
+  checkHookDraft(null, w);
+  checkHookDraft('# LOG\n', w);
+  checkHookDraft('### Hook-Entwurf\n| 1 | proof | a | b | c | d | ja |\n| 2 | | | | | | |\n', w);
+  assert.equal(W.length, 4);
+  W.length = 0;
+  checkHookDraft('### Hook-Entwurf\n| 1 | proof | a | b | c | d | ja |\n| 2 | process | a | b | c | d | nein |\n| 3 | mystery | a | b | c | d | teils |\n- Gewählt: # 1 – weil\n', w);
+  assert.deepEqual(W, []);
 });

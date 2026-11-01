@@ -19,6 +19,7 @@
 //   "hud": { "start": 100, "decimals": 0 },
 //   "pointe": "plug_in",                         // Ereignis-ID oder Sekunde
 //   "endcard": { "beat": "end", "at": 0.4 },     // optional
+//   "hook": { "type": "proof|process|countdown|mystery", "proof": "<Ereignis-ID>", "question": "…", "stakes": "…", "withheld": "…" },  // Guide 18.12
 //   "post": {...}, "motion_blur": [...],          // werden durchgereicht
 //   "audio": { "fade_out": 1.2, "music": { "bpm": 112, "root": "D", "seed": 3, "gain_db": -9,
 //              "sections": [{ "from": 0, "to": 20, "style": "pulse" }, …], "automation": [[t, dB], …] },
@@ -31,7 +32,8 @@
 //       "data": { "you": [x, y, z, rotY] },          // frei: Positionen für scene.js (B.beat(id).data) – eine Quelle für Szene und Kamera
 //       "hud": { "label": "battery", "to": 92, "mode": "steps", "steps": 3, "window": [0.4, 3.4], "tick": "pop", "bar": [0, 100] },
 //       "events": [{ "id": "alarm", "at": 0.6, "what": "Wecker klingelt", "sfx": "buzz", "gain_db": -6,
-//                    "hud_to": 95, "flash": "loss", "shake": { "amp": 0.04, "dur": 0.6 }, "trigger": true }] }
+//                    "hud_to": 95, "flash": "loss", "shake": { "amp": 0.04, "dur": 0.6 }, "trigger": true,
+//                    "premise": "visible" | "hud" }] }   // Prämissen-Konsequenz im Bild / nur im HUD (Guide 18.12); ohne = Kulisse
 //   ]
 // }
 import fs from 'node:fs';
@@ -208,13 +210,14 @@ export function buildTimeline(B) {
     shots,
     hud,
     lines,
-    events: events.map((e) => ({ t: e.t, id: e.id, beat: e.beat, ...(e.trigger ? { trigger: true } : {}), ...(e.what ? { what: e.what } : {}), ...(e.sfx ? { sfx: [].concat(e.sfx) } : {}), ...(e.flash ? { flash: e.flash } : {}) })),
+    events: events.map((e) => ({ t: e.t, id: e.id, beat: e.beat, ...(e.trigger ? { trigger: true } : {}), ...(e.what ? { what: e.what } : {}), ...(e.sfx ? { sfx: [].concat(e.sfx) } : {}), ...(e.flash ? { flash: e.flash } : {}), ...(e.premise ? { premise: e.premise } : {}) })),
     beats: beats.map((b) => ({ id: b.id, from: b.from, to: b.to, place: b.place, mood: b.mood, framing: b.framing, preset: b.camera.preset, hud_change: !!(b.hud?.to != null || (b.events || []).some((e) => e.hud_to != null) || !!b.labelChange), ...(b.data ? { data: b.data } : {}) })),
     audio,
   };
   if (B.post) tl.post = B.post;
   if (B.motion_blur) tl.motion_blur = B.motion_blur;
   if (B.qa) tl.qa = B.qa;
+  if (B.hook) tl.hook = B.hook; // Hook-Standard 18.12: Typ, Beweis-Ereignis, Frage, Einsatz, Zurückgehaltenes
   if (B.endcard) {
     const eb = beats.find((b) => b.id === B.endcard.beat);
     if (!eb) throw new Error(`endcard.beat ${B.endcard.beat} unbekannt`);

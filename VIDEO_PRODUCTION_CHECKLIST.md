@@ -13,6 +13,8 @@ Ablage pro Video: `productions/<slug>/` mit `LOG.md`, `beats.json`, `timeline.js
 - [ ] Frage „What if …?“, ≤ 10 Wörter (2)
 - [ ] HUD-Messgröße mit Start → Ende, ändert sich in ≥ 70 % der Beats (18.5)
 - [ ] Pointe festgelegt und früh vorbereitet (Aufbau → Auszahlung) (18.7)
+- [ ] **Hook-Entwurf:** 3 Einstiege verschiedener Typen/Bildideen skizziert, gegen 18.12 bewertet, Wahl begründet; Hook-Typ der letzten 3 Produktionen verglichen (18.12 H10)
+- [ ] **Unmöglichkeitstest:** Beweis-Ereignis zeigt die Prämisse im Bild (≤ 2 s bzw. Geheimnis/Countdown ab Frame 0); kein Aufwach-/Alltagseinstieg (18.12 H1–H3)
 - [ ] Hoffnung/Rückschlag-Wechsel geplant; Fakten mit Quelle im LOG (3.2)
 - [ ] Themen-Ausschlüsse geprüft (keine realen Personen, Logos, Religion/Politik) (1.4)
 
@@ -25,6 +27,7 @@ Ablage pro Video: `productions/<slug>/` mit `LOG.md`, `beats.json`, `timeline.js
 - [ ] Klang auf jedem Schlüsselereignis (Auslöser, Akzente, Pointe), sonst sparsam; Musikplan mit Ruhe vor der Pointe (18.6)
 - [ ] Texte nur in `text.en.json`: Titel, HUD-Labels, 12–24 Zeilen à 3–10 Wörter, Endkarte (4)
 - [ ] `node tools/build_timeline.mjs productions/<slug>` + `node tools/validate_production.mjs productions/<slug>` → **OK**
+- [ ] `hook`-Block vollständig; Prämissen-Ereignisse mit `premise` markiert (bis 15 s ≥ 3, ≥ 2 `visible`); keine Fehler `[18.12]`, Warnungen behoben oder begründet (18.12)
 - [ ] Keine Warnung `[18.11]` (Referenzniveau des Testvideos) – oder Begründung im LOG (18.11)
 
 ## 3. Szene und Vorschau
@@ -33,6 +36,7 @@ Ablage pro Video: `productions/<slug>/` mit `LOG.md`, `beats.json`, `timeline.js
 - [ ] Lichtstimmung je Ort (`applyLook`) (18.4)
 - [ ] Neue Teile im Kit ergänzt und im LOG genannt
 - [ ] `tools/still.mjs` für jeden Beat angesehen: Figur im Bild, Gesicht lesbar, Kamera frei, Texte frei (18.3)
+- [ ] **Hook-Vorschau** 0 / 0,5 / 1 / 2 / 3 / 5 / 8 / 12 / 15 s: `quality_review.md` Abschnitt H (H1–H6) **vor dem Rendern** ausgefüllt; jede `visible`-Konsequenz ist im 9:16-Bild groß genug zu sehen (18.12)
 
 ## 4. Rendern
 
@@ -43,6 +47,7 @@ Ablage pro Video: `productions/<slug>/` mit `LOG.md`, `beats.json`, `timeline.js
 
 - [ ] **A technisch:** `qa/report.md`: Status, Format, Frames, Lautheit, **Synchronität der Ereignis-Klänge**, Monotonie-Kandidaten, jede REVIEW-Meldung eingestuft (11.1, 18.8)
 - [ ] **B visuell:** **alle** `qa/sheet_*.jpg` inkl. Ende, `qa/shots.jpg`, **alle** `qa/strips/*` angesehen (11.2)
+- [ ] **H Hook:** Abschnitt H am fertigen Video wiederholt (18.12)
 - [ ] **C dramaturgisch:** Einstieg, Entwicklung, Abwechslung, Eskalation, Pointe/Ende; Vergleich mit R07/R19/R20 (18.7)
 - [ ] **D Hörprüfung** beim Nutzer angefragt (11.3)
 

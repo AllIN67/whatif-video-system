@@ -706,10 +706,38 @@ export function createProps(THREE, core, rng) {
     return g;
   };
 
+  // Schaf (Würfel-Stil, 2026-10-31: „What if you couldn't sleep“): weißes Vlies aus Würfeln, schwarzer Kopf und Beine.
+  // userData.gallop(p) bewegt die Beine (p = Phase in Zyklen), userData.tuck(k) zieht sie im Sprung an (0…1).
+  const sheep = ({ wool = 0xe9e3d6, shade = 0xd6cebd, face = 0x2a2522 } = {}) => {
+    const g = group();
+    const body = group(box(0.62, 0.42, 0.86, wool, [0, 0.42, 0]));
+    [[-0.22, 0.78, 0.25], [0.2, 0.8, 0.0], [-0.12, 0.8, -0.28], [0.24, 0.66, 0.3], [-0.3, 0.6, -0.1], [0.3, 0.6, -0.3], [0.0, 0.62, 0.4], [0.0, 0.6, -0.42]].forEach(([x, y, z], i) => body.add(box(0.26, 0.2, 0.26, i % 2 ? shade : wool, [x, y - 0.16, z])));
+    const head = group(box(0.24, 0.28, 0.3, face, [0, -0.04, 0]), box(0.3, 0.14, 0.2, wool, [0, 0.12, -0.04]));
+    for (const sx of [-1, 1]) {
+      head.add(box(0.14, 0.05, 0.08, face, [sx * 0.17, 0.02, -0.02]));
+      head.add(box(0.05, 0.06, 0.02, 0xffffff, [sx * 0.07, 0.0, 0.151], { cast: false }));
+      head.add(box(0.025, 0.035, 0.02, 0x111111, [sx * 0.07, -0.005, 0.162], { cast: false }));
+    }
+    head.position.set(0, 0.72, 0.5);
+    body.add(head);
+    g.add(body);
+    const legs = [[-0.2, 0.3], [0.2, 0.3], [-0.2, -0.3], [0.2, -0.3]].map(([x, z], i) => {
+      const piv = new THREE.Group();
+      piv.position.set(x, 0.46, z);
+      piv.add(box(0.1, 0.46, 0.1, face, [0, -0.46, 0]));
+      g.add(piv);
+      return { piv, ph: i % 3 === 0 ? 0 : Math.PI };
+    });
+    g.userData.gallop = (p) => legs.forEach((l) => (l.piv.rotation.x = 0.6 * Math.sin(p * Math.PI * 2 + l.ph)));
+    g.userData.tuck = (k) => legs.forEach((l, i) => (l.piv.rotation.x = (i < 2 ? -1 : 1) * 0.7 * k));
+    g.userData.head = head;
+    return g;
+  };
+
   return {
     canvasTex, phoneTexture, phone, bigPhone, sign, bed, nightstand, tableLamp, alarmClock, table, chair, counter, upperCabinets, toaster, mug, toast, plant, cardboardBox,
     desk, officeChair, umbrella, puddle, tree, bush, streetLamp, bench, hydrant, trashCan, car, bus, building, tower, slab,
-    thoughtBubble, powerBank, wallOutlet, charger, kiosk, pigeon, lightning,
+    thoughtBubble, powerBank, wallOutlet, charger, kiosk, pigeon, lightning, sheep,
     ...createFamilyProps(THREE, core, rng, { canvasTex }),
   };
 }
