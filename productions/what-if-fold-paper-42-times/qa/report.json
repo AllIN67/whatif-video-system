@@ -3,8 +3,8 @@
  "mode": "render",
  "probe": {
   "duration": 62.4,
-  "size_bytes": 29358176,
-  "bitrate_kbps": 3764,
+  "size_bytes": 29725753,
+  "bitrate_kbps": 3811,
   "video": {
    "codec": "h264",
    "width": 1080,
@@ -62,15 +62,15 @@
     "end": 11.567,
     "frames": 3,
     "peak_ydif": 29.5,
-    "baseline_ydif": 0.9,
+    "baseline_ydif": 1.0,
     "mid_n": 346
    },
    {
     "start": 20.5,
     "end": 20.667,
     "frames": 6,
-    "peak_ydif": 33.8,
-    "baseline_ydif": 3.6,
+    "peak_ydif": 35.2,
+    "baseline_ydif": 3.2,
     "mid_n": 617
    },
    {
@@ -90,14 +90,6 @@
     "mid_n": 941
    },
    {
-    "start": 41.7,
-    "end": 41.767,
-    "frames": 3,
-    "peak_ydif": 19.1,
-    "baseline_ydif": 3.2,
-    "mid_n": 1252
-   },
-   {
     "start": 52.8,
     "end": 52.9,
     "frames": 4,
@@ -106,7 +98,7 @@
     "mid_n": 1585
    }
   ],
-  "motion_transition_count": 7,
+  "motion_transition_count": 6,
   "shots": [
    {
     "start": 0.0,
@@ -194,15 +186,9 @@
    },
    {
     "start": 38.6,
-    "frames": 94,
-    "dur": 3.133,
-    "mid_n": 1204
-   },
-   {
-    "start": 41.733,
-    "frames": 2,
-    "dur": 0.067,
-    "mid_n": 1252
+    "frames": 96,
+    "dur": 3.2,
+    "mid_n": 1205
    },
    {
     "start": 41.8,
@@ -254,24 +240,17 @@
    }
   ],
   "shot_stats": {
-   "count": 24,
-   "median_s": 2.95,
-   "mean_s": 2.6,
-   "min_s": 0.07,
+   "count": 23,
+   "median_s": 3.0,
+   "mean_s": 2.71,
+   "min_s": 0.4,
    "max_s": 7.23,
    "cuts_per_10s": 2.56,
-   "shot_changes_per_10s": 3.69
+   "shot_changes_per_10s": 3.53
   },
-  "flash_shots": [
-   {
-    "start": 41.733,
-    "frames": 2,
-    "dur": 0.067,
-    "mid_n": 1252
-   }
-  ],
+  "flash_shots": [],
   "isolated_duplicate_frames": [],
-  "duplicate_ratio_in_motion": 0.003,
+  "duplicate_ratio_in_motion": 0.001,
   "jump_candidates": [
    {
     "t": 0.633,
@@ -304,36 +283,6 @@
     "local_median": 2.61
    },
    {
-    "t": 12.933,
-    "ydif": 7.05,
-    "local_median": 0.91
-   },
-   {
-    "t": 12.967,
-    "ydif": 7.41,
-    "local_median": 0.91
-   },
-   {
-    "t": 13.0,
-    "ydif": 7.24,
-    "local_median": 0.92
-   },
-   {
-    "t": 13.033,
-    "ydif": 7.09,
-    "local_median": 0.93
-   },
-   {
-    "t": 13.067,
-    "ydif": 6.21,
-    "local_median": 0.93
-   },
-   {
-    "t": 13.1,
-    "ydif": 6.46,
-    "local_median": 0.96
-   },
-   {
     "t": 24.767,
     "ydif": 12.64,
     "local_median": 1.72
@@ -346,52 +295,52 @@
    {
     "t": 30.2,
     "ydif": 17.9,
-    "local_median": 2.31
+    "local_median": 2.3
    },
    {
     "t": 33.0,
-    "ydif": 11.22,
-    "local_median": 0.75
+    "ydif": 10.83,
+    "local_median": 0.48
    },
    {
     "t": 35.3,
-    "ydif": 7.68,
-    "local_median": 0.84
+    "ydif": 8.03,
+    "local_median": 0.82
    },
    {
     "t": 44.9,
-    "ydif": 6.4,
-    "local_median": 1.05
+    "ydif": 6.41,
+    "local_median": 1.04
    },
    {
     "t": 44.933,
-    "ydif": 7.06,
-    "local_median": 1.05
+    "ydif": 7.05,
+    "local_median": 1.04
    },
    {
     "t": 44.967,
     "ydif": 7.67,
-    "local_median": 1.05
+    "local_median": 1.04
    },
    {
     "t": 45.0,
     "ydif": 8.44,
-    "local_median": 1.05
+    "local_median": 1.04
    },
    {
     "t": 45.033,
     "ydif": 9.55,
-    "local_median": 1.05
+    "local_median": 1.04
    },
    {
     "t": 45.067,
     "ydif": 10.67,
-    "local_median": 1.05
+    "local_median": 1.04
    },
    {
     "t": 45.1,
     "ydif": 11.24,
-    "local_median": 1.05
+    "local_median": 1.04
    },
    {
     "t": 49.633,
@@ -452,8 +401,8 @@
   "flicker_candidates": [],
   "first_cut_s": 0.4,
   "first_shot_change_s": 0.4,
-  "mean_luma": 101.4,
-  "mean_motion_ydif": 2.94,
+  "mean_luma": 102.7,
+  "mean_motion_ydif": 2.93,
   "monotony": [],
   "planned_transitions": [
    {
@@ -488,7 +437,7 @@
     "t": 13.8,
     "type": "cut",
     "frames": 0,
-    "peak_ydif": 63.31,
+    "peak_ydif": 59.78,
     "visible": true
    },
    {
@@ -502,14 +451,14 @@
     "t": 20.6,
     "type": "dip",
     "frames": 5,
-    "peak_ydif": 33.84,
+    "peak_ydif": 35.24,
     "visible": true
    },
    {
     "t": 24.2,
     "type": "cut",
     "frames": 0,
-    "peak_ydif": 72.63,
+    "peak_ydif": 75.76,
     "visible": true
    },
    {
@@ -523,7 +472,7 @@
     "t": 31.4,
     "type": "dip",
     "frames": 5,
-    "peak_ydif": 26.01,
+    "peak_ydif": 26.02,
     "visible": true
    },
    {
@@ -537,28 +486,28 @@
     "t": 38.6,
     "type": "dip",
     "frames": 5,
-    "peak_ydif": 61.38,
+    "peak_ydif": 53.98,
     "visible": true
    },
    {
     "t": 41.8,
-    "type": "dip",
-    "frames": 6,
-    "peak_ydif": 59.15,
+    "type": "cut",
+    "frames": 0,
+    "peak_ydif": 107.7,
     "visible": true
    },
    {
     "t": 46.4,
     "type": "cut",
     "frames": 0,
-    "peak_ydif": 41.49,
+    "peak_ydif": 42.45,
     "visible": true
    },
    {
     "t": 49.0,
     "type": "cut",
     "frames": 0,
-    "peak_ydif": 32.51,
+    "peak_ydif": 33.52,
     "visible": true
    },
    {
@@ -1620,34 +1569,18 @@
    }
   ]
  },
- "black": [
+ "black": [],
+ "freezes": [
   [
-   37.6667,
-   38.6
-  ],
-  [
-   46.4,
-   46.8
-  ],
-  [
-   46.9,
+   47.6,
    48.1
   ]
  ],
- "freezes": [
-  [
-   37.9,
-   38.4
-  ]
- ],
- "status": "FAIL",
- "fails": [
-  "Schwarzbilder: [(37.6667, 38.6), (46.4, 46.8), (46.9, 48.1)]",
-  "Einstellungen < 4 Frames (Blitzbild/Sprung): [41.733]"
- ],
+ "status": "REVIEW",
+ "fails": [],
  "reviews": [
-  "Sprungkandidaten ohne Schnitt: [0.633, 0.667, 0.7, 0.733, 11.2, 11.233, 12.933, 12.967, 13.0, 13.033, 13.067, 13.1, 24.767, 24.8, 30.2, 33.0, 35.3, 44.9, 44.933, 44.967, 45.0, 45.033, 45.067, 45.1, 49.633, 49.667, 49.7, 49.733, 49.767, 49.8, 49.833, 49.867, 49.9, 57.4, 57.433]",
-  "Standbild-Phasen ≥ 0.5 s (nur ok, wenn beabsichtigt): [(37.9, 38.4)]",
+  "Sprungkandidaten ohne Schnitt: [0.633, 0.667, 0.7, 0.733, 11.2, 11.233, 24.767, 24.8, 30.2, 33.0, 35.3, 44.9, 44.933, 44.967, 45.0, 45.033, 45.067, 45.1, 49.633, 49.667, 49.7, 49.733, 49.767, 49.8, 49.833, 49.867, 49.9, 57.4, 57.433]",
+  "Standbild-Phasen ≥ 0.5 s (nur ok, wenn beabsichtigt): [(47.6, 48.1)]",
   "Klick-Kandidaten (anhören!): [0.25, 0.76, 4.58, 10.42, 10.8, 11.44, 13.98, 17.03, 17.42, 24.15, 25.17, 25.68, 26.19, 26.7, 34.32, 35.08, 38.9, 40.17, 46.02, 46.33, 52.37, 52.76]",
   "Ereignis-Klänge > ±34 ms versetzt (anhören!): [(6.466667, 'paper', 40), (8.6, 'paper', 45), (22.1, 'pop', 60), (32.566667, 'paper', 50), (33, 'paper', 50), (35.3, 'paper', 50), (36.333333, 'paper', 55), (39.1, 'pop', 50), (42.1, 'paper', 55), (53.4, 'pop', 55)]",
   "Ereignis-Klänge verdeckt – Anstieg < 3 dB, nur per Hörprüfung beurteilbar: [(2.466667, 'tick'), (2.7, 'tick'), (2.8, 'tick'), (3.033333, 'tick'), (3.133333, 'tick'), (3.233333, 'tick'), (3.466667, 'tick'), (3.566667, 'tick'), (3.8, 'tick'), (7.2, 'paper'), (9.3, 'paper'), (13.1, 'paper'), (14.4, 'paper'), (22.033333, 'paper'), (23.2, 'paper'), (27.6, 'paper'), (29.333333, 'paper'), (31.7, 'paper'), (39.2, 'paper'), (41, 'paper'), (47.433333, 'paper')]"

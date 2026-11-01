@@ -134,6 +134,25 @@ Zeilen (≈ 10–12 pro Video, je 4–6 s sichtbar); (5) Pointe zurück im **Ma�
 
 Prüfbar **ohne** Veröffentlichung: nur Machbarkeit, Lesbarkeit und Regelkonformität (Abschnitt 6). Wirkung auf Zuschauerbindung: **nicht prüfbar**.
 
-## 6. Ergebnis
+## 6. Ergebnis (2026-11-01)
 
-Siehe `productions/what-if-fold-paper-42-times/LOG.md` (QA-Durchläufe) und `quality_review.md`; Zusammenfassung wird nach dem Rendern ergänzt.
+Produktion `productions/what-if-fold-paper-42-times/` – 62,4 s, Render 2 (`f21bd07`), `video_qa.py` REVIEW (keine FAIL), Status
+**QUALITÄT GEPRÜFT**, nicht freigegeben (Hörprüfung offen). Details: `LOG.md` 5, `quality_review.md`.
+
+| Hypothese | Was sich ohne Veröffentlichung prüfen ließ | Befund |
+|---|---|---|
+| H-A Messgröße über Größenordnungen | Machbarkeit, Lesbarkeit | **umsetzbar**: HUD-Modus `geo` zählt jede Faltung exakt (0,1 · 2ⁿ mm), Einheitenwechsel mm → m → km über Labels; im Kontaktbogen ist jede Stufe sichtbar. Wirkung: nicht belegt |
+| H-B Kranfahrten statt Ortswechsel | Bildqualität, QA | **teilweise**: Schulhof- und Stadtfahrt funktionieren (Strips 20,5–24,2, 27–31). Eine Fahrt über 94 km in 3,6 s scheiterte (Unschärfe, Schwarzbild) → Kranfahrten brauchen begrenzte Geschwindigkeit; Weltraumstufen weiter per Schnitt |
+| H-C Ringstruktur / Pointe am Ausgangsort | Dramaturgie (Sichtprüfung) | **umgesetzt und lesbar**: Tafel-Papierflieger ab 5,8 s, Pointe 57,4 s mit HUD-Label „YOUR PAPER PLANE · ON THE MOON“. Witz-Wirkung: nicht belegt |
+| H-D flashforward | Hook-Sichtprüfung H | Frame 0 besteht den Unmöglichkeitstest (erstmals in diesem Repository ab Frame 0); Einschränkung H2: „Papier“ ist erst über den Titel lesbar. Bindung: nicht belegt |
+
+**Was messbar anders ist als bisher** (LOG 5, Tabelle): erstes unmögliches Bild bei 0 s; 13 statt 1–2 Größenordnungen im HUD; 6 Maßstabsstufen;
+Median-Einstellung 3,0 s (vorher 3,6–4,0 s); 1,9 Ereignisse pro Beat.
+**Was schlechter ist:** Figur nur in 10 von 19 Beats sichtbar (Gefühlsebene schwächer als im Akku-Video), 2 s fast leeres All vor dem Höhepunkt,
+Lehrerin angeschnitten.
+
+**Empfehlung zur Übernahme (Entscheidung beim Auftraggeber):**
+1. S1 `crane`, S2 `geo`/`decimals` und S4 Kit-Teile sind additiv und getestet → übernehmbar ohne Regeländerung.
+2. S3 `flashforward` erst nach Veröffentlichungsdaten dieses Videos als Regel verankern (Abbruchkurve 0–5 s mit dem Akku-/no-sleep-Video vergleichen).
+3. Kranfahrten: Hinweis in Guide 18.3 erwägen („Kran ≤ ≈ 10 Bildhöhen pro Sekunde, sonst Unschärfe“) – belegt durch Render 1 dieses Experiments.
+4. Für Maßstabsreisen die Hauptfigur in jeder Stufe sichtbar halten (z. B. Reaktions-Einschübe), um die Gefühlsebene der Referenzproduktion zu halten.

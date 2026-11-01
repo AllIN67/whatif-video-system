@@ -5,10 +5,10 @@
 | Slug | `what-if-fold-paper-42-times` |
 | Produktionsstil | B – Rezept B1 (mit Experiment-Bausteinen „Maßstabsreise“, Branch `experiment/reference-insights-2026-11`) |
 | Sprache | en |
-| Status | ENTWURF |
+| Status | QUALITÄT GEPRÜFT (Render 2) – nicht FREIGEGEBEN, Hörprüfung offen |
 | Style-Guide-Version | 2.2 (unverändert) + Experiment-Bausteine laut `EXPERIMENT_REFERENCE_INSIGHTS.md` |
 | Beat-Sheet / Freigabebogen | `beats.json` / `quality_review.md` |
-| Git-Commit des Renders | (siehe Abschnitt 4) |
+| Git-Commit des Renders | Render 1: `4156d0f` · Render 2 (ausgeliefert): `f21bd07` |
 | Länge | 62,4 s |
 
 **Experiment-Kontext:** Diese Produktion testet Erkenntnisse aus vier Referenzvideos (Analyse: `EXPERIMENT_REFERENCE_INSIGHTS.md`
@@ -77,11 +77,49 @@ im Repository-Wurzelverzeichnis des Branches). Sie liegt ausschließlich auf dem
 ## 4. Render
 
 - Befehl(e): `node pipeline/run.mjs --production productions/what-if-fold-paper-42-times`
-- Dauer, Auffälligkeiten: (nach dem Rendern)
+- Render 1: ≈ 32 min (1872 Frames), QA FAIL.
+- Render 2: 1952 s Frames (≈ 1,04 s/Frame), Mix −14,1 LUFS / TP −1,2 dBTP, QA REVIEW. Ausgeliefert per SendUserFile (Bestätigung erhalten).
+- Abweichung 18.11 (Warnung HUD-Änderung 0,95): Endbild-Beat `end` hält den Wert bewusst (Endkarte); alle anderen 18 Beats ändern den HUD.
 
 ## 5. QA-Durchläufe
 
-(nach dem Rendern)
+### Durchlauf 1 – 2026-11-01 (Render 1, `4156d0f`)
+
+- `video_qa.py`: **FAIL** – Schwarzbilder (37,67–38,6), (46,4–48,1); Einstellung < 4 Frames 41,733.
+- Kontaktbögen sheet_01–03 ✅, Strip 12,933 ✅ (übrige Strips wegen Neu-Render erst in Durchlauf 2 vollständig).
+
+| Zeitpunkt | Fehler | Ursache | Korrektur |
+|---|---|---|---|
+| 37,7–38,6 | Bild schwarz, Säule verschwindet | Kranfahrt 3,5 → 97,5 km in 3,6 s: Bewegungsunschärfe + Schwenk verwischen die Säule; Himmel auf Schwarz geblendet | Kran nur bis 18 km, linear; Randhimmel Nachtblau `0x0d1a3c`; Säule leuchtet beim Verdunkeln |
+| 46,4–48,1 | fast schwarzes Bild | Kamera zu nah: Mond über, Säulenspitze unter dem Bildausschnitt | Abstand 170, Ziel y 90 → Mond oben, Spitze wächst von unten ins Bild |
+| 41,73 | 2-Frame-Einstellung | Abblende helle Straße → schwarzes All (Guide 18.2) | harter Schnitt |
+| 21–23 | Kinder nicht im Bild, kids_point unsichtbar | Kranstart zu nah (5 m) | Start 12 m Abstand |
+| 31–32,6 | Himmel ohne Flugzeug | Flugbahn begann außerhalb des Bildes | Start x 120, 60 m/s |
+| 12,8–13,1 | Arm durchdringt Papierblock | Posenübergang recoil → sit führt den Arm über den Tisch | Pose recoil bleibt, nur Gefühl wechselt |
+
+### Durchlauf 2 – 2026-11-01 (Render 2, `f21bd07`, ausgeliefert)
+
+- `video_qa.py`: **REVIEW**, keine FAIL-Meldung (Bericht `qa/report.md`). Schwarzbilder: keine. Kurz-Einstellungen: keine. Monotonie-Kandidaten: keine.
+- Kontaktbögen sheet_01–03 ✅ · shots.jpg ✅ · Bildstreifen: alle 43 ✅ (als 4 Montagen gesichtet).
+- REVIEW-Bewertung: siehe `quality_review.md` A (alle beabsichtigt bzw. nur hörbar prüfbar).
+- Verbleibende Schwächen (nicht behoben, bewusst kein drittes Rendern): 46,4–48,6 s bildlich karg; Lehrerin 53–56 s oben angeschnitten,
+  Gesicht kaum sichtbar; Kinder im Schulhof (21 s) klein; HUD liegt in Nahaufnahmen über der Brust der Figur; Weltraum-/Himmel-Beats ohne Figur.
+
+### Vergleich mit den bisherigen Produktionen (gemessen bzw. gesehen, keine Wirkungsaussage)
+
+| Merkmal | Akku (Referenz 18.11) | no-sleep | fold-paper (neu) |
+|---|---|---|---|
+| Frame 0 | Aufwachen (Gegenbeispiel 18.12) | Z-Blase (process) | Papier am Mond (flashforward) |
+| Erstes sichtbar unmögliches Bild | bis 14 s keines (nur HUD-Abzüge, Analyse 18.12) | ≈ 1 s (Beweis-Ereignis laut Beat-Sheet) | 0 s |
+| HUD-Spannweite | 100 → 0 % | 1 → 30 Tage | 0,1 mm → 439.805 km (13 Größenordnungen) |
+| Orte / Maßstabsstufen | 7 / 1 | 6 / 1 | 6 / 6 (Tisch, Raum, Gebäude, Stadt, Himmel, Erde–Mond) |
+| Harte Schnitte / Einstellungswechsel | 9 / 13 | 5 / 10 | 16 / 22 |
+| Median Einstellungslänge | 3,78 s | 4,0 s | 3,0 s |
+| Lautheit / LRA | −14,2 / 10,9 | −14,1 / 6,4 | −14,1 / 8,2 |
+| Ereignisse/Beat · Klang-Anteil | 1,5 · ≥ 0,9 | – | 1,9 · 1,0 (Plan) |
+| Figuren im Bild | in allen Beats | in allen Beats | in 10 von 19 Beats |
+| QA-Durchläufe bis REVIEW | 2 | 4 | 2 |
+
 
 ## 6. Hörprüfung (Mensch)
 
@@ -89,4 +127,7 @@ im Repository-Wurzelverzeichnis des Branches). Sie liegt ausschließlich auf dem
 
 ## 7. Bekannte Einschränkungen
 
-(nach dem Rendern)
+- Wirkung von H-A…H-D auf Zuschauerbindung ohne Veröffentlichungsdaten **nicht** belegbar.
+- Ton nicht gehört (Klangfarbe, Mischung, Paper-Ticks, Stille vor Falte 42).
+- Maßstab schematisch (Säulenbreite, Erde–Mond-Abstand), HUD-Werte exakt.
+- Ohne Titel ist in 0–3 s nicht erkennbar, dass die Säule Papier ist (H2 teilweise).
