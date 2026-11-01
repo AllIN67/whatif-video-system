@@ -12,7 +12,9 @@
 //   Schauspiel mit weichen Übergängen: h.act(spur, t) – siehe unten
 //   Oberkörper-Posen sitzend: h.pose('facepalm', p, { seated: true }) (Beine/Hüfte wie 'sit');
 //   Aufstehen weich: h.pose('stand', p, { seated: 1 - k }) mit k 0 → 1
-// Gefühle: neutral, happy, laugh, relief, sad, worried, panic, angry, shock, tired, smug
+// Gefühle: neutral, happy, laugh, relief, sad, worried, panic, angry, shock, tired, smug, cry (Tränen), unconscious (Augen zu)
+// Ergänzt 2026-11-01 (what-if-one-argument-last-goodbye): Kinder über { scale, headScale } (größerer Kopf = kindliche
+//   Proportionen), Bart { beard }, Posen hug, holdHand, reachUp, yell, drive, unconscious, handMouth, coverEars, showUp, placeLow, kneelHug
 import { clamp01 } from './core.js';
 
 export const SKIN = [0xe8c4a0, 0xd9a77e, 0xb07a52, 0x8a5a3b, 0x5e3b27, 0xf1d3b8];
@@ -110,6 +112,24 @@ export function createHumanFactory(THREE, core) {
     if (o.glasses) {
       for (const sx of [-1, 1]) head.add(cbox(0.09, 0.07, 0.01, mat(0x222222, { transparent: true, opacity: 0.55 }), [sx * 0.07, 0.19, fz + 0.012], { cast: false }));
     }
+
+    if (o.beard) {
+      const bm = mat(o.beard);
+      head.add(cbox(HW + 0.012, 0.07, 0.04, bm, [0, 0.035, fz - 0.012]));
+      for (const sx of [-1, 1]) head.add(cbox(0.04, 0.16, HD * 0.8, bm, [sx * (HW / 2 + 0.005), 0.08, -0.01]));
+      head.add(cbox(0.13, 0.025, 0.012, bm, [0, 0.1, fz + 0.002], { cast: false })); // Schnurrbart
+    }
+    // Tränen (Gefühl cry): je Auge ein Streifen unter dem Auge, Länge über tear
+    const tearMat = mat(0x9fd8ff, { emissive: 0x5aa8e0, emissiveIntensity: 0.35, roughness: 0.15 });
+    const tears = [-1, 1].map((sx) => {
+      const piv = new THREE.Group();
+      piv.position.set(sx * 0.075, 0.165, fz + 0.006);
+      const m = cbox(0.022, 0.09, 0.008, tearMat, [0, -0.045, 0], { cast: false, receive: false });
+      piv.add(m);
+      head.add(piv);
+      return piv;
+    });
+    head.scale.setScalar(o.headScale ?? 1);
 
     // Arme: Schulter-Gelenk → Oberarm → Ellbogen → Unterarm + Hand
     const makeArm = (sx) => {
@@ -363,6 +383,111 @@ export function createHumanFactory(THREE, core) {
         armR.elbow.rotation.x = -2.3;
       },
     });
+    // Posen für Familien-/Drama-Szenen (2026-11-01). Rechte Hand = armR (−x), linke = armL (+x).
+    Object.assign(POSES, {
+      // Umarmen: beide Arme nach vorn und nach innen, leicht vorgebeugt
+      hug(p) {
+        armL.shoulder.rotation.x = armR.shoulder.rotation.x = -1.2;
+        armL.shoulder.rotation.z = -0.45;
+        armR.shoulder.rotation.z = 0.45;
+        armL.elbow.rotation.x = armR.elbow.rotation.x = -0.95;
+        spine.rotation.x = 0.18 + 0.015 * Math.sin(p * TAU);
+        head.rotation.x = 0.22;
+      },
+      // Kniend umarmen (Mutter hält die Kinder)
+      kneelHug(p) {
+        POSES.kneel();
+        armL.shoulder.rotation.x = armR.shoulder.rotation.x = -1.15;
+        armL.shoulder.rotation.z = -0.5;
+        armR.shoulder.rotation.z = 0.5;
+        armL.elbow.rotation.x = armR.elbow.rotation.x = -1.0;
+        spine.rotation.x = 0.12 + 0.02 * Math.sin(p * TAU * 0.8);
+        head.rotation.x = 0.3;
+      },
+      // Hand eines Kindes halten (linke Hand leicht nach außen unten)
+      holdHand() {
+        relax();
+        armL.shoulder.rotation.z = 0.32;
+        armL.shoulder.rotation.x = -0.18;
+        armL.elbow.rotation.x = -0.2;
+      },
+      // Kind greift nach oben (Hand der Mutter): rechter Arm seitlich nach oben
+      reachUp() {
+        relax();
+        armR.shoulder.rotation.z = -1.05;
+        armR.shoulder.rotation.x = -0.35;
+        armR.elbow.rotation.x = -0.15;
+        head.rotation.x = -0.12;
+      },
+      // Streiten/Schreien: Gesten mit beiden Armen, Oberkörper nach vorn
+      yell(p) {
+        const a = Math.sin(p * TAU * 1.6);
+        armR.shoulder.rotation.x = -1.05 + 0.35 * a;
+        armR.shoulder.rotation.z = -0.25;
+        armR.elbow.rotation.x = -0.9 - 0.3 * a;
+        armL.shoulder.rotation.x = -0.55 - 0.25 * Math.sin(p * TAU * 1.6 + 1.7);
+        armL.shoulder.rotation.z = 0.3;
+        armL.elbow.rotation.x = -1.1;
+        spine.rotation.x = 0.12 + 0.04 * Math.abs(a);
+        head.rotation.x = -0.12 + 0.05 * a;
+      },
+      // Am Steuer sitzen (Beine wie sitzen, Arme nach vorn zum Lenkrad)
+      drive(p) {
+        POSES.sit();
+        armL.shoulder.rotation.x = armR.shoulder.rotation.x = -1.05;
+        armL.shoulder.rotation.z = -0.12;
+        armR.shoulder.rotation.z = 0.12;
+        armL.elbow.rotation.x = armR.elbow.rotation.x = -0.45;
+        spine.rotation.x = -0.12 + 0.01 * Math.sin(p * TAU);
+      },
+      // Bewusstlos im Sitz: Oberkörper zur Seite gesunken, Kopf geneigt, Arme hängen
+      unconscious() {
+        POSES.sit();
+        spine.rotation.x = 0.32;
+        spine.rotation.z = -0.16;
+        head.rotation.x = 0.45;
+        head.rotation.z = -0.4;
+        armL.shoulder.rotation.x = armR.shoulder.rotation.x = -0.25;
+        armL.elbow.rotation.x = armR.elbow.rotation.x = -0.2;
+      },
+      // Hand vor den Mund (Trauer, Schock)
+      handMouth() {
+        relax();
+        armR.shoulder.rotation.x = -1.75;
+        armR.shoulder.rotation.z = 0.42;
+        armR.elbow.rotation.x = -2.05;
+        head.rotation.x = 0.1;
+        spine.rotation.x = 0.05;
+      },
+      // Ohren zuhalten (Kind während des Streits)
+      coverEars() {
+        armL.shoulder.rotation.z = 1.25;
+        armR.shoulder.rotation.z = -1.25;
+        armL.shoulder.rotation.x = armR.shoulder.rotation.x = -0.35;
+        armL.elbow.rotation.z = 1.75;
+        armR.elbow.rotation.z = -1.75;
+        head.rotation.x = 0.18;
+        spine.rotation.x = 0.1;
+      },
+      // Etwas mit beiden Händen hochhalten/zeigen (Zeichnung)
+      showUp() {
+        armL.shoulder.rotation.x = armR.shoulder.rotation.x = -1.75;
+        armL.shoulder.rotation.z = -0.18;
+        armR.shoulder.rotation.z = 0.18;
+        armL.elbow.rotation.x = armR.elbow.rotation.x = -0.35;
+        head.rotation.x = -0.18;
+      },
+      // Kniend etwas vor sich ablegen (Blumen, Zeichnung)
+      placeLow() {
+        POSES.kneel();
+        spine.rotation.x = 0.55;
+        head.rotation.x = 0.25;
+        armL.shoulder.rotation.x = armR.shoulder.rotation.x = -0.95;
+        armL.shoulder.rotation.z = -0.1;
+        armR.shoulder.rotation.z = 0.1;
+        armL.elbow.rotation.x = armR.elbow.rotation.x = -0.25;
+      },
+    });
     const seatLegs = (k = 1) => {
       body.position.y = -0.47 * k;
       legL.hip.rotation.x = legR.hip.rotation.x = (-Math.PI / 2) * k;
@@ -371,17 +496,19 @@ export function createHumanFactory(THREE, core) {
 
     // Gefühle über Brauen, Augen, Mund, Wangen (cheek) und Schweißtropfen (sweat)
     const MOODS = {
-      neutral: { brow: 0, browY: 0, eye: 1, mouth: 0, open: 1, cheek: 0, sweat: 0 },
-      happy: { brow: 0.1, browY: 0.01, eye: 0.8, mouth: 0.35, open: 1, cheek: 1, sweat: 0 },
-      laugh: { brow: -0.15, browY: 0.018, eye: 0.3, mouth: 0.4, open: 2.6, cheek: 1, sweat: 0 },
-      relief: { brow: -0.25, browY: 0.012, eye: 0.25, mouth: 0.3, open: 1.2, cheek: 0.6, sweat: 0 },
-      sad: { brow: -0.45, browY: 0, eye: 0.9, mouth: -0.35, open: 1, cheek: 0, sweat: 0 },
-      worried: { brow: -0.35, browY: 0.012, eye: 1.1, mouth: -0.15, open: 1.4, cheek: 0, sweat: 1 },
-      panic: { brow: -0.42, browY: 0.024, eye: 1.4, mouth: -0.3, open: 3.0, cheek: 0, sweat: 1 },
-      angry: { brow: 0.5, browY: -0.012, eye: 0.8, mouth: -0.25, open: 1.3, cheek: 0.4, sweat: 0 },
-      shock: { brow: -0.1, browY: 0.025, eye: 1.4, mouth: 0, open: 3.4, cheek: 0, sweat: 0 },
-      tired: { brow: -0.2, browY: -0.006, eye: 0.35, mouth: -0.1, open: 1, cheek: 0, sweat: 0 },
-      smug: { brow: 0.25, browY: 0, eye: 0.6, mouth: 0.25, open: 1, cheek: 0.3, sweat: 0 },
+      neutral: { brow: 0, browY: 0, eye: 1, mouth: 0, open: 1, cheek: 0, sweat: 0, tear: 0 },
+      happy: { brow: 0.1, browY: 0.01, eye: 0.8, mouth: 0.35, open: 1, cheek: 1, sweat: 0, tear: 0 },
+      laugh: { brow: -0.15, browY: 0.018, eye: 0.3, mouth: 0.4, open: 2.6, cheek: 1, sweat: 0, tear: 0 },
+      relief: { brow: -0.25, browY: 0.012, eye: 0.25, mouth: 0.3, open: 1.2, cheek: 0.6, sweat: 0, tear: 0 },
+      sad: { brow: -0.45, browY: 0, eye: 0.9, mouth: -0.35, open: 1, cheek: 0, sweat: 0, tear: 0 },
+      worried: { brow: -0.35, browY: 0.012, eye: 1.1, mouth: -0.15, open: 1.4, cheek: 0, sweat: 1, tear: 0 },
+      panic: { brow: -0.42, browY: 0.024, eye: 1.4, mouth: -0.3, open: 3.0, cheek: 0, sweat: 1, tear: 0 },
+      angry: { brow: 0.5, browY: -0.012, eye: 0.8, mouth: -0.25, open: 1.3, cheek: 0.4, sweat: 0, tear: 0 },
+      shock: { brow: -0.1, browY: 0.025, eye: 1.4, mouth: 0, open: 3.4, cheek: 0, sweat: 0, tear: 0 },
+      tired: { brow: -0.2, browY: -0.006, eye: 0.35, mouth: -0.1, open: 1, cheek: 0, sweat: 0, tear: 0 },
+      smug: { brow: 0.25, browY: 0, eye: 0.6, mouth: 0.25, open: 1, cheek: 0.3, sweat: 0, tear: 0 },
+      cry: { brow: -0.55, browY: 0.012, eye: 0.55, mouth: -0.42, open: 1.9, cheek: 0.55, sweat: 0, tear: 1 },
+      unconscious: { brow: 0.05, browY: -0.008, eye: 0.08, mouth: -0.05, open: 1.5, cheek: 0, sweat: 0, tear: 0 },
     };
     const MOOD_KEYS = Object.keys(MOODS.neutral);
     const setMood = (M, blink) => {
@@ -400,6 +527,10 @@ export function createHumanFactory(THREE, core) {
       }
       sweat.visible = M.sweat > 0.05;
       sweat.scale.setScalar(Math.max(0.01, M.sweat));
+      for (const tr of tears) {
+        tr.visible = M.tear > 0.05;
+        tr.scale.set(1, Math.max(0.01, M.tear), 1);
+      }
     };
     const moodOf = (name) => {
       const M = MOODS[name];
