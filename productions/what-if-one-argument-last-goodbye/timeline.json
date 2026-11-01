@@ -1,0 +1,2943 @@
+{
+ "_comment": "ERZEUGT von tools/build_timeline.mjs aus beats.json – nicht von Hand ändern.",
+ "fps": 30,
+ "duration": 71,
+ "seed": 1106,
+ "recipe": "B1",
+ "pointe": 66.2,
+ "title": {
+  "in": 0,
+  "out": 3.4
+ },
+ "shots": [
+  {
+   "id": "hook",
+   "from": 0,
+   "to": 4.4,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 0,
+      "pos": [
+       0.636,
+       0.88,
+       -0.264
+      ],
+      "look": [
+       0.2,
+       0.78,
+       2.3
+      ],
+      "fov": 40
+     },
+     {
+      "t": 4.4,
+      "pos": [
+       0.369,
+       0.88,
+       0.557
+      ],
+      "look": [
+       0.2,
+       0.78,
+       2.3
+      ],
+      "fov": 40
+     }
+    ]
+   }
+  },
+  {
+   "id": "mom_react",
+   "from": 4.4,
+   "to": 7.8,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 4.4,
+      "pos": [
+       1.05,
+       0.96,
+       3.75
+      ],
+      "look": [
+       -0.6,
+       1.203,
+       2.45
+      ],
+      "fov": 46
+     },
+     {
+      "t": 5.25,
+      "pos": [
+       1.052,
+       0.939,
+       3.725
+      ],
+      "look": [
+       -0.594,
+       1.199,
+       2.45
+      ],
+      "fov": 46
+     },
+     {
+      "t": 6.1,
+      "pos": [
+       1.006,
+       0.93,
+       3.7
+      ],
+      "look": [
+       -0.603,
+       1.199,
+       2.45
+      ],
+      "fov": 46
+     },
+     {
+      "t": 6.95,
+      "pos": [
+       0.982,
+       0.938,
+       3.675
+      ],
+      "look": [
+       -0.605,
+       1.203,
+       2.45
+      ],
+      "fov": 46
+     },
+     {
+      "t": 7.8,
+      "pos": [
+       0.996,
+       0.908,
+       3.65
+      ],
+      "look": [
+       -0.595,
+       1.197,
+       2.45
+      ],
+      "fov": 46
+     }
+    ]
+   }
+  },
+  {
+   "id": "home_happy",
+   "from": 7.8,
+   "to": 11.6,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 7.8,
+      "pos": [
+       39.875,
+       1.2,
+       2.571
+      ],
+      "look": [
+       39.4,
+       0.85,
+       -1.3
+      ],
+      "fov": 46
+     },
+     {
+      "t": 8.75,
+      "pos": [
+       40.244,
+       1.2,
+       2.508
+      ],
+      "look": [
+       39.4,
+       0.85,
+       -1.3
+      ],
+      "fov": 46
+     },
+     {
+      "t": 9.7,
+      "pos": [
+       40.605,
+       1.2,
+       2.409
+      ],
+      "look": [
+       39.4,
+       0.85,
+       -1.3
+      ],
+      "fov": 46
+     },
+     {
+      "t": 10.65,
+      "pos": [
+       40.955,
+       1.2,
+       2.277
+      ],
+      "look": [
+       39.4,
+       0.85,
+       -1.3
+      ],
+      "fov": 46
+     },
+     {
+      "t": 11.6,
+      "pos": [
+       41.291,
+       1.2,
+       2.111
+      ],
+      "look": [
+       39.4,
+       0.85,
+       -1.3
+      ],
+      "fov": 46
+     }
+    ]
+   }
+  },
+  {
+   "id": "argue",
+   "from": 11.6,
+   "to": 15.2,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 11.6,
+      "pos": [
+       40.219,
+       1.5,
+       3.699
+      ],
+      "look": [
+       40.3,
+       1.45,
+       0.6
+      ],
+      "fov": 46
+     },
+     {
+      "t": 15.2,
+      "pos": [
+       40.379,
+       1.5,
+       3.606
+      ],
+      "look": [
+       40.3,
+       1.45,
+       0.6
+      ],
+      "fov": 46
+     }
+    ]
+   },
+   "shake": [
+    {
+     "t": 13.2,
+     "dur": 0.4,
+     "amp": 0.015,
+     "freq": 9
+    }
+   ]
+  },
+  {
+   "id": "kids_watch",
+   "from": 15.2,
+   "to": 17.8,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 15.2,
+      "pos": [
+       39.407,
+       1,
+       1.327
+      ],
+      "look": [
+       39.28,
+       0.7,
+       -1.1
+      ],
+      "fov": 44
+     },
+     {
+      "t": 17.8,
+      "pos": [
+       39.614,
+       1,
+       1.011
+      ],
+      "look": [
+       39.28,
+       0.7,
+       -1.1
+      ],
+      "fov": 44
+     }
+    ]
+   }
+  },
+  {
+   "id": "dad_slam",
+   "from": 17.8,
+   "to": 20.8,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 17.8,
+      "pos": [
+       38.185,
+       0.3,
+       1.186
+      ],
+      "look": [
+       40.2,
+       1.35,
+       -0.9
+      ],
+      "fov": 50
+     },
+     {
+      "t": 20.8,
+      "pos": [
+       38.971,
+       0.3,
+       1.067
+      ],
+      "look": [
+       40.2,
+       1.35,
+       -0.9
+      ],
+      "fov": 50
+     }
+    ]
+   },
+   "shake": [
+    {
+     "t": 18.9,
+     "dur": 0.5,
+     "amp": 0.05,
+     "freq": 9
+    }
+   ]
+  },
+  {
+   "id": "keys_pov",
+   "from": 20.8,
+   "to": 24.6,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 20.8,
+      "pos": [
+       39.58,
+       1.13,
+       -1.53
+      ],
+      "look": [
+       42.6,
+       0.953,
+       0.1
+      ],
+      "fov": 52
+     },
+     {
+      "t": 21.75,
+      "pos": [
+       39.609,
+       1.112,
+       -1.517
+      ],
+      "look": [
+       42.606,
+       0.949,
+       0.1
+      ],
+      "fov": 52
+     },
+     {
+      "t": 22.7,
+      "pos": [
+       39.591,
+       1.105,
+       -1.505
+      ],
+      "look": [
+       42.597,
+       0.949,
+       0.1
+      ],
+      "fov": 52
+     },
+     {
+      "t": 23.65,
+      "pos": [
+       39.595,
+       1.116,
+       -1.492
+      ],
+      "look": [
+       42.595,
+       0.953,
+       0.1
+      ],
+      "fov": 52
+     },
+     {
+      "t": 24.6,
+      "pos": [
+       39.636,
+       1.088,
+       -1.48
+      ],
+      "look": [
+       42.605,
+       0.947,
+       0.1
+      ],
+      "fov": 52
+     }
+    ]
+   },
+   "shake": [
+    {
+     "t": 23.8,
+     "dur": 0.4,
+     "amp": 0.035,
+     "freq": 9
+    }
+   ]
+  },
+  {
+   "id": "driveway",
+   "from": 24.6,
+   "to": 28.2,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 24.6,
+      "pos": [
+       6.995,
+       1.35,
+       130.37
+      ],
+      "look": [
+       3.4,
+       0.8,
+       123
+      ],
+      "fov": 46
+     },
+     {
+      "t": 25.5,
+      "pos": [
+       7.745,
+       1.35,
+       129.954
+      ],
+      "look": [
+       3.4,
+       0.8,
+       123
+      ],
+      "fov": 46
+     },
+     {
+      "t": 26.4,
+      "pos": [
+       8.448,
+       1.35,
+       129.462
+      ],
+      "look": [
+       3.4,
+       0.8,
+       123
+      ],
+      "fov": 46
+     },
+     {
+      "t": 27.3,
+      "pos": [
+       9.096,
+       1.35,
+       128.899
+      ],
+      "look": [
+       3.4,
+       0.8,
+       123
+      ],
+      "fov": 46
+     },
+     {
+      "t": 28.2,
+      "pos": [
+       9.682,
+       1.35,
+       128.271
+      ],
+      "look": [
+       3.4,
+       0.8,
+       123
+      ],
+      "fov": 46
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   },
+   "shake": [
+    {
+     "t": 27.2,
+     "dur": 0.6,
+     "amp": 0.012,
+     "freq": 9
+    }
+   ]
+  },
+  {
+   "id": "accelerate",
+   "from": 28.2,
+   "to": 31.6,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 28.2,
+      "pos": [
+       198.2,
+       1.95,
+       -237.2
+      ],
+      "look": [
+       198.2,
+       0.95,
+       -230
+      ],
+      "fov": 48
+     },
+     {
+      "t": 31.6,
+      "pos": [
+       198.2,
+       1.95,
+       -137.2
+      ],
+      "look": [
+       198.2,
+       0.95,
+       -130
+      ],
+      "fov": 48
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "whip",
+    "direction": "left"
+   },
+   "shake": [
+    {
+     "t": 28.4,
+     "dur": 1,
+     "amp": 0.015,
+     "freq": 9
+    }
+   ]
+  },
+  {
+   "id": "driver_close",
+   "from": 31.6,
+   "to": 34.6,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 31.6,
+      "pos": [
+       198.61,
+       1.42,
+       2.15
+      ],
+      "look": [
+       198.66,
+       1.36,
+       -0.25
+      ],
+      "fov": 40
+     },
+     {
+      "t": 34.6,
+      "pos": [
+       198.71,
+       1.42,
+       1.65
+      ],
+      "look": [
+       198.66,
+       1.36,
+       -0.25
+      ],
+      "fov": 40
+     }
+    ]
+   }
+  },
+  {
+   "id": "skid",
+   "from": 34.6,
+   "to": 37.6,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 34.6,
+      "pos": [
+       189.652,
+       17.3,
+       134.435
+      ],
+      "look": [
+       200,
+       0.5,
+       118.5
+      ],
+      "fov": 46
+     },
+     {
+      "t": 37.6,
+      "pos": [
+       192.237,
+       15.7,
+       133.736
+      ],
+      "look": [
+       200,
+       0.5,
+       118.5
+      ],
+      "fov": 46
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "whip",
+    "direction": "left"
+   }
+  },
+  {
+   "id": "impact",
+   "from": 37.6,
+   "to": 40.4,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 37.6,
+      "pos": [
+       192.201,
+       0.42,
+       135.621
+      ],
+      "look": [
+       202.4,
+       0.9,
+       131.5
+      ],
+      "fov": 50
+     },
+     {
+      "t": 40.4,
+      "pos": [
+       195.104,
+       0.42,
+       136.421
+      ],
+      "look": [
+       202.4,
+       0.9,
+       131.5
+      ],
+      "fov": 50
+     }
+    ]
+   },
+   "shake": [
+    {
+     "t": 38.6,
+     "dur": 0.8,
+     "amp": 0.09,
+     "freq": 9
+    }
+   ]
+  },
+  {
+   "id": "approach",
+   "from": 40.4,
+   "to": 43.8,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 40.4,
+      "pos": [
+       206.526,
+       1.65,
+       125.676
+      ],
+      "look": [
+       202.1,
+       1.15,
+       131.1
+      ],
+      "fov": 44
+     },
+     {
+      "t": 43.8,
+      "pos": [
+       203.637,
+       1.65,
+       129
+      ],
+      "look": [
+       202.1,
+       1.15,
+       131.1
+      ],
+      "fov": 44
+     }
+    ]
+   }
+  },
+  {
+   "id": "interior",
+   "from": 43.8,
+   "to": 48.2,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 43.8,
+      "pos": [
+       203.459,
+       1.24,
+       129.421
+      ],
+      "look": [
+       202.1,
+       1.1,
+       131.1
+      ],
+      "fov": 40
+     },
+     {
+      "t": 48.2,
+      "pos": [
+       203.079,
+       1.24,
+       129.471
+      ],
+      "look": [
+       202.1,
+       1.1,
+       131.1
+      ],
+      "fov": 40
+     }
+    ]
+   }
+  },
+  {
+   "id": "grave_flowers",
+   "from": 48.2,
+   "to": 52,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 48.2,
+      "pos": [
+       1.196,
+       1.7,
+       -1.206
+      ],
+      "look": [
+       -0.25,
+       0.7,
+       2.2
+      ],
+      "fov": 46
+     },
+     {
+      "t": 49.15,
+      "pos": [
+       0.863,
+       1.7,
+       -1.329
+      ],
+      "look": [
+       -0.25,
+       0.7,
+       2.2
+      ],
+      "fov": 46
+     },
+     {
+      "t": 50.1,
+      "pos": [
+       0.519,
+       1.7,
+       -1.419
+      ],
+      "look": [
+       -0.25,
+       0.7,
+       2.2
+      ],
+      "fov": 46
+     },
+     {
+      "t": 51.05,
+      "pos": [
+       0.169,
+       1.7,
+       -1.476
+      ],
+      "look": [
+       -0.25,
+       0.7,
+       2.2
+      ],
+      "fov": 46
+     },
+     {
+      "t": 52,
+      "pos": [
+       -0.185,
+       1.7,
+       -1.499
+      ],
+      "look": [
+       -0.25,
+       0.7,
+       2.2
+      ],
+      "fov": 46
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "drawing_down",
+   "from": 52,
+   "to": 55,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 52,
+      "pos": [
+       0.168,
+       1.255,
+       1.021
+      ],
+      "look": [
+       0.14,
+       0.1,
+       1.42
+      ],
+      "fov": 44
+     },
+     {
+      "t": 55,
+      "pos": [
+       0.115,
+       1.145,
+       1.061
+      ],
+      "look": [
+       0.14,
+       0.1,
+       1.42
+      ],
+      "fov": 44
+     }
+    ]
+   }
+  },
+  {
+   "id": "understand",
+   "from": 55,
+   "to": 58.6,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 55,
+      "pos": [
+       0.498,
+       0.91,
+       0.535
+      ],
+      "look": [
+       0.25,
+       0.86,
+       2.3
+      ],
+      "fov": 38
+     },
+     {
+      "t": 58.6,
+      "pos": [
+       0.25,
+       0.91,
+       0.732
+      ],
+      "look": [
+       0.25,
+       0.86,
+       2.3
+      ],
+      "fov": 38
+     }
+    ]
+   }
+  },
+  {
+   "id": "hug",
+   "from": 58.6,
+   "to": 62.4,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 58.6,
+      "pos": [
+       0.025,
+       2.2,
+       0
+      ],
+      "look": [
+       -0.1,
+       0.7,
+       2.4
+      ],
+      "fov": 46
+     },
+     {
+      "t": 62.4,
+      "pos": [
+       -0.225,
+       2.2,
+       -4.2
+      ],
+      "look": [
+       -0.1,
+       0.7,
+       2.4
+      ],
+      "fov": 46
+     }
+    ]
+   }
+  },
+  {
+   "id": "msg1",
+   "from": 62.4,
+   "to": 66,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 62.4,
+      "pos": [
+       -0.105,
+       1.4,
+       -596.001
+      ],
+      "look": [
+       0,
+       1,
+       -600
+      ],
+      "fov": 46
+     },
+     {
+      "t": 66,
+      "pos": [
+       0.102,
+       1.4,
+       -596.121
+      ],
+      "look": [
+       0,
+       1,
+       -600
+      ],
+      "fov": 46
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "msg2",
+   "from": 66,
+   "to": 71,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 66,
+      "pos": [
+       -0.125,
+       1.15,
+       -596
+      ],
+      "look": [
+       0,
+       1,
+       -600
+      ],
+      "fov": 46
+     },
+     {
+      "t": 71,
+      "pos": [
+       0.125,
+       1.15,
+       -597.12
+      ],
+      "look": [
+       0,
+       1,
+       -600
+      ],
+      "fov": 46
+     }
+    ]
+   }
+  }
+ ],
+ "hud": [
+  {
+   "id": "days",
+   "from": 0,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      0,
+      0
+     ],
+     [
+      0.166667,
+      7,
+      "hold"
+     ],
+     [
+      0.5,
+      14,
+      "hold"
+     ],
+     [
+      0.866667,
+      21,
+      "hold"
+     ],
+     [
+      1.2,
+      27,
+      "hold"
+     ],
+     [
+      1.566667,
+      34,
+      "hold"
+     ],
+     [
+      1.9,
+      41,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 2,
+     "kind": "warn"
+    }
+   ]
+  },
+  {
+   "id": "together",
+   "from": 7.8,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      7.8,
+      15
+     ],
+     [
+      8.8,
+      14,
+      "hold"
+     ],
+     [
+      10.8,
+      13,
+      "hold"
+     ],
+     [
+      12.5,
+      12,
+      "hold"
+     ],
+     [
+      13.566667,
+      11,
+      "hold"
+     ],
+     [
+      14.6,
+      10,
+      "hold"
+     ],
+     [
+      16.4,
+      9,
+      "hold"
+     ],
+     [
+      18.9,
+      7,
+      "hold"
+     ],
+     [
+      21.4,
+      6,
+      "hold"
+     ],
+     [
+      23.2,
+      5,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 11.9,
+     "kind": "warn"
+    },
+    {
+     "t": 18.9,
+     "kind": "loss"
+    },
+    {
+     "t": 21.8,
+     "kind": "warn"
+    },
+    {
+     "t": 23.8,
+     "kind": "loss"
+    }
+   ]
+  },
+  {
+   "id": "speed",
+   "from": 24.6,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      24.6,
+      0
+     ],
+     [
+      27.6,
+      3,
+      "hold"
+     ],
+     [
+      28,
+      6,
+      "hold"
+     ],
+     [
+      28.4,
+      6,
+      "linear"
+     ],
+     [
+      31.4,
+      78,
+      "linear"
+     ],
+     [
+      31.7,
+      78,
+      "linear"
+     ],
+     [
+      34.5,
+      104,
+      "linear"
+     ],
+     [
+      35,
+      104,
+      "linear"
+     ],
+     [
+      37.5,
+      88,
+      "linear"
+     ],
+     [
+      38.6,
+      0,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 27.2,
+     "kind": "warn"
+    },
+    {
+     "t": 35.1,
+     "kind": "warn"
+    },
+    {
+     "t": 38.6,
+     "kind": "loss"
+    }
+   ]
+  },
+  {
+   "id": "heart",
+   "from": 40.4,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      40.4,
+      136
+     ],
+     [
+      40.7,
+      136,
+      "linear"
+     ],
+     [
+      43.6,
+      92,
+      "linear"
+     ],
+     [
+      44.4,
+      79,
+      "hold"
+     ],
+     [
+      45.066667,
+      67,
+      "hold"
+     ],
+     [
+      45.733333,
+      54,
+      "hold"
+     ],
+     [
+      46.4,
+      41,
+      "hold"
+     ],
+     [
+      47.1,
+      0,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 47.1,
+     "kind": "loss"
+    }
+   ]
+  },
+  {
+   "id": "days",
+   "from": 48.2,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      48.2,
+      0
+     ],
+     [
+      48.4,
+      8,
+      "hold"
+     ],
+     [
+      48.8,
+      16,
+      "hold"
+     ],
+     [
+      49.2,
+      25,
+      "hold"
+     ],
+     [
+      49.6,
+      33,
+      "hold"
+     ],
+     [
+      50,
+      41,
+      "hold"
+     ],
+     [
+      55.4,
+      41,
+      "linear"
+     ],
+     [
+      58.2,
+      9999,
+      "linear"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 56,
+     "kind": "loss"
+    }
+   ]
+  },
+  {
+   "id": "forever",
+   "from": 58.6,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      58.6,
+      9999
+     ],
+     [
+      71,
+      9999
+     ]
+    ]
+   },
+   "final": {
+    "at": 58.6
+   },
+   "flashes": [
+    {
+     "t": 59.2,
+     "kind": "gain"
+    }
+   ]
+  }
+ ],
+ "lines": [
+  {
+   "id": "l_hook",
+   "in": 0.6,
+   "out": 4.2
+  },
+  {
+   "id": "l_noanswer",
+   "in": 4.7,
+   "out": 7.6
+  },
+  {
+   "id": "l_evening",
+   "in": 8.2,
+   "out": 11.4
+  },
+  {
+   "id": "l_fight",
+   "in": 11.9,
+   "out": 15
+  },
+  {
+   "id": "l_kids",
+   "in": 15.366667,
+   "out": 17.666667
+  },
+  {
+   "id": "l_words",
+   "in": 18,
+   "out": 20.666667
+  },
+  {
+   "id": "l_drawing",
+   "in": 21.7,
+   "out": 24.4
+  },
+  {
+   "id": "l_drive",
+   "in": 24.9,
+   "out": 28
+  },
+  {
+   "id": "l_faster",
+   "in": 28.5,
+   "out": 31.4
+  },
+  {
+   "id": "l_call",
+   "in": 32.1,
+   "out": 34.466667
+  },
+  {
+   "id": "l_wet",
+   "in": 34.9,
+   "out": 37.3
+  },
+  {
+   "id": "l_quiet",
+   "in": 40.8,
+   "out": 43.6
+  },
+  {
+   "id": "l_never",
+   "in": 44.2,
+   "out": 46.7
+  },
+  {
+   "id": "l_flowers",
+   "in": 48.5,
+   "out": 51.8
+  },
+  {
+   "id": "l_unseen",
+   "in": 52.5,
+   "out": 54.866667
+  },
+  {
+   "id": "l_understand",
+   "in": 55.6,
+   "out": 58.4
+  }
+ ],
+ "events": [
+  {
+   "t": 0.3,
+   "id": "drawing_lower",
+   "beat": "hook",
+   "trigger": true,
+   "what": "Junge kniet am Grab und senkt die Zeichnung vorsichtig auf das Grab",
+   "sfx": [
+    "paper"
+   ]
+  },
+  {
+   "t": 2,
+   "id": "look_up",
+   "beat": "hook",
+   "what": "er hält inne und schaut zur Mutter hoch (Frage)",
+   "sfx": [
+    "heartbeat"
+   ],
+   "flash": "warn"
+  },
+  {
+   "t": 4.566667,
+   "id": "mom_turn",
+   "beat": "mom_react",
+   "what": "Mutter dreht sich zum Sohn, Hand vor dem Mund, Tränen",
+   "sfx": [
+    "appear"
+   ]
+  },
+  {
+   "t": 5.9,
+   "id": "mom_kneel",
+   "beat": "mom_react",
+   "what": "sie geht zu ihm in die Knie, findet keine Antwort",
+   "sfx": [
+    "thud"
+   ]
+  },
+  {
+   "t": 7.8,
+   "id": "flashback",
+   "beat": "home_happy",
+   "what": "harter Schnitt in die Vergangenheit",
+   "sfx": [
+    "swoosh"
+   ]
+  },
+  {
+   "t": 8.7,
+   "id": "toy_car",
+   "beat": "home_happy",
+   "what": "kleiner Bruder lässt sein Spielzeug-Auto (911) rollen",
+   "sfx": [
+    "pop"
+   ]
+  },
+  {
+   "t": 9.5,
+   "id": "boy_show",
+   "beat": "home_happy",
+   "what": "Junge hält seine Zeichnung hoch, Eltern lachen",
+   "sfx": [
+    "ding"
+   ]
+  },
+  {
+   "t": 11.9,
+   "id": "argue_start",
+   "beat": "argue",
+   "what": "Mutter stellt ihn zur Rede, Streit beginnt",
+   "sfx": [
+    "hit"
+   ],
+   "flash": "warn"
+  },
+  {
+   "t": 13.2,
+   "id": "dad_yell",
+   "beat": "argue",
+   "what": "Vater schreit zurück, Gesten werden heftiger",
+   "sfx": [
+    "thud"
+   ]
+  },
+  {
+   "t": 15.6,
+   "id": "flinch",
+   "beat": "kids_watch",
+   "what": "Junge zuckt bei einem Schrei zusammen, drückt die Zeichnung an sich",
+   "sfx": [
+    "heartbeat"
+   ]
+  },
+  {
+   "t": 16.2,
+   "id": "ears",
+   "beat": "kids_watch",
+   "what": "Vater schreit erneut, kleiner Bruder hält sich die Ohren zu",
+   "sfx": [
+    "thud"
+   ]
+  },
+  {
+   "t": 18.9,
+   "id": "slam",
+   "beat": "dad_slam",
+   "what": "Vater schlägt mit der Faust auf den Tisch, Stifte springen",
+   "sfx": [
+    "impact"
+   ],
+   "flash": "loss"
+  },
+  {
+   "t": 19.4,
+   "id": "boy_cry",
+   "beat": "dad_slam",
+   "what": "Junge beginnt zu weinen"
+  },
+  {
+   "t": 21.8,
+   "id": "keys_grab",
+   "beat": "keys_pov",
+   "what": "Vater greift die Autoschlüssel, geht ohne Blick an der Zeichnung vorbei",
+   "sfx": [
+    "keys"
+   ],
+   "flash": "warn"
+  },
+  {
+   "t": 22.8,
+   "id": "door_open",
+   "beat": "keys_pov",
+   "what": "Haustür öffnet sich, Nachtluft",
+   "sfx": [
+    "swoosh"
+   ]
+  },
+  {
+   "t": 23.8,
+   "id": "door_slam",
+   "beat": "keys_pov",
+   "what": "Haustür knallt zu – er ist weg",
+   "sfx": [
+    "slam"
+   ],
+   "flash": "loss"
+  },
+  {
+   "t": 24.6,
+   "id": "speed_reset",
+   "beat": "driveway",
+   "what": "Tacho-Anzeige beginnt bei 0"
+  },
+  {
+   "t": 26.5,
+   "id": "car_door",
+   "beat": "driveway",
+   "what": "Vater steigt in den 911, Tür knallt",
+   "sfx": [
+    "slam"
+   ]
+  },
+  {
+   "t": 26.9,
+   "id": "lights_on",
+   "beat": "driveway",
+   "what": "runde Scheinwerfer gehen an",
+   "sfx": [
+    "pop"
+   ]
+  },
+  {
+   "t": 27.2,
+   "id": "engine_start",
+   "beat": "driveway",
+   "what": "Motor springt an",
+   "sfx": [
+    "engine_start"
+   ],
+   "flash": "warn"
+  },
+  {
+   "t": 28.4,
+   "id": "rev",
+   "beat": "accelerate",
+   "what": "er tritt aufs Gas, Auto zieht davon",
+   "sfx": [
+    "rev"
+   ]
+  },
+  {
+   "t": 30.2,
+   "id": "shift",
+   "beat": "accelerate",
+   "what": "Gangwechsel, noch schneller",
+   "sfx": [
+    "rev"
+   ]
+  },
+  {
+   "t": 32,
+   "id": "phone_buzz",
+   "beat": "driver_close",
+   "what": "Handy am Armaturenbrett: Mama ruft an",
+   "sfx": [
+    "buzz"
+   ]
+  },
+  {
+   "t": 33.2,
+   "id": "decline",
+   "beat": "driver_close",
+   "what": "er drückt den Anruf weg",
+   "sfx": [
+    "pop"
+   ]
+  },
+  {
+   "t": 35.1,
+   "id": "skid_start",
+   "beat": "skid",
+   "what": "Heck bricht auf nasser Straße aus",
+   "sfx": [
+    "screech"
+   ],
+   "flash": "warn"
+  },
+  {
+   "t": 36.3,
+   "id": "countersteer",
+   "beat": "skid",
+   "what": "er reißt das Lenkrad herum – zu spät",
+   "sfx": [
+    "screech"
+   ]
+  },
+  {
+   "t": 38.6,
+   "id": "crash_hit",
+   "beat": "impact",
+   "what": "Porsche prallt mit der Front gegen die Leitplanke",
+   "sfx": [
+    "crash",
+    "impact"
+   ],
+   "flash": "loss"
+  },
+  {
+   "t": 39.1,
+   "id": "debris",
+   "beat": "impact",
+   "what": "Splitter fallen, Auto kommt zum Stehen, Rauch steigt",
+   "sfx": [
+    "thud"
+   ]
+  },
+  {
+   "t": 40.4,
+   "id": "heart_on",
+   "beat": "approach",
+   "what": "Herzschlag des Vaters wird hörbar, Anzeige 136",
+   "sfx": [
+    "heartbeat"
+   ]
+  },
+  {
+   "t": 41.1,
+   "id": "hazard",
+   "beat": "approach",
+   "what": "Warnblinker springen an, Rauch, Regen; Kamera fährt zum Fenster",
+   "sfx": [
+    "blinker"
+   ]
+  },
+  {
+   "t": 44.1,
+   "id": "phone_ring",
+   "beat": "interior",
+   "what": "Handy leuchtet: Mama ruft wieder an – keine Reaktion",
+   "sfx": [
+    "buzz"
+   ]
+  },
+  {
+   "t": 45.2,
+   "id": "hand_slip",
+   "beat": "interior",
+   "what": "seine Hand rutscht vom Lenkrad",
+   "sfx": [
+    "thud"
+   ]
+  },
+  {
+   "t": 47.1,
+   "id": "flat",
+   "beat": "interior",
+   "what": "Herzschlag hört auf, Armaturenlicht erlischt",
+   "sfx": [
+    "flatline"
+   ],
+   "flash": "loss"
+  },
+  {
+   "t": 48.5,
+   "id": "hold_hand",
+   "beat": "grave_flowers",
+   "what": "kleiner Bruder hält die Hand der Mutter"
+  },
+  {
+   "t": 49.9,
+   "id": "flowers_down",
+   "beat": "grave_flowers",
+   "what": "Mutter kniet und legt Blumen nieder",
+   "sfx": [
+    "paper"
+   ]
+  },
+  {
+   "t": 52.066667,
+   "id": "drawing_placed",
+   "beat": "drawing_down",
+   "what": "Junge legt die Zeichnung auf das Grab: die Familie, an den Händen",
+   "sfx": [
+    "paper"
+   ]
+  },
+  {
+   "t": 53.9,
+   "id": "smooth",
+   "beat": "drawing_down",
+   "what": "er streicht sie glatt",
+   "sfx": [
+    "paper"
+   ]
+  },
+  {
+   "t": 56,
+   "id": "realize",
+   "beat": "understand",
+   "what": "er schaut auf den Grabstein und versteht",
+   "sfx": [
+    "heartbeat"
+   ],
+   "flash": "loss"
+  },
+  {
+   "t": 56.8,
+   "id": "tears_run",
+   "beat": "understand",
+   "what": "Tränen laufen"
+  },
+  {
+   "t": 59.2,
+   "id": "hug_in",
+   "beat": "hug",
+   "what": "Mutter nimmt beide Kinder in den Arm",
+   "sfx": [
+    "warmth"
+   ],
+   "flash": "gain"
+  },
+  {
+   "t": 60.6,
+   "id": "leaves",
+   "beat": "hug",
+   "what": "Wind trägt Laub über den Friedhof",
+   "sfx": [
+    "swoosh"
+   ]
+  },
+  {
+   "t": 62.7,
+   "id": "msg1_in",
+   "beat": "msg1",
+   "what": "Schwarzbild: erste Botschaft",
+   "sfx": [
+    "appear"
+   ]
+  },
+  {
+   "t": 66.2,
+   "id": "last_message",
+   "beat": "msg2",
+   "what": "letzte Botschaft (Endkarte) – Pointe",
+   "sfx": [
+    "warmth"
+   ]
+  }
+ ],
+ "beats": [
+  {
+   "id": "hook",
+   "from": 0,
+   "to": 4.4,
+   "place": "cemetery",
+   "mood": "sad",
+   "framing": "close",
+   "preset": "push",
+   "hud_change": true,
+   "data": {
+    "boy": [
+     0.25,
+     0,
+     2.3,
+     3.142
+    ],
+    "mom": [
+     -0.6,
+     0,
+     2.5,
+     3.142
+    ],
+    "tod": [
+     -1.05,
+     0,
+     2.6,
+     3.142
+    ]
+   }
+  },
+  {
+   "id": "mom_react",
+   "from": 4.4,
+   "to": 7.8,
+   "place": "cemetery",
+   "mood": "cry",
+   "framing": "pov",
+   "preset": "pov",
+   "hud_change": false,
+   "data": {
+    "boy": [
+     0.25,
+     0,
+     2.3,
+     3.142
+    ],
+    "mom": [
+     -0.6,
+     0,
+     2.5,
+     3.142
+    ],
+    "momFace": 1.75,
+    "tod": [
+     -1.05,
+     0,
+     2.6,
+     3.142
+    ]
+   }
+  },
+  {
+   "id": "home_happy",
+   "from": 7.8,
+   "to": 11.6,
+   "place": "livingroom",
+   "mood": "happy",
+   "framing": "medium",
+   "preset": "orbit",
+   "hud_change": true,
+   "data": {
+    "dad": [
+     38.95,
+     0,
+     -2.05,
+     0
+    ],
+    "mom": [
+     39.85,
+     0,
+     -2.05,
+     0
+    ],
+    "boy": [
+     39.6,
+     0,
+     -1.5,
+     0
+    ],
+    "tod": [
+     39.05,
+     0,
+     -0.35,
+     0.3
+    ]
+   }
+  },
+  {
+   "id": "argue",
+   "from": 11.6,
+   "to": 15.2,
+   "place": "livingroom",
+   "mood": "angry",
+   "framing": "medium",
+   "preset": "still",
+   "hud_change": true,
+   "data": {
+    "dad": [
+     39.9,
+     0,
+     0.6,
+     1.571
+    ],
+    "mom": [
+     40.7,
+     0,
+     0.6,
+     -1.571
+    ],
+    "boy": [
+     39.6,
+     0,
+     -1.5,
+     0
+    ],
+    "tod": [
+     39.05,
+     0,
+     -0.35,
+     0.3
+    ]
+   }
+  },
+  {
+   "id": "kids_watch",
+   "from": 15.2,
+   "to": 17.8,
+   "place": "livingroom",
+   "mood": "worried",
+   "framing": "close",
+   "preset": "close",
+   "hud_change": true,
+   "data": {
+    "boy": [
+     39.6,
+     0,
+     -1.5,
+     0
+    ],
+    "tod": [
+     39.05,
+     0,
+     -0.35,
+     0.3
+    ]
+   }
+  },
+  {
+   "id": "dad_slam",
+   "from": 17.8,
+   "to": 20.8,
+   "place": "livingroom",
+   "mood": "angry",
+   "framing": "low",
+   "preset": "low",
+   "hud_change": true,
+   "data": {
+    "dad": [
+     40.35,
+     0,
+     -0.9,
+     -1.571
+    ],
+    "mom": [
+     40.6,
+     0,
+     0.9,
+     -3
+    ],
+    "boy": [
+     39.6,
+     0,
+     -1.5,
+     0
+    ],
+    "tod": [
+     39.05,
+     0,
+     -0.35,
+     0.3
+    ]
+   }
+  },
+  {
+   "id": "keys_pov",
+   "from": 20.8,
+   "to": 24.6,
+   "place": "livingroom",
+   "mood": "sad",
+   "framing": "pov",
+   "preset": "pov",
+   "hud_change": true,
+   "data": {
+    "boy": [
+     39.6,
+     0,
+     -1.5,
+     0.9
+    ],
+    "dadPath": [
+     [
+      40.35,
+      -0.9
+     ],
+     [
+      42.75,
+      -0.45
+     ],
+     [
+      42.95,
+      1.2
+     ],
+     [
+      44.3,
+      1.2
+     ]
+    ],
+    "mom": [
+     40.6,
+     0,
+     0.9,
+     -3
+    ]
+   }
+  },
+  {
+   "id": "driveway",
+   "from": 24.6,
+   "to": 28.2,
+   "place": "driveway",
+   "mood": "angry",
+   "framing": "wide",
+   "preset": "orbit",
+   "hud_change": true,
+   "data": {
+    "car": [
+     3.6,
+     0,
+     123.6,
+     0
+    ],
+    "dadFrom": [
+     0.9,
+     0,
+     121.3
+    ],
+    "dadTo": [
+     4.95,
+     0,
+     123.35
+    ]
+   }
+  },
+  {
+   "id": "accelerate",
+   "from": 28.2,
+   "to": 31.6,
+   "place": "road",
+   "mood": "angry",
+   "framing": "wide",
+   "preset": "track",
+   "hud_change": true,
+   "data": {
+    "car": [
+     198.2,
+     0,
+     -230
+    ],
+    "carTo": [
+     198.2,
+     0,
+     -130
+    ],
+    "pull": 6
+   }
+  },
+  {
+   "id": "driver_close",
+   "from": 31.6,
+   "to": 34.6,
+   "place": "car",
+   "mood": "angry",
+   "framing": "medium",
+   "preset": "push",
+   "hud_change": true,
+   "data": {
+    "car": [
+     198.2,
+     0,
+     0,
+     0
+    ],
+    "speed": 38
+   }
+  },
+  {
+   "id": "skid",
+   "from": 34.6,
+   "to": 37.6,
+   "place": "crash_site",
+   "mood": "panic",
+   "framing": "high",
+   "preset": "high",
+   "hud_change": true,
+   "data": {
+    "carFrom": [
+     198.2,
+     0,
+     105,
+     0
+    ],
+    "carTo": [
+     199.6,
+     0,
+     126,
+     0.5
+    ]
+   }
+  },
+  {
+   "id": "impact",
+   "from": 37.6,
+   "to": 40.4,
+   "place": "crash_site",
+   "mood": "shock",
+   "framing": "low",
+   "preset": "low",
+   "hud_change": true,
+   "data": {
+    "carFrom": [
+     199.6,
+     0,
+     126,
+     0.5
+    ],
+    "carRest": [
+     201.75,
+     0,
+     131.5,
+     0.9
+    ]
+   }
+  },
+  {
+   "id": "approach",
+   "from": 40.4,
+   "to": 43.8,
+   "place": "crash_site",
+   "mood": "unconscious",
+   "framing": "medium",
+   "preset": "push",
+   "hud_change": true,
+   "data": {
+    "car": [
+     201.75,
+     0,
+     131.5,
+     0.9
+    ]
+   }
+  },
+  {
+   "id": "interior",
+   "from": 43.8,
+   "to": 48.2,
+   "place": "car",
+   "mood": "unconscious",
+   "framing": "close",
+   "preset": "close",
+   "hud_change": true,
+   "data": {
+    "car": [
+     201.75,
+     0,
+     131.5,
+     0.9
+    ]
+   }
+  },
+  {
+   "id": "grave_flowers",
+   "from": 48.2,
+   "to": 52,
+   "place": "cemetery",
+   "mood": "sad",
+   "framing": "medium",
+   "preset": "orbit",
+   "hud_change": true,
+   "data": {
+    "boy": [
+     0.25,
+     0,
+     2.3,
+     3.142
+    ],
+    "mom": [
+     -0.6,
+     0,
+     2.5,
+     3.142
+    ],
+    "tod": [
+     -1.05,
+     0,
+     2.6,
+     3.142
+    ]
+   }
+  },
+  {
+   "id": "drawing_down",
+   "from": 52,
+   "to": 55,
+   "place": "cemetery",
+   "mood": "sad",
+   "framing": "high",
+   "preset": "high",
+   "hud_change": false,
+   "data": {
+    "boy": [
+     0.25,
+     0,
+     2.3,
+     3.142
+    ]
+   }
+  },
+  {
+   "id": "understand",
+   "from": 55,
+   "to": 58.6,
+   "place": "cemetery",
+   "mood": "cry",
+   "framing": "close",
+   "preset": "close",
+   "hud_change": true,
+   "data": {
+    "boy": [
+     0.25,
+     0,
+     2.3,
+     3.142
+    ]
+   }
+  },
+  {
+   "id": "hug",
+   "from": 58.6,
+   "to": 62.4,
+   "place": "cemetery",
+   "mood": "sad",
+   "framing": "wide",
+   "preset": "pull",
+   "hud_change": true,
+   "data": {
+    "boy": [
+     0.25,
+     0,
+     2.3,
+     3.142
+    ],
+    "mom": [
+     -0.6,
+     0,
+     2.5,
+     3.142
+    ],
+    "tod": [
+     -1.05,
+     0,
+     2.6,
+     3.142
+    ]
+   }
+  },
+  {
+   "id": "msg1",
+   "from": 62.4,
+   "to": 66,
+   "place": "black",
+   "mood": "sad",
+   "framing": "medium",
+   "preset": "still",
+   "hud_change": false
+  },
+  {
+   "id": "msg2",
+   "from": 66,
+   "to": 71,
+   "place": "black",
+   "mood": "sad",
+   "framing": "medium",
+   "preset": "push",
+   "hud_change": false
+  }
+ ],
+ "audio": {
+  "fade_out": 1.4,
+  "beds": [
+   {
+    "src": "music:main",
+    "start": 0,
+    "end": 71,
+    "gain_db": -9
+   },
+   {
+    "src": "gen:wind",
+    "start": 0,
+    "end": 7.8,
+    "gain_db": -16,
+    "automation": [
+     [
+      0,
+      -40
+     ],
+     [
+      0.25,
+      0
+     ],
+     [
+      7.55,
+      0
+     ],
+     [
+      7.8,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:room",
+    "start": 7.8,
+    "end": 24.6,
+    "gain_db": -16,
+    "automation": [
+     [
+      7.8,
+      -40
+     ],
+     [
+      8.05,
+      0
+     ],
+     [
+      24.35,
+      0
+     ],
+     [
+      24.6,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:wind",
+    "start": 24.6,
+    "end": 28.2,
+    "gain_db": -16,
+    "automation": [
+     [
+      24.6,
+      -40
+     ],
+     [
+      24.85,
+      0
+     ],
+     [
+      27.95,
+      0
+     ],
+     [
+      28.2,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:road",
+    "start": 28.2,
+    "end": 34.6,
+    "gain_db": -16,
+    "automation": [
+     [
+      28.2,
+      -40
+     ],
+     [
+      28.45,
+      0
+     ],
+     [
+      34.35,
+      0
+     ],
+     [
+      34.6,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:rain",
+    "start": 34.6,
+    "end": 48.2,
+    "gain_db": -16,
+    "automation": [
+     [
+      34.6,
+      -40
+     ],
+     [
+      34.85,
+      0
+     ],
+     [
+      47.95,
+      0
+     ],
+     [
+      48.2,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:wind",
+    "start": 48.2,
+    "end": 62.4,
+    "gain_db": -16,
+    "automation": [
+     [
+      48.2,
+      -40
+     ],
+     [
+      48.45,
+      0
+     ],
+     [
+      62.15,
+      0
+     ],
+     [
+      62.4,
+      -40
+     ]
+    ]
+   }
+  ],
+  "sfx": [
+   {
+    "src": "gen:pop",
+    "t": 0.166667,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 0.3,
+    "gain_db": -8,
+    "event": "drawing_lower"
+   },
+   {
+    "src": "gen:pop",
+    "t": 0.5,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 0.866667,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 1.2,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 1.566667,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 1.9,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 2,
+    "gain_db": -12,
+    "event": "look_up"
+   },
+   {
+    "src": "gen:appear",
+    "t": 4.566667,
+    "gain_db": -16,
+    "event": "mom_turn"
+   },
+   {
+    "src": "gen:thud",
+    "t": 5.9,
+    "gain_db": -20,
+    "event": "mom_kneel"
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 7.8,
+    "gain_db": -10,
+    "event": "flashback"
+   },
+   {
+    "src": "gen:pop",
+    "t": 8.7,
+    "gain_db": -12,
+    "event": "toy_car"
+   },
+   {
+    "src": "gen:ding",
+    "t": 9.5,
+    "gain_db": -16,
+    "event": "boy_show"
+   },
+   {
+    "src": "gen:hit",
+    "t": 11.9,
+    "gain_db": -12,
+    "event": "argue_start"
+   },
+   {
+    "src": "gen:thud",
+    "t": 13.2,
+    "gain_db": -9,
+    "event": "dad_yell"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 15.6,
+    "gain_db": -8,
+    "event": "flinch"
+   },
+   {
+    "src": "gen:thud",
+    "t": 16.2,
+    "gain_db": -15,
+    "event": "ears"
+   },
+   {
+    "src": "gen:impact",
+    "t": 18.9,
+    "gain_db": -7,
+    "event": "slam"
+   },
+   {
+    "src": "gen:keys",
+    "t": 21.8,
+    "gain_db": -6,
+    "event": "keys_grab"
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 22.8,
+    "gain_db": -16,
+    "event": "door_open"
+   },
+   {
+    "src": "gen:slam",
+    "t": 23.8,
+    "gain_db": -4,
+    "event": "door_slam"
+   },
+   {
+    "src": "gen:slam",
+    "t": 26.5,
+    "gain_db": -10,
+    "event": "car_door"
+   },
+   {
+    "src": "gen:pop",
+    "t": 26.9,
+    "gain_db": -14,
+    "event": "lights_on"
+   },
+   {
+    "src": "gen:engine_start",
+    "t": 27.2,
+    "gain_db": -3,
+    "event": "engine_start"
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 27.833333,
+    "gain_db": -12,
+    "event": "cut:accelerate"
+   },
+   {
+    "src": "gen:rev",
+    "t": 28.4,
+    "gain_db": -4,
+    "event": "rev"
+   },
+   {
+    "src": "gen:rev",
+    "t": 30.2,
+    "gain_db": -7,
+    "event": "shift"
+   },
+   {
+    "src": "gen:buzz",
+    "t": 32,
+    "gain_db": -7,
+    "event": "phone_buzz"
+   },
+   {
+    "src": "gen:pop",
+    "t": 33.2,
+    "gain_db": -10,
+    "event": "decline"
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 34.266667,
+    "gain_db": -12,
+    "event": "cut:skid"
+   },
+   {
+    "src": "gen:screech",
+    "t": 35.1,
+    "gain_db": -4,
+    "event": "skid_start"
+   },
+   {
+    "src": "gen:screech",
+    "t": 36.3,
+    "gain_db": -7,
+    "event": "countersteer"
+   },
+   {
+    "src": "gen:crash",
+    "t": 38.6,
+    "gain_db": -2,
+    "event": "crash_hit"
+   },
+   {
+    "src": "gen:impact",
+    "t": 38.6,
+    "gain_db": -2,
+    "event": "crash_hit"
+   },
+   {
+    "src": "gen:thud",
+    "t": 39.1,
+    "gain_db": -12,
+    "event": "debris"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 40.4,
+    "gain_db": -6,
+    "event": "heart_on"
+   },
+   {
+    "src": "gen:blinker",
+    "t": 41.1,
+    "gain_db": -12,
+    "event": "hazard"
+   },
+   {
+    "src": "gen:buzz",
+    "t": 44.1,
+    "gain_db": -10,
+    "event": "phone_ring"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 44.4,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 45.066667,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:thud",
+    "t": 45.2,
+    "gain_db": -16,
+    "event": "hand_slip"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 45.733333,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 46.4,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:flatline",
+    "t": 47.1,
+    "gain_db": -9,
+    "event": "flat"
+   },
+   {
+    "src": "gen:pop",
+    "t": 48.4,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 48.8,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 49.2,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 49.6,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 49.9,
+    "gain_db": -13,
+    "event": "flowers_down"
+   },
+   {
+    "src": "gen:pop",
+    "t": 50,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 52.066667,
+    "gain_db": -10,
+    "event": "drawing_placed"
+   },
+   {
+    "src": "gen:paper",
+    "t": 53.9,
+    "gain_db": -20,
+    "event": "smooth"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 56,
+    "gain_db": -6,
+    "event": "realize"
+   },
+   {
+    "src": "gen:warmth",
+    "t": 59.2,
+    "gain_db": -11,
+    "event": "hug_in"
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 60.6,
+    "gain_db": -19,
+    "event": "leaves"
+   },
+   {
+    "src": "gen:appear",
+    "t": 62.7,
+    "gain_db": -14,
+    "event": "msg1_in"
+   },
+   {
+    "src": "gen:warmth",
+    "t": 66.2,
+    "gain_db": -8,
+    "event": "last_message"
+   }
+  ],
+  "music": {
+   "main": {
+    "bpm": 84,
+    "root": "D",
+    "seed": 11,
+    "sections": [
+     {
+      "from": 0,
+      "to": 7.8,
+      "style": "sad"
+     },
+     {
+      "from": 7.8,
+      "to": 11.6,
+      "style": "warm"
+     },
+     {
+      "from": 11.6,
+      "to": 28.2,
+      "style": "pulse"
+     },
+     {
+      "from": 28.2,
+      "to": 31.6,
+      "style": "drive"
+     },
+     {
+      "from": 31.6,
+      "to": 38.25,
+      "style": "drive_hi"
+     },
+     {
+      "from": 38.25,
+      "to": 40.4,
+      "style": "silence"
+     },
+     {
+      "from": 40.4,
+      "to": 47.1,
+      "style": "sad"
+     },
+     {
+      "from": 47.1,
+      "to": 48.4,
+      "style": "silence"
+     },
+     {
+      "from": 48.4,
+      "to": 62.4,
+      "style": "sad"
+     },
+     {
+      "from": 62.4,
+      "to": 65.75,
+      "style": "calm"
+     },
+     {
+      "from": 65.75,
+      "to": 66.2,
+      "style": "silence"
+     },
+     {
+      "from": 66.2,
+      "to": 71,
+      "style": "calm"
+     }
+    ],
+    "duration": 71
+   }
+  }
+ },
+ "post": {
+  "vignette": 0.22
+ },
+ "endcard": {
+  "in": 66.2,
+  "center": 0.3
+ }
+}

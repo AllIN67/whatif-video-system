@@ -1,3 +1,4 @@
+import { createFamilyPlaces } from './places_family.js';
 // Fertige Orte („Sets“). Jeder Ort wird an einer eigenen Stelle der Welt aufgebaut (origin),
 // damit ein Video zwischen Orten schneiden kann wie die Referenzen (jedes Ereignis = eigener kleiner Ort).
 // Rückgabe: { root, origin, spots } – spots sind Weltkoordinaten für Figuren/Kamera.
@@ -263,5 +264,5 @@ export function createPlaces(THREE, core, props, rng) {
     return { root: place(g, o), origin: o, spots: { seatL: at(o, -1.25, 0, -0.8), seatR: at(o, 0.05, 0, -0.8), table: at(o, -0.6, 0.75, -0.8), center: at(o, 0, 0, 0) } };
   };
 
-  return { room, windowPane, bedroom, kitchen, street, park, office, classroom, cafe };
+  return { room, windowPane, bedroom, kitchen, street, park, office, classroom, cafe, ...createFamilyPlaces(THREE, core, props, rng, { room, windowPane, at, place }) };
 }

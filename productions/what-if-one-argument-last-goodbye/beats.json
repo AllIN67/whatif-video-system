@@ -1,0 +1,1405 @@
+{
+ "_comment": "Beat-Sheet (Quelle der Wahrheit). timeline.json: node tools/build_timeline.mjs productions/what-if-one-argument-last-goodbye",
+ "recipe": "B1",
+ "fps": 30,
+ "seed": 1106,
+ "title": {
+  "in": 0,
+  "out": 3.4
+ },
+ "hud": {
+  "start": 0,
+  "decimals": 0
+ },
+ "pointe": "last_message",
+ "endcard": {
+  "beat": "msg2",
+  "at": 0.2,
+  "center": 0.3
+ },
+ "post": {
+  "vignette": 0.22
+ },
+ "audio": {
+  "fade_out": 1.4,
+  "tick_gain_db": -18,
+  "whoosh_gain_db": -12,
+  "ambience_gain_db": -16,
+  "music": {
+   "bpm": 84,
+   "root": "D",
+   "seed": 11,
+   "gain_db": -9,
+   "sections": [
+    {
+     "from": 0,
+     "to": 7.8,
+     "style": "sad"
+    },
+    {
+     "from": 7.8,
+     "to": 11.6,
+     "style": "warm"
+    },
+    {
+     "from": 11.6,
+     "to": 28.2,
+     "style": "pulse"
+    },
+    {
+     "from": 28.2,
+     "to": 31.6,
+     "style": "drive"
+    },
+    {
+     "from": 31.6,
+     "to": 38.25,
+     "style": "drive_hi"
+    },
+    {
+     "from": 38.25,
+     "to": 40.4,
+     "style": "silence"
+    },
+    {
+     "from": 40.4,
+     "to": 47.1,
+     "style": "sad"
+    },
+    {
+     "from": 47.1,
+     "to": 48.4,
+     "style": "silence"
+    },
+    {
+     "from": 48.4,
+     "to": 62.4,
+     "style": "sad"
+    },
+    {
+     "from": 62.4,
+     "to": 65.75,
+     "style": "calm"
+    },
+    {
+     "from": 65.75,
+     "to": 66.2,
+     "style": "silence"
+    },
+    {
+     "from": 66.2,
+     "to": 71.0,
+     "style": "calm"
+    }
+   ]
+  }
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "dur": 4.4,
+   "place": "cemetery",
+   "mood": "sad",
+   "ambience": "wind",
+   "camera": {
+    "preset": "push",
+    "target": [
+     0.2,
+     0.78,
+     2.3
+    ],
+    "yaw": 172,
+    "dist": 2.6,
+    "distTo": 1.75,
+    "height": 0.1,
+    "fov": 40,
+    "drift": 0.15
+   },
+   "line": "l_hook",
+   "line_at": [
+    0.6,
+    -0.2
+   ],
+   "hud": {
+    "label": "days",
+    "to": 41,
+    "mode": "steps",
+    "steps": 6,
+    "window": [
+     0.15,
+     1.9
+    ],
+    "tick": "pop"
+   },
+   "events": [
+    {
+     "id": "drawing_lower",
+     "at": 0.3,
+     "what": "Junge kniet am Grab und senkt die Zeichnung vorsichtig auf das Grab",
+     "sfx": "paper",
+     "gain_db": -8,
+     "trigger": true
+    },
+    {
+     "id": "look_up",
+     "at": 2.0,
+     "what": "er hält inne und schaut zur Mutter hoch (Frage)",
+     "sfx": "heartbeat",
+     "gain_db": -12,
+     "flash": "warn"
+    }
+   ],
+   "data": {
+    "boy": [
+     0.25,
+     0,
+     2.3,
+     3.142
+    ],
+    "mom": [
+     -0.6,
+     0,
+     2.5,
+     3.142
+    ],
+    "tod": [
+     -1.05,
+     0,
+     2.6,
+     3.142
+    ]
+   }
+  },
+  {
+   "id": "mom_react",
+   "dur": 3.4,
+   "place": "cemetery",
+   "mood": "cry",
+   "ambience": "wind",
+   "camera": {
+    "preset": "pov",
+    "eye": [
+     1.05,
+     0.95,
+     3.75
+    ],
+    "eyeTo": [
+     0.98,
+     0.92,
+     3.65
+    ],
+    "target": [
+     -0.6,
+     1.2,
+     2.45
+    ],
+    "fov": 46,
+    "sway": 0.02
+   },
+   "line": "l_noanswer",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "events": [
+    {
+     "id": "mom_turn",
+     "at": 0.15,
+     "what": "Mutter dreht sich zum Sohn, Hand vor dem Mund, Tränen",
+     "sfx": "appear",
+     "gain_db": -16
+    },
+    {
+     "id": "mom_kneel",
+     "at": 1.5,
+     "what": "sie geht zu ihm in die Knie, findet keine Antwort",
+     "sfx": "thud",
+     "gain_db": -20
+    }
+   ],
+   "data": {
+    "boy": [
+     0.25,
+     0,
+     2.3,
+     3.142
+    ],
+    "mom": [
+     -0.6,
+     0,
+     2.5,
+     3.142
+    ],
+    "momFace": 1.75,
+    "tod": [
+     -1.05,
+     0,
+     2.6,
+     3.142
+    ]
+   }
+  },
+  {
+   "id": "home_happy",
+   "dur": 3.8,
+   "place": "livingroom",
+   "mood": "happy",
+   "ambience": "room",
+   "transition": "cut",
+   "camera": {
+    "preset": "orbit",
+    "target": [
+     39.4,
+     0.85,
+     -1.3
+    ],
+    "yaw": 18,
+    "dist": 3.9,
+    "height": 0.35,
+    "swing": 22,
+    "fov": 46
+   },
+   "line": "l_evening",
+   "line_at": [
+    0.4,
+    -0.2
+   ],
+   "hud": {
+    "label": "together",
+    "to": 13,
+    "mode": "steps",
+    "steps": 2,
+    "window": [
+     1.0,
+     3.0
+    ]
+   },
+   "events": [
+    {
+     "id": "flashback",
+     "at": 0.0,
+     "what": "harter Schnitt in die Vergangenheit",
+     "sfx": "swoosh",
+     "gain_db": -10,
+     "hud_to": 15
+    },
+    {
+     "id": "toy_car",
+     "at": 0.9,
+     "what": "kleiner Bruder lässt sein Spielzeug-Auto (911) rollen",
+     "sfx": "pop",
+     "gain_db": -12
+    },
+    {
+     "id": "boy_show",
+     "at": 1.7,
+     "what": "Junge hält seine Zeichnung hoch, Eltern lachen",
+     "sfx": "ding",
+     "gain_db": -16
+    }
+   ],
+   "data": {
+    "dad": [
+     38.95,
+     0,
+     -2.05,
+     0
+    ],
+    "mom": [
+     39.85,
+     0,
+     -2.05,
+     0
+    ],
+    "boy": [
+     39.6,
+     0,
+     -1.5,
+     0
+    ],
+    "tod": [
+     39.05,
+     0,
+     -0.35,
+     0.3
+    ]
+   }
+  },
+  {
+   "id": "argue",
+   "dur": 3.6,
+   "place": "livingroom",
+   "mood": "angry",
+   "ambience": "room",
+   "camera": {
+    "preset": "still",
+    "target": [
+     40.3,
+     1.45,
+     0.6
+    ],
+    "yaw": 0,
+    "dist": 3.1,
+    "height": 0.05,
+    "fov": 46
+   },
+   "line": "l_fight",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "hud": {
+    "to": 10,
+    "mode": "steps",
+    "steps": 3,
+    "window": [
+     0.9,
+     3.0
+    ]
+   },
+   "events": [
+    {
+     "id": "argue_start",
+     "at": 0.3,
+     "what": "Mutter stellt ihn zur Rede, Streit beginnt",
+     "sfx": "hit",
+     "gain_db": -12,
+     "flash": "warn"
+    },
+    {
+     "id": "dad_yell",
+     "at": 1.6,
+     "what": "Vater schreit zurück, Gesten werden heftiger",
+     "sfx": "thud",
+     "gain_db": -9,
+     "shake": {
+      "amp": 0.015,
+      "dur": 0.4
+     }
+    }
+   ],
+   "data": {
+    "dad": [
+     39.9,
+     0,
+     0.6,
+     1.571
+    ],
+    "mom": [
+     40.7,
+     0,
+     0.6,
+     -1.571
+    ],
+    "boy": [
+     39.6,
+     0,
+     -1.5,
+     0
+    ],
+    "tod": [
+     39.05,
+     0,
+     -0.35,
+     0.3
+    ]
+   }
+  },
+  {
+   "id": "kids_watch",
+   "dur": 2.6,
+   "place": "livingroom",
+   "mood": "worried",
+   "ambience": "room",
+   "camera": {
+    "preset": "close",
+    "target": [
+     39.28,
+     0.7,
+     -1.1
+    ],
+    "yaw": 6,
+    "dist": 2.25,
+    "height": 0.3,
+    "fov": 44,
+    "swing": 6
+   },
+   "line": "l_kids",
+   "line_at": [
+    0.15,
+    -0.15
+   ],
+   "hud": {
+    "to": 9,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     1.2,
+     1.2
+    ]
+   },
+   "events": [
+    {
+     "id": "flinch",
+     "at": 0.4,
+     "what": "Junge zuckt bei einem Schrei zusammen, drückt die Zeichnung an sich",
+     "sfx": "heartbeat",
+     "gain_db": -8
+    },
+    {
+     "id": "ears",
+     "at": 1.0,
+     "what": "Vater schreit erneut, kleiner Bruder hält sich die Ohren zu",
+     "sfx": "thud",
+     "gain_db": -15
+    }
+   ],
+   "data": {
+    "boy": [
+     39.6,
+     0,
+     -1.5,
+     0
+    ],
+    "tod": [
+     39.05,
+     0,
+     -0.35,
+     0.3
+    ]
+   }
+  },
+  {
+   "id": "dad_slam",
+   "dur": 3.0,
+   "place": "livingroom",
+   "mood": "angry",
+   "ambience": "room",
+   "camera": {
+    "preset": "low",
+    "target": [
+     40.2,
+     1.35,
+     -0.9
+    ],
+    "yaw": -38,
+    "dist": 2.9,
+    "camHeight": 0.3,
+    "fov": 50
+   },
+   "line": "l_words",
+   "line_at": [
+    0.2,
+    -0.15
+   ],
+   "events": [
+    {
+     "id": "slam",
+     "at": 1.1,
+     "what": "Vater schlägt mit der Faust auf den Tisch, Stifte springen",
+     "sfx": "impact",
+     "gain_db": -7,
+     "flash": "loss",
+     "hud_to": 7,
+     "shake": {
+      "amp": 0.05,
+      "dur": 0.5
+     }
+    },
+    {
+     "id": "boy_cry",
+     "at": 1.6,
+     "what": "Junge beginnt zu weinen"
+    }
+   ],
+   "data": {
+    "dad": [
+     40.35,
+     0,
+     -0.9,
+     -1.571
+    ],
+    "mom": [
+     40.6,
+     0,
+     0.9,
+     -3.0
+    ],
+    "boy": [
+     39.6,
+     0,
+     -1.5,
+     0
+    ],
+    "tod": [
+     39.05,
+     0,
+     -0.35,
+     0.3
+    ]
+   }
+  },
+  {
+   "id": "keys_pov",
+   "dur": 3.8,
+   "place": "livingroom",
+   "mood": "sad",
+   "ambience": "room",
+   "camera": {
+    "preset": "pov",
+    "eye": [
+     39.58,
+     1.12,
+     -1.53
+    ],
+    "eyeTo": [
+     39.62,
+     1.1,
+     -1.48
+    ],
+    "target": [
+     42.6,
+     0.95,
+     0.1
+    ],
+    "fov": 52,
+    "sway": 0.02
+   },
+   "line": "l_drawing",
+   "line_at": [
+    0.9,
+    -0.2
+   ],
+   "hud": {
+    "to": 5,
+    "mode": "steps",
+    "steps": 2,
+    "window": [
+     0.6,
+     2.4
+    ]
+   },
+   "events": [
+    {
+     "id": "keys_grab",
+     "at": 1.0,
+     "what": "Vater greift die Autoschlüssel, geht ohne Blick an der Zeichnung vorbei",
+     "sfx": "keys",
+     "gain_db": -6,
+     "flash": "warn"
+    },
+    {
+     "id": "door_open",
+     "at": 2.0,
+     "what": "Haustür öffnet sich, Nachtluft",
+     "sfx": "swoosh",
+     "gain_db": -16
+    },
+    {
+     "id": "door_slam",
+     "at": 3.0,
+     "what": "Haustür knallt zu – er ist weg",
+     "sfx": "slam",
+     "gain_db": -4,
+     "flash": "loss",
+     "shake": {
+      "amp": 0.035,
+      "dur": 0.4
+     }
+    }
+   ],
+   "data": {
+    "boy": [
+     39.6,
+     0,
+     -1.5,
+     0.9
+    ],
+    "dadPath": [
+     [
+      40.35,
+      -0.9
+     ],
+     [
+      42.75,
+      -0.45
+     ],
+     [
+      42.95,
+      1.2
+     ],
+     [
+      44.3,
+      1.2
+     ]
+    ],
+    "mom": [
+     40.6,
+     0,
+     0.9,
+     -3.0
+    ]
+   }
+  },
+  {
+   "id": "driveway",
+   "dur": 3.6,
+   "place": "driveway",
+   "mood": "angry",
+   "ambience": "wind",
+   "transition": "dip",
+   "camera": {
+    "preset": "orbit",
+    "target": [
+     3.4,
+     0.8,
+     123.0
+    ],
+    "yaw": 38,
+    "dist": 8.2,
+    "height": 0.55,
+    "swing": 24,
+    "fov": 46
+   },
+   "line": "l_drive",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "hud": {
+    "label": "speed",
+    "to": 6,
+    "mode": "steps",
+    "steps": 2,
+    "window": [
+     3.0,
+     3.4
+    ]
+   },
+   "events": [
+    {
+     "id": "speed_reset",
+     "at": 0.0,
+     "what": "Tacho-Anzeige beginnt bei 0",
+     "hud_to": 0
+    },
+    {
+     "id": "car_door",
+     "at": 1.9,
+     "what": "Vater steigt in den 911, Tür knallt",
+     "sfx": "slam",
+     "gain_db": -10
+    },
+    {
+     "id": "lights_on",
+     "at": 2.3,
+     "what": "runde Scheinwerfer gehen an",
+     "sfx": "pop",
+     "gain_db": -14
+    },
+    {
+     "id": "engine_start",
+     "at": 2.6,
+     "what": "Motor springt an",
+     "sfx": "engine_start",
+     "gain_db": -3,
+     "flash": "warn",
+     "shake": {
+      "amp": 0.012,
+      "dur": 0.6
+     }
+    }
+   ],
+   "data": {
+    "car": [
+     3.6,
+     0,
+     123.6,
+     0
+    ],
+    "dadFrom": [
+     0.9,
+     0,
+     121.3
+    ],
+    "dadTo": [
+     4.95,
+     0,
+     123.35
+    ]
+   }
+  },
+  {
+   "id": "accelerate",
+   "dur": 3.4,
+   "place": "road",
+   "mood": "angry",
+   "ambience": "road",
+   "transition": "whip",
+   "camera": {
+    "preset": "track",
+    "a": [
+     198.2,
+     0.95,
+     -230
+    ],
+    "b": [
+     198.2,
+     0.95,
+     -130
+    ],
+    "yaw": 180,
+    "dist": 7.2,
+    "height": 1.0,
+    "fov": 48
+   },
+   "line": "l_faster",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "hud": {
+    "to": 78,
+    "mode": "linear",
+    "window": [
+     0.2,
+     3.2
+    ]
+   },
+   "events": [
+    {
+     "id": "rev",
+     "at": 0.2,
+     "what": "er tritt aufs Gas, Auto zieht davon",
+     "sfx": "rev",
+     "gain_db": -4,
+     "shake": {
+      "amp": 0.015,
+      "dur": 1.0
+     }
+    },
+    {
+     "id": "shift",
+     "at": 2.0,
+     "what": "Gangwechsel, noch schneller",
+     "sfx": "rev",
+     "gain_db": -7
+    }
+   ],
+   "data": {
+    "car": [
+     198.2,
+     0,
+     -230
+    ],
+    "carTo": [
+     198.2,
+     0,
+     -130
+    ],
+    "pull": 6
+   }
+  },
+  {
+   "id": "driver_close",
+   "dur": 3.0,
+   "place": "car",
+   "mood": "angry",
+   "ambience": "road",
+   "camera": {
+    "preset": "push",
+    "target": [
+     198.66,
+     1.36,
+     -0.25
+    ],
+    "yaw": 0,
+    "dist": 2.4,
+    "distTo": 1.9,
+    "height": 0.06,
+    "fov": 40,
+    "drift": 0.1
+   },
+   "line": "l_call",
+   "line_at": [
+    0.5,
+    -0.15
+   ],
+   "hud": {
+    "to": 104,
+    "mode": "linear",
+    "window": [
+     0.1,
+     2.9
+    ]
+   },
+   "events": [
+    {
+     "id": "phone_buzz",
+     "at": 0.4,
+     "what": "Handy am Armaturenbrett: Mama ruft an",
+     "sfx": "buzz",
+     "gain_db": -7
+    },
+    {
+     "id": "decline",
+     "at": 1.6,
+     "what": "er drückt den Anruf weg",
+     "sfx": "pop",
+     "gain_db": -10
+    }
+   ],
+   "data": {
+    "car": [
+     198.2,
+     0,
+     0,
+     0
+    ],
+    "speed": 38
+   }
+  },
+  {
+   "id": "skid",
+   "dur": 3.0,
+   "place": "crash_site",
+   "mood": "panic",
+   "ambience": "rain",
+   "transition": "whip",
+   "camera": {
+    "preset": "high",
+    "target": [
+     200.0,
+     0.5,
+     118.5
+    ],
+    "yaw": -30,
+    "dist": 19,
+    "height": 16,
+    "swing": 6,
+    "fov": 46
+   },
+   "line": "l_wet",
+   "line_at": [
+    0.3,
+    -0.3
+   ],
+   "hud": {
+    "to": 88,
+    "mode": "linear",
+    "window": [
+     0.4,
+     2.9
+    ]
+   },
+   "events": [
+    {
+     "id": "skid_start",
+     "at": 0.5,
+     "what": "Heck bricht auf nasser Straße aus",
+     "sfx": "screech",
+     "gain_db": -4,
+     "flash": "warn"
+    },
+    {
+     "id": "countersteer",
+     "at": 1.7,
+     "what": "er reißt das Lenkrad herum – zu spät",
+     "sfx": "screech",
+     "gain_db": -7
+    }
+   ],
+   "data": {
+    "carFrom": [
+     198.2,
+     0,
+     105,
+     0
+    ],
+    "carTo": [
+     199.6,
+     0,
+     126,
+     0.5
+    ]
+   }
+  },
+  {
+   "id": "impact",
+   "dur": 2.8,
+   "place": "crash_site",
+   "mood": "shock",
+   "ambience": "rain",
+   "camera": {
+    "preset": "low",
+    "target": [
+     202.4,
+     0.9,
+     131.5
+    ],
+    "yaw": -62,
+    "dist": 11,
+    "camHeight": 0.42,
+    "fov": 50
+   },
+   "events": [
+    {
+     "id": "crash_hit",
+     "at": 1.0,
+     "what": "Porsche prallt mit der Front gegen die Leitplanke",
+     "sfx": [
+      "crash",
+      "impact"
+     ],
+     "gain_db": -2,
+     "flash": "loss",
+     "hud_to": 0,
+     "shake": {
+      "amp": 0.09,
+      "dur": 0.8
+     }
+    },
+    {
+     "id": "debris",
+     "at": 1.5,
+     "what": "Splitter fallen, Auto kommt zum Stehen, Rauch steigt",
+     "sfx": "thud",
+     "gain_db": -12
+    }
+   ],
+   "data": {
+    "carFrom": [
+     199.6,
+     0,
+     126,
+     0.5
+    ],
+    "carRest": [
+     201.75,
+     0,
+     131.5,
+     0.9
+    ]
+   }
+  },
+  {
+   "id": "approach",
+   "dur": 3.4,
+   "place": "crash_site",
+   "mood": "unconscious",
+   "ambience": "rain",
+   "camera": {
+    "preset": "push",
+    "target": [
+     202.1,
+     1.15,
+     131.1
+    ],
+    "yaw": 141.6,
+    "dist": 7.0,
+    "distTo": 2.6,
+    "height": 0.5,
+    "fov": 44,
+    "drift": 0.2
+   },
+   "line": "l_quiet",
+   "line_at": [
+    0.4,
+    -0.2
+   ],
+   "hud": {
+    "label": "heart",
+    "to": 92,
+    "mode": "linear",
+    "window": [
+     0.3,
+     3.2
+    ]
+   },
+   "events": [
+    {
+     "id": "heart_on",
+     "at": 0.0,
+     "what": "Herzschlag des Vaters wird hörbar, Anzeige 136",
+     "sfx": "heartbeat",
+     "gain_db": -6,
+     "hud_to": 136
+    },
+    {
+     "id": "hazard",
+     "at": 0.7,
+     "what": "Warnblinker springen an, Rauch, Regen; Kamera fährt zum Fenster",
+     "sfx": "blinker",
+     "gain_db": -12
+    }
+   ],
+   "data": {
+    "car": [
+     201.75,
+     0,
+     131.5,
+     0.9
+    ]
+   }
+  },
+  {
+   "id": "interior",
+   "dur": 4.4,
+   "place": "car",
+   "mood": "unconscious",
+   "ambience": "rain",
+   "camera": {
+    "preset": "close",
+    "target": [
+     202.1,
+     1.1,
+     131.1
+    ],
+    "yaw": 145,
+    "dist": 2.0,
+    "height": 0.14,
+    "swing": 8,
+    "fov": 40
+   },
+   "line": "l_never",
+   "line_at": [
+    0.4,
+    2.9
+   ],
+   "hud": {
+    "to": 41,
+    "mode": "steps",
+    "steps": 4,
+    "window": [
+     0.6,
+     2.6
+    ],
+    "tick": "heartbeat"
+   },
+   "events": [
+    {
+     "id": "phone_ring",
+     "at": 0.3,
+     "what": "Handy leuchtet: Mama ruft wieder an – keine Reaktion",
+     "sfx": "buzz",
+     "gain_db": -10
+    },
+    {
+     "id": "hand_slip",
+     "at": 1.4,
+     "what": "seine Hand rutscht vom Lenkrad",
+     "sfx": "thud",
+     "gain_db": -16
+    },
+    {
+     "id": "flat",
+     "at": 3.3,
+     "what": "Herzschlag hört auf, Armaturenlicht erlischt",
+     "sfx": "flatline",
+     "gain_db": -9,
+     "flash": "loss",
+     "hud_to": 0
+    }
+   ],
+   "data": {
+    "car": [
+     201.75,
+     0,
+     131.5,
+     0.9
+    ]
+   }
+  },
+  {
+   "id": "grave_flowers",
+   "dur": 3.8,
+   "place": "cemetery",
+   "mood": "sad",
+   "ambience": "wind",
+   "transition": "dip",
+   "camera": {
+    "preset": "orbit",
+    "target": [
+     -0.25,
+     0.7,
+     2.2
+    ],
+    "yaw": 168,
+    "dist": 3.7,
+    "height": 1.0,
+    "swing": 22,
+    "fov": 46
+   },
+   "line": "l_flowers",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "hud": {
+    "label": "days",
+    "to": 41,
+    "mode": "steps",
+    "steps": 5,
+    "window": [
+     0.2,
+     1.8
+    ],
+    "tick": "pop"
+   },
+   "events": [
+    {
+     "id": "hold_hand",
+     "at": 0.3,
+     "what": "kleiner Bruder hält die Hand der Mutter"
+    },
+    {
+     "id": "flowers_down",
+     "at": 1.7,
+     "what": "Mutter kniet und legt Blumen nieder",
+     "sfx": "paper",
+     "gain_db": -13
+    }
+   ],
+   "data": {
+    "boy": [
+     0.25,
+     0,
+     2.3,
+     3.142
+    ],
+    "mom": [
+     -0.6,
+     0,
+     2.5,
+     3.142
+    ],
+    "tod": [
+     -1.05,
+     0,
+     2.6,
+     3.142
+    ]
+   }
+  },
+  {
+   "id": "drawing_down",
+   "dur": 3.0,
+   "place": "cemetery",
+   "mood": "sad",
+   "ambience": "wind",
+   "camera": {
+    "preset": "high",
+    "target": [
+     0.14,
+     0.1,
+     1.42
+    ],
+    "yaw": 180,
+    "dist": 0.4,
+    "height": 1.1,
+    "swing": 8,
+    "fov": 44
+   },
+   "line": "l_unseen",
+   "line_at": [
+    0.5,
+    -0.15
+   ],
+   "events": [
+    {
+     "id": "drawing_placed",
+     "at": 0.05,
+     "what": "Junge legt die Zeichnung auf das Grab: die Familie, an den Händen",
+     "sfx": "paper",
+     "gain_db": -10
+    },
+    {
+     "id": "smooth",
+     "at": 1.9,
+     "what": "er streicht sie glatt",
+     "sfx": "paper",
+     "gain_db": -20
+    }
+   ],
+   "data": {
+    "boy": [
+     0.25,
+     0,
+     2.3,
+     3.142
+    ]
+   }
+  },
+  {
+   "id": "understand",
+   "dur": 3.6,
+   "place": "cemetery",
+   "mood": "cry",
+   "ambience": "wind",
+   "transition": "cut",
+   "camera": {
+    "preset": "close",
+    "target": [
+     0.25,
+     0.86,
+     2.3
+    ],
+    "yaw": 176,
+    "dist": 1.65,
+    "height": 0.05,
+    "swing": 8,
+    "fov": 38
+   },
+   "line": "l_understand",
+   "line_at": [
+    0.6,
+    -0.2
+   ],
+   "hud": {
+    "to": 9999,
+    "mode": "linear",
+    "window": [
+     0.4,
+     3.2
+    ]
+   },
+   "events": [
+    {
+     "id": "realize",
+     "at": 1.0,
+     "what": "er schaut auf den Grabstein und versteht",
+     "sfx": "heartbeat",
+     "gain_db": -6,
+     "flash": "loss"
+    },
+    {
+     "id": "tears_run",
+     "at": 1.8,
+     "what": "Tränen laufen"
+    }
+   ],
+   "data": {
+    "boy": [
+     0.25,
+     0,
+     2.3,
+     3.142
+    ]
+   }
+  },
+  {
+   "id": "hug",
+   "dur": 3.8,
+   "place": "cemetery",
+   "mood": "sad",
+   "ambience": "wind",
+   "camera": {
+    "preset": "pull",
+    "target": [
+     -0.1,
+     0.7,
+     2.4
+    ],
+    "yaw": 180,
+    "dist": 2.4,
+    "distTo": 6.6,
+    "height": 1.5,
+    "fov": 46
+   },
+   "hud": {
+    "label": "forever",
+    "final": true
+   },
+   "events": [
+    {
+     "id": "hug_in",
+     "at": 0.6,
+     "what": "Mutter nimmt beide Kinder in den Arm",
+     "sfx": "warmth",
+     "gain_db": -11,
+     "flash": "gain"
+    },
+    {
+     "id": "leaves",
+     "at": 2.0,
+     "what": "Wind trägt Laub über den Friedhof",
+     "sfx": "swoosh",
+     "gain_db": -19
+    }
+   ],
+   "data": {
+    "boy": [
+     0.25,
+     0,
+     2.3,
+     3.142
+    ],
+    "mom": [
+     -0.6,
+     0,
+     2.5,
+     3.142
+    ],
+    "tod": [
+     -1.05,
+     0,
+     2.6,
+     3.142
+    ]
+   }
+  },
+  {
+   "id": "msg1",
+   "dur": 3.6,
+   "place": "black",
+   "mood": "sad",
+   "transition": "dip",
+   "camera": {
+    "preset": "still",
+    "target": [
+     0,
+     1,
+     -600
+    ],
+    "yaw": 0,
+    "dist": 4,
+    "fov": 46
+   },
+   "events": [
+    {
+     "id": "msg1_in",
+     "at": 0.3,
+     "what": "Schwarzbild: erste Botschaft",
+     "sfx": "appear",
+     "gain_db": -14
+    }
+   ]
+  },
+  {
+   "id": "msg2",
+   "dur": 5.0,
+   "place": "black",
+   "mood": "sad",
+   "camera": {
+    "preset": "push",
+    "target": [
+     0,
+     1,
+     -600
+    ],
+    "yaw": 0,
+    "dist": 4,
+    "fov": 46
+   },
+   "events": [
+    {
+     "id": "last_message",
+     "at": 0.2,
+     "what": "letzte Botschaft (Endkarte) – Pointe",
+     "sfx": "warmth",
+     "gain_db": -8
+    }
+   ]
+  }
+ ]
+}
