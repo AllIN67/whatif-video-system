@@ -1,0 +1,33 @@
+{
+ "lang": "en",
+ "number_locale": "en-US",
+ "title": { "text": "What if one argument was your last goodbye?", "highlight": "goodbye" },
+ "hud": {
+  "days": { "label": "DAYS WITHOUT DADDY", "unit": "", "sub": "SINCE THE ARGUMENT" },
+  "together": { "label": "TIME LEFT TOGETHER", "unit": " MIN", "sub": "41 DAYS EARLIER" },
+  "speed": { "label": "SPEED", "unit": " MPH", "sub": "DRIVING ANGRY" },
+  "heart": { "label": "HEART RATE", "unit": " BPM", "sub": "AFTER THE CRASH" },
+  "forever": { "label": "DAYS WITHOUT DADDY", "unit": "", "sub": "SINCE THE ARGUMENT", "final": "FOREVER" }
+ },
+ "lines": {
+  "l_hook": "Mommy… when will Daddy wake up?",
+  "l_noanswer": "She had no answer for him.",
+  "l_evening": "Just a normal family evening.",
+  "l_fight": "Then one small fight got loud.",
+  "l_kids": "The kids heard every word.",
+  "l_words": "Words you can never take back.",
+  "l_drawing": "He never looked at the drawing.",
+  "l_drive": "He just needed to drive.",
+  "l_faster": "Faster. Angrier. Faster still.",
+  "l_call": "She called. He didn't answer.",
+  "l_wet": "The road was wet.",
+  "l_quiet": "Then everything went quiet.",
+  "l_never": "He never made it home.",
+  "l_flowers": "Now they bring him flowers.",
+  "l_unseen": "The drawing he never saw.",
+  "l_understand": "Daddy is not coming back.",
+  "l_msg1": "Never let anger decide your last goodbye."
+ },
+ "endcard": { "title": "Love your family. Spend time with them.", "sub": "You never know which moment will be your last." },
+ "scene": { "stone": "DANIEL\nBELOVED HUSBAND\nAND DADDY\n1989 – 2026" }
+}

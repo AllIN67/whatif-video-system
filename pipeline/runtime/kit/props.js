@@ -1,3 +1,4 @@
+import { createFamilyProps } from './props_family.js';
 // Requisiten aus Kisten. Jede Funktion liefert eine THREE.Group mit Füßen auf y = 0, Vorderseite +z.
 // Bildschirm-/Schild-Texte über Canvas-Texturen (Schrift: Systemschrift sans-serif, deterministisch je Umgebung).
 
@@ -94,9 +95,15 @@ export function createProps(THREE, core, rng) {
       }
       // Videoanruf: Gesicht des Anrufers als Würfelkopf + rote/grüne Taste
       if (mode === 'call') {
-        g.fillStyle = '#e8c4a0';
+        // opts.caller = { skin, hair, long } – Anrufer erkennbar ohne Schrift (z. B. Mutter mit langen Haaren)
+        const cl = opts.caller || {};
+        if (cl.long) {
+          g.fillStyle = cl.hair || '#3b2a20';
+          g.fillRect(96, 160, 168, 230);
+        }
+        g.fillStyle = cl.skin || '#e8c4a0';
         g.fillRect(110, 170, 140, 160);
-        g.fillStyle = '#3b2a20';
+        g.fillStyle = cl.hair || '#3b2a20';
         g.fillRect(104, 150, 152, 40);
         g.fillStyle = '#1f1a18';
         g.fillRect(140, 230, 18, 22);
@@ -703,5 +710,6 @@ export function createProps(THREE, core, rng) {
     canvasTex, phoneTexture, phone, bigPhone, sign, bed, nightstand, tableLamp, alarmClock, table, chair, counter, upperCabinets, toaster, mug, toast, plant, cardboardBox,
     desk, officeChair, umbrella, puddle, tree, bush, streetLamp, bench, hydrant, trashCan, car, bus, building, tower, slab,
     thoughtBubble, powerBank, wallOutlet, charger, kiosk, pigeon, lightning,
+    ...createFamilyProps(THREE, core, rng, { canvasTex }),
   };
 }

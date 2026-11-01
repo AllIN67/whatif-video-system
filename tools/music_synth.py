@@ -15,6 +15,8 @@ Plan (timeline.json → audio.music.<name>):
 
 Stile: silence · pulse (Bass-Achtel + Ticken + Fläche, gespannt) · drive (+ Kick, pumpender Bass)
        · drive_hi (+ Snare, Toms, höhere Fläche) · calm (nur Fläche + leise Glocken-Arpeggios)
+       · warm (Dur-Parallele: weiche Fläche + Klavier-Arpeggio, Familiengefühl) · sad (langsames Moll-Klavier, sehr leise Fläche)
+         (warm/sad ergänzt 2026-11-01 für what-if-one-argument-last-goodbye)
 Übergänge zwischen Abschnitten werden über 40 ms überblendet (keine Knackser).
 
   python3 tools/music_synth.py --plan plan.json --out music.wav
@@ -211,6 +213,75 @@ def render(plan, sr=48000):
         bell[int(d * sr):] += bell[: n - int(d * sr)] * g
     L += bell
     R += np.roll(bell, int(0.02 * sr))
+
+    # 7) Klavier-Stimmen für warm (Dur-Parallele, I–V–vi–IV) und sad (Moll, Viertel-/Halbe-Arpeggien)
+    def piano(f, ln):
+        tt = np.arange(ln) / sr
+        env = np.exp(-tt * 2.2) * np.minimum(1, tt / 0.004)
+        return (np.sin(2 * np.pi * f * tt) + 0.42 * np.sin(2 * np.pi * 2 * f * tt + 0.3) * np.exp(-tt * 3)
+                + 0.18 * np.sin(2 * np.pi * 3 * f * tt + 1.1) * np.exp(-tt * 5)) * env
+
+    keys_l = np.zeros(n)
+    keys_r = np.zeros(n)
+    soft = np.zeros(n)
+    maj_root = root_hz(root, 3) * 2 ** (3 / 12)  # Dur-Parallele
+    prog_maj = [0, 7, 9, 5]  # I – V – vi – IV
+    qual_maj = [0, 0, 1, 0]  # 1 = Moll-Akkord
+    arp_maj = [0, 2, 1, 2, 3, 2, 1, 2]
+    k = 0
+    while k * eighth < dur:
+        x0 = k * eighth
+        st = style_at(x0)
+        if st == "warm":
+            ci = int(x0 // (2 * bar)) % 4
+            third = 3 if qual_maj[ci] else 4
+            chord = [0, third, 7, 12]
+            f = maj_root * 2 ** ((prog_maj[ci] + chord[arp_maj[k % 8]]) / 12)
+            ln = int(1.6 * sr)
+            note = piano(f, ln) * (0.11 if k % 2 == 0 else 0.08)
+            place(keys_l if k % 2 else keys_r, note, x0 * sr)
+            place(keys_r if k % 2 else keys_l, note * 0.6, x0 * sr)
+            if k % 8 == 0:  # Bass-Ton je Takt
+                place(keys_l, piano(maj_root / 2 * 2 ** (prog_maj[ci] / 12), int(2.4 * sr)) * 0.16, x0 * sr)
+                place(keys_r, piano(maj_root / 2 * 2 ** (prog_maj[ci] / 12), int(2.4 * sr)) * 0.16, x0 * sr)
+        if st == "sad" and k % 2 == 0:
+            q = k // 2  # Viertel
+            arp_s = [0, 7, 12, 15, 12, 7, 3, 7]
+            if q % 2 == 0 or q % 8 in (3, 7):
+                f = root_hz(root, 4) * 2 ** ((chord_root(x0) + arp_s[q % 8]) / 12)
+                ln = int(2.4 * sr)
+                note = piano(f, ln) * 0.10
+                place(keys_l, note, x0 * sr)
+                place(keys_r, note * 0.85, (x0 + 0.012) * sr)
+            if q % 8 == 0:
+                fb = root_hz(root, 2) * 2 ** (chord_root(x0) / 12)
+                place(keys_l, piano(fb, int(3.2 * sr)) * 0.15, x0 * sr)
+                place(keys_r, piano(fb, int(3.2 * sr)) * 0.15, x0 * sr)
+        k += 1
+    # weiche Sinus-Fläche unter warm/sad
+    seg2 = int(2 * bar * sr)
+    for i0 in range(0, n, seg2):
+        i1 = min(n, i0 + seg2)
+        st = style_at(i0 / sr)
+        if st not in ("warm", "sad"):
+            continue
+        tt = t[i0:i1]
+        if st == "warm":
+            ci = int((i0 / sr) // (2 * bar)) % 4
+            base = maj_root * 2 ** (prog_maj[ci] / 12)
+            ivs = [0, 3 if qual_maj[ci] else 4, 7]
+        else:
+            base = root_hz(root, 3) * 2 ** (chord_root(i0 / sr) / 12)
+            ivs = [0, 3, 7]
+        x = sum(0.3 * np.sin(2 * np.pi * base * 2 ** (iv / 12) * tt + iv) for iv in ivs)
+        fade = np.minimum(1, np.minimum(np.arange(i1 - i0), np.arange(i1 - i0)[::-1]) / (0.25 * sr))
+        soft[i0:i1] += x * fade * (0.05 if st == "warm" else 0.04)
+    for d, g in [(0.13, 0.3), (0.29, 0.18)]:
+        keys_l[int(d * sr):] += keys_l[: n - int(d * sr)] * g
+        keys_r[int(d * sr):] += keys_r[: n - int(d * sr)] * g
+    m_soft = mask({"warm", "sad"})
+    L += (keys_l + soft) * m_soft
+    R += (keys_r + soft) * m_soft
 
     # Stille-Abschnitte hart (mit Überblendung) stummschalten
     m_on = 1 - mask({"silence"})
