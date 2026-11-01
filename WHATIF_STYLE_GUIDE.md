@@ -478,6 +478,7 @@ dramaturgisch, `templates/quality_review.md`) → MP4-AUSLIEFERUNG (Datei als An
 | Beatlänge | 1,8–6,0 s (1,0–1,8 s nur als Reaktions-Einschub); Median 2,5–4,6 s | R07/R19 4,0 s, R20 Median 1,5 s |
 | Länge | ≥ 60 s, B1 Standard 61–64 s, 15–18 Beats | |
 | Übergänge | Ortswechsel: `dip` (4–6 Frames) oder `whip`; gleicher Ort: harter Schnitt | R19 Abblenden, R20 Whips |
+| Helligkeit an Übergängen | Abblende/Whip zwischen sehr hellen und sehr dunklen Szenen (z. B. Tag ≈ 160 → Nacht ≈ 30 mittlere Helligkeit) vermeiden: `video_qa.py` meldet dann „Einstellung < 4 Frames“ (FAIL), obwohl das Bild sauber ist. Lichtstimmung angleichen oder 6-Frame-Abblende; vorab mit `tools/still.mjs` an den Übergangsframes prüfen | Produktion `what-if-no-sleep-30-days`, LOG 5 |
 | Ereignis-Typen | Aufprall, Verwandlung, Ankunft/Gehen einer Figur, Gegenstand ändert Zustand, Licht kippt, Reaktion | |
 
 ### 18.3 Kamera

@@ -51,3 +51,15 @@ vorgesehen (vier Typen, Tests oben). Praxisprobe: Produktion `productions/what-i
 - `npm test`: 38 Node-Tests + 5 Python-Tests bestanden [B].
 - Akku-Video: 2 Fehler `[18.12]` (beabsichtigt, dokumentiert) → `run.mjs` würde ein Neu-Rendern blockieren. Übrige Meldungen
   sind Warnungen. `_kit_demo` (technischer Clip, ohne Beat-Sheet) hat unverändert eigene Fehler; nicht Teil der Produktion.
+
+## 5. Praxisprobe: `what-if-no-sleep-30-days` (2026-11-01)
+
+- **Validator bestand jede Vorfassung** – auch die, in der die Schafe im Hook oben aus dem Bild liefen, in 1/2/3 s kein Schaf zu
+  sehen war und die Figur in der Wecker-Szene fehlte. Alle diese Mängel fand erst die Sichtprüfung an Vorschaubildern bzw. Streifen.
+  Das bestätigt Abschnitt 2: Der Validator prüft Struktur und Selbstauskunft, nicht das Bild.
+- **Was die Sichtprüfung fand (Auswahl):** Objekte im 9:16-Bild nur ≈ 0,5 s sichtbar (schmaler Bildwinkel); Blase von hinten; Gesichter
+  in Totalen/Profil zu klein; Figur dreht sich aus dem Bild.
+- **Technische Erkenntnis (→ Guide 18.2):** Abblenden zwischen Szenen mit sehr unterschiedlicher Helligkeit erzeugen in `video_qa.py`
+  „Einstellungen < 4 Frames“ (FAIL), obwohl das Bild sauber ist. Die Prüfregel wurde nicht entschärft (sie fand im Akku-Video echte
+  Fehler); stattdessen Lichtstimmungen angeglichen.
+- **Zuschauerbindung:** nicht messbar vor Veröffentlichung.

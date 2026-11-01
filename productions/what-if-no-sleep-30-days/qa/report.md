@@ -4,7 +4,7 @@ Modus: **render** — Status: **REVIEW**
 
 ## Container und Streams
 
-- Dauer: 61.400 s, Größe 36.8 MB, 4792 kbit/s
+- Dauer: 61.400 s, Größe 37.0 MB, 4815 kbit/s
 - Video: h264 1080×1920 (yuv420p), r=30.000 fps, avg=30.000 fps, 1842 Frames
 - Audio: aac 48000 Hz, 2 Kanäle, 61.400 s
 
@@ -12,20 +12,20 @@ Modus: **render** — Status: **REVIEW**
 
 - Bildinhalt/Balken: vollflächig
 - Harte Schnitte: 5 (≈ 0.81 pro 10 s), erster bei 4.0 s
-- Bewegungsübergänge (Whip/Fast-Move): 7 [(7.9, 8.1), (11.5, 11.7), (15.7, 15.9), (19.7, 19.8), (23.7, 23.8), (34.0, 34.1), (37.9, 38.0)]
-- Einstellungswechsel gesamt: 12 (≈ 1.95 pro 10 s), erster bei 4.0 s
-- Einstellungslänge: Median 4.0 s, Mittel 4.72 s, min 2.23 s, max 13.27 s
+- Bewegungsübergänge (Whip/Fast-Move): 5 [(7.9, 8.1), (11.5, 11.7), (15.7, 15.9), (19.7, 19.8), (23.7, 23.8)]
+- Einstellungswechsel gesamt: 10 (≈ 1.63 pro 10 s), erster bei 4.0 s
+- Einstellungslänge: Median 4.0 s, Mittel 5.58 s, min 3.6 s, max 19.4 s
 - Unregelmäßige Zeitstempel: 0
 - Schwarzbilder: keine
 - Standbild-Phasen ≥ 0.5 s: keine
 - Isolierte Doppelbilder in Bewegung: 0 []
 - Doppelbild-Anteil in Bewegungsphasen: 0.0%
 - Sehr kurze Einstellungen (< 4 Frames): keine
-- Sprungkandidaten ohne Schnitt: [9.7, 32.667, 32.7, 32.733, 32.767, 32.8, 33.9, 34.567, 35.433, 35.467, 36.567, 44.533, 44.567, 51.733, 51.767, 51.8, 51.833, 51.867, 57.067, 57.1, 57.133]
+- Sprungkandidaten ohne Schnitt: [32.667, 32.7, 32.733, 32.767, 32.8, 33.9, 34.1, 34.533, 34.567, 34.6, 34.633, 36.533, 36.567, 37.9, 38.1, 44.533, 44.567, 51.733, 51.767, 51.8, 51.833, 51.867, 57.067, 57.1, 57.133]
 - Flacker-Kandidaten: [11.5, 15.7, 33.9]
-- Abgleich mit Zeitplan: 14 geplante Übergänge, davon im Bild erkennbar: 14; Kandidaten an geplanten Übergängen (erwartet): Sprung [42.5, 42.533, 42.567, 42.6, 42.633, 42.667, 42.7, 47.0], Flackern [7.933, 7.967, 8.0, 11.533, 11.567, 15.733, 15.767, 19.733, 19.767, 19.8, 23.733, 23.767, 23.8, 33.933, 33.967, 37.933, 37.967, 38.0, 42.533, 42.567]
+- Abgleich mit Zeitplan: 14 geplante Übergänge, davon im Bild erkennbar: 14; Kandidaten an geplanten Übergängen (erwartet): Sprung [33.933, 33.967, 34.0, 34.033, 34.067, 37.933, 37.967, 38.0, 38.033, 38.067, 42.5, 42.533, 42.567, 42.6, 42.633, 42.667, 42.7, 47.0], Flackern [7.933, 7.967, 8.0, 11.533, 11.567, 15.733, 15.767, 19.733, 19.767, 19.8, 23.733, 23.767, 23.8, 33.933, 33.967, 37.933, 37.967, 38.0, 42.533, 42.567]
 - Monotonie-Kandidaten (3 s mittlere Bilddifferenz < 0.5): [[58.0, 61.0]]
-- Mittlere Helligkeit (Y 0–255): 98.8, mittlere Bilddifferenz: 2.67
+- Mittlere Helligkeit (Y 0–255): 98.5, mittlere Bilddifferenz: 2.69
 
 ## Ton
 
@@ -43,7 +43,7 @@ Modus: **render** — Status: **REVIEW**
 
 **Status: REVIEW**
 
-- ⚠️ Sprungkandidaten ohne Schnitt: [9.7, 32.667, 32.7, 32.733, 32.767, 32.8, 33.9, 34.567, 35.433, 35.467, 36.567, 44.533, 44.567, 51.733, 51.767, 51.8, 51.833, 51.867, 57.067, 57.1, 57.133]
+- ⚠️ Sprungkandidaten ohne Schnitt: [32.667, 32.7, 32.733, 32.767, 32.8, 33.9, 34.1, 34.533, 34.567, 34.6, 34.633, 36.533, 36.567, 37.9, 38.1, 44.533, 44.567, 51.733, 51.767, 51.8, 51.833, 51.867, 57.067, 57.1, 57.133]
 - ⚠️ Flacker-Kandidaten: [11.5, 15.7, 33.9]
 - ⚠️ Klick-Kandidaten (anhören!): [0.28, 0.59, 0.89, 2.02, 2.45, 2.88, 3.18, 3.6, 4.03, 4.34, 4.9, 5.48, 5.91, 6.34, 8.37, 8.8, 9.27, 9.57, 10.24, 10.67, 10.97, 11.39, 12.26, 12.69, 12.99, 13.41, 13.71, 15.0, 15.3, 15.72]
 - ⚠️ Ereignis-Klänge > ±34 ms versetzt (anhören!): [(11.8, 'pop', 55), (16.1, 'pop', 55), (34.3, 'pop', 50), (57.2, 'pop', 45)]
@@ -66,8 +66,6 @@ Automatische Prüfung ersetzt nicht die Sichtprüfung (Kontaktbögen, shots.jpg)
 | 6 | 19.733 | 4.0 | 120 |
 | 7 | 23.733 | 4.267 | 128 |
 | 8 | 28.0 | 3.8 | 114 |
-| 9 | 31.8 | 2.233 | 67 |
-| 10 | 34.033 | 3.9 | 117 |
-| 11 | 37.933 | 13.267 | 398 |
-| 12 | 51.2 | 4.8 | 144 |
-| 13 | 56.0 | 5.4 | 162 |
+| 9 | 31.8 | 19.4 | 582 |
+| 10 | 51.2 | 4.8 | 144 |
+| 11 | 56.0 | 5.4 | 162 |

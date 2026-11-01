@@ -79,4 +79,32 @@ Zahlen nur als Anker (Abschnitt 2), keine medizinischen Behauptungen.
 
 ## 5. Render und QA
 
-(wird ergänzt)
+Vorschau vor dem Rendern (11 Runden `tools/still.mjs`, `stills/`) – gefundene und behobene Fehler: Schafe oben aus dem Bild bzw.
+hinter dem Titel; Schaf-Modell (Beine vom Körper getrennt, Fell überstrahlt); in 1/2/3 s kein Schaf im 9:16-Bild (Strom verdichtet,
+alle 0,42 s); Blase im Büro von hinten (zur Kamera gedreht); Figur in der Wecker-Szene nicht im Bild; Mitschüler verdeckt POV; Kopf in
+Nahaufnahme angeschnitten; Kopf im Park außerhalb des Bildes; Taube am falschen Körperende.
+
+| Durchlauf | Commit | `video_qa.py` | Befund | Ursache | Korrektur |
+|---|---|---|---|---|---|
+| 1 | 178a5ab | **FAIL** | Einstellungen < 4 Frames bei 19,73 / 42,6 / 46,93 s (Streifen: saubere Abblenden, kein Blitzbild) | Abblende dunkelt nur bis 60 %; Folgeszene viel dunkler/heller → Detektor erkennt Abblende-Beginn (3 Frames YDIF > 14) und Schnitt getrennt | Küche Tag 7 hell (interior); Außen→Außen als Whip; Nacht-Totale mit Gang (Monotonie 38,5–42,5 s); Drehung langsamer |
+| 2 | 6e52346 | **FAIL** | 42,53 / 42,6 / 46,93 s (Whips: sauber, aber Ankunft in dunkler Szene ohne Unschärfe-Folge) | asymmetrische Differenzfolge am Whip | Abendpark (dusk, Belichtung 0,88), Nahaufnahme von oben, 6-Frame-Abblenden; **vorab an Einzelframes gemessen**: alle Abblende-Schritte ≤ 9,6 (< 14) |
+| 3 | 186af2d | REVIEW | Sichtprüfung: Figur dreht sich bei 9,7–10,5 s aus dem Bild (Wecker), Küche 34–38 s halb angeschnitten | 9:16-Bildwinkel; Pose „reach“ kippt nach vorn | Arm-Ausholen ohne Vorbeugen; Kameraziel verschoben |
+| 4 | 4975ef7 | REVIEW | keine Fehler; REVIEW-Meldungen eingestuft (quality_review A) | – | – |
+
+- Gesichtet in Durchlauf 4: `sheet_01–03`, `hook.jpg`, Streifen der geänderten Bereiche (8–11,7 s, 33,5–38,3 s); in Durchlauf 3: `shots.jpg`
+  und **alle 94 Streifen** (unveränderte Bereiche identischer Code).
+- Bekannte Restschwächen: Gesicht im Hook und in der Pointe klein; Wecker-Szene im Profil; „Fenster erlöschen“ (38–42 s) subtil;
+  bei 54 s ist das Erinnerungs-Schaf oben angeschnitten; Raum ohne Decke (dunkler Streifen oben im Hook).
+- Auslieferung: `render/final.mp4` (37,0 MB, 61,4 s) am 2026-11-01 per `SendUserFile` übergeben, Übergabe bestätigt.
+
+## 6. Hörprüfung (Mensch)
+
+- ausstehend (beim Nutzer angefragt). Zu prüfen: Blöken/Wecker-Klänge (neu), „pop“ bei 11,8 / 16,1 / 34,3 / 57,2 s (gemessen +45…+55 ms),
+  verdeckte Klänge 12,2 / 22,4 s, Stille vor der Pointe 56,2–57,0 s.
+
+## 7. Nach Veröffentlichung (7 Tage)
+
+| Plattform | Aufrufe | Länge | Ø Wiedergabe s | Abschlussrate | nach 2 s % | nach 5 s % | 50 %-Punkt (s) | Likes-Spitze (s) | Shares/1k | Kommentare/1k |
+|---|---|---|---|---|---|---|---|---|---|---|
+
+- Hook-Auswertung gegen das Akku-Video (≈ 75 % nach 2 s, 50 %-Punkt ≈ 14 s): offen.
