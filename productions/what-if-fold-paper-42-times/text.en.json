@@ -1,0 +1,73 @@
+{
+ "lang": "en",
+ "number_locale": "en-US",
+ "title": {
+  "text": "What if you folded paper 42 times?",
+  "highlight": "42"
+ },
+ "hud": {
+  "ff": {
+   "label": "PAPER THICKNESS",
+   "unit": " km",
+   "scale": 1e-06,
+   "sub": "FOLD 41 → 42"
+  },
+  "rw": {
+   "label": "REWIND",
+   "unit": " km",
+   "scale": 1e-06,
+   "sub": "42 FOLDS EARLIER"
+  },
+  "mm": {
+   "label": "PAPER THICKNESS",
+   "unit": " mm",
+   "sub": "EVERY FOLD = 2×"
+  },
+  "m": {
+   "label": "PAPER THICKNESS",
+   "unit": " m",
+   "scale": 0.001,
+   "sub": "EVERY FOLD = 2×"
+  },
+  "km": {
+   "label": "PAPER THICKNESS",
+   "unit": " km",
+   "scale": 1e-06,
+   "sub": "EVERY FOLD = 2×"
+  },
+  "home": {
+   "label": "YOUR HOMEWORK",
+   "unit": " km away",
+   "scale": 1e-06,
+   "sub": "DUE: NOW"
+  },
+  "plane": {
+   "label": "YOUR PAPER PLANE",
+   "unit": " km away",
+   "scale": 1e-06,
+   "sub": "ON THE MOON"
+  }
+ },
+ "lines": {
+  "l_sheet": "42 folds earlier: one sheet.",
+  "l_strain": "Fold 7. Paper refuses.",
+  "l_slam": "But you keep folding.",
+  "l_tower": "Fold 13. Over your head.",
+  "l_ceiling": "Fold 15. Through the ceiling.",
+  "l_yard": "Fold 18. Taller than the school.",
+  "l_react": "Everyone runs outside.",
+  "l_city": "Fold 23. Taller than any skyscraper.",
+  "l_plane": "Fold 27. Planes have to swerve.",
+  "l_edge": "Fold 30. It reaches space.",
+  "l_watch": "A white line into space.",
+  "l_globe": "Fold 37. Longer than Earth is wide.",
+  "l_quiet": "Five more folds.",
+  "l_moon": "Fold 42. Past the Moon.",
+  "l_teacher": "“Where is your paper plane?”",
+  "l_pointe": "“It’s on the Moon.”"
+ },
+ "endcard": {
+  "title": "Would you fold it a 43rd time?",
+  "sub": "Part 2?"
+ }
+}

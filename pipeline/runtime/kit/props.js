@@ -1,4 +1,5 @@
 import { createFamilyProps } from './props_family.js';
+import { createScaleProps } from './props_scale.js';
 // Requisiten aus Kisten. Jede Funktion liefert eine THREE.Group mit Füßen auf y = 0, Vorderseite +z.
 // Bildschirm-/Schild-Texte über Canvas-Texturen (Schrift: Systemschrift sans-serif, deterministisch je Umgebung).
 
@@ -739,5 +740,6 @@ export function createProps(THREE, core, rng) {
     desk, officeChair, umbrella, puddle, tree, bush, streetLamp, bench, hydrant, trashCan, car, bus, building, tower, slab,
     thoughtBubble, powerBank, wallOutlet, charger, kiosk, pigeon, lightning, sheep,
     ...createFamilyProps(THREE, core, rng, { canvasTex }),
+    ...createScaleProps(THREE, core, rng, { canvasTex }),
   };
 }

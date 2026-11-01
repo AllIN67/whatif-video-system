@@ -1,0 +1,1198 @@
+{
+ "recipe": "B1",
+ "fps": 30,
+ "seed": 42,
+ "title": {
+  "in": 0,
+  "out": 3.4
+ },
+ "hud": {
+  "start": 219902325555.2,
+  "decimals": 1
+ },
+ "pointe": "point_up",
+ "hook": {
+  "type": "flashforward",
+  "proof": "ff_touch",
+  "question": "How can one sheet of paper reach the Moon?",
+  "stakes": "Every fold doubles it – and you can't stop folding.",
+  "withheld": "How it gets there (desk, ceiling, city, sky) and the pointe: it was the homework paper plane."
+ },
+ "endcard": {
+  "beat": "end",
+  "at": 0.3,
+  "center": 0.32
+ },
+ "post": {
+  "vignette": 0.18
+ },
+ "audio": {
+  "fade_out": 1.0,
+  "tick_gain_db": -15,
+  "whoosh_gain_db": -12,
+  "ambience_gain_db": -17,
+  "music": {
+   "bpm": 118,
+   "root": "E",
+   "seed": 42,
+   "gain_db": -11,
+   "sections": [
+    {
+     "from": 0,
+     "to": 4.0,
+     "style": "pulse"
+    },
+    {
+     "from": 4.0,
+     "to": 13.8,
+     "style": "pulse"
+    },
+    {
+     "from": 13.8,
+     "to": 35.0,
+     "style": "drive"
+    },
+    {
+     "from": 35.0,
+     "to": 47.9,
+     "style": "drive_hi"
+    },
+    {
+     "from": 47.9,
+     "to": 49.5,
+     "style": "silence"
+    },
+    {
+     "from": 49.5,
+     "to": 52.8,
+     "style": "drive_hi"
+    },
+    {
+     "from": 52.8,
+     "to": 56.9,
+     "style": "calm"
+    },
+    {
+     "from": 56.9,
+     "to": 62.4,
+     "style": "warm"
+    }
+   ]
+  }
+ },
+ "beats": [
+  {
+   "id": "ff_moon",
+   "dur": 2.2,
+   "place": "space",
+   "mood": "smug",
+   "camera": {
+    "preset": "still",
+    "target": [
+     -27,
+     100,
+     30012.7
+    ],
+    "yaw": 25,
+    "dist": 262,
+    "height": 2,
+    "fov": 45
+   },
+   "hud": {
+    "label": "ff",
+    "decimals": 1
+   },
+   "events": [
+    {
+     "id": "ff_touch",
+     "at": 0.4,
+     "what": "Leuchtende Papiersäule schießt (Falte 42) am Mond vorbei – Blitz an der Spitze",
+     "sfx": "impact",
+     "gain_db": -5,
+     "hud_to": 439804651110.4,
+     "flash": "gain",
+     "premise": "visible",
+     "trigger": true
+    },
+    {
+     "id": "ff_moon_glint",
+     "at": 1.3,
+     "what": "Spitze der Säule glüht über dem Mond nach, Kamera driftet",
+     "sfx": "shimmer",
+     "gain_db": -13,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "set": "space"
+   }
+  },
+  {
+   "id": "rewind",
+   "dur": 1.8,
+   "place": "space",
+   "mood": "neutral",
+   "transition": "cut",
+   "camera": {
+    "preset": "crane",
+    "target": [
+     -27,
+     100,
+     30012.7
+    ],
+    "targetTo": [
+     0,
+     10.6,
+     30000
+    ],
+    "ratio": 0.03,
+    "yaw": 25,
+    "yawTo": 40,
+    "dist": 262,
+    "distTo": 3.2,
+    "height": 2,
+    "heightTo": 0.9,
+    "fov": 45,
+    "keys": 10
+   },
+   "hud": {
+    "label": "rw",
+    "decimals": 1,
+    "to": 0.1,
+    "mode": "geo",
+    "steps": 14,
+    "window": [
+     0.15,
+     1.6
+    ],
+    "tick": "tick"
+   },
+   "events": [
+    {
+     "id": "rw_start",
+     "at": 0.1,
+     "what": "Zurückspulen: Säule schrumpft zur Erde, Kamera stürzt mit",
+     "sfx": "whoosh",
+     "gain_db": -8,
+     "flash": "warn",
+     "premise": "visible"
+    },
+    {
+     "id": "rw_land",
+     "at": 1.55,
+     "what": "Kamera erreicht die Erdoberfläche – weißer Blitz",
+     "sfx": "swoosh",
+     "gain_db": -10,
+     "premise": "hud"
+    }
+   ],
+   "data": {
+    "set": "space"
+   }
+  },
+  {
+   "id": "sheet",
+   "dur": 3.6,
+   "place": "classroom",
+   "mood": "neutral",
+   "ambience": "room",
+   "transition": "flash",
+   "frames": 6,
+   "camera": {
+    "preset": "push",
+    "target": [
+     0,
+     0.86,
+     0.6
+    ],
+    "yaw": 180,
+    "dist": 2.0,
+    "distTo": 1.5,
+    "height": 0.35,
+    "fov": 45
+   },
+   "line": "l_sheet",
+   "line_at": [
+    0.25,
+    -0.15
+   ],
+   "hud": {
+    "label": "mm",
+    "decimals": 1,
+    "to": 1.6,
+    "mode": "geo",
+    "steps": 4,
+    "window": [
+     1.0,
+     3.2
+    ],
+    "tick": "paper"
+   },
+   "events": [
+    {
+     "id": "teacher_draws",
+     "at": 1.8,
+     "what": "Lehrerin zeichnet an der Tafel einen Papierflieger (Vorbereitung der Pointe)",
+     "premise": "hud",
+     "sfx": "swoosh",
+     "gain_db": -16
+    }
+   ],
+   "data": {
+    "you": [
+     0,
+     0,
+     1.0,
+     3.14159
+    ],
+    "teacher": [
+     -1.1,
+     0,
+     -3.6,
+     2.9
+    ]
+   }
+  },
+  {
+   "id": "strain",
+   "dur": 3.2,
+   "place": "classroom",
+   "mood": "angry",
+   "ambience": "room",
+   "camera": {
+    "preset": "close",
+    "target": [
+     0,
+     0.95,
+     0.62
+    ],
+    "yaw": 200,
+    "dist": 1.35,
+    "fov": 40
+   },
+   "line": "l_strain",
+   "hud": {
+    "label": "mm",
+    "to": 12.8,
+    "mode": "geo",
+    "steps": 3,
+    "window": [
+     0.3,
+     1.7
+    ],
+    "tick": "paper"
+   },
+   "events": [
+    {
+     "id": "stuck",
+     "at": 2.3,
+     "what": "Falte 8 geht nicht: Figur drückt mit beiden Händen, Gesicht rot, Block federt zurück",
+     "sfx": "thud",
+     "gain_db": -7,
+     "flash": "loss",
+     "premise": "hud",
+     "shake": {
+      "amp": 0.01,
+      "dur": 0.4
+     }
+    }
+   ],
+   "data": {
+    "you": [
+     0,
+     0,
+     1.0,
+     3.14159
+    ]
+   }
+  },
+  {
+   "id": "slam",
+   "dur": 3.0,
+   "place": "classroom",
+   "mood": "shock",
+   "ambience": "room",
+   "transition": "cut",
+   "camera": {
+    "preset": "low",
+    "target": [
+     0,
+     0.92,
+     0.62
+    ],
+    "yaw": 140,
+    "dist": 1.15,
+    "ground": 0.72,
+    "camHeight": 0.06,
+    "fov": 50
+   },
+   "line": "l_slam",
+   "hud": {
+    "label": "mm",
+    "to": 102.4,
+    "mode": "geo",
+    "steps": 2,
+    "window": [
+     1.2,
+     2.3
+    ],
+    "tick": "paper"
+   },
+   "events": [
+    {
+     "id": "slam_fold",
+     "at": 0.45,
+     "what": "Faust auf den Block – er faltet sich trotzdem (Falte 8), Papierfunken",
+     "sfx": "slam",
+     "gain_db": -5,
+     "hud_to": 25.6,
+     "flash": "gain",
+     "premise": "visible",
+     "shake": {
+      "amp": 0.02,
+      "dur": 0.5
+     }
+    },
+    {
+     "id": "class_turns",
+     "at": 1.7,
+     "what": "Mitschüler im Hintergrund drehen sich um, Figur staunt",
+     "premise": "visible",
+     "sfx": "swoosh",
+     "gain_db": -16
+    }
+   ],
+   "data": {
+    "you": [
+     0,
+     0,
+     1.0,
+     3.14159
+    ]
+   }
+  },
+  {
+   "id": "desk_tower",
+   "dur": 3.6,
+   "place": "classroom",
+   "mood": "happy",
+   "ambience": "room",
+   "transition": "cut",
+   "camera": {
+    "preset": "orbit",
+    "target": [
+     0,
+     1.3,
+     0.55
+    ],
+    "yaw": 148,
+    "dist": 3.5,
+    "height": 0.55,
+    "swing": 34,
+    "fov": 45
+   },
+   "line": "l_tower",
+   "hud": {
+    "label": "mm",
+    "to": 819.2,
+    "mode": "geo",
+    "steps": 3,
+    "window": [
+     0.6,
+     2.4
+    ],
+    "tick": "paper"
+   },
+   "events": [
+    {
+     "id": "stack_jump",
+     "at": 0.3,
+     "what": "Stapel springt auf Handbreite, Papierlagen sichtbar",
+     "sfx": "pop",
+     "gain_db": -10,
+     "premise": "visible"
+    },
+    {
+     "id": "tower_head",
+     "at": 2.4,
+     "what": "Säule auf dem Tisch überragt den Kopf der Figur",
+     "sfx": "pop",
+     "gain_db": -8,
+     "flash": "gain",
+     "premise": "visible"
+    },
+    {
+     "id": "teacher_turns",
+     "at": 1.2,
+     "what": "Lehrerin dreht sich von der Tafel um",
+     "premise": "visible",
+     "sfx": "swoosh",
+     "gain_db": -17
+    }
+   ],
+   "data": {
+    "you": [
+     0,
+     0,
+     1.0,
+     3.14159
+    ],
+    "teacher": [
+     -1.1,
+     0,
+     -3.6,
+     2.9
+    ]
+   }
+  },
+  {
+   "id": "ceiling",
+   "dur": 3.2,
+   "place": "classroom",
+   "mood": "shock",
+   "ambience": "room",
+   "transition": "cut",
+   "camera": {
+    "preset": "pov",
+    "eye": [
+     0,
+     1.2,
+     1.02
+    ],
+    "eyeTo": [
+     0,
+     1.1,
+     1.16
+    ],
+    "target": [
+     0,
+     2.95,
+     0.45
+    ],
+    "fov": 62,
+    "sway": 0.02
+   },
+   "line": "l_ceiling",
+   "hud": {
+    "label": "mm",
+    "to": 3276.8,
+    "mode": "geo",
+    "steps": 2,
+    "window": [
+     0.35,
+     1.0
+    ],
+    "tick": "paper"
+   },
+   "events": [
+    {
+     "id": "crash_ceiling",
+     "at": 1.0,
+     "what": "Säule durchschlägt die Decke, Putzbrocken fliegen",
+     "sfx": "crash",
+     "gain_db": -4,
+     "flash": "warn",
+     "premise": "visible",
+     "shake": {
+      "amp": 0.05,
+      "dur": 0.7
+     }
+    },
+    {
+     "id": "daylight",
+     "at": 1.6,
+     "what": "Tageslicht fällt durch das Loch",
+     "sfx": "shimmer",
+     "gain_db": -15
+    }
+   ],
+   "data": {
+    "you": [
+     0,
+     0,
+     1.0,
+     3.14159
+    ]
+   }
+  },
+  {
+   "id": "yard",
+   "dur": 3.6,
+   "place": "schoolyard",
+   "mood": "shock",
+   "ambience": "city",
+   "transition": "dip",
+   "frames": 5,
+   "camera": {
+    "preset": "crane",
+    "target": [
+     200,
+     1.5,
+     10
+    ],
+    "targetTo": [
+     200,
+     22,
+     0
+    ],
+    "ratio": 1,
+    "yaw": 12,
+    "yawTo": 0,
+    "dist": 12,
+    "distTo": 50,
+    "height": 0.3,
+    "heightTo": 12,
+    "fov": 50
+   },
+   "line": "l_yard",
+   "hud": {
+    "label": "m",
+    "decimals": 1,
+    "to": 26214.4,
+    "mode": "geo",
+    "steps": 3,
+    "window": [
+     0.3,
+     2.6
+    ],
+    "tick": "paper"
+   },
+   "events": [
+    {
+     "id": "roof_burst",
+     "at": 0.3,
+     "what": "Säule bricht aus dem Schuldach",
+     "sfx": "crash",
+     "gain_db": -8,
+     "flash": "warn",
+     "premise": "visible"
+    },
+    {
+     "id": "kids_point",
+     "at": 1.5,
+     "what": "Kinder auf dem Hof zeigen nach oben",
+     "premise": "visible",
+     "sfx": "pop",
+     "gain_db": -14
+    }
+   ],
+   "data": {
+    "col": [
+     200,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "yard_react",
+   "dur": 3.0,
+   "place": "schoolyard",
+   "mood": "laugh",
+   "ambience": "city",
+   "transition": "cut",
+   "camera": {
+    "preset": "close",
+    "target": [
+     201.0,
+     1.55,
+     10.5
+    ],
+    "yaw": 200,
+    "dist": 1.35,
+    "height": -0.12,
+    "fov": 42
+   },
+   "line": "l_react",
+   "events": [
+    {
+     "id": "you_cheer",
+     "at": 0.5,
+     "what": "Figur lacht und reißt die Arme hoch (Falte 19)",
+     "sfx": "pop",
+     "gain_db": -8,
+     "hud_to": 52428.8,
+     "flash": "gain",
+     "premise": "visible"
+    },
+    {
+     "id": "friend_films",
+     "at": 1.6,
+     "what": "Mitschüler neben der Figur filmt mit dem Handy",
+     "premise": "visible",
+     "sfx": "tick",
+     "gain_db": -10
+    }
+   ],
+   "data": {
+    "you": [
+     201.0,
+     0,
+     10.5,
+     3.14159
+    ],
+    "friend": [
+     200.25,
+     0,
+     10.8,
+     3.0
+    ]
+   }
+  },
+  {
+   "id": "city",
+   "dur": 4.2,
+   "place": "city",
+   "mood": "happy",
+   "ambience": "city",
+   "transition": "whip",
+   "whip_dir": "left",
+   "camera": {
+    "preset": "crane",
+    "target": [
+     3000,
+     40,
+     0
+    ],
+    "targetTo": [
+     3000,
+     850,
+     0
+    ],
+    "ratio": 21,
+    "yaw": 35,
+    "yawTo": 55,
+    "dist": 170,
+    "distTo": 700,
+    "height": 15,
+    "heightTo": 160,
+    "fov": 50
+   },
+   "line": "l_city",
+   "hud": {
+    "label": "m",
+    "to": 838860.8,
+    "mode": "geo",
+    "steps": 4,
+    "window": [
+     0.4,
+     3.0
+    ],
+    "tick": "paper"
+   },
+   "events": [
+    {
+     "id": "city_rise",
+     "at": 0.3,
+     "what": "Säule wächst über die Dächer der Stadt",
+     "sfx": "whoosh",
+     "gain_db": -12,
+     "premise": "visible"
+    },
+    {
+     "id": "pass_tower",
+     "at": 3.0,
+     "what": "Säule überholt den höchsten Wolkenkratzer",
+     "sfx": "shimmer",
+     "gain_db": -9,
+     "flash": "gain",
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "col": [
+     3000,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "plane",
+   "dur": 3.6,
+   "place": "sky",
+   "mood": "shock",
+   "ambience": "wind",
+   "transition": "dip",
+   "frames": 5,
+   "camera": {
+    "preset": "orbit",
+    "target": [
+     40,
+     30,
+     -9030
+    ],
+    "yaw": 28,
+    "dist": 240,
+    "height": 30,
+    "swing": 26,
+    "fov": 48
+   },
+   "line": "l_plane",
+   "hud": {
+    "label": "m",
+    "to": 13421772.8,
+    "mode": "geo",
+    "steps": 4,
+    "window": [
+     0.3,
+     1.6
+    ],
+    "tick": "paper"
+   },
+   "events": [
+    {
+     "id": "column_up",
+     "at": 1.6,
+     "what": "Säulenspitze schießt neben dem Flugzeug nach oben",
+     "sfx": "whoosh",
+     "gain_db": -8,
+     "premise": "visible"
+    },
+    {
+     "id": "plane_swerve",
+     "at": 2.0,
+     "what": "Verkehrsflugzeug weicht mit starker Querneigung aus",
+     "sfx": "riser",
+     "gain_db": -12,
+     "flash": "warn",
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "col": [
+     0,
+     0,
+     -9000
+    ]
+   }
+  },
+  {
+   "id": "edge",
+   "dur": 3.6,
+   "place": "sky",
+   "mood": "happy",
+   "ambience": "wind",
+   "transition": "cut",
+   "camera": {
+    "preset": "crane",
+    "target": [
+     0,
+     3500,
+     -9000
+    ],
+    "targetTo": [
+     0,
+     18000,
+     -9000
+    ],
+    "ratio": 1,
+    "yaw": 40,
+    "yawTo": 60,
+    "dist": 420,
+    "distTo": 700,
+    "height": 40,
+    "heightTo": 120,
+    "fov": 50
+   },
+   "line": "l_edge",
+   "hud": {
+    "label": "km",
+    "decimals": 1,
+    "to": 107374182.4,
+    "mode": "geo",
+    "steps": 3,
+    "window": [
+     0.3,
+     2.4
+    ],
+    "tick": "paper"
+   },
+   "events": [
+    {
+     "id": "sky_dark",
+     "at": 1.6,
+     "what": "Himmel wird schwarz, Sterne erscheinen",
+     "sfx": "shimmer",
+     "gain_db": -11,
+     "premise": "visible"
+    },
+    {
+     "id": "space_reached",
+     "at": 2.4,
+     "what": "Spitze erreicht den Weltraum (100 km)",
+     "sfx": "ding",
+     "gain_db": -10,
+     "flash": "gain",
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "col": [
+     0,
+     0,
+     -9000
+    ]
+   }
+  },
+  {
+   "id": "watch",
+   "dur": 3.2,
+   "place": "street",
+   "mood": "happy",
+   "ambience": "city",
+   "transition": "dip",
+   "frames": 5,
+   "camera": {
+    "preset": "low",
+    "target": [
+     -300,
+     9,
+     -30
+    ],
+    "yaw": 8,
+    "dist": 34,
+    "camHeight": 0.5,
+    "fov": 50
+   },
+   "line": "l_watch",
+   "hud": {
+    "label": "km",
+    "to": 429496729.6,
+    "mode": "geo",
+    "steps": 2,
+    "window": [
+     0.6,
+     2.4
+    ],
+    "tick": "paper"
+   },
+   "events": [
+    {
+     "id": "phones_up",
+     "at": 0.5,
+     "what": "Menschen auf der Straße heben die Handys",
+     "premise": "visible",
+     "sfx": "pop",
+     "gain_db": -14
+    },
+    {
+     "id": "line_glow",
+     "at": 2.0,
+     "what": "Weiße Linie am Himmel blitzt auf",
+     "sfx": "shimmer",
+     "gain_db": -14,
+     "flash": "gain",
+     "premise": "visible"
+    }
+   ],
+   "data": {}
+  },
+  {
+   "id": "globe",
+   "dur": 4.6,
+   "place": "space",
+   "mood": "shock",
+   "transition": "cut",
+   "camera": {
+    "preset": "pull",
+    "target": [
+     0,
+     13,
+     30000
+    ],
+    "yaw": 20,
+    "dist": 34,
+    "distTo": 62,
+    "height": 3,
+    "fov": 45
+   },
+   "line": "l_globe",
+   "hud": {
+    "label": "km",
+    "to": 13743895347.2,
+    "mode": "geo",
+    "steps": 5,
+    "window": [
+     0.3,
+     3.0
+    ],
+    "tick": "paper"
+   },
+   "events": [
+    {
+     "id": "needle_out",
+     "at": 0.3,
+     "what": "Säule ragt wie eine Nadel aus der Erde",
+     "sfx": "appear",
+     "gain_db": -10,
+     "premise": "visible"
+    },
+    {
+     "id": "longer_than_earth",
+     "at": 3.0,
+     "what": "Säule wird länger als die Erde breit ist",
+     "sfx": "boom",
+     "gain_db": -9,
+     "flash": "gain",
+     "premise": "visible"
+    }
+   ],
+   "data": {}
+  },
+  {
+   "id": "quiet",
+   "dur": 2.6,
+   "place": "space",
+   "mood": "worried",
+   "transition": "cut",
+   "camera": {
+    "preset": "still",
+    "target": [
+     4,
+     90,
+     30000
+    ],
+    "yaw": 40,
+    "dist": 170,
+    "height": -6,
+    "fov": 45
+   },
+   "line": "l_quiet",
+   "hud": {
+    "label": "km",
+    "to": 219902325555.2,
+    "mode": "geo",
+    "steps": 4,
+    "window": [
+     0.4,
+     2.3
+    ],
+    "tick": "paper"
+   },
+   "events": [
+    {
+     "id": "tip_in",
+     "at": 1.67,
+     "what": "Säulenspitze schiebt sich von unten ins Bild (Falte 40)",
+     "premise": "visible",
+     "sfx": "riser",
+     "gain_db": -13
+    },
+    {
+     "id": "near_moon",
+     "at": 2.3,
+     "what": "Spitze knapp unter dem Mond",
+     "sfx": "heartbeat",
+     "gain_db": -10,
+     "flash": "warn",
+     "premise": "visible"
+    }
+   ],
+   "data": {}
+  },
+  {
+   "id": "moon",
+   "dur": 3.8,
+   "place": "space",
+   "mood": "laugh",
+   "transition": "cut",
+   "camera": {
+    "preset": "push",
+    "target": [
+     5,
+     150,
+     30000
+    ],
+    "yaw": 55,
+    "dist": 44,
+    "distTo": 32,
+    "height": -4,
+    "fov": 45
+   },
+   "line": "l_moon",
+   "events": [
+    {
+     "id": "fold_42",
+     "at": 0.5,
+     "what": "Falte 42: Säule schießt am Mond vorbei, Blitz (Spiegel des Einstiegs)",
+     "sfx": "impact",
+     "gain_db": -3,
+     "hud_to": 439804651110.4,
+     "flash": "gain",
+     "premise": "visible",
+     "shake": {
+      "amp": 0.25,
+      "dur": 0.8
+     }
+    },
+    {
+     "id": "moon_dust",
+     "at": 1.3,
+     "what": "Staubwolke am Mondrand",
+     "sfx": "rumble",
+     "gain_db": -12
+    }
+   ],
+   "data": {}
+  },
+  {
+   "id": "teacher",
+   "dur": 4.2,
+   "place": "classroom",
+   "mood": "worried",
+   "ambience": "room",
+   "transition": "dip",
+   "frames": 6,
+   "camera": {
+    "preset": "push",
+    "target": [
+     0.3,
+     1.3,
+     0.55
+    ],
+    "yaw": 60,
+    "dist": 3.3,
+    "distTo": 2.5,
+    "height": 0.2,
+    "fov": 45
+   },
+   "line": "l_teacher",
+   "hud": {
+    "label": "home",
+    "decimals": 1
+   },
+   "events": [
+    {
+     "id": "teacher_hand",
+     "at": 0.6,
+     "what": "Lehrerin steht am Tisch und streckt die Hand aus",
+     "sfx": "pop",
+     "gain_db": -12,
+     "flash": "warn"
+    },
+    {
+     "id": "you_gulp",
+     "at": 2.4,
+     "what": "Figur schluckt, schaut zur Säule, die durch die Decke verschwindet",
+     "sfx": "heartbeat",
+     "gain_db": -13
+    }
+   ],
+   "data": {
+    "you": [
+     0,
+     0,
+     1.0,
+     3.14159
+    ],
+    "teacher": [
+     0.8,
+     0,
+     0.1,
+     -0.73
+    ]
+   }
+  },
+  {
+   "id": "pointe",
+   "dur": 3.0,
+   "place": "classroom",
+   "mood": "smug",
+   "ambience": "room",
+   "transition": "cut",
+   "camera": {
+    "preset": "close",
+    "target": [
+     0,
+     1.62,
+     1.0
+    ],
+    "yaw": 228,
+    "dist": 1.9,
+    "height": 0.0,
+    "fov": 50
+   },
+   "line": "l_pointe",
+   "events": [
+    {
+     "id": "point_up",
+     "at": 0.4,
+     "what": "Pointe: Figur zeigt grinsend nach oben – der Papierflieger ist auf dem Mond",
+     "sfx": "ding",
+     "gain_db": -5,
+     "flash": "gain"
+    },
+    {
+     "id": "teacher_looks",
+     "at": 1.6,
+     "what": "Lehrerin folgt dem Finger nach oben",
+     "sfx": "swoosh",
+     "gain_db": -16
+    }
+   ],
+   "data": {
+    "you": [
+     0,
+     0,
+     1.0,
+     3.14159
+    ],
+    "teacher": [
+     0.8,
+     0,
+     0.1,
+     -0.73
+    ]
+   },
+   "hud": {
+    "label": "plane",
+    "decimals": 1
+   }
+  },
+  {
+   "id": "end",
+   "dur": 2.4,
+   "place": "classroom",
+   "mood": "smug",
+   "ambience": "room",
+   "transition": "cut",
+   "camera": {
+    "preset": "high",
+    "target": [
+     0,
+     1.0,
+     0.5
+    ],
+    "yaw": 200,
+    "dist": 3.0,
+    "height": 1.55,
+    "swing": 10,
+    "fov": 48
+   },
+   "events": [
+    {
+     "id": "class_looks_up",
+     "at": 0.3,
+     "what": "Ganze Klasse schaut zur Decke (Endbild, Endkarte)",
+     "sfx": "pop",
+     "gain_db": -14
+    }
+   ],
+   "data": {
+    "you": [
+     0,
+     0,
+     1.0,
+     3.14159
+    ],
+    "teacher": [
+     0.8,
+     0,
+     0.1,
+     -0.73
+    ]
+   }
+  }
+ ]
+}

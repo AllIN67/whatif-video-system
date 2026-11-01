@@ -1,0 +1,3343 @@
+{
+ "_comment": "ERZEUGT von tools/build_timeline.mjs aus beats.json – nicht von Hand ändern.",
+ "fps": 30,
+ "duration": 62.4,
+ "seed": 42,
+ "recipe": "B1",
+ "pointe": 57.4,
+ "title": {
+  "in": 0,
+  "out": 3.4
+ },
+ "shots": [
+  {
+   "id": "ff_moon",
+   "from": 0,
+   "to": 2.2,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 0,
+      "pos": [
+       77.472,
+       102,
+       30252.97
+      ],
+      "look": [
+       -27,
+       100,
+       30012.7
+      ],
+      "fov": 45
+     },
+     {
+      "t": 2.2,
+      "pos": [
+       86.397,
+       102,
+       30240.139
+      ],
+      "look": [
+       -27,
+       100,
+       30012.7
+      ],
+      "fov": 45
+     }
+    ]
+   }
+  },
+  {
+   "id": "rewind",
+   "from": 2.2,
+   "to": 4,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 2.2,
+      "pos": [
+       83.726,
+       102,
+       30250.153
+      ],
+      "look": [
+       -27,
+       100,
+       30012.7
+      ],
+      "fov": 45
+     },
+     {
+      "t": 2.38,
+      "pos": [
+       56.484,
+       74.587,
+       30159.758
+      ],
+      "look": [
+       -18.767,
+       72.74,
+       30008.827
+      ],
+      "fov": 45
+     },
+     {
+      "t": 2.56,
+      "pos": [
+       37.997,
+       55.248,
+       30101.953
+      ],
+      "look": [
+       -12.969,
+       53.543,
+       30006.1
+      ],
+      "fov": 45
+     },
+     {
+      "t": 2.74,
+      "pos": [
+       25.524,
+       41.598,
+       30065.001
+      ],
+      "look": [
+       -8.886,
+       40.024,
+       30004.18
+      ],
+      "fov": 45
+     },
+     {
+      "t": 2.92,
+      "pos": [
+       17.157,
+       31.956,
+       30041.385
+      ],
+      "look": [
+       -6.011,
+       30.503,
+       30002.827
+      ],
+      "fov": 45
+     },
+     {
+      "t": 3.1,
+      "pos": [
+       11.571,
+       25.14,
+       30026.295
+      ],
+      "look": [
+       -3.986,
+       23.798,
+       30001.875
+      ],
+      "fov": 45
+     },
+     {
+      "t": 3.28,
+      "pos": [
+       7.862,
+       20.316,
+       30016.656
+      ],
+      "look": [
+       -2.56,
+       19.077,
+       30001.204
+      ],
+      "fov": 45
+     },
+     {
+      "t": 3.46,
+      "pos": [
+       5.411,
+       16.895,
+       30010.499
+      ],
+      "look": [
+       -1.556,
+       15.752,
+       30000.732
+      ],
+      "fov": 45
+     },
+     {
+      "t": 3.64,
+      "pos": [
+       3.799,
+       14.466,
+       30006.567
+      ],
+      "look": [
+       -0.849,
+       13.41,
+       30000.399
+      ],
+      "fov": 45
+     },
+     {
+      "t": 3.82,
+      "pos": [
+       2.744,
+       12.736,
+       30004.056
+      ],
+      "look": [
+       -0.351,
+       11.761,
+       30000.165
+      ],
+      "fov": 45
+     },
+     {
+      "t": 4,
+      "pos": [
+       2.057,
+       11.5,
+       30002.451
+      ],
+      "look": [
+       0,
+       10.6,
+       30000
+      ],
+      "fov": 45
+     }
+    ]
+   }
+  },
+  {
+   "id": "sheet",
+   "from": 4,
+   "to": 7.6,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 4,
+      "pos": [
+       0.125,
+       1.21,
+       -1.4
+      ],
+      "look": [
+       0,
+       0.86,
+       0.6
+      ],
+      "fov": 45
+     },
+     {
+      "t": 7.6,
+      "pos": [
+       -0.125,
+       1.21,
+       -0.9
+      ],
+      "look": [
+       0,
+       0.86,
+       0.6
+      ],
+      "fov": 45
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "flash",
+    "frames": 6
+   }
+  },
+  {
+   "id": "strain",
+   "from": 7.6,
+   "to": 10.8,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 7.6,
+      "pos": [
+       -0.402,
+       0.97,
+       -0.782
+      ],
+      "look": [
+       0,
+       0.95,
+       0.62
+      ],
+      "fov": 40
+     },
+     {
+      "t": 10.8,
+      "pos": [
+       -0.522,
+       0.97,
+       -0.552
+      ],
+      "look": [
+       0,
+       0.95,
+       0.62
+      ],
+      "fov": 40
+     }
+    ]
+   },
+   "shake": [
+    {
+     "t": 9.9,
+     "dur": 0.4,
+     "amp": 0.01,
+     "freq": 9
+    }
+   ]
+  },
+  {
+   "id": "slam",
+   "from": 10.8,
+   "to": 13.8,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 10.8,
+      "pos": [
+       0.827,
+       0.78,
+       -0.179
+      ],
+      "look": [
+       0,
+       0.92,
+       0.62
+      ],
+      "fov": 50
+     },
+     {
+      "t": 13.8,
+      "pos": [
+       0.514,
+       0.78,
+       -0.143
+      ],
+      "look": [
+       0,
+       0.92,
+       0.62
+      ],
+      "fov": 50
+     }
+    ]
+   },
+   "shake": [
+    {
+     "t": 11.266667,
+     "dur": 0.5,
+     "amp": 0.02,
+     "freq": 9
+    }
+   ]
+  },
+  {
+   "id": "desk_tower",
+   "from": 13.8,
+   "to": 17.4,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 13.8,
+      "pos": [
+       2.641,
+       1.85,
+       -1.746
+      ],
+      "look": [
+       0,
+       1.3,
+       0.55
+      ],
+      "fov": 45
+     },
+     {
+      "t": 14.7,
+      "pos": [
+       2.273,
+       1.85,
+       -2.111
+      ],
+      "look": [
+       0,
+       1.3,
+       0.55
+      ],
+      "fov": 45
+     },
+     {
+      "t": 15.6,
+      "pos": [
+       1.855,
+       1.85,
+       -2.418
+      ],
+      "look": [
+       0,
+       1.3,
+       0.55
+      ],
+      "fov": 45
+     },
+     {
+      "t": 16.5,
+      "pos": [
+       1.396,
+       1.85,
+       -2.66
+      ],
+      "look": [
+       0,
+       1.3,
+       0.55
+      ],
+      "fov": 45
+     },
+     {
+      "t": 17.4,
+      "pos": [
+       0.906,
+       1.85,
+       -2.831
+      ],
+      "look": [
+       0,
+       1.3,
+       0.55
+      ],
+      "fov": 45
+     }
+    ]
+   }
+  },
+  {
+   "id": "ceiling",
+   "from": 17.4,
+   "to": 20.6,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 17.4,
+      "pos": [
+       0,
+       1.21,
+       1.02
+      ],
+      "look": [
+       0,
+       2.953,
+       0.45
+      ],
+      "fov": 62
+     },
+     {
+      "t": 18.2,
+      "pos": [
+       0.019,
+       1.172,
+       1.055
+      ],
+      "look": [
+       0.006,
+       2.949,
+       0.45
+      ],
+      "fov": 62
+     },
+     {
+      "t": 19,
+      "pos": [
+       -0.009,
+       1.145,
+       1.09
+      ],
+      "look": [
+       -0.003,
+       2.949,
+       0.45
+      ],
+      "fov": 62
+     },
+     {
+      "t": 19.8,
+      "pos": [
+       -0.015,
+       1.136,
+       1.125
+      ],
+      "look": [
+       -0.005,
+       2.953,
+       0.45
+      ],
+      "fov": 62
+     },
+     {
+      "t": 20.6,
+      "pos": [
+       0.016,
+       1.088,
+       1.16
+      ],
+      "look": [
+       0.005,
+       2.947,
+       0.45
+      ],
+      "fov": 62
+     }
+    ]
+   },
+   "shake": [
+    {
+     "t": 18.4,
+     "dur": 0.7,
+     "amp": 0.05,
+     "freq": 9
+    }
+   ]
+  },
+  {
+   "id": "yard",
+   "from": 20.6,
+   "to": 24.2,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 20.6,
+      "pos": [
+       202.495,
+       1.8,
+       21.738
+      ],
+      "look": [
+       200,
+       1.5,
+       10
+      ],
+      "fov": 50
+     },
+     {
+      "t": 21.05,
+      "pos": [
+       202.614,
+       4.538,
+       22.853
+      ],
+      "look": [
+       200,
+       4.063,
+       8.75
+      ],
+      "fov": 50
+     },
+     {
+      "t": 21.5,
+      "pos": [
+       202.682,
+       7.379,
+       24.434
+      ],
+      "look": [
+       200,
+       6.625,
+       7.5
+      ],
+      "fov": 50
+     },
+     {
+      "t": 21.95,
+      "pos": [
+       202.675,
+       10.384,
+       26.568
+      ],
+      "look": [
+       200,
+       9.188,
+       6.25
+      ],
+      "fov": 50
+     },
+     {
+      "t": 22.4,
+      "pos": [
+       202.56,
+       13.647,
+       29.361
+      ],
+      "look": [
+       200,
+       11.75,
+       5
+      ],
+      "fov": 50
+     },
+     {
+      "t": 22.85,
+      "pos": [
+       202.297,
+       17.321,
+       32.938
+      ],
+      "look": [
+       200,
+       14.313,
+       3.75
+      ],
+      "fov": 50
+     },
+     {
+      "t": 23.3,
+      "pos": [
+       201.832,
+       21.647,
+       37.448
+      ],
+      "look": [
+       200,
+       16.875,
+       2.5
+      ],
+      "fov": 50
+     },
+     {
+      "t": 23.75,
+      "pos": [
+       201.095,
+       27.005,
+       43.066
+      ],
+      "look": [
+       200,
+       19.438,
+       1.25
+      ],
+      "fov": 50
+     },
+     {
+      "t": 24.2,
+      "pos": [
+       200,
+       34,
+       50
+      ],
+      "look": [
+       200,
+       22,
+       0
+      ],
+      "fov": 50
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip",
+    "frames": 5
+   }
+  },
+  {
+   "id": "yard_react",
+   "from": 24.2,
+   "to": 27.2,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 24.2,
+      "pos": [
+       200.598,
+       1.43,
+       9.098
+      ],
+      "look": [
+       201,
+       1.55,
+       10.5
+      ],
+      "fov": 42
+     },
+     {
+      "t": 27.2,
+      "pos": [
+       200.478,
+       1.43,
+       9.328
+      ],
+      "look": [
+       201,
+       1.55,
+       10.5
+      ],
+      "fov": 42
+     }
+    ]
+   }
+  },
+  {
+   "id": "city",
+   "from": 27.2,
+   "to": 31.4,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 27.2,
+      "pos": [
+       3097.508,
+       55,
+       139.256
+      ],
+      "look": [
+       3000,
+       40,
+       0
+      ],
+      "fov": 50
+     },
+     {
+      "t": 27.725,
+      "pos": [
+       3123.517,
+       78.921,
+       160.971
+      ],
+      "look": [
+       3000,
+       58.756,
+       0
+      ],
+      "fov": 50
+     },
+     {
+      "t": 28.25,
+      "pos": [
+       3155.661,
+       113.306,
+       185.509
+      ],
+      "look": [
+       3000,
+       86.198,
+       0
+      ],
+      "fov": 50
+     },
+     {
+      "t": 28.775,
+      "pos": [
+       3195.266,
+       162.791,
+       213.095
+      ],
+      "look": [
+       3000,
+       126.349,
+       0
+      ],
+      "fov": 50
+     },
+     {
+      "t": 29.3,
+      "pos": [
+       3243.926,
+       234.084,
+       243.926
+      ],
+      "look": [
+       3000,
+       185.094,
+       0
+      ],
+      "fov": 50
+     },
+     {
+      "t": 29.825,
+      "pos": [
+       3303.554,
+       336.903,
+       278.156
+      ],
+      "look": [
+       3000,
+       271.045,
+       0
+      ],
+      "fov": 50
+     },
+     {
+      "t": 30.35,
+      "pos": [
+       3376.435,
+       485.335,
+       315.866
+      ],
+      "look": [
+       3000,
+       396.801,
+       0
+      ],
+      "fov": 50
+     },
+     {
+      "t": 30.875,
+      "pos": [
+       3465.301,
+       699.814,
+       357.038
+      ],
+      "look": [
+       3000,
+       580.795,
+       0
+      ],
+      "fov": 50
+     },
+     {
+      "t": 31.4,
+      "pos": [
+       3573.406,
+       1010,
+       401.504
+      ],
+      "look": [
+       3000,
+       850,
+       0
+      ],
+      "fov": 50
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "whip",
+    "direction": "left"
+   }
+  },
+  {
+   "id": "plane",
+   "from": 31.4,
+   "to": 35,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 31.4,
+      "pos": [
+       102.117,
+       60,
+       -8798.178
+      ],
+      "look": [
+       40,
+       30,
+       -9030
+      ],
+      "fov": 48
+     },
+     {
+      "t": 32.3,
+      "pos": [
+       127.96,
+       60,
+       -8806.7
+      ],
+      "look": [
+       40,
+       30,
+       -9030
+      ],
+      "fov": 48
+     },
+     {
+      "t": 33.2,
+      "pos": [
+       152.673,
+       60,
+       -8818.093
+      ],
+      "look": [
+       40,
+       30,
+       -9030
+      ],
+      "fov": 48
+     },
+     {
+      "t": 34.1,
+      "pos": [
+       175.937,
+       60,
+       -8832.21
+      ],
+      "look": [
+       40,
+       30,
+       -9030
+      ],
+      "fov": 48
+     },
+     {
+      "t": 35,
+      "pos": [
+       197.454,
+       60,
+       -8848.87
+      ],
+      "look": [
+       40,
+       30,
+       -9030
+      ],
+      "fov": 48
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip",
+    "frames": 5
+   }
+  },
+  {
+   "id": "edge",
+   "from": 35,
+   "to": 38.6,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 35,
+      "pos": [
+       269.971,
+       3540,
+       -8678.261
+      ],
+      "look": [
+       0,
+       3500,
+       -9000
+      ],
+      "fov": 50
+     },
+     {
+      "t": 35.45,
+      "pos": [
+       302.457,
+       5358.388,
+       -8669.926
+      ],
+      "look": [
+       0,
+       5312.5,
+       -9000
+      ],
+      "fov": 50
+     },
+     {
+      "t": 35.9,
+      "pos": [
+       337.44,
+       7177.643,
+       -8662.56
+      ],
+      "look": [
+       0,
+       7125,
+       -9000
+      ],
+      "fov": 50
+     },
+     {
+      "t": 36.35,
+      "pos": [
+       375.036,
+       8997.892,
+       -8656.342
+      ],
+      "look": [
+       0,
+       8937.5,
+       -9000
+      ],
+      "fov": 50
+     },
+     {
+      "t": 36.8,
+      "pos": [
+       415.363,
+       10819.282,
+       -8651.469
+      ],
+      "look": [
+       0,
+       10750,
+       -9000
+      ],
+      "fov": 50
+     },
+     {
+      "t": 37.25,
+      "pos": [
+       458.534,
+       12641.981,
+       -8648.155
+      ],
+      "look": [
+       0,
+       12562.5,
+       -9000
+      ],
+      "fov": 50
+     },
+     {
+      "t": 37.7,
+      "pos": [
+       504.662,
+       14466.18,
+       -8646.632
+      ],
+      "look": [
+       0,
+       14375,
+       -9000
+      ],
+      "fov": 50
+     },
+     {
+      "t": 38.15,
+      "pos": [
+       553.855,
+       16292.102,
+       -8647.155
+      ],
+      "look": [
+       0,
+       16187.5,
+       -9000
+      ],
+      "fov": 50
+     },
+     {
+      "t": 38.6,
+      "pos": [
+       606.218,
+       18120,
+       -8650
+      ],
+      "look": [
+       0,
+       18000,
+       -9000
+      ],
+      "fov": 50
+     }
+    ]
+   }
+  },
+  {
+   "id": "watch",
+   "from": 38.6,
+   "to": 41.8,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 38.6,
+      "pos": [
+       -298.813,
+       0.5,
+       3.979
+      ],
+      "look": [
+       -300,
+       9,
+       -30
+      ],
+      "fov": 50
+     },
+     {
+      "t": 41.8,
+      "pos": [
+       -293.42,
+       0.5,
+       -3.608
+      ],
+      "look": [
+       -300,
+       9,
+       -30
+      ],
+      "fov": 50
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip",
+    "frames": 5
+   }
+  },
+  {
+   "id": "globe",
+   "from": 41.8,
+   "to": 46.4,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 41.8,
+      "pos": [
+       11.511,
+       16,
+       30031.992
+      ],
+      "look": [
+       0,
+       13,
+       30000
+      ],
+      "fov": 45
+     },
+     {
+      "t": 46.4,
+      "pos": [
+       21.323,
+       16,
+       30058.218
+      ],
+      "look": [
+       0,
+       13,
+       30000
+      ],
+      "fov": 45
+     }
+    ]
+   }
+  },
+  {
+   "id": "quiet",
+   "from": 46.4,
+   "to": 49,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 46.4,
+      "pos": [
+       109.827,
+       84,
+       30133.043
+      ],
+      "look": [
+       4,
+       90,
+       30000
+      ],
+      "fov": 45
+     },
+     {
+      "t": 49,
+      "pos": [
+       113.266,
+       84,
+       30123.503
+      ],
+      "look": [
+       4,
+       90,
+       30000
+      ],
+      "fov": 45
+     }
+    ]
+   }
+  },
+  {
+   "id": "moon",
+   "from": 49,
+   "to": 52.8,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 49,
+      "pos": [
+       40.971,
+       146,
+       30025.34
+      ],
+      "look": [
+       5,
+       150,
+       30000
+      ],
+      "fov": 45
+     },
+     {
+      "t": 52.8,
+      "pos": [
+       31.285,
+       146,
+       30018.252
+      ],
+      "look": [
+       5,
+       150,
+       30000
+      ],
+      "fov": 45
+     }
+    ]
+   },
+   "shake": [
+    {
+     "t": 49.5,
+     "dur": 0.8,
+     "amp": 0.25,
+     "freq": 9
+    }
+   ]
+  },
+  {
+   "id": "teacher",
+   "from": 52.8,
+   "to": 57,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 52.8,
+      "pos": [
+       3.095,
+       1.5,
+       2.308
+      ],
+      "look": [
+       0.3,
+       1.3,
+       0.55
+      ],
+      "fov": 45
+     },
+     {
+      "t": 57,
+      "pos": [
+       2.528,
+       1.5,
+       1.692
+      ],
+      "look": [
+       0.3,
+       1.3,
+       0.55
+      ],
+      "fov": 45
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip",
+    "frames": 6
+   }
+  },
+  {
+   "id": "pointe",
+   "from": 57,
+   "to": 60,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 57,
+      "pos": [
+       -1.425,
+       1.62,
+       -0.476
+      ],
+      "look": [
+       0,
+       1.62,
+       1
+      ],
+      "fov": 50
+     },
+     {
+      "t": 60,
+      "pos": [
+       -1.422,
+       1.62,
+       -0.111
+      ],
+      "look": [
+       0,
+       1.62,
+       1
+      ],
+      "fov": 50
+     }
+    ]
+   }
+  },
+  {
+   "id": "end",
+   "from": 60,
+   "to": 62.4,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 60,
+      "pos": [
+       -0.776,
+       2.628,
+       -2.398
+      ],
+      "look": [
+       0,
+       1,
+       0.5
+      ],
+      "fov": 48
+     },
+     {
+      "t": 62.4,
+      "pos": [
+       -1.141,
+       2.473,
+       -1.947
+      ],
+      "look": [
+       0,
+       1,
+       0.5
+      ],
+      "fov": 48
+     }
+    ]
+   }
+  }
+ ],
+ "hud": [
+  {
+   "id": "ff",
+   "from": 0,
+   "decimals": 1,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      0,
+      219902325555.2
+     ],
+     [
+      0.4,
+      439804651110.4,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 0.4,
+     "kind": "gain"
+    }
+   ]
+  },
+  {
+   "id": "rw",
+   "from": 2.2,
+   "decimals": 1,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      2.2,
+      439804651110.4
+     ],
+     [
+      2.366667,
+      54975581388.8,
+      "hold"
+     ],
+     [
+      2.466667,
+      6871947673.6,
+      "hold"
+     ],
+     [
+      2.6,
+      858993459.2,
+      "hold"
+     ],
+     [
+      2.7,
+      107374182.4,
+      "hold"
+     ],
+     [
+      2.8,
+      13421772.8,
+      "hold"
+     ],
+     [
+      2.933333,
+      1677721.6,
+      "hold"
+     ],
+     [
+      3.033333,
+      209715.2,
+      "hold"
+     ],
+     [
+      3.133333,
+      26214.4,
+      "hold"
+     ],
+     [
+      3.233333,
+      3276.8,
+      "hold"
+     ],
+     [
+      3.366667,
+      409.6,
+      "hold"
+     ],
+     [
+      3.466667,
+      51.2,
+      "hold"
+     ],
+     [
+      3.566667,
+      6.4,
+      "hold"
+     ],
+     [
+      3.7,
+      0.8,
+      "hold"
+     ],
+     [
+      3.8,
+      0.1,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 2.3,
+     "kind": "warn"
+    }
+   ]
+  },
+  {
+   "id": "mm",
+   "from": 4,
+   "decimals": 1,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      4,
+      0.1
+     ],
+     [
+      5,
+      0.2,
+      "hold"
+     ],
+     [
+      5.733333,
+      0.4,
+      "hold"
+     ],
+     [
+      6.466667,
+      0.8,
+      "hold"
+     ],
+     [
+      7.2,
+      1.6,
+      "hold"
+     ],
+     [
+      7.9,
+      3.2,
+      "hold"
+     ],
+     [
+      8.6,
+      6.4,
+      "hold"
+     ],
+     [
+      9.3,
+      12.8,
+      "hold"
+     ],
+     [
+      11.266667,
+      25.6,
+      "hold"
+     ],
+     [
+      12,
+      51.2,
+      "hold"
+     ],
+     [
+      13.1,
+      102.4,
+      "hold"
+     ],
+     [
+      14.4,
+      204.8,
+      "hold"
+     ],
+     [
+      15.3,
+      409.6,
+      "hold"
+     ],
+     [
+      16.2,
+      819.2,
+      "hold"
+     ],
+     [
+      17.766667,
+      1638.4,
+      "hold"
+     ],
+     [
+      18.4,
+      3276.8,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 9.9,
+     "kind": "loss"
+    },
+    {
+     "t": 11.266667,
+     "kind": "gain"
+    },
+    {
+     "t": 16.2,
+     "kind": "gain"
+    },
+    {
+     "t": 18.4,
+     "kind": "warn"
+    }
+   ]
+  },
+  {
+   "id": "m",
+   "from": 20.6,
+   "decimals": 1,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      20.6,
+      3276.8
+     ],
+     [
+      20.9,
+      6553.6,
+      "hold"
+     ],
+     [
+      22.033333,
+      13107.2,
+      "hold"
+     ],
+     [
+      23.2,
+      26214.4,
+      "hold"
+     ],
+     [
+      24.7,
+      52428.8,
+      "hold"
+     ],
+     [
+      27.6,
+      104857.6,
+      "hold"
+     ],
+     [
+      28.466667,
+      209715.2,
+      "hold"
+     ],
+     [
+      29.333333,
+      419430.4,
+      "hold"
+     ],
+     [
+      30.2,
+      838860.8,
+      "hold"
+     ],
+     [
+      31.7,
+      1677721.6,
+      "hold"
+     ],
+     [
+      32.133333,
+      3355443.2,
+      "hold"
+     ],
+     [
+      32.566667,
+      6710886.4,
+      "hold"
+     ],
+     [
+      33,
+      13421772.8,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 20.9,
+     "kind": "warn"
+    },
+    {
+     "t": 24.7,
+     "kind": "gain"
+    },
+    {
+     "t": 30.2,
+     "kind": "gain"
+    },
+    {
+     "t": 33.4,
+     "kind": "warn"
+    }
+   ]
+  },
+  {
+   "id": "km",
+   "from": 35,
+   "decimals": 1,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      35,
+      13421772.8
+     ],
+     [
+      35.3,
+      26843545.6,
+      "hold"
+     ],
+     [
+      36.333333,
+      53687091.2,
+      "hold"
+     ],
+     [
+      37.4,
+      107374182.4,
+      "hold"
+     ],
+     [
+      39.2,
+      214748364.8,
+      "hold"
+     ],
+     [
+      41,
+      429496729.6,
+      "hold"
+     ],
+     [
+      42.1,
+      858993459.2,
+      "hold"
+     ],
+     [
+      42.766667,
+      1717986918.4,
+      "hold"
+     ],
+     [
+      43.466667,
+      3435973836.8,
+      "hold"
+     ],
+     [
+      44.133333,
+      6871947673.6,
+      "hold"
+     ],
+     [
+      44.8,
+      13743895347.2,
+      "hold"
+     ],
+     [
+      46.8,
+      27487790694.4,
+      "hold"
+     ],
+     [
+      47.433333,
+      54975581388.8,
+      "hold"
+     ],
+     [
+      48.066667,
+      109951162777.6,
+      "hold"
+     ],
+     [
+      48.7,
+      219902325555.2,
+      "hold"
+     ],
+     [
+      49.5,
+      439804651110.4,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 37.4,
+     "kind": "gain"
+    },
+    {
+     "t": 40.6,
+     "kind": "gain"
+    },
+    {
+     "t": 44.8,
+     "kind": "gain"
+    },
+    {
+     "t": 48.7,
+     "kind": "warn"
+    },
+    {
+     "t": 49.5,
+     "kind": "gain"
+    }
+   ]
+  },
+  {
+   "id": "home",
+   "from": 52.8,
+   "decimals": 1,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      52.8,
+      439804651110.4
+     ],
+     [
+      57,
+      439804651110.4
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 53.4,
+     "kind": "warn"
+    }
+   ]
+  },
+  {
+   "id": "plane",
+   "from": 57,
+   "decimals": 1,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      57,
+      439804651110.4
+     ],
+     [
+      62.4,
+      439804651110.4
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 57.4,
+     "kind": "gain"
+    }
+   ]
+  }
+ ],
+ "lines": [
+  {
+   "id": "l_sheet",
+   "in": 4.266667,
+   "out": 7.433333
+  },
+  {
+   "id": "l_strain",
+   "in": 7.9,
+   "out": 10.666667
+  },
+  {
+   "id": "l_slam",
+   "in": 11.1,
+   "out": 13.666667
+  },
+  {
+   "id": "l_tower",
+   "in": 14.1,
+   "out": 17.266667
+  },
+  {
+   "id": "l_ceiling",
+   "in": 17.7,
+   "out": 20.466667
+  },
+  {
+   "id": "l_yard",
+   "in": 20.9,
+   "out": 24.066667
+  },
+  {
+   "id": "l_react",
+   "in": 24.5,
+   "out": 27.066667
+  },
+  {
+   "id": "l_city",
+   "in": 27.5,
+   "out": 31.266667
+  },
+  {
+   "id": "l_plane",
+   "in": 31.7,
+   "out": 34.866667
+  },
+  {
+   "id": "l_edge",
+   "in": 35.3,
+   "out": 38.466667
+  },
+  {
+   "id": "l_watch",
+   "in": 38.9,
+   "out": 41.666667
+  },
+  {
+   "id": "l_globe",
+   "in": 42.1,
+   "out": 46.266667
+  },
+  {
+   "id": "l_quiet",
+   "in": 46.7,
+   "out": 48.866667
+  },
+  {
+   "id": "l_moon",
+   "in": 49.3,
+   "out": 52.666667
+  },
+  {
+   "id": "l_teacher",
+   "in": 53.1,
+   "out": 56.866667
+  },
+  {
+   "id": "l_pointe",
+   "in": 57.3,
+   "out": 59.866667
+  }
+ ],
+ "events": [
+  {
+   "t": 0.4,
+   "id": "ff_touch",
+   "beat": "ff_moon",
+   "trigger": true,
+   "what": "Leuchtende Papiersäule schießt (Falte 42) am Mond vorbei – Blitz an der Spitze",
+   "sfx": [
+    "impact"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 1.3,
+   "id": "ff_moon_glint",
+   "beat": "ff_moon",
+   "what": "Spitze der Säule glüht über dem Mond nach, Kamera driftet",
+   "sfx": [
+    "shimmer"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 2.3,
+   "id": "rw_start",
+   "beat": "rewind",
+   "what": "Zurückspulen: Säule schrumpft zur Erde, Kamera stürzt mit",
+   "sfx": [
+    "whoosh"
+   ],
+   "flash": "warn",
+   "premise": "visible"
+  },
+  {
+   "t": 3.766667,
+   "id": "rw_land",
+   "beat": "rewind",
+   "what": "Kamera erreicht die Erdoberfläche – weißer Blitz",
+   "sfx": [
+    "swoosh"
+   ],
+   "premise": "hud"
+  },
+  {
+   "t": 5.8,
+   "id": "teacher_draws",
+   "beat": "sheet",
+   "what": "Lehrerin zeichnet an der Tafel einen Papierflieger (Vorbereitung der Pointe)",
+   "sfx": [
+    "swoosh"
+   ],
+   "premise": "hud"
+  },
+  {
+   "t": 9.9,
+   "id": "stuck",
+   "beat": "strain",
+   "what": "Falte 8 geht nicht: Figur drückt mit beiden Händen, Gesicht rot, Block federt zurück",
+   "sfx": [
+    "thud"
+   ],
+   "flash": "loss",
+   "premise": "hud"
+  },
+  {
+   "t": 11.266667,
+   "id": "slam_fold",
+   "beat": "slam",
+   "what": "Faust auf den Block – er faltet sich trotzdem (Falte 8), Papierfunken",
+   "sfx": [
+    "slam"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 12.5,
+   "id": "class_turns",
+   "beat": "slam",
+   "what": "Mitschüler im Hintergrund drehen sich um, Figur staunt",
+   "sfx": [
+    "swoosh"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 14.1,
+   "id": "stack_jump",
+   "beat": "desk_tower",
+   "what": "Stapel springt auf Handbreite, Papierlagen sichtbar",
+   "sfx": [
+    "pop"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 16.2,
+   "id": "tower_head",
+   "beat": "desk_tower",
+   "what": "Säule auf dem Tisch überragt den Kopf der Figur",
+   "sfx": [
+    "pop"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 15,
+   "id": "teacher_turns",
+   "beat": "desk_tower",
+   "what": "Lehrerin dreht sich von der Tafel um",
+   "sfx": [
+    "swoosh"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 18.4,
+   "id": "crash_ceiling",
+   "beat": "ceiling",
+   "what": "Säule durchschlägt die Decke, Putzbrocken fliegen",
+   "sfx": [
+    "crash"
+   ],
+   "flash": "warn",
+   "premise": "visible"
+  },
+  {
+   "t": 19,
+   "id": "daylight",
+   "beat": "ceiling",
+   "what": "Tageslicht fällt durch das Loch",
+   "sfx": [
+    "shimmer"
+   ]
+  },
+  {
+   "t": 20.9,
+   "id": "roof_burst",
+   "beat": "yard",
+   "what": "Säule bricht aus dem Schuldach",
+   "sfx": [
+    "crash"
+   ],
+   "flash": "warn",
+   "premise": "visible"
+  },
+  {
+   "t": 22.1,
+   "id": "kids_point",
+   "beat": "yard",
+   "what": "Kinder auf dem Hof zeigen nach oben",
+   "sfx": [
+    "pop"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 24.7,
+   "id": "you_cheer",
+   "beat": "yard_react",
+   "what": "Figur lacht und reißt die Arme hoch (Falte 19)",
+   "sfx": [
+    "pop"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 25.8,
+   "id": "friend_films",
+   "beat": "yard_react",
+   "what": "Mitschüler neben der Figur filmt mit dem Handy",
+   "sfx": [
+    "tick"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 27.5,
+   "id": "city_rise",
+   "beat": "city",
+   "what": "Säule wächst über die Dächer der Stadt",
+   "sfx": [
+    "whoosh"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 30.2,
+   "id": "pass_tower",
+   "beat": "city",
+   "what": "Säule überholt den höchsten Wolkenkratzer",
+   "sfx": [
+    "shimmer"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 33,
+   "id": "column_up",
+   "beat": "plane",
+   "what": "Säulenspitze schießt neben dem Flugzeug nach oben",
+   "sfx": [
+    "whoosh"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 33.4,
+   "id": "plane_swerve",
+   "beat": "plane",
+   "what": "Verkehrsflugzeug weicht mit starker Querneigung aus",
+   "sfx": [
+    "riser"
+   ],
+   "flash": "warn",
+   "premise": "visible"
+  },
+  {
+   "t": 36.6,
+   "id": "sky_dark",
+   "beat": "edge",
+   "what": "Himmel wird schwarz, Sterne erscheinen",
+   "sfx": [
+    "shimmer"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 37.4,
+   "id": "space_reached",
+   "beat": "edge",
+   "what": "Spitze erreicht den Weltraum (100 km)",
+   "sfx": [
+    "ding"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 39.1,
+   "id": "phones_up",
+   "beat": "watch",
+   "what": "Menschen auf der Straße heben die Handys",
+   "sfx": [
+    "pop"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 40.6,
+   "id": "line_glow",
+   "beat": "watch",
+   "what": "Weiße Linie am Himmel blitzt auf",
+   "sfx": [
+    "shimmer"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 42.1,
+   "id": "needle_out",
+   "beat": "globe",
+   "what": "Säule ragt wie eine Nadel aus der Erde",
+   "sfx": [
+    "appear"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 44.8,
+   "id": "longer_than_earth",
+   "beat": "globe",
+   "what": "Säule wird länger als die Erde breit ist",
+   "sfx": [
+    "boom"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 48.066667,
+   "id": "tip_in",
+   "beat": "quiet",
+   "what": "Säulenspitze schiebt sich von unten ins Bild (Falte 40)",
+   "sfx": [
+    "riser"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 48.7,
+   "id": "near_moon",
+   "beat": "quiet",
+   "what": "Spitze knapp unter dem Mond",
+   "sfx": [
+    "heartbeat"
+   ],
+   "flash": "warn",
+   "premise": "visible"
+  },
+  {
+   "t": 49.5,
+   "id": "fold_42",
+   "beat": "moon",
+   "what": "Falte 42: Säule schießt am Mond vorbei, Blitz (Spiegel des Einstiegs)",
+   "sfx": [
+    "impact"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 50.3,
+   "id": "moon_dust",
+   "beat": "moon",
+   "what": "Staubwolke am Mondrand",
+   "sfx": [
+    "rumble"
+   ]
+  },
+  {
+   "t": 53.4,
+   "id": "teacher_hand",
+   "beat": "teacher",
+   "what": "Lehrerin steht am Tisch und streckt die Hand aus",
+   "sfx": [
+    "pop"
+   ],
+   "flash": "warn"
+  },
+  {
+   "t": 55.2,
+   "id": "you_gulp",
+   "beat": "teacher",
+   "what": "Figur schluckt, schaut zur Säule, die durch die Decke verschwindet",
+   "sfx": [
+    "heartbeat"
+   ]
+  },
+  {
+   "t": 57.4,
+   "id": "point_up",
+   "beat": "pointe",
+   "what": "Pointe: Figur zeigt grinsend nach oben – der Papierflieger ist auf dem Mond",
+   "sfx": [
+    "ding"
+   ],
+   "flash": "gain"
+  },
+  {
+   "t": 58.6,
+   "id": "teacher_looks",
+   "beat": "pointe",
+   "what": "Lehrerin folgt dem Finger nach oben",
+   "sfx": [
+    "swoosh"
+   ]
+  },
+  {
+   "t": 60.3,
+   "id": "class_looks_up",
+   "beat": "end",
+   "what": "Ganze Klasse schaut zur Decke (Endbild, Endkarte)",
+   "sfx": [
+    "pop"
+   ]
+  }
+ ],
+ "beats": [
+  {
+   "id": "ff_moon",
+   "from": 0,
+   "to": 2.2,
+   "place": "space",
+   "mood": "smug",
+   "framing": "wide",
+   "preset": "still",
+   "hud_change": true,
+   "data": {
+    "set": "space"
+   }
+  },
+  {
+   "id": "rewind",
+   "from": 2.2,
+   "to": 4,
+   "place": "space",
+   "mood": "neutral",
+   "framing": "medium",
+   "preset": "crane",
+   "hud_change": true,
+   "data": {
+    "set": "space"
+   }
+  },
+  {
+   "id": "sheet",
+   "from": 4,
+   "to": 7.6,
+   "place": "classroom",
+   "mood": "neutral",
+   "framing": "close",
+   "preset": "push",
+   "hud_change": true,
+   "data": {
+    "you": [
+     0,
+     0,
+     1,
+     3.14159
+    ],
+    "teacher": [
+     -1.1,
+     0,
+     -3.6,
+     2.9
+    ]
+   }
+  },
+  {
+   "id": "strain",
+   "from": 7.6,
+   "to": 10.8,
+   "place": "classroom",
+   "mood": "angry",
+   "framing": "close",
+   "preset": "close",
+   "hud_change": true,
+   "data": {
+    "you": [
+     0,
+     0,
+     1,
+     3.14159
+    ]
+   }
+  },
+  {
+   "id": "slam",
+   "from": 10.8,
+   "to": 13.8,
+   "place": "classroom",
+   "mood": "shock",
+   "framing": "low",
+   "preset": "low",
+   "hud_change": true,
+   "data": {
+    "you": [
+     0,
+     0,
+     1,
+     3.14159
+    ]
+   }
+  },
+  {
+   "id": "desk_tower",
+   "from": 13.8,
+   "to": 17.4,
+   "place": "classroom",
+   "mood": "happy",
+   "framing": "medium",
+   "preset": "orbit",
+   "hud_change": true,
+   "data": {
+    "you": [
+     0,
+     0,
+     1,
+     3.14159
+    ],
+    "teacher": [
+     -1.1,
+     0,
+     -3.6,
+     2.9
+    ]
+   }
+  },
+  {
+   "id": "ceiling",
+   "from": 17.4,
+   "to": 20.6,
+   "place": "classroom",
+   "mood": "shock",
+   "framing": "pov",
+   "preset": "pov",
+   "hud_change": true,
+   "data": {
+    "you": [
+     0,
+     0,
+     1,
+     3.14159
+    ]
+   }
+  },
+  {
+   "id": "yard",
+   "from": 20.6,
+   "to": 24.2,
+   "place": "schoolyard",
+   "mood": "shock",
+   "framing": "wide",
+   "preset": "crane",
+   "hud_change": true,
+   "data": {
+    "col": [
+     200,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "yard_react",
+   "from": 24.2,
+   "to": 27.2,
+   "place": "schoolyard",
+   "mood": "laugh",
+   "framing": "close",
+   "preset": "close",
+   "hud_change": true,
+   "data": {
+    "you": [
+     201,
+     0,
+     10.5,
+     3.14159
+    ],
+    "friend": [
+     200.25,
+     0,
+     10.8,
+     3
+    ]
+   }
+  },
+  {
+   "id": "city",
+   "from": 27.2,
+   "to": 31.4,
+   "place": "city",
+   "mood": "happy",
+   "framing": "wide",
+   "preset": "crane",
+   "hud_change": true,
+   "data": {
+    "col": [
+     3000,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "plane",
+   "from": 31.4,
+   "to": 35,
+   "place": "sky",
+   "mood": "shock",
+   "framing": "wide",
+   "preset": "orbit",
+   "hud_change": true,
+   "data": {
+    "col": [
+     0,
+     0,
+     -9000
+    ]
+   }
+  },
+  {
+   "id": "edge",
+   "from": 35,
+   "to": 38.6,
+   "place": "sky",
+   "mood": "happy",
+   "framing": "wide",
+   "preset": "crane",
+   "hud_change": true,
+   "data": {
+    "col": [
+     0,
+     0,
+     -9000
+    ]
+   }
+  },
+  {
+   "id": "watch",
+   "from": 38.6,
+   "to": 41.8,
+   "place": "street",
+   "mood": "happy",
+   "framing": "low",
+   "preset": "low",
+   "hud_change": true,
+   "data": {}
+  },
+  {
+   "id": "globe",
+   "from": 41.8,
+   "to": 46.4,
+   "place": "space",
+   "mood": "shock",
+   "framing": "wide",
+   "preset": "pull",
+   "hud_change": true,
+   "data": {}
+  },
+  {
+   "id": "quiet",
+   "from": 46.4,
+   "to": 49,
+   "place": "space",
+   "mood": "worried",
+   "framing": "wide",
+   "preset": "still",
+   "hud_change": true,
+   "data": {}
+  },
+  {
+   "id": "moon",
+   "from": 49,
+   "to": 52.8,
+   "place": "space",
+   "mood": "laugh",
+   "framing": "wide",
+   "preset": "push",
+   "hud_change": true,
+   "data": {}
+  },
+  {
+   "id": "teacher",
+   "from": 52.8,
+   "to": 57,
+   "place": "classroom",
+   "mood": "worried",
+   "framing": "medium",
+   "preset": "push",
+   "hud_change": true,
+   "data": {
+    "you": [
+     0,
+     0,
+     1,
+     3.14159
+    ],
+    "teacher": [
+     0.8,
+     0,
+     0.1,
+     -0.73
+    ]
+   }
+  },
+  {
+   "id": "pointe",
+   "from": 57,
+   "to": 60,
+   "place": "classroom",
+   "mood": "smug",
+   "framing": "close",
+   "preset": "close",
+   "hud_change": true,
+   "data": {
+    "you": [
+     0,
+     0,
+     1,
+     3.14159
+    ],
+    "teacher": [
+     0.8,
+     0,
+     0.1,
+     -0.73
+    ]
+   }
+  },
+  {
+   "id": "end",
+   "from": 60,
+   "to": 62.4,
+   "place": "classroom",
+   "mood": "smug",
+   "framing": "high",
+   "preset": "high",
+   "hud_change": false,
+   "data": {
+    "you": [
+     0,
+     0,
+     1,
+     3.14159
+    ],
+    "teacher": [
+     0.8,
+     0,
+     0.1,
+     -0.73
+    ]
+   }
+  }
+ ],
+ "audio": {
+  "fade_out": 1,
+  "beds": [
+   {
+    "src": "music:main",
+    "start": 0,
+    "end": 62.4,
+    "gain_db": -11
+   },
+   {
+    "src": "gen:room",
+    "start": 4,
+    "end": 20.6,
+    "gain_db": -17,
+    "automation": [
+     [
+      4,
+      -40
+     ],
+     [
+      4.25,
+      0
+     ],
+     [
+      20.35,
+      0
+     ],
+     [
+      20.6,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:city",
+    "start": 20.6,
+    "end": 31.4,
+    "gain_db": -17,
+    "automation": [
+     [
+      20.6,
+      -40
+     ],
+     [
+      20.85,
+      0
+     ],
+     [
+      31.15,
+      0
+     ],
+     [
+      31.4,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:wind",
+    "start": 31.4,
+    "end": 38.6,
+    "gain_db": -17,
+    "automation": [
+     [
+      31.4,
+      -40
+     ],
+     [
+      31.65,
+      0
+     ],
+     [
+      38.35,
+      0
+     ],
+     [
+      38.6,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:city",
+    "start": 38.6,
+    "end": 41.8,
+    "gain_db": -17,
+    "automation": [
+     [
+      38.6,
+      -40
+     ],
+     [
+      38.85,
+      0
+     ],
+     [
+      41.55,
+      0
+     ],
+     [
+      41.8,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:room",
+    "start": 52.8,
+    "end": 62.4,
+    "gain_db": -17,
+    "automation": [
+     [
+      52.8,
+      -40
+     ],
+     [
+      53.05,
+      0
+     ],
+     [
+      62.15,
+      0
+     ],
+     [
+      62.4,
+      -40
+     ]
+    ]
+   }
+  ],
+  "sfx": [
+   {
+    "src": "gen:impact",
+    "t": 0.4,
+    "gain_db": -5,
+    "event": "ff_touch"
+   },
+   {
+    "src": "gen:shimmer",
+    "t": 1.3,
+    "gain_db": -13,
+    "event": "ff_moon_glint"
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 2.3,
+    "gain_db": -8,
+    "event": "rw_start"
+   },
+   {
+    "src": "gen:tick",
+    "t": 2.366667,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 2.466667,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 2.6,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 2.7,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 2.8,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 2.933333,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 3.033333,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 3.133333,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 3.233333,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 3.366667,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 3.466667,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 3.566667,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:tick",
+    "t": 3.7,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 3.766667,
+    "gain_db": -10,
+    "event": "rw_land"
+   },
+   {
+    "src": "gen:tick",
+    "t": 3.8,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 5,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 5.733333,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 5.8,
+    "gain_db": -16,
+    "event": "teacher_draws"
+   },
+   {
+    "src": "gen:paper",
+    "t": 6.466667,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 7.2,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 7.9,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 8.6,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 9.3,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:thud",
+    "t": 9.9,
+    "gain_db": -7,
+    "event": "stuck"
+   },
+   {
+    "src": "gen:slam",
+    "t": 11.266667,
+    "gain_db": -5,
+    "event": "slam_fold"
+   },
+   {
+    "src": "gen:paper",
+    "t": 12,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 12.5,
+    "gain_db": -16,
+    "event": "class_turns"
+   },
+   {
+    "src": "gen:paper",
+    "t": 13.1,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 14.1,
+    "gain_db": -10,
+    "event": "stack_jump"
+   },
+   {
+    "src": "gen:paper",
+    "t": 14.4,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 15,
+    "gain_db": -17,
+    "event": "teacher_turns"
+   },
+   {
+    "src": "gen:paper",
+    "t": 15.3,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 16.2,
+    "gain_db": -8,
+    "event": "tower_head"
+   },
+   {
+    "src": "gen:paper",
+    "t": 16.2,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 17.766667,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:crash",
+    "t": 18.4,
+    "gain_db": -4,
+    "event": "crash_ceiling"
+   },
+   {
+    "src": "gen:paper",
+    "t": 18.4,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:shimmer",
+    "t": 19,
+    "gain_db": -15,
+    "event": "daylight"
+   },
+   {
+    "src": "gen:crash",
+    "t": 20.9,
+    "gain_db": -8,
+    "event": "roof_burst"
+   },
+   {
+    "src": "gen:paper",
+    "t": 20.9,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 22.033333,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 22.1,
+    "gain_db": -14,
+    "event": "kids_point"
+   },
+   {
+    "src": "gen:paper",
+    "t": 23.2,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 24.7,
+    "gain_db": -8,
+    "event": "you_cheer"
+   },
+   {
+    "src": "gen:tick",
+    "t": 25.8,
+    "gain_db": -10,
+    "event": "friend_films"
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 26.833333,
+    "gain_db": -12,
+    "event": "cut:city"
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 27.5,
+    "gain_db": -12,
+    "event": "city_rise"
+   },
+   {
+    "src": "gen:paper",
+    "t": 27.6,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 28.466667,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 29.333333,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:shimmer",
+    "t": 30.2,
+    "gain_db": -9,
+    "event": "pass_tower"
+   },
+   {
+    "src": "gen:paper",
+    "t": 30.2,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 31.7,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 32.133333,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 32.566667,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 33,
+    "gain_db": -8,
+    "event": "column_up"
+   },
+   {
+    "src": "gen:paper",
+    "t": 33,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:riser",
+    "t": 33.4,
+    "gain_db": -12,
+    "event": "plane_swerve"
+   },
+   {
+    "src": "gen:paper",
+    "t": 35.3,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 36.333333,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:shimmer",
+    "t": 36.6,
+    "gain_db": -11,
+    "event": "sky_dark"
+   },
+   {
+    "src": "gen:ding",
+    "t": 37.4,
+    "gain_db": -10,
+    "event": "space_reached"
+   },
+   {
+    "src": "gen:paper",
+    "t": 37.4,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:pop",
+    "t": 39.1,
+    "gain_db": -14,
+    "event": "phones_up"
+   },
+   {
+    "src": "gen:paper",
+    "t": 39.2,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:shimmer",
+    "t": 40.6,
+    "gain_db": -14,
+    "event": "line_glow"
+   },
+   {
+    "src": "gen:paper",
+    "t": 41,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:appear",
+    "t": 42.1,
+    "gain_db": -10,
+    "event": "needle_out"
+   },
+   {
+    "src": "gen:paper",
+    "t": 42.1,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 42.766667,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 43.466667,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 44.133333,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:boom",
+    "t": 44.8,
+    "gain_db": -9,
+    "event": "longer_than_earth"
+   },
+   {
+    "src": "gen:paper",
+    "t": 44.8,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 46.8,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:paper",
+    "t": 47.433333,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:riser",
+    "t": 48.066667,
+    "gain_db": -13,
+    "event": "tip_in"
+   },
+   {
+    "src": "gen:paper",
+    "t": 48.066667,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 48.7,
+    "gain_db": -10,
+    "event": "near_moon"
+   },
+   {
+    "src": "gen:paper",
+    "t": 48.7,
+    "gain_db": -15,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:impact",
+    "t": 49.5,
+    "gain_db": -3,
+    "event": "fold_42"
+   },
+   {
+    "src": "gen:rumble",
+    "t": 50.3,
+    "gain_db": -12,
+    "event": "moon_dust"
+   },
+   {
+    "src": "gen:pop",
+    "t": 53.4,
+    "gain_db": -12,
+    "event": "teacher_hand"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 55.2,
+    "gain_db": -13,
+    "event": "you_gulp"
+   },
+   {
+    "src": "gen:ding",
+    "t": 57.4,
+    "gain_db": -5,
+    "event": "point_up"
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 58.6,
+    "gain_db": -16,
+    "event": "teacher_looks"
+   },
+   {
+    "src": "gen:pop",
+    "t": 60.3,
+    "gain_db": -14,
+    "event": "class_looks_up"
+   }
+  ],
+  "music": {
+   "main": {
+    "bpm": 118,
+    "root": "E",
+    "seed": 42,
+    "sections": [
+     {
+      "from": 0,
+      "to": 4,
+      "style": "pulse"
+     },
+     {
+      "from": 4,
+      "to": 13.8,
+      "style": "pulse"
+     },
+     {
+      "from": 13.8,
+      "to": 35,
+      "style": "drive"
+     },
+     {
+      "from": 35,
+      "to": 47.9,
+      "style": "drive_hi"
+     },
+     {
+      "from": 47.9,
+      "to": 49.5,
+      "style": "silence"
+     },
+     {
+      "from": 49.5,
+      "to": 52.8,
+      "style": "drive_hi"
+     },
+     {
+      "from": 52.8,
+      "to": 56.9,
+      "style": "calm"
+     },
+     {
+      "from": 56.9,
+      "to": 62.4,
+      "style": "warm"
+     }
+    ],
+    "duration": 62.4
+   }
+  }
+ },
+ "post": {
+  "vignette": 0.18
+ },
+ "hook": {
+  "type": "flashforward",
+  "proof": "ff_touch",
+  "question": "How can one sheet of paper reach the Moon?",
+  "stakes": "Every fold doubles it – and you can't stop folding.",
+  "withheld": "How it gets there (desk, ceiling, city, sky) and the pointe: it was the homework paper plane."
+ },
+ "endcard": {
+  "in": 60.3,
+  "center": 0.32
+ }
+}

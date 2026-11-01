@@ -136,6 +136,35 @@ const PRESETS = {
       keys: [[0, k0, o.fov ?? 45, o.a], [1, k1, o.fov ?? 45, o.b]],
     };
   },
+  // Kranfahrt über Maßstäbe (EXPERIMENT 2026-11-01, Referenzen V1–V3: durchgehende Fahrt Person → Straße → Stadt → Erde):
+  // Kamera und Blickpunkt wandern von (target, dist, height) nach (targetTo, distTo, heightTo). Zwischenkeys liegen
+  // geometrisch (log-gleichmäßig), damit eine Fahrt über mehrere Größenordnungen gleichmäßig schnell wirkt.
+  // Zwei aufeinanderfolgende crane-Beats mit passendem Ende/Anfang ergeben eine Fahrt ohne sichtbaren Schnitt.
+  crane(o) {
+    const s = o.scale ?? 1;
+    const yaw0 = o.yaw ?? 0;
+    const yaw1 = o.yawTo ?? yaw0;
+    const t0 = o.target;
+    const t1 = o.targetTo ?? o.target;
+    const d0 = (o.dist ?? 3) * s;
+    const d1 = (o.distTo ?? o.dist ?? 3) * s;
+    const h0 = (o.height ?? 0.5) * s;
+    const h1 = (o.heightTo ?? o.height ?? 0.5) * s;
+    const n = o.keys ?? 8;
+    const geo = (a, b, k) => (a > 0 && b > 0 ? a * Math.pow(b / a, k) : lerp(a, b, k));
+    const keys = [];
+    for (let i = 0; i <= n; i++) {
+      const k = i / n;
+      // ratio R ≠ 1: Blickpunkt wandert exponentiell (R > 1 langsam → schnell, R < 1 schnell → langsam), passend zu
+      // Werten, die sich je Stufe um denselben Faktor ändern (HUD-Modus geo). R = 1: gleichmäßig.
+      const R = o.ratio ?? 1;
+      const kt = Math.abs(R - 1) < 1e-9 ? k : (Math.pow(R, k) - 1) / (R - 1);
+      const tk = lerpV(t0, t1, kt);
+      keys.push([k, orbitPoint(tk, lerp(yaw0, yaw1, k), geo(d0, d1, k), geo(h0, h1, k)), lerp(o.fov ?? 45, o.fovTo ?? o.fov ?? 45, k), tk]);
+    }
+    const dEnd = Math.hypot(d1, h1);
+    return { framing: h1 > d1 * 0.8 ? 'high' : dEnd < 1.8 * s ? 'close' : dEnd < 5 * s ? 'medium' : 'wide', keys };
+  },
   // Fester Beobachter mit minimaler Drift (nur, wenn im Bild selbst viel passiert)
   still(o) {
     const s = o.scale ?? 1;
