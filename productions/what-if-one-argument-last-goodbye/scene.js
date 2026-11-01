@@ -127,6 +127,11 @@ export async function build({ THREE, scene, renderer, rng, timeline, assetUrl, f
 
   // ---------- Hilfen ----------
   const ev = B.ev;
+  // Erste Botschaft als große Textkarte auf Schwarz (gleiche Schrift/Größe wie die Endkarte, nicht als kleine Zeile)
+  try { await document.fonts.load('600 92px "Fraunces"'); } catch (e) { /* Rückfall: Serifenschrift */ }
+  const msgCard = P.textCard({ text: text.scene?.msg1 || '', highlight: 'goodbye', width: 1.75 });
+  msgCard.position.set(0, 1.62, -600);
+  scene.add(msgCard);
   const at = (id) => B.beat(id).from;
   const dur = (id) => B.beat(id).to - B.beat(id).from;
   const D = (id, key) => B.beat(id).data[key];
@@ -197,6 +202,7 @@ export async function build({ THREE, scene, renderer, rng, timeline, assetUrl, f
       mom.root.visible = inGrave || inHome;
       dad.root.visible = inHome || carScene;
       car.visible = carScene;
+      msgCard.userData.setOpacity(id === 'msg1' ? ramp(t, ev('msg1_in'), ev('msg1_in') + 0.7) * (1 - ramp(t, at('msg1') + dur('msg1') - 0.45, at('msg1') + dur('msg1'))) : 0);
       toyCar.visible = inHome;
       keys.visible = inHome;
       flowers.visible = inGrave;

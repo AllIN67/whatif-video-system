@@ -869,14 +869,14 @@
    "camera": {
     "preset": "high",
     "target": [
-     200.2,
+     200.0,
      0.5,
-     117
+     118.5
     ],
-    "yaw": -35,
-    "dist": 11,
-    "height": 9.5,
-    "swing": 10,
+    "yaw": -30,
+    "dist": 19,
+    "height": 16,
+    "swing": 6,
     "fov": 46
    },
    "line": "l_wet",
@@ -1208,7 +1208,7 @@
    "events": [
     {
      "id": "drawing_placed",
-     "at": 0.8,
+     "at": 0.05,
      "what": "Junge legt die Zeichnung auf das Grab: die Familie, an den Händen",
      "sfx": "paper",
      "gain_db": -10
@@ -1365,11 +1365,6 @@
     "dist": 4,
     "fov": 46
    },
-   "line": "l_msg1",
-   "line_at": [
-    0.3,
-    -0.25
-   ],
    "events": [
     {
      "id": "msg1_in",

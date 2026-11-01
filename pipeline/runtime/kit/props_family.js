@@ -684,8 +684,50 @@ export function createFamilyProps(THREE, core, rng, base) {
     return g;
   };
 
+  // ---------- Textkarte im Bild (Schwarzbild-Botschaft) ----------
+  // Sprite (immer zur Kamera), unbeleuchtet, ohne Nebel/Tonemapping. Text kommt aus text.<lang>.json (Szene).
+  // highlight = Wort in Signalfarbe. userData.setOpacity(a).
+  const textCard = ({ text = '', highlight = '', width = 1.6, size = 92, color = '#FFFFFF', accent = '#F5C04A', font = 'Fraunces', weight = 600 } = {}) => {
+    const PX = 1024;
+    const H = 512;
+    const tex = canvasTex(PX, H, (g, W, Hh) => {
+      g.clearRect(0, 0, W, Hh);
+      g.font = `${weight} ${size}px "${font}", serif`;
+      g.textBaseline = 'middle';
+      const words = text.split(/\s+/).filter(Boolean);
+      const rows = [];
+      let row = [];
+      for (const w of words) {
+        const test = [...row, w].join(' ');
+        if (row.length && g.measureText(test).width > W * 0.92) { rows.push(row); row = [w]; } else row.push(w);
+      }
+      if (row.length) rows.push(row);
+      const lh = size * 1.18;
+      let y = Hh / 2 - ((rows.length - 1) * lh) / 2;
+      for (const r of rows) {
+        const full = r.join(' ');
+        let x = (W - g.measureText(full).width) / 2;
+        for (let i = 0; i < r.length; i++) {
+          const w = r[i] + (i < r.length - 1 ? ' ' : '');
+          const bare = r[i].replace(/[^\p{L}\p{N}'’-]/gu, '');
+          g.fillStyle = highlight && bare.toLowerCase() === highlight.toLowerCase() ? accent : color;
+          g.fillText(w, x, y);
+          x += g.measureText(w).width;
+        }
+        y += lh;
+      }
+    });
+    const m = new THREE.SpriteMaterial({ map: tex, transparent: true, fog: false, toneMapped: false, depthTest: false, depthWrite: false, opacity: 0 });
+    const s = new THREE.Sprite(m);
+    s.scale.set(width, (width * H) / PX, 1);
+    s.renderOrder = 10;
+    s.userData.setOpacity = (a) => { m.opacity = a; s.visible = a > 0.001; };
+    s.userData.setOpacity(0);
+    return s;
+  };
+
   return {
     sportsCar, gravestone, gravePlot, flowers, drawing, guardrail, curveSign, smoke, leaves,
-    sofa, coffeeTable, tv, floorLamp, familyPhoto, door, keys, sideboard, toyBlocks, house,
+    sofa, coffeeTable, tv, floorLamp, familyPhoto, door, keys, sideboard, toyBlocks, house, textCard,
   };
 }
