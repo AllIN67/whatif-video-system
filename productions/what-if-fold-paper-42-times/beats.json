@@ -527,8 +527,8 @@
     "preset": "crane",
     "target": [
      200,
-     1.8,
-     9.5
+     1.5,
+     10
     ],
     "targetTo": [
      200,
@@ -538,10 +538,10 @@
     "ratio": 1,
     "yaw": 12,
     "yawTo": 0,
-    "dist": 5,
-    "distTo": 44,
-    "height": 0.4,
-    "heightTo": 10,
+    "dist": 12,
+    "distTo": 50,
+    "height": 0.3,
+    "heightTo": 12,
     "fov": 50
    },
    "line": "l_yard",
@@ -783,16 +783,16 @@
     ],
     "targetTo": [
      0,
-     97500,
+     18000,
      -9000
     ],
-    "ratio": 28,
+    "ratio": 1,
     "yaw": 40,
-    "yawTo": 70,
+    "yawTo": 60,
     "dist": 420,
-    "distTo": 1300,
+    "distTo": 700,
     "height": 40,
-    "heightTo": 160,
+    "heightTo": 120,
     "fov": 50
    },
    "line": "l_edge",
@@ -893,8 +893,7 @@
    "dur": 4.6,
    "place": "space",
    "mood": "shock",
-   "transition": "dip",
-   "frames": 6,
+   "transition": "cut",
    "camera": {
     "preset": "pull",
     "target": [
@@ -951,11 +950,11 @@
     "preset": "still",
     "target": [
      4,
-     100,
+     90,
      30000
     ],
     "yaw": 40,
-    "dist": 115,
+    "dist": 170,
     "height": -6,
     "fov": 45
    },

@@ -252,7 +252,7 @@ export async function build({ THREE, scene, camera, renderer, rng, timeline, fet
   const LOOK_SPACE = { sky: 0x02030a, fog: null, hemi: [0x6f86c8, 0x0a0a14, 0.45], sun: [0xfff4e6, 0.2], exposure: 1.0 };
   const LOOK_CITY = { ...kit.LOOKS.day, fog: [0xc9dcec, 900, 4200] };
   const LOOK_SKY = { sky: 0x5f93db, fog: [0x8fb5e8, 1500, 5200], hemi: [0xffffff, 0x9fb4d0, 1.5], sun: [0xfff4e2, 2.2], exposure: 1.0 };
-  const LOOK_EDGE = { sky: 0x03050f, fog: null, hemi: [0xb8c8f0, 0x101020, 0.9], sun: [0xfff4e2, 2.4], exposure: 1.0 };
+  const LOOK_EDGE = { sky: 0x0d1a3c, fog: null, hemi: [0xb8c8f0, 0x101020, 0.9], sun: [0xfff4e2, 2.4], exposure: 1.0 };
   const LOOK_STREET = { ...kit.LOOKS.day, fog: [0xc9dcec, 300, 2600] };
   const CLIP = { class: [0.03, 120], yard: [0.1, 800], city: [1, 6000], sky: [1, 8000], street: [0.1, 4000], space: [0.05, 3000] };
 
@@ -338,7 +338,7 @@ export async function build({ THREE, scene, camera, renderer, rng, timeline, fet
             { t: at('slam'), pose: 'facepalm', seated: 1, mood: 'angry' },
             { t: ev('slam_fold') - 0.15, pose: 'reach', seated: 1, mood: 'angry', blend: 0.12 },
             { t: ev('slam_fold') + 0.2, pose: 'recoil', seated: 1, mood: 'shock', blend: 0.12 },
-            { t: ev('class_turns') + 0.3, pose: 'sit', seated: 1, mood: 'happy', blend: 0.4, look: [0, 0.2] },
+            { t: ev('class_turns') + 0.3, mood: 'happy', blend: 0.4, look: [0, 0.2] },
           ], t);
         } else if (id === 'desk_tower') {
           you.act([
@@ -434,7 +434,7 @@ export async function build({ THREE, scene, camera, renderer, rng, timeline, fet
         // Flugzeug: fliegt von rechts nach links knapp an der Säule vorbei, weicht beim Ereignis aus
         const s = t - at('plane');
         const sw = id === 'plane' ? ramp(t, ev('plane_swerve'), ev('plane_swerve') + 1.0) : 1;
-        jet.position.set(330 - s * 130, 30 + 25 * sw, 40 + 90 * sw);
+        jet.position.set(120 - s * 60, 30 + 25 * sw, 40 + 90 * sw);
         jet.rotation.y = -Math.PI / 2 + 0.5 * sw;
         jet.userData.setBank(-0.9 * Math.sin(Math.PI * clamp01(sw * 0.9)));
         jet.visible = id === 'plane';
@@ -442,6 +442,7 @@ export async function build({ THREE, scene, camera, renderer, rng, timeline, fet
         camera.getWorldPosition(tmp);
         skyStars.position.set(tmp.x, tmp.y, tmp.z - SKZ);
         skyStars.visible = id === 'edge' && t > ev('sky_dark') - 0.6;
+        skyStack.userData.setGlow(id === 'edge' ? 0.15 + 0.55 * ramp(t, ev('sky_dark') - 1.2, ev('sky_dark') + 0.6) : 0.15);
       }
 
       // ---------- Straße ----------
