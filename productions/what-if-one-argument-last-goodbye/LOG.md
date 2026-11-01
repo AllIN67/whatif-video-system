@@ -141,3 +141,20 @@
 
 **QUALITÄT GEPRÜFT (mit Einschränkungen) – nicht FREIGEGEBEN.** Hörprüfung durch den Nutzer ausstehend; dramaturgische Prüfung
 ohne Echtzeit-Wiedergabe.
+
+## 8. Einordnung zum Hook-Standard 18.12 (Nachtrag 2026-11-01, beim Zusammenführen mit dem Hook-Branch)
+
+- **Produktionsstand:** Dieses Video wurde am 2026-11-01 vollständig nach dem damals gültigen Standard (Guide 18, ohne 18.12)
+  produziert, gerendert, geprüft und ausgeliefert. Guide 18.12 entstand parallel im Branch `claude/hook-retention-standard` und
+  lag bei Produktion und QA nicht vor.
+- **Validator-Meldungen nach dem Zusammenführen – beabsichtigt, nicht behoben:**
+  - Fehler `[18.12] hook fehlt in beats.json` – das Beat-Sheet hat keinen `hook`-Block und keine `premise`-Felder.
+  - Warnung `[18.12]` zum fehlenden LOG-Abschnitt nach H10 – drei Einstiegs-Ansätze wurden nicht entworfen.
+- **Begründung:** Der Einstieg (0–15 s: Grab, Zeichnung, Frage „Mommy… when will Daddy wake up?“, HUD `DAYS WITHOUT DADDY`,
+  danach Rückblende Familienabend und Streit) war im Auftrag wörtlich vorgegeben (Abschnitt 1). Ein `hook`-Block im Nachhinein
+  würde Prüfergebnisse vortäuschen, die nie erarbeitet wurden; ein neuer Einstieg verlangt ein neues Rendering und ist nicht
+  beauftragt. Bild und Ton des ausgelieferten Videos bleiben unverändert.
+- **Nicht geprüft:** Der Einstieg wurde **nicht** gegen 18.12 (Unmöglichkeitstest, sichtbare Prämissen-Konsequenzen bis 15 s,
+  Füllstoff) bewertet. Ob er den Standard erfüllen würde, ist offen.
+- **Folge:** Bei einer Überarbeitung oder einem Neu-Render zuerst den Einstieg nach 18.12 entwerfen (LOG-Abschnitt nach H10 mit
+  drei Ansätzen, `hook`-Block, `premise` an den Ereignissen), dann neu rendern und QA inkl. Abschnitt H durchlaufen.
