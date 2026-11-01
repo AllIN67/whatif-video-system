@@ -156,3 +156,21 @@ Lehrerin angeschnitten.
 2. S3 `flashforward` erst nach Veröffentlichungsdaten dieses Videos als Regel verankern (Abbruchkurve 0–5 s mit dem Akku-/no-sleep-Video vergleichen).
 3. Kranfahrten: Hinweis in Guide 18.3 erwägen („Kran ≤ ≈ 10 Bildhöhen pro Sekunde, sonst Unschärfe“) – belegt durch Render 1 dieses Experiments.
 4. Für Maßstabsreisen die Hauptfigur in jeder Stufe sichtbar halten (z. B. Reaktions-Einschübe), um die Gefühlsebene der Referenzproduktion zu halten.
+
+## 7. Sicherungspunkt und Rückgängigmachen
+
+- **Stand von `main` vor dem Merge:** Commit `aad9f0292fdd90bc866de9d027990e1abc6e5d89` („Merge pull request #6: Hook-Standard 18.12 + Produktion what-if-no-sleep-30-days“).
+- **Sicherung auf GitHub:** Branch `backup/main-aad9f02-vor-experiment` zeigt unveränderlich auf diesen Commit (nicht löschen).
+  Ein Tag war geplant, das Pushen von Tags wird aber vom Proxy der Cloud-Umgebung abgelehnt (HTTP 403); lokal anlegen:
+  `git tag -a main-vor-experiment-2026-11-01 aad9f02 -m "…" && git push origin main-vor-experiment-2026-11-01`.
+- **Merge-Methode:** echter Merge-Commit (kein Squash, kein Rebase). Dadurch ist das gesamte Experiment **ein** Commit auf `main`.
+- **Rückgängig machen (empfohlen, verliert keine späteren Änderungen):**
+  ```
+  git checkout main && git pull
+  git revert -m 1 <SHA des Merge-Commits>   # -m 1 = Seite von main behalten
+  git push origin main
+  ```
+  Danach entspricht der Dateistand dem von `aad9f02` plus allen Änderungen, die nach dem Merge auf `main` kamen.
+  Hinweis: Soll der Experiment-Branch später erneut gemergt werden, zuerst den Revert-Commit revertieren (`git revert <SHA des Revert-Commits>`),
+  sonst übernimmt Git die schon einmal gemergten Commits nicht noch einmal.
+- **Nur zum Vergleich ansehen:** `git checkout backup/main-aad9f02-vor-experiment` (ändert `main` nicht).
