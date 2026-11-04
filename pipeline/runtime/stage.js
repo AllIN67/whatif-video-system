@@ -133,11 +133,16 @@ function createPost(THREE, renderer) {
       tex: { value: rtScene.texture }, blurVec: { value: new THREE.Vector2() }, texel: { value: new THREE.Vector2(1 / 1080, 1 / 1920) },
       vignette: { value: 0 }, grain: { value: 0 }, seed: { value: 0 }, chroma: { value: 0 }, flash: { value: 0 }, flashColor: { value: new THREE.Color(1, 1, 1) },
       radial: { value: 0 },
+      // Version 3.0 (Analyse 6 Videos, Licht/Atmosphäre): Bloom (Leuchten um helle Lichtquellen/Neon/Spitzlichter) und
+      // Color Grading (Sättigung, Kontrast, Farbstich, Anhebung). Standard = aus → bestehende Produktionen bit-identisch.
+      bloom: { value: 0 }, bloomThreshold: { value: 0.9 }, bloomRadius: { value: 1 },
+      gradeOn: { value: 0 }, gSat: { value: 1 }, gContrast: { value: 1 }, gTint: { value: new THREE.Vector3(1, 1, 1) }, gLift: { value: 0 },
     },
     vertexShader: vs,
     fragmentShader: `
       uniform sampler2D tex; uniform vec2 blurVec; uniform vec2 texel; uniform float vignette; uniform float grain;
       uniform float seed; uniform float chroma; uniform float flash; uniform vec3 flashColor; uniform float radial; varying vec2 vUv;
+      uniform float bloom; uniform float bloomThreshold; uniform float bloomRadius; uniform float gradeOn; uniform float gSat; uniform float gContrast; uniform vec3 gTint; uniform float gLift;
       float hash(vec2 p){ p = fract(p * vec2(443.897, 441.423) + seed * 0.1031); p += dot(p, p.yx + 19.19); return fract((p.x + p.y) * p.x); }
       vec3 sampleC(vec2 uv){
         if (chroma <= 0.0) return texture2D(tex, uv).rgb;
@@ -159,6 +164,20 @@ function createPost(THREE, renderer) {
           }
           col = acc / ws;
         }
+        if (bloom > 0.0) {
+          // zwei Ringe à 12 Abtastungen: Anteil über der Schwelle (linearer HDR-Wert vor dem Tonemapping) streut nach außen
+          vec3 b = vec3(0.0);
+          for (int ring = 1; ring <= 2; ring++) {
+            float rad = float(ring) * 9.0 * bloomRadius;
+            for (int k = 0; k < 12; k++) {
+              float a = (float(k) + 0.5 * float(ring)) * 0.5235988;
+              vec3 c = texture2D(tex, clamp(vUv + vec2(cos(a), sin(a)) * rad * texel, 0.0, 1.0)).rgb;
+              float l = dot(c, vec3(0.2126, 0.7152, 0.0722));
+              b += c * max(l - bloomThreshold, 0.0) / max(l, 1e-4) / float(ring);
+            }
+          }
+          col += b / 18.0 * bloom;
+        }
         col += flashColor * flash;
         gl_FragColor = vec4(col, 1.0);
         #include <tonemapping_fragment>
@@ -169,6 +188,14 @@ function createPost(THREE, renderer) {
         gl_FragColor.rgb *= mix(1.0 - vignette, 1.0, v);
         float n = hash(gl_FragCoord.xy) + hash(gl_FragCoord.yx + 7.3) - 1.0;
         gl_FragColor.rgb += n * grain;
+        if (gradeOn > 0.5) {
+          vec3 g = gl_FragColor.rgb;
+          float lu = dot(g, vec3(0.2126, 0.7152, 0.0722));
+          g = mix(vec3(lu), g, gSat);
+          g = (g - 0.5) * gContrast + 0.5;
+          g = g * gTint + gLift;
+          gl_FragColor.rgb = clamp(g, 0.0, 1.0);
+        }
       }`,
     depthTest: false, depthWrite: false, toneMapped: true,
   });
@@ -205,6 +232,15 @@ function createPost(THREE, renderer) {
       u.seed.value = fx.seed || 0;
       u.chroma.value = fx.chroma || 0;
       u.flash.value = fx.flash || 0;
+      u.bloom.value = fx.bloom || 0;
+      u.bloomThreshold.value = fx.bloomThreshold ?? 0.9;
+      u.bloomRadius.value = fx.bloomRadius ?? 1;
+      const gr = fx.grade;
+      u.gradeOn.value = gr ? 1 : 0;
+      u.gSat.value = gr?.saturation ?? 1;
+      u.gContrast.value = gr?.contrast ?? 1;
+      u.gTint.value.set(...(gr?.tint ?? [1, 1, 1]));
+      u.gLift.value = gr?.lift ?? 0;
       if (fx.flashColor) u.flashColor.value.set(fx.flashColor);
       else u.flashColor.value.setRGB(1, 1, 1);
       renderer.setRenderTarget(null);

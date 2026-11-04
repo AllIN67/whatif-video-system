@@ -1,5 +1,5 @@
 {
- "_comment": "Vorlage Beat-Sheet (Guide 18). Kopieren nach productions/<slug>/beats.json, Beats ergänzen (15–18), dann: node tools/build_timeline.mjs productions/<slug> && node tools/validate_production.mjs productions/<slug>. Kamera-Vorlagen: push, pull, close, orbit, low, high, pov (eye), track (a, b), still. Klänge: tools/sfx_synth.py (pop, ding, loss, thud, crash, zap, shimmer, buzz, power_down, charge, heartbeat, impact, boom, hit, appear, rumble …). HUD-Akzente: loss, gain, warn. Ereignis-Feld premise: visible (Prämissen-Konsequenz im Bild) | hud (nur Messwert) | weglassen (Kulisse) – bis 15 s ≥ 3 Prämissen-Ereignisse, ≥ 2 visible (Guide 18.12). Atmosphären: room, city, rain. Lichtstimmung setzt scene.js je Beat (kit.applyLook).",
+ "_comment": "Vorlage Beat-Sheet (Guide 18). Kopieren nach productions/<slug>/beats.json, Beats ergänzen (15–18), dann: node tools/build_timeline.mjs productions/<slug> && node tools/validate_production.mjs productions/<slug>. Kamera-Vorlagen: push, pull, close, orbit, low, high, pov (eye), track (a, b), still. Klänge: tools/sfx_synth.py (pop, ding, loss, thud, crash, zap, shimmer, buzz, power_down, charge, heartbeat, impact, boom, hit, appear, rumble …). HUD-Akzente: loss, gain, warn. Ereignis-Feld premise: visible (Prämissen-Konsequenz im Bild) | hud (nur Messwert) | weglassen (Kulisse) – bis 15 s ≥ 3 Prämissen-Ereignisse, ≥ 2 visible (Guide 18.12). Atmosphären: room, city, rain. Lichtstimmung setzt scene.js je Beat (kit.applyLook; Version 3.0: haze, backlight, goldenHour, neonNight, clinical, underwater). Version 3.0 (Guide 18.13): story, beats[].act/fact/showpiece/pov, events[].setup_for; schnelle Bewegung: motion_blur [{ from, to, samples, shutter }].",
  "recipe": "B1",
  "fps": 30,
  "seed": 1,
@@ -7,8 +7,9 @@
  "hud": { "start": 0, "decimals": 0 },
  "pointe": "pointe_event",
  "hook": { "_comment": "Guide 18.12: vor dem Beat-Sheet 3 Einstiege entwerfen (LOG), besten wählen. type: proof | process | countdown | mystery.", "type": "proof", "proof": "proof_event", "question": "Frage, die sich der Zuschauer bei 3 s stellt", "stakes": "Was steht auf dem Spiel – ohne Untertitel erkennbar", "withheld": "Was der Einstieg bewusst nicht zeigt (Pointe, Endzustand)" },
+ "story": { "_comment": "Guide 18.13 A: Story-Kern nach dem Hook-Entwurf. Erzählform (B1–B6) im LOG begründen.", "stake": "Was steht auf dem Spiel (bleibt bis zum Ende dasselbe)", "measure": "Was das HUD misst (eine Größe; Labels nur als Phasen)", "question": "Titelfrage, zu der jeder Beat beiträgt", "turn": "turn_event" },
  "endcard": { "beat": "end", "at": 1.4, "center": 0.32 },
- "post": { "vignette": 0.18 },
+ "post": { "vignette": 0.18, "_comment_v3": "optional je Produktion oder je Akt über fx der Szene: bloom 0.3–1.0, bloomThreshold 0.7–0.9, grade { saturation 0.85–1, contrast 1–1.1, tint [r,g,b], lift } (Guide 18.13 L5)" },
  "audio": {
   "fade_out": 1.2,
   "tick_gain_db": -17,
@@ -26,19 +27,23 @@
   }
  },
  "beats": [
-  { "id": "hook", "dur": 4.0, "place": "bedroom", "mood": "neutral", "ambience": "room",
+  { "id": "hook", "dur": 4.0, "place": "bedroom", "mood": "neutral", "ambience": "room", "act": 1, "pov": true, "showpiece": "glow",
+    "fact": { "text": "Reale, geprüfte Zahl/Tatsache dieses Akts (Guide 18.13 S4)", "source": "Quelle (auch im LOG)" },
     "camera": { "preset": "orbit", "target": [0, 1.2, 0], "yaw": 30, "dist": 2.8, "height": 0.6, "swing": 14 },
     "hud": { "label": "metric", "to": 3, "mode": "steps", "steps": 3, "window": [0.8, 3.4], "tick": "pop" },
     "events": [
      { "id": "proof_event", "at": 0.8, "what": "Beweis: Prämissen-Konsequenz IM BILD, die ohne Prämisse unmöglich wäre (Unmöglichkeitstest)", "sfx": "impact", "gain_db": -8, "trigger": true, "premise": "visible", "flash": "loss" },
-     { "id": "reaction", "at": 1.6, "what": "Figur reagiert körperlich (Gesicht + Pose)", "premise": "visible" }
+     { "id": "reaction", "at": 1.6, "what": "Figur reagiert körperlich (Gesicht + Pose)", "premise": "visible" },
+     { "id": "cause", "at": 1.2, "what": "Sichtbare Ursache, auf die sich die Pointe bezieht – ohne Text lesbar (18.13 S3)", "premise": "visible", "setup_for": "pointe_event" }
     ],
     "data": { "you": [0, 0, 0, 0] } },
-  { "id": "end", "dur": 4.0, "place": "street", "mood": "shock", "ambience": "city", "transition": "dip",
+  { "id": "end", "dur": 4.0, "place": "street", "mood": "shock", "ambience": "city", "transition": "dip", "act": 2, "showpiece": "vista",
+    "fact": { "text": "Wissensanker Akt 2", "source": "Quelle" },
     "camera": { "preset": "close", "target": [100, 1.8, 0], "yaw": 0, "dist": 1.4 },
     "line": "l_end",
     "hud": { "to": 10, "mode": "linear", "window": [0.3, 3.5] },
     "events": [
+     { "id": "turn_event", "at": 0.3, "what": "Wende (story.turn) – in echten Produktionen deutlich früher", "premise": "visible" },
      { "id": "pointe_event", "at": 0.8, "what": "Pointe als eigenes Ereignis", "sfx": "impact", "gain_db": -4, "flash": "loss" }
     ],
     "data": { "you": [100, 0.12, 0, 0] } }

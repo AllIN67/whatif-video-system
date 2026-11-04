@@ -1,0 +1,7 @@
+{
+ "lang": "en",
+ "number_locale": "en-US",
+ "title": { "text": "What if the world had more light?", "highlight": "light" },
+ "hud": { "metric": { "label": "KIT 3.0 DEMO", "sub": "LIGHT · POV · MASSES", "unit": "" } },
+ "lines": {}
+}

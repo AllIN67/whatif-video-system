@@ -34,6 +34,10 @@
 //       "events": [{ "id": "alarm", "at": 0.6, "what": "Wecker klingelt", "sfx": "buzz", "gain_db": -6,
 //                    "hud_to": 95, "flash": "loss", "shake": { "amp": 0.04, "dur": 0.6 }, "trigger": true,
 //                    "premise": "visible" | "hud" }] }   // Prämissen-Konsequenz im Bild / nur im HUD (Guide 18.12); ohne = Kulisse
+//   Version 3.0 (Guide 18.13, alles optional/additiv):
+//   "story": { "stake": "…", "measure": "…", "question": "…", "turn": "<Ereignis-ID>" },
+//   Beat-Felder "act": 1, "fact": { "text": "…", "source": "…" }, "showpiece": "mass|vista|glow", "pov": true;
+//   Ereignis-Feld "setup_for": "<Ereignis-ID der Pointe/Wende>" = sichtbare Ursache, auf die sich die Pointe bezieht.
 //   ]
 // }
 import fs from 'node:fs';
@@ -212,14 +216,17 @@ export function buildTimeline(B) {
     shots,
     hud,
     lines,
-    events: events.map((e) => ({ t: e.t, id: e.id, beat: e.beat, ...(e.trigger ? { trigger: true } : {}), ...(e.what ? { what: e.what } : {}), ...(e.sfx ? { sfx: [].concat(e.sfx) } : {}), ...(e.flash ? { flash: e.flash } : {}), ...(e.premise ? { premise: e.premise } : {}) })),
-    beats: beats.map((b) => ({ id: b.id, from: b.from, to: b.to, place: b.place, mood: b.mood, framing: b.framing, preset: b.camera.preset, hud_change: !!(b.hud?.to != null || (b.events || []).some((e) => e.hud_to != null) || !!b.labelChange), ...(b.data ? { data: b.data } : {}) })),
+    events: events.map((e) => ({ t: e.t, id: e.id, beat: e.beat, ...(e.trigger ? { trigger: true } : {}), ...(e.what ? { what: e.what } : {}), ...(e.sfx ? { sfx: [].concat(e.sfx) } : {}), ...(e.flash ? { flash: e.flash } : {}), ...(e.premise ? { premise: e.premise } : {}), ...(e.setup_for ? { setup_for: e.setup_for } : {}) })),
+    beats: beats.map((b) => ({ id: b.id, from: b.from, to: b.to, place: b.place, mood: b.mood, framing: b.framing, preset: b.camera.preset, hud_change: !!(b.hud?.to != null || (b.events || []).some((e) => e.hud_to != null) || !!b.labelChange), ...(b.data ? { data: b.data } : {}), ...(b.act != null ? { act: b.act } : {}), ...(b.fact ? { fact: b.fact } : {}), ...(b.showpiece ? { showpiece: b.showpiece } : {}), ...(b.pov ? { pov: b.pov } : {}) })),
     audio,
   };
   if (B.post) tl.post = B.post;
   if (B.motion_blur) tl.motion_blur = B.motion_blur;
   if (B.qa) tl.qa = B.qa;
   if (B.hook) tl.hook = B.hook; // Hook-Standard 18.12: Typ, Beweis-Ereignis, Frage, Einsatz, Zurückgehaltenes
+  // Version 3.0 / Guide 18.13: Story-Kern (Einsatz, Messgröße, Wende) und Pointe-ID (für die Ursachen-Prüfung setup_for)
+  if (B.story) tl.story = B.story;
+  if (B.story && typeof B.pointe === 'string') tl.pointe_id = B.pointe; // nur neue Produktionen: bestehende timeline.json bleiben identisch
   if (B.endcard) {
     const eb = beats.find((b) => b.id === B.endcard.beat);
     if (!eb) throw new Error(`endcard.beat ${B.endcard.beat} unbekannt`);

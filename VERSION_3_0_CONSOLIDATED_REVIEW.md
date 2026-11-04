@@ -225,3 +225,14 @@ Alle fünf Dateien sind **untracked** (kein Commit, kein Push). Hinweis: Die Con
 - Themen, rote Pullover-Figur, grüne Geld-HUD oder Gesangs-Songs der Referenzen übernehmen.
 - Ich-Perspektive für das ganze Video – nur Hook und Schlüsselmomente (Experiment-Befund: Gefühlsebene leidet, wenn die Figur fehlt).
 - Hektik ohne Prämissenbezug (Guide 18.12 H7 bleibt).
+
+---
+
+## Nachtrag 2026-11-04 (Umsetzung): Korrektur eines Befunds
+
+- **Korrektur [M]:** Die Aussage „keine Bewegungsunschärfe“ (Gap-Analyse L12, hier Abschnitt 4 „Kamera … fehlt: Bewegungsunschärfe (Renderer)“,
+  Abschnitt 6.3 F1) war **falsch**. `pipeline/runtime/stage.js` hat bereits (a) Richtungsunschärfe bei jedem Whip (automatisch),
+  (b) Bewegungsunschärfe durch Teilbild-Akkumulation (`motion_blur: [{ from, to, samples, shutter }]` in `beats.json`, vom Builder
+  durchgereicht), (c) Vignette, Filmkorn, Farbsaum, Blitz, Zoom-Unschärfe. Diese Mittel wurden in Stil-B-Produktionen bisher **nicht genutzt**.
+  Fehlend waren nur Leuchten (Bloom) und Color Grading – beide jetzt als optionale Post-Effekte ergänzt (Guide 18.13 L5).
+- Die vier Analysedokumente bleiben unverändert; die Korrektur steht hier und in Guide 18.13 L7.
