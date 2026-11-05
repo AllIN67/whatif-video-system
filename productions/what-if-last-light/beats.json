@@ -171,7 +171,7 @@
      1.4
     ],
     "yaw": 195,
-    "dist": 1.4,
+    "dist": 2.4,
     "swing": 10
    },
    "line": "l_only",
@@ -356,7 +356,6 @@
    "mood": "shock",
    "act": 1,
    "showpiece": "mass",
-   "transition": "whip",
    "fact": {
     "text": "More than 8 billion people live on Earth.",
     "source": "UN DESA, World Population Prospects 2022 (8 billion on 15 Nov 2022)"
@@ -492,7 +491,7 @@
      0
     ],
     "yaw": 20,
-    "dist": 1.45,
+    "dist": 2.2,
     "swing": 8
    },
    "line": "l_needs",
@@ -937,7 +936,7 @@
      0
     ],
     "yaw": -15,
-    "dist": 1.45,
+    "dist": 2.3,
     "swing": 6
    },
    "line": "l_out",
