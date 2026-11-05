@@ -160,7 +160,7 @@ Lehrerin angeschnitten.
 ## 7. Sicherungspunkt und Rückgängigmachen
 
 - **Stand von `main` vor dem Merge:** Commit `aad9f0292fdd90bc866de9d027990e1abc6e5d89` („Merge pull request #6: Hook-Standard 18.12 + Produktion what-if-no-sleep-30-days“).
-- **Sicherung auf GitHub:** Branch `backup/main-aad9f02-vor-experiment` zeigt unveränderlich auf diesen Commit (nicht löschen).
+- **Sicherung:** Commit `aad9f02` ist Teil der History von `main` und bleibt damit erhalten. Der frühere Branch `backup/main-aad9f02-vor-experiment` ist seit V3 (2026-11-05) überflüssig und zur Löschung freigegeben.
   Ein Tag war geplant, das Pushen von Tags wird aber vom Proxy der Cloud-Umgebung abgelehnt (HTTP 403); lokal anlegen:
   `git tag -a main-vor-experiment-2026-11-01 aad9f02 -m "…" && git push origin main-vor-experiment-2026-11-01`.
 - **Merge-Methode:** echter Merge-Commit (kein Squash, kein Rebase). Dadurch ist das gesamte Experiment **ein** Commit auf `main`.
@@ -173,4 +173,4 @@ Lehrerin angeschnitten.
   Danach entspricht der Dateistand dem von `aad9f02` plus allen Änderungen, die nach dem Merge auf `main` kamen.
   Hinweis: Soll der Experiment-Branch später erneut gemergt werden, zuerst den Revert-Commit revertieren (`git revert <SHA des Revert-Commits>`),
   sonst übernimmt Git die schon einmal gemergten Commits nicht noch einmal.
-- **Nur zum Vergleich ansehen:** `git checkout backup/main-aad9f02-vor-experiment` (ändert `main` nicht).
+- **Nur zum Vergleich ansehen:** `git checkout aad9f02` (ändert `main` nicht).

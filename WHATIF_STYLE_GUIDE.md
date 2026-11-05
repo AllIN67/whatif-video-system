@@ -419,7 +419,7 @@ Abschnitt 16 beschreibt **Stil B**. Jedes Stil-B-Video folgt **genau einem** der
 | Bild | nah, Augenhöhe, langsame Kamerafahrt; viele Requisiten (Bett, Toaster, Bus, Handy-Chat, Schilder) |
 | Bogen | Eskalation → Wendung (≈ 50–57 s) → Schlussbild |
 | Ende | „Part 2?“ **oder** direkte Frage an den Zuschauer („Who would you want it to be?“) → Kommentare |
-| Länge | **61 s** (knapp über 1 Minute) |
+| Länge | **61 s** (knapp über 1 Minute); andere Erzählformen siehe 18.13 F |
 
 ### 16.2 Rezept B2 – „X verschwindet für 5 Sekunden“ (Alternative; Vorbild 17-Mio.-Video R16, dazu R06, R15)
 
@@ -452,7 +452,7 @@ Abschnitt 16 beschreibt **Stil B**. Jedes Stil-B-Video folgt **genau einem** der
 - **[V]** Thema, Länge (≥ 60 s), Format, Sprache, QA und Ausgabe bleiben Teil jedes Auftrags.
 - Stil, Rezept und Referenz stehen im Produktionsprotokoll.
 
-## 18. Produktionsstandard Stil B (verbindlich, eingefroren seit 2026-10-30)
+## 18. Produktionsstandard Stil B – System V3 (verbindlich; Architektur eingefroren seit 2026-10-30, Version 3.0 seit 2026-11-05)
 
 Grundlage: Sichtung und Messung von R07, R19, R20 (`REFERENCE_ANALYSIS.md`, Abschnitt 9) und die Fehleranalyse der bisherigen
 Produktionen (unten 18.9). Alles, was hier steht, ist **[V]** und wird – soweit messbar – von `tools/validate_production.mjs`
@@ -476,7 +476,7 @@ dramaturgisch, `templates/quality_review.md`) → MP4-AUSLIEFERUNG (Datei als An
 |---|---|---|
 | Beat = eine Einstellung an einem Ort mit **mindestens einem sichtbaren Ereignis** | Fehler, wenn ein Beat kein Ereignis hat | R07/R19: jede 4-s-Szene hat eine Aktion |
 | Beatlänge | 1,8–6,0 s (1,0–1,8 s nur als Reaktions-Einschub); Median 2,5–4,6 s | R07/R19 4,0 s, R20 Median 1,5 s |
-| Länge | ≥ 60 s, B1 Standard 61–64 s, 15–18 Beats | |
+| Länge | ≥ 60 s, B1 Standard 61–64 s, 15–18 Beats; Erzählformen B3/B4 (18.13 F) 61–75 s | 18.13 F |
 | Übergänge | Ortswechsel: `dip` (4–6 Frames) oder `whip`; gleicher Ort: harter Schnitt | R19 Abblenden, R20 Whips |
 | Helligkeit an Übergängen | Abblende/Whip zwischen sehr hellen und sehr dunklen Szenen (z. B. Tag ≈ 160 → Nacht ≈ 30 mittlere Helligkeit) vermeiden: `video_qa.py` meldet dann „Einstellung < 4 Frames“ (FAIL), obwohl das Bild sauber ist. Lichtstimmung angleichen oder 6-Frame-Abblende; vorab mit `tools/still.mjs` an den Übergangsframes prüfen | Produktion `what-if-no-sleep-30-days`, LOG 5 |
 | Ereignis-Typen | Aufprall, Verwandlung, Ankunft/Gehen einer Figur, Gegenstand ändert Zustand, Licht kippt, Reaktion | |
