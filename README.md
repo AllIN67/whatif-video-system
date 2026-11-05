@@ -1,6 +1,6 @@
 # whatif-video-system
 
-Produktionssystem für eigenständige, geprüfte **„What if …?“-Kurzvideos** (9:16, mindestens 60 s, Englisch). **Aktives Produktionsziel: Stil B** (stumm, visuelles Storytelling, HUD, Sounddesign) nach dem eingefrorenen Produktionsstandard `WHATIF_STYLE_GUIDE.md` Abschnitt 18. Stil A („Earth“, Sprecher) ist archiviert. Das Repository enthält die kreative und technische Regelbasis, die Belege aus 15 Referenzvideos, einen Claude-Code-Skill für den Arbeitsablauf und Werkzeuge für Analyse und Qualitätsabnahme.
+Produktionssystem für eigenständige, geprüfte **„What if …?“-Kurzvideos** (9:16, mindestens 60 s, Englisch). **Aktives Produktionsziel: Stil B** (stumm, visuelles Storytelling, HUD, Sounddesign) nach dem verbindlichen **Produktionsstandard V3** (`WHATIF_STYLE_GUIDE.md` Abschnitt 18 inkl. 18.12 Hook und **18.13 Version 3.0**). Stil A („Earth“, Sprecher) ist archiviert. Das Repository enthält die kreative und technische Regelbasis, die Belege aus 15 Referenzvideos, einen Claude-Code-Skill für den Arbeitsablauf und Werkzeuge für Analyse und Qualitätsabnahme.
 
 Eigenständiges Projekt – unabhängig von `AllIN67/oxygen-video`; von dort wurden weder Dateien noch Regeln übernommen.
 
@@ -8,7 +8,8 @@ Eigenständiges Projekt – unabhängig von `AllIN67/oxygen-video`; von dort wur
 
 | Datei | Zweck |
 |---|---|
-| `WHATIF_STYLE_GUIDE.md` | **Quelle der Wahrheit**; **Abschnitt 18 = Produktionsstandard Stil B (Vorrang, Architektur-Freeze)** |
+| `WHATIF_STYLE_GUIDE.md` | **Quelle der Wahrheit**; **Abschnitt 18 = Produktionsstandard Stil B, Version 3.0 (Vorrang, Architektur-Freeze)** |
+| `VERSION_3_0_*.md`, `VIDEO_*_6_VIDEOS.md` | Grundlage von V3: Analyse von 6 Videos, Vergleich, Lückenanalyse, Plan, konsolidierte Auswertung |
 | `templates/beats.json`, `templates/quality_review.md` | Vorlage Beat-Sheet; dreistufige Freigabe (technisch, visuell, dramaturgisch) |
 | `productions/what-if-phone-battery-life/` | Referenzproduktion des Standards (Testvideo der Systemüberarbeitung) |
 | `STYLE_A_EARTH.md` | Regeln für Produktionsstil A (Earth, mit Sprecher); Stil B steht im Style-Guide |
@@ -81,14 +82,19 @@ beats.json + text.en.json + scene.js
 
 | Baustein | Datei | Zweck |
 |---|---|---|
-| Schauspiel | `kit/human.js` → `act(spur, t)` | Posen/Gefühle/Blick weich überblendet, Blinzeln, Wangen, Schweißtropfen; 26 Posen, 11 Gefühle |
-| Kamera-Vorlagen | `kit/camera.js` → `shotKeys()` | push, pull, close, orbit, low, high, pov, track, still – mit Bildgrößen-Klasse für die Abwechslungsprüfung |
+| Schauspiel | `kit/human.js` → `act(spur, t)` | Posen/Gefühle/Blick weich überblendet, Blinzeln, Wangen, Schweißtropfen, Tränen; 39 Posen, 13 Gefühle |
+| Kamera-Vorlagen | `kit/camera.js` → `shotKeys()` | push, pull, close, orbit, low, high, pov, track, crane, still – mit Bildgrößen-Klasse für die Abwechslungsprüfung |
 | Beats/Ereignisse | `kit/beats.js` → `beatClock()` | `B.ev('id')`, `B.beat('id')`, `B.active(t)` |
-| Licht je Beat | `kit/core.js` → `applyLook()` | Stimmungen day … storm, blackout, nightRoom; Überblendung als Ereignis |
+| Licht je Beat | `kit/core.js` → `applyLook()` | Stimmungen day … storm, blackout, nightRoom (+ V3: haze, backlight, goldenHour, neonNight, clinical, underwater); Überblendung als Ereignis |
+| Licht & Atmosphäre (V3) | `kit/atmosphere.js` → `kit.atmo` | Lichtquellen (lampPool, stringLights, neonStrip, spotCone, glowSign), Gegenlicht, Struktur-Böden, Wasser mit Spiegelung, Staub/Konfetti, Paletten |
+| Ich-Perspektive (V3) | `kit/pov.js` → `kit.firstPerson()` | Hände/Arme an der Kamera, Gesten mit `act()`, `hold()` |
+| Massen (V3) | `kit/masses.js` → `kit.masses` | instanzierte Menschenmengen, Tribüne, Autofeld, Skyline |
+| Post (V3) | `runtime/stage.js` | optional `bloom`, `grade`; vorhanden: Whip-Unschärfe, `motion_blur`, Vignette, Korn |
 | Effekte | `kit/fx.js` | Regen, Funkenstoß (deterministisch) |
 | HUD | `overlay.js` + `brand.json` | Gestaltung nach R07/R19/R20, Akzente loss/gain/warn, Stufen-Impuls, Endkarte |
-| Klänge | `tools/sfx_synth.py` | 25 selbst erzeugte Klänge inkl. Atmosphären (room, city, rain) |
+| Klänge | `tools/sfx_synth.py` | 38 selbst erzeugte Klänge inkl. Atmosphären (room, city, rain) |
 | QA | `tools/video_qa.py` | zusätzlich: Synchronität der Ereignis-Klänge (±1 Frame), Monotonie-Kandidaten |
+| Balance (V3) | `tools/balance_qa.py` | informativ: Farbhierarchie, Sättigung, Bandanteile, Stille, Dynamik |
 
 Alles in einem Befehl (bricht beim ersten Fehler ab, schreibt `render/run_log.json`):
 

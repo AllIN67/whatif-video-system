@@ -157,6 +157,7 @@ export function validate(timeline, text, { lang = 'en', wordTimes = null, requir
   if (timeline.beats) {
     checkStandardB(timeline, ptl, E, W);
     checkHook(timeline, E, W);
+    checkStory(timeline, text, W);
   }
   else if (requireBeats) E('18.1', 'timeline.json ist nicht aus beats.json erzeugt – Stil-B-Produktionen brauchen productions/<slug>/beats.json (node tools/build_timeline.mjs)');
 
@@ -402,6 +403,64 @@ function validateVoiceover(timeline, text, { words, errors, warnings, E, W }) {
 export function loadWords(dir, timeline) {
   const f = timeline.captions?.words && path.join(dir, timeline.captions.words);
   return f && fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : null;
+}
+
+// Version 3.0 – Story-Kern, Ursachen, Akte (Guide 18.13). Nur Warnungen: die Regeln beruhen auf einer Analyse von 6 Videos
+// (VERSION_3_0_CONSOLIDATED_REVIEW.md) und sind Produktionsregeln, keine belegten Reichweiten-Ursachen. Geprüft wird nur
+// Vorhandensein/Struktur; ob die Ursache OHNE TEXT lesbar ist, entscheidet die Sichtprüfung (quality_review.md C10).
+export const STORY = { titleMaxWords: 7, minActs: 2, setupMinLead: 3.0, quietBeforePointe: [3.0, 0.5], showpieces: ['mass', 'vista', 'glow'] };
+export function checkStory(timeline, text, W) {
+  if (!timeline.story && !timeline.hook) return; // Produktionen vor 2.2 (ohne Hook-Feld) nicht nachträglich bewerten
+  const S = STORY;
+  const r2 = (x) => Math.round(x * 100) / 100;
+  const st = timeline.story;
+  const events = timeline.events || [];
+  if (!st) W('18.13', 'story fehlt in beats.json (stake, measure, question, turn) – Story-Kern vor dem Beat-Sheet festlegen');
+  else {
+    for (const k of ['stake', 'measure', 'question']) if (!String(st[k] || '').trim()) W('18.13', `story.${k} fehlt`);
+    if (!st.turn) W('18.13', 'story.turn fehlt (Ereignis-ID der Wende)');
+    else {
+      const tv = events.find((e) => e.id === st.turn);
+      if (!tv) W('18.13', `story.turn „${st.turn}“ ist kein Ereignis`);
+      else if (timeline.pointe != null && tv.t >= timeline.pointe) W('18.13', `Wende ${st.turn} (${tv.t} s) liegt nicht vor der Pointe (${timeline.pointe} s)`);
+    }
+  }
+  // Pointe braucht eine früher gezeigte Ursache (A2: Rettung unlesbar, Pointe „the driver you saved“ ohne Bezug)
+  if (timeline.pointe_id) {
+    const setups = events.filter((e) => e.setup_for === timeline.pointe_id);
+    if (!setups.length) W('18.13', `keine Ursache für die Pointe markiert (events[].setup_for = "${timeline.pointe_id}") – Aufbau → Auszahlung sichtbar machen`);
+    for (const e of setups) {
+      if (e.t > timeline.pointe - S.setupMinLead) W('18.13', `Ursache ${e.id} (${e.t} s) liegt weniger als ${S.setupMinLead} s vor der Pointe – zu spät, um als Vorbereitung zu wirken`);
+      if (e.premise !== 'visible') W('18.13', `Ursache ${e.id} ist nicht als sichtbar markiert (premise: "visible") – Ursachen müssen im Bild lesbar sein`);
+    }
+  }
+  // Akte: je Akt ein geprüfter Wissensanker und ein Schauwert-Bild
+  const beats = timeline.beats || [];
+  const acts = [...new Set(beats.filter((b) => b.act != null).map((b) => b.act))];
+  if (!acts.length) W('18.13', 'Akte nicht markiert (beats[].act) – Wissensanker/Schauwert je Akt nicht prüfbar');
+  else {
+    if (acts.length < S.minActs) W('18.13', `nur ${acts.length} Akt(e) markiert (min. ${S.minActs})`);
+    for (const a of acts) {
+      const bs = beats.filter((b) => b.act === a);
+      const facts = bs.filter((b) => b.fact);
+      if (!facts.length) W('18.13', `Akt ${a}: kein Wissensanker (beats[].fact { text, source })`);
+      for (const b of facts) if (!String(b.fact.source || '').trim()) W('18.13', `Beat ${b.id}: Wissensanker ohne Quelle (fact.source)`);
+      const sp = bs.filter((b) => b.showpiece);
+      if (!sp.length) W('18.13', `Akt ${a}: kein Schauwert-Bild (beats[].showpiece: ${S.showpieces.join(' | ')})`);
+      for (const b of sp) if (!S.showpieces.includes(b.showpiece)) W('18.13', `Beat ${b.id}: showpiece „${b.showpiece}“ unbekannt (${S.showpieces.join(', ')})`);
+    }
+  }
+  // Ruhe vor der Pointe (Ton als Dramaturgie): Abschnitt silence/calm, der kurz vor der Pointe endet oder sie überdeckt
+  const secs = timeline.audio?.music?.main?.sections;
+  if (secs && timeline.pointe != null) {
+    const [pre, post] = S.quietBeforePointe;
+    const p = timeline.pointe;
+    const quiet = secs.some((x) => ['silence', 'calm'].includes(x.style) && x.to >= p - pre && x.from <= p + post);
+    if (!quiet) W('18.13', `keine Ruhe (silence/calm) im Bereich ${r2(p - pre)}–${r2(p + post)} s vor der Pointe – Musik an die Dramaturgie koppeln`);
+  }
+  // Titel kurz (C-Referenzen 6–7 Wörter, 2 Zeilen)
+  const title = text?.title?.text;
+  if (title && title.trim().split(/\s+/).length > S.titleMaxWords) W('18.13', `Titel hat ${title.trim().split(/\s+/).length} Wörter (empfohlen ≤ ${S.titleMaxWords})`);
 }
 
 // Hook-Entwurf (18.12 H10) liegt nicht im Beat-Sheet, sondern im LOG. Nur über die Kommandozeile geprüft (Datei-basiert):

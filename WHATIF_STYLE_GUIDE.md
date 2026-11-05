@@ -419,7 +419,7 @@ Abschnitt 16 beschreibt **Stil B**. Jedes Stil-B-Video folgt **genau einem** der
 | Bild | nah, Augenhöhe, langsame Kamerafahrt; viele Requisiten (Bett, Toaster, Bus, Handy-Chat, Schilder) |
 | Bogen | Eskalation → Wendung (≈ 50–57 s) → Schlussbild |
 | Ende | „Part 2?“ **oder** direkte Frage an den Zuschauer („Who would you want it to be?“) → Kommentare |
-| Länge | **61 s** (knapp über 1 Minute) |
+| Länge | **61 s** (knapp über 1 Minute); andere Erzählformen siehe 18.13 F |
 
 ### 16.2 Rezept B2 – „X verschwindet für 5 Sekunden“ (Alternative; Vorbild 17-Mio.-Video R16, dazu R06, R15)
 
@@ -436,7 +436,7 @@ Abschnitt 16 beschreibt **Stil B**. Jedes Stil-B-Video folgt **genau einem** der
 ### 16.3 Baukasten und Vorschau
 
 - `pipeline/runtime/kit/` – `createKit({ THREE, scene, renderer, rng })` liefert: `human()` mit **`act(spur, t)`** (weiche Übergänge; Posen: stand, walk, run, wave, sit, armsUp, facepalm, phone, phoneTalk, shrug, slump, lie, liePhone, point, carry, cheer, jump, recoil, lookUp, think, kneel, crouch, reach, pant, fall · Gefühle: neutral, happy, laugh, relief, sad, worried, panic, angry, shock, tired, smug – mit Wangen und Schweißtropfen), `props.*` (Bett, Wecker, Küche, Toaster, Handy mit Sperrbildschirm/Chat/Akku/Anruf, Schild, Auto, Bus, Gebäude mit schaltbarem Fensterlicht, Bank, Baum, Laterne, Regenschirm, Karton, Gedankenblase, Powerbank, Steckdose, Ladekabel, Ladesäule, Taube, Blitz …), `places.*` (bedroom, kitchen, street, park, office, cafe, classroom), `fx.*` (Regen, Funkenstoß), `applyLook()` (Lichtstimmung je Beat: day, overcast, sunset, night, interior, dusk, storm, blackout, nightRoom), `shotKeys()` (Kamera-Vorlagen), `beatClock()` (Beats/Ereignisse aus der Zeitachse), `crowd()`, `sunAt()`, `activeSet()`.
-- Beispiel aller Teile: `productions/_kit_demo/scene.js`.
+- Beispiel aller Teile: `productions/_kit_demo/scene.js`; Version-3.0-Teile (`kit.atmo`, `kit.firstPerson`, `kit.masses`, Bloom/Grading): `productions/_kit_demo_v3/` (Guide 18.13).
 - **Vorschau statt Komplett-Render:** `node tools/still.mjs --production productions/<slug> --at 2,6,10` rendert einzelne Bilder in Sekunden. Jede Einstellung erst per Vorschau prüfen, dann das ganze Video rendern.
 - Fehlt ein Teil, wird es **im Kit** ergänzt (nicht nur in einer Produktion), damit jedes weitere Video schneller geht.
 
@@ -452,7 +452,7 @@ Abschnitt 16 beschreibt **Stil B**. Jedes Stil-B-Video folgt **genau einem** der
 - **[V]** Thema, Länge (≥ 60 s), Format, Sprache, QA und Ausgabe bleiben Teil jedes Auftrags.
 - Stil, Rezept und Referenz stehen im Produktionsprotokoll.
 
-## 18. Produktionsstandard Stil B (verbindlich, eingefroren seit 2026-10-30)
+## 18. Produktionsstandard Stil B – System V3 (verbindlich; Architektur eingefroren seit 2026-10-30, Version 3.0 seit 2026-11-05)
 
 Grundlage: Sichtung und Messung von R07, R19, R20 (`REFERENCE_ANALYSIS.md`, Abschnitt 9) und die Fehleranalyse der bisherigen
 Produktionen (unten 18.9). Alles, was hier steht, ist **[V]** und wird – soweit messbar – von `tools/validate_production.mjs`
@@ -460,7 +460,7 @@ Produktionen (unten 18.9). Alles, was hier steht, ist **[V]** und wird – sowei
 
 ### 18.1 Arbeitsablauf (fest)
 
-THEMA → STORY → **BEAT-SHEET** (`beats.json`) → ASSETS (Baukasten) → ANIMATION (`scene.js` mit `act()`) → SOUND-DESIGN (Ereignisse
+THEMA → HOOK-ENTWURF (18.12) → **STORY-KERN** (18.13 A) → STORY → **BEAT-SHEET** (`beats.json`) → ASSETS (Baukasten) → ANIMATION (`scene.js` mit `act()`) → SOUND-DESIGN (Ereignisse
 im Beat-Sheet) → VORSCHAU (`tools/still.mjs`) → RENDERING (`pipeline/run.mjs`) → QUALITÄTSKONTROLLE (technisch + visuell +
 dramaturgisch, `templates/quality_review.md`) → MP4-AUSLIEFERUNG (Datei als Anhang senden).
 
@@ -476,7 +476,7 @@ dramaturgisch, `templates/quality_review.md`) → MP4-AUSLIEFERUNG (Datei als An
 |---|---|---|
 | Beat = eine Einstellung an einem Ort mit **mindestens einem sichtbaren Ereignis** | Fehler, wenn ein Beat kein Ereignis hat | R07/R19: jede 4-s-Szene hat eine Aktion |
 | Beatlänge | 1,8–6,0 s (1,0–1,8 s nur als Reaktions-Einschub); Median 2,5–4,6 s | R07/R19 4,0 s, R20 Median 1,5 s |
-| Länge | ≥ 60 s, B1 Standard 61–64 s, 15–18 Beats | |
+| Länge | ≥ 60 s, B1 Standard 61–64 s, 15–18 Beats; Erzählformen B3/B4 (18.13 F) 61–75 s | 18.13 F |
 | Übergänge | Ortswechsel: `dip` (4–6 Frames) oder `whip`; gleicher Ort: harter Schnitt | R19 Abblenden, R20 Whips |
 | Helligkeit an Übergängen | Abblende/Whip zwischen sehr hellen und sehr dunklen Szenen (z. B. Tag ≈ 160 → Nacht ≈ 30 mittlere Helligkeit) vermeiden: `video_qa.py` meldet dann „Einstellung < 4 Frames“ (FAIL), obwohl das Bild sauber ist. Lichtstimmung angleichen oder 6-Frame-Abblende; vorab mit `tools/still.mjs` an den Übergangsframes prüfen | Produktion `what-if-no-sleep-30-days`, LOG 5 |
 | Ereignis-Typen | Aufprall, Verwandlung, Ankunft/Gehen einer Figur, Gegenstand ändert Zustand, Licht kippt, Reaktion | |
@@ -633,6 +633,76 @@ sackt zusammen (`recoil` → `slump`, `panic`) – *jeder Fingertipp des Kindes 
 Eskalation bis 15 s: Helligkeit auf Maximum = Atemnot; ein Kollege „leiht“ sich das Ladekabel; der Chef ruft per Video an. Zurückgehalten:
 Stromausfall der Stadt und der Pointe zu Hause. Toast und Bus entfallen.
 
+### 18.13 Version 3.0 – Weiterentwicklung aus der Analyse von 6 Videos (verbindlich ab 3.0)
+
+Grundlage: `VIDEO_ANALYSIS_6_VIDEOS.md`, `VIDEO_COMPARISON_6_VIDEOS.md`, `VERSION_3_0_GAP_ANALYSIS.md`,
+`VERSION_3_0_IMPROVEMENT_PLAN.md`, `VERSION_3_0_CONSOLIDATED_REVIEW.md` (2 eigene Videos, 2 Videos des 80k-Kanals, 2 Videos eines
+Millionen-Kanals). **Die Regeln sind Produktionsregeln aus wiederkehrenden Unterschieden [M]/[B] – keine belegten Ursachen für
+Reichweite** (keine Abbruchkurven, sehr unterschiedliche Kanalgrößen). Wirkung je Video an der Abbruchkurve prüfen. 18.12 bleibt für
+0–15 s in Kraft; 18.13 ergänzt, ersetzt nichts.
+
+**A. Story-Kern (vor dem Beat-Sheet, nach dem Hook-Entwurf).** Beleg: B1/B2/C1/C2 halten **eine** Prämisse und **eine** Messgröße bis zum
+Schluss; A1 reihte Gags ohne Folgen, A2 wechselte bei 7,5 s die Prämisse.
+| # | Regel | Prüfung |
+|---|---|---|
+| S1 | **Ein Einsatz, eine Messgröße:** `story.stake` (was steht auf dem Spiel), `story.measure` (was das HUD misst). Jeder Beat verändert diesen Wert und trägt zur Titelfrage bei; Label-Wechsel nur als Phase derselben Größe. Ereigniszähler („wie oft passiert X“) nur, wenn jede Zählung den Einsatz erhöht. | Validator `[18.13]` (Feld) + QA C |
+| S2 | **Spannungsbogen:** Aufbau → Wende (`story.turn`, Ereignis vor der Pointe) → Höhepunkt → Auflösung; Hoffnung/Rückschlag (18.7) konkret im Beat-Sheet. | Validator + QA C |
+| S3 | **Ursachen sichtbar:** Jedes Ereignis, auf das sich Wende/Pointe beziehen, trägt `setup_for: "<Ereignis-ID>"` und `premise: "visible"`, liegt ≥ 3 s vor der Pointe und ist **ohne Untertitel** verständlich (wer tut was, was ist die Gefahr). | Validator (Struktur) + QA C10 (Vorschaubild ohne Text) |
+| S4 | **Wissensanker je Akt:** Akte im Beat-Sheet markieren (`beats[].act`); je Akt mindestens eine reale, geprüfte Zahl/Tatsache (`beats[].fact { text, source }`), Quelle im LOG. | Validator |
+| S5 | **Text:** Titel ≤ 7 Wörter / 2 Zeilen; Zeilen bevorzugt 2. Person Präsens; Gags müssen im Bild lesbar sein, nicht nur in der Zeile. | Validator (Titel) + QA C |
+
+**B. Perspektive.** Beleg: C1/C2 zeigen Hook und Schlüsselmomente aus Ich-Sicht mit eigenen Händen; A1/A2 nie.
+- `kit.firstPerson({ camera, scene })` – Hände/Arme an der Kamera, Gesten `rest, hold, show, reach, push, grip, table, lie, flail, point`
+  mit `act()` (weiche Übergänge), `hold(obj)`. Kamera-Vorlage `pov` dazu. Beat-Feld `pov: true` (Dokumentation).
+- Einsatz: **Hook-Entwurf prüft immer eine Ich-Variante** (18.12 H10); im Video für Hook und 2–4 Schlüsselmomente, **nicht** durchgehend –
+  Gefühle dann über Bezugsfiguren, Hände und Ton (Experiment fold-paper: Figur in 10/19 Beats → Gefühlsebene schwächer).
+
+**C. Schauwert und Dichte.** Beleg: C zeigt in fast jedem Beat Masse/Weite/Glanz; Bildveränderung 3–15 s A 2,5–3,1 vs. C 7,3–8,0 [M].
+- **Je Akt mindestens ein Schauwert-Bild** (`beats[].showpiece`: `mass` | `vista` | `glow`), möglichst als Höhepunkt des Akts. Validator `[18.13]`.
+- Kit: `kit.masses.crowd({ count })` (Hunderte–Tausende Figuren, instanziert, `anim: idle|bob|cheer|wave`), `stands()` (Tribüne mit
+  Publikum), `carField()`, `skyline()` (Kulisse, nachts leuchtende Fenster). Nah vor der Kamera weiterhin `kit.human()`.
+- Bewegung **innerhalb** der Einstellung statt mehr Schnitte: Vordergrund-Parallaxe, Menge in Bewegung, Teilchen (`atmo.dust`, `atmo.confetti`).
+
+**D. Licht, Farbe, Atmosphäre.** Beleg [M]: Unsere Bilder waren **gesättigter** als die Referenzen (stark gesättigte Pixel 34–38 % vs.
+12–14 %), mit großer bunter Akzentfläche (7–10 % vs. 0,5–1,4 %) und schwacher Farbhierarchie; [B] den Referenzen fehlt nicht Farbe, sondern
+uns fehlen Lichtquellen, Oberflächenstruktur, Dunst und Glanz. **Sättigung nicht erhöhen.**
+| # | Regel |
+|---|---|
+| L1 | **Farbhierarchie je Akt:** eine dominante Lichtfarbe/-temperatur, gedämpfte Kulisse (`atmo.palette('coolCity' …)`), **ein** Akzent (Hauptfigur oder Schlüsselobjekt). Keine zusätzlichen bunten Flächen. |
+| L2 | **Motiviertes Licht:** In jeder Nacht- und Innenszene sind Lichtquellen im Bild und werfen Licht (`atmo.lampPool`, `stringLights`, `neonStrip`, `spotCone`, `glowSign`, beleuchtete Fenster). Lichtstärken in Candela (20–100 für Lampen). |
+| L3 | **Tiefe:** Außen mit Dunst (`haze`, `goldenHour`, `backlight`), Kulisse (`skyline`), Gegenlicht über `atmo.sunBehind()`; Innen mit Lichtabfall statt gleichmäßiger Helligkeit. |
+| L4 | **Oberflächen:** Böden/Flächen in Schauplätzen mit Struktur (`atmo.ground('cobble' | 'brick' | 'planks' | 'tiles' | 'asphalt' | 'concrete' | 'grass')`), Wasser mit Glanz/Spiegelung (`atmo.water({ mirror: true })` nach `await kit.atmo.loadReflector()`; ≈ doppelte Renderzeit für diese Bilder). |
+| L5 | **Grading/Leuchten je Akt** über `fx` der Szene oder `post` im Beat-Sheet: `bloom` (0,3–1,0, `bloomThreshold` 0,7–0,9) für Neon/Lampen/Spitzlichter, `grade { saturation 0,85–1,0, contrast 1,0–1,1, tint [r,g,b], lift }`. Farbwechsel zwischen Akten über Licht und Grading, nicht über bunte Requisiten. |
+| L6 | Neue Stimmungen: `haze`, `backlight`, `goldenHour`, `neonNight`, `clinical`, `underwater` (bestehende unverändert). |
+| L7 | **Bewegungsunschärfe existiert bereits:** Whips erhalten Richtungsunschärfe automatisch; für schnelle Bewegungen (Sturz, Fahrt, Kranfahrt) `motion_blur: [{ from, to, samples: 6–8, shutter: 0.5 }]` im Beat-Sheet (Renderzeit × samples in diesem Bereich). |
+| L8 | Messung: `python3 tools/balance_qa.py render/final.mp4 --out qa/balance.json` (informativ: Sättigung, Akzentfläche, dominanter Farbton; Ton-Bänder, Stille, Dynamik). |
+
+**E. Ton.** Beleg [M]: A 64–77 % der Energie < 100 Hz, 0,9–7 % bei 2–8 kHz, 0 % Stille, Dynamik 21–23 dB; C1/C2 11–27 % / 5–17 %, bis 6 %
+Stille, 30–48 dB; C wechselt Musikabschnitte exakt auf Story-Beats. **Musikstile werden erst nach der Hörprüfung des Auftraggebers
+(A1 vs. C1 am Handy) geändert.** Bis dahin:
+- Musikabschnitte an Wende, Höhepunkt und Pointe binden; **Ruhe (`silence`/`calm`) im Bereich 3 s vor bis 0,5 s nach der Pointe** (Validator `[18.13]`).
+- Leiser Einstieg ist erlaubt (C1 0–10 s leise) – der Hook trägt über Bild und Einsatz, nicht über Lautstärke.
+- `balance_qa.py` zeigt Bassüberhang/fehlende Präsenz; Ergebnis in die Hörprüfung mitgeben.
+
+**F. Erzählformen (zusätzlich zu B1/B2, Wahl im LOG begründen).** Messgröße, HUD-Modi und Prüfregeln bleiben gleich.
+| Form | Vorbild | Motor | HUD | Länge |
+|---|---|---|---|---|
+| B3 Ritual + doppelte Uhr | C1 | dieselbe Handlung je Beat in steigender Größenordnung; Budget- und Zeitzähler; Umdeutung am Ende | `steps`/`geo` + Zeit-Label | 61–75 s |
+| B4 Überlebensbogen mit Zeitsprüngen | C2 | eine Person, Zeitsprung-HUD (DAY → WEEK), Hoffnung/Rückschlag, Bezugsfigur, Fakten, emotionale Auflösung | `steps` | 65–75 s |
+| B5 Maßstabs-Entdeckungsreise | B2, B1 | eine Größe über viele Größenordnungen, je Stufe eine neue Welt | `geo` + `crane` | 61–64 s |
+| B6 Ausbreitung + Wende | A2 (verbessert) | Zahl steigt bis zum Planeten, dann kippt sie; Rückkehr zur Person | `geo` | 61–64 s |
+Rezept-Feld `recipe` bleibt `B1`/`B2` für die Prüfregeln; die Form steht im LOG und in `story`.
+
+**G. Bewusst nicht geändert:** Schnittfrequenz (A = C [M]), Lautheitsziel −14 LUFS, Figurenmodell, HUD-Gestaltung und Signalfarbe,
+Kameraarchitektur, Beat-Sheet-Grundformat, Determinismus, bestehende Prüfregeln, bestehende Kit-Teile/Stimmungen/Musikstile
+(alte Produktionen rendern bit-identisch – geprüft an 8 Standbildern von `what-if-phone-battery-life` und `what-if-fold-paper-42-times`).
+Keine Themen, Figuren, HUD-Optik oder Gesangs-Songs der Referenzen übernehmen.
+
+**Freeze-Vermerk (18.10):** Additiv sind neue Kit-Module (`atmosphere.js`, `pov.js`, `masses.js`), Beat-Sheet-Felder (`story`,
+`beats[].act/fact/showpiece/pov`, `events[].setup_for`), Warnregeln `[18.13]` und `tools/balance_qa.py`. **Ausnahme mit Begründung:**
+`pipeline/runtime/stage.js` erhielt zwei optionale Post-Effekte (`bloom`, `grade`), Standard = aus; nachgewiesen bit-identische Bilder
+bestehender Produktionen. Begründung: Licht/Glanz ist der in der Analyse am deutlichsten sichtbare Abstand (Abschnitt D des Reviews).
+
 ### Änderungsprotokoll
 
 | Datum | Version | Änderung | Begründung |
@@ -644,3 +714,4 @@ Stromausfall der Stadt und der Pointe zu Hause. Toast und Bus entfallen.
 | 2026-10-30 | 2.0 | Abschnitt 18 „Produktionsstandard Stil B“ (verbindlich, Vorrang), Architektur-Freeze 18.10; Stil B als einziges aktives Ziel, Stil A archiviert (17); HUD-Gestaltung und Signalfarbe nach R07/R19/R20 (18.5, ersetzt 6.3 HUD-Schrift „Monospace“ und 6.4 Punkt 2/3 „nicht Gold“); 16.3 Kit-Bestand | Auftrag des Nutzers (finale Systemüberarbeitung); Sichtung R07/R19/R20 (`REFERENCE_ANALYSIS.md` 9); Fehleranalyse 18.9; Testvideo `productions/what-if-phone-battery-life` |
 | 2026-10-30 | 2.1 | 18.11: abgenommenes Testvideo als verbindliches Mindestniveau; Validator erzwingt `beats.json` für Stil B und warnt bei Unterschreitung; `run.mjs` legt `quality_review.md` an | Abnahme durch den Auftraggeber; Prüfung, ob der Standard im Ablauf greift |
 | 2026-10-31 | 2.2 | 18.12 Hook-Standard (Unmöglichkeitstest, Hook-Typen, Beweis-Ereignis, Prämissen-Ereignisse, Füllstoff, Vorwegnahme, Hook-Entwurf); 2, 3.1, 16.1, 18.7, 18.11 angepasst; Beat-Sheet additiv `hook` + `events[].premise`; Validator-Regeln `[18.12]`; QA-Abschnitt H | Analytics Akku-Video (≈ 50 % Abgang bis 14 s), Hook-Analyse `REFERENCE_ANALYSIS.md` 10; Regeltext von 2/3.1/16.1 schrieb einen Alltagseinstieg vor (10.4). Auftrag des Nutzers 2026-10-31 |
+| 2026-11-04 | 3.0 | 18.13: Story-Kern (Einsatz, Messgröße, Wende, sichtbare Ursachen, Wissensanker je Akt), Ich-Perspektive (`kit.firstPerson`), Schauwert/Massen (`kit.masses`), Licht & Atmosphäre (`kit.atmo`: Stimmungen, Lichtquellen, Oberflächen, Wasser, Teilchen, Paletten), optionale Post-Effekte `bloom`/`grade`, Erzählformen B3–B6, Warnregeln `[18.13]`, `tools/balance_qa.py`. Korrektur: Bewegungsunschärfe war bereits vorhanden (`motion_blur`, Whip-Unschärfe) | Analyse von 6 Videos (eigen / 80k / Millionen-Kanal), konsolidierte Auswertung; Auftrag des Nutzers 2026-11-04. Alte Produktionen bit-identisch geprüft |

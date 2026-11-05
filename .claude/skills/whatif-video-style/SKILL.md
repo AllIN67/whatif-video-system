@@ -32,6 +32,11 @@ erneute Repository-Analyse pro Video. Neue Kit-Teile sind erlaubt, wenn ein Them
   bewerten („Sähe dieses Bild ohne die Prämisse genauso aus?“). Den Typ wählen, der zum Thema passt, nicht den vom letzten Video.
   Kein Aufwachen/Ankommen/Alltag als Einstieg; Alltag ist Schauplatz, nicht Ereignis. Bis 15 s nur Prämissen-Konsequenzen,
   jede größer/näher/persönlicher. Entwurf + Wahl ins LOG.
+- **Story-Kern (Guide 18.13 A, Pflicht nach dem Hook-Entwurf):** ein Einsatz (`story.stake`), eine Messgröße (`story.measure`),
+  Wende (`story.turn`); jeder Beat verändert den Einsatz und trägt zur Titelfrage bei. Ursachen der Pointe sichtbar
+  (`events[].setup_for`, ohne Text lesbar). Je Akt ein geprüfter Wissensanker (`beats[].fact`) und ein Schauwert-Bild
+  (`beats[].showpiece`). Erzählform wählen (B1/B2 oder B3–B6, Guide 18.13 F) und im LOG begründen. Hook-Entwurf prüft immer
+  auch eine **Ich-Variante** (`kit.firstPerson`).
 - 15–18 Beats à 2–4,5 s, ≥ 5 Orte, ≥ 4 Gefühle der Hauptfigur mit Entwicklung. Zahlen mit Quelle im LOG.
 - `productions/<slug>/` anlegen, `templates/production_log.md` → `LOG.md`.
 
@@ -50,12 +55,17 @@ erneute Repository-Analyse pro Video. Neue Kit-Teile sind erlaubt, wenn ein Them
 
 - `scene.js` nur mit dem Kit: `kit.human().act(spur, t)`, `kit.beatClock(timeline)` für alle Zeiten, `beats[].data` für Positionen,
   `kit.applyLook()` je Beat, `kit.fx`, `props`, `places`. Keine Zeitkonstanten, keine harten Posenwechsel.
+- **Licht & Atmosphäre (18.13 D):** je Akt eine Grundstimmung + ein Akzent (`kit.atmo.palette`), sichtbare Lichtquellen
+  (`atmo.lampPool/stringLights/neonStrip/spotCone/glowSign`), Dunst/Kulisse (`haze`, `goldenHour`, `backlight`, `masses.skyline`),
+  Struktur-Böden (`atmo.ground`), `bloom`/`grade` über `fx`. **Sättigung nicht erhöhen.** Massen über `kit.masses`,
+  Ich-Perspektive über `kit.firstPerson({ camera, scene })`. Vorlage: `productions/_kit_demo_v3/scene.js`.
 - Fehlende Teile im Kit ergänzen (Schnittstellen nicht ändern) und im LOG nennen.
 
 ## Schritt 4 – Vorschau (Pflicht vor dem Rendern)
 
 - `node tools/still.mjs --production productions/<slug> --at <Mitte jedes Beats + Ereigniszeiten>` und `stills/contact.jpg` ansehen.
 - Prüfen: Figur im Bild (9:16 = schmaler Bildwinkel), Gesicht lesbar, Kamera nicht in Wänden/Figuren, Licht je Ort, HUD/Texte frei.
+- **Ursachen-Vorschau ohne Text:** jedes `setup_for`-Ereignis einzeln ansehen (QA C10) – unverständlich → Nahaufnahme/Reaktion ergänzen.
 - **Hook-Vorschau** `--at 0,0.5,1,2,3,5,8,12,15` und `quality_review.md` Abschnitt H vor dem Rendern ausfüllen; ein Nein bei H1–H3 → Einstieg neu.
 - Korrigieren in `beats.json` (Kamera/Positionen) bzw. `scene.js`, neu bauen, erneut Vorschau – bis alle Beats stimmen.
 
@@ -67,7 +77,8 @@ erneute Repository-Analyse pro Video. Neue Kit-Teile sind erlaubt, wenn ein Them
 
 ## Schritt 6 – Qualitätskontrolle (drei Stufen, vollständig)
 
-1. **Technisch:** `qa/report.md` lesen (Status, Synchronität der Ereignis-Klänge, Monotonie-Kandidaten, alle Meldungen).
+1. **Technisch:** `qa/report.md` lesen (Status, Synchronität der Ereignis-Klänge, Monotonie-Kandidaten, alle Meldungen);
+   zusätzlich `python3 tools/balance_qa.py productions/<slug>/render/final.mp4 --out productions/<slug>/qa/balance.json` (informativ, 18.13 L8).
 2. **Visuell:** **jeden** `qa/sheet_*.jpg` (inkl. Ende), `qa/shots.jpg`, **jeden** Streifen in `qa/strips/` ansehen; jede REVIEW-Meldung
    als „beabsichtigt“ (Grund) oder „Fehler“ einstufen.
 3. **Dramaturgisch:** Ablauf gegen Beat-Sheet prüfen (Einstieg, Entwicklung, Eskalation, Pointe, Ende); **Hook** nach Abschnitt H.

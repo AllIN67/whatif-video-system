@@ -34,7 +34,7 @@ const files = await withStage({ production: path.relative(ROOT, prodDir), lang: 
     await page.evaluate((k) => window.__stage.setFrame(k), n);
     if (st.errors.length) throw new Error(`Fehler bei ${s} s: ${st.errors.join(' | ')}`);
     const f = path.join(out, `t${s.toFixed(2).padStart(6, '0')}.png`);
-    fs.writeFileSync(f, await page.screenshot({ type: 'png', clip: { x: 0, y: 0, width: 1080, height: 1920 } }));
+    fs.writeFileSync(f, await page.screenshot({ type: 'png', timeout: 600000, clip: { x: 0, y: 0, width: 1080, height: 1920 } }));
     done.push(f);
     console.log(`${s} s → ${path.relative(ROOT, f)}`);
   }

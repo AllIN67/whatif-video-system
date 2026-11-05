@@ -29,6 +29,10 @@ Nichts als geprüft eintragen, was nicht angesehen wurde.
 | HUD + Texte lesbar, in der Sicherheitszone, HUD reagiert sichtbar auf Ereignisse | | |
 | Licht, Schatten, Farben stimmig; keine Renderfehler (Flackern, Schattenakne, Z-Fighting) | | |
 | Stilspezifikation Guide 18 eingehalten (Würfel-Figuren mit Gesicht, Requisiten, Tiefe) | | |
+| **L1 Farbhierarchie (18.13 D):** je Akt eine dominante Lichtfarbe, gedämpfte Kulisse, **ein** Akzent; `qa/balance.json` (Akzentfläche, Sättigung) gesichtet | | |
+| **L2 Motiviertes Licht:** Nacht-/Innenszenen mit sichtbaren Lichtquellen und Lichtabfall; Gesichter lesbar | | |
+| **L3/L4 Tiefe & Oberflächen:** Dunst/Kulisse/Gegenlicht außen, strukturierte Böden an Schauplätzen, Glanz wo passend | | |
+| **Schauwert je Akt** (Masse/Weite/Glanz) sichtbar und nicht nur Hintergrund | | |
 
 ## C. Dramaturgisch (Ansehen in Echtzeit, ohne Ton und mit Ton)
 
@@ -40,6 +44,10 @@ Nichts als geprüft eintragen, was nicht angesehen wurde.
 | Eskalation steigt (HUD-Verlauf + Gefühle + Maßstab) | | |
 | Ende: Wendung/Pointe als eigenes Ereignis mit Ton, danach ≤ 5 s, Frage/Loop | | |
 | Vergleich mit Referenzen (R07/R19/R20): Was ist gleichwertig, was schwächer? | | |
+| **C9 Ein Einsatz (18.13 S1):** Prämisse und Messgröße bleiben bis zum Ende dieselben; jeder Beat trägt zur Titelfrage bei | | |
+| **C10 Ursache ohne Text (18.13 S3):** Vorschaubild jedes `setup_for`-Ereignisses **ohne Untertitel**: Wer tut was, was ist die Gefahr? | | |
+| **C11 Ich-Perspektive:** im Hook-Entwurf geprüft; wo eingesetzt, sind Hände/Gegenstand groß genug und das Gefühl über Bezugsfigur/Ton lesbar | | |
+| **C12 Wissensanker:** je Akt eine geprüfte Zahl/Tatsache, Quelle im LOG | | |
 
 ## H. Hook (0–15 s, Guide 18.12) – vor dem Rendern an Vorschaubildern, nach dem Rendern am Video
 
