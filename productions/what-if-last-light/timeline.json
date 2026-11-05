@@ -1,0 +1,2059 @@
+{
+ "_comment": "ERZEUGT von tools/build_timeline.mjs aus beats.json – nicht von Hand ändern.",
+ "fps": 30,
+ "duration": 61,
+ "seed": 23,
+ "recipe": "B1",
+ "pointe": 56.3,
+ "title": {
+  "in": 0,
+  "out": 3.4
+ },
+ "shots": [
+  {
+   "id": "b_wave",
+   "from": 0,
+   "to": 4,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 0,
+      "pos": [
+       0,
+       1.665,
+       1.6
+      ],
+      "look": [
+       0,
+       0.205,
+       -60
+      ],
+      "fov": 55
+     },
+     {
+      "t": 1,
+      "pos": [
+       0.029,
+       1.64,
+       1.563
+      ],
+      "look": [
+       0.009,
+       0.198,
+       -60
+      ],
+      "fov": 55
+     },
+     {
+      "t": 2,
+      "pos": [
+       -0.014,
+       1.633,
+       1.525
+      ],
+      "look": [
+       -0.004,
+       0.198,
+       -60
+      ],
+      "fov": 55
+     },
+     {
+      "t": 3,
+      "pos": [
+       -0.023,
+       1.651,
+       1.488
+      ],
+      "look": [
+       -0.007,
+       0.205,
+       -60
+      ],
+      "fov": 55
+     },
+     {
+      "t": 4,
+      "pos": [
+       0.024,
+       1.613,
+       1.45
+      ],
+      "look": [
+       0.007,
+       0.195,
+       -60
+      ],
+      "fov": 55
+     }
+    ]
+   }
+  },
+  {
+   "id": "b_closeup",
+   "from": 4,
+   "to": 7.8,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 4,
+      "pos": [
+       0.037,
+       1.64,
+       -0.089
+      ],
+      "look": [
+       0.3,
+       1.62,
+       1.4
+      ],
+      "fov": 38
+     },
+     {
+      "t": 7.8,
+      "pos": [
+       -0.155,
+       1.64,
+       0.15
+      ],
+      "look": [
+       0.3,
+       1.62,
+       1.4
+      ],
+      "fov": 38
+     }
+    ]
+   }
+  },
+  {
+   "id": "b_street",
+   "from": 7.8,
+   "to": 11.8,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 7.8,
+      "pos": [
+       203.208,
+       1.6,
+       -4.307
+      ],
+      "look": [
+       200,
+       1.3,
+       1
+      ],
+      "fov": 46
+     },
+     {
+      "t": 11.8,
+      "pos": [
+       202.092,
+       1.6,
+       -2.873
+      ],
+      "look": [
+       200,
+       1.3,
+       1
+      ],
+      "fov": 46
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "b_stream",
+   "from": 11.8,
+   "to": 15.4,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 11.8,
+      "pos": [
+       199.041,
+       13.65,
+       13.958
+      ],
+      "look": [
+       200,
+       0,
+       3
+      ],
+      "fov": 48
+     },
+     {
+      "t": 15.4,
+      "pos": [
+       200.863,
+       12.35,
+       12.862
+      ],
+      "look": [
+       200,
+       0,
+       3
+      ],
+      "fov": 48
+     }
+    ]
+   }
+  },
+  {
+   "id": "b_avenue",
+   "from": 15.4,
+   "to": 19.8,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 15.4,
+      "pos": [
+       398.746,
+       1.3,
+       -10.066
+      ],
+      "look": [
+       400,
+       1.8,
+       -22
+      ],
+      "fov": 50
+     },
+     {
+      "t": 19.8,
+      "pos": [
+       401.003,
+       1.3,
+       -12.453
+      ],
+      "look": [
+       400,
+       1.8,
+       -22
+      ],
+      "fov": 50
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "whip",
+    "direction": "left"
+   }
+  },
+  {
+   "id": "b_plaza",
+   "from": 19.8,
+   "to": 24.2,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 19.8,
+      "pos": [
+       601.593,
+       5.5,
+       4.741
+      ],
+      "look": [
+       600,
+       2,
+       0
+      ],
+      "fov": 48
+     },
+     {
+      "t": 24.2,
+      "pos": [
+       605.59,
+       5.5,
+       14.992
+      ],
+      "look": [
+       600,
+       2,
+       0
+      ],
+      "fov": 48
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "b_face",
+   "from": 24.2,
+   "to": 27.4,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 24.2,
+      "pos": [
+       600.432,
+       2.44,
+       1.505
+      ],
+      "look": [
+       600,
+       2.42,
+       0
+      ],
+      "fov": 38
+     },
+     {
+      "t": 27.4,
+      "pos": [
+       600.56,
+       2.44,
+       1.258
+      ],
+      "look": [
+       600,
+       2.42,
+       0
+      ],
+      "fov": 38
+     }
+    ]
+   }
+  },
+  {
+   "id": "b_park",
+   "from": 27.4,
+   "to": 32,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 27.4,
+      "pos": [
+       801.605,
+       0.6,
+       5.972
+      ],
+      "look": [
+       800,
+       16,
+       -40
+      ],
+      "fov": 56
+     },
+     {
+      "t": 32,
+      "pos": [
+       808.903,
+       0.6,
+       -4.293
+      ],
+      "look": [
+       800,
+       16,
+       -40
+      ],
+      "fov": 56
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "b_space",
+   "from": 32,
+   "to": 36.2,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 32,
+      "pos": [
+       -2.615,
+       0,
+       5029.886
+      ],
+      "look": [
+       0,
+       0,
+       5000
+      ],
+      "fov": 40
+     },
+     {
+      "t": 33.05,
+      "pos": [
+       -1.309,
+       0,
+       5029.971
+      ],
+      "look": [
+       0,
+       0,
+       5000
+      ],
+      "fov": 40
+     },
+     {
+      "t": 34.1,
+      "pos": [
+       0,
+       0,
+       5030
+      ],
+      "look": [
+       0,
+       0,
+       5000
+      ],
+      "fov": 40
+     },
+     {
+      "t": 35.15,
+      "pos": [
+       1.309,
+       0,
+       5029.971
+      ],
+      "look": [
+       0,
+       0,
+       5000
+      ],
+      "fov": 40
+     },
+     {
+      "t": 36.2,
+      "pos": [
+       2.615,
+       0,
+       5029.886
+      ],
+      "look": [
+       0,
+       0,
+       5000
+      ],
+      "fov": 40
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "b_battery",
+   "from": 36.2,
+   "to": 40.2,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 36.2,
+      "pos": [
+       600,
+       2.465,
+       0.1
+      ],
+      "look": [
+       600,
+       0.905,
+       8
+      ],
+      "fov": 55
+     },
+     {
+      "t": 37.2,
+      "pos": [
+       600.029,
+       2.44,
+       0.113
+      ],
+      "look": [
+       600.009,
+       0.898,
+       8
+      ],
+      "fov": 55
+     },
+     {
+      "t": 38.2,
+      "pos": [
+       599.986,
+       2.433,
+       0.125
+      ],
+      "look": [
+       599.996,
+       0.898,
+       8
+      ],
+      "fov": 55
+     },
+     {
+      "t": 39.2,
+      "pos": [
+       599.977,
+       2.451,
+       0.138
+      ],
+      "look": [
+       599.993,
+       0.905,
+       8
+      ],
+      "fov": 55
+     },
+     {
+      "t": 40.2,
+      "pos": [
+       600.024,
+       2.413,
+       0.15
+      ],
+      "look": [
+       600.007,
+       0.895,
+       8
+      ],
+      "fov": 55
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip"
+   }
+  },
+  {
+   "id": "b_worry",
+   "from": 40.2,
+   "to": 44.2,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 40.2,
+      "pos": [
+       599.068,
+       2.4,
+       3.477
+      ],
+      "look": [
+       600,
+       2.3,
+       0
+      ],
+      "fov": 46
+     },
+     {
+      "t": 41.2,
+      "pos": [
+       599.53,
+       2.4,
+       3.569
+      ],
+      "look": [
+       600,
+       2.3,
+       0
+      ],
+      "fov": 46
+     },
+     {
+      "t": 42.2,
+      "pos": [
+       600,
+       2.4,
+       3.6
+      ],
+      "look": [
+       600,
+       2.3,
+       0
+      ],
+      "fov": 46
+     },
+     {
+      "t": 43.2,
+      "pos": [
+       600.47,
+       2.4,
+       3.569
+      ],
+      "look": [
+       600,
+       2.3,
+       0
+      ],
+      "fov": 46
+     },
+     {
+      "t": 44.2,
+      "pos": [
+       600.932,
+       2.4,
+       3.477
+      ],
+      "look": [
+       600,
+       2.3,
+       0
+      ],
+      "fov": 46
+     }
+    ]
+   }
+  },
+  {
+   "id": "b_onepercent",
+   "from": 44.2,
+   "to": 47.8,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 44.2,
+      "pos": [
+       600,
+       2.435,
+       0.1
+      ],
+      "look": [
+       600,
+       1.205,
+       5
+      ],
+      "fov": 52
+     },
+     {
+      "t": 45.1,
+      "pos": [
+       600.029,
+       2.41,
+       0.125
+      ],
+      "look": [
+       600.009,
+       1.198,
+       5
+      ],
+      "fov": 52
+     },
+     {
+      "t": 46,
+      "pos": [
+       599.986,
+       2.403,
+       0.15
+      ],
+      "look": [
+       599.996,
+       1.198,
+       5
+      ],
+      "fov": 52
+     },
+     {
+      "t": 46.9,
+      "pos": [
+       599.977,
+       2.421,
+       0.175
+      ],
+      "look": [
+       599.993,
+       1.205,
+       5
+      ],
+      "fov": 52
+     },
+     {
+      "t": 47.8,
+      "pos": [
+       600.024,
+       2.383,
+       0.2
+      ],
+      "look": [
+       600.007,
+       1.195,
+       5
+      ],
+      "fov": 52
+     }
+    ]
+   }
+  },
+  {
+   "id": "b_surge",
+   "from": 47.8,
+   "to": 52,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 47.8,
+      "pos": [
+       603.661,
+       13.65,
+       8.222
+      ],
+      "look": [
+       600,
+       0,
+       0
+      ],
+      "fov": 48
+     },
+     {
+      "t": 52,
+      "pos": [
+       604.761,
+       12.35,
+       6.553
+      ],
+      "look": [
+       600,
+       0,
+       0
+      ],
+      "fov": 48
+     }
+    ]
+   }
+  },
+  {
+   "id": "b_out",
+   "from": 52,
+   "to": 55.8,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 52,
+      "pos": [
+       599.516,
+       2.44,
+       1.489
+      ],
+      "look": [
+       600,
+       2.42,
+       0
+      ],
+      "fov": 38
+     },
+     {
+      "t": 55.8,
+      "pos": [
+       599.714,
+       2.44,
+       1.347
+      ],
+      "look": [
+       600,
+       2.42,
+       0
+      ],
+      "fov": 38
+     }
+    ]
+   }
+  },
+  {
+   "id": "b_lookup",
+   "from": 55.8,
+   "to": 61,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 55.8,
+      "pos": [
+       596.864,
+       2.3,
+       -0.164
+      ],
+      "look": [
+       600,
+       9,
+       -30
+      ],
+      "fov": 60
+     },
+     {
+      "t": 61,
+      "pos": [
+       602.509,
+       2.3,
+       -6.131
+      ],
+      "look": [
+       600,
+       9,
+       -30
+      ],
+      "fov": 60
+     }
+    ]
+   }
+  }
+ ],
+ "hud": [
+  {
+   "id": "follow",
+   "from": 0,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      0,
+      0
+     ],
+     [
+      1.7,
+      1,
+      "hold"
+     ],
+     [
+      5,
+      2,
+      "hold"
+     ],
+     [
+      9.6,
+      8,
+      "hold"
+     ],
+     [
+      10.6,
+      14,
+      "hold"
+     ],
+     [
+      12.4,
+      49,
+      "hold"
+     ],
+     [
+      13.6,
+      85,
+      "hold"
+     ],
+     [
+      14.8,
+      120,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 1.7,
+     "kind": "gain"
+    },
+    {
+     "t": 10.8,
+     "kind": "gain"
+    },
+    {
+     "t": 12.6,
+     "kind": "gain"
+    }
+   ]
+  },
+  {
+   "id": "crowd",
+   "from": 15.4,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      15.4,
+      120
+     ],
+     [
+      17.2,
+      1760,
+      "hold"
+     ],
+     [
+      18.8,
+      3400,
+      "hold"
+     ],
+     [
+      20.8,
+      25700,
+      "hold"
+     ],
+     [
+      23,
+      48000,
+      "hold"
+     ],
+     [
+      25.2,
+      120000,
+      "hold"
+     ],
+     [
+      28.2,
+      510000,
+      "hold"
+     ],
+     [
+      30.8,
+      900000,
+      "hold"
+     ],
+     [
+      33,
+      2450000,
+      "hold"
+     ],
+     [
+      35.2,
+      4000000,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 17.2,
+     "kind": "gain"
+    },
+    {
+     "t": 22,
+     "kind": "gain"
+    },
+    {
+     "t": 29.8,
+     "kind": "gain"
+    },
+    {
+     "t": 34.4,
+     "kind": "gain"
+    }
+   ]
+  },
+  {
+   "id": "last",
+   "from": 36.2,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      36.2,
+      4000000
+     ],
+     [
+      38.4,
+      9000000,
+      "hold"
+     ],
+     [
+      41.2,
+      19500000,
+      "hold"
+     ],
+     [
+      43.4,
+      30000000,
+      "hold"
+     ],
+     [
+      45.6,
+      80000000,
+      "hold"
+     ],
+     [
+      48.6,
+      140000000,
+      "hold"
+     ],
+     [
+      51,
+      200000000,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 37,
+     "kind": "warn"
+    },
+    {
+     "t": 42.6,
+     "kind": "warn"
+    },
+    {
+     "t": 44.8,
+     "kind": "warn"
+    },
+    {
+     "t": 48.8,
+     "kind": "gain"
+    }
+   ]
+  },
+  {
+   "id": "dark",
+   "from": 52,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      52,
+      200000000
+     ],
+     [
+      53.2,
+      0,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 53.2,
+     "kind": "loss"
+    }
+   ]
+  },
+  {
+   "id": "stars",
+   "from": 55.8,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      55.8,
+      0
+     ],
+     [
+      56.3,
+      8100000000,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 56.3,
+     "kind": "gain"
+    }
+   ]
+  }
+ ],
+ "lines": [
+  {
+   "id": "l_only",
+   "in": 4.166667,
+   "out": 7.7
+  },
+  {
+   "id": "l_neighbours",
+   "in": 8.1,
+   "out": 11.6
+  },
+  {
+   "id": "l_street",
+   "in": 12.1,
+   "out": 15.2
+  },
+  {
+   "id": "l_billion",
+   "in": 15.8,
+   "out": 19.6
+  },
+  {
+   "id": "l_city",
+   "in": 20.2,
+   "out": 24
+  },
+  {
+   "id": "l_needs",
+   "in": 24.4,
+   "out": 27.2
+  },
+  {
+   "id": "l_stars",
+   "in": 27.8,
+   "out": 31.8
+  },
+  {
+   "id": "l_space",
+   "in": 32.4,
+   "out": 36
+  },
+  {
+   "id": "l_battery",
+   "in": 36.6,
+   "out": 40
+  },
+  {
+   "id": "l_dark",
+   "in": 40.466667,
+   "out": 44.1
+  },
+  {
+   "id": "l_one",
+   "in": 44.4,
+   "out": 47.7
+  },
+  {
+   "id": "l_push",
+   "in": 48.1,
+   "out": 51.8
+  },
+  {
+   "id": "l_out",
+   "in": 53.3,
+   "out": 55.7
+  },
+  {
+   "id": "l_lookup",
+   "in": 56.266667,
+   "out": 59.6
+  }
+ ],
+ "events": [
+  {
+   "t": 0.166667,
+   "id": "e_wave",
+   "beat": "b_wave",
+   "trigger": true,
+   "what": "Lichterwelle: die ganze Skyline erlischt von hinten nach vorn (läuft ab Frame 0)",
+   "sfx": [
+    "power_down"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 1.2,
+   "id": "e_neighbor_dark",
+   "beat": "b_wave",
+   "what": "Nachbar neben dir: sein Handy wird schwarz – deins leuchtet weiter (Beweis)",
+   "sfx": [
+    "zap"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 1.7,
+   "id": "e_neighbor_turn",
+   "beat": "b_wave",
+   "what": "Nachbar dreht sich zu deinem Licht",
+   "sfx": [
+    "pop"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 3,
+   "id": "e_city_dark",
+   "beat": "b_wave",
+   "what": "Skyline ganz dunkel, erste Sterne – nur dein Lichtkegel",
+   "sfx": [
+    "wind"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 5,
+   "id": "e_neighbor_close",
+   "beat": "b_closeup",
+   "what": "Nachbar tritt ins Licht, starrt auf deine Lampe",
+   "sfx": [
+    "appear"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 6.4,
+   "id": "e_gasp",
+   "beat": "b_closeup",
+   "what": "du hebst das Handy, Lichtkegel schwenkt über das Dach",
+   "sfx": [
+    "swoosh"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 8.4,
+   "id": "e_doors",
+   "beat": "b_street",
+   "what": "Türen gehen auf, Nachbarn treten aus dem Dunkel",
+   "sfx": [
+    "thud"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 9.6,
+   "id": "e_step_out",
+   "beat": "b_street",
+   "what": "sie gehen auf dein Licht zu",
+   "sfx": [
+    "tick"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 10.8,
+   "id": "e_follow",
+   "beat": "b_street",
+   "what": "du gehst los, sie folgen",
+   "sfx": [
+    "pop"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 12.6,
+   "id": "e_stream",
+   "beat": "b_stream",
+   "what": "die ganze Straße strömt hinter dir her",
+   "sfx": [
+    "rumble"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 14.2,
+   "id": "e_beam_ahead",
+   "beat": "b_stream",
+   "what": "dein Lichtkegel ist das Einzige, was den Weg zeigt",
+   "sfx": [
+    "whoosh"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 15.9,
+   "id": "e_cars_dark",
+   "beat": "b_avenue",
+   "what": "Stau toter Autos, keine Scheinwerfer",
+   "sfx": [
+    "power_down"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 17.2,
+   "id": "e_drivers_out",
+   "beat": "b_avenue",
+   "what": "Fahrer steigen aus und gehen auf das ferne Licht zu",
+   "sfx": [
+    "slam"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 20.6,
+   "id": "e_raise",
+   "beat": "b_plaza",
+   "what": "du hältst die Lampe hoch über die Menge",
+   "sfx": [
+    "shimmer"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 22,
+   "id": "e_roar",
+   "beat": "b_plaza",
+   "what": "Tausende jubeln dem Licht zu",
+   "sfx": [
+    "rumble"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 25,
+   "id": "e_smile",
+   "beat": "b_face",
+   "what": "du lächelst – zum ersten Mal braucht dich jeder",
+   "sfx": [
+    "ding"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 28,
+   "id": "e_stars",
+   "beat": "b_park",
+   "what": "ohne Stadtlicht erscheint die Milchstraße über allen",
+   "sfx": [
+    "shimmer"
+   ],
+   "premise": "visible",
+   "setup_for": "e_lookup"
+  },
+  {
+   "t": 29.8,
+   "id": "e_crowd_park",
+   "beat": "b_park",
+   "what": "die Menge lagert um dich, schaut aber nur auf deine Lampe",
+   "sfx": [
+    "warmth"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 32.8,
+   "id": "e_dot",
+   "beat": "b_space",
+   "what": "die Nachtseite der Erde ist völlig dunkel – bis auf einen Punkt",
+   "sfx": [
+    "appear"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 34.4,
+   "id": "e_zoom",
+   "beat": "b_space",
+   "what": "der Punkt pulsiert – dein Licht",
+   "sfx": [
+    "tick"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 37,
+   "id": "e_battery",
+   "beat": "b_battery",
+   "what": "Wende: Akku-Anzeige 9 %, rot",
+   "sfx": [
+    "alarm"
+   ],
+   "flash": "warn",
+   "premise": "visible",
+   "setup_for": "e_lookup"
+  },
+  {
+   "t": 38.6,
+   "id": "e_drop",
+   "beat": "b_battery",
+   "what": "die Anzeige fällt weiter",
+   "sfx": [
+    "loss"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 41,
+   "id": "e_worry",
+   "beat": "b_worry",
+   "what": "du starrst auf das Handy, die Menge rückt näher",
+   "sfx": [
+    "heartbeat"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 42.6,
+   "id": "e_push",
+   "beat": "b_worry",
+   "what": "Gedränge am Brunnen",
+   "sfx": [
+    "rumble"
+   ],
+   "flash": "warn",
+   "premise": "visible"
+  },
+  {
+   "t": 44.8,
+   "id": "e_one",
+   "beat": "b_onepercent",
+   "what": "Akku 1 %, Lampe flackert",
+   "sfx": [
+    "buzz"
+   ],
+   "flash": "warn",
+   "premise": "visible"
+  },
+  {
+   "t": 46.4,
+   "id": "e_flicker",
+   "beat": "b_onepercent",
+   "what": "Lichtkegel flackert über die Gesichter",
+   "sfx": [
+    "zap"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 48.8,
+   "id": "e_surge",
+   "beat": "b_surge",
+   "what": "die Menge drängt zum letzten Licht",
+   "sfx": [
+    "rumble"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 50.4,
+   "id": "e_reach",
+   "beat": "b_surge",
+   "what": "Hände strecken sich nach dir",
+   "sfx": [
+    "swoosh"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 53.2,
+   "id": "e_out",
+   "beat": "b_out",
+   "what": "der Akku ist leer – das letzte Licht erlischt",
+   "sfx": [
+    "power_down"
+   ],
+   "flash": "loss",
+   "premise": "visible",
+   "setup_for": "e_lookup"
+  },
+  {
+   "t": 56.3,
+   "id": "e_lookup",
+   "beat": "b_lookup",
+   "what": "Pointe: im Dunkeln schauen alle nach oben – die Milchstraße ist das Licht, dem jetzt alle folgen",
+   "sfx": [
+    "shimmer"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 58,
+   "id": "e_glow",
+   "beat": "b_lookup",
+   "what": "Sternenlicht auf Tausenden Gesichtern",
+   "sfx": [
+    "warmth"
+   ],
+   "premise": "visible"
+  }
+ ],
+ "beats": [
+  {
+   "id": "b_wave",
+   "from": 0,
+   "to": 4,
+   "place": "rooftop",
+   "mood": "neutral",
+   "framing": "pov",
+   "preset": "pov",
+   "hud_change": true,
+   "data": {
+    "you": [
+     0,
+     0,
+     1.6,
+     3.14159
+    ]
+   },
+   "act": 1,
+   "pov": true
+  },
+  {
+   "id": "b_closeup",
+   "from": 4,
+   "to": 7.8,
+   "place": "rooftop",
+   "mood": "shock",
+   "framing": "close",
+   "preset": "close",
+   "hud_change": true,
+   "data": {
+    "you": [
+     0.3,
+     0,
+     1.4,
+     3.14159
+    ]
+   },
+   "act": 1
+  },
+  {
+   "id": "b_street",
+   "from": 7.8,
+   "to": 11.8,
+   "place": "street",
+   "mood": "worried",
+   "framing": "medium",
+   "preset": "push",
+   "hud_change": true,
+   "data": {
+    "you": [
+     200,
+     0,
+     2,
+     3.14159
+    ]
+   },
+   "act": 1
+  },
+  {
+   "id": "b_stream",
+   "from": 11.8,
+   "to": 15.4,
+   "place": "street",
+   "mood": "worried",
+   "framing": "high",
+   "preset": "high",
+   "hud_change": true,
+   "data": {
+    "you": [
+     200,
+     0,
+     2,
+     3.14159
+    ]
+   },
+   "act": 1
+  },
+  {
+   "id": "b_avenue",
+   "from": 15.4,
+   "to": 19.8,
+   "place": "avenue",
+   "mood": "shock",
+   "framing": "low",
+   "preset": "low",
+   "hud_change": true,
+   "data": {
+    "you": [
+     400,
+     0,
+     -80,
+     3.14159
+    ]
+   },
+   "act": 1,
+   "fact": {
+    "text": "More than 8 billion people live on Earth.",
+    "source": "UN DESA, World Population Prospects 2022 (8 billion on 15 Nov 2022)"
+   },
+   "showpiece": "mass"
+  },
+  {
+   "id": "b_plaza",
+   "from": 19.8,
+   "to": 24.2,
+   "place": "plaza",
+   "mood": "happy",
+   "framing": "wide",
+   "preset": "pull",
+   "hud_change": true,
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   },
+   "act": 2,
+   "showpiece": "mass"
+  },
+  {
+   "id": "b_face",
+   "from": 24.2,
+   "to": 27.4,
+   "place": "plaza",
+   "mood": "smug",
+   "framing": "close",
+   "preset": "close",
+   "hud_change": true,
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   },
+   "act": 2
+  },
+  {
+   "id": "b_park",
+   "from": 27.4,
+   "to": 32,
+   "place": "park",
+   "mood": "happy",
+   "framing": "low",
+   "preset": "low",
+   "hud_change": true,
+   "data": {
+    "you": [
+     801.6,
+     0,
+     -1.5,
+     3.14159
+    ]
+   },
+   "act": 2,
+   "fact": {
+    "text": "Under a truly dark sky you can see about 2,500 stars at once.",
+    "source": "Sky & Telescope, 'How Many Stars Can You See?' (≈ 2,500 stars visible at once from a dark site)"
+   },
+   "showpiece": "glow"
+  },
+  {
+   "id": "b_space",
+   "from": 32,
+   "to": 36.2,
+   "place": "space",
+   "mood": "smug",
+   "framing": "wide",
+   "preset": "orbit",
+   "hud_change": true,
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   },
+   "act": 2,
+   "showpiece": "vista"
+  },
+  {
+   "id": "b_battery",
+   "from": 36.2,
+   "to": 40.2,
+   "place": "plaza",
+   "mood": "worried",
+   "framing": "pov",
+   "preset": "pov",
+   "hud_change": true,
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   },
+   "act": 2,
+   "pov": true
+  },
+  {
+   "id": "b_worry",
+   "from": 40.2,
+   "to": 44.2,
+   "place": "plaza",
+   "mood": "worried",
+   "framing": "medium",
+   "preset": "orbit",
+   "hud_change": true,
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   },
+   "act": 3,
+   "fact": {
+    "text": "More than a third of humanity can no longer see the Milky Way from home.",
+    "source": "Falchi et al. 2016, Science Advances 2(6): e1600377 (World Atlas of Artificial Night Sky Brightness)"
+   }
+  },
+  {
+   "id": "b_onepercent",
+   "from": 44.2,
+   "to": 47.8,
+   "place": "plaza",
+   "mood": "panic",
+   "framing": "pov",
+   "preset": "pov",
+   "hud_change": true,
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   },
+   "act": 3,
+   "pov": true
+  },
+  {
+   "id": "b_surge",
+   "from": 47.8,
+   "to": 52,
+   "place": "plaza",
+   "mood": "panic",
+   "framing": "high",
+   "preset": "high",
+   "hud_change": true,
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   },
+   "act": 3
+  },
+  {
+   "id": "b_out",
+   "from": 52,
+   "to": 55.8,
+   "place": "plaza",
+   "mood": "shock",
+   "framing": "close",
+   "preset": "close",
+   "hud_change": true,
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   },
+   "act": 3
+  },
+  {
+   "id": "b_lookup",
+   "from": 55.8,
+   "to": 61,
+   "place": "plaza",
+   "mood": "relief",
+   "framing": "low",
+   "preset": "low",
+   "hud_change": true,
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   },
+   "act": 3,
+   "showpiece": "glow"
+  }
+ ],
+ "audio": {
+  "fade_out": 1.2,
+  "beds": [
+   {
+    "src": "music:main",
+    "start": 0,
+    "end": 61,
+    "gain_db": -10
+   }
+  ],
+  "sfx": [
+   {
+    "src": "gen:power_down",
+    "t": 0.166667,
+    "gain_db": -7,
+    "event": "e_wave"
+   },
+   {
+    "src": "gen:zap",
+    "t": 1.2,
+    "gain_db": -9,
+    "event": "e_neighbor_dark"
+   },
+   {
+    "src": "gen:pop",
+    "t": 1.7,
+    "gain_db": -12,
+    "event": "e_neighbor_turn"
+   },
+   {
+    "src": "gen:wind",
+    "t": 3,
+    "gain_db": -14,
+    "event": "e_city_dark"
+   },
+   {
+    "src": "gen:appear",
+    "t": 5,
+    "gain_db": -11,
+    "event": "e_neighbor_close"
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 6.4,
+    "gain_db": -13,
+    "event": "e_gasp"
+   },
+   {
+    "src": "gen:thud",
+    "t": 8.4,
+    "gain_db": -10,
+    "event": "e_doors"
+   },
+   {
+    "src": "gen:tick",
+    "t": 9.6,
+    "gain_db": -12,
+    "event": "e_step_out"
+   },
+   {
+    "src": "gen:pop",
+    "t": 10.8,
+    "gain_db": -12,
+    "event": "e_follow"
+   },
+   {
+    "src": "gen:pop",
+    "t": 12.4,
+    "gain_db": -17,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:rumble",
+    "t": 12.6,
+    "gain_db": -11,
+    "event": "e_stream"
+   },
+   {
+    "src": "gen:pop",
+    "t": 13.6,
+    "gain_db": -17,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 14.2,
+    "gain_db": -14,
+    "event": "e_beam_ahead"
+   },
+   {
+    "src": "gen:pop",
+    "t": 14.8,
+    "gain_db": -17,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:whoosh",
+    "t": 15.066667,
+    "gain_db": -12,
+    "event": "cut:b_avenue"
+   },
+   {
+    "src": "gen:power_down",
+    "t": 15.9,
+    "gain_db": -12,
+    "event": "e_cars_dark"
+   },
+   {
+    "src": "gen:slam",
+    "t": 17.2,
+    "gain_db": -10,
+    "event": "e_drivers_out"
+   },
+   {
+    "src": "gen:shimmer",
+    "t": 20.6,
+    "gain_db": -12,
+    "event": "e_raise"
+   },
+   {
+    "src": "gen:rumble",
+    "t": 22,
+    "gain_db": -9,
+    "event": "e_roar"
+   },
+   {
+    "src": "gen:ding",
+    "t": 25,
+    "gain_db": -13,
+    "event": "e_smile"
+   },
+   {
+    "src": "gen:shimmer",
+    "t": 28,
+    "gain_db": -12,
+    "event": "e_stars"
+   },
+   {
+    "src": "gen:warmth",
+    "t": 29.8,
+    "gain_db": -13,
+    "event": "e_crowd_park"
+   },
+   {
+    "src": "gen:appear",
+    "t": 32.8,
+    "gain_db": -11,
+    "event": "e_dot"
+   },
+   {
+    "src": "gen:tick",
+    "t": 34.4,
+    "gain_db": -13,
+    "event": "e_zoom"
+   },
+   {
+    "src": "gen:alarm",
+    "t": 37,
+    "gain_db": -10,
+    "event": "e_battery"
+   },
+   {
+    "src": "gen:loss",
+    "t": 38.6,
+    "gain_db": -11,
+    "event": "e_drop"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 41,
+    "gain_db": -10,
+    "event": "e_worry"
+   },
+   {
+    "src": "gen:rumble",
+    "t": 42.6,
+    "gain_db": -12,
+    "event": "e_push"
+   },
+   {
+    "src": "gen:buzz",
+    "t": 44.8,
+    "gain_db": -11,
+    "event": "e_one"
+   },
+   {
+    "src": "gen:zap",
+    "t": 46.4,
+    "gain_db": -12,
+    "event": "e_flicker"
+   },
+   {
+    "src": "gen:rumble",
+    "t": 48.8,
+    "gain_db": -9,
+    "event": "e_surge"
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 50.4,
+    "gain_db": -12,
+    "event": "e_reach"
+   },
+   {
+    "src": "gen:power_down",
+    "t": 53.2,
+    "gain_db": -6,
+    "event": "e_out"
+   },
+   {
+    "src": "gen:shimmer",
+    "t": 56.3,
+    "gain_db": -7,
+    "event": "e_lookup"
+   },
+   {
+    "src": "gen:warmth",
+    "t": 58,
+    "gain_db": -13,
+    "event": "e_glow"
+   }
+  ],
+  "music": {
+   "main": {
+    "bpm": 96,
+    "root": "A",
+    "seed": 9,
+    "sections": [
+     {
+      "from": 0,
+      "to": 15.4,
+      "style": "pulse"
+     },
+     {
+      "from": 15.4,
+      "to": 36.2,
+      "style": "drive"
+     },
+     {
+      "from": 36.2,
+      "to": 52,
+      "style": "drive_hi"
+     },
+     {
+      "from": 52,
+      "to": 54.6,
+      "style": "calm"
+     },
+     {
+      "from": 54.6,
+      "to": 56.3,
+      "style": "silence"
+     },
+     {
+      "from": 56.3,
+      "to": 61,
+      "style": "warm"
+     }
+    ],
+    "duration": 61
+   }
+  }
+ },
+ "post": {
+  "vignette": 0.2
+ },
+ "hook": {
+  "type": "process",
+  "proof": "e_neighbor_dark",
+  "question": "What happens to the only light left on Earth – and to you?",
+  "stakes": "Your phone torch is the last light; everyone in the dark will come for it.",
+  "withheld": "Battery dying and the stars as the real light (pointe)."
+ },
+ "story": {
+  "stake": "Your phone torch is the last light on Earth – everyone depends on it, and its battery is running out.",
+  "measure": "People following your light",
+  "question": "What if yours was the last light?",
+  "turn": "e_battery"
+ },
+ "pointe_id": "e_lookup",
+ "endcard": {
+  "in": 59.7,
+  "center": 0.3
+ }
+}

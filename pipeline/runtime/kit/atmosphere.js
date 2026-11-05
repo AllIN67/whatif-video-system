@@ -112,7 +112,7 @@ export function createAtmosphere(THREE, core) {
   };
 
   // Scheinwerfer mit sichtbarem Lichtkegel (Kegel = additiv transparente Hülle, wirkt im Dunst wie ein Lichtstrahl).
-  const spotCone = ({ pos, target, color = 0xfff1d6, intensity = 40, angle = 0.32, penumbra = 0.5, cone = true, coneOpacity = 0.12, shadow = false, dist = 0 } = {}) => {
+  const spotCone = ({ pos, target, color = 0xfff1d6, intensity = 40, angle = 0.32, penumbra = 0.5, cone = true, coneOpacity = 0.12, shadow = false, dist = 0, housing = true } = {}) => {
     const root = group();
     const L = new THREE.SpotLight(color, intensity, dist, angle, penumbra, 2);
     L.position.set(...pos);
@@ -133,7 +133,8 @@ export function createAtmosphere(THREE, core) {
       coneMesh.castShadow = coneMesh.receiveShadow = false;
       root.add(coneMesh);
     }
-    root.add(new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.18, 0.25, 12), glow(color, 3)).translateX(pos[0]).translateY(pos[1]).translateZ(pos[2]));
+    // housing: false für Lampen in der Hand/vor der Kamera (das leuchtende Gehäuse würde das Bild überdecken)
+    if (housing) root.add(new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.18, 0.25, 12), glow(color, 3)).translateX(pos[0]).translateY(pos[1]).translateZ(pos[2]));
     return { root, light: L, cone: coneMesh, set: (k) => { L.intensity = intensity * k; coneMat.opacity = coneOpacity * k; } };
   };
 
@@ -142,9 +143,12 @@ export function createAtmosphere(THREE, core) {
     const root = group();
     const L = new THREE.PointLight(color, intensity, dist, 2);
     L.position.set(...pos);
-    const b = new THREE.Mesh(new THREE.SphereGeometry(bulb, 10, 8), glow(color, 3));
-    b.position.set(...pos);
-    root.add(L, b);
+    root.add(L);
+    if (bulb > 0) { // bulb: 0 = nur Licht, kein sichtbarer Glühkörper
+      const b = new THREE.Mesh(new THREE.SphereGeometry(bulb, 10, 8), glow(color, 3));
+      b.position.set(...pos);
+      root.add(b);
+    }
     return { root, light: L, set: (k) => (L.intensity = intensity * k) };
   };
 
@@ -357,6 +361,56 @@ export function createAtmosphere(THREE, core) {
     };
   };
 
+  // Milchstraße: dichtes Sternenband + weiche Leuchtwolken über den Himmel (dunkler Himmel ohne Lichtverschmutzung).
+  // Ergänzt 2026-11-05 für what-if-last-light. center = Standpunkt; tilt = Neigung des Bands (rad); set(k) blendet ein.
+  const milkyWay = ({ center = [0, 0, 0], radius = 400, count = 9000, tilt = 0.5, yaw = 0, width = 0.12, seed = 71, glow = 0.55 } = {}) => {
+    const r = createRng(seed);
+    const root = group();
+    root.position.set(...center);
+    root.rotation.set(tilt, yaw, 0);
+    const pos = new Float32Array(count * 3);
+    const col = new Float32Array(count * 3);
+    const gauss = () => (r.next() + r.next() + r.next() - 1.5) / 1.5;
+    for (let i = 0; i < count; i++) {
+      const a = r.range(0, Math.PI); // obere Himmelshälfte
+      const b = gauss() * width * (r.next() < 0.25 ? 2.5 : 1);
+      const x = Math.cos(a) * Math.cos(b);
+      const y = Math.sin(a) * Math.cos(b);
+      const z = Math.sin(b);
+      pos.set([x * radius, y * radius, z * radius], i * 3);
+      const w = r.range(0.55, 1);
+      const warm = r.next() < 0.3;
+      col.set([w, w * (warm ? 0.92 : 0.97), w * (warm ? 0.8 : 1.0)], i * 3);
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+    const ptsMat = new THREE.PointsMaterial({ size: 2.2, sizeAttenuation: false, vertexColors: true, transparent: true, opacity: 1, fog: false, depthWrite: false });
+    root.add(new THREE.Points(geo, ptsMat));
+    // Leuchtwolken entlang des Bands (Canvas-Verlauf, additiv)
+    const c = document.createElement('canvas');
+    c.width = c.height = 128;
+    const g = c.getContext('2d');
+    const grd = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+    grd.addColorStop(0, 'rgba(255,255,255,1)');
+    grd.addColorStop(0.45, 'rgba(255,255,255,0.35)');
+    grd.addColorStop(1, 'rgba(255,255,255,0)');
+    g.fillStyle = grd;
+    g.fillRect(0, 0, 128, 128);
+    const tex = new THREE.CanvasTexture(c);
+    const cloudMat = [];
+    for (let i = 0; i < 26; i++) {
+      const a = (i + r.next()) / 26 * Math.PI;
+      const m = new THREE.SpriteMaterial({ map: tex, color: r.next() < 0.3 ? 0xd9c8ff : 0xcfe0ff, transparent: true, opacity: glow * r.range(0.25, 0.6), blending: THREE.AdditiveBlending, depthWrite: false, fog: false });
+      const s = new THREE.Sprite(m);
+      s.position.set(Math.cos(a) * radius * 0.98, Math.sin(a) * radius * 0.98, gauss() * width * radius * 0.6);
+      s.scale.setScalar(radius * r.range(0.18, 0.34));
+      cloudMat.push([m, m.opacity]);
+      root.add(s);
+    }
+    return { root, set: (k) => { ptsMat.opacity = k; cloudMat.forEach(([m, o]) => (m.opacity = o * k)); root.visible = k > 0.01; } };
+  };
+
   // Gedämpfte Kulissenfarbe aus einer Palette (deterministisch über Index).
   const palette = (name) => {
     const P = PALETTES[name];
@@ -364,5 +418,5 @@ export function createAtmosphere(THREE, core) {
     return { ...P, pick: (i) => P.base[((i % P.base.length) + P.base.length) % P.base.length] };
   };
 
-  return { LOOKS: LOOKS_V3, PALETTES, palette, glow, sunBehind, stringLights, neonStrip, spotCone, lampPool, glowSign, surfaceTexture, surface, ground, water, loadReflector, setReflector, dust, confetti };
+  return { LOOKS: LOOKS_V3, PALETTES, palette, glow, sunBehind, stringLights, neonStrip, spotCone, lampPool, glowSign, surfaceTexture, surface, ground, water, loadReflector, setReflector, dust, confetti, milkyWay };
 }

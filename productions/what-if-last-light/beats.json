@@ -1,0 +1,1043 @@
+{
+ "_comment": "Beat-Sheet (Quelle der Wahrheit), System V3 (Guide 18.13). timeline.json: node tools/build_timeline.mjs productions/what-if-last-light",
+ "recipe": "B1",
+ "fps": 30,
+ "seed": 23,
+ "title": {
+  "in": 0,
+  "out": 3.4
+ },
+ "hud": {
+  "start": 0,
+  "decimals": 0
+ },
+ "pointe": "e_lookup",
+ "hook": {
+  "type": "process",
+  "proof": "e_neighbor_dark",
+  "question": "What happens to the only light left on Earth – and to you?",
+  "stakes": "Your phone torch is the last light; everyone in the dark will come for it.",
+  "withheld": "Battery dying and the stars as the real light (pointe)."
+ },
+ "story": {
+  "stake": "Your phone torch is the last light on Earth – everyone depends on it, and its battery is running out.",
+  "measure": "People following your light",
+  "question": "What if yours was the last light?",
+  "turn": "e_battery"
+ },
+ "endcard": {
+  "beat": "b_lookup",
+  "at": 3.9,
+  "center": 0.3
+ },
+ "post": {
+  "vignette": 0.2
+ },
+ "audio": {
+  "fade_out": 1.2,
+  "tick_gain_db": -17,
+  "whoosh_gain_db": -12,
+  "music": {
+   "bpm": 96,
+   "root": "A",
+   "seed": 9,
+   "gain_db": -10,
+   "sections": [
+    {
+     "from": 0,
+     "to": 15.4,
+     "style": "pulse"
+    },
+    {
+     "from": 15.4,
+     "to": 36.2,
+     "style": "drive"
+    },
+    {
+     "from": 36.2,
+     "to": 52.0,
+     "style": "drive_hi"
+    },
+    {
+     "from": 52.0,
+     "to": 54.6,
+     "style": "calm"
+    },
+    {
+     "from": 54.6,
+     "to": 56.3,
+     "style": "silence"
+    },
+    {
+     "from": 56.3,
+     "to": 61.0,
+     "style": "warm"
+    }
+   ]
+  }
+ },
+ "beats": [
+  {
+   "id": "b_wave",
+   "dur": 4.0,
+   "place": "rooftop",
+   "mood": "neutral",
+   "act": 1,
+   "pov": true,
+   "camera": {
+    "preset": "pov",
+    "eye": [
+     0,
+     1.65,
+     1.6
+    ],
+    "eyeTo": [
+     0,
+     1.63,
+     1.45
+    ],
+    "target": [
+     0,
+     0.2,
+     -60
+    ],
+    "fov": 55
+   },
+   "hud": {
+    "label": "follow",
+    "to": 1,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     1.7,
+     1.9
+    ]
+   },
+   "events": [
+    {
+     "id": "e_wave",
+     "at": 0.15,
+     "what": "Lichterwelle: die ganze Skyline erlischt von hinten nach vorn (läuft ab Frame 0)",
+     "sfx": "power_down",
+     "gain_db": -7,
+     "trigger": true,
+     "premise": "visible"
+    },
+    {
+     "id": "e_neighbor_dark",
+     "at": 1.2,
+     "what": "Nachbar neben dir: sein Handy wird schwarz – deins leuchtet weiter (Beweis)",
+     "sfx": "zap",
+     "gain_db": -9,
+     "premise": "visible"
+    },
+    {
+     "id": "e_neighbor_turn",
+     "at": 1.7,
+     "what": "Nachbar dreht sich zu deinem Licht",
+     "sfx": "pop",
+     "gain_db": -12,
+     "flash": "gain",
+     "premise": "visible"
+    },
+    {
+     "id": "e_city_dark",
+     "at": 3.0,
+     "what": "Skyline ganz dunkel, erste Sterne – nur dein Lichtkegel",
+     "sfx": "wind",
+     "gain_db": -14,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     0,
+     0,
+     1.6,
+     3.14159
+    ]
+   }
+  },
+  {
+   "id": "b_closeup",
+   "dur": 3.8,
+   "place": "rooftop",
+   "mood": "shock",
+   "camera": {
+    "preset": "close",
+    "target": [
+     0.3,
+     1.62,
+     1.4
+    ],
+    "yaw": 195,
+    "dist": 1.4,
+    "swing": 10
+   },
+   "line": "l_only",
+   "line_at": [
+    0.15,
+    -0.1
+   ],
+   "hud": {
+    "to": 2,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     1.0,
+     1.4
+    ]
+   },
+   "events": [
+    {
+     "id": "e_neighbor_close",
+     "at": 1.0,
+     "what": "Nachbar tritt ins Licht, starrt auf deine Lampe",
+     "sfx": "appear",
+     "gain_db": -11,
+     "premise": "visible"
+    },
+    {
+     "id": "e_gasp",
+     "at": 2.4,
+     "what": "du hebst das Handy, Lichtkegel schwenkt über das Dach",
+     "sfx": "swoosh",
+     "gain_db": -13,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     0.3,
+     0,
+     1.4,
+     3.14159
+    ]
+   },
+   "act": 1
+  },
+  {
+   "id": "b_street",
+   "dur": 4.0,
+   "place": "street",
+   "mood": "worried",
+   "transition": "dip",
+   "camera": {
+    "preset": "push",
+    "target": [
+     200,
+     1.3,
+     1
+    ],
+    "yaw": 150,
+    "dist": 6.2,
+    "distTo": 4.4,
+    "height": 0.3,
+    "fov": 46
+   },
+   "line": "l_neighbours",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "hud": {
+    "to": 14,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     2.8,
+     3.2
+    ]
+   },
+   "events": [
+    {
+     "id": "e_doors",
+     "at": 0.6,
+     "what": "Türen gehen auf, Nachbarn treten aus dem Dunkel",
+     "sfx": "thud",
+     "gain_db": -10,
+     "premise": "visible"
+    },
+    {
+     "id": "e_step_out",
+     "at": 1.8,
+     "what": "sie gehen auf dein Licht zu",
+     "sfx": "tick",
+     "gain_db": -12,
+     "hud_to": 8,
+     "premise": "visible"
+    },
+    {
+     "id": "e_follow",
+     "at": 3.0,
+     "what": "du gehst los, sie folgen",
+     "sfx": "pop",
+     "gain_db": -12,
+     "flash": "gain",
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     200,
+     0,
+     2,
+     3.14159
+    ]
+   },
+   "act": 1
+  },
+  {
+   "id": "b_stream",
+   "dur": 3.6,
+   "place": "street",
+   "mood": "worried",
+   "camera": {
+    "preset": "high",
+    "target": [
+     200,
+     0,
+     3
+    ],
+    "yaw": 0,
+    "dist": 11,
+    "height": 13,
+    "swing": 10,
+    "fov": 48
+   },
+   "line": "l_street",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "hud": {
+    "to": 120,
+    "mode": "steps",
+    "steps": 3,
+    "window": [
+     0.6,
+     3.0
+    ],
+    "tick": "pop"
+   },
+   "events": [
+    {
+     "id": "e_stream",
+     "at": 0.8,
+     "what": "die ganze Straße strömt hinter dir her",
+     "sfx": "rumble",
+     "gain_db": -11,
+     "flash": "gain",
+     "premise": "visible"
+    },
+    {
+     "id": "e_beam_ahead",
+     "at": 2.4,
+     "what": "dein Lichtkegel ist das Einzige, was den Weg zeigt",
+     "sfx": "whoosh",
+     "gain_db": -14,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     200,
+     0,
+     2,
+     3.14159
+    ]
+   },
+   "act": 1
+  },
+  {
+   "id": "b_avenue",
+   "dur": 4.4,
+   "place": "avenue",
+   "mood": "shock",
+   "act": 1,
+   "showpiece": "mass",
+   "transition": "whip",
+   "fact": {
+    "text": "More than 8 billion people live on Earth.",
+    "source": "UN DESA, World Population Prospects 2022 (8 billion on 15 Nov 2022)"
+   },
+   "camera": {
+    "preset": "low",
+    "target": [
+     400,
+     1.8,
+     -22
+    ],
+    "yaw": 0,
+    "dist": 12,
+    "camHeight": 1.3,
+    "fov": 50
+   },
+   "line": "l_billion",
+   "line_at": [
+    0.4,
+    -0.2
+   ],
+   "hud": {
+    "label": "crowd",
+    "to": 3400,
+    "mode": "steps",
+    "steps": 2,
+    "window": [
+     1.8,
+     3.4
+    ]
+   },
+   "events": [
+    {
+     "id": "e_cars_dark",
+     "at": 0.5,
+     "what": "Stau toter Autos, keine Scheinwerfer",
+     "sfx": "power_down",
+     "gain_db": -12,
+     "premise": "visible"
+    },
+    {
+     "id": "e_drivers_out",
+     "at": 1.8,
+     "what": "Fahrer steigen aus und gehen auf das ferne Licht zu",
+     "sfx": "slam",
+     "gain_db": -10,
+     "flash": "gain",
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     400,
+     0,
+     -80,
+     3.14159
+    ]
+   }
+  },
+  {
+   "id": "b_plaza",
+   "dur": 4.4,
+   "place": "plaza",
+   "mood": "happy",
+   "act": 2,
+   "showpiece": "mass",
+   "transition": "dip",
+   "camera": {
+    "preset": "pull",
+    "target": [
+     600,
+     2.0,
+     0
+    ],
+    "yaw": 20,
+    "dist": 5,
+    "distTo": 16,
+    "height": 3.5,
+    "fov": 48
+   },
+   "line": "l_city",
+   "line_at": [
+    0.4,
+    -0.2
+   ],
+   "hud": {
+    "to": 48000,
+    "mode": "steps",
+    "steps": 2,
+    "window": [
+     1.0,
+     3.2
+    ]
+   },
+   "events": [
+    {
+     "id": "e_raise",
+     "at": 0.8,
+     "what": "du hältst die Lampe hoch über die Menge",
+     "sfx": "shimmer",
+     "gain_db": -12,
+     "premise": "visible"
+    },
+    {
+     "id": "e_roar",
+     "at": 2.2,
+     "what": "Tausende jubeln dem Licht zu",
+     "sfx": "rumble",
+     "gain_db": -9,
+     "flash": "gain",
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "b_face",
+   "dur": 3.2,
+   "place": "plaza",
+   "mood": "smug",
+   "camera": {
+    "preset": "close",
+    "target": [
+     600,
+     2.42,
+     0
+    ],
+    "yaw": 20,
+    "dist": 1.45,
+    "swing": 8
+   },
+   "line": "l_needs",
+   "line_at": [
+    0.2,
+    -0.2
+   ],
+   "hud": {
+    "to": 120000,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     1.0,
+     1.4
+    ]
+   },
+   "events": [
+    {
+     "id": "e_smile",
+     "at": 0.8,
+     "what": "du lächelst – zum ersten Mal braucht dich jeder",
+     "sfx": "ding",
+     "gain_db": -13,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   },
+   "act": 2
+  },
+  {
+   "id": "b_park",
+   "dur": 4.6,
+   "place": "park",
+   "mood": "happy",
+   "showpiece": "glow",
+   "transition": "dip",
+   "fact": {
+    "text": "Under a truly dark sky you can see about 2,500 stars at once.",
+    "source": "Sky & Telescope, 'How Many Stars Can You See?' (≈ 2,500 stars visible at once from a dark site)"
+   },
+   "camera": {
+    "preset": "low",
+    "target": [
+     800,
+     16,
+     -40
+    ],
+    "yaw": 8,
+    "dist": 46,
+    "camHeight": 0.6,
+    "fov": 56
+   },
+   "line": "l_stars",
+   "line_at": [
+    0.4,
+    -0.2
+   ],
+   "hud": {
+    "to": 900000,
+    "mode": "steps",
+    "steps": 2,
+    "window": [
+     0.8,
+     3.4
+    ]
+   },
+   "events": [
+    {
+     "id": "e_stars",
+     "at": 0.6,
+     "what": "ohne Stadtlicht erscheint die Milchstraße über allen",
+     "sfx": "shimmer",
+     "gain_db": -12,
+     "premise": "visible",
+     "setup_for": "e_lookup"
+    },
+    {
+     "id": "e_crowd_park",
+     "at": 2.4,
+     "what": "die Menge lagert um dich, schaut aber nur auf deine Lampe",
+     "sfx": "warmth",
+     "gain_db": -13,
+     "flash": "gain",
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     801.6,
+     0,
+     -1.5,
+     3.14159
+    ]
+   },
+   "act": 2
+  },
+  {
+   "id": "b_space",
+   "dur": 4.2,
+   "place": "space",
+   "mood": "smug",
+   "showpiece": "vista",
+   "transition": "dip",
+   "camera": {
+    "preset": "orbit",
+    "target": [
+     0,
+     0,
+     5000
+    ],
+    "yaw": 0,
+    "dist": 30,
+    "height": 0,
+    "swing": 10,
+    "fov": 40
+   },
+   "line": "l_space",
+   "line_at": [
+    0.4,
+    -0.2
+   ],
+   "hud": {
+    "to": 4000000,
+    "mode": "steps",
+    "steps": 2,
+    "window": [
+     1.0,
+     3.2
+    ]
+   },
+   "events": [
+    {
+     "id": "e_dot",
+     "at": 0.8,
+     "what": "die Nachtseite der Erde ist völlig dunkel – bis auf einen Punkt",
+     "sfx": "appear",
+     "gain_db": -11,
+     "premise": "visible"
+    },
+    {
+     "id": "e_zoom",
+     "at": 2.4,
+     "what": "der Punkt pulsiert – dein Licht",
+     "sfx": "tick",
+     "gain_db": -13,
+     "flash": "gain",
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   },
+   "act": 2
+  },
+  {
+   "id": "b_battery",
+   "dur": 4.0,
+   "place": "plaza",
+   "mood": "worried",
+   "act": 2,
+   "pov": true,
+   "transition": "dip",
+   "camera": {
+    "preset": "pov",
+    "eye": [
+     600,
+     2.45,
+     0.1
+    ],
+    "eyeTo": [
+     600,
+     2.43,
+     0.15
+    ],
+    "target": [
+     600,
+     0.9,
+     8
+    ],
+    "fov": 55
+   },
+   "line": "l_battery",
+   "line_at": [
+    0.4,
+    -0.2
+   ],
+   "hud": {
+    "label": "last",
+    "to": 9000000,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     2.2,
+     2.6
+    ]
+   },
+   "events": [
+    {
+     "id": "e_battery",
+     "at": 0.8,
+     "what": "Wende: Akku-Anzeige 9 %, rot",
+     "sfx": "alarm",
+     "gain_db": -10,
+     "flash": "warn",
+     "premise": "visible",
+     "setup_for": "e_lookup"
+    },
+    {
+     "id": "e_drop",
+     "at": 2.4,
+     "what": "die Anzeige fällt weiter",
+     "sfx": "loss",
+     "gain_db": -11,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "b_worry",
+   "dur": 4.0,
+   "place": "plaza",
+   "mood": "worried",
+   "act": 3,
+   "fact": {
+    "text": "More than a third of humanity can no longer see the Milky Way from home.",
+    "source": "Falchi et al. 2016, Science Advances 2(6): e1600377 (World Atlas of Artificial Night Sky Brightness)"
+   },
+   "camera": {
+    "preset": "orbit",
+    "target": [
+     600,
+     2.3,
+     0
+    ],
+    "yaw": 0,
+    "dist": 3.6,
+    "height": 0.1,
+    "swing": 30,
+    "fov": 46
+   },
+   "line": "l_dark",
+   "line_at": [
+    0.25,
+    -0.1
+   ],
+   "hud": {
+    "to": 30000000,
+    "mode": "steps",
+    "steps": 2,
+    "window": [
+     1.0,
+     3.2
+    ]
+   },
+   "events": [
+    {
+     "id": "e_worry",
+     "at": 0.8,
+     "what": "du starrst auf das Handy, die Menge rückt näher",
+     "sfx": "heartbeat",
+     "gain_db": -10,
+     "premise": "visible"
+    },
+    {
+     "id": "e_push",
+     "at": 2.4,
+     "what": "Gedränge am Brunnen",
+     "sfx": "rumble",
+     "gain_db": -12,
+     "flash": "warn",
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "b_onepercent",
+   "dur": 3.6,
+   "place": "plaza",
+   "mood": "panic",
+   "pov": true,
+   "camera": {
+    "preset": "pov",
+    "eye": [
+     600,
+     2.42,
+     0.1
+    ],
+    "eyeTo": [
+     600,
+     2.4,
+     0.2
+    ],
+    "target": [
+     600,
+     1.2,
+     5
+    ],
+    "fov": 52
+   },
+   "line": "l_one",
+   "line_at": [
+    0.2,
+    -0.1
+   ],
+   "hud": {
+    "to": 80000000,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     1.4,
+     1.8
+    ]
+   },
+   "events": [
+    {
+     "id": "e_one",
+     "at": 0.6,
+     "what": "Akku 1 %, Lampe flackert",
+     "sfx": "buzz",
+     "gain_db": -11,
+     "flash": "warn",
+     "premise": "visible"
+    },
+    {
+     "id": "e_flicker",
+     "at": 2.2,
+     "what": "Lichtkegel flackert über die Gesichter",
+     "sfx": "zap",
+     "gain_db": -12,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   },
+   "act": 3
+  },
+  {
+   "id": "b_surge",
+   "dur": 4.2,
+   "place": "plaza",
+   "mood": "panic",
+   "camera": {
+    "preset": "high",
+    "target": [
+     600,
+     0,
+     0
+    ],
+    "yaw": 30,
+    "dist": 9,
+    "height": 13,
+    "swing": 12,
+    "fov": 48
+   },
+   "line": "l_push",
+   "line_at": [
+    0.3,
+    -0.2
+   ],
+   "hud": {
+    "to": 200000000,
+    "mode": "steps",
+    "steps": 2,
+    "window": [
+     0.8,
+     3.2
+    ]
+   },
+   "events": [
+    {
+     "id": "e_surge",
+     "at": 1.0,
+     "what": "die Menge drängt zum letzten Licht",
+     "sfx": "rumble",
+     "gain_db": -9,
+     "flash": "gain",
+     "premise": "visible"
+    },
+    {
+     "id": "e_reach",
+     "at": 2.6,
+     "what": "Hände strecken sich nach dir",
+     "sfx": "swoosh",
+     "gain_db": -12,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   },
+   "act": 3
+  },
+  {
+   "id": "b_out",
+   "dur": 3.8,
+   "place": "plaza",
+   "mood": "shock",
+   "camera": {
+    "preset": "close",
+    "target": [
+     600,
+     2.42,
+     0
+    ],
+    "yaw": -15,
+    "dist": 1.45,
+    "swing": 6
+   },
+   "line": "l_out",
+   "line_at": [
+    1.3,
+    -0.1
+   ],
+   "hud": {
+    "label": "dark",
+    "to": 0,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     1.2,
+     1.4
+    ]
+   },
+   "events": [
+    {
+     "id": "e_out",
+     "at": 1.2,
+     "what": "der Akku ist leer – das letzte Licht erlischt",
+     "sfx": "power_down",
+     "gain_db": -6,
+     "flash": "loss",
+     "premise": "visible",
+     "setup_for": "e_lookup"
+    }
+   ],
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   },
+   "act": 3
+  },
+  {
+   "id": "b_lookup",
+   "dur": 5.2,
+   "place": "plaza",
+   "mood": "relief",
+   "act": 3,
+   "showpiece": "glow",
+   "camera": {
+    "preset": "low",
+    "target": [
+     600,
+     9,
+     -30
+    ],
+    "yaw": 0,
+    "dist": 30,
+    "camHeight": 2.3,
+    "fov": 60
+   },
+   "line": "l_lookup",
+   "line_at": [
+    0.45,
+    -1.4
+   ],
+   "hud": {
+    "label": "stars",
+    "to": 8100000000,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     0.5,
+     0.9
+    ]
+   },
+   "events": [
+    {
+     "id": "e_lookup",
+     "at": 0.5,
+     "what": "Pointe: im Dunkeln schauen alle nach oben – die Milchstraße ist das Licht, dem jetzt alle folgen",
+     "sfx": "shimmer",
+     "gain_db": -7,
+     "flash": "gain",
+     "premise": "visible"
+    },
+    {
+     "id": "e_glow",
+     "at": 2.2,
+     "what": "Sternenlicht auf Tausenden Gesichtern",
+     "sfx": "warmth",
+     "gain_db": -13,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     600,
+     0.8,
+     0,
+     0
+    ]
+   }
+  }
+ ]
+}

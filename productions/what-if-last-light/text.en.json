@@ -1,0 +1,55 @@
+{
+ "lang": "en",
+ "number_locale": "en-US",
+ "title": {
+  "text": "What if yours was the last light?",
+  "highlight": "last"
+ },
+ "hud": {
+  "follow": {
+   "label": "FOLLOWING YOUR LIGHT",
+   "unit": "",
+   "sub": "THE ONLY LIGHT ON EARTH"
+  },
+  "crowd": {
+   "label": "FOLLOWING YOUR LIGHT",
+   "unit": "",
+   "sub": "THE WHOLE CITY"
+  },
+  "last": {
+   "label": "FOLLOWING YOUR LIGHT",
+   "unit": "",
+   "sub": "BATTERY LOW"
+  },
+  "dark": {
+   "label": "FOLLOWING YOUR LIGHT",
+   "unit": "",
+   "sub": "LIGHTS ON EARTH: 0"
+  },
+  "stars": {
+   "label": "FOLLOWING THE STARS",
+   "unit": "",
+   "sub": "THE OLDEST LIGHT THERE IS"
+  }
+ },
+ "lines": {
+  "l_only": "Every light on Earth is out. Except yours.",
+  "l_neighbours": "Your neighbours walk toward the only light.",
+  "l_street": "Then the whole street follows you.",
+  "l_billion": "8 billion people. One light left.",
+  "l_city": "By midnight, the whole city has found you.",
+  "l_needs": "For once, everyone needs you.",
+  "l_stars": "Above you, 2,500 stars appear. Nobody looks.",
+  "l_space": "From space, Earth is dark. Except one dot.",
+  "l_battery": "But your battery has other plans.",
+  "l_dark": "A third of us never see the Milky Way.",
+  "l_one": "Battery: 1 percent.",
+  "l_push": "Everyone pushes toward the last light.",
+  "l_out": "Then it goes out.",
+  "l_lookup": "And for the first time, everyone looks up."
+ },
+ "endcard": {
+  "title": "Would you share the last light?",
+  "sub": "Part 2?"
+ }
+}
