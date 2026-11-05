@@ -5,7 +5,7 @@
 | Slug | `what-if-last-light` |
 | Produktionsstil | B – Rezept B1 (Prüfregeln); Erzählform **B6 Ausbreitung + Wende** (Guide 18.13 F) |
 | Sprache | en |
-| Status | ENTWURF |
+| Status | QUALITÄT GEPRÜFT (Hörprüfung offen) |
 | Style-Guide-Version | 3.0 (Abschnitt 18 inkl. 18.12, 18.13) |
 | Beat-Sheet / Freigabebogen | `beats.json` / `quality_review.md` |
 | Git-Commit des Renders | (wird nach dem Rendern eingetragen) |
@@ -73,4 +73,7 @@ Auftrag (2026-11-05): kompakte, vollständige **Testproduktion von System V3**; 
 
 ## 4. QA-Durchläufe
 
-(folgt)
+| Durchlauf | Commit | Ergebnis | Maßnahme |
+|---|---|---|---|
+| Render 1 | d5722ff | `video_qa` FAIL: Schwarzbild 15,37 s (Whip aus dunkler Hochaufnahme), TP −0,9 dBTP; sichtbar: Nahaufnahmen 4–7 s und 52–55 s zu eng (Gesicht angeschnitten) | Whip vor `b_avenue` entfernt; Kameraabstand `b_closeup` 1,4 → 2,4, `b_face` 1,45 → 2,2, `b_out` 1,45 → 2,3 |
+| Render 2 | 9034ff7 | `video_qa` REVIEW (alle Meldungen eingestuft), keine Schwarzbilder, −14,1 LUFS / TP −1,3 dBTP; 67 min Renderzeit (2,2 s/Frame) | Details `quality_review.md`; Hörprüfung offen |
