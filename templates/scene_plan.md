@@ -2,13 +2,13 @@
 
 - Slug: `<slug>`
 - Produktionsstil: B – Rezept B1 / B2 (Stil A: Vorlage aus `productions/earth-stops-1-second/scene_plan.md`)
-- Frage: „What if …?“
-- HUD-Messgröße: <Label> · Start <Wert> → Ende <Wert/„HERE“/„0 %“> · Einheit (EN) <…> / (DE) <…>
+- Frage: „Was wäre, wenn …?“ (Guide 18.14)
+- HUD-Messgröße: <Label> · Start <Wert> → Ende <Wert/„HERE“/„0 %“> · Einheit (SI) <…>
 - Kamera-Paradigma: P1 / P2 / P3 / P4 – Begründung: <…>
 - Pointe/Wendung: <…>
 - Geplante Länge: <≥ 60, Standard 61–80> s
 
-| Zeit (s) | Akt | Bild – was sieht man? | Kamera | HUD-Label / Wert | Text-ID (text.en.json) | Ton (Musik/SFX/Stille, Ziel-LUFS) | Übergang | Erzählfunktion von Effekten |
+| Zeit (s) | Akt | Bild – was sieht man? | Kamera | HUD-Label / Wert | Text-ID (text.de.json) | Ton (Musik/SFX/Stille, Ziel-LUFS) | Übergang | Erzählfunktion von Effekten |
 |---|---|---|---|---|---|---|---|---|
 | 0,0–3,5 | A | | | | title | | – | |
 | 3,5–… | B | | | | l01 | | | |
@@ -27,19 +27,19 @@
 ## Dateien der Produktion
 
 - `timeline.json` – Zeiten, Einstellungen, Kamera, HUD-Werte, Ereignisse, Ton (Vorlage: `templates/timeline.json`)
-- `text.en.json` – alle Bildschirmtexte (Struktur unten), keine Texte im Szenencode
+- `text.de.json` – alle Bildschirmtexte (Struktur unten, Vorlage `templates/text.de.json`), keine Texte im Szenencode
 - `scene.js` – 3D-Szene, Zustand nur aus `t` (Vorlage: `templates/scene.js`)
 
-## text.en.json (Struktur)
+## text.de.json (Struktur)
 
 ```json
 {
-  "lang": "en",
-  "number_locale": "en-US",
-  "title": { "text": "What if …?", "highlight": "Schlüsselwort" },
-  "hud": { "h1": { "label": "LABEL", "sub": "UNTERZEILE", "unit": " m", "scale": 1, "final": "HERE" } },
+  "lang": "de",
+  "number_locale": "de-DE",
+  "title": { "text": "Was wäre, wenn …?", "highlight": "Schlüsselwort" },
+  "hud": { "h1": { "label": "LABEL", "sub": "UNTERZEILE", "unit": " m", "scale": 1, "final": "HIER" } },
   "lines": { "l01": "Eine Zeile, drei bis zehn Wörter." }
 }
 ```
 
-Für eine metrische/deutsche Fassung `text.de.json` mit `"number_locale": "de-DE"`, `"unit"` und `"scale"` (Umrechnungsfaktor) anlegen – Zeiten und Szene bleiben unverändert.
+Englische Fassung (nur auf Auftrag, `--lang en`): `text.en.json` mit `"lang": "en"`, `"number_locale": "en-US"`, Titel „What if …?“; `"unit"` und `"scale"` (Umrechnungsfaktor) für andere Einheiten – Zeiten und Szene bleiben unverändert.

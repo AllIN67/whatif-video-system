@@ -2,7 +2,7 @@
 // Vorschaubilder einzelner Zeitpunkte einer Produktion – ohne das ganze Video zu rendern.
 // Gedacht für schnelle Sichtprüfung beim Bauen von Szenen (Sekunden statt 15 Minuten).
 //
-//   node tools/still.mjs --production productions/<slug> --at 1,5.5,9 [--out productions/<slug>/stills] [--lang en]
+//   node tools/still.mjs --production productions/<slug> --at 1,5.5,9 [--out productions/<slug>/stills] [--lang de|en]
 //
 // Ausgabe: PNG je Zeitpunkt (1080×1920) + contact.jpg (alle nebeneinander, verkleinert).
 import fs from 'node:fs';
@@ -10,6 +10,7 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { withStage } from '../pipeline/browser.mjs';
 import { ROOT } from '../pipeline/server.mjs';
+import { DEFAULT_LANG } from '../pipeline/runtime/lang.js';
 
 const args = process.argv.slice(2);
 const opt = (k, d) => {
@@ -26,8 +27,13 @@ const tl = JSON.parse(fs.readFileSync(path.join(prodDir, 'timeline.json'), 'utf8
 const times = (opt('--at') || '0').split(',').map(Number);
 const out = path.resolve(opt('--out', path.join(prodDir, 'stills')));
 fs.mkdirSync(out, { recursive: true });
+const lang = opt('--lang', DEFAULT_LANG);
+if ((tl.title || tl.lines?.length || tl.hud?.length) && !fs.existsSync(path.join(prodDir, `text.${lang}.json`))) {
+  console.error(`text.${lang}.json fehlt – Standardsprache ist ${DEFAULT_LANG}; englische Produktionen mit --lang en`);
+  process.exit(1);
+}
 
-const files = await withStage({ production: path.relative(ROOT, prodDir), lang: opt('--lang', 'en'), seed: String(tl.seed ?? 1) }, async (page, st) => {
+const files = await withStage({ production: path.relative(ROOT, prodDir), lang, seed: String(tl.seed ?? 1) }, async (page, st) => {
   const done = [];
   for (const s of times) {
     const n = Math.round(s * (tl.fps || 30));

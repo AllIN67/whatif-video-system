@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Rendert alle Frames einer Produktion deterministisch (Frame n ↔ t = n/fps, fps aus timeline.json) in verlustfreie Teilstücke.
 //
-//   node pipeline/render_frames.mjs --production productions/<slug> [--lang en] [--chunk 300]
+//   node pipeline/render_frames.mjs --production productions/<slug> [--lang de|en] [--chunk 300]
 //                                   [--from F --to F] [--force] [--hashes]
 //
 // Ausgabe: <production>/render/chunks/cNNNN.mkv (FFV1, RGB, verlustfrei) + render/frames.tsv (Frame, SHA-256 des PNG).
@@ -12,9 +12,10 @@ import { spawn, execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { startServer, ROOT } from './server.mjs';
 import { launchStage } from './browser.mjs';
+import { DEFAULT_LANG } from './runtime/lang.js';
 
 export function parseArgs(argv) {
-  const a = { lang: 'en', chunk: 300, force: false, hashes: true };
+  const a = { lang: DEFAULT_LANG, chunk: 300, force: false, hashes: true };
   for (let i = 0; i < argv.length; i++) {
     const k = argv[i];
     const v = () => argv[++i];

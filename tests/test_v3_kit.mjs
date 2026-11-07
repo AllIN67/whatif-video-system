@@ -131,3 +131,15 @@ test('Story-Prüfung 18.13: fehlende Ursache, Akte, Fakten, Schauwert, Ruhe vor 
   checkStory({ beats: [] }, {}, (r, m) => none.push(m));
   assert.deepEqual(none, [], 'Produktionen vor 2.2 (ohne hook/story) werden nicht nachträglich bewertet');
 });
+
+test('18.13 S5 / 18.14: Titelformel „Was wäre, wenn“ zählt wie „What if“ (+1 Wort nur für Deutsch)', () => {
+  const msgs = (title, lang) => {
+    const out = [];
+    checkStory({ hook: { type: 'proof' }, beats: [] }, { lang, title: { text: title } }, (r, m) => out.push(m), lang);
+    return out.filter((m) => /Titel hat/.test(m));
+  };
+  assert.deepEqual(msgs('Was wäre, wenn dein Akku dein Leben wäre?', 'de'), []); // 8 Wörter, Grenze 8
+  assert.match(msgs('Was wäre, wenn dein Handyakku plötzlich dein Leben wäre?', 'de')[0], /9 Wörter \(empfohlen ≤ 8 inkl\. „Was wäre, wenn“\)/);
+  assert.match(msgs('What if your phone battery was your life?', 'en')[0], /8 Wörter \(empfohlen ≤ 7\)/);
+  assert.deepEqual(msgs('What if your battery was your life?', 'en'), []);
+});

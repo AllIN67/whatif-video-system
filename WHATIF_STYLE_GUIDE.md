@@ -10,6 +10,10 @@ aktive Produktion nicht (Abschnitt 17).
 
 **Mindestlänge für jedes Video: 60 s** (alle Stile, Abschnitt 10.1).
 
+**Videosprache: Deutsch** (seit 2026-11-07, Abschnitt 18.14). Englisch bleibt über `--lang en` vollständig unterstützt (alle Produktionen vor der Umstellung).
+
+**Kreativer Maßstab: die vier analysierten Referenzvideos C1, C2, B1, B2** (Abschnitt 18.11, seit 2026-11-07). Das Akku-Testvideo `productions/what-if-phone-battery-life/` ist nur noch technischer Regressionstest.
+
 Kennzeichnung der Regeln:
 
 - **[V] verbindlich** – gilt für jedes Video; Abweichung nur mit schriftlicher Begründung im Produktionsprotokoll.
@@ -24,7 +28,7 @@ Referenzbelege stehen in eckigen Klammern, z. B. *(R12, R14)*. Zahlen aus den Re
 
 ### 1.1 Was wir machen
 
-Vertikale Kurzvideos (mindestens 60 s, Standard 61–80 s), die eine einzige **„What if …?“-Frage** konsequent zu Ende denken: aus der Perspektive des Zuschauers, in einer stilisierten 3D-Welt, erzählt durch **kurze Texteinblendungen, einen Live-Messwert und Bild/Ton – ohne Sprecher**.
+Vertikale Kurzvideos (mindestens 60 s, Standard 61–80 s), die eine einzige **„Was wäre, wenn …?“-Frage** (Englisch: „What if …?“) konsequent zu Ende denken: aus der Perspektive des Zuschauers, in einer stilisierten 3D-Welt, erzählt durch **kurze Texteinblendungen, einen Live-Messwert und Bild/Ton – ohne Sprecher**.
 
 Das Format-Versprechen an den Zuschauer: *„In einer Minute erlebst du, was wirklich passieren würde – Schritt für Schritt, mit echten Zahlen, bis zur Pointe.“*
 
@@ -33,7 +37,9 @@ Das Format-Versprechen an den Zuschauer: *„In einer Minute erlebst du, was wir
 - 14 von 15 Referenzen sind What-if-Videos mit derselben Grundarchitektur (Titelfrage, Live-Messwert, Untertitel, Eskalation, Pointe). Nur R05 ist eine wortlose Story.
 - **Entscheidung [V]:** Wir produzieren What-if-Videos. Das Story-Format (R05) ist mit einer einzigen Referenz nicht belegt und wird nicht Teil des Systems.
 
-### 1.3 Sprachentscheidung: **Englisch zuerst, Deutsch als kontrollierter Test**
+### 1.3 Sprachentscheidung: ~~Englisch zuerst, Deutsch als kontrollierter Test~~ → **Deutsch (seit 2026-11-07)**
+
+> **Abgelöst durch Auftrag des Nutzers vom 2026-11-07:** Der Kanal wird auf Deutsch umgestellt; alle neuen Videos werden vollständig auf Deutsch produziert (Regeln: **18.14**). Tabelle, Phase-1-Entscheidung und Sprachtest unten bleiben als Entscheidungshistorie stehen. Englisch bleibt technisch vollständig nutzbar (`--lang en`).
 
 | Kriterium | Englisch | Deutsch | Beleg/Annahme |
 |---|---|---|---|
@@ -46,11 +52,11 @@ Das Format-Versprechen an den Zuschauer: *„In einer Minute erlebst du, was wir
 | Plattformen (TikTok, Shorts, Reels, Snapchat, Facebook) | englische Texte werden ohne Anpassung überall verstanden | auf DACH beschränkt | **Annahme** |
 | Treue Zuschauerschaft | schwerer, weil austauschbar | eventuell leichter durch Nische | **Hypothese** |
 
-**Entscheidung [V für Phase 1]:** Wir starten **einsprachig auf Englisch**. Begründung: Die gesamte Belegbasis ist englisch; das Format funktioniert ohne Sprecher, also ist Englisch nicht teurer oder riskanter als Deutsch; die Reichweite ist größer. Das größte Gegenargument – starke Konkurrenz im englischen Markt – adressieren wir nicht durch Sprachwechsel, sondern durch **eigenständige Erkennungsmerkmale** (Abschnitt 6.4) und durch den geplanten Deutsch-Test.
+**Entscheidung [V für Phase 1, abgelöst 2026-11-07]:** Wir starten **einsprachig auf Englisch**. Begründung: Die gesamte Belegbasis ist englisch; das Format funktioniert ohne Sprecher, also ist Englisch nicht teurer oder riskanter als Deutsch; die Reichweite ist größer. Das größte Gegenargument – starke Konkurrenz im englischen Markt – adressieren wir nicht durch Sprachwechsel, sondern durch **eigenständige Erkennungsmerkmale** (Abschnitt 6.4) und durch den geplanten Deutsch-Test.
 
-**Sprachunabhängigkeit [V]:** Jeder Bildschirmtext liegt ausschließlich in einer Textdatei pro Sprache (`productions/<slug>/text.en.json`, später `text.de.json`), nie fest im Szenencode. Zahlen im HUD werden aus Werten + Einheit erzeugt, damit eine metrische Fassung (km, km/h, °C) ohne Szenenänderung entsteht. Keine Texte in 3D-Texturen einbacken (Ausnahme: Schilder, die bewusst unübersetzt bleiben dürfen – im Protokoll vermerken).
+**Sprachunabhängigkeit [V]:** Jeder Bildschirmtext liegt ausschließlich in einer Textdatei pro Sprache (`productions/<slug>/text.de.json` für neue Produktionen; ältere Produktionen `text.en.json`), nie fest im Szenencode. Zahlen im HUD werden aus Werten + Einheit erzeugt, damit eine metrische Fassung (km, km/h, °C) ohne Szenenänderung entsteht. Keine Texte in 3D-Texturen einbacken (Ausnahme: Schilder, die bewusst unübersetzt bleiben dürfen – im Protokoll vermerken).
 
-**Kontrollierter Sprachtest (später) [S]:**
+**Kontrollierter Sprachtest (später) [S] – entfällt mit der Umstellung 2026-11-07, Historie:**
 
 1. Voraussetzung: ≥ 10 veröffentlichte englische Videos mit Analytics.
 2. Die 3 Videos mit der höchsten durchschnittlichen Wiedergabequote + 3 Videos aus dem Mittelfeld werden auf Deutsch lokalisiert (gleicher Schnitt, Text getauscht, metrische Einheiten).
@@ -76,7 +82,7 @@ Belege: Titel ab Frame 0 über bewegtem Bild in 14/14 What-if-Referenzen; HUD ab
 | Regel | Typ |
 |---|---|
 | **Frame 0 zeigt bereits: bewegte Szene + Titelfrage + HUD.** Kein Logo, kein Intro, keine Schwarzblende länger als 3 Frames. | [V] |
-| Titel als Frage „What if …?“, **≤ 10 Wörter, max. 2 Zeilen**, oben mittig (Bildhöhe ≈ 22–32 %). | [V] |
+| Titel als Frage „Was wäre, wenn …?“ (Englisch: „What if …?“), **≤ 10 Wörter, max. 2 Zeilen**, oben mittig (Bildhöhe ≈ 22–32 %). | [V] |
 | Genau **ein** Schlüsselwort in der Signalfarbe (Abschnitt 6.4). | [S] *(10/14 Referenzen)* |
 | Titel steht 2,5–4,0 s, dann 0,3–0,5 s Ausblendung. | [V] |
 | Der HUD-Wert **verändert sich in den ersten 2 s** sichtbar (Countdown läuft, Zähler steigt/fällt). | [V] *(R06, R07, R08, R11–R15)* |
@@ -128,7 +134,7 @@ Belege: Titel ab Frame 0 über bewegtem Bild in 14/14 What-if-Referenzen; HUD ab
 - **[V]** **Eine Zeile = ein Gedanke**, 3–10 Wörter, Satzzeichen am Ende. Keine Zeile über 2 Bildschirmzeilen.
 - **[V]** Anzeigedauer pro Zeile: `max(1,8 s; Wörter / 3 + 0,6 s)`, höchstens 4,5 s. *(Referenzen: Zeilen ≈2–4 s sichtbar.)*
 - **[V]** Zwischen zwei Zeilen ≥ 0,2 s Pause (Ausblenden 0,2–0,3 s, Einblenden 0,2–0,3 s).
-- **[V]** **Bild vor Text:** Der Text beschreibt nicht, was ohnehin zu sehen ist, sondern ergänzt Ursache, Maßstab oder Bedeutung („There is no sound.“ statt „The asteroid explodes.“).
+- **[V]** **Bild vor Text:** Der Text beschreibt nicht, was ohnehin zu sehen ist, sondern ergänzt Ursache, Maßstab oder Bedeutung („Es ist kein Ton zu hören.“ statt „Der Asteroid explodiert.“).
 - **[V]** Zahlen gehören in den HUD; der Untertitel wiederholt eine HUD-Zahl nur am Höhepunkt.
 - **[S]** Die zweite Person („you/your“) ist Standard. *(≥ 11 Referenzen)*
 - **[S]** Benannte Figur nur bei Personen-Szenarien („Meet Sam.“, R04); dann **eine** Figur durchgehend.
@@ -238,7 +244,7 @@ Diese Merkmale sind gestalterische Entscheidungen, keine belegten Erfolgsfaktore
 ### 7.4 Ende
 
 - **[V]** Nach der Pointe höchstens **5 s** bis zum Videoende *(Referenzen: Endkarten 3–8 s; 7–8 s sind ein mögliches Abbruchrisiko [H])*.
-- **[S]** Abschlussvarianten: (a) Pointe als letzter Untertitel auf bewegtem Endbild, (b) Frage an den Zuschauer, (c) „Part 2?“ bei Serienpotenzial, (d) Kreisschluss zum ersten Bild.
+- **[S]** Abschlussvarianten: (a) Pointe als letzter Untertitel auf bewegtem Endbild, (b) Frage an den Zuschauer, (c) „Teil 2?“ (Englisch: „Part 2?“) bei Serienpotenzial, (d) Kreisschluss zum ersten Bild.
 - **[V]** Bild und Ton enden gemeinsam; Ton-Fade-out ≥ 0,5 s; letztes Bild hält ≥ 0,5 s.
 
 ---
@@ -371,7 +377,7 @@ Claude Code kann Audio messen, aber **nicht hören**. Deshalb gilt **[V]**: Vor 
 
 ## 13. Verbindlich vs. situativ – Übersicht
 
-**Verbindlich [V]** (für Stil B; Stil A weicht bei Sprecher, Textebene, Bildrate und Kamera ab – `STYLE_A_EARTH.md`; Mindestlänge 60 s gilt für beide): What-if-Format; Englisch in Phase 1 mit externen Textdateien; Frame 0 mit Szene + Titel + HUD; Titel ≤ 10 Wörter; HUD ändert sich in 2 s; Ereignis bis 10 s; monotone Eskalation mit festgelegter Pointe; Textregeln (Zeilenlänge, Anzeigedauer, Bild vor Text); ein Kamera-Paradigma pro Video; Augenhöhe; nur echte 3D-Kamera; stilisierte 3D-Welt vollflächig; Blitzregel; Typografie-Mindestgrößen, Sicherheitszone, Scrim; Erkennungsmerkmale 6.4; Kontinuität; Zustandsänderung spätestens alle 6 s; Text blendet vor Schnitt aus; Ende ≤ 5 s nach Pointe; kein Sprecher; lizenzierte Musik; Tonakzente framegenau; Clip-Fades; Mischwerte; technische Ausgabe 10.1; deterministisches Rendern; QA 11.1–11.4; keine realen Personen/Logos.
+**Verbindlich [V]** (für Stil B; Stil A weicht bei Sprecher, Textebene, Bildrate und Kamera ab – `STYLE_A_EARTH.md`; Mindestlänge 60 s gilt für beide): What-if-Format; Deutsch (18.14, seit 2026-11-07; Englisch über `--lang en`) mit externen Textdateien; Frame 0 mit Szene + Titel + HUD; Titel ≤ 10 Wörter; HUD ändert sich in 2 s; Ereignis bis 10 s; monotone Eskalation mit festgelegter Pointe; Textregeln (Zeilenlänge, Anzeigedauer, Bild vor Text); ein Kamera-Paradigma pro Video; Augenhöhe; nur echte 3D-Kamera; stilisierte 3D-Welt vollflächig; Blitzregel; Typografie-Mindestgrößen, Sicherheitszone, Scrim; Erkennungsmerkmale 6.4; Kontinuität; Zustandsänderung spätestens alle 6 s; Text blendet vor Schnitt aus; Ende ≤ 5 s nach Pointe; kein Sprecher; lizenzierte Musik; Tonakzente framegenau; Clip-Fades; Mischwerte; technische Ausgabe 10.1; deterministisches Rendern; QA 11.1–11.4; keine realen Personen/Logos.
 
 **Situativ [S]:** Schlüsselwort-Farbe, Formulierung der ersten Zeile, globale/persönliche Wechsel, Anzahl HUD-Label-Wechsel, „HERE“-Countdown, benannte Figur, Schnitttakt je Paradigma, Ruhephasen, Abschlussvariante, Kamera-Wackeln, Effektfunktionen, instrumentale Musik, Themenpool und Themenausschlüsse.
 
@@ -384,11 +390,11 @@ Claude Code kann Audio messen, aber **nicht hören**. Deshalb gilt **[V]**: Vor 
 | H1 | Ein sofort laufender HUD-Wert erhöht den Anteil der Zuschauer nach 3 s. | A/B: gleiches Video mit HUD ab Frame 0 vs. ab 4 s |
 | H2 | Pointe + kurzes Ende (≤ 5 s) erhöht die Abschlussrate gegenüber 7–8 s Endkarte. | zwei Varianten desselben Videos |
 | H3 | Kreisschluss erhöht Wiederholungen. | Wiedergabezeit > 100 % vergleichen |
-| H4 | Frage-Endkarte erhöht Kommentare/1.000 Aufrufe gegenüber „Part 2?“. | über mehrere Videos |
+| H4 | Frage-Endkarte erhöht Kommentare/1.000 Aufrufe gegenüber „Teil 2?“. | über mehrere Videos |
 | H5 | Instrumentale Musik verbessert Textverständnis gegenüber Gesang. | Abschlussrate, Kommentare zu Verständnis |
 | H6 | Länge knapp über 60 s ist wegen Plattformregeln vorteilhaft. | Plattformregeln aktuell prüfen; Längen 61 s vs. 75 s vergleichen |
 | H7 | Eigenständige Erkennungsmerkmale (6.4) erhöhen Follower-Rate. | langfristig, Follower/1.000 Aufrufe |
-| H8 | Englisch erreicht bessere Bindungskennzahlen als Deutsch. | Sprachtest 1.3 |
+| H8 | ~~Englisch erreicht bessere Bindungskennzahlen als Deutsch.~~ (entfällt: Umstellung auf Deutsch 2026-11-07) | – |
 
 ## 15. Noch nicht ausreichend belegt
 
@@ -396,7 +402,7 @@ Claude Code kann Audio messen, aber **nicht hören**. Deshalb gilt **[V]**: Vor 
 - **Ton:** Musikstil, Sounddesign-Details und Mischqualität der Referenzen sind nur gemessen, nicht gehört.
 - **Optimale Schnittfrequenz:** Die Referenzen streuen von 0,12 bis 4,9 Wechseln/10 s; eine Optimalfrequenz lässt sich nicht ableiten.
 - **Deutscher Markt:** Keine einzige deutschsprachige Referenz.
-- **Optimale Länge der Endkarte, Wirkung von Farbhervorhebung, Wirkung von „Part 2?“.**
+- **Optimale Länge der Endkarte, Wirkung von Farbhervorhebung, Wirkung von „Teil 2?“.**
 - **Originalqualität der Referenzen** (nur Re-Encodes analysiert).
 - **Plattformspezifische Unterschiede** (TikTok vs. Shorts vs. Reels): Alle Referenzen stammen von TikTok.
 
@@ -412,20 +418,20 @@ Abschnitt 16 beschreibt **Stil B**. Jedes Stil-B-Video folgt **genau einem** der
 
 | Baustein | Vorgabe |
 |---|---|
-| Frage | Alltag, zweite Person: „What if you …?“ / „What if everyone … except you?“ – Alltag ist der **Schauplatz**, nicht der Einstieg: die ersten 15 s zeigen nur Prämissen-Konsequenzen (18.12) |
-| HUD | Zähler, der Schritt für Schritt steigt/fällt („BAD THINGS TODAY 1 → 15“, „PEOPLE ON EARTH 8,199,999,707 → 2“, „HEIGHT 1.49 m …“) |
+| Frage | Alltag, zweite Person: „Was wäre, wenn du …?“ / „Was wäre, wenn alle … außer dir?“ – Alltag ist der **Schauplatz**, nicht der Einstieg: die ersten 15 s zeigen nur Prämissen-Konsequenzen (18.12) |
+| HUD | Zähler, der Schritt für Schritt steigt/fällt („PECH HEUTE 1 → 15“, „MENSCHEN AUF DER ERDE 8.199.999.707 → 2“, „GRÖSSE 1,49 m …“; Referenzen englisch) |
 | Takt | **Alle 3–4 s ein neues Ereignis**, jedes an einem eigenen kleinen Ort; Wechsel per kurzer Abblende (`dip`, 4 Frames) oder Whip |
 | Figuren | Würfel-Menschen **mit Gesicht**; Gefühl ist in jeder Einstellung lesbar (Brauen, Mund); Hauptfigur sieht überall gleich aus |
 | Bild | nah, Augenhöhe, langsame Kamerafahrt; viele Requisiten (Bett, Toaster, Bus, Handy-Chat, Schilder) |
 | Bogen | Eskalation → Wendung (≈ 50–57 s) → Schlussbild |
-| Ende | „Part 2?“ **oder** direkte Frage an den Zuschauer („Who would you want it to be?“) → Kommentare |
+| Ende | „Teil 2?“ **oder** direkte Frage an den Zuschauer („Wen würdest du wählen?“) → Kommentare |
 | Länge | **61 s** (knapp über 1 Minute); andere Erzählformen siehe 18.13 F |
 
 ### 16.2 Rezept B2 – „X verschwindet für 5 Sekunden“ (Alternative; Vorbild 17-Mio.-Video R16, dazu R06, R15)
 
 | Baustein | Vorgabe |
 |---|---|
-| Frage | „What if [Grundbaustein der Welt] disappeared for 5 seconds?“ (Sauerstoff, Elektronen, Wasser, Schwerkraft, Reibung, Licht …) |
+| Frage | „Was wäre, wenn [Grundbaustein der Welt] für 5 Sekunden verschwindet?“ (Sauerstoff, Elektronen, Wasser, Schwerkraft, Reibung, Licht …) |
 | HUD | Countdown **mit Millisekunden** bis zum Ereignis, dann „[X] RETURNS IN 0:04.958“ + Unterzeile „TIME SLOWED DOWN 11×“ |
 | Ort | **Ein** Ort (z. B. Park in einer Großstadt), Ich-Perspektive mit eigenen Händen |
 | Eskalation | vom Kleinen zum Riesigen: Hände → Menschen → Stadt → Erde (Totale aus dem All) |
@@ -526,7 +532,7 @@ dramaturgisch, `templates/quality_review.md`) → MP4-AUSLIEFERUNG (Datei als An
 - Frame 0: Situation in Bewegung + Titel + laufender HUD; Einstieg nach dem Hook-Standard **18.12** (Beweis-Ereignis ≤ 2 s bzw. Geheimnis/Countdown ab Frame 0; bis 15 s ≥ 3 Prämissen-Konsequenzen, kein Füllstoff).
 - Wechsel aus Hoffnung und Rückschlag (Gewinn → Verlust) treibt die Eskalation; HUD-Verlauf und Gefühle zeigen die Richtung.
 - Pointe = eigenes Ereignis mit Klang, vorbereitet durch ein früheres Ereignis (Aufbau → Auszahlung); danach ≤ 5 s.
-- Ende: Endkarte mit Frage an den Zuschauer und/oder „Part 2?“ (`endcard`).
+- Ende: Endkarte mit Frage an den Zuschauer und/oder „Teil 2?“ (`endcard`; Englisch „Part 2?“).
 
 ### 18.8 Qualitätskontrolle in drei Stufen
 
@@ -549,13 +555,36 @@ Der Validator prüft beim Hook nur Struktur, Zeitpunkte und die **Selbstauskunft
 | Sounddesign | Klangzeiten von Hand, unabhängig von der Szene; keine Kontrolle im fertigen Ton | Ereignis-gekoppelte Klänge, Synchronitätsmessung |
 | Qualitätskontrolle | `video_qa.py` prüfte nur Technik; „technisch geprüft“ wurde als Qualität gelesen | dreistufige Freigabe, Monotonie-Kandidaten, Standard-B-Regeln vor dem Rendern |
 
-### 18.11 Referenzproduktion = verbindliches Mindestniveau (abgenommen 2026-10-30)
+### 18.11 Referenzhierarchie (neu gefasst 2026-11-07; vorher: Akku-Testvideo als Mindestniveau)
 
-Das Testvideo `productions/what-if-phone-battery-life/` wurde vom Auftraggeber vollständig abgenommen und ist der **verbindliche
-Qualitätsmaßstab**. Neue Videos sind eigenständig (eigenes Thema, eigene Orte, eigene Pointe), fallen aber nicht ohne konkreten,
-im LOG begründeten Grund hinter diese Werte zurück. `validate_production.mjs` meldet jede Unterschreitung als Warnung `[18.11]`.
+**Entscheidung des Auftraggebers 2026-11-07:** Das Testvideo `productions/what-if-phone-battery-life/` ist **veraltet**. Es ist
+**kein** visueller oder erzählerischer Qualitätsmaßstab und **kein** Vorbild für neue Produktionen mehr. Kreativer Maßstab sind die
+vier analysierten Referenzvideos unten. Alle künftigen Produktionen richten sich daran aus.
 
-| Merkmal | Referenzwert (Testvideo) | Prüfung |
+**Stufe 1 – Kreative Referenzen (Maßstab für Bild, Erzählung, Hook, Licht, Ton).** Analyse: `VIDEO_ANALYSIS_6_VIDEOS.md`
+(Einzelanalysen Abschnitt 4–7), `VIDEO_COMPARISON_6_VIDEOS.md`, `VERSION_3_0_*.md`; daraus abgeleitet: 18.13.
+Die Videos liegen nur lokal beim Auftraggeber (Upload), nicht im Repository; die Dateinamen sind die der Analyse. Sind sie
+verfügbar, werden sie unverändert nach `references/videos/` gelegt (nicht versioniert, `.gitignore`).
+
+| Rang | ID (Analyse) | Datei | Titel im Bild | Maßstab vor allem für |
+|---|---|---|---|---|
+| 1 | **C1** viral (Millionen-Kanal) | `Viral_referenz_1.mp4.MP4` | What if you had to spend $1 trillion? (70,0 s) | Ich-Perspektive mit eigenen Händen ab Frame 0; Einsatz als HUD (Budget + Zeit); Ritual mit steigender Größenordnung; Schauwerte (Masse, Weite, Glanz); gerichtetes Licht/Gegenlicht; Musikabschnitte auf Story-Beats, leiser Einstieg |
+| 1 | **C2** viral (Millionen-Kanal) | `Viral_referenz_2.mp4.MP4` | What if you fell into a coma? (75,2 s) | Hook mit starker Bewegung und Ich-Perspektive (0–3 s); persönliche Überlebensgeschichte mit Zeitsprung-HUD; Hoffnung/Rückschlag; Wissensanker; echte Stille und Schwarzbild als Erzählmittel; hohe Dynamik |
+| 1 | **B1** neuer Stil (80k-Kanal, ≈ 1 Mio. Aufrufe) | `Referenz__neuer_stil_1m_views.MP4` | What if it rained forever? (61,0 s) | eine Messgröße über Größenordnungen; Stimmung über Dunst/Regen/Wasser; Farbhierarchie (eine Akzentfarbe in grauer Welt); einfache, sofort klare Frage |
+| 2 | **B2** alter Stil (80k-Kanal, = R07) | `Referenz_alter_stil.MP4` | What if you got 2× smaller every 2 seconds? (61,0 s) | Ergänzung: monotone Messgröße/Maßstabsreise, HUD-Gestaltung (18.5). **Kein** Vorbild für Licht und Ton |
+
+Gewichtung: Wo die Referenzen verschiedene Wege gehen, haben **C1, C2 und B1** Vorrang vor B2. Ton: C1/C2 sind Vorbild, B1/B2 nicht
+(flache Fremdsongs ohne Ereignisklänge, Vergleich Abschnitt 4). Story-Form je Thema wählen (18.13 F), nicht vereinheitlichen.
+Die Referenzen sind englisch; Sprache nach 18.14. Gemessene Referenzwerte stehen in `VIDEO_COMPARISON_6_VIDEOS.md` Abschnitt 2.
+
+**Stufe 2 – Messbare Regeln:** Abschnitt 18 (inkl. 18.12 Hook, 18.13 Version 3.0, 18.14 Sprache), Prüfung durch
+`validate_production.mjs`, `video_qa.py`, `balance_qa.py` und `quality_review.md` (C: Vergleich mit C1/C2/B1/B2).
+
+**Stufe 3 – Technische Mindestwerte `[18.11]`:** Die Zahlen unten wurden am Akku-Testvideo gemessen. Sie bleiben als **Untergrenze**
+für Handwerk (Ereignisdichte, Kamera, Figuren, Orte, HUD, Ton) im Validator: eine Unterschreitung ist eine Warnung und wird im LOG
+begründet. Sie sind **kein Ziel**: Erreicht ein Video sie, ist es damit nicht gut. Ob es gut ist, entscheidet der Vergleich mit Stufe 1.
+
+| Merkmal | Mindestwert (gemessen am Akku-Testvideo 2026-10-30) | Prüfung |
 |---|---|---|
 | Ereignisdichte | 26 Ereignisse / 17 Beats = 1,5 pro Beat | Warnung < 1,5 |
 | Kamerawechsel | 7 Vorlagen, 6 Bildgrößen, nie zweimal gleich hintereinander | Fehler bei Wiederholung / < 4 Bildgrößen; Warnung < 6 |
@@ -563,13 +592,15 @@ im LOG begründeten Grund hinter diese Werte zurück. `validate_production.mjs` 
 | Orte/Licht | 7 Orte, je eigene Lichtstimmung, Lichtwechsel als Ereignis | Fehler < 5 (B1), Warnung < 6 |
 | HUD-Dynamik | Wert ändert sich in 100 % der Beats, 11 Akzente, 4 Labels | Fehler < 70 %, Warnungen < 100 % / < 0,5 Akzente pro Beat / < 4 Labels |
 | Sound-Synchronisation | alle Ereignisse mit Klang; gemessen −15 … +10 ms | Fehler bei Versatz im Plan; Warnung < 90 % mit Klang; Messung in `video_qa.py` |
-| Dramaturgie | Hoffnung/Rückschlag, früh vorbereitete Pointe, Endkarte mit Frage + „Part 2?“, 3,6 s nach der Pointe | Pointe/Ende Fehler, Endkarte Warnung; Rest in `quality_review.md` C |
+| Dramaturgie | Hoffnung/Rückschlag, früh vorbereitete Pointe, Endkarte mit Frage + „Teil 2?“, 3,6 s nach der Pointe | Pointe/Ende Fehler, Endkarte Warnung; Rest in `quality_review.md` C |
 | Bildqualität | Würfel-Figuren mit Gesicht, Requisiten mit Erzählfunktion, keine Schwarzbilder/Kurz-Einstellungen, keine Monotonie-Kandidaten | `video_qa.py` + `quality_review.md` B |
 
-**Ausnahme Einstieg:** Für die ersten 15 s ist das Testvideo **kein** Maßstab, sondern Gegenbeispiel (Analytics: ≈ 50 % Abgang bis 14 s; Analyse `REFERENCE_ANALYSIS.md` 10). Dort gilt 18.12; der Validator meldet für das Testvideo selbst Hook-Fehler (beabsichtigt, dokumentiert).
-
-Bekannte Schwächen der Referenz, die **nicht** wiederholt werden sollen: zu dunkle Nachtszenen (Gesicht unlesbar),
-Anschlussfehler über einen Schnitt (Pose wechselt), Text während eines Blitzes, wichtige Requisiten zu klein in der Ich-Perspektive.
+**Stufe 4 – Akku-Produktion nur noch als technischer Regressionstest:** `productions/what-if-phone-battery-life/` bleibt unverändert
+im Repository. Sie dient nur noch Tests (`tests/test_build_timeline.mjs`: Hook-Gegenbeispiel 18.12; Nachweis bit-identischer
+Bilder nach Renderer-Änderungen; englische Pipeline über `--lang en`). Nicht als Muster für Beat-Sheet, Szene, Einstieg, Licht oder
+Erzählung nachschlagen. Format-Vorlagen sind `templates/` und `productions/_kit_demo_v3/`. Ihre Schwächen sind Warnhinweise:
+Einstieg ohne Prämisse (≈ 50 % Abgang bis 14 s, `REFERENCE_ANALYSIS.md` 10), zu dunkle Nachtszenen, Anschlussfehler über einen
+Schnitt, Text während eines Blitzes, leere, flach beleuchtete Welten.
 
 ### 18.10 Architektur-Freeze
 
@@ -649,7 +680,7 @@ Schluss; A1 reihte Gags ohne Folgen, A2 wechselte bei 7,5 s die Prämisse.
 | S2 | **Spannungsbogen:** Aufbau → Wende (`story.turn`, Ereignis vor der Pointe) → Höhepunkt → Auflösung; Hoffnung/Rückschlag (18.7) konkret im Beat-Sheet. | Validator + QA C |
 | S3 | **Ursachen sichtbar:** Jedes Ereignis, auf das sich Wende/Pointe beziehen, trägt `setup_for: "<Ereignis-ID>"` und `premise: "visible"`, liegt ≥ 3 s vor der Pointe und ist **ohne Untertitel** verständlich (wer tut was, was ist die Gefahr). | Validator (Struktur) + QA C10 (Vorschaubild ohne Text) |
 | S4 | **Wissensanker je Akt:** Akte im Beat-Sheet markieren (`beats[].act`); je Akt mindestens eine reale, geprüfte Zahl/Tatsache (`beats[].fact { text, source }`), Quelle im LOG. | Validator |
-| S5 | **Text:** Titel ≤ 7 Wörter / 2 Zeilen; Zeilen bevorzugt 2. Person Präsens; Gags müssen im Bild lesbar sein, nicht nur in der Zeile. | Validator (Titel) + QA C |
+| S5 | **Text:** Titel ≤ 7 Wörter / 2 Zeilen (Deutsch ≤ 8 inkl. „Was wäre, wenn“, 18.14); Zeilen bevorzugt 2. Person Präsens; Gags müssen im Bild lesbar sein, nicht nur in der Zeile. | Validator (Titel) + QA C |
 
 **B. Perspektive.** Beleg: C1/C2 zeigen Hook und Schlüsselmomente aus Ich-Sicht mit eigenen Händen; A1/A2 nie.
 - `kit.firstPerson({ camera, scene })` – Hände/Arme an der Kamera, Gesten `rest, hold, show, reach, push, grip, table, lie, flail, point`
@@ -703,6 +734,40 @@ Keine Themen, Figuren, HUD-Optik oder Gesangs-Songs der Referenzen übernehmen.
 `pipeline/runtime/stage.js` erhielt zwei optionale Post-Effekte (`bloom`, `grade`), Standard = aus; nachgewiesen bit-identische Bilder
 bestehender Produktionen. Begründung: Licht/Glanz ist der in der Analyse am deutlichsten sichtbare Abstand (Abschnitt D des Reviews).
 
+### 18.14 Sprache Deutsch (verbindlich seit 2026-11-07)
+
+Auftrag des Nutzers: Der Kanal wird von Englisch auf Deutsch umgestellt. **Nur die Sprache ändert sich** – Rezept B1/B2, Hook
+(18.12), Story-Kern (18.13), Kamera, Licht, Ton, Musik, Render und die Referenzhierarchie (18.11) bleiben unverändert. Ein Video
+darf durch den Sprachwechsel weder einfacher noch schlechter werden.
+
+**Technik (keine Architekturänderung):** Standardsprache `de` zentral in `pipeline/runtime/lang.js` (`DEFAULT_LANG`); alle
+Bildschirmtexte in `productions/<slug>/text.de.json` mit `"lang": "de"`, `"number_locale": "de-DE"` (Vorlage
+`templates/text.de.json`). Ältere Produktionen haben nur `text.en.json` und werden mit `--lang en` geprüft/gerendert
+(`run.mjs`, `render_frames.mjs`, `still.mjs`, `validate_production.mjs`); fehlt die Textdatei der gewählten Sprache, bricht das
+Werkzeug mit Hinweis ab.
+
+| # | Regel | Prüfung |
+|---|---|---|
+| D1 | **Titelformel „Was wäre, wenn …?“** (nicht „Was, wenn …?“, nicht „Stell dir vor …“); ≤ 10 Wörter, Empfehlung S5 ≤ 8 Wörter (die Formel hat ein Wort mehr als „What if“). | Validator `[2]`, `[18.13]` |
+| D2 | **Natürliches, modernes Deutsch** – so, wie man es einem Freund erzählt. Nie wörtlich aus dem Englischen übersetzen; Satzbau, Redewendung und Pointe auf Deutsch neu denken („Someone was faster.“ → „Zu spät.“ / „Jemand war schneller.“ nach Klang, nicht nach Wörterbuch). | QA C13 + Sprachabnahme |
+| D3 | **Du-Form**, klein geschrieben („du“, „dein“); zweite Person Präsens wie bisher (S5). Kein „Sie“, kein „man“-Stil. | QA C13 |
+| D4 | **Kurze Hauptsätze**, ein Gedanke je Zeile (3–10 Wörter wie Abschnitt 4). Deutsche Wörter sind länger: Zeile höchstens 2 Bildschirmzeilen – bei langen Komposita kürzer formulieren oder umstellen („Energiesparmodus“ → „Sparmodus“), nie trennen. | Standbild (`tools/still.mjs`) + QA B |
+| D5 | **Alltagswörter vor Fachwörtern**, etablierte Anglizismen nur, wenn sie im Deutschen üblich sind („Akku“, „Handy“, „WLAN“, „Powerbank“, „Videocall“ ja; „Battery“, „Outlet“ nein). | QA C13 |
+| D6 | **Zahlen deutsch:** Tausenderpunkt, Dezimalkomma (1.000 · 3,5) – im HUD automatisch über `number_locale: "de-DE"`; in Texten von Hand. **SI-Einheiten** (km, km/h, m, °C, kg); Leerzeichen vor Einheit („42 km“, „37 %“). | Validator `[18.14]` (Zahlenformat) |
+| D7 | **Typografie:** deutsche Anführungszeichen „ … “ und Gedankenstrich „–“. **HUD-Labels in Versalien mit „SS“ statt „ß“** („STRASSE“, „GRÖSSE“) – das versale ẞ fehlt in den Hausschriften und fiele auf eine Systemschrift zurück. Umlaute ä ö ü Ä Ö Ü und ß sind enthalten (Test `tests/test_overlay.mjs`). | Validator `[18.14]` (Schriftzeichen, Fehler) |
+| D8 | **HUD-Labels** kurz und eindeutig (1–3 Wörter: „DEIN LEBEN“, „KRITISCH“, „LÄDT“); Unterzeile als Ergänzung („= HANDYAKKU“). Label-Wechsel bleiben Phasen derselben Messgröße (18.13 S2). | QA B/C |
+| D9 | **Hook-Entwurf auf Deutsch** (18.12 H10): alle drei Ansätze werden auf Deutsch formuliert, einer davon als **Ich-Variante** („Ich …“ im Bild aus eigener Sicht, Text in Du- oder Ich-Form – im LOG begründen). | LOG + QA H |
+| D10 | **Endkarte:** Frage an den Zuschauer auf Deutsch („Wie lange würdest du durchhalten?“) und/oder „Teil 2?“. | Validator (Wortzahl) + QA C |
+| D11 | **Bildtexte im Szenencode** (Handy-Sperrbildschirm, Chat, Schilder, Leuchtschriften, Zettel – z. B. `kit.props` `time/date/name/messages`, `kit.atmo.glowSign({ text })`): in deutschen Produktionen immer **ausdrücklich auf Deutsch** setzen (Vorgaben des Kits sind englisch, z. B. `'Monday'`, `'OPEN'`, und bleiben wegen alter Szenen unverändert). Bewusst englisch gelassene Schilder im LOG vermerken. | QA B + Checkliste |
+| D12 | **Sprachabnahme:** Claude prüft Natürlichkeit und Rechtschreibung (QA C13); der Nutzer liest die Texte vor dem Rendern muttersprachlich gegen – wie die Hörprüfung wird sie angefragt, nicht vorausgesetzt. | `quality_review.md` C13 + D |
+
+**Referenzen (18.11):** Die kreativen Referenzen C1, C2, B1, B2 sind englisch. Sie sind Maßstab für Bild, Takt, Ton und
+Dramaturgie; für die Sprache gilt 18.14. Bestehende englische Produktionen werden nicht übersetzt oder verändert.
+
+**Freeze-Vermerk (18.10):** Additiv: `pipeline/runtime/lang.js`, sprachspezifische Prüfregeln `[18.14]` (nur für `de`), Titelformel
+je Sprache, Standard-`--lang` = `de`. Pipeline, Renderer, Kit, Beat-Sheet-Format, HUD-Gestaltung und Signalfarbe unverändert;
+englische Validierung aller Produktionen vor/nach der Änderung byte-identisch geprüft.
+
 ### Änderungsprotokoll
 
 | Datum | Version | Änderung | Begründung |
@@ -715,3 +780,5 @@ bestehender Produktionen. Begründung: Licht/Glanz ist der in der Analyse am deu
 | 2026-10-30 | 2.1 | 18.11: abgenommenes Testvideo als verbindliches Mindestniveau; Validator erzwingt `beats.json` für Stil B und warnt bei Unterschreitung; `run.mjs` legt `quality_review.md` an | Abnahme durch den Auftraggeber; Prüfung, ob der Standard im Ablauf greift |
 | 2026-10-31 | 2.2 | 18.12 Hook-Standard (Unmöglichkeitstest, Hook-Typen, Beweis-Ereignis, Prämissen-Ereignisse, Füllstoff, Vorwegnahme, Hook-Entwurf); 2, 3.1, 16.1, 18.7, 18.11 angepasst; Beat-Sheet additiv `hook` + `events[].premise`; Validator-Regeln `[18.12]`; QA-Abschnitt H | Analytics Akku-Video (≈ 50 % Abgang bis 14 s), Hook-Analyse `REFERENCE_ANALYSIS.md` 10; Regeltext von 2/3.1/16.1 schrieb einen Alltagseinstieg vor (10.4). Auftrag des Nutzers 2026-10-31 |
 | 2026-11-04 | 3.0 | 18.13: Story-Kern (Einsatz, Messgröße, Wende, sichtbare Ursachen, Wissensanker je Akt), Ich-Perspektive (`kit.firstPerson`), Schauwert/Massen (`kit.masses`), Licht & Atmosphäre (`kit.atmo`: Stimmungen, Lichtquellen, Oberflächen, Wasser, Teilchen, Paletten), optionale Post-Effekte `bloom`/`grade`, Erzählformen B3–B6, Warnregeln `[18.13]`, `tools/balance_qa.py`. Korrektur: Bewegungsunschärfe war bereits vorhanden (`motion_blur`, Whip-Unschärfe) | Analyse von 6 Videos (eigen / 80k / Millionen-Kanal), konsolidierte Auswertung; Auftrag des Nutzers 2026-11-04. Alte Produktionen bit-identisch geprüft |
+| 2026-11-07 | 3.1 | 18.14 Sprache Deutsch: Standardsprache `de` (`pipeline/runtime/lang.js`), Titelformel „Was wäre, wenn …?“, Regeln D1–D12 (natürliches Deutsch, Du-Form, Zahlen/Einheiten, Typografie, HUD-Versalien mit SS); Validator: Titelformel je Sprache, `[18.14]` Zahlenformat/Schriftzeichen nur für `de`, S5 +1 Wort für die deutsche Formel; 1.3, 2, 4, 7.4, 13, 14, 16.1, 18.7, 18.13 angepasst; Vorlage `templates/text.de.json`; QA C13 Sprache, Sprachabnahme in D | Auftrag des Nutzers 2026-11-07 (Kanal auf Deutsch umgestellt). Englisch über `--lang en` unverändert; englische Validierung aller Produktionen byte-identisch |
+| 2026-11-07 | 3.2 | 18.11 neu gefasst als Referenzhierarchie: kreative Referenzen C1 `Viral_referenz_1.mp4.MP4`, C2 `Viral_referenz_2.mp4.MP4`, B1 `Referenz__neuer_stil_1m_views.MP4` (Rang 1), B2 `Referenz_alter_stil.MP4` = R07 (Rang 2); Werte `[18.11]` nur noch technische Untergrenze; Akku-Produktion `what-if-phone-battery-life` nur noch technischer Regressionstest. CLAUDE.md, Skill, Checkliste, `quality_review.md`, README, Validator-Meldung angepasst | Auftrag des Nutzers 2026-11-07: Akku-Video veraltet, kein visueller/erzählerischer Maßstab mehr. Schwellen und Tests unverändert |
