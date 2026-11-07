@@ -4,7 +4,7 @@
 |---|---|
 | Slug | `<slug>` |
 | Produktionsstil | B – Rezept B1 / B2 (Stil A nur auf ausdrücklichen Auftrag) |
-| Sprache | en |
+| Sprache | de (Standard, Guide 18.14; en nur für Altproduktionen mit `--lang en`) |
 | Status | ENTWURF / TECHNISCH GEPRÜFT / QUALITÄT GEPRÜFT / FREIGEGEBEN (Guide 18.8) |
 | Style-Guide-Version | 2.0 |
 | Beat-Sheet / Freigabebogen | `beats.json` / `quality_review.md` |

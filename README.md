@@ -1,6 +1,6 @@
 # whatif-video-system
 
-Produktionssystem für eigenständige, geprüfte **„What if …?“-Kurzvideos** (9:16, mindestens 60 s, Englisch). **Aktives Produktionsziel: Stil B** (stumm, visuelles Storytelling, HUD, Sounddesign) nach dem verbindlichen **Produktionsstandard V3** (`WHATIF_STYLE_GUIDE.md` Abschnitt 18 inkl. 18.12 Hook und **18.13 Version 3.0**). Stil A („Earth“, Sprecher) ist archiviert. Das Repository enthält die kreative und technische Regelbasis, die Belege aus 15 Referenzvideos, einen Claude-Code-Skill für den Arbeitsablauf und Werkzeuge für Analyse und Qualitätsabnahme.
+Produktionssystem für eigenständige, geprüfte **„Was wäre, wenn …?“-Kurzvideos** (9:16, mindestens 60 s, **Deutsch** seit 2026-11-07, Guide 18.14; Produktionen davor englisch, weiter nutzbar mit `--lang en`). **Aktives Produktionsziel: Stil B** (stumm, visuelles Storytelling, HUD, Sounddesign) nach dem verbindlichen **Produktionsstandard V3** (`WHATIF_STYLE_GUIDE.md` Abschnitt 18 inkl. 18.12 Hook und **18.13 Version 3.0**). Stil A („Earth“, Sprecher) ist archiviert. Das Repository enthält die kreative und technische Regelbasis, die Belege aus 15 Referenzvideos, einen Claude-Code-Skill für den Arbeitsablauf und Werkzeuge für Analyse und Qualitätsabnahme.
 
 Eigenständiges Projekt – unabhängig von `AllIN67/oxygen-video`; von dort wurden weder Dateien noch Regeln übernommen.
 
@@ -11,7 +11,7 @@ Eigenständiges Projekt – unabhängig von `AllIN67/oxygen-video`; von dort wur
 | `WHATIF_STYLE_GUIDE.md` | **Quelle der Wahrheit**; **Abschnitt 18 = Produktionsstandard Stil B, Version 3.0 (Vorrang, Architektur-Freeze)** |
 | `VERSION_3_0_*.md`, `VIDEO_*_6_VIDEOS.md` | Grundlage von V3: Analyse von 6 Videos, Vergleich, Lückenanalyse, Plan, konsolidierte Auswertung |
 | `templates/beats.json`, `templates/quality_review.md` | Vorlage Beat-Sheet; dreistufige Freigabe (technisch, visuell, dramaturgisch) |
-| `productions/what-if-phone-battery-life/` | Referenzproduktion des Standards (Testvideo der Systemüberarbeitung) |
+| `productions/what-if-phone-battery-life/` | **veraltet** – nur technischer Regressionstest (Testvideo der Systemüberarbeitung 2026-10-30), kein Qualitätsmaßstab (Guide 18.11) |
 | `STYLE_A_EARTH.md` | Regeln für Produktionsstil A (Earth, mit Sprecher); Stil B steht im Style-Guide |
 | `VIDEO_PRODUCTION_CHECKLIST.md` | Abhakliste für jedes Video (Thema → Freigabe → Dokumentation) |
 | `REFERENCE_ANALYSIS.md` | Belegbasis: Einzelanalyse R01–R15, Vergleich, Schwächen, Grenzen der Analyse |
@@ -32,7 +32,8 @@ Eigenständiges Projekt – unabhängig von `AllIN67/oxygen-video`; von dort wur
 ├── pipeline/                  # Render-Pipeline (siehe Abschnitt „Render-Pipeline“)
 ├── tests/                     # automatische Tests + Fixtures
 ├── templates/
-│   ├── scene_plan.md          # Vorlage Szenenplan + text.en.json-Struktur
+│   ├── scene_plan.md          # Vorlage Szenenplan + text.de.json-Struktur
+│   ├── text.de.json           # Vorlage Bildschirmtexte Deutsch (Guide 18.14)
 │   └── production_log.md      # Vorlage Produktionsprotokoll
 ├── tools/
 │   ├── validate_production.mjs, audio_mix.py, sfx_synth.py, av_sync.py   # Render-Pipeline (siehe unten)
@@ -55,7 +56,7 @@ Eigenständiges Projekt – unabhängig von `AllIN67/oxygen-video`; von dort wur
 Deterministisch: Jedes Bild ist eine reine Funktion seines Frame-Index (`t = n / 30`). Uhr, Animationsschleife und ungeseedeter Zufall sind in der Bühne technisch gesperrt (`pipeline/runtime/guard.js`).
 
 ```
-timeline.json + text.en.json + scene.js
+timeline.json + text.<lang>.json + scene.js        (lang: de = Standard, pipeline/runtime/lang.js; en mit --lang en)
    │  node tools/validate_production.mjs productions/<slug>        Regeln des Style-Guides vor dem Rendern
    ▼
 pipeline/render_frames.mjs   headless Chromium + Three.js (SwiftShader), 1 PNG-Screenshot pro Frame
@@ -73,7 +74,7 @@ Klangeinsätze auf den Ereignis-Frames, Whip-Luftzüge, Musik- und Atmosphären-
 `kit.beatClock(timeline)` – Bild, HUD und Ton laufen dadurch nicht auseinander.
 
 ```
-beats.json + text.en.json + scene.js
+beats.json + text.de.json + scene.js
    │  node tools/build_timeline.mjs productions/<slug>          → timeline.json (nie von Hand ändern)
    │  node tools/validate_production.mjs productions/<slug>     → Regeln inkl. Standard B (Kamera-Abwechslung, Ereignisse, HUD, Ton)
    │  node tools/still.mjs --production productions/<slug> --at …   Vorschau je Beat
@@ -128,7 +129,7 @@ node pipeline/run.mjs --production productions/<slug>
 
 | Auftrag | Regeln | Profil | Referenz |
 |---|---|---|---|
-| Standard (jedes Thema): **Stil B** | `WHATIF_STYLE_GUIDE.md` 18 (+16 Rezept B1/B2) | Standard + `beats.json` | `productions/what-if-phone-battery-life/`, R07, R19, R20 |
+| Standard (jedes Thema): **Stil B** | `WHATIF_STYLE_GUIDE.md` 18 (+16 Rezept B1/B2) | Standard + `beats.json` | kreative Referenzen C1 `Viral_referenz_1.mp4.MP4`, C2 `Viral_referenz_2.mp4.MP4`, B1 `Referenz__neuer_stil_1m_views.MP4`, B2 `Referenz_alter_stil.MP4` (Guide 18.11; HUD-Gestaltung nach R07/R19/R20) |
 | nur bei wörtlich `PRODUKTIONSSTIL: A (Earth)` (archiviert) | `STYLE_A_EARTH.md` | `"profile": "voiceover"` | `productions/earth-stops-1-second/` |
 
 **Mindestlänge 60 s für jedes Video.** `validate_production.mjs` und `video_qa.py` lehnen kürzere Videos ab; `timeline.qa` kann die Grenze nur anheben. `--skip-validate`/`--qa-ignore-length` (`run.mjs`) und `--ignore-length` (`video_qa.py`) sind nur für technische Test-Clips (`tests/…`, `productions/_…`) erlaubt.
@@ -172,7 +173,7 @@ npm test     # node --test tests/*.mjs  +  python3 -m unittest (tests/test_*.py)
 
 Voraussetzung: Claude Code arbeitet in diesem Repository (als Arbeitsverzeichnis gestartet oder der Sitzung hinzugefügt). Projekt-Skills unter `.claude/skills/` werden dann erkannt; in anderen Projekten oder Chats ist der Skill nicht verfügbar.
 
-- Explizit: `/whatif-video-style` – z. B. `/whatif-video-style Plane ein Video: What if the Moon disappeared?`
+- Explizit: `/whatif-video-style` – z. B. `/whatif-video-style Plane ein Video: Was wäre, wenn der Mond verschwindet?`
 - Implizit: Aufgaben wie „Produziere ein What-if-Video über …“ passen zur Skill-Beschreibung.
 - In manchen Umgebungen ist zusätzlich ein älterer, globaler Skill `whatif-3d-style` sichtbar. Er gehört zu einem anderen Projekt und gilt hier **nicht**; im Zweifel `/whatif-video-style` explizit aufrufen.
 
@@ -190,7 +191,7 @@ Voraussetzung: Claude Code arbeitet in diesem Repository (als Arbeitsverzeichnis
 Kurzform (Details: Checkliste und Skill):
 
 1. Frage, HUD-Messgröße, Konsequenzen, Pointe, Fakten mit Quellen → `productions/<slug>/LOG.md`
-2. Szenenplan + `text.en.json`
+2. Szenenplan + `text.de.json`
 3. Kamera-Paradigma, Licht, Effekte, Ton (lizenzierte Musik)
 4. Deterministisch rendern (30 fps CFR, 1080×1920)
 5. `video_qa.py --mode render` + `inspect_frames.py --report …`
@@ -229,7 +230,7 @@ Zusätzlich an den Referenzen kalibriert (Letterbox-Zuschnitt, Bewegungsübergä
 
 - Erstes Inhaltsvideo: `productions/earth-stops-1-second/` (Stil A, technisch geprüft, Hörprüfung ausstehend). Mit 41 s erfüllt es die Mindestlänge 60 s nicht mehr – Stilreferenz, nicht veröffentlichungsfähig (`STYLE_A_EARTH.md`, Abschnitt 6).
 - Musik nur selbst erzeugt (`tools/music_synth.py`, keine lizenzierte Musik eingebunden).
-- Referenzproduktion Stil B: `productions/what-if-phone-battery-life/` (Stand siehe dessen `LOG.md` und `quality_review.md`).
+- Kreative Referenzen Stil B: vier analysierte Videos (Guide 18.11); sie liegen nicht im Repository (nur Analyse in `VIDEO_ANALYSIS_6_VIDEOS.md`). `productions/what-if-phone-battery-life/` ist nur noch technischer Regressionstest.
 - **Claude kann Audio nicht hören.** Ton wird gemessen; die Hörprüfung vor der Freigabe muss ein Mensch durchführen.
 - Automatische Bildprüfung findet Kandidaten, keine Gewissheit: Abblend-Übergänge, Zeitraffer und Partikel erzeugen Fehlalarme; sehr kurze Fehler zwischen den 1-s-Kontaktbögen findet nur die Frame-Messung bzw. die Bildstreifen.
 - Referenzvideos und Kontaktbögen sind nicht versioniert (Urheberrecht). In einer neuen Umgebung müssen sie erneut bereitgestellt werden.

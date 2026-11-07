@@ -2,13 +2,14 @@
 // Prüft eine Produktion VOR dem Rendern gegen die messbaren Regeln des Style-Guides.
 // Nutzt dieselbe Zeitachsen-Logik wie der Render (pipeline/runtime/timeline.js) – keine Doppelimplementierung.
 //
-//   node tools/validate_production.mjs productions/<slug> [--lang en] [--json]
+//   node tools/validate_production.mjs productions/<slug> [--lang de|en] [--json]   (Standard: de, pipeline/runtime/lang.js)
 //
 // Exit-Code: 0 = keine Fehler (Warnungen möglich), 1 = Fehler.
 import fs from 'node:fs';
 import path from 'node:path';
 import { prepare, hudAt } from '../pipeline/runtime/timeline.js';
 import { paginate } from '../pipeline/runtime/captions.js';
+import { DEFAULT_LANG, LANG_RULES } from '../pipeline/runtime/lang.js';
 
 const words = (s) => s.trim().split(/\s+/).filter(Boolean).length;
 const r2 = (x) => Math.round(x * 100) / 100;
@@ -36,11 +37,33 @@ export function checkLength(timeline, E, W) {
   }
 }
 
-export function validate(timeline, text, { lang = 'en', wordTimes = null, requireBeats = false } = {}) {
+// Schriften der Text-Ebene liegen als Untermenge „latin“ vor (@fontsource, unicode-range der woff2-Dateien).
+// Zeichen außerhalb fallen still auf eine Systemschrift zurück – z. B. das versale ẞ (U+1E9E): in Versalien „SS“ schreiben.
+const LATIN_SUBSET = /^[\u0000-\u00FF\u0131\u0152\u0153\u02BB\u02BC\u02C6\u02DA\u02DC\u0304\u0308\u0329\u2000-\u206F\u20AC\u2122\u2191\u2193\u2212\u2215\uFEFF\uFFFD]*$/u;
+const textStrings = (o, out = []) => {
+  if (typeof o === 'string') out.push(o);
+  else if (o && typeof o === 'object') for (const [k, v] of Object.entries(o)) if (k !== 'lang' && k !== 'number_locale' && !k.startsWith('_')) textStrings(v, out); // _comment wird nicht angezeigt
+  return out;
+};
+
+// Sprachspezifische Regeln (Guide 1.3, 18.14). Englisch unverändert; Deutsch zusätzlich Zahlenformat und Schriftzeichen.
+function checkLanguage(text, lang, E, W) {
+  if (text?.lang && text.lang !== lang) E('1.3', `text.${lang}.json trägt "lang": "${text.lang}"`);
+  if (lang !== 'de') return;
+  const nl = text?.number_locale;
+  if (!nl || !nl.startsWith(LANG_RULES.de.numberLocale)) W('18.14', `number_locale „${nl ?? '–'}“ – für Deutsch "de-DE" setzen (sonst Zahlen als 1,000.5 statt 1.000,5)`);
+  for (const s of textStrings(text)) {
+    const bad = [...s].filter((c) => !LATIN_SUBSET.test(c));
+    if (bad.length) E('18.14', `Zeichen ${[...new Set(bad)].map((c) => `„${c}“`).join(', ')} nicht in den Schriften (Text: „${s}“)${bad.includes('ẞ') ? ' – in Versalien „SS“ schreiben' : ''}`);
+  }
+}
+
+export function validate(timeline, text, { lang = text?.lang ?? DEFAULT_LANG, wordTimes = null, requireBeats = false } = {}) {
   const errors = [];
   const warnings = [];
   const E = (rule, msg) => errors.push(`[${rule}] ${msg}`);
   const W = (rule, msg) => warnings.push(`[${rule}] ${msg}`);
+  checkLanguage(text, lang, E, W);
   if (timeline.profile === 'voiceover') return validateVoiceover(timeline, text, { lang, words: wordTimes, errors, warnings, E, W });
 
   let ptl;
@@ -62,7 +85,8 @@ export function validate(timeline, text, { lang = 'en', wordTimes = null, requir
   else {
     if (tt.in !== 0) E('2', `Titel muss ab Frame 0 stehen (in = ${tt.in})`);
     if (tt.out - tt.in < 2.5 || tt.out - tt.in > 4.5) E('2', `Titel steht ${r2(tt.out - tt.in)} s (erlaubt 2,5–4,0 s + Ausblendung)`);
-    if (!/^What if\b/.test(title) && lang === 'en') E('2', 'Titel beginnt nicht mit „What if“');
+    const LR = LANG_RULES[lang];
+    if (LR && !LR.titlePrefix.test(title)) E('2', `Titel beginnt nicht mit „${LR.titleFormula}“`);
     if (!title.trim().endsWith('?')) E('2', 'Titel endet nicht mit „?“');
     if (words(title) > 10) E('2', `Titel hat ${words(title)} Wörter (max. 10)`);
     const hl = text.title.highlight;
@@ -157,7 +181,7 @@ export function validate(timeline, text, { lang = 'en', wordTimes = null, requir
   if (timeline.beats) {
     checkStandardB(timeline, ptl, E, W);
     checkHook(timeline, E, W);
-    checkStory(timeline, text, W);
+    checkStory(timeline, text, W, lang);
   }
   else if (requireBeats) E('18.1', 'timeline.json ist nicht aus beats.json erzeugt – Stil-B-Produktionen brauchen productions/<slug>/beats.json (node tools/build_timeline.mjs)');
 
@@ -178,8 +202,9 @@ export const STANDARD_B = {
   minHudChangeShare: 0.7,
 };
 
-// Referenzniveau = vom Nutzer abgenommenes Testvideo productions/what-if-phone-battery-life (2026-10-30, Guide 18.11).
-// Unterschreitung ist kein Fehler, aber eine Warnung, die im LOG begründet werden muss (nicht ohne Grund zurückfallen).
+// Technische Mindestwerte [18.11] – gemessen am Testvideo productions/what-if-phone-battery-life (2026-10-30). Seit 2026-11-07 ist es
+// kein Qualitätsmaßstab mehr (kreative Referenzen: Guide 18.11 Stufe 1), die Werte bleiben als Untergrenze fürs Handwerk.
+// Unterschreitung ist kein Fehler, aber eine Warnung, die im LOG begründet werden muss.
 export const REFERENCE_B = {
   eventsPerBeat: 1.5, // Referenz 1,53
   framings: 6, // close, medium, wide, low, high, pov
@@ -258,10 +283,10 @@ export function checkStandardB(timeline, ptl, E, W) {
   // Ende (18.7): Endkarte oder Frage an den Zuschauer
   if (!timeline.endcard) W('18.7', 'keine Endkarte (Frage an den Zuschauer / „Part 2?“)');
 
-  // Referenzniveau (18.11): Werte des abgenommenen Testvideos; Unterschreitung im LOG begründen
+  // Technische Mindestwerte (18.11 Stufe 3): Untergrenze, kein Qualitätsziel; Unterschreitung im LOG begründen
   const R = REFERENCE_B;
   const ev = timeline.events || [];
-  const under = (what, have, want) => W('18.11', `unter Referenzniveau: ${what} ${have} (Referenz ≥ ${want}) – im LOG begründen`);
+  const under = (what, have, want) => W('18.11', `unter technischem Mindestwert: ${what} ${have} (Mindestwert ≥ ${want}) – im LOG begründen`);
   const epb = Math.round((ev.length / beats.length) * 100) / 100;
   if (epb < R.eventsPerBeat) under('Ereignisse pro Beat', epb, R.eventsPerBeat);
   if (nF < R.framings) under('Bildgrößen', nF, R.framings);
@@ -409,7 +434,7 @@ export function loadWords(dir, timeline) {
 // (VERSION_3_0_CONSOLIDATED_REVIEW.md) und sind Produktionsregeln, keine belegten Reichweiten-Ursachen. Geprüft wird nur
 // Vorhandensein/Struktur; ob die Ursache OHNE TEXT lesbar ist, entscheidet die Sichtprüfung (quality_review.md C10).
 export const STORY = { titleMaxWords: 7, minActs: 2, setupMinLead: 3.0, quietBeforePointe: [3.0, 0.5], showpieces: ['mass', 'vista', 'glow'] };
-export function checkStory(timeline, text, W) {
+export function checkStory(timeline, text, W, lang = text?.lang ?? DEFAULT_LANG) {
   if (!timeline.story && !timeline.hook) return; // Produktionen vor 2.2 (ohne Hook-Feld) nicht nachträglich bewerten
   const S = STORY;
   const r2 = (x) => Math.round(x * 100) / 100;
@@ -460,7 +485,11 @@ export function checkStory(timeline, text, W) {
   }
   // Titel kurz (C-Referenzen 6–7 Wörter, 2 Zeilen)
   const title = text?.title?.text;
-  if (title && title.trim().split(/\s+/).length > S.titleMaxWords) W('18.13', `Titel hat ${title.trim().split(/\s+/).length} Wörter (empfohlen ≤ ${S.titleMaxWords})`);
+  // Titelformel zählt wie „What if“ (2 Wörter): „Was wäre, wenn“ (3) bekommt 1 Wort Ausgleich (Guide 18.14)
+  const LR = LANG_RULES[lang];
+  const extra = LR && title && LR.titlePrefix.test(title) ? LR.prefixWords - LANG_RULES.en.prefixWords : 0;
+  const max = S.titleMaxWords + extra;
+  if (title && title.trim().split(/\s+/).length > max) W('18.13', `Titel hat ${title.trim().split(/\s+/).length} Wörter (empfohlen ≤ ${max}${extra ? ` inkl. „${LR.titleFormula}“` : ''})`);
 }
 
 // Hook-Entwurf (18.12 H10) liegt nicht im Beat-Sheet, sondern im LOG. Nur über die Kommandozeile geprüft (Datei-basiert):
@@ -478,9 +507,13 @@ export function checkHookDraft(logText, W) {
 if (import.meta.url === `file://${process.argv[1]}`) {
   const args = process.argv.slice(2);
   const dir = args.find((a) => !a.startsWith('--'));
-  const lang = args.includes('--lang') ? args[args.indexOf('--lang') + 1] : 'en';
+  const lang = args.includes('--lang') ? args[args.indexOf('--lang') + 1] : DEFAULT_LANG;
   if (!dir) {
-    console.error('Aufruf: node tools/validate_production.mjs productions/<slug> [--lang en] [--json]');
+    console.error('Aufruf: node tools/validate_production.mjs productions/<slug> [--lang de|en] [--json]');
+    process.exit(2);
+  }
+  if (!fs.existsSync(path.join(dir, `text.${lang}.json`))) {
+    console.error(`text.${lang}.json fehlt in ${dir} – Standardsprache ist ${DEFAULT_LANG}; englische Produktionen mit --lang en prüfen`);
     process.exit(2);
   }
   const tl = JSON.parse(fs.readFileSync(path.join(dir, 'timeline.json'), 'utf8'));

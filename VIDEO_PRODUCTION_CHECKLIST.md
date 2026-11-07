@@ -4,16 +4,16 @@ Für **jedes** Video abarbeiten. Regeln stehen in `WHATIF_STYLE_GUIDE.md` (Absch
 Ein Punkt gilt erst als erledigt, wenn er im Produktionsprotokoll (`productions/<slug>/LOG.md`) bzw. in
 `productions/<slug>/quality_review.md` mit Ergebnis vermerkt ist. Stil A (archiviert) nur bei ausdrücklichem Auftrag → `STYLE_A_EARTH.md`.
 
-Ablage pro Video: `productions/<slug>/` mit `LOG.md`, `beats.json`, `timeline.json` (erzeugt), `text.en.json`, `scene.js`,
+Ablage pro Video: `productions/<slug>/` mit `LOG.md`, `beats.json`, `timeline.json` (erzeugt), `text.de.json` (Sprache Deutsch, Guide 18.14), `scene.js`,
 `quality_review.md`, `qa/`, `render/` (nicht versioniert).
 
 ## 1. Thema und Story
 
 - [ ] Rezept B1 (Standard) bzw. B2 im LOG (17, 16)
-- [ ] Frage „What if …?“, ≤ 10 Wörter (2)
+- [ ] Frage „Was wäre, wenn …?“, ≤ 10 Wörter, empfohlen ≤ 8; Du-Form, natürliches Deutsch, nicht übersetzt (2, 18.14 D1–D3)
 - [ ] HUD-Messgröße mit Start → Ende, ändert sich in ≥ 70 % der Beats (18.5)
 - [ ] Pointe festgelegt und früh vorbereitet (Aufbau → Auszahlung) (18.7)
-- [ ] **Hook-Entwurf:** 3 Einstiege verschiedener Typen/Bildideen skizziert, gegen 18.12 bewertet, Wahl begründet; Hook-Typ der letzten 3 Produktionen verglichen (18.12 H10)
+- [ ] **Hook-Entwurf (auf Deutsch):** 3 Einstiege verschiedener Typen/Bildideen skizziert, gegen 18.12 bewertet, Wahl begründet; Hook-Typ der letzten 3 Produktionen verglichen (18.12 H10)
 - [ ] **Unmöglichkeitstest:** Beweis-Ereignis zeigt die Prämisse im Bild (≤ 2 s bzw. Geheimnis/Countdown ab Frame 0); kein Aufwach-/Alltagseinstieg (18.12 H1–H3)
 - [ ] Hoffnung/Rückschlag-Wechsel geplant; Fakten mit Quelle im LOG (3.2)
 - [ ] **Story-Kern:** `story.stake`, `story.measure`, `story.question`, `story.turn`; Prämisse bleibt bis zum Ende; Erzählform (B1–B6) im LOG (18.13 A/F)
@@ -29,10 +29,11 @@ Ablage pro Video: `productions/<slug>/` mit `LOG.md`, `beats.json`, `timeline.js
 - [ ] ≥ 5 Orte (B1), ≥ 4 Gefühle mit Entwicklung (18.4)
 - [ ] Kamera: nie zweimal gleich hintereinander, ≥ 4 Bildgrößen, ≥ 1 Reaktions-Nahaufnahme, ≥ 1 Totale/Aufsicht (18.3)
 - [ ] Klang auf jedem Schlüsselereignis (Auslöser, Akzente, Pointe), sonst sparsam; Musikplan mit Ruhe vor der Pointe (18.6)
-- [ ] Texte nur in `text.en.json`: Titel, HUD-Labels, 12–24 Zeilen à 3–10 Wörter, Endkarte (4)
+- [ ] Texte nur in `text.de.json` (Vorlage `templates/text.de.json`): Titel, HUD-Labels, 12–24 Zeilen à 3–10 Wörter, Endkarte (4)
+- [ ] Deutsch nach 18.14: `number_locale: "de-DE"`, SI-Einheiten, „ “ und –, HUD-Versalien mit SS statt ß, keine wörtliche Übersetzung; keine Fehler/Warnungen `[18.14]`
 - [ ] `node tools/build_timeline.mjs productions/<slug>` + `node tools/validate_production.mjs productions/<slug>` → **OK**
 - [ ] `hook`-Block vollständig; Prämissen-Ereignisse mit `premise` markiert (bis 15 s ≥ 3, ≥ 2 `visible`); keine Fehler `[18.12]`, Warnungen behoben oder begründet (18.12)
-- [ ] Keine Warnung `[18.11]` (Referenzniveau des Testvideos) – oder Begründung im LOG (18.11)
+- [ ] Keine Warnung `[18.11]` (technische Mindestwerte, kein Qualitätsziel) – oder Begründung im LOG (18.11)
 - [ ] Keine Warnung `[18.13]` – oder Begründung im LOG (18.13)
 
 ## 3. Szene und Vorschau
@@ -41,8 +42,9 @@ Ablage pro Video: `productions/<slug>/` mit `LOG.md`, `beats.json`, `timeline.js
 - [ ] Lichtstimmung je Ort (`applyLook`) (18.4)
 - [ ] **Licht & Farbe:** je Akt eine Grundstimmung + ein Akzent; sichtbare Lichtquellen in Nacht/Innen; Dunst/Kulisse außen; Struktur-Böden; `bloom`/`grade` bewusst gesetzt; Sättigung nicht erhöht (18.13 D)
 - [ ] Musik: Ruhe (`silence`/`calm`) 3 s vor bis 0,5 s nach der Pointe; Abschnitte an Wende/Höhepunkt (18.13 E)
+- [ ] Bildtexte im Szenencode (Handy, Chat, Schilder, `glowSign`) ausdrücklich auf Deutsch; bewusst englische Schilder im LOG (18.14 D11)
 - [ ] Neue Teile im Kit ergänzt und im LOG genannt
-- [ ] `tools/still.mjs` für jeden Beat angesehen: Figur im Bild, Gesicht lesbar, Kamera frei, Texte frei (18.3)
+- [ ] `tools/still.mjs` für jeden Beat angesehen: Figur im Bild, Gesicht lesbar, Kamera frei, Texte frei; deutsche Zeilen ≤ 2 Bildschirmzeilen (18.3, 18.14 D4)
 - [ ] **Hook-Vorschau** 0 / 0,5 / 1 / 2 / 3 / 5 / 8 / 12 / 15 s: `quality_review.md` Abschnitt H (H1–H6) **vor dem Rendern** ausgefüllt; jede `visible`-Konsequenz ist im 9:16-Bild groß genug zu sehen (18.12)
 
 ## 4. Rendern
@@ -56,7 +58,8 @@ Ablage pro Video: `productions/<slug>/` mit `LOG.md`, `beats.json`, `timeline.js
 - [ ] **B visuell:** **alle** `qa/sheet_*.jpg` inkl. Ende, `qa/shots.jpg`, **alle** `qa/strips/*` angesehen (11.2)
 - [ ] `tools/balance_qa.py` → `qa/balance.json` gesichtet (Farbhierarchie, Bandanteile, Stille) und in die Hörprüfung mitgegeben (18.13 L8)
 - [ ] **H Hook:** Abschnitt H am fertigen Video wiederholt (18.12)
-- [ ] **C dramaturgisch:** Einstieg, Entwicklung, Abwechslung, Eskalation, Pointe/Ende; Vergleich mit R07/R19/R20 (18.7)
+- [ ] **C dramaturgisch:** Einstieg, Entwicklung, Abwechslung, Eskalation, Pointe/Ende; Vergleich mit den kreativen Referenzen C1/C2/B1/B2 (18.11)
+- [ ] **C13 Sprache** geprüft; **Sprachabnahme** (muttersprachliches Gegenlesen) beim Nutzer angefragt (18.14 D12)
 - [ ] **D Hörprüfung** beim Nutzer angefragt (11.3)
 
 ## 6. Fehler beheben, erneut rendern

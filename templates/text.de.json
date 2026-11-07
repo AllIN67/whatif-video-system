@@ -1,0 +1,19 @@
+{
+ "_comment": "Vorlage Bildschirmtexte Deutsch (Guide 18.14). Kopieren nach productions/<slug>/text.de.json; IDs passend zu beats.json (hud.label, beats[].line, endcard). Beispielinhalt = Akku-Thema frei auf Deutsch formuliert (nicht wörtlich übersetzt). Regeln: Titel „Was wäre, wenn …?“ (≤ 10, empfohlen ≤ 8 Wörter), Du-Form, Zeilen 3–10 Wörter mit Satzzeichen, „ “ und –, HUD-Labels in Versalien mit SS statt ß, Zahlen über number_locale de-DE (1.000,5), SI-Einheiten mit Leerzeichen.",
+ "lang": "de",
+ "number_locale": "de-DE",
+ "title": { "text": "Was wäre, wenn dein Handyakku dein Leben wäre?", "highlight": "Handyakku" },
+ "hud": {
+  "battery": { "label": "DEIN LEBEN", "unit": " %", "sub": "= HANDYAKKU" },
+  "lowpower": { "label": "STROMSPARMODUS", "unit": " %", "sub": "NICHT BEWEGEN" },
+  "critical": { "label": "KRITISCH", "unit": " %", "sub": "LADEGERÄT SUCHEN" },
+  "charging": { "label": "LÄDT", "unit": " %", "sub": "ZU HAUSE" }
+ },
+ "lines": {
+  "l01": "Jedes Wischen kostet dich ein bisschen Leben.",
+  "l02": "Mit Navi geht es noch schneller.",
+  "l03": "Eine freie Steckdose. Jemand war schneller.",
+  "l04": "Dann ruft dein Chef per Video an."
+ },
+ "endcard": { "title": "Wie lange würdest du durchhalten?", "sub": "Teil 2?" }
+}

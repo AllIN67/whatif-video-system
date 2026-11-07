@@ -12,7 +12,7 @@ const FIX = 'tests/fixtures/text';
 test('Pipeline erzeugt vollständige, spezifikationsgerechte MP4 und prüft sie', { timeout: 900000 }, async () => {
   const dir = path.join(ROOT, FIX);
   try {
-    const log = await run({ production: FIX, skipValidate: true, qaIgnoreLength: true });
+    const log = await run({ production: FIX, lang: 'en', skipValidate: true, qaIgnoreLength: true });
     const final = path.join(dir, 'render', 'final.mp4');
     assert.ok(fs.existsSync(final));
     const v = JSON.parse(execFileSync('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-count_packets', '-show_entries',

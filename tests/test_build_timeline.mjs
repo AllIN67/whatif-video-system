@@ -123,16 +123,16 @@ test('Standard B erkennt Kamera-Wiederholung, Beat ohne Ereignis, zu lange Beats
   assert.match(errs.join('\n'), /liegt nicht auf/);
 });
 
-test('Stil B ohne beats.json wird abgelehnt; Referenzniveau als Warnung', () => {
+test('Stil B ohne beats.json wird abgelehnt; technische Mindestwerte [18.11] als Warnung', () => {
   const tl = buildTimeline(sheet());
   const noBeats = { ...tl };
   delete noBeats.beats;
   assert.match(validate(noBeats, text(), { requireBeats: true }).errors.join('\n'), /beats\.json/);
   assert.equal(validate(noBeats, text()).errors.some((e) => /beats\.json/.test(e)), false);
-  // Testfixture liegt unter dem Referenzniveau (5 Bildgrößen, 6 Orte, 1 Ereignis/Beat) → Warnungen, keine Fehler
+  // Testfixture liegt unter den technischen Mindestwerten (5 Bildgrößen, 6 Orte, 1 Ereignis/Beat) → Warnungen, keine Fehler
   const r = validate(tl, text(), { requireBeats: true });
   assert.deepEqual(r.errors, []);
-  assert.match(r.warnings.join('\n'), /unter Referenzniveau: Ereignisse pro Beat/);
+  assert.match(r.warnings.join('\n'), /unter technischem Mindestwert: Ereignisse pro Beat/);
 });
 
 test('Hook-Standard 18.12: schwacher Einstieg wird erkannt, Hook-Typen nicht schablonenhaft', () => {
@@ -164,7 +164,7 @@ test('Hook-Standard 18.12: schwacher Einstieg wird erkannt, Hook-Typen nicht sch
   assert.match(errs((B) => (B.pointe = 'e2')), /Pointe .* im Hook-Fenster/);
 });
 
-test('Hook-Standard 18.12: Referenzproduktion (Akku-Video) besteht den Einstieg nicht – beabsichtigt', async () => {
+test('Hook-Standard 18.12: Regressionstest Akku-Video (veraltet, Guide 18.11 Stufe 4) besteht den Einstieg nicht – beabsichtigt', async () => {
   const fs = await import('node:fs');
   const B = JSON.parse(fs.readFileSync(new URL('../productions/what-if-phone-battery-life/beats.json', import.meta.url), 'utf8'));
   const tl = buildTimeline(B);

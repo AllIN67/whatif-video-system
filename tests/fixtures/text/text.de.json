@@ -1,0 +1,25 @@
+{
+ "lang": "de",
+ "number_locale": "de-DE",
+ "title": {
+  "text": "Was wäre, wenn ein Stern auf deine Stadt fällt?",
+  "highlight": "Stern"
+ },
+ "hud": {
+  "dist": {
+   "label": "HÖHE",
+   "sub": "53.000 KM/H",
+   "unit": " km"
+  },
+  "shock": {
+   "label": "DRUCKWELLE",
+   "sub": "40 KM ENTFERNT",
+   "unit": " s",
+   "final": "HIER"
+  }
+ },
+ "lines": {
+  "l01": "Im Radio heißt es nur: „Bleibt drinnen.“",
+  "l02": "Jedes Fenster in der Straße zittert. Keiner weiß, warum."
+ }
+}

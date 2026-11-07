@@ -86,3 +86,50 @@ test('Regelverstöße werden einzeln erkannt', () => {
     assert.ok(hasErr(r, re), `erwartet Fehler ${re}, erhalten: ${JSON.stringify(r.errors)}`);
   }
 });
+
+// Guide 18.14: sprachspezifische Regeln. Deutsch = Standard; Englisch bleibt unverändert prüfbar.
+function validDe() {
+  const v = valid();
+  v.text = {
+    lang: 'de',
+    number_locale: 'de-DE',
+    title: { text: 'Was wäre, wenn der Himmel ausgeht?', highlight: 'Himmel' },
+    hud: { a: { label: 'HÖHE' }, b: { label: 'DRUCK' }, c: { label: 'STRASSE', final: 'HIER' } },
+    lines: Object.fromEntries(Object.keys(v.text.lines).map((id) => [id, 'Diese Zeile hat genau sechs Wörter.'])),
+  };
+  return v;
+}
+const runDe = (mut, opts) => {
+  const v = validDe();
+  mut(v);
+  return validate(v.timeline, v.text, opts);
+};
+
+test('Deutsch: gültige Produktion ohne Fehler, Sprache aus text.lang', () => {
+  assert.deepEqual(runDe(() => {}).errors, []);
+  assert.deepEqual(runDe(() => {}, { lang: 'de' }).errors, []);
+  assert.deepEqual(runDe(() => {}).warnings.filter((w) => w.startsWith('[18.14]')), []);
+});
+
+test('Deutsch: Titelformel, Zahlenformat, Schriftzeichen, Sprachkennung', () => {
+  assert.ok(hasErr(runDe((v) => { v.text.title.text = 'Was, wenn der Himmel ausgeht?'; }), /beginnt nicht mit „Was wäre, wenn“/));
+  assert.ok(hasErr(runDe((v) => { v.text.title.text = 'What if the sky turned off?'; v.text.title.highlight = 'sky'; }), /beginnt nicht mit „Was wäre, wenn“/));
+  assert.ok(runDe((v) => { delete v.text.number_locale; }).warnings.some((w) => /\[18\.14\].*de-DE/.test(w)));
+  assert.ok(runDe((v) => { v.text.number_locale = 'en-US'; }).warnings.some((w) => /\[18\.14\].*de-DE/.test(w)));
+  assert.ok(hasErr(runDe((v) => { v.text.hud.c.label = 'STRAẞE'; }), /„ẞ“.*„SS“/));
+  assert.equal(hasErr(runDe((v) => { v.text.lines.l01 = 'Im Radio heißt es: „Bleibt drinnen.“ – sofort.'; }), /18\.14/), false);
+  assert.ok(hasErr(runDe(() => {}, { lang: 'en' }), /trägt "lang": "de"/));
+});
+
+test('Englisch über lang en: Regeln unverändert', () => {
+  const v = valid();
+  assert.deepEqual(validate(v.timeline, v.text, { lang: 'en' }).errors, []);
+  v.text.title.text = 'Was wäre, wenn der Himmel ausgeht?';
+  v.text.title.highlight = 'Himmel';
+  assert.ok(hasErr(validate(v.timeline, v.text, { lang: 'en' }), /beginnt nicht mit „What if“/));
+  // keine deutschen Zusatzregeln für Englisch (Zahlenformat, Schriftzeichen)
+  const w = valid();
+  w.text.hud.a.label = 'STRAẞE';
+  const r = validate(w.timeline, w.text, { lang: 'en' });
+  assert.equal([...r.errors, ...r.warnings].some((m) => m.startsWith('[18.14]')), false);
+});

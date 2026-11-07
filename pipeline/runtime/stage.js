@@ -3,9 +3,10 @@
 //
 // URL-Parameter:
 //   production=<Pfad relativ zum Repo, z. B. productions/_pipeline_test>
-//   lang=en            Sprache der Textdatei text.<lang>.json
+//   lang=de|en         Sprache der Textdatei text.<lang>.json (Standard: DEFAULT_LANG aus lang.js = de)
 //   selftest=1|cheat   eingebaute Testszene (Pipeline-Tests)
 import { installGuard, lock } from './guard.js';
+import { DEFAULT_LANG } from './lang.js';
 
 const params = new URLSearchParams(location.search);
 const stage = { ready: false, error: null };
@@ -321,7 +322,7 @@ async function production(THREE, prodPath, seed) {
 
   // Text-Ebene: nur wenn die Zeitachse Titel/HUD/Untertitel enthält
   if (raw.title || (raw.lines && raw.lines.length) || (raw.hud && raw.hud.length) || raw.sync_markers) {
-    const lang = params.get('lang') || 'en';
+    const lang = params.get('lang') || DEFAULT_LANG;
     const brand = await fetchJson('/pipeline/runtime/brand.json');
     const text = await fetchJson(`${base}/text.${lang}.json`);
     const { createOverlay } = await import('./overlay.js');
@@ -330,7 +331,7 @@ async function production(THREE, prodPath, seed) {
   }
   // Wort-für-Wort-Untertitel zum Sprecher + große animierte Zahlen/Einblendungen
   if (raw.captions || raw.callouts) {
-    const lang = params.get('lang') || 'en';
+    const lang = params.get('lang') || DEFAULT_LANG;
     const text = await fetchJson(`${base}/text.${lang}.json`);
     const words = raw.captions ? await fetchJson(`${base}/${raw.captions.words}`) : null;
     const { createCaptions } = await import('./captions.js');

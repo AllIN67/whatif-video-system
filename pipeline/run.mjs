@@ -2,7 +2,7 @@
 // Gesamtablauf einer Produktion:
 //   validieren → Frames rendern → Ton mischen → kodieren → video_qa.py → inspect_frames.py
 //
-//   node pipeline/run.mjs --production productions/<slug> [--lang en] [--skip-validate] [--qa-ignore-length]
+//   node pipeline/run.mjs --production productions/<slug> [--lang de|en] [--skip-validate] [--qa-ignore-length]
 //
 // Bricht beim ersten Fehler ab. Schreibt render/run_log.json (Befehle, Git-Stand, Zeiten, Ergebnisse).
 // Bereits fertige Frame-Teilstücke werden wiederverwendet (Wiederaufnahme nach Abbruch).
@@ -14,6 +14,7 @@ import { renderFrames } from './render_frames.mjs';
 import { encode } from './encode.mjs';
 import { validate, loadWords } from '../tools/validate_production.mjs';
 import { buildTimeline } from '../tools/build_timeline.mjs';
+import { DEFAULT_LANG } from './runtime/lang.js';
 
 function git(args) {
   try {
@@ -47,11 +48,18 @@ export function isTechnical(rel) {
   return parts[0] === 'productions' && (parts[1] || '').startsWith('_');
 }
 
-export async function run({ production, lang = 'en', skipValidate = false, qaIgnoreLength = false }) {
+export async function run({ production, lang = DEFAULT_LANG, skipValidate = false, qaIgnoreLength = false }) {
   const prodDir = path.resolve(ROOT, production);
   const rel = path.relative(ROOT, prodDir);
   if ((skipValidate || qaIgnoreLength) && !isTechnical(rel)) {
     throw new Error(`--skip-validate/--qa-ignore-length sind nur für technische Test-Clips erlaubt, nicht für ${rel}`);
+  }
+  const textFile = path.join(prodDir, `text.${lang}.json`);
+  if (!fs.existsSync(textFile) && fs.existsSync(path.join(prodDir, 'timeline.json'))) {
+    const tl0 = JSON.parse(fs.readFileSync(path.join(prodDir, 'timeline.json'), 'utf8'));
+    if (tl0.title || tl0.lines?.length || tl0.hud?.length || tl0.captions || tl0.callouts) {
+      throw new Error(`text.${lang}.json fehlt in ${rel} – Standardsprache ist ${DEFAULT_LANG}; englische Produktionen mit --lang en rendern`);
+    }
   }
   const renderDir = path.join(prodDir, 'render');
   const qaDir = path.join(prodDir, 'qa');
@@ -140,7 +148,7 @@ export async function run({ production, lang = 'en', skipValidate = false, qaIgn
 if (import.meta.url === `file://${process.argv[1]}`) {
   const a = process.argv.slice(2);
   const get = (k) => (a.includes(k) ? a[a.indexOf(k) + 1] : undefined);
-  run({ production: get('--production'), lang: get('--lang') || 'en', skipValidate: a.includes('--skip-validate'), qaIgnoreLength: a.includes('--qa-ignore-length') })
+  run({ production: get('--production'), lang: get('--lang') || DEFAULT_LANG, skipValidate: a.includes('--skip-validate'), qaIgnoreLength: a.includes('--qa-ignore-length') })
     .then(() => process.exit(0))
     .catch((e) => {
       console.error(`\nABBRUCH: ${e.message || e}`);
