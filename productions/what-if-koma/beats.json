@@ -1,0 +1,1274 @@
+{
+ "_comment": "Beat-Sheet (Quelle der Wahrheit), System V3 (Guide 18.13), Erzählform B4 Überlebensbogen mit Zeitsprüngen (Prüfregeln Rezept B1). timeline.json: node tools/build_timeline.mjs productions/what-if-koma",
+ "recipe": "B1",
+ "fps": 30,
+ "seed": 31,
+ "title": {
+  "in": 0,
+  "out": 3.4
+ },
+ "hud": {
+  "start": 0,
+  "decimals": 0
+ },
+ "pointe": "e_arrive",
+ "hook": {
+  "type": "proof",
+  "proof": "e_impact",
+  "question": "Wachst du je wieder auf – und wer wartet dann noch auf dich?",
+  "stakes": "Dein Leben mit Lea: Deine letzte Nachricht an sie hängt unzugestellt auf dem kaputten Handy.",
+  "withheld": "Das Aufwachen nach zehn Jahren und dass die Nachricht doch noch ankommt (Pointe)."
+ },
+ "story": {
+  "stake": "Dein Leben mit Lea und deiner Familie – während du dich nicht bewegen kannst, läuft es ohne dich weiter.",
+  "measure": "Tage im Koma (eine Größe; Labels nur als Phasen: Unfall, Leben geht weiter, fast zehn Jahre, wach)",
+  "question": "Was wäre, wenn du ins Koma fällst?",
+  "turn": "e_twitch"
+ },
+ "endcard": {
+  "beat": "b_end",
+  "at": 3.2,
+  "center": 0.3
+ },
+ "post": {
+  "vignette": 0.2
+ },
+ "audio": {
+  "fade_out": 1.2,
+  "tick_gain_db": -18,
+  "whoosh_gain_db": -12,
+  "ambience_gain_db": -15,
+  "music": {
+   "bpm": 84,
+   "root": "D",
+   "seed": 17,
+   "gain_db": -11,
+   "sections": [
+    {
+     "from": 0,
+     "to": 1.2,
+     "style": "pulse"
+    },
+    {
+     "from": 1.2,
+     "to": 5.0,
+     "style": "silence"
+    },
+    {
+     "from": 5.0,
+     "to": 16.0,
+     "style": "sad"
+    },
+    {
+     "from": 16.0,
+     "to": 28.2,
+     "style": "drive"
+    },
+    {
+     "from": 28.2,
+     "to": 32.6,
+     "style": "warm"
+    },
+    {
+     "from": 32.6,
+     "to": 36.4,
+     "style": "sad"
+    },
+    {
+     "from": 36.4,
+     "to": 40.6,
+     "style": "calm"
+    },
+    {
+     "from": 40.6,
+     "to": 48.0,
+     "style": "pulse"
+    },
+    {
+     "from": 48.0,
+     "to": 52.6,
+     "style": "drive"
+    },
+    {
+     "from": 52.6,
+     "to": 57.3,
+     "style": "silence"
+    },
+    {
+     "from": 57.3,
+     "to": 61.2,
+     "style": "warm"
+    }
+   ]
+  }
+ },
+ "beats": [
+  {
+   "id": "b_cross",
+   "dur": 2.0,
+   "place": "street",
+   "mood": "happy",
+   "ambience": "rain",
+   "act": 1,
+   "pov": true,
+   "showpiece": "glow",
+   "camera": {
+    "preset": "pov",
+    "eye": [
+     1.7,
+     1.62,
+     0.4
+    ],
+    "eyeTo": [
+     1.45,
+     1.6,
+     0.4
+    ],
+    "target": [
+     1.0,
+     1.05,
+     24
+    ],
+    "fov": 55,
+    "sway": 0.02
+   },
+   "hud": {
+    "label": "coma",
+    "to": 1,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     1.2,
+     1.3
+    ]
+   },
+   "events": [
+    {
+     "id": "e_lights",
+     "at": 0.0,
+     "what": "Scheinwerfer rasen im Regen auf dich zu, du tippst „Bin gleich da!“ (läuft ab Frame 0)",
+     "sfx": "road",
+     "gain_db": -12,
+     "trigger": true,
+     "premise": "visible"
+    },
+    {
+     "id": "e_horn",
+     "at": 0.7,
+     "what": "Hupe/Bremsen – deine Hände zucken hoch",
+     "sfx": "screech",
+     "gain_db": -9,
+     "premise": "visible"
+    },
+    {
+     "id": "e_impact",
+     "at": 1.2,
+     "what": "Aufprall: Weißblitz, Handy fliegt aus der Hand (Beweis: hier beginnt dein Koma)",
+     "sfx": "crash",
+     "gain_db": -5,
+     "flash": "loss",
+     "shake": {
+      "amp": 0.06,
+      "dur": 0.5
+     },
+     "premise": "visible",
+     "hud_to": 1
+    }
+   ],
+   "data": {
+    "car": [
+     1.0,
+     0,
+     18.4,
+     3.14159
+    ],
+    "carHit": 1.6
+   }
+  },
+  {
+   "id": "b_ground",
+   "dur": 3.0,
+   "place": "street",
+   "mood": "unconscious",
+   "ambience": "rain",
+   "act": 1,
+   "camera": {
+    "preset": "high",
+    "target": [
+     -2.45,
+     0.1,
+     1.8
+    ],
+    "yaw": 90,
+    "dist": 1.0,
+    "height": 3.0,
+    "fov": 50,
+    "swing": 10
+   },
+   "hud": {
+    "to": 1,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     0.2,
+     0.3
+    ]
+   },
+   "events": [
+    {
+     "id": "e_down",
+     "at": 0.3,
+     "what": "Du liegst reglos auf dem nassen Asphalt, Augen zu",
+     "sfx": "heartbeat",
+     "gain_db": -6,
+     "premise": "visible"
+    },
+    {
+     "id": "e_unsent",
+     "at": 1.3,
+     "what": "Dein Handy im Regen: „Bin gleich da!“ – roter Hinweis „Nicht zugestellt“",
+     "sfx": "beep",
+     "gain_db": -14,
+     "premise": "visible",
+     "setup_for": "e_arrive"
+    },
+    {
+     "id": "e_blue",
+     "at": 2.0,
+     "what": "Blaulicht flackert über die Straße",
+     "sfx": "alarm",
+     "gain_db": -20,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     -1.75,
+     0.0,
+     1.55,
+     1.5708
+    ],
+    "phone": [
+     -1.45,
+     0.02,
+     2.15
+    ]
+   }
+  },
+  {
+   "id": "b_icu",
+   "dur": 3.8,
+   "place": "icu",
+   "mood": "unconscious",
+   "ambience": "monitor",
+   "transition": "dip",
+   "frames": 6,
+   "act": 1,
+   "fact": {
+    "text": "Glasgow-Koma-Skala: 3 von 15 Punkten ist der niedrigste Wert (≤ 8 = Koma).",
+    "source": "Teasdale G, Jennett B: Assessment of coma and impaired consciousness. Lancet 1974; 304:81–84"
+   },
+   "camera": {
+    "preset": "orbit",
+    "target": [
+     200.2,
+     0.95,
+     -1.9
+    ],
+    "yaw": 30,
+    "dist": 3.4,
+    "height": 0.9,
+    "swing": 20,
+    "fov": 48
+   },
+   "line": "l_gcs",
+   "line_at": [
+    0.4,
+    -0.2
+   ],
+   "hud": {
+    "to": 2,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     2.6,
+     2.9
+    ],
+    "tick": "pop"
+   },
+   "events": [
+    {
+     "id": "e_doctors",
+     "at": 0.3,
+     "what": "Ärztin und Pfleger am Bett, Monitor piept",
+     "sfx": "beep",
+     "gain_db": -10,
+     "premise": "visible"
+    },
+    {
+     "id": "e_penlight",
+     "at": 1.4,
+     "what": "Lichttest in die Augen – keine Reaktion",
+     "sfx": "zap",
+     "gain_db": -16,
+     "flash": "warn",
+     "premise": "visible"
+    },
+    {
+     "id": "e_gcs",
+     "at": 2.7,
+     "what": "Ärztin schüttelt den Kopf – Tag 2",
+     "sfx": "loss",
+     "gain_db": -12,
+     "premise": "hud"
+    }
+   ],
+   "data": {
+    "you": [
+     200,
+     0.55,
+     -1.8,
+     0
+    ]
+   }
+  },
+  {
+   "id": "b_lea",
+   "dur": 3.6,
+   "place": "icu",
+   "mood": "cry",
+   "ambience": "monitor",
+   "act": 1,
+   "camera": {
+    "preset": "close",
+    "target": [
+     201.25,
+     1.45,
+     -0.35
+    ],
+    "yaw": 235,
+    "dist": 1.9,
+    "fov": 40,
+    "swing": 10
+   },
+   "line": "l_lastmsg",
+   "line_at": [
+    0.9,
+    -0.1
+   ],
+   "hud": {
+    "to": 3,
+    "mode": "steps",
+    "steps": 2,
+    "window": [
+     0.6,
+     2.8
+    ]
+   },
+   "events": [
+    {
+     "id": "e_lea_in",
+     "at": 0.25,
+     "what": "Lea kommt herein, bleibt am Bett stehen",
+     "sfx": "thud",
+     "gain_db": -16,
+     "premise": "visible"
+    },
+    {
+     "id": "e_lea_sees",
+     "at": 0.9,
+     "what": "Sie sieht dich – Hand vor den Mund, Tränen",
+     "sfx": "heartbeat",
+     "gain_db": -10,
+     "premise": "visible"
+    },
+    {
+     "id": "e_lea_phone",
+     "at": 2.1,
+     "what": "Sie hält dein zersprungenes Handy, schaut auf die Nachricht",
+     "sfx": "paper",
+     "gain_db": -16,
+     "premise": "visible",
+     "setup_for": "e_arrive"
+    }
+   ],
+   "data": {
+    "lea": [
+     201.25,
+     0,
+     -0.35,
+     -2.45
+    ]
+   }
+  },
+  {
+   "id": "b_text",
+   "dur": 3.6,
+   "place": "apartment",
+   "mood": "sad",
+   "ambience": "room",
+   "transition": "dip",
+   "frames": 6,
+   "act": 1,
+   "camera": {
+    "preset": "push",
+    "target": [
+     399.6,
+     0.95,
+     -1.95
+    ],
+    "yaw": 18,
+    "dist": 3.0,
+    "distTo": 2.1,
+    "height": 0.25,
+    "fov": 44
+   },
+   "line": "l_daily",
+   "line_at": [
+    0.3,
+    -0.15
+   ],
+   "hud": {
+    "to": 30,
+    "mode": "linear",
+    "window": [
+     0.2,
+     3.5
+    ]
+   },
+   "events": [
+    {
+     "id": "e_type",
+     "at": 0.5,
+     "what": "Lea allein auf dem Sofa, tippt dir eine Nachricht",
+     "sfx": "keys",
+     "gain_db": -16,
+     "premise": "visible"
+    },
+    {
+     "id": "e_send",
+     "at": 1.9,
+     "what": "Gesendet – keine Antwort. Daneben dein leerer Becher",
+     "sfx": "pop",
+     "gain_db": -11,
+     "flash": "gain",
+     "premise": "visible",
+     "setup_for": "e_arrive"
+    },
+    {
+     "id": "e_wait",
+     "at": 2.9,
+     "what": "Sie legt das Handy weg, umarmt deine Jacke",
+     "sfx": "warmth",
+     "gain_db": -16,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "lea": [
+     399.6,
+     0,
+     -2.15,
+     0
+    ]
+   }
+  },
+  {
+   "id": "b_lapse",
+   "dur": 4.6,
+   "place": "icu",
+   "mood": "neutral",
+   "ambience": "monitor",
+   "transition": "dip",
+   "frames": 6,
+   "act": 2,
+   "showpiece": "vista",
+   "camera": {
+    "preset": "still",
+    "target": [
+     199.9,
+     1.05,
+     -1.7
+    ],
+    "yaw": -32,
+    "dist": 5.4,
+    "height": 1.3,
+    "fov": 50
+   },
+   "line": "l_months",
+   "line_at": [
+    0.4,
+    -0.2
+   ],
+   "hud": {
+    "label": "wait",
+    "to": 365,
+    "mode": "linear",
+    "window": [
+     0.1,
+     4.5
+    ]
+   },
+   "events": [
+    {
+     "id": "e_lapse",
+     "at": 0.2,
+     "what": "Zeitraffer: Tag und Nacht flackern, Uhr rast, Besucher erscheinen und verschwinden",
+     "sfx": "riser",
+     "gain_db": -14,
+     "premise": "visible"
+    },
+    {
+     "id": "e_cards",
+     "at": 1.8,
+     "what": "Karten füllen die Wand, Blumen wechseln",
+     "sfx": "shimmer",
+     "gain_db": -14,
+     "flash": "gain",
+     "premise": "visible"
+    },
+    {
+     "id": "e_winter",
+     "at": 3.2,
+     "what": "Fenster wird winterweiß – ein Jahr ist um",
+     "sfx": "wind",
+     "gain_db": -16,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     200,
+     0.55,
+     -1.8,
+     0
+    ]
+   }
+  },
+  {
+   "id": "b_mom",
+   "dur": 3.6,
+   "place": "home",
+   "mood": "sad",
+   "ambience": "room",
+   "transition": "dip",
+   "frames": 6,
+   "act": 2,
+   "camera": {
+    "preset": "low",
+    "target": [
+     601.3,
+     1.0,
+     -1.0
+    ],
+    "yaw": 18,
+    "dist": 3.3,
+    "camHeight": 1.25,
+    "fov": 50
+   },
+   "line": "l_mom",
+   "line_at": [
+    0.3,
+    -0.15
+   ],
+   "hud": {
+    "to": 540,
+    "mode": "steps",
+    "steps": 3,
+    "window": [
+     0.4,
+     3.2
+    ]
+   },
+   "events": [
+    {
+     "id": "e_plate",
+     "at": 0.6,
+     "what": "Mama stellt einen dritten Teller hin – deinen",
+     "sfx": "thud",
+     "gain_db": -14,
+     "premise": "visible"
+    },
+    {
+     "id": "e_mom_stop",
+     "at": 1.6,
+     "what": "Sie hält inne, schaut auf deinen leeren Stuhl",
+     "sfx": "heartbeat",
+     "gain_db": -12,
+     "premise": "visible"
+    },
+    {
+     "id": "e_plate_back",
+     "at": 2.6,
+     "what": "Sie nimmt den Teller wieder weg",
+     "sfx": "loss",
+     "gain_db": -13,
+     "flash": "loss",
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "mom": [
+     601.65,
+     0,
+     -1.5,
+     -0.25
+    ]
+   }
+  },
+  {
+   "id": "b_hair",
+   "dur": 4.0,
+   "place": "icu",
+   "mood": "unconscious",
+   "ambience": "monitor",
+   "transition": "dip",
+   "frames": 6,
+   "act": 2,
+   "fact": {
+    "text": "Kopfhaar wächst etwa 15 cm pro Jahr – auch im Koma.",
+    "source": "American Academy of Dermatology: „Hair loss: Who gets and causes“ (Haar wächst ca. 6 Inch/Jahr)"
+   },
+   "camera": {
+    "preset": "high",
+    "target": [
+     200.0,
+     0.8,
+     -2.62
+    ],
+    "yaw": 0,
+    "dist": 0.42,
+    "height": 1.05,
+    "fov": 42,
+    "swing": 40
+   },
+   "line": "l_hair",
+   "line_at": [
+    0.2,
+    -0.1
+   ],
+   "hud": {
+    "to": 1095,
+    "mode": "linear",
+    "window": [
+     0.2,
+     3.5
+    ]
+   },
+   "events": [
+    {
+     "id": "e_hair",
+     "at": 0.5,
+     "what": "Deine Haare wachsen sichtbar über das Kissen",
+     "sfx": "shimmer",
+     "gain_db": -15,
+     "premise": "visible"
+    },
+    {
+     "id": "e_beard",
+     "at": 1.9,
+     "what": "Ein Bart wächst, Gesicht wird schmaler",
+     "sfx": "appear",
+     "gain_db": -14,
+     "flash": "warn",
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     200,
+     0.55,
+     -1.8,
+     0
+    ]
+   }
+  },
+  {
+   "id": "b_wedding",
+   "dur": 4.4,
+   "place": "wedding",
+   "mood": "happy",
+   "ambience": "wind",
+   "transition": "dip",
+   "frames": 6,
+   "act": 2,
+   "showpiece": "mass",
+   "camera": {
+    "preset": "pull",
+    "target": [
+     798.0,
+     0.8,
+     0.8
+    ],
+    "yaw": -68,
+    "dist": 1.6,
+    "distTo": 6.4,
+    "height": 0.55,
+    "fov": 46
+   },
+   "line": "l_wedding",
+   "line_at": [
+    0.3,
+    -0.15
+   ],
+   "hud": {
+    "to": 1460,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     1.3,
+     1.6
+    ]
+   },
+   "events": [
+    {
+     "id": "e_chair",
+     "at": 0.2,
+     "what": "Erste Reihe: ein leerer Stuhl mit deinem Foto",
+     "sfx": "ding",
+     "gain_db": -16,
+     "premise": "visible"
+    },
+    {
+     "id": "e_kiss",
+     "at": 1.4,
+     "what": "Dein bester Freund küsst die Braut – Jubel, Konfetti",
+     "sfx": "shimmer",
+     "gain_db": -11,
+     "flash": "gain",
+     "premise": "visible"
+    },
+    {
+     "id": "e_cheer",
+     "at": 2.6,
+     "what": "Hunderte jubeln, dein Platz bleibt leer",
+     "sfx": "appear",
+     "gain_db": -15,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "chair": [
+     801.0,
+     0,
+     0.8
+    ],
+    "couple": [
+     796.9,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "b_doctor",
+   "dur": 3.8,
+   "place": "icu",
+   "mood": "angry",
+   "ambience": "monitor",
+   "transition": "dip",
+   "frames": 6,
+   "act": 2,
+   "camera": {
+    "preset": "orbit",
+    "target": [
+     200.5,
+     1.2,
+     -0.9
+    ],
+    "yaw": 24,
+    "dist": 3.6,
+    "height": 0.35,
+    "swing": 22,
+    "fov": 46
+   },
+   "line": "l_doctor",
+   "line_at": [
+    0.3,
+    -0.15
+   ],
+   "hud": {
+    "to": 1826,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     0.5,
+     0.8
+    ]
+   },
+   "events": [
+    {
+     "id": "e_dr_talk",
+     "at": 0.6,
+     "what": "Ärztin zeigt auf die Akte: Abschalten",
+     "sfx": "loss",
+     "gain_db": -10,
+     "flash": "loss",
+     "premise": "visible"
+    },
+    {
+     "id": "e_mom_no",
+     "at": 1.8,
+     "what": "Mama stellt sich vor das Bett, schüttelt den Kopf",
+     "sfx": "thud",
+     "gain_db": -11,
+     "premise": "visible"
+    },
+    {
+     "id": "e_lea_hold",
+     "at": 2.8,
+     "what": "Lea nimmt deine Hand, weint",
+     "sfx": "heartbeat",
+     "gain_db": -12,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "doc": [
+     201.5,
+     0,
+     -0.25,
+     -2.3
+    ],
+    "mom": [
+     200.15,
+     0,
+     -0.35,
+     -0.2
+    ],
+    "lea": [
+     199.25,
+     0,
+     -1.25,
+     1.57
+    ]
+   }
+  },
+  {
+   "id": "b_night",
+   "dur": 4.2,
+   "place": "icu",
+   "mood": "relief",
+   "ambience": "monitor",
+   "act": 2,
+   "camera": {
+    "preset": "push",
+    "target": [
+     199.8,
+     0.86,
+     -2.62
+    ],
+    "yaw": 14,
+    "dist": 1.35,
+    "distTo": 1.1,
+    "height": 1.25,
+    "fov": 50
+   },
+   "line": "l_night",
+   "line_at": [
+    0.3,
+    -0.15
+   ],
+   "hud": {
+    "label": "late",
+    "to": 3640,
+    "mode": "linear",
+    "window": [
+     0.1,
+     3.0
+    ]
+   },
+   "events": [
+    {
+     "id": "e_sleep",
+     "at": 0.3,
+     "what": "Nacht. Lea – grau geworden – schläft am Bett, hält deine Hand",
+     "sfx": "beep",
+     "gain_db": -14,
+     "premise": "visible"
+    },
+    {
+     "id": "e_twitch",
+     "at": 2.4,
+     "what": "Deine Lider zucken, der Monitor schlägt aus – Lea schreckt hoch (Wende)",
+     "sfx": "heartbeat",
+     "gain_db": -6,
+     "flash": "gain",
+     "shake": {
+      "amp": 0.015,
+      "dur": 0.3
+     },
+     "premise": "visible"
+    },
+    {
+     "id": "e_lea_up",
+     "at": 3.1,
+     "what": "Lea starrt dich an, Hoffnung",
+     "sfx": "ding",
+     "gain_db": -15,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "lea": [
+     199.2,
+     0,
+     -2.35,
+     1.45
+    ]
+   }
+  },
+  {
+   "id": "b_eyes",
+   "dur": 4.0,
+   "place": "icu",
+   "mood": "shock",
+   "ambience": "monitor",
+   "act": 3,
+   "pov": true,
+   "showpiece": "glow",
+   "fact": {
+    "text": "Längstes dokumentiertes Erwachen: Jan Grzebski (Polen) nach 19 Jahren.",
+    "source": "BBC News, 2. Juni 2007: „Pole wakes from 19-year coma“"
+   },
+   "camera": {
+    "preset": "pov",
+    "eye": [
+     200,
+     1.02,
+     -2.45
+    ],
+    "eyeTo": [
+     200,
+     1.05,
+     -2.4
+    ],
+    "target": [
+     200.2,
+     2.0,
+     0.6
+    ],
+    "fov": 58,
+    "sway": 0.012
+   },
+   "line": "l_eyes",
+   "line_at": [
+    1.5,
+    -0.1
+   ],
+   "hud": {
+    "label": "awake",
+    "to": 3652,
+    "mode": "steps",
+    "steps": 3,
+    "window": [
+     0.4,
+     1.4
+    ]
+   },
+   "events": [
+    {
+     "id": "e_eyes",
+     "at": 0.4,
+     "what": "Ich-Sicht: Lider öffnen sich, grelles Deckenlicht, alles verschwommen",
+     "sfx": "riser",
+     "gain_db": -14,
+     "flash": "gain",
+     "premise": "visible"
+    },
+    {
+     "id": "e_hands",
+     "at": 1.6,
+     "what": "Deine dünnen Hände auf der Decke bewegen sich",
+     "sfx": "paper",
+     "gain_db": -16,
+     "premise": "visible"
+    },
+    {
+     "id": "e_drop",
+     "at": 2.6,
+     "what": "Pflegerin sieht deine offenen Augen – Tablett fällt",
+     "sfx": "slam",
+     "gain_db": -9,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "nurse": [
+     200.55,
+     0,
+     0.35,
+     3.0
+    ]
+   }
+  },
+  {
+   "id": "b_face",
+   "dur": 3.4,
+   "place": "icu",
+   "mood": "shock",
+   "ambience": "monitor",
+   "act": 3,
+   "camera": {
+    "preset": "close",
+    "target": [
+     200.0,
+     1.55,
+     -2.4
+    ],
+    "yaw": 20,
+    "dist": 1.25,
+    "fov": 40,
+    "swing": 10
+   },
+   "line": "l_face",
+   "line_at": [
+    0.3,
+    -0.15
+   ],
+   "hud": {
+    "to": 3653,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     0.6,
+     0.9
+    ]
+   },
+   "events": [
+    {
+     "id": "e_mirror",
+     "at": 0.6,
+     "what": "Du sitzt im Bett, tastest nach Bart und langen Haaren",
+     "sfx": "appear",
+     "gain_db": -14,
+     "premise": "visible"
+    },
+    {
+     "id": "e_weak",
+     "at": 2.0,
+     "what": "Arm sackt kraftlos weg – Muskeln weg",
+     "sfx": "thud",
+     "gain_db": -13,
+     "flash": "warn",
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     200,
+     0.24,
+     -2.5,
+     0
+    ]
+   }
+  },
+  {
+   "id": "b_phone",
+   "dur": 4.6,
+   "place": "icu",
+   "mood": "worried",
+   "ambience": "monitor",
+   "act": 3,
+   "pov": true,
+   "camera": {
+    "preset": "pov",
+    "eye": [
+     200,
+     1.45,
+     -2.05
+    ],
+    "eyeTo": [
+     200,
+     1.43,
+     -2.0
+    ],
+    "target": [
+     200,
+     0.6,
+     -0.4
+    ],
+    "fov": 52,
+    "sway": 0.01
+   },
+   "line": "l_phone",
+   "line_at": [
+    0.3,
+    2.7
+   ],
+   "hud": {
+    "to": 3653,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     0.2,
+     0.3
+    ]
+   },
+   "events": [
+    {
+     "id": "e_unread",
+     "at": 0.5,
+     "what": "Dein altes Handy: 3.652 Nachrichten von Lea – eine pro Tag",
+     "sfx": "ding",
+     "gain_db": -13,
+     "premise": "visible"
+    },
+    {
+     "id": "e_scroll",
+     "at": 1.9,
+     "what": "Ganz oben: deine letzte Nachricht „Bin gleich da!“ – nicht zugestellt",
+     "sfx": "tick",
+     "gain_db": -16,
+     "premise": "visible"
+    },
+    {
+     "id": "e_resend",
+     "at": 3.2,
+     "what": "Du tippst auf „Erneut senden“ – Zugestellt",
+     "sfx": "pop",
+     "gain_db": -10,
+     "flash": "gain",
+     "premise": "visible"
+    }
+   ]
+  },
+  {
+   "id": "b_bench",
+   "dur": 3.6,
+   "place": "corridor",
+   "mood": "shock",
+   "ambience": "room",
+   "transition": "dip",
+   "frames": 6,
+   "act": 3,
+   "camera": {
+    "preset": "push",
+    "target": [
+     1000.75,
+     1.12,
+     -1.0
+    ],
+    "yaw": -10,
+    "dist": 2.5,
+    "distTo": 1.95,
+    "height": 0.3,
+    "fov": 44
+   },
+   "line": "l_bench",
+   "line_at": [
+    1.1,
+    -0.1
+   ],
+   "hud": {
+    "to": 3653,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     0.2,
+     0.3
+    ]
+   },
+   "events": [
+    {
+     "id": "e_buzz",
+     "at": 1.0,
+     "what": "Lea im Flur, grau, ihr Handy vibriert: „Schatz: Bin gleich da!“",
+     "sfx": [
+      "vibrate",
+      "ding"
+     ],
+     "gain_db": -8,
+     "flash": "gain",
+     "premise": "visible"
+    },
+    {
+     "id": "e_lea_stand",
+     "at": 2.2,
+     "what": "Hand vor den Mund – sie springt auf und rennt los",
+     "sfx": "swoosh",
+     "gain_db": -13,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "lea": [
+     1000.6,
+     0,
+     -1.2,
+     0
+    ]
+   }
+  },
+  {
+   "id": "b_end",
+   "dur": 5.0,
+   "place": "icu",
+   "mood": "relief",
+   "ambience": "monitor",
+   "transition": "dip",
+   "frames": 6,
+   "act": 3,
+   "camera": {
+    "preset": "orbit",
+    "target": [
+     200.3,
+     1.3,
+     -2.15
+    ],
+    "yaw": -38,
+    "dist": 2.5,
+    "height": 0.2,
+    "swing": 18,
+    "fov": 44
+   },
+   "line": "l_end",
+   "line_at": [
+    0.6,
+    3.2
+   ],
+   "hud": {
+    "to": 3653,
+    "mode": "steps",
+    "steps": 1,
+    "window": [
+     0.2,
+     0.3
+    ]
+   },
+   "events": [
+    {
+     "id": "e_arrive",
+     "at": 0.6,
+     "what": "Pointe: Lea ist da – sie umarmt dich, Handy mit deiner Nachricht in der Hand",
+     "sfx": "warmth",
+     "gain_db": -6,
+     "flash": "gain",
+     "premise": "visible"
+    },
+    {
+     "id": "e_smile",
+     "at": 2.2,
+     "what": "Ihr lacht und weint gleichzeitig, warmes Licht",
+     "sfx": "shimmer",
+     "gain_db": -16,
+     "premise": "visible"
+    }
+   ],
+   "data": {
+    "you": [
+     200,
+     0.24,
+     -2.5,
+     0
+    ],
+    "lea": [
+     200.62,
+     0,
+     -1.72,
+     -1.9
+    ]
+   }
+  }
+ ]
+}

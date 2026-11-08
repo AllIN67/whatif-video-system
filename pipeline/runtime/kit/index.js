@@ -26,6 +26,8 @@ import { createFx } from './fx.js';
 import { createAtmosphere } from './atmosphere.js';
 import { createFirstPersonFactory } from './pov.js';
 import { createMasses } from './masses.js';
+// Ergänzt 2026-11-08 (what-if-koma, additiv): Krankenhaus-Teile (Bett, EKG-Monitor, Infusion, Intensivzimmer, Flur, Chat-Handy).
+import { createHospital } from './hospital.js';
 
 export function createKit({ THREE, scene, renderer, rng }) {
   if (!rng) throw new Error('createKit: rng fehlt (geseedeter Zufall aus build())');
@@ -38,6 +40,7 @@ export function createKit({ THREE, scene, renderer, rng }) {
   const atmo = createAtmosphere(THREE, core);
   const firstPerson = createFirstPersonFactory(THREE, core);
   const masses = createMasses(THREE, core);
+  const hospital = createHospital(THREE, core, atmo);
 
   // Sonne mit dem aktiven Ort mitführen: ein Schattenlicht für alle Orte, scharfe Schatten dort, wo die Kamera ist.
   const sunAt = (sun, origin, offset = [18, 30, 14]) => {
@@ -73,5 +76,5 @@ export function createKit({ THREE, scene, renderer, rng }) {
     return out;
   };
 
-  return { THREE, core, ...core, human, props, places, space, fx, sunAt, activeSet, crowd, SKIN, HAIR, clamp01, smooth, lerp, ramp, shotKeys, beatClock, atmo, firstPerson, masses };
+  return { THREE, core, ...core, human, props, places, space, fx, sunAt, activeSet, crowd, SKIN, HAIR, clamp01, smooth, lerp, ramp, shotKeys, beatClock, atmo, firstPerson, masses, hospital };
 }

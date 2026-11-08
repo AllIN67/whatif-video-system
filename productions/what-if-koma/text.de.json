@@ -1,0 +1,28 @@
+{
+ "lang": "de",
+ "number_locale": "de-DE",
+ "title": { "text": "Was wäre, wenn du ins Koma fällst?", "highlight": "Koma" },
+ "hud": {
+  "coma": { "label": "TAGE IM KOMA", "unit": "", "sub": "SEIT DEM UNFALL" },
+  "wait": { "label": "TAGE IM KOMA", "unit": "", "sub": "DAS LEBEN GEHT WEITER" },
+  "late": { "label": "TAGE IM KOMA", "unit": "", "sub": "FAST ZEHN JAHRE" },
+  "awake": { "label": "TAGE VERPASST", "unit": "", "sub": "DU BIST WACH" }
+ },
+ "lines": {
+  "l_gcs": "Koma-Skala: 3 von 15. Tiefer geht’s nicht.",
+  "l_lastmsg": "Deine letzte Nachricht kam nie an.",
+  "l_daily": "Sie schreibt dir trotzdem. Jeden Tag.",
+  "l_months": "Aus Tagen werden Monate.",
+  "l_mom": "Mama deckt immer noch für dich mit.",
+  "l_hair": "Deine Haare wachsen weiter – 15 cm im Jahr.",
+  "l_wedding": "Dein bester Freund heiratet. Dein Platz bleibt leer.",
+  "l_doctor": "Jahr 5: Die Ärzte raten zum Abschalten.",
+  "l_night": "Lea sagt Nein. Jahr für Jahr.",
+  "l_eyes": "Zehn Jahre später. Ein Blinzeln.",
+  "l_face": "Muskeln weg. Gesicht fremd.",
+  "l_phone": "3.652 Nachrichten. Alle von Lea.",
+  "l_bench": "Deine letzte Nachricht kommt an.",
+  "l_end": "Sie war die ganze Zeit da."
+ },
+ "endcard": { "title": "Würde jemand zehn Jahre auf dich warten?", "sub": "Teil 2?" }
+}
