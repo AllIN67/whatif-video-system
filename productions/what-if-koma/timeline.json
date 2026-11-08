@@ -1,0 +1,2671 @@
+{
+ "_comment": "ERZEUGT von tools/build_timeline.mjs aus beats.json – nicht von Hand ändern.",
+ "fps": 30,
+ "duration": 61.2,
+ "seed": 31,
+ "recipe": "B1",
+ "pointe": 56.8,
+ "title": {
+  "in": 0,
+  "out": 3.4
+ },
+ "shots": [
+  {
+   "id": "b_cross",
+   "from": 0,
+   "to": 2,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 0,
+      "pos": [
+       1.7,
+       1.63,
+       0.4
+      ],
+      "look": [
+       1,
+       1.053,
+       24
+      ],
+      "fov": 55
+     },
+     {
+      "t": 0.5,
+      "pos": [
+       1.657,
+       1.612,
+       0.4
+      ],
+      "look": [
+       1.006,
+       1.049,
+       24
+      ],
+      "fov": 55
+     },
+     {
+      "t": 1,
+      "pos": [
+       1.566,
+       1.605,
+       0.4
+      ],
+      "look": [
+       0.997,
+       1.049,
+       24
+      ],
+      "fov": 55
+     },
+     {
+      "t": 1.5,
+      "pos": [
+       1.497,
+       1.616,
+       0.4
+      ],
+      "look": [
+       0.995,
+       1.053,
+       24
+      ],
+      "fov": 55
+     },
+     {
+      "t": 2,
+      "pos": [
+       1.466,
+       1.588,
+       0.4
+      ],
+      "look": [
+       1.005,
+       1.047,
+       24
+      ],
+      "fov": 55
+     }
+    ]
+   },
+   "shake": [
+    {
+     "t": 1.2,
+     "dur": 0.5,
+     "amp": 0.06,
+     "freq": 9
+    }
+   ]
+  },
+  {
+   "id": "b_ground",
+   "from": 2,
+   "to": 5,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 2,
+      "pos": [
+       -1.454,
+       3.25,
+       1.887
+      ],
+      "look": [
+       -2.45,
+       0.1,
+       1.8
+      ],
+      "fov": 50
+     },
+     {
+      "t": 5,
+      "pos": [
+       -1.553,
+       2.95,
+       1.722
+      ],
+      "look": [
+       -2.45,
+       0.1,
+       1.8
+      ],
+      "fov": 50
+     }
+    ]
+   }
+  },
+  {
+   "id": "b_icu",
+   "from": 5,
+   "to": 8.8,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 5,
+      "pos": [
+       201.363,
+       1.85,
+       1.295
+      ],
+      "look": [
+       200.2,
+       0.95,
+       -1.9
+      ],
+      "fov": 48
+     },
+     {
+      "t": 5.95,
+      "pos": [
+       201.637,
+       1.85,
+       1.181
+      ],
+      "look": [
+       200.2,
+       0.95,
+       -1.9
+      ],
+      "fov": 48
+     },
+     {
+      "t": 6.9,
+      "pos": [
+       201.9,
+       1.85,
+       1.044
+      ],
+      "look": [
+       200.2,
+       0.95,
+       -1.9
+      ],
+      "fov": 48
+     },
+     {
+      "t": 7.85,
+      "pos": [
+       202.15,
+       1.85,
+       0.885
+      ],
+      "look": [
+       200.2,
+       0.95,
+       -1.9
+      ],
+      "fov": 48
+     },
+     {
+      "t": 8.8,
+      "pos": [
+       202.385,
+       1.85,
+       0.705
+      ],
+      "look": [
+       200.2,
+       0.95,
+       -1.9
+      ],
+      "fov": 48
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip",
+    "frames": 6
+   }
+  },
+  {
+   "id": "b_lea",
+   "from": 8.8,
+   "to": 12.4,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 8.8,
+      "pos": [
+       199.678,
+       1.47,
+       -1.669
+      ],
+      "look": [
+       201.25,
+       1.45,
+       -0.35
+      ],
+      "fov": 40
+     },
+     {
+      "t": 12.4,
+      "pos": [
+       199.687,
+       1.47,
+       -1.253
+      ],
+      "look": [
+       201.25,
+       1.45,
+       -0.35
+      ],
+      "fov": 40
+     }
+    ]
+   }
+  },
+  {
+   "id": "b_text",
+   "from": 12.4,
+   "to": 16,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 12.4,
+      "pos": [
+       400.408,
+       1.2,
+       0.942
+      ],
+      "look": [
+       399.6,
+       0.95,
+       -1.95
+      ],
+      "fov": 44
+     },
+     {
+      "t": 16,
+      "pos": [
+       400.368,
+       1.2,
+       0.009
+      ],
+      "look": [
+       399.6,
+       0.95,
+       -1.95
+      ],
+      "fov": 44
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip",
+    "frames": 6
+   }
+  },
+  {
+   "id": "b_lapse",
+   "from": 16,
+   "to": 20.6,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 16,
+      "pos": [
+       196.92,
+       2.35,
+       2.803
+      ],
+      "look": [
+       199.9,
+       1.05,
+       -1.7
+      ],
+      "fov": 50
+     },
+     {
+      "t": 20.6,
+      "pos": [
+       197.242,
+       2.35,
+       2.813
+      ],
+      "look": [
+       199.9,
+       1.05,
+       -1.7
+      ],
+      "fov": 50
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip",
+    "frames": 6
+   }
+  },
+  {
+   "id": "b_mom",
+   "from": 20.6,
+   "to": 24.2,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 20.6,
+      "pos": [
+       601.986,
+       1.25,
+       2.228
+      ],
+      "look": [
+       601.3,
+       1,
+       -1
+      ],
+      "fov": 50
+     },
+     {
+      "t": 24.2,
+      "pos": [
+       602.374,
+       1.25,
+       1.412
+      ],
+      "look": [
+       601.3,
+       1,
+       -1
+      ],
+      "fov": 50
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip",
+    "frames": 6
+   }
+  },
+  {
+   "id": "b_hair",
+   "from": 24.2,
+   "to": 28.2,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 24.2,
+      "pos": [
+       199.856,
+       1.903,
+       -2.225
+      ],
+      "look": [
+       200,
+       0.8,
+       -2.62
+      ],
+      "fov": 42
+     },
+     {
+      "t": 28.2,
+      "pos": [
+       200.129,
+       1.797,
+       -2.265
+      ],
+      "look": [
+       200,
+       0.8,
+       -2.62
+      ],
+      "fov": 42
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip",
+    "frames": 6
+   }
+  },
+  {
+   "id": "b_wedding",
+   "from": 28.2,
+   "to": 32.6,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 28.2,
+      "pos": [
+       796.47,
+       1.35,
+       1.283
+      ],
+      "look": [
+       798,
+       0.8,
+       0.8
+      ],
+      "fov": 46
+     },
+     {
+      "t": 32.6,
+      "pos": [
+       792.113,
+       1.35,
+       3.313
+      ],
+      "look": [
+       798,
+       0.8,
+       0.8
+      ],
+      "fov": 46
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip",
+    "frames": 6
+   }
+  },
+  {
+   "id": "b_doctor",
+   "from": 32.6,
+   "to": 36.4,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 32.6,
+      "pos": [
+       201.31,
+       1.55,
+       2.608
+      ],
+      "look": [
+       200.5,
+       1.2,
+       -0.9
+      ],
+      "fov": 46
+     },
+     {
+      "t": 33.55,
+      "pos": [
+       201.642,
+       1.55,
+       2.514
+      ],
+      "look": [
+       200.5,
+       1.2,
+       -0.9
+      ],
+      "fov": 46
+     },
+     {
+      "t": 34.5,
+      "pos": [
+       201.964,
+       1.55,
+       2.389
+      ],
+      "look": [
+       200.5,
+       1.2,
+       -0.9
+      ],
+      "fov": 46
+     },
+     {
+      "t": 35.45,
+      "pos": [
+       202.273,
+       1.55,
+       2.233
+      ],
+      "look": [
+       200.5,
+       1.2,
+       -0.9
+      ],
+      "fov": 46
+     },
+     {
+      "t": 36.4,
+      "pos": [
+       202.565,
+       1.55,
+       2.049
+      ],
+      "look": [
+       200.5,
+       1.2,
+       -0.9
+      ],
+      "fov": 46
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip",
+    "frames": 6
+   }
+  },
+  {
+   "id": "b_night",
+   "from": 36.4,
+   "to": 40.6,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 36.4,
+      "pos": [
+       200.005,
+       2.11,
+       -1.28
+      ],
+      "look": [
+       199.8,
+       0.86,
+       -2.62
+      ],
+      "fov": 50
+     },
+     {
+      "t": 40.6,
+      "pos": [
+       200.187,
+       2.11,
+       -1.583
+      ],
+      "look": [
+       199.8,
+       0.86,
+       -2.62
+      ],
+      "fov": 50
+     }
+    ]
+   },
+   "shake": [
+    {
+     "t": 38.8,
+     "dur": 0.3,
+     "amp": 0.015,
+     "freq": 9
+    }
+   ]
+  },
+  {
+   "id": "b_eyes",
+   "from": 40.6,
+   "to": 44.6,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 40.6,
+      "pos": [
+       200,
+       1.026,
+       -2.45
+      ],
+      "look": [
+       200.2,
+       2.002,
+       0.6
+      ],
+      "fov": 58
+     },
+     {
+      "t": 41.6,
+      "pos": [
+       200.012,
+       1.025,
+       -2.437
+      ],
+      "look": [
+       200.204,
+       1.999,
+       0.6
+      ],
+      "fov": 58
+     },
+     {
+      "t": 42.6,
+      "pos": [
+       199.995,
+       1.032,
+       -2.425
+      ],
+      "look": [
+       200.198,
+       1.999,
+       0.6
+      ],
+      "fov": 58
+     },
+     {
+      "t": 43.6,
+      "pos": [
+       199.991,
+       1.049,
+       -2.412
+      ],
+      "look": [
+       200.197,
+       2.002,
+       0.6
+      ],
+      "fov": 58
+     },
+     {
+      "t": 44.6,
+      "pos": [
+       200.01,
+       1.043,
+       -2.4
+      ],
+      "look": [
+       200.203,
+       1.998,
+       0.6
+      ],
+      "fov": 58
+     }
+    ]
+   }
+  },
+  {
+   "id": "b_face",
+   "from": 44.6,
+   "to": 48,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 44.6,
+      "pos": [
+       200.349,
+       1.57,
+       -1.096
+      ],
+      "look": [
+       200,
+       1.55,
+       -2.4
+      ],
+      "fov": 40
+     },
+     {
+      "t": 48,
+      "pos": [
+       200.502,
+       1.57,
+       -1.324
+      ],
+      "look": [
+       200,
+       1.55,
+       -2.4
+      ],
+      "fov": 40
+     }
+    ]
+   }
+  },
+  {
+   "id": "b_phone",
+   "from": 48,
+   "to": 52.6,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 48,
+      "pos": [
+       200,
+       1.455,
+       -2.05
+      ],
+      "look": [
+       200,
+       0.602,
+       -0.4
+      ],
+      "fov": 52
+     },
+     {
+      "t": 49.15,
+      "pos": [
+       200.01,
+       1.443,
+       -2.037
+      ],
+      "look": [
+       200.003,
+       0.599,
+       -0.4
+      ],
+      "fov": 52
+     },
+     {
+      "t": 50.3,
+      "pos": [
+       199.995,
+       1.438,
+       -2.025
+      ],
+      "look": [
+       199.999,
+       0.599,
+       -0.4
+      ],
+      "fov": 52
+     },
+     {
+      "t": 51.45,
+      "pos": [
+       199.992,
+       1.44,
+       -2.013
+      ],
+      "look": [
+       199.998,
+       0.602,
+       -0.4
+      ],
+      "fov": 52
+     },
+     {
+      "t": 52.6,
+      "pos": [
+       200.008,
+       1.424,
+       -2
+      ],
+      "look": [
+       200.002,
+       0.598,
+       -0.4
+      ],
+      "fov": 52
+     }
+    ]
+   }
+  },
+  {
+   "id": "b_bench",
+   "from": 52.6,
+   "to": 56.2,
+   "camera": {
+    "mode": "linear",
+    "keys": [
+     {
+      "t": 52.6,
+      "pos": [
+       1000.193,
+       1.42,
+       1.44
+      ],
+      "look": [
+       1000.75,
+       1.12,
+       -1
+      ],
+      "fov": 44
+     },
+     {
+      "t": 56.2,
+      "pos": [
+       1000.534,
+       1.42,
+       0.942
+      ],
+      "look": [
+       1000.75,
+       1.12,
+       -1
+      ],
+      "fov": 44
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip",
+    "frames": 6
+   }
+  },
+  {
+   "id": "b_end",
+   "from": 56.2,
+   "to": 61.2,
+   "camera": {
+    "mode": "catmull",
+    "keys": [
+     {
+      "t": 56.2,
+      "pos": [
+       198.472,
+       1.5,
+       -0.445
+      ],
+      "look": [
+       200.3,
+       1.3,
+       -2.15
+      ],
+      "fov": 44
+     },
+     {
+      "t": 57.45,
+      "pos": [
+       198.611,
+       1.5,
+       -0.307
+      ],
+      "look": [
+       200.3,
+       1.3,
+       -2.15
+      ],
+      "fov": 44
+     },
+     {
+      "t": 58.7,
+      "pos": [
+       198.761,
+       1.5,
+       -0.18
+      ],
+      "look": [
+       200.3,
+       1.3,
+       -2.15
+      ],
+      "fov": 44
+     },
+     {
+      "t": 59.95,
+      "pos": [
+       198.92,
+       1.5,
+       -0.065
+      ],
+      "look": [
+       200.3,
+       1.3,
+       -2.15
+      ],
+      "fov": 44
+     },
+     {
+      "t": 61.2,
+      "pos": [
+       199.088,
+       1.5,
+       0.037
+      ],
+      "look": [
+       200.3,
+       1.3,
+       -2.15
+      ],
+      "fov": 44
+     }
+    ]
+   },
+   "transition_in": {
+    "type": "dip",
+    "frames": 6
+   }
+  }
+ ],
+ "hud": [
+  {
+   "id": "coma",
+   "from": 0,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      0,
+      0
+     ],
+     [
+      1.2,
+      1,
+      "hold"
+     ],
+     [
+      1.2,
+      1,
+      "hold"
+     ],
+     [
+      2.2,
+      1,
+      "hold"
+     ],
+     [
+      7.6,
+      2,
+      "hold"
+     ],
+     [
+      9.4,
+      3,
+      "hold"
+     ],
+     [
+      11.6,
+      3,
+      "hold"
+     ],
+     [
+      12.6,
+      3,
+      "linear"
+     ],
+     [
+      15.9,
+      30,
+      "linear"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 1.2,
+     "kind": "loss"
+    },
+    {
+     "t": 6.4,
+     "kind": "warn"
+    },
+    {
+     "t": 14.3,
+     "kind": "gain"
+    }
+   ]
+  },
+  {
+   "id": "wait",
+   "from": 16,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      16,
+      30
+     ],
+     [
+      16.1,
+      30,
+      "linear"
+     ],
+     [
+      20.5,
+      365,
+      "linear"
+     ],
+     [
+      21,
+      423,
+      "hold"
+     ],
+     [
+      22.4,
+      482,
+      "hold"
+     ],
+     [
+      23.8,
+      540,
+      "hold"
+     ],
+     [
+      24.4,
+      540,
+      "linear"
+     ],
+     [
+      27.7,
+      1095,
+      "linear"
+     ],
+     [
+      29.5,
+      1460,
+      "hold"
+     ],
+     [
+      33.1,
+      1826,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 17.8,
+     "kind": "gain"
+    },
+    {
+     "t": 23.2,
+     "kind": "loss"
+    },
+    {
+     "t": 26.1,
+     "kind": "warn"
+    },
+    {
+     "t": 29.6,
+     "kind": "gain"
+    },
+    {
+     "t": 33.2,
+     "kind": "loss"
+    }
+   ]
+  },
+  {
+   "id": "late",
+   "from": 36.4,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      36.4,
+      1826
+     ],
+     [
+      36.5,
+      1826,
+      "linear"
+     ],
+     [
+      39.4,
+      3640,
+      "linear"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 38.8,
+     "kind": "gain"
+    }
+   ]
+  },
+  {
+   "id": "awake",
+   "from": 40.6,
+   "decimals": 0,
+   "value": {
+    "ease": "linear",
+    "keys": [
+     [
+      40.6,
+      3640
+     ],
+     [
+      41,
+      3644,
+      "hold"
+     ],
+     [
+      41.5,
+      3648,
+      "hold"
+     ],
+     [
+      42,
+      3652,
+      "hold"
+     ],
+     [
+      45.2,
+      3653,
+      "hold"
+     ],
+     [
+      48.2,
+      3653,
+      "hold"
+     ],
+     [
+      52.8,
+      3653,
+      "hold"
+     ],
+     [
+      56.4,
+      3653,
+      "hold"
+     ]
+    ]
+   },
+   "flashes": [
+    {
+     "t": 41,
+     "kind": "gain"
+    },
+    {
+     "t": 46.6,
+     "kind": "warn"
+    },
+    {
+     "t": 51.2,
+     "kind": "gain"
+    },
+    {
+     "t": 53.6,
+     "kind": "gain"
+    },
+    {
+     "t": 56.8,
+     "kind": "gain"
+    }
+   ]
+  }
+ ],
+ "lines": [
+  {
+   "id": "l_gcs",
+   "in": 5.4,
+   "out": 8.6
+  },
+  {
+   "id": "l_lastmsg",
+   "in": 9.7,
+   "out": 12.3
+  },
+  {
+   "id": "l_daily",
+   "in": 12.7,
+   "out": 15.866667
+  },
+  {
+   "id": "l_months",
+   "in": 16.4,
+   "out": 20.4
+  },
+  {
+   "id": "l_mom",
+   "in": 20.9,
+   "out": 24.066667
+  },
+  {
+   "id": "l_hair",
+   "in": 24.4,
+   "out": 28.1
+  },
+  {
+   "id": "l_wedding",
+   "in": 28.5,
+   "out": 32.466667
+  },
+  {
+   "id": "l_doctor",
+   "in": 32.9,
+   "out": 36.266667
+  },
+  {
+   "id": "l_night",
+   "in": 36.7,
+   "out": 40.466667
+  },
+  {
+   "id": "l_eyes",
+   "in": 42.1,
+   "out": 44.5
+  },
+  {
+   "id": "l_face",
+   "in": 44.9,
+   "out": 47.866667
+  },
+  {
+   "id": "l_phone",
+   "in": 48.3,
+   "out": 50.7
+  },
+  {
+   "id": "l_bench",
+   "in": 53.7,
+   "out": 56.1
+  },
+  {
+   "id": "l_end",
+   "in": 56.8,
+   "out": 59.4
+  }
+ ],
+ "events": [
+  {
+   "t": 0,
+   "id": "e_lights",
+   "beat": "b_cross",
+   "trigger": true,
+   "what": "Scheinwerfer rasen im Regen auf dich zu, du tippst „Bin gleich da!“ (läuft ab Frame 0)",
+   "sfx": [
+    "road"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 0.7,
+   "id": "e_horn",
+   "beat": "b_cross",
+   "what": "Hupe/Bremsen – deine Hände zucken hoch",
+   "sfx": [
+    "screech"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 1.2,
+   "id": "e_impact",
+   "beat": "b_cross",
+   "what": "Aufprall: Weißblitz, Handy fliegt aus der Hand (Beweis: hier beginnt dein Koma)",
+   "sfx": [
+    "crash"
+   ],
+   "flash": "loss",
+   "premise": "visible"
+  },
+  {
+   "t": 2.3,
+   "id": "e_down",
+   "beat": "b_ground",
+   "what": "Du liegst reglos auf dem nassen Asphalt, Augen zu",
+   "sfx": [
+    "heartbeat"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 3.3,
+   "id": "e_unsent",
+   "beat": "b_ground",
+   "what": "Dein Handy im Regen: „Bin gleich da!“ – roter Hinweis „Nicht zugestellt“",
+   "sfx": [
+    "beep"
+   ],
+   "premise": "visible",
+   "setup_for": "e_arrive"
+  },
+  {
+   "t": 4,
+   "id": "e_blue",
+   "beat": "b_ground",
+   "what": "Blaulicht flackert über die Straße",
+   "sfx": [
+    "alarm"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 5.3,
+   "id": "e_doctors",
+   "beat": "b_icu",
+   "what": "Ärztin und Pfleger am Bett, Monitor piept",
+   "sfx": [
+    "beep"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 6.4,
+   "id": "e_penlight",
+   "beat": "b_icu",
+   "what": "Lichttest in die Augen – keine Reaktion",
+   "sfx": [
+    "zap"
+   ],
+   "flash": "warn",
+   "premise": "visible"
+  },
+  {
+   "t": 7.7,
+   "id": "e_gcs",
+   "beat": "b_icu",
+   "what": "Ärztin schüttelt den Kopf – Tag 2",
+   "sfx": [
+    "loss"
+   ],
+   "premise": "hud"
+  },
+  {
+   "t": 9.066667,
+   "id": "e_lea_in",
+   "beat": "b_lea",
+   "what": "Lea kommt herein, bleibt am Bett stehen",
+   "sfx": [
+    "thud"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 9.7,
+   "id": "e_lea_sees",
+   "beat": "b_lea",
+   "what": "Sie sieht dich – Hand vor den Mund, Tränen",
+   "sfx": [
+    "heartbeat"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 10.9,
+   "id": "e_lea_phone",
+   "beat": "b_lea",
+   "what": "Sie hält dein zersprungenes Handy, schaut auf die Nachricht",
+   "sfx": [
+    "paper"
+   ],
+   "premise": "visible",
+   "setup_for": "e_arrive"
+  },
+  {
+   "t": 12.9,
+   "id": "e_type",
+   "beat": "b_text",
+   "what": "Lea allein auf dem Sofa, tippt dir eine Nachricht",
+   "sfx": [
+    "keys"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 14.3,
+   "id": "e_send",
+   "beat": "b_text",
+   "what": "Gesendet – keine Antwort. Daneben dein leerer Becher",
+   "sfx": [
+    "pop"
+   ],
+   "flash": "gain",
+   "premise": "visible",
+   "setup_for": "e_arrive"
+  },
+  {
+   "t": 15.3,
+   "id": "e_wait",
+   "beat": "b_text",
+   "what": "Sie legt das Handy weg, umarmt deine Jacke",
+   "sfx": [
+    "warmth"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 16.2,
+   "id": "e_lapse",
+   "beat": "b_lapse",
+   "what": "Zeitraffer: Tag und Nacht flackern, Uhr rast, Besucher erscheinen und verschwinden",
+   "sfx": [
+    "riser"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 17.8,
+   "id": "e_cards",
+   "beat": "b_lapse",
+   "what": "Karten füllen die Wand, Blumen wechseln",
+   "sfx": [
+    "shimmer"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 19.2,
+   "id": "e_winter",
+   "beat": "b_lapse",
+   "what": "Fenster wird winterweiß – ein Jahr ist um",
+   "sfx": [
+    "wind"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 21.2,
+   "id": "e_plate",
+   "beat": "b_mom",
+   "what": "Mama stellt einen dritten Teller hin – deinen",
+   "sfx": [
+    "thud"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 22.2,
+   "id": "e_mom_stop",
+   "beat": "b_mom",
+   "what": "Sie hält inne, schaut auf deinen leeren Stuhl",
+   "sfx": [
+    "heartbeat"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 23.2,
+   "id": "e_plate_back",
+   "beat": "b_mom",
+   "what": "Sie nimmt den Teller wieder weg",
+   "sfx": [
+    "loss"
+   ],
+   "flash": "loss",
+   "premise": "visible"
+  },
+  {
+   "t": 24.7,
+   "id": "e_hair",
+   "beat": "b_hair",
+   "what": "Deine Haare wachsen sichtbar über das Kissen",
+   "sfx": [
+    "shimmer"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 26.1,
+   "id": "e_beard",
+   "beat": "b_hair",
+   "what": "Ein Bart wächst, Gesicht wird schmaler",
+   "sfx": [
+    "appear"
+   ],
+   "flash": "warn",
+   "premise": "visible"
+  },
+  {
+   "t": 28.4,
+   "id": "e_chair",
+   "beat": "b_wedding",
+   "what": "Erste Reihe: ein leerer Stuhl mit deinem Foto",
+   "sfx": [
+    "ding"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 29.6,
+   "id": "e_kiss",
+   "beat": "b_wedding",
+   "what": "Dein bester Freund küsst die Braut – Jubel, Konfetti",
+   "sfx": [
+    "shimmer"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 30.8,
+   "id": "e_cheer",
+   "beat": "b_wedding",
+   "what": "Hunderte jubeln, dein Platz bleibt leer",
+   "sfx": [
+    "appear"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 33.2,
+   "id": "e_dr_talk",
+   "beat": "b_doctor",
+   "what": "Ärztin zeigt auf die Akte: Abschalten",
+   "sfx": [
+    "loss"
+   ],
+   "flash": "loss",
+   "premise": "visible"
+  },
+  {
+   "t": 34.4,
+   "id": "e_mom_no",
+   "beat": "b_doctor",
+   "what": "Mama stellt sich vor das Bett, schüttelt den Kopf",
+   "sfx": [
+    "thud"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 35.4,
+   "id": "e_lea_hold",
+   "beat": "b_doctor",
+   "what": "Lea nimmt deine Hand, weint",
+   "sfx": [
+    "heartbeat"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 36.7,
+   "id": "e_sleep",
+   "beat": "b_night",
+   "what": "Nacht. Lea – grau geworden – schläft am Bett, hält deine Hand",
+   "sfx": [
+    "beep"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 38.8,
+   "id": "e_twitch",
+   "beat": "b_night",
+   "what": "Deine Lider zucken, der Monitor schlägt aus – Lea schreckt hoch (Wende)",
+   "sfx": [
+    "heartbeat"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 39.5,
+   "id": "e_lea_up",
+   "beat": "b_night",
+   "what": "Lea starrt dich an, Hoffnung",
+   "sfx": [
+    "ding"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 41,
+   "id": "e_eyes",
+   "beat": "b_eyes",
+   "what": "Ich-Sicht: Lider öffnen sich, grelles Deckenlicht, alles verschwommen",
+   "sfx": [
+    "riser"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 42.2,
+   "id": "e_hands",
+   "beat": "b_eyes",
+   "what": "Deine dünnen Hände auf der Decke bewegen sich",
+   "sfx": [
+    "paper"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 43.2,
+   "id": "e_drop",
+   "beat": "b_eyes",
+   "what": "Pflegerin sieht deine offenen Augen – Tablett fällt",
+   "sfx": [
+    "slam"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 45.2,
+   "id": "e_mirror",
+   "beat": "b_face",
+   "what": "Du sitzt im Bett, tastest nach Bart und langen Haaren",
+   "sfx": [
+    "appear"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 46.6,
+   "id": "e_weak",
+   "beat": "b_face",
+   "what": "Arm sackt kraftlos weg – Muskeln weg",
+   "sfx": [
+    "thud"
+   ],
+   "flash": "warn",
+   "premise": "visible"
+  },
+  {
+   "t": 48.5,
+   "id": "e_unread",
+   "beat": "b_phone",
+   "what": "Dein altes Handy: 3.652 Nachrichten von Lea – eine pro Tag",
+   "sfx": [
+    "ding"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 49.9,
+   "id": "e_scroll",
+   "beat": "b_phone",
+   "what": "Ganz oben: deine letzte Nachricht „Bin gleich da!“ – nicht zugestellt",
+   "sfx": [
+    "tick"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 51.2,
+   "id": "e_resend",
+   "beat": "b_phone",
+   "what": "Du tippst auf „Erneut senden“ – Zugestellt",
+   "sfx": [
+    "pop"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 53.6,
+   "id": "e_buzz",
+   "beat": "b_bench",
+   "what": "Lea im Flur, grau, ihr Handy vibriert: „Schatz: Bin gleich da!“",
+   "sfx": [
+    "vibrate",
+    "ding"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 54.8,
+   "id": "e_lea_stand",
+   "beat": "b_bench",
+   "what": "Hand vor den Mund – sie springt auf und rennt los",
+   "sfx": [
+    "swoosh"
+   ],
+   "premise": "visible"
+  },
+  {
+   "t": 56.8,
+   "id": "e_arrive",
+   "beat": "b_end",
+   "what": "Pointe: Lea ist da – sie umarmt dich, Handy mit deiner Nachricht in der Hand",
+   "sfx": [
+    "warmth"
+   ],
+   "flash": "gain",
+   "premise": "visible"
+  },
+  {
+   "t": 58.4,
+   "id": "e_smile",
+   "beat": "b_end",
+   "what": "Ihr lacht und weint gleichzeitig, warmes Licht",
+   "sfx": [
+    "shimmer"
+   ],
+   "premise": "visible"
+  }
+ ],
+ "beats": [
+  {
+   "id": "b_cross",
+   "from": 0,
+   "to": 2,
+   "place": "street",
+   "mood": "happy",
+   "framing": "pov",
+   "preset": "pov",
+   "hud_change": true,
+   "data": {
+    "car": [
+     1,
+     0,
+     18.4,
+     3.14159
+    ],
+    "carHit": 1.6
+   },
+   "act": 1,
+   "showpiece": "glow",
+   "pov": true
+  },
+  {
+   "id": "b_ground",
+   "from": 2,
+   "to": 5,
+   "place": "street",
+   "mood": "unconscious",
+   "framing": "high",
+   "preset": "high",
+   "hud_change": true,
+   "data": {
+    "you": [
+     -1.75,
+     0,
+     1.55,
+     1.5708
+    ],
+    "phone": [
+     -1.45,
+     0.02,
+     2.15
+    ]
+   },
+   "act": 1
+  },
+  {
+   "id": "b_icu",
+   "from": 5,
+   "to": 8.8,
+   "place": "icu",
+   "mood": "unconscious",
+   "framing": "medium",
+   "preset": "orbit",
+   "hud_change": true,
+   "data": {
+    "you": [
+     200,
+     0.55,
+     -1.8,
+     0
+    ]
+   },
+   "act": 1,
+   "fact": {
+    "text": "Glasgow-Koma-Skala: 3 von 15 Punkten ist der niedrigste Wert (≤ 8 = Koma).",
+    "source": "Teasdale G, Jennett B: Assessment of coma and impaired consciousness. Lancet 1974; 304:81–84"
+   }
+  },
+  {
+   "id": "b_lea",
+   "from": 8.8,
+   "to": 12.4,
+   "place": "icu",
+   "mood": "cry",
+   "framing": "close",
+   "preset": "close",
+   "hud_change": true,
+   "data": {
+    "lea": [
+     201.25,
+     0,
+     -0.35,
+     -2.45
+    ]
+   },
+   "act": 1
+  },
+  {
+   "id": "b_text",
+   "from": 12.4,
+   "to": 16,
+   "place": "apartment",
+   "mood": "sad",
+   "framing": "medium",
+   "preset": "push",
+   "hud_change": true,
+   "data": {
+    "lea": [
+     399.6,
+     0,
+     -2.15,
+     0
+    ]
+   },
+   "act": 1
+  },
+  {
+   "id": "b_lapse",
+   "from": 16,
+   "to": 20.6,
+   "place": "icu",
+   "mood": "neutral",
+   "framing": "wide",
+   "preset": "still",
+   "hud_change": true,
+   "data": {
+    "you": [
+     200,
+     0.55,
+     -1.8,
+     0
+    ]
+   },
+   "act": 2,
+   "showpiece": "vista"
+  },
+  {
+   "id": "b_mom",
+   "from": 20.6,
+   "to": 24.2,
+   "place": "home",
+   "mood": "sad",
+   "framing": "low",
+   "preset": "low",
+   "hud_change": true,
+   "data": {
+    "mom": [
+     601.65,
+     0,
+     -1.5,
+     -0.25
+    ]
+   },
+   "act": 2
+  },
+  {
+   "id": "b_hair",
+   "from": 24.2,
+   "to": 28.2,
+   "place": "icu",
+   "mood": "unconscious",
+   "framing": "high",
+   "preset": "high",
+   "hud_change": true,
+   "data": {
+    "you": [
+     200,
+     0.55,
+     -1.8,
+     0
+    ]
+   },
+   "act": 2,
+   "fact": {
+    "text": "Kopfhaar wächst etwa 15 cm pro Jahr – auch im Koma.",
+    "source": "American Academy of Dermatology: „Hair loss: Who gets and causes“ (Haar wächst ca. 6 Inch/Jahr)"
+   }
+  },
+  {
+   "id": "b_wedding",
+   "from": 28.2,
+   "to": 32.6,
+   "place": "wedding",
+   "mood": "happy",
+   "framing": "wide",
+   "preset": "pull",
+   "hud_change": true,
+   "data": {
+    "chair": [
+     801,
+     0,
+     0.8
+    ],
+    "couple": [
+     796.9,
+     0,
+     0
+    ]
+   },
+   "act": 2,
+   "showpiece": "mass"
+  },
+  {
+   "id": "b_doctor",
+   "from": 32.6,
+   "to": 36.4,
+   "place": "icu",
+   "mood": "angry",
+   "framing": "medium",
+   "preset": "orbit",
+   "hud_change": true,
+   "data": {
+    "doc": [
+     201.5,
+     0,
+     -0.25,
+     -2.3
+    ],
+    "mom": [
+     200.15,
+     0,
+     -0.35,
+     -0.2
+    ],
+    "lea": [
+     199.25,
+     0,
+     -1.25,
+     1.57
+    ]
+   },
+   "act": 2
+  },
+  {
+   "id": "b_night",
+   "from": 36.4,
+   "to": 40.6,
+   "place": "icu",
+   "mood": "relief",
+   "framing": "close",
+   "preset": "push",
+   "hud_change": true,
+   "data": {
+    "lea": [
+     199.2,
+     0,
+     -2.35,
+     1.45
+    ]
+   },
+   "act": 2
+  },
+  {
+   "id": "b_eyes",
+   "from": 40.6,
+   "to": 44.6,
+   "place": "icu",
+   "mood": "shock",
+   "framing": "pov",
+   "preset": "pov",
+   "hud_change": true,
+   "data": {
+    "nurse": [
+     200.55,
+     0,
+     0.35,
+     3
+    ]
+   },
+   "act": 3,
+   "fact": {
+    "text": "Längstes dokumentiertes Erwachen: Jan Grzebski (Polen) nach 19 Jahren.",
+    "source": "BBC News, 2. Juni 2007: „Pole wakes from 19-year coma“"
+   },
+   "showpiece": "glow",
+   "pov": true
+  },
+  {
+   "id": "b_face",
+   "from": 44.6,
+   "to": 48,
+   "place": "icu",
+   "mood": "shock",
+   "framing": "close",
+   "preset": "close",
+   "hud_change": true,
+   "data": {
+    "you": [
+     200,
+     0.24,
+     -2.5,
+     0
+    ]
+   },
+   "act": 3
+  },
+  {
+   "id": "b_phone",
+   "from": 48,
+   "to": 52.6,
+   "place": "icu",
+   "mood": "worried",
+   "framing": "pov",
+   "preset": "pov",
+   "hud_change": true,
+   "act": 3,
+   "pov": true
+  },
+  {
+   "id": "b_bench",
+   "from": 52.6,
+   "to": 56.2,
+   "place": "corridor",
+   "mood": "shock",
+   "framing": "medium",
+   "preset": "push",
+   "hud_change": true,
+   "data": {
+    "lea": [
+     1000.6,
+     0,
+     -1.2,
+     0
+    ]
+   },
+   "act": 3
+  },
+  {
+   "id": "b_end",
+   "from": 56.2,
+   "to": 61.2,
+   "place": "icu",
+   "mood": "relief",
+   "framing": "medium",
+   "preset": "orbit",
+   "hud_change": true,
+   "data": {
+    "you": [
+     200,
+     0.24,
+     -2.5,
+     0
+    ],
+    "lea": [
+     200.62,
+     0,
+     -1.72,
+     -1.9
+    ]
+   },
+   "act": 3
+  }
+ ],
+ "audio": {
+  "fade_out": 1.2,
+  "beds": [
+   {
+    "src": "music:main",
+    "start": 0,
+    "end": 61.2,
+    "gain_db": -11
+   },
+   {
+    "src": "gen:rain",
+    "start": 0,
+    "end": 5,
+    "gain_db": -15,
+    "automation": [
+     [
+      0,
+      -40
+     ],
+     [
+      0.25,
+      0
+     ],
+     [
+      4.75,
+      0
+     ],
+     [
+      5,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:monitor",
+    "start": 5,
+    "end": 12.4,
+    "gain_db": -15,
+    "automation": [
+     [
+      5,
+      -40
+     ],
+     [
+      5.25,
+      0
+     ],
+     [
+      12.15,
+      0
+     ],
+     [
+      12.4,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:room",
+    "start": 12.4,
+    "end": 16,
+    "gain_db": -15,
+    "automation": [
+     [
+      12.4,
+      -40
+     ],
+     [
+      12.65,
+      0
+     ],
+     [
+      15.75,
+      0
+     ],
+     [
+      16,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:monitor",
+    "start": 16,
+    "end": 20.6,
+    "gain_db": -15,
+    "automation": [
+     [
+      16,
+      -40
+     ],
+     [
+      16.25,
+      0
+     ],
+     [
+      20.35,
+      0
+     ],
+     [
+      20.6,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:room",
+    "start": 20.6,
+    "end": 24.2,
+    "gain_db": -15,
+    "automation": [
+     [
+      20.6,
+      -40
+     ],
+     [
+      20.85,
+      0
+     ],
+     [
+      23.95,
+      0
+     ],
+     [
+      24.2,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:monitor",
+    "start": 24.2,
+    "end": 28.2,
+    "gain_db": -15,
+    "automation": [
+     [
+      24.2,
+      -40
+     ],
+     [
+      24.45,
+      0
+     ],
+     [
+      27.95,
+      0
+     ],
+     [
+      28.2,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:wind",
+    "start": 28.2,
+    "end": 32.6,
+    "gain_db": -15,
+    "automation": [
+     [
+      28.2,
+      -40
+     ],
+     [
+      28.45,
+      0
+     ],
+     [
+      32.35,
+      0
+     ],
+     [
+      32.6,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:monitor",
+    "start": 32.6,
+    "end": 52.6,
+    "gain_db": -15,
+    "automation": [
+     [
+      32.6,
+      -40
+     ],
+     [
+      32.85,
+      0
+     ],
+     [
+      52.35,
+      0
+     ],
+     [
+      52.6,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:room",
+    "start": 52.6,
+    "end": 56.2,
+    "gain_db": -15,
+    "automation": [
+     [
+      52.6,
+      -40
+     ],
+     [
+      52.85,
+      0
+     ],
+     [
+      55.95,
+      0
+     ],
+     [
+      56.2,
+      -40
+     ]
+    ]
+   },
+   {
+    "src": "gen:monitor",
+    "start": 56.2,
+    "end": 61.2,
+    "gain_db": -15,
+    "automation": [
+     [
+      56.2,
+      -40
+     ],
+     [
+      56.45,
+      0
+     ],
+     [
+      60.95,
+      0
+     ],
+     [
+      61.2,
+      -40
+     ]
+    ]
+   }
+  ],
+  "sfx": [
+   {
+    "src": "gen:road",
+    "t": 0,
+    "gain_db": -12,
+    "event": "e_lights"
+   },
+   {
+    "src": "gen:screech",
+    "t": 0.7,
+    "gain_db": -9,
+    "event": "e_horn"
+   },
+   {
+    "src": "gen:crash",
+    "t": 1.2,
+    "gain_db": -5,
+    "event": "e_impact"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 2.3,
+    "gain_db": -6,
+    "event": "e_down"
+   },
+   {
+    "src": "gen:beep",
+    "t": 3.3,
+    "gain_db": -14,
+    "event": "e_unsent"
+   },
+   {
+    "src": "gen:alarm",
+    "t": 4,
+    "gain_db": -20,
+    "event": "e_blue"
+   },
+   {
+    "src": "gen:beep",
+    "t": 5.3,
+    "gain_db": -10,
+    "event": "e_doctors"
+   },
+   {
+    "src": "gen:zap",
+    "t": 6.4,
+    "gain_db": -16,
+    "event": "e_penlight"
+   },
+   {
+    "src": "gen:pop",
+    "t": 7.6,
+    "gain_db": -18,
+    "event": "hud_step"
+   },
+   {
+    "src": "gen:loss",
+    "t": 7.7,
+    "gain_db": -12,
+    "event": "e_gcs"
+   },
+   {
+    "src": "gen:thud",
+    "t": 9.066667,
+    "gain_db": -16,
+    "event": "e_lea_in"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 9.7,
+    "gain_db": -10,
+    "event": "e_lea_sees"
+   },
+   {
+    "src": "gen:paper",
+    "t": 10.9,
+    "gain_db": -16,
+    "event": "e_lea_phone"
+   },
+   {
+    "src": "gen:keys",
+    "t": 12.9,
+    "gain_db": -16,
+    "event": "e_type"
+   },
+   {
+    "src": "gen:pop",
+    "t": 14.3,
+    "gain_db": -11,
+    "event": "e_send"
+   },
+   {
+    "src": "gen:warmth",
+    "t": 15.3,
+    "gain_db": -16,
+    "event": "e_wait"
+   },
+   {
+    "src": "gen:riser",
+    "t": 16.2,
+    "gain_db": -14,
+    "event": "e_lapse"
+   },
+   {
+    "src": "gen:shimmer",
+    "t": 17.8,
+    "gain_db": -14,
+    "event": "e_cards"
+   },
+   {
+    "src": "gen:wind",
+    "t": 19.2,
+    "gain_db": -16,
+    "event": "e_winter"
+   },
+   {
+    "src": "gen:thud",
+    "t": 21.2,
+    "gain_db": -14,
+    "event": "e_plate"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 22.2,
+    "gain_db": -12,
+    "event": "e_mom_stop"
+   },
+   {
+    "src": "gen:loss",
+    "t": 23.2,
+    "gain_db": -13,
+    "event": "e_plate_back"
+   },
+   {
+    "src": "gen:shimmer",
+    "t": 24.7,
+    "gain_db": -15,
+    "event": "e_hair"
+   },
+   {
+    "src": "gen:appear",
+    "t": 26.1,
+    "gain_db": -14,
+    "event": "e_beard"
+   },
+   {
+    "src": "gen:ding",
+    "t": 28.4,
+    "gain_db": -16,
+    "event": "e_chair"
+   },
+   {
+    "src": "gen:shimmer",
+    "t": 29.6,
+    "gain_db": -11,
+    "event": "e_kiss"
+   },
+   {
+    "src": "gen:appear",
+    "t": 30.8,
+    "gain_db": -15,
+    "event": "e_cheer"
+   },
+   {
+    "src": "gen:loss",
+    "t": 33.2,
+    "gain_db": -10,
+    "event": "e_dr_talk"
+   },
+   {
+    "src": "gen:thud",
+    "t": 34.4,
+    "gain_db": -11,
+    "event": "e_mom_no"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 35.4,
+    "gain_db": -12,
+    "event": "e_lea_hold"
+   },
+   {
+    "src": "gen:beep",
+    "t": 36.7,
+    "gain_db": -14,
+    "event": "e_sleep"
+   },
+   {
+    "src": "gen:heartbeat",
+    "t": 38.8,
+    "gain_db": -6,
+    "event": "e_twitch"
+   },
+   {
+    "src": "gen:ding",
+    "t": 39.5,
+    "gain_db": -15,
+    "event": "e_lea_up"
+   },
+   {
+    "src": "gen:riser",
+    "t": 41,
+    "gain_db": -14,
+    "event": "e_eyes"
+   },
+   {
+    "src": "gen:paper",
+    "t": 42.2,
+    "gain_db": -16,
+    "event": "e_hands"
+   },
+   {
+    "src": "gen:slam",
+    "t": 43.2,
+    "gain_db": -9,
+    "event": "e_drop"
+   },
+   {
+    "src": "gen:appear",
+    "t": 45.2,
+    "gain_db": -14,
+    "event": "e_mirror"
+   },
+   {
+    "src": "gen:thud",
+    "t": 46.6,
+    "gain_db": -13,
+    "event": "e_weak"
+   },
+   {
+    "src": "gen:ding",
+    "t": 48.5,
+    "gain_db": -13,
+    "event": "e_unread"
+   },
+   {
+    "src": "gen:tick",
+    "t": 49.9,
+    "gain_db": -16,
+    "event": "e_scroll"
+   },
+   {
+    "src": "gen:pop",
+    "t": 51.2,
+    "gain_db": -10,
+    "event": "e_resend"
+   },
+   {
+    "src": "gen:vibrate",
+    "t": 53.6,
+    "gain_db": -8,
+    "event": "e_buzz"
+   },
+   {
+    "src": "gen:ding",
+    "t": 53.6,
+    "gain_db": -8,
+    "event": "e_buzz"
+   },
+   {
+    "src": "gen:swoosh",
+    "t": 54.8,
+    "gain_db": -13,
+    "event": "e_lea_stand"
+   },
+   {
+    "src": "gen:warmth",
+    "t": 56.8,
+    "gain_db": -6,
+    "event": "e_arrive"
+   },
+   {
+    "src": "gen:shimmer",
+    "t": 58.4,
+    "gain_db": -16,
+    "event": "e_smile"
+   }
+  ],
+  "music": {
+   "main": {
+    "bpm": 84,
+    "root": "D",
+    "seed": 17,
+    "sections": [
+     {
+      "from": 0,
+      "to": 1.2,
+      "style": "pulse"
+     },
+     {
+      "from": 1.2,
+      "to": 5,
+      "style": "silence"
+     },
+     {
+      "from": 5,
+      "to": 16,
+      "style": "sad"
+     },
+     {
+      "from": 16,
+      "to": 28.2,
+      "style": "drive"
+     },
+     {
+      "from": 28.2,
+      "to": 32.6,
+      "style": "warm"
+     },
+     {
+      "from": 32.6,
+      "to": 36.4,
+      "style": "sad"
+     },
+     {
+      "from": 36.4,
+      "to": 40.6,
+      "style": "calm"
+     },
+     {
+      "from": 40.6,
+      "to": 48,
+      "style": "pulse"
+     },
+     {
+      "from": 48,
+      "to": 52.6,
+      "style": "drive"
+     },
+     {
+      "from": 52.6,
+      "to": 57.3,
+      "style": "silence"
+     },
+     {
+      "from": 57.3,
+      "to": 61.2,
+      "style": "warm"
+     }
+    ],
+    "duration": 61.2
+   }
+  }
+ },
+ "post": {
+  "vignette": 0.2
+ },
+ "hook": {
+  "type": "proof",
+  "proof": "e_impact",
+  "question": "Wachst du je wieder auf – und wer wartet dann noch auf dich?",
+  "stakes": "Dein Leben mit Lea: Deine letzte Nachricht an sie hängt unzugestellt auf dem kaputten Handy.",
+  "withheld": "Das Aufwachen nach zehn Jahren und dass die Nachricht doch noch ankommt (Pointe)."
+ },
+ "story": {
+  "stake": "Dein Leben mit Lea und deiner Familie – während du dich nicht bewegen kannst, läuft es ohne dich weiter.",
+  "measure": "Tage im Koma (eine Größe; Labels nur als Phasen: Unfall, Leben geht weiter, fast zehn Jahre, wach)",
+  "question": "Was wäre, wenn du ins Koma fällst?",
+  "turn": "e_twitch"
+ },
+ "pointe_id": "e_arrive",
+ "endcard": {
+  "in": 59.4,
+  "center": 0.3
+ }
+}

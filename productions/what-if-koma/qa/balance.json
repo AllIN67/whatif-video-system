@@ -1,0 +1,51 @@
+{
+ "file": "productions/what-if-koma/render/final.mp4",
+ "audio_bands": {
+  "sub_lt100_pct": 61.4,
+  "low_100_300_pct": 23.1,
+  "mid_300_2k_pct": 14.3,
+  "presence_2k_8k_pct": 1.0,
+  "air_gt8k_pct": 0.2
+ },
+ "audio_dynamics": {
+  "silence_pct": 0.0,
+  "dynamics_p95_p5_db": 6.8
+ },
+ "color": {
+  "sat_strong_pct": 4.8,
+  "accent_area_pct": 0.1,
+  "dominant_hue_pct": 89.4
+ },
+ "reference_C_range": {
+  "sub_lt100_pct": [
+   11,
+   24
+  ],
+  "presence_2k_8k_pct": [
+   5,
+   17
+  ],
+  "silence_pct": [
+   0.9,
+   6.0
+  ],
+  "sat_strong_pct": [
+   12,
+   14
+  ],
+  "accent_area_pct": [
+   0.6,
+   1.4
+  ],
+  "dominant_hue_pct": [
+   66,
+   74
+  ]
+ },
+ "note": "informativ – Orientierung für Sicht- und Hörprüfung, keine Bewertung",
+ "hints": [
+  "Ton: 61.4 % der Energie unter 100 Hz – auf Handylautsprechern kaum hörbar; Hörprüfung am Handy",
+  "Ton: nur 1.0 % bei 2–8 kHz – wenig Präsenz/Klangdetail",
+  "Ton: keine stille Stelle – Ruhe vor der Pointe prüfen (Guide 18.6/18.13)"
+ ]
+}

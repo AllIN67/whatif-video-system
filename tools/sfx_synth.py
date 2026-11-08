@@ -214,6 +214,21 @@ SOUNDS = {
     "tick": (0.08, (
         f"aevalsrc='0.6*sin(2*PI*3000*t)*min(1,min(t/0.005,(0.08-t)/0.005))':d=0.08:s={SR},"
         "pan=stereo|c0=c0|c1=c0[out]")),
+    # ---- Ergänzt 2026-11-08 (what-if-koma): Intensivstation, Handy ----
+    # einzelner Monitor-Piep (EKG-Takt): 1-kHz-Sinus, 110 ms, weiche Flanken
+    "beep": (0.3, (
+        f"aevalsrc='0.42*sin(2*PI*1046*t)*min(1,t/0.004)*exp(-9*t)*lt(t,0.12)':d=0.3:s={SR},"
+        "pan=stereo|c0=c0|c1=c0[out]")),
+    # Atmosphäre Intensivstation (90 s): Raumton + leiser Monitor-Piep im 72er-Takt + Beatmungsgerät (Rauschen, 4-s-Zyklus)
+    "monitor": (90.0, (
+        f"anoisesrc=d=90:c=brown:r={SR}:a=0.22:s=131,lowpass=f=260[a];"
+        f"aevalsrc='0.07*sin(2*PI*1046*t)*lt(mod(t,0.8333),0.09)*min(1,mod(t,0.8333)/0.004)':d=90:s={SR}[b];"
+        f"anoisesrc=d=90:c=pink:r={SR}:a=0.05:s=132,bandpass=f=900:width_type=o:w=2,{_env('pow(max(0,sin(2*PI*t/4.0)),2)')}[c];"
+        "[a][b][c]amix=inputs=3:normalize=0,pan=stereo|c0=c0|c1=c0[out]")),
+    # Handy vibriert: zwei kurze 170-Hz-Brummstöße
+    "vibrate": (0.9, (
+        f"aevalsrc='0.55*sin(2*PI*170*t)*(0.6+0.4*sin(2*PI*31*t))*(lt(t,0.28)+gte(t,0.45)*lt(t,0.73))*min(1,t/0.01)':d=0.9:s={SR},"
+        "lowpass=f=900,pan=stereo|c0=c0|c1=c0[out]")),
 }
 
 
