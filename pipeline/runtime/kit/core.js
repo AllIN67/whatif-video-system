@@ -63,8 +63,11 @@ export function createCore(THREE) {
   };
 
   // Grundlicht + Tonemapping. sunTarget = Bereich, in dem scharfe Schatten liegen (Kamera-Arbeitsbereich).
+  // Erweiterungspunkt Bildsprache V4 (kit/look4.js): map(look) → Look, setup(ctx, lights), apply(A, B, k).
+  // Leer = altes Verhalten (bestehende Produktionen bit-identisch).
+  const hooks = {};
   const setupLook = ({ scene, renderer }, name = 'day', { sunPos = [18, 30, 14], area = 40, target = [0, 0, 0] } = {}) => {
-    const L = LOOKS[name];
+    const L = hooks.map ? hooks.map(LOOKS[name]) : LOOKS[name];
     if (!L) throw new Error(`Unbekannte Licht-Stimmung "${name}"`);
     if (renderer) {
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -84,7 +87,9 @@ export function createCore(THREE) {
     sun.shadow.normalBias = 0.02;
     sun.shadow.radius = 3;
     scene.add(hemi, sun, sun.target);
-    return { hemi, sun, look: L };
+    const res = { hemi, sun, look: L };
+    if (hooks.setup) hooks.setup({ scene, renderer }, res, L);
+    return res;
   };
 
   // Licht-Stimmung pro Beat/Ort wechseln oder überblenden (k = 0 → a, 1 → b), ohne neue Lichter.
@@ -94,9 +99,14 @@ export function createCore(THREE) {
   const _cb = new THREE.Color();
   const mixHex = (a, b, k) => _ca.setHex(a).lerp(_cb.setHex(b), k);
   const applyLook = ({ scene, renderer, hemi, sun }, a, b = a, k = 0) => {
-    const A = typeof a === 'string' ? LOOKS[a] : a;
-    const B = typeof b === 'string' ? LOOKS[b] : b;
+    let A = typeof a === 'string' ? LOOKS[a] : a;
+    let B = typeof b === 'string' ? LOOKS[b] : b;
     if (!A || !B) throw new Error(`applyLook: unbekannte Stimmung ${a}/${b}`);
+    if (hooks.map) {
+      A = hooks.map(A);
+      B = hooks.map(B);
+    }
+    if (hooks.apply) hooks.apply(A, B, k);
     if (!scene.background?.isColor) scene.background = new THREE.Color();
     scene.background.copy(mixHex(A.sky, B.sky, k));
     const fa = A.fog || [A.sky, 400, 1000];
@@ -120,5 +130,5 @@ export function createCore(THREE) {
     nightRoom: { sky: 0x101626, fog: null, hemi: [0x8a9ad0, 0x2a2630, 0.85], sun: [0xffd9a0, 0.45], exposure: 1.2 },
   });
 
-  return { mat, box, cbox, group, setupLook, applyLook, LOOKS };
+  return { mat, box, cbox, group, setupLook, applyLook, LOOKS, hooks };
 }

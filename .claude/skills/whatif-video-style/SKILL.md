@@ -68,6 +68,10 @@ erneute Repository-Analyse pro Video. Neue Kit-Teile sind erlaubt, wenn ein Them
 - **Bildtexte im Szenencode auf Deutsch** setzen (Handy `time/date/name/messages/notify`, Chat, `atmo.glowSign({ text })`, Zettel) –
   die Kit-Vorgaben sind englisch (`'Monday'`, `'OPEN'`) und bleiben wegen alter Szenen so (Guide 18.14 D11).
 - Fehlende Teile im Kit ergänzen (Schnittstellen nicht ändern) und im LOG nennen.
+- **Bildsprache V4 (Guide 18.15, Erprobung):** `"post": { "v4": true }` in `beats.json` schaltet Umriss-Linien, kühle Schatten,
+  Himmelsverlauf, Grade, Hintergrund-Unschärfe, Texturen und Figuren-Timing ein – ohne Szenenänderung. Je Beat über `fx`
+  nachsteuern (`fx.dof = kit.look4.focus([x,y,z])`, `fx.dof = false` bei Info im Hintergrund). Fertige Modelle nur über
+  `kit.models` mit Lizenz. Bis zur Abnahme durch den Nutzer nur auf Auftrag einschalten.
 
 ## Schritt 4 – Vorschau (Pflicht vor dem Rendern)
 
@@ -77,6 +81,8 @@ erneute Repository-Analyse pro Video. Neue Kit-Teile sind erlaubt, wenn ein Them
 - **Ursachen-Vorschau ohne Text:** jedes `setup_for`-Ereignis einzeln ansehen (QA C10) – unverständlich → Nahaufnahme/Reaktion ergänzen.
 - **Hook-Vorschau** `--at 0,0.5,1,2,3,5,8,12,15` und `quality_review.md` Abschnitt H vor dem Rendern ausfüllen; ein Nein bei H1–H3 → Einstieg neu.
 - Korrigieren in `beats.json` (Kamera/Positionen) bzw. `scene.js`, neu bauen, erneut Vorschau – bis alle Beats stimmen.
+- **V4:** `WARNUNG Verdeckung` aus `still.mjs` beheben (Kamera/Position oder `"occlusion": "hide"`); Bildsprache messen:
+  `python3 tools/look_metrics.py --base 'alt/*.png' --ours '<slug>/stills/*.png'` (Buntheit darf nicht steigen).
 
 ## Schritt 5 – Rendern
 

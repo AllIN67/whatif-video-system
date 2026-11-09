@@ -14,6 +14,7 @@
 // Determinismus: Alle Muster/Streuungen nutzen einen EIGENEN Zufall (opts.seed), nie das gemeinsame rng aus build().
 // So verschiebt dieses Modul die Zufallsfolge bestehender Szenen nicht (bestehende Produktionen bleiben bit-identisch).
 import { createRng } from '../rng.js';
+import { v4Config } from './look4.js';
 
 // Zusätzliche Licht-Stimmungen. Format wie core.LOOKS. Bestehende Stimmungen werden nicht verändert.
 export const LOOKS_V3 = {
@@ -175,8 +176,13 @@ export function createAtmosphere(THREE, core) {
   // ---------- Oberflächen mit Struktur (Canvas-Texturen, eigener Zufall) ----------
   const texCache = new Map();
   const surfaceTexture = (kind, { seed = 7, color } = {}) => {
-    const key = `${kind}|${seed}|${color}`;
+    const key = `${kind}|${seed}|${color}|${v4Config() ? 'v4' : ''}`;
     if (texCache.has(key)) return texCache.get(key);
+    if (v4Config()) {
+      const t = surfaceTextureV4(kind, { seed, color });
+      texCache.set(key, t);
+      return t;
+    }
     const r = createRng(seed);
     const N = 256;
     const c = document.createElement('canvas');
@@ -232,6 +238,96 @@ export function createAtmosphere(THREE, core) {
     tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
     tex.anisotropy = 4;
     texCache.set(key, tex);
+    return tex;
+  };
+
+  // Bildsprache V4 (nur wenn post.v4): „handgemalte“ Texturen nach Referenz – dunkle Fugen (≈ 55 % der Grundfarbe),
+  // Maserung/Pinselstriche, Kantenschatten je Stein/Brett, 512 px, Anisotropie 8. Gleiche Muster-Logik wie oben.
+  const surfaceTextureV4 = (kind, { seed = 7, color } = {}) => {
+    const r = createRng(seed);
+    const N = 512;
+    const c = document.createElement('canvas');
+    c.width = c.height = N;
+    const g = c.getContext('2d');
+    const cl = (x) => Math.max(0, Math.min(255, Math.round(x)));
+    const shade = (n, f, a = 1) => `rgba(${cl(((n >> 16) & 255) * f)},${cl(((n >> 8) & 255) * f)},${cl((n & 255) * f)},${a})`;
+    const base = color ?? { cobble: 0x8d8780, brick: 0x9a5a46, planks: 0x8a6646, tiles: 0xd9dcdc, asphalt: 0x3d4045, concrete: 0xa7a59f, grass: 0x5f7f45 }[kind] ?? 0x999999;
+    const strokes = (x0, y0, w, h, n, fMin, fMax, len, vertical = false) => {
+      for (let i = 0; i < n; i++) {
+        g.fillStyle = shade(base, r.range(fMin, fMax), r.range(0.25, 0.6));
+        const x = x0 + r.range(0, w), y = y0 + r.range(0, h);
+        if (vertical) g.fillRect(x, y, r.range(1, 2.2), r.range(len * 0.5, len * 1.5));
+        else g.fillRect(x, y, r.range(len * 0.5, len * 1.5), r.range(1, 2.2));
+      }
+    };
+    // Stein/Brett/Fliese: Fläche + Lichtkante oben/links + Schattenkante unten/rechts
+    const block = (x, y, w, h, f, rad = 0) => {
+      g.fillStyle = shade(base, f);
+      g.beginPath();
+      g.roundRect(x, y, w, h, rad);
+      g.fill();
+      g.fillStyle = shade(base, f * 1.12, 0.55);
+      g.fillRect(x + rad * 0.5, y + 1, w - rad, 2);
+      g.fillStyle = shade(base, f * 0.72, 0.6);
+      g.fillRect(x + rad * 0.5, y + h - 3, w - rad, 2);
+      g.fillRect(x + w - 3, y + rad * 0.5, 2, h - rad);
+    };
+    g.fillStyle = shade(base, kind === 'tiles' ? 0.78 : 0.55); // Fugenfarbe
+    g.fillRect(0, 0, N, N);
+    if (kind === 'cobble') {
+      for (let y = 0; y < 10; y++) for (let x = 0; x < 9; x++) {
+        const w = 52 + r.range(-6, 6), h = 46 + r.range(-5, 5);
+        block(((x * 57 + (y % 2) * 28) % N) + 3, y * 51 + 3, w, h, r.range(0.8, 1.12), 12);
+        strokes((x * 57) % N, y * 51, 50, 44, 6, 0.85, 1.1, 8);
+      }
+    } else if (kind === 'brick') {
+      for (let y = 0; y < 22; y++) for (let x = 0; x < 6; x++) {
+        const bx = ((x * 86 + (y % 2) * 43) % N) + 2, by = y * 23.3 + 2;
+        block(bx, by, 82, 19, r.range(0.8, 1.14), 2);
+        strokes(bx, by, 80, 17, 4, 0.82, 1.08, 10);
+      }
+    } else if (kind === 'planks') {
+      for (let x = 0; x < 8; x++) {
+        const f = r.range(0.84, 1.12);
+        block(x * 64 + 2, -4, 60, N + 8, f, 0);
+        strokes(x * 64 + 3, 0, 56, N, 46, 0.78, 0.96, 70, true); // Maserung
+        for (let k = 0; k < 2; k++) { // Astlöcher
+          const ax = x * 64 + r.range(14, 48), ay = r.range(20, N - 20);
+          g.fillStyle = shade(base, 0.62, 0.8);
+          g.beginPath();
+          g.ellipse(ax, ay, r.range(3, 6), r.range(7, 12), 0, 0, Math.PI * 2);
+          g.fill();
+        }
+        g.fillStyle = shade(base, 0.5);
+        g.fillRect(x * 64, Math.floor(r.range(0, N)), 64, 2); // Stoßfuge
+      }
+    } else if (kind === 'tiles') {
+      for (let y = 0; y < 4; y++) for (let x = 0; x < 4; x++) {
+        block(x * 128 + 3, y * 128 + 3, 122, 122, r.range(0.95, 1.04), 4);
+        strokes(x * 128, y * 128, 122, 122, 10, 0.96, 1.04, 20);
+      }
+    } else {
+      g.fillStyle = shade(base, 1);
+      g.fillRect(0, 0, N, N);
+      for (let i = 0; i < 9000; i++) {
+        g.fillStyle = shade(base, r.range(0.8, 1.18), r.range(0.4, 0.9));
+        const s = r.range(1, kind === 'grass' ? 4 : 3);
+        g.fillRect(r.range(0, N), r.range(0, N), s, kind === 'grass' ? s * 3 : s);
+      }
+      if (kind === 'asphalt' || kind === 'concrete') for (let i = 0; i < 10; i++) { // Risse/Flecken
+        g.strokeStyle = shade(base, 0.6, 0.5);
+        g.lineWidth = 1.2;
+        g.beginPath();
+        let x = r.range(0, N), y = r.range(0, N);
+        g.moveTo(x, y);
+        for (let k = 0; k < 6; k++) g.lineTo((x += r.range(-30, 30)), (y += r.range(-30, 30)));
+        g.stroke();
+      }
+    }
+    const tex = new THREE.CanvasTexture(c);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+    tex.anisotropy = 8;
     return tex;
   };
 

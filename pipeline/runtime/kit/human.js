@@ -16,6 +16,7 @@
 // Ergänzt 2026-11-01 (what-if-one-argument-last-goodbye): Kinder über { scale, headScale } (größerer Kopf = kindliche
 //   Proportionen), Bart { beard }, Posen hug, holdHand, reachUp, yell, drive, unconscious, handMouth, coverEars, showUp, placeLow, kneelHug
 import { clamp01 } from './core.js';
+import { v4Config } from './look4.js';
 
 export const SKIN = [0xe8c4a0, 0xd9a77e, 0xb07a52, 0x8a5a3b, 0x5e3b27, 0xf1d3b8];
 export const HAIR = [0x3b2a20, 0x5a3a24, 0x1d1d1f, 0x8a5a2e, 0xc9a26b, 0x7a7a7a];
@@ -207,6 +208,14 @@ export function createHumanFactory(THREE, core) {
         armR.shoulder.rotation.z = -0.06;
         armL.elbow.rotation.x = armR.elbow.rotation.x = -0.25;
         body.position.y = 0.025 * Math.abs(Math.cos(p * TAU));
+        if (V4M) {
+          // Referenz (motion.md): Wippen 3–7 % der Größe, federnd und gesetzt; Vorlehnen 1–7° je Schritt
+          const c = Math.abs(Math.cos(p * TAU));
+          body.position.y = 0.075 * Math.pow(c, 1.6);
+          spine.rotation.x = 0.035 + 0.05 * (1 - c);
+          spine.rotation.y = 0.06 * a;
+          head.rotation.x = -0.03 * (1 - c);
+        }
       },
       run(p) {
         const a = Math.sin(p * TAU);
@@ -532,7 +541,7 @@ export function createHumanFactory(THREE, core) {
         b.m.rotation.z = b.sx * M.brow; // brow < 0: innen hoch = traurig, brow > 0: innen runter = wütend
         b.m.position.y = 0.245 + M.browY;
       }
-      for (const e of eyes) e.scale.y = blink ? 0.12 : M.eye;
+      for (const e of eyes) e.scale.y = blink === true ? 0.12 : blink ? M.eye + (0.12 - M.eye) * blink : M.eye;
       for (const h of mouth) {
         h.pivot.rotation.z = h.sx * M.mouth;
         h.m.scale.y = M.open;
@@ -574,6 +583,21 @@ export function createHumanFactory(THREE, core) {
       return c * c * (3 - 2 * c);
     };
     const blinkSeed = (o.blinkSeed ?? Math.abs(Math.sin(shirt * 0.37 + (o.scale ?? 1) * 11))) * 3.1;
+    // V4 (Referenz motion.md): Blinzeln alle 0,5–2,3 s in 4 Frames (halb – zu – zu – halb), je Figur eigener Takt
+    const V4M = !!v4Config();
+    const blinkTimes = [];
+    if (V4M) {
+      let s = Math.floor(blinkSeed * 100003) % 2147483647 || 7;
+      const nx = () => ((s = (s * 16807) % 2147483647) - 1) / 2147483646;
+      for (let bt = nx() * 1.5; bt < 600; bt += 0.5 + 1.8 * nx()) blinkTimes.push(bt);
+    }
+    const blinkAmount = (t) => {
+      let lo = 0, hi = blinkTimes.length - 1;
+      while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (blinkTimes[mid] <= t) lo = mid; else hi = mid - 1; }
+      const d = t - blinkTimes[lo];
+      if (d < 0 || d >= 4 / 30) return 0;
+      return d < 1 / 30 || d >= 3 / 30 ? 0.5 : 1;
+    };
 
     const api = {
       root,
@@ -628,7 +652,7 @@ export function createHumanFactory(THREE, core) {
         const M0 = mp ? moodOf(mp.mood) : M1;
         const M = {};
         for (const key of MOOD_KEYS) M[key] = M0[key] + (M1[key] - M0[key]) * mw;
-        const bl = blink && M.eye > 0.5 && (t + blinkSeed) % 3.3 < 0.11;
+        const bl = V4M ? (blink && M.eye > 0.5 ? blinkAmount(t) : 0) : blink && M.eye > 0.5 && (t + blinkSeed) % 3.3 < 0.11;
         setMood(M, bl);
         // Blick
         const looks = track.slice(0, i + 1).filter((k) => k.look);

@@ -44,6 +44,12 @@ const files = await withStage({ production: path.relative(ROOT, prodDir), lang, 
     done.push(f);
     console.log(`${s} s → ${path.relative(ROOT, f)}`);
   }
+  // Bildsprache V4: Verdeckungsprüfung (Strahl Kamera → Blickziel) – nur Meldung, entscheidet der Mensch/Claude
+  const occ = await page.evaluate(() => window.__stage.occlusion || []);
+  const fps = tl.fps || 30;
+  for (const o of occ.filter((x) => times.some((s) => Math.round(s * fps) === x.frame))) {
+    console.log(`WARNUNG Verdeckung bei ${(o.frame / fps).toFixed(2)} s: ${o.objects.join(', ')} in ${o.dist} m vor dem Blickziel (${o.of} m)`);
+  }
   return done;
 });
 

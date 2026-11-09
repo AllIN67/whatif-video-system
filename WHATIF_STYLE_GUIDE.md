@@ -768,6 +768,49 @@ Dramaturgie; für die Sprache gilt 18.14. Bestehende englische Produktionen werd
 je Sprache, Standard-`--lang` = `de`. Pipeline, Renderer, Kit, Beat-Sheet-Format, HUD-Gestaltung und Signalfarbe unverändert;
 englische Validierung aller Produktionen vor/nach der Änderung byte-identisch geprüft.
 
+### 18.15 Bildsprache V4 – Qualitäts-Upgrade (Erprobung seit 2026-11-09, opt-in)
+
+**Befund (Code geprüft):** Die Bildqualität begrenzte nicht Three.js, sondern unser Einsatz: Einheitsfarben mit `flatShading`,
+kein Tiefenbild (deshalb weder Umriss-Linien noch echte Tiefenunschärfe), einfarbiger Himmel, graue/braune Schatten (Himmelslicht
+weiß bzw. pfirsich), keine farbig angehobenen Schwarzwerte. Die Referenz (Mr omi, three.js, Code `mromidev/claude-animated-shorts`,
+MIT) erreichte ihren Sprung mit Licht und Nachbearbeitung – nicht mit Blender oder KI-Video.
+
+**Einschalten:** `beats.json` → `"post": { "v4": true }` (oder Optionen-Objekt). Szenen bleiben unverändert; ohne den Schalter
+läuft der alte Weg bit-identisch (geprüft an `what-if-koma`, 300 Frames).
+
+| # | Teil | Wirkung | Wo |
+|---|---|---|---|
+| V1 | Tiefenbild + **Umriss-Linien** (Laplace auf 1/z, vor jeder Unschärfe, ~2 px, fast schwarz, in der Ferne ausgeblendet) | gezeichnete Formen, Ebenen trennen sich | `stage.js` (fx.ink) |
+| V2 | **Stimmungen umgerechnet**: Schattenseiten blau-violett, Himmelslicht −20 %, Sonne wärmer/+15 % | Licht/Schatten-Kontrast mit Farbtemperatur | `kit/look4.js` `upgradeLook` |
+| V3 | **Himmelskuppel mit Verlauf**, Nebel in Horizontfarbe | Luftperspektive, Tiefe | `look4.skyDome` |
+| V4 | **Grade**: Schattentönung, farbig angehobene Schwarzwerte (`liftRGB`), Kontrast 1,07, **ACES bleibt** | kein totes Schwarz; Sättigung gemessen unverändert | `stage.js` (grade.shadows/highlights/liftRGB) |
+| V5 | **Tiefenunschärfe** automatisch auf das Kamera-Blickziel, nur Hintergrund (Vordergrund trägt Information: Handy, Zahl, Schild) | Blick geht zur Figur | `stage.js` (fx.dof) |
+| V6 | **Texturen** mit dunklen Fugen, Maserung, Kantenschatten (512 px); „gemalte“ Farbwolken auf allen Einheitsflächen + Bodenschatten | keine Plastikflächen | `atmo.surfaceTexture`, `look4.prepareScene` |
+| V7 | **Laufen/Blinzeln** nach Messwerten der Referenz (Wippen ≈ 4 % der Größe, Vorlehnen; Blinzeln alle 0,5–2,3 s in 4 Frames) | lebendigere Figuren | `kit/human.js` |
+| V8 | **Verdeckungsprüfung** Kamera → Blickziel (Meldung in `tools/still.mjs`; `"occlusion": "hide"` blendet Verdecker aus) | keine Kamera in Wänden/Ketten vor Gesichtern | `stage.js` |
+| V9 | **Fertige 3D-Modelle** (GLB) mit Lizenzpflicht im Lader | glaubwürdige Orte | `kit.models` |
+
+**Optionen** (`post.v4`): `{ "ink": false | {strength, color, width, far}, "dof": false | {range, max, near}, "sky": false,
+"occlusion": false | "hide" }`. Je Beat überschreibt die Szene über `fx` (z. B. `fx.dof = kit.look4.focus([x,y,z], { max: 9 })`,
+`fx.dof = false`, eigene `grade`-Werte bleiben erhalten und werden um Schatten/Schwarz ergänzt). Eigene V4-Stimmungen:
+`day4, golden4, dusk4, night4, storm4, interior4, clinical4, nightRoom4`.
+
+**Messen statt meinen:** `python3 tools/look_metrics.py --base 'alt/*.png' --ours 'neu/*.png' --ref 'referenz/*.jpg'` –
+Schwarzanteil (ohne Linien), Schwarzwert, Buntheit (darf nicht steigen), Schattenfarbe, Linienanteil, Tiefe, Himmelsverlauf und
+Linien auf Handy-Größe. Messung Koma (6 Bilder, alt → V4, Referenz 38 Bilder): Schwarz 0,44 → 0,16 % (0,008), Schwarzwert 0,117 →
+0,130 (0,116), Buntheit 0,071 → 0,071, Schatten B−R −0,066 → −0,021 (−0,031), Linien 41 → 52 % (60 %), Handy 44 → 55 %.
+
+**Modelle:** nur mit geprüfter Lizenz (CC0 bevorzugt; Quelle + Lizenz beim Laden Pflicht, `M.credits()` für das LOG). Kenney-
+Starter-Kits auf GitHub sind CC0 (README), aber Kachel-/Spielzeugmaßstab – für menschengroße Orte die großen Kenney-Pakete
+(kenney.nl; in Cloud-Sitzungen gesperrt, Freigabe/Upload durch den Nutzer).
+
+**Kosten:** Renderzeit je Frame steigt (Messung im Testvideo `productions/_v4_koma`, LOG). **Standard wird V4 erst nach Abnahme
+des Testvideos durch den Nutzer** (dann `templates/beats.json` → `post.v4: true`).
+
+**Freeze-Vermerk (18.10):** additiv und opt-in: `kit/look4.js`, `kit/models.js`, Kit-Erweiterungspunkt `core.hooks` (leer =
+alt), neue `fx`-Schlüssel `ink`/`dof`/`grade.shadows|highlights|liftRGB`/`tone`, `tools/look_metrics.py`. Beat-Sheet-Format,
+HUD, Ton, Render und Encode unverändert.
+
 ### Änderungsprotokoll
 
 | Datum | Version | Änderung | Begründung |
@@ -782,3 +825,4 @@ englische Validierung aller Produktionen vor/nach der Änderung byte-identisch g
 | 2026-11-04 | 3.0 | 18.13: Story-Kern (Einsatz, Messgröße, Wende, sichtbare Ursachen, Wissensanker je Akt), Ich-Perspektive (`kit.firstPerson`), Schauwert/Massen (`kit.masses`), Licht & Atmosphäre (`kit.atmo`: Stimmungen, Lichtquellen, Oberflächen, Wasser, Teilchen, Paletten), optionale Post-Effekte `bloom`/`grade`, Erzählformen B3–B6, Warnregeln `[18.13]`, `tools/balance_qa.py`. Korrektur: Bewegungsunschärfe war bereits vorhanden (`motion_blur`, Whip-Unschärfe) | Analyse von 6 Videos (eigen / 80k / Millionen-Kanal), konsolidierte Auswertung; Auftrag des Nutzers 2026-11-04. Alte Produktionen bit-identisch geprüft |
 | 2026-11-07 | 3.1 | 18.14 Sprache Deutsch: Standardsprache `de` (`pipeline/runtime/lang.js`), Titelformel „Was wäre, wenn …?“, Regeln D1–D12 (natürliches Deutsch, Du-Form, Zahlen/Einheiten, Typografie, HUD-Versalien mit SS); Validator: Titelformel je Sprache, `[18.14]` Zahlenformat/Schriftzeichen nur für `de`, S5 +1 Wort für die deutsche Formel; 1.3, 2, 4, 7.4, 13, 14, 16.1, 18.7, 18.13 angepasst; Vorlage `templates/text.de.json`; QA C13 Sprache, Sprachabnahme in D | Auftrag des Nutzers 2026-11-07 (Kanal auf Deutsch umgestellt). Englisch über `--lang en` unverändert; englische Validierung aller Produktionen byte-identisch |
 | 2026-11-07 | 3.2 | 18.11 neu gefasst als Referenzhierarchie: kreative Referenzen C1 `Viral_referenz_1.mp4.MP4`, C2 `Viral_referenz_2.mp4.MP4`, B1 `Referenz__neuer_stil_1m_views.MP4` (Rang 1), B2 `Referenz_alter_stil.MP4` = R07 (Rang 2); Werte `[18.11]` nur noch technische Untergrenze; Akku-Produktion `what-if-phone-battery-life` nur noch technischer Regressionstest. CLAUDE.md, Skill, Checkliste, `quality_review.md`, README, Validator-Meldung angepasst | Auftrag des Nutzers 2026-11-07: Akku-Video veraltet, kein visueller/erzählerischer Maßstab mehr. Schwellen und Tests unverändert |
+| 2026-11-09 | 3.3 | 18.15 Bildsprache V4 (opt-in `post.v4`): Umriss-Linien, Tiefenunschärfe, kühle Schatten, Himmelsverlauf, Grade mit farbigem Schwarz, Texturen mit Fugen, gemalte Flächen, Laufen/Blinzeln, Verdeckungsprüfung, `kit.models`, `tools/look_metrics.py` | Auftrag des Nutzers 2026-11-09 (Qualitäts-Upgrade); Analyse Mr omi + Code-Vergleich; alte Produktionen bit-identisch |

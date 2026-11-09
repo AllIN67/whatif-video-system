@@ -28,6 +28,10 @@ import { createFirstPersonFactory } from './pov.js';
 import { createMasses } from './masses.js';
 // Ergänzt 2026-11-08 (what-if-koma, additiv): Krankenhaus-Teile (Bett, EKG-Monitor, Infusion, Intensivzimmer, Flur, Chat-Handy).
 import { createHospital } from './hospital.js';
+// Ergänzt 2026-11-09 (Qualitäts-Upgrade V4, additiv, opt-in): Licht/Himmel/Nachbearbeitung – kit.look4.
+import { createLook4 } from './look4.js';
+// Phase 4: fertige CC0-3D-Modelle (GLB) – kit.models
+import { createModels } from './models.js';
 
 export function createKit({ THREE, scene, renderer, rng }) {
   if (!rng) throw new Error('createKit: rng fehlt (geseedeter Zufall aus build())');
@@ -41,6 +45,8 @@ export function createKit({ THREE, scene, renderer, rng }) {
   const firstPerson = createFirstPersonFactory(THREE, core);
   const masses = createMasses(THREE, core);
   const hospital = createHospital(THREE, core, atmo);
+  const look4 = createLook4(THREE, core);
+  const models = createModels(THREE);
 
   // Sonne mit dem aktiven Ort mitführen: ein Schattenlicht für alle Orte, scharfe Schatten dort, wo die Kamera ist.
   const sunAt = (sun, origin, offset = [18, 30, 14]) => {
@@ -76,5 +82,5 @@ export function createKit({ THREE, scene, renderer, rng }) {
     return out;
   };
 
-  return { THREE, core, ...core, human, props, places, space, fx, sunAt, activeSet, crowd, SKIN, HAIR, clamp01, smooth, lerp, ramp, shotKeys, beatClock, atmo, firstPerson, masses, hospital };
+  return { THREE, core, ...core, human, props, places, space, fx, sunAt, activeSet, crowd, SKIN, HAIR, clamp01, smooth, lerp, ramp, shotKeys, beatClock, atmo, firstPerson, masses, hospital, look4, models };
 }

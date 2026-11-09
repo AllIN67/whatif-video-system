@@ -138,12 +138,15 @@ function createPost(THREE, renderer) {
       // Color Grading (Sättigung, Kontrast, Farbstich, Anhebung). Standard = aus → bestehende Produktionen bit-identisch.
       bloom: { value: 0 }, bloomThreshold: { value: 0.9 }, bloomRadius: { value: 1 },
       gradeOn: { value: 0 }, gSat: { value: 1 }, gContrast: { value: 1 }, gTint: { value: new THREE.Vector3(1, 1, 1) }, gLift: { value: 0 },
+      // Bildsprache V4 (opt-in): Tönung der Schatten/Lichter + farbig angehobene Schwarzwerte
+      gradeV4: { value: 0 }, gShadow: { value: new THREE.Vector3() }, gHigh: { value: new THREE.Vector3() }, gLiftRGB: { value: new THREE.Vector3() },
     },
     vertexShader: vs,
     fragmentShader: `
       uniform sampler2D tex; uniform vec2 blurVec; uniform vec2 texel; uniform float vignette; uniform float grain;
       uniform float seed; uniform float chroma; uniform float flash; uniform vec3 flashColor; uniform float radial; varying vec2 vUv;
       uniform float bloom; uniform float bloomThreshold; uniform float bloomRadius; uniform float gradeOn; uniform float gSat; uniform float gContrast; uniform vec3 gTint; uniform float gLift;
+      uniform float gradeV4; uniform vec3 gShadow; uniform vec3 gHigh; uniform vec3 gLiftRGB;
       float hash(vec2 p){ p = fract(p * vec2(443.897, 441.423) + seed * 0.1031); p += dot(p, p.yx + 19.19); return fract((p.x + p.y) * p.x); }
       vec3 sampleC(vec2 uv){
         if (chroma <= 0.0) return texture2D(tex, uv).rgb;
@@ -195,19 +198,127 @@ function createPost(THREE, renderer) {
           g = mix(vec3(lu), g, gSat);
           g = (g - 0.5) * gContrast + 0.5;
           g = g * gTint + gLift;
+          if (gradeV4 > 0.5) {
+            float yy = dot(g, vec3(0.2126, 0.7152, 0.0722));
+            float wS = 1.0 - smoothstep(0.0, 0.55, yy);
+            float wH = smoothstep(0.45, 1.0, yy);
+            g += wS * gShadow + wH * gHigh;
+            g = g + gLiftRGB * (1.0 - clamp(g, 0.0, 1.0));
+          }
           gl_FragColor.rgb = clamp(g, 0.0, 1.0);
         }
       }`,
     depthTest: false, depthWrite: false, toneMapped: true,
   });
   const postScene = quad(postMat);
+
+  // ---- Bildsprache V4 (opt-in über fx.ink / fx.dof; ohne diese Schlüssel läuft exakt der alte Weg) ----
+  // Szene → Ziel MIT Tiefentextur → Umriss-Pass (Laplace auf 1/z, vor jeder Unschärfe) → Tiefenunschärfe → Post-Shader.
+  // Werte in px gelten für 1080×1920. Nach mromidev/claude-animated-shorts (MIT): ink.ts, lensblur.ts.
+  let v4 = null;
+  const makeV4 = () => {
+    const rt = new THREE.WebGLRenderTarget(1080, 1920, { samples: 4, type: THREE.HalfFloatType, depthTexture: new THREE.DepthTexture(1080, 1920) });
+    rt.texture.colorSpace = THREE.LinearSRGBColorSpace;
+    const depthHead = `#include <packing>
+      uniform sampler2D tex; uniform sampler2D depthTex; uniform float cNear; uniform float cFar; uniform vec2 texel; varying vec2 vUv;
+      float vz(vec2 uv){ return -perspectiveDepthToViewZ(texture2D(depthTex, uv).x, cNear, cFar); }`;
+    const common = () => ({ tex: { value: null }, depthTex: { value: rt.depthTexture }, cNear: { value: 0.1 }, cFar: { value: 2000 }, texel: { value: new THREE.Vector2(1 / 1080, 1 / 1920) } });
+    const inkMat = new THREE.ShaderMaterial({
+      uniforms: { ...common(), ink: { value: new THREE.Color() }, strength: { value: 0.85 }, thr: { value: 0.06 }, farFade: { value: 220 }, width: { value: 1 } },
+      vertexShader: vs,
+      fragmentShader: `${depthHead}
+        uniform vec3 ink; uniform float strength; uniform float thr; uniform float farFade; uniform float width;
+        float W(vec2 uv){ return 1.0 / max(vz(uv), 1e-4); }
+        float edgeAt(vec2 uv, vec2 o, float c){
+          float l = W(uv - vec2(o.x, 0.0)), r = W(uv + vec2(o.x, 0.0)), d = W(uv - vec2(0.0, o.y)), u = W(uv + vec2(0.0, o.y));
+          return abs(l + r + d + u - 4.0 * c) / max(c, 1e-6);
+        }
+        void main(){
+          vec3 col = texture2D(tex, vUv).rgb;
+          float c = W(vUv);
+          vec2 o = texel * width;
+          float e = max(edgeAt(vUv, o, c), 0.85 * edgeAt(vUv, o * 2.0, c));
+          float k = smoothstep(thr, thr * 2.2, e) * strength * (1.0 - smoothstep(farFade * 0.5, farFade, 1.0 / c));
+          gl_FragColor = vec4(mix(col, ink, k), 1.0);
+        }`,
+      depthTest: false, depthWrite: false, toneMapped: false,
+    });
+    const DOF_TAPS = 40;
+    const dofMat = new THREE.ShaderMaterial({
+      uniforms: { ...common(), focus: { value: 5 }, range: { value: 0.7 }, maxR: { value: 8 }, nearK: { value: 1 } },
+      vertexShader: vs,
+      fragmentShader: `${depthHead}
+        uniform float focus; uniform float range; uniform float maxR; uniform float nearK;
+        float coc(float z){ float c = (z - focus) / max(z, 1e-3) / range; c = c < 0.0 ? -c * nearK : c; return clamp(c, 0.0, 1.0) * maxR; }
+        void main(){
+          vec3 c0 = texture2D(tex, vUv).rgb;
+          float z0 = vz(vUv);
+          float r0 = coc(z0);
+          if (r0 < 0.6) { gl_FragColor = vec4(c0, 1.0); return; }
+          vec3 acc = c0; float ws = 1.0;
+          for (int i = 0; i < ${DOF_TAPS}; i++) {
+            float fi = float(i) + 0.5;
+            float rr = sqrt(fi / float(${DOF_TAPS})) * r0;
+            float a = fi * 2.39996323;
+            vec2 p = clamp(vUv + vec2(cos(a), sin(a)) * rr * texel, 0.0, 1.0);
+            float zs = vz(p);
+            // scharfe Motive vor dem Pixel bluten nicht in den unscharfen Hintergrund
+            float w = zs >= z0 - 0.05 ? 1.0 : smoothstep(rr - 1.0, rr + 1.0, coc(zs));
+            acc += texture2D(tex, p).rgb * w; ws += w;
+          }
+          gl_FragColor = vec4(acc / ws, 1.0);
+        }`,
+      depthTest: false, depthWrite: false, toneMapped: false,
+    });
+    return { rt, rtInk: mk(0), rtDof: mk(0), inkMat, inkScene: quad(inkMat), dofMat, dofScene: quad(dofMat) };
+  };
+  const _fp = new THREE.Vector3();
+  const runV4 = (src, camera, fx) => {
+    const setCam = (m) => {
+      m.uniforms.cNear.value = camera.near;
+      m.uniforms.cFar.value = camera.far;
+    };
+    if (fx.ink) {
+      const o = typeof fx.ink === 'object' ? fx.ink : { strength: fx.ink };
+      const u = v4.inkMat.uniforms;
+      setCam(v4.inkMat);
+      u.tex.value = src;
+      u.ink.value.set(o.color ?? 0x221f2e);
+      u.strength.value = o.strength ?? 0.85;
+      u.thr.value = o.threshold ?? 0.06;
+      u.farFade.value = o.far ?? 220;
+      u.width.value = o.width ?? 1;
+      renderer.setRenderTarget(v4.rtInk);
+      renderer.render(v4.inkScene, qCam);
+      src = v4.rtInk.texture;
+    }
+    if (fx.dof && (fx.dof.max ?? 8) > 0) {
+      const d = fx.dof;
+      const u = v4.dofMat.uniforms;
+      setCam(v4.dofMat);
+      u.tex.value = src;
+      u.focus.value = d.target ? camera.position.distanceTo(_fp.set(d.target[0], d.target[1], d.target[2])) : d.focus ?? 5;
+      u.range.value = d.range ?? 0.7;
+      u.maxR.value = d.max ?? 8;
+      u.nearK.value = d.near ?? 1;
+      renderer.setRenderTarget(v4.rtDof);
+      renderer.render(v4.dofScene, qCam);
+      src = v4.rtDof.texture;
+    }
+    return src;
+  };
+
   return {
     // samples: Teilbilder pro Frame; renderSample(i) setzt Szene/Kamera für Teilbild i und rendert nichts selbst.
     render(scene, camera, { samples = 1, setSample, fx }) {
+      const useV4 = !!(fx.ink || fx.dof);
+      if (useV4 && !v4) v4 = makeV4();
+      const rtS = useV4 ? v4.rt : rtScene;
+      accMat.uniforms.tex.value = rtS.texture;
       if (samples <= 1) {
-        renderer.setRenderTarget(rtScene);
+        renderer.setRenderTarget(rtS);
         renderer.render(scene, camera);
-        postMat.uniforms.tex.value = rtScene.texture;
+        postMat.uniforms.tex.value = rtS.texture;
       } else {
         renderer.setRenderTarget(rtAccum);
         renderer.setClearColor(0x000000, 0);
@@ -215,7 +326,7 @@ function createPost(THREE, renderer) {
         accMat.uniforms.w.value = 1 / samples;
         for (let i = 0; i < samples; i++) {
           setSample(i);
-          renderer.setRenderTarget(rtScene);
+          renderer.setRenderTarget(rtS);
           renderer.render(scene, camera);
           renderer.setRenderTarget(rtAccum);
           renderer.autoClear = false;
@@ -225,6 +336,7 @@ function createPost(THREE, renderer) {
         renderer.setClearColor(0x000000, 1);
         postMat.uniforms.tex.value = rtAccum.texture;
       }
+      if (useV4) postMat.uniforms.tex.value = runV4(postMat.uniforms.tex.value, camera, fx);
       const u = postMat.uniforms;
       u.blurVec.value.set(fx.blurX || 0, fx.blurY || 0);
       u.radial.value = fx.radial || 0;
@@ -242,10 +354,19 @@ function createPost(THREE, renderer) {
       u.gContrast.value = gr?.contrast ?? 1;
       u.gTint.value.set(...(gr?.tint ?? [1, 1, 1]));
       u.gLift.value = gr?.lift ?? 0;
+      const v4g = !!(gr && (gr.shadows || gr.highlights || gr.liftRGB));
+      u.gradeV4.value = v4g ? 1 : 0;
+      u.gShadow.value.set(...(gr?.shadows ?? [0, 0, 0]));
+      u.gHigh.value.set(...(gr?.highlights ?? [0, 0, 0]));
+      u.gLiftRGB.value.set(...(gr?.liftRGB ?? [0, 0, 0]));
       if (fx.flashColor) u.flashColor.value.set(fx.flashColor);
       else u.flashColor.value.setRGB(1, 1, 1);
       renderer.setRenderTarget(null);
+      // V4: neutrales Tonemapping (Farbtöne bleiben, Lichter brennen weich aus) statt ACES – nur für diesen Durchgang
+      const tm = renderer.toneMapping;
+      if (fx.tone === 'neutral') renderer.toneMapping = THREE.NeutralToneMapping;
       renderer.render(postScene, qCam);
+      renderer.toneMapping = tm;
     },
   };
 }
@@ -259,10 +380,15 @@ async function production(THREE, prodPath, seed) {
   const renderer = makeRenderer(THREE);
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(50, 1080 / 1920, 0.1, 2000);
+  // Bildsprache V4: Schalter post.v4 in beats.json → Kit rechnet Stimmungen um, stage.js setzt Umrisse/Unschärfe/Grade.
+  const L4 = await import('./kit/look4.js');
+  const v4cfg = raw.post?.v4 || null;
+  L4.enableV4(v4cfg);
   const sceneMod = await import(`${base}/scene.js`);
   const world = await sceneMod.build({ THREE, scene, camera, renderer, rng: createRng(seed), timeline: ptl, assetUrl: (p) => `${base}/${p}`, fetchJson });
   if (!world || typeof world.update !== 'function') throw new Error('scene.js: build() muss { update(state) } liefern');
   checkShadowReceivers(THREE, scene);
+  if (v4cfg) L4.prepareScene(THREE, scene);
 
   const trEl = document.getElementById('transition');
   const post = createPost(THREE, renderer);
@@ -270,6 +396,7 @@ async function production(THREE, prodPath, seed) {
   // mit festem Seed): Korn im Shader macht jedes PNG/FFV1-Bild groß und das Rendern deutlich langsamer.
   const postDefaults = { ...(raw.post || {}) };
   if (postDefaults.grain_in_shader !== true) delete postDefaults.grain;
+  delete postDefaults.v4;
   const mbSegs = raw.motion_blur || []; // [{ from, to, samples, shutter }] – Bewegungsunschärfe durch Teilbilder
 
   // Kamera + Szene für eine (ggf. gebrochene) Frame-Position f setzen. Liefert die Effekte der Szene.
@@ -290,7 +417,38 @@ async function production(THREE, prodPath, seed) {
       camera.fov = fov;
       camera.updateProjectionMatrix();
     }
-    return { cam, fx: out.fx || {} };
+    return { cam, fx: out.fx || {}, look: c.look };
+  };
+
+  // V4: Schutz vor verdeckten Motiven. Strahl Kamera → Blickziel; trifft er vorher undurchsichtige Geometrie
+  // (nicht das Motiv selbst: Treffer weiter als 85 % des Abstands zählen nicht), wird der Frame gemeldet
+  // (stage.occlusion → tools/still.mjs). Mit post.v4.occlusion = "hide" werden die Verdecker für diesen Frame ausgeblendet.
+  const ray = new THREE.Raycaster();
+  const _o = new THREE.Vector3();
+  const _t = new THREE.Vector3();
+  stage.occlusion = [];
+  const hidden = [];
+  const checkOcclusion = (n, look) => {
+    while (hidden.length) hidden.pop().visible = true;
+    if (!look) return;
+    camera.updateMatrixWorld();
+    _o.copy(camera.position);
+    _t.set(look[0], look[1], look[2]);
+    const dist = _o.distanceTo(_t);
+    if (dist < 0.6) return;
+    ray.set(_o, _t.sub(_o).normalize());
+    ray.near = 0.25;
+    ray.far = dist * 0.85;
+    const hits = ray.intersectObjects(scene.children, true).filter((h) => {
+      const m = h.object.material;
+      if (!h.object.isMesh || h.object.name === 'look4.sky' || (m && (m.transparent || m.depthWrite === false))) return false;
+      for (let p = h.object; p; p = p.parent) if (!p.visible) return false;
+      return true;
+    });
+    if (!hits.length) return;
+    const names = [...new Set(hits.map((h) => h.object.name || h.object.parent?.name || h.object.geometry?.type))];
+    if (stage.occlusion.length < 500) stage.occlusion.push({ frame: n, dist: +hits[0].distance.toFixed(2), of: +dist.toFixed(2), objects: names.slice(0, 4) });
+    if (v4cfg.occlusion === 'hide') for (const h of hits) if (h.object.visible) { h.object.visible = false; hidden.push(h.object); }
   };
 
   // Ein Frame: alles nur aus dem Index ableiten.
@@ -304,7 +462,8 @@ async function production(THREE, prodPath, seed) {
     const sh = ptl.shots[TL.shotIndexAt(ptl, n)];
     const subF = (i) => Math.min(sh.to - 1e-3, Math.max(sh.from, n + shutter * (samples > 1 ? i / (samples - 1) - 0.5 : 0)));
     let res = apply(n, n);
-    const fx = { ...postDefaults, ...res.fx, seed: n };
+    if (v4cfg && v4cfg.occlusion !== false) checkOcclusion(n, res.look);
+    const fx = v4cfg ? { ...L4.composeFx(postDefaults, res.fx, res.look), seed: n } : { ...postDefaults, ...res.fx, seed: n };
     const cam = res.cam;
     trEl.style.background = cam.overlayColor || 'transparent';
     trEl.style.opacity = String(cam.overlay || 0);
