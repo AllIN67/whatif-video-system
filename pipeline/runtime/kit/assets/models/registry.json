@@ -1,0 +1,30 @@
+{
+ "_comment": "Register freigegebener 3D-Modelle für kit.models (Guide 18.15 V9). Nur Einträge mit geprüfter Lizenz; Pfade relativ zu dieser Datei. Laden: await kit.models.loadRegistry('/pipeline/runtime/kit/assets/models/registry.json', ['name', …]). Modell-Dateien erst nach Freigabe durch den Nutzer ins Repo (Lizenz + Qualität geprüft).",
+ "checked_sources": [
+  {
+   "source": "Kenney – GitHub KenneyNL/Starter-Kit-City-Builder, Starter-Kit-Racing, Starter-Kit-Basic-Scene",
+   "license": "CC0-1.0 (README: „Assets included in this package (2D sprites, 3D models and sound effects) are CC0 licensed“; Code MIT)",
+   "checked": "2026-11-09",
+   "quality": "Lädt fehlerfrei mit Texturatlas (Textures/colormap.png neben den GLB). Kachel-/Spielzeugmaßstab (Straßenlaternen überdimensional zur Würfel-Figur) – für Kulisse in der Ferne/Draufsicht brauchbar, für menschengroße Straßen nicht. Fahrzeuge (Racing) brauchbar."
+  },
+  {
+   "source": "Kenney – kenney.nl (City Kit Commercial/Suburban/Roads, Car Kit, Furniture Kit, Nature Kit u. a.)",
+   "license": "CC0-1.0 laut kenney.nl (noch nicht geprüft: Host in der Cloud-Sitzung gesperrt)",
+   "checked": null,
+   "quality": "offen – Paket-Download/Freischaltung durch den Nutzer nötig"
+  },
+  {
+   "source": "Poly Haven (polyhaven.com) – Modelle, Texturen, HDRIs",
+   "license": "CC0-1.0 laut polyhaven.com (noch nicht geprüft: Host gesperrt)",
+   "checked": null,
+   "quality": "offen; fotorealistisch – passt nur als Textur/Licht, nicht als Objektstil zu Würfel-Figuren"
+  },
+  {
+   "source": "Quaternius (quaternius.com) – Low-Poly-Pakete inkl. animierter Figuren",
+   "license": "CC0-1.0 laut quaternius.com (noch nicht geprüft: Host gesperrt)",
+   "checked": null,
+   "quality": "offen"
+  }
+ ],
+ "models": []
+}

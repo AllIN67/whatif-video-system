@@ -245,11 +245,12 @@ function createPost(THREE, renderer) {
     });
     const DOF_TAPS = 40;
     const dofMat = new THREE.ShaderMaterial({
-      uniforms: { ...common(), focus: { value: 5 }, range: { value: 0.7 }, maxR: { value: 8 }, nearK: { value: 1 } },
+      uniforms: { ...common(), focus: { value: 5 }, range: { value: 0.7 }, maxR: { value: 8 }, nearK: { value: 1 }, margin: { value: 0.15 } },
       vertexShader: vs,
       fragmentShader: `${depthHead}
-        uniform float focus; uniform float range; uniform float maxR; uniform float nearK;
-        float coc(float z){ float c = (z - focus) / max(z, 1e-3) / range; c = c < 0.0 ? -c * nearK : c; return clamp(c, 0.0, 1.0) * maxR; }
+        uniform float focus; uniform float range; uniform float maxR; uniform float nearK; uniform float margin;
+        // scharfe Zone ±margin (relativ) um den Fokus: Motiv knapp hinter/vor dem Fokus flackert sonst zwischen scharf/unscharf
+        float coc(float z){ float c = (z - focus) / max(z, 1e-3); c = c < 0.0 ? -c * nearK : c; c = max(c - margin, 0.0) / range; return clamp(c, 0.0, 1.0) * maxR; }
         void main(){
           vec3 c0 = texture2D(tex, vUv).rgb;
           float z0 = vz(vUv);
@@ -301,6 +302,7 @@ function createPost(THREE, renderer) {
       u.range.value = d.range ?? 0.7;
       u.maxR.value = d.max ?? 8;
       u.nearK.value = d.near ?? 1;
+      u.margin.value = d.margin ?? 0.15;
       renderer.setRenderTarget(v4.rtDof);
       renderer.render(v4.dofScene, qCam);
       src = v4.rtDof.texture;
@@ -451,6 +453,9 @@ async function production(THREE, prodPath, seed) {
     if (v4cfg.occlusion === 'hide') for (const h of hits) if (h.object.visible) { h.object.visible = false; hidden.push(h.object); }
   };
 
+  const beatsTL = raw.beats || [];
+  const beatAt = (t) => beatsTL.find((b) => t >= b.from && t < b.to) || null;
+
   // Ein Frame: alles nur aus dem Index ableiten.
   const frame = (n) => {
     if (n >= ptl.total) throw new Error(`Frame ${n} ≥ Gesamtlänge ${ptl.total}`);
@@ -462,8 +467,9 @@ async function production(THREE, prodPath, seed) {
     const sh = ptl.shots[TL.shotIndexAt(ptl, n)];
     const subF = (i) => Math.min(sh.to - 1e-3, Math.max(sh.from, n + shutter * (samples > 1 ? i / (samples - 1) - 0.5 : 0)));
     let res = apply(n, n);
-    if (v4cfg && v4cfg.occlusion !== false) checkOcclusion(n, res.look);
-    const fx = v4cfg ? { ...L4.composeFx(postDefaults, res.fx, res.look), seed: n } : { ...postDefaults, ...res.fx, seed: n };
+    // Ich-Perspektive: Hände/Handy vor dem Blickziel sind gewollt → keine Verdeckungsprüfung
+    if (v4cfg && v4cfg.occlusion !== false && !beatAt(t)?.pov) checkOcclusion(n, res.look);
+    const fx = v4cfg ? { ...L4.composeFx(postDefaults, res.fx, res.look, beatAt(t)), seed: n } : { ...postDefaults, ...res.fx, seed: n };
     const cam = res.cam;
     trEl.style.background = cam.overlayColor || 'transparent';
     trEl.style.opacity = String(cam.overlay || 0);

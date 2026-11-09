@@ -784,14 +784,14 @@ läuft der alte Weg bit-identisch (geprüft an `what-if-koma`, 300 Frames).
 | V2 | **Stimmungen umgerechnet**: Schattenseiten blau-violett, Himmelslicht −20 %, Sonne wärmer/+15 % | Licht/Schatten-Kontrast mit Farbtemperatur | `kit/look4.js` `upgradeLook` |
 | V3 | **Himmelskuppel mit Verlauf**, Nebel in Horizontfarbe | Luftperspektive, Tiefe | `look4.skyDome` |
 | V4 | **Grade**: Schattentönung, farbig angehobene Schwarzwerte (`liftRGB`), Kontrast 1,07, **ACES bleibt** | kein totes Schwarz; Sättigung gemessen unverändert | `stage.js` (grade.shadows/highlights/liftRGB) |
-| V5 | **Tiefenunschärfe** automatisch auf das Kamera-Blickziel, nur Hintergrund (Vordergrund trägt Information: Handy, Zahl, Schild) | Blick geht zur Figur | `stage.js` (fx.dof) |
+| V5 | **Tiefenunschärfe** automatisch auf das Kamera-Blickziel, nur Hintergrund, scharfe Zone ±15 % um den Fokus, in Ich-Perspektive (`pov`) aus (Vordergrund trägt Information: Handy, Zahl, Schild) | Blick geht zur Figur | `stage.js` (fx.dof) |
 | V6 | **Texturen** mit dunklen Fugen, Maserung, Kantenschatten (512 px); „gemalte“ Farbwolken auf allen Einheitsflächen + Bodenschatten | keine Plastikflächen | `atmo.surfaceTexture`, `look4.prepareScene` |
 | V7 | **Laufen/Blinzeln** nach Messwerten der Referenz (Wippen ≈ 4 % der Größe, Vorlehnen; Blinzeln alle 0,5–2,3 s in 4 Frames) | lebendigere Figuren | `kit/human.js` |
 | V8 | **Verdeckungsprüfung** Kamera → Blickziel (Meldung in `tools/still.mjs`; `"occlusion": "hide"` blendet Verdecker aus) | keine Kamera in Wänden/Ketten vor Gesichtern | `stage.js` |
 | V9 | **Fertige 3D-Modelle** (GLB) mit Lizenzpflicht im Lader | glaubwürdige Orte | `kit.models` |
 
 **Optionen** (`post.v4`): `{ "ink": false | {strength, color, width, far}, "dof": false | {range, max, near}, "sky": false,
-"occlusion": false | "hide" }`. Je Beat überschreibt die Szene über `fx` (z. B. `fx.dof = kit.look4.focus([x,y,z], { max: 9 })`,
+"occlusion": false | "hide" }`. Je Beat in `beats.json`: `"v4": { "ink": false, "dof": { "max": 9 } }` (an Produktion vorbei). Je Beat überschreibt die Szene über `fx` (z. B. `fx.dof = kit.look4.focus([x,y,z], { max: 9 })`,
 `fx.dof = false`, eigene `grade`-Werte bleiben erhalten und werden um Schatten/Schwarz ergänzt). Eigene V4-Stimmungen:
 `day4, golden4, dusk4, night4, storm4, interior4, clinical4, nightRoom4`.
 
@@ -800,7 +800,7 @@ Schwarzanteil (ohne Linien), Schwarzwert, Buntheit (darf nicht steigen), Schatte
 Linien auf Handy-Größe. Messung Koma (6 Bilder, alt → V4, Referenz 38 Bilder): Schwarz 0,44 → 0,16 % (0,008), Schwarzwert 0,117 →
 0,130 (0,116), Buntheit 0,071 → 0,071, Schatten B−R −0,066 → −0,021 (−0,031), Linien 41 → 52 % (60 %), Handy 44 → 55 %.
 
-**Modelle:** nur mit geprüfter Lizenz (CC0 bevorzugt; Quelle + Lizenz beim Laden Pflicht, `M.credits()` für das LOG). Kenney-
+**Modelle:** Register `pipeline/runtime/kit/assets/models/registry.json`; nur mit geprüfter Lizenz (CC0 bevorzugt; Quelle + Lizenz beim Laden Pflicht, `M.credits()` für das LOG). Kenney-
 Starter-Kits auf GitHub sind CC0 (README), aber Kachel-/Spielzeugmaßstab – für menschengroße Orte die großen Kenney-Pakete
 (kenney.nl; in Cloud-Sitzungen gesperrt, Freigabe/Upload durch den Nutzer).
 

@@ -68,3 +68,13 @@ test('upgradeLook: Sättigung der Grade nicht über 1, V4-Stimmungen bleiben unv
     assert.ok(L.fx.grade.saturation <= 1);
   }
 });
+
+test('Beat-Optionen: POV ohne automatische Unschärfe, beat.v4 überschreibt Produktion', () => {
+  enableV4(true);
+  createKit({ THREE, scene: new THREE.Scene(), renderer: null, rng: createRng(1) });
+  assert.equal(composeFx({}, {}, [0, 0, 0], { pov: true }).dof, undefined, 'POV: Vordergrund-Info bleibt scharf');
+  assert.ok(composeFx({}, {}, [0, 0, 0], { pov: true, v4: { dof: { max: 4 } } }).dof, 'POV mit ausdrücklicher dof');
+  assert.equal(composeFx({}, {}, [0, 0, 0], { v4: { ink: false } }).ink, undefined);
+  assert.ok(composeFx({}, {}, [0, 0, 0], null).ink);
+  enableV4(null);
+});

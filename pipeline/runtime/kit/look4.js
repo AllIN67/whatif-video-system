@@ -122,16 +122,21 @@ export function upgradeLook(THREE, L) {
 // fx für stage.js: V4-Vorgaben der aktuellen Stimmung ← post (beats.json) ← fx der Szene. grade wird zusammengeführt
 // (Szene behält Sättigung/Kontrast/Tönung, V4 ergänzt Schatten-/Lichtertönung + Schwarzwerte).
 // Tiefenunschärfe automatisch auf den Kamera-Zielpunkt (look), sofern die Szene keine eigene dof setzt.
-export function composeFx(post, sceneFx, camLook) {
+// beat (aus timeline.beats): beat.v4 = { ink, dof } überschreibt die Produktions-Optionen für diesen Beat
+// (false = aus); Ich-Perspektive (beat.pov) bekommt keine automatische Unschärfe (Hände/Handy/Text im Vordergrund).
+export function composeFx(post, sceneFx, camLook, beat = null) {
   if (!V4) return null;
+  const bo = beat && beat.v4 && typeof beat.v4 === 'object' ? beat.v4 : {};
+  const opt = { ...V4, ...bo };
   const base = current ? mixFxPlain(current.A.fx, current.B.fx, current.k) : fxOf();
   const fx = { ...base, ...post, ...sceneFx };
   delete fx.v4;
   fx.grade = { ...(base.grade || {}), ...(post.grade || {}), ...(sceneFx.grade || {}) };
-  if (V4.ink === false) delete fx.ink;
-  else if (typeof V4.ink === 'object') fx.ink = { ...(fx.ink || {}), ...V4.ink };
-  if (sceneFx.dof === undefined && V4.dof !== false && camLook) {
-    const d = typeof V4.dof === 'object' ? V4.dof : {};
+  if (opt.ink === false) delete fx.ink;
+  else if (typeof opt.ink === 'object') fx.ink = { ...(fx.ink || {}), ...opt.ink };
+  const autoDof = opt.dof !== false && !(beat && beat.pov && bo.dof === undefined);
+  if (sceneFx.dof === undefined && autoDof && camLook) {
+    const d = typeof opt.dof === 'object' ? opt.dof : {};
     // nur Hintergrund: Vordergrund trägt bei uns oft Information (Handy, Schild, Zahl) und bleibt scharf
     fx.dof = { target: camLook, range: d.range ?? 0.9, max: d.max ?? 5, near: d.near ?? 0 };
   }

@@ -1,13 +1,13 @@
 // Fertige 3D-Modelle (GLB/glTF) im Baukasten – Qualitäts-Upgrade V4, Phase 4 (additiv, opt-in).
-// Nur Modelle mit geprüfter Lizenz (CC0 bevorzugt) verwenden; Quelle + Lizenz stehen im Register (assets/models/registry.json)
+// Nur Modelle mit geprüfter Lizenz (CC0 bevorzugt) verwenden; Quelle + Lizenz stehen im Register (pipeline/runtime/kit/assets/models/registry.json)
 // und werden beim Laden mitgeführt (M.credits() für LOG/Beschreibung).
 //
 //   const M = kit.models;
-//   await M.load('truck', '/assets/models/kenney-racing/vehicle-truck-red.glb', { height: 2.6, license: 'CC0', source: 'Kenney Starter-Kit-Racing' });
+//   await M.load('truck', '/pipeline/runtime/kit/assets/models/kenney-racing/vehicle-truck-red.glb', { height: 2.6, license: 'CC0', source: 'Kenney Starter-Kit-Racing' });
 //   const t = M.place('truck', [x, 0, z], { yaw: Math.PI / 2 });          // Klon, wirft/empfängt Schatten
 //   M.recolor(t, { 'body': 0x7d838c });                                      // Material nach Name (Teilstring) umfärben
 //   const trees = M.instances('tree', [[x, 0, z, yaw, s], …]);               // viele Kopien (InstancedMesh je Teilnetz)
-//   await M.loadRegistry('/assets/models/registry.json');                    // alle freigegebenen Modelle mit Metadaten
+//   await M.loadRegistry('/pipeline/runtime/kit/assets/models/registry.json');                    // alle freigegebenen Modelle mit Metadaten
 //
 // Determinismus: Laden ist deterministisch (keine Zeit, kein Zufall). Kein Zufall aus rng.
 

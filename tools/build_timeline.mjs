@@ -217,7 +217,7 @@ export function buildTimeline(B) {
     hud,
     lines,
     events: events.map((e) => ({ t: e.t, id: e.id, beat: e.beat, ...(e.trigger ? { trigger: true } : {}), ...(e.what ? { what: e.what } : {}), ...(e.sfx ? { sfx: [].concat(e.sfx) } : {}), ...(e.flash ? { flash: e.flash } : {}), ...(e.premise ? { premise: e.premise } : {}), ...(e.setup_for ? { setup_for: e.setup_for } : {}) })),
-    beats: beats.map((b) => ({ id: b.id, from: b.from, to: b.to, place: b.place, mood: b.mood, framing: b.framing, preset: b.camera.preset, hud_change: !!(b.hud?.to != null || (b.events || []).some((e) => e.hud_to != null) || !!b.labelChange), ...(b.data ? { data: b.data } : {}), ...(b.act != null ? { act: b.act } : {}), ...(b.fact ? { fact: b.fact } : {}), ...(b.showpiece ? { showpiece: b.showpiece } : {}), ...(b.pov ? { pov: b.pov } : {}) })),
+    beats: beats.map((b) => ({ id: b.id, from: b.from, to: b.to, place: b.place, mood: b.mood, framing: b.framing, preset: b.camera.preset, hud_change: !!(b.hud?.to != null || (b.events || []).some((e) => e.hud_to != null) || !!b.labelChange), ...(b.data ? { data: b.data } : {}), ...(b.act != null ? { act: b.act } : {}), ...(b.fact ? { fact: b.fact } : {}), ...(b.showpiece ? { showpiece: b.showpiece } : {}), ...(b.pov ? { pov: b.pov } : {}), ...(b.v4 != null ? { v4: b.v4 } : {}) })),
     audio,
   };
   if (B.post) tl.post = B.post;
