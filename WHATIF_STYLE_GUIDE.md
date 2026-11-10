@@ -804,7 +804,7 @@ Linien auf Handy-Größe. Messung Koma (6 Bilder, alt → V4, Referenz 38 Bilder
 Starter-Kits auf GitHub sind CC0 (README), aber Kachel-/Spielzeugmaßstab – für menschengroße Orte die großen Kenney-Pakete
 (kenney.nl; in Cloud-Sitzungen gesperrt, Freigabe/Upload durch den Nutzer).
 
-**Kosten:** Renderzeit je Frame steigt (Messung im Testvideo `productions/_v4_koma`, LOG). **Standard wird V4 erst nach Abnahme
+**Kosten:** Renderzeit ≈ 1,4–1,7 statt ≈ 1,2–1,3 s/Frame (61 s Video ≈ 45–55 statt ≈ 41 min; `productions/_v4_koma/LOG.md`). **Standard wird V4 erst nach Abnahme
 des Testvideos durch den Nutzer** (dann `templates/beats.json` → `post.v4: true`).
 
 **Freeze-Vermerk (18.10):** additiv und opt-in: `kit/look4.js`, `kit/models.js`, Kit-Erweiterungspunkt `core.hooks` (leer =
