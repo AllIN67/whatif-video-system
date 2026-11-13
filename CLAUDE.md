@@ -15,3 +15,10 @@
 - **Auslieferung:** Nach jedem erfolgreichen Rendering die tatsächliche Datei (`productions/<slug>/render/final.mp4`) mit dem verfügbaren Sende-Werkzeug (z. B. `SendUserFile`) als abspielbaren Anhang übergeben und den Erfolg prüfen; ein Dateipfad allein gilt nicht als Auslieferung. Scheitert die Übergabe, den Fehler melden.
 - Nichts als geprüft melden, was nicht geprüft wurde. Ein technisches PASS ist keine Qualitätsfreigabe. Ton kann nicht gehört werden – Hörprüfung immer beim Nutzer anfragen; ebenso die Sprachabnahme der deutschen Texte (Guide 18.14 D12).
 - Referenzvideos (`references/videos/`), Render-Ausgaben und Bilder nie committen (siehe `.gitignore`).
+
+## HyperFrames (optionales Zusatzwerkzeug, nicht Teil der V3-Pipeline)
+
+- Die Skills `hyperframes`, `hyperframes-cli`, `media-use` in `.claude/skills/` (Stand: `hyperframes@0.9.41`) werden **nur** benutzt, wenn der Nutzer `/hyperframes` aufruft oder HyperFrames ausdrücklich nennt. What-if-Produktionen laufen weiter ausschließlich über `pipeline/` und `/whatif-video-style`; nichts aus HyperFrames in Pipeline, Kit oder Beat-Sheet einbauen.
+- HyperFrames-Projekte in einem eigenen Ordner außerhalb von `pipeline/` und `productions/` anlegen (z. B. `/tmp/hf/<name>` oder einem anderen Repo).
+- Keine kostenpflichtigen Dienste ohne Rückfrage: kein `hyperframes auth login`, keine HeyGen-Anbieter, kein Hosted-Connector. In `media-use` nur kostenlose Wege (mitgelieferte SFX, Openverse CC0/CC BY, lokales Kokoro).
+- Vor dem Start: `export HYPERFRAMES_NO_TELEMETRY=1`; in der Cloud zusätzlich `export HYPERFRAMES_BROWSER_PATH="$(command -v google-chrome)"`. Prüfen mit `npx hyperframes doctor`.

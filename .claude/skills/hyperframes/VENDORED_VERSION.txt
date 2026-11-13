@@ -1,0 +1,1 @@
+hyperframes@0.9.41 (npm), Skills aus package/dist/skills; nur per /hyperframes aufrufbar (disable-model-invocation)
